@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>header</title>
     <style>
       * {
         margin: 0;
@@ -31,6 +31,24 @@
         }
       }
 
+      /* 搜尋改造 */
+      .search-bar-input {
+        border: none;
+        padding: 5px;
+        margin-left: 5px; /* 根據需要調整間距 */
+      }
+      .search-bar-input:focus {
+        border: none;
+        outline: none;
+      }
+      .search-bar-button {
+        background: none;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+      }
+      /* 搜尋改造 */
+
       .header-content {
         align-items: center;
         display: flex;
@@ -55,14 +73,15 @@
       }
 
       .logo {
-        aspect-ratio: 3.45;
         object-fit: auto;
         object-position: center;
         width: 235px;
       }
 
       .search-bar {
-        align-self: stretch;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: #fff;
         border: 2px solid rgba(120, 206, 166, 1);
         border-radius: 5px;
@@ -71,7 +90,6 @@
         font-size: 16px;
         font-weight: 500;
         gap: 20px;
-        justify-content: space-between;
         line-height: 120%;
         margin: auto 0;
         padding: 10px 30px;
@@ -92,6 +110,9 @@
 
       .search-bar-text {
         font-family: Inter, sans-serif;
+        display: flex;
+        align-items: center;
+        text-align: center;
       }
 
       .search-bar-icon {
@@ -112,6 +133,7 @@
 
       .search-bar-divider {
         font-family: Inter, sans-serif;
+        align-self: center;
       }
 
       .search-bar-placeholder {
@@ -173,10 +195,15 @@
         width: 32px;
       }
 
-      .cart-text {
-        align-self: start;
+      .icon-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-family: Inter, sans-serif;
         margin-top: 13px;
+        & .aBitMargin {
+          margin-inline-end: 2px;
+        }
       }
 
       .member-action {
@@ -197,10 +224,6 @@
         object-fit: auto;
         object-position: center;
         width: 25px;
-      }
-
-      .member-text {
-        font-family: Inter, sans-serif;
       }
 
       .nav {
@@ -392,50 +415,114 @@
         <div class="header-content">
           <div class="logo-wrapper">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/0af82cee07d2a72a5633bd1126e92fa0b011a02473fb509248f3dbcf8b229e43?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
+              src="../public/images/np_logo.png"
               alt="Company Logo"
               class="logo"
             />
           </div>
+
           <div class="search-bar">
             <div class="search-bar-left">
-              <span class="search-bar-text">所有分類</span>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/68c197dcce0d3005646efa43548dd21a69e7d0a93af90dff39e25f758842b1a0?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
-                alt=""
-                class="search-bar-icon"
-              />
+              <span class="search-bar-text">
+                所有分類<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="black"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m7 10l5 5m0 0l5-5"
+                  />
+                </svg>
+                <!-- 所有分類 arrow down -->
+              </span>
               <span class="search-bar-divider">|</span>
-              <span class="search-bar-placeholder">Search for ltemss...</span>
+
+              <!-- 搜索欄位 -->
+              <input
+                type="text"
+                class="search-bar-input"
+                placeholder="Search for items..."
+              />
             </div>
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/b560a29ddb01bb916b918eb1904344d9b7e5002a0e205a69b889e72e1d759b16?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
-              alt="Search Icon"
-              class="search-icon"
-            />
+
+            <!-- 搜索按鈕 -->
+            <button type="submit" class="search-bar-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="#747E85"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"
+                />
+              </svg>
+            </button>
           </div>
           <div class="header-actions">
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/cda90455b188d0dc356f3368022839d933e5892e0675b15b645f4036afed90c9?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
-              alt="Header Action"
-              class="header-action-image"
-            />
-            <div class="cart-action">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/eace9c9cc13c77b028fd999cc001fa2549e0570dac5b8a8623e5ee70c7d57397?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
-                alt="Shopping Cart Icon"
-                class="cart-icon"
-              />
-              <span class="cart-text">購物車</span>
-            </div>
-            <div class="member-action">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/6bd08fedfd9e19cc3a97d4ba395c5ac76a171f38132216921a0a1df1496a2726?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
-                alt="Member Icon"
-                class="member-icon"
-              />
-              <span class="member-text">會員</span>
-            </div>
+            <span class="icon-text">
+              <!-- 願望清單 heart -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                viewBox="0 0 256 256"
+                class="aBitMargin"
+              >
+                <path
+                  fill="#253D4E"
+                  d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
+                />
+              </svg>
+              願望清單</span
+            >
+            <span class="icon-text"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                class="aBitMargin"
+              >
+                <path
+                  fill="none"
+                  stroke="#253D4E"
+                  stroke-width="2"
+                  d="M5 5h17l-2 9H7L4 2H0m7 12l1 4h13m-2 5a1 1 0 1 1 0-2a1 1 0 0 1 0 2ZM9 23a1 1 0 1 1 0-2a1 1 0 0 1 0 2Z"
+                />
+              </svg>
+              購物車</span
+            >
+            <span class="icon-text"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  fill="none"
+                  stroke="#253D4E"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </g>
+              </svg>
+              會員</span
+            >
           </div>
         </div>
       </header>
