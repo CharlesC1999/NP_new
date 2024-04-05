@@ -29,7 +29,10 @@
         width: 100%;
       }
 
-      @media (max-width: 991px) {
+      @media (max-width: 375px) {
+        .container {
+          padding: 16px;
+        }
         .header {
           max-width: 100%;
           padding: 0 20px;
@@ -89,8 +92,13 @@
       /* 搜尋改造 */
       .search-bar-input {
         border: none;
-        padding: 5px;
+        padding: 4px;
+        width: 17vw;
+        margin-top: 2px;
         margin-left: 5px; /* 根據需要調整間距 */
+      }
+      .search-bar-input::placeholder {
+        font-size: 16px;
       }
       .search-bar-input:focus {
         border: none;
@@ -103,7 +111,6 @@
       .search-bar-button {
         background: none;
         border: none;
-        padding: 5px;
         cursor: pointer;
       }
       /* 搜尋改造 */
@@ -128,7 +135,7 @@
         width: 100%;
       }
 
-      @media (max-width: 991px) {
+      @media (max-width: 375px) {
         .header-content {
           flex-wrap: wrap;
           max-width: 100%;
@@ -140,12 +147,30 @@
         align-self: stretch;
         display: flex;
         justify-content: center;
+        .mobile-menu {
+          display: none;
+        }
+        @media (max-width: 375px) {
+          .mobile-menu {
+            display: block;
+            margin-bottom: 6px;
+            background: none;
+            outline: none;
+            border: none;
+            padding: 0;
+          }
+        }
       }
 
       .logo {
         object-fit: auto;
         object-position: center;
         width: 235px;
+      }
+      @media (max-width: 375px) {
+        .logo {
+          width: 130px;
+        }
       }
 
       .search-bar {
@@ -162,14 +187,12 @@
         gap: 20px;
         line-height: 120%;
         margin: auto 0;
-        padding: 10px 30px;
+        padding: 0px 24px;
       }
 
-      @media (max-width: 991px) {
+      @media (max-width: 375px) {
         .search-bar {
-          flex-wrap: wrap;
-          max-width: 100%;
-          padding: 0 20px;
+          display: none;
         }
       }
 
@@ -186,22 +209,6 @@
         text-align: center;
       }
 
-      .search-bar-icon {
-        aspect-ratio: 2.5;
-        border: 2px solid rgba(0, 0, 0, 1);
-        fill: var(
-          --gray01,
-          linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
-          #919da6
-        );
-        margin: auto 0;
-        object-fit: auto;
-        object-position: center;
-        stroke: #000;
-        stroke-width: 2px;
-        width: 10px;
-      }
-
       .search-bar-divider {
         font-family: Inter, sans-serif;
         align-self: center;
@@ -210,14 +217,6 @@
       .search-bar-placeholder {
         color: var(--gray02, #d9e1e6);
         font-family: Inter, sans-serif;
-      }
-
-      .search-icon {
-        aspect-ratio: 0.93;
-        margin: auto 0;
-        object-fit: auto;
-        object-position: center;
-        width: 12px;
       }
 
       .header-actions {
@@ -234,18 +233,10 @@
         white-space: nowrap;
       }
 
-      @media (max-width: 991px) {
+      @media (max-width: 375px) {
         .header-actions {
           white-space: initial;
         }
-      }
-
-      .header-action-image {
-        align-self: stretch;
-        aspect-ratio: 2.86;
-        object-fit: auto;
-        object-position: center;
-        width: 95px;
       }
 
       .cart-action {
@@ -253,17 +244,10 @@
         gap: 0;
       }
 
-      @media (max-width: 991px) {
+      @media (max-width: 375px) {
         .cart-action {
           white-space: initial;
         }
-      }
-
-      .cart-icon {
-        aspect-ratio: 1;
-        object-fit: auto;
-        object-position: center;
-        width: 32px;
       }
 
       .icon-text {
@@ -277,6 +261,22 @@
         }
       }
 
+      .icon-link-mobile {
+        display: none;
+      }
+      @media (max-width: 375px) {
+        .icon-text {
+          font-size: 0px;
+          color: #78cea6;
+        }
+        .mobile-none {
+          display: none;
+        }
+        .icon-link-mobile {
+          display: block;
+        }
+      }
+
       .member-action {
         display: flex;
         gap: 0;
@@ -284,26 +284,16 @@
         margin-top: 8px;
       }
 
-      @media (max-width: 991px) {
+      @media (max-width: 375px) {
         .member-action {
           white-space: initial;
         }
       }
 
-      .member-icon {
-        aspect-ratio: 1;
-        object-fit: auto;
-        object-position: center;
-        width: 25px;
-      }
-
       .nav {
-        align-items: center;
-        background-color: #fff;
-        color: #000;
         display: flex;
         font-size: 20px;
-        font-weight: 300;
+        font-weight: 500;
         justify-content: center;
         letter-spacing: 1.6px;
         line-height: 120%;
@@ -313,28 +303,19 @@
         width: 100%;
       }
 
-      @media (max-width: 991px) {
+      @media (max-width: 375px) {
         .nav {
-          max-width: 100%;
-          white-space: initial;
+          display: none;
         }
       }
 
       .nav-list {
         display: flex;
-        gap: 20px;
-        justify-content: center;
+        gap: 35px;
         padding: 10px 48px;
       }
 
-      @media (max-width: 991px) {
-        .nav-list {
-          flex-wrap: wrap;
-          padding: 0 20px;
-          white-space: initial;
-        }
-      }
-
+      /* 頁面連結 */
       .nav-item-promotion {
         display: flex;
         gap: 4px;
@@ -342,141 +323,22 @@
         margin-inline-end: 16px;
       }
 
-      @media (max-width: 991px) {
-        .nav-item-promotion {
-          white-space: initial;
-        }
-      }
-
-      .nav-icon-promotion {
-        aspect-ratio: 0.95;
-        margin: auto 0;
-        object-fit: auto;
-        object-position: center;
-        width: 20px;
-      }
-
-      .nav-text-promotion {
-        font-family: Inter, sans-serif;
-      }
-
-      .nav-item-products {
-        display: flex;
-        gap: 3px;
-      }
-
-      @media (max-width: 991px) {
-        .nav-item-products {
-          white-space: initial;
-        }
-      }
-
-      .nav-text-products {
-        font-family: Inter, sans-serif;
-      }
-
-      .nav-icon-products {
-        aspect-ratio: 1.61;
-        margin: auto 0;
-        object-fit: auto;
-        object-position: center;
-        width: 13px;
-      }
-
-      .nav-item-recipes {
-        display: flex;
-        gap: 5px;
-      }
-
-      @media (max-width: 991px) {
-        .nav-item-recipes {
-          white-space: initial;
-        }
-      }
-
-      .nav-text-recipes {
-        font-family: Inter, sans-serif;
-      }
-
-      .nav-icon-recipes {
-        aspect-ratio: 1.61;
-        margin: auto 0;
-        object-fit: auto;
-        object-position: center;
-        width: 13px;
-      }
-
-      .nav-item-courses {
+      .nav-item-page-links {
         display: flex;
         gap: 3px;
         justify-content: center;
       }
-
-      @media (max-width: 991px) {
-        .nav-item-courses {
-          white-space: initial;
-        }
-      }
-
-      .nav-text-courses {
-        -family: Inter, sans-serif;
-      }
-
-      .nav-icon-courses {
-        aspect-ratio: 1.61;
-        margin: auto 0;
-        object-fit: auto;
-        object-position: center;
-        width: 13px;
-      }
-
-      .nav-item-instructors {
-        display: flex;
-        gap: 3px;
-        justify-content: center;
-      }
-
-      @media (max-width: 991px) {
-        .nav-item-instructors {
-          white-space: initial;
-        }
-      }
-
-      .nav-text-instructors {
-        font-family: Inter, sans-serif;
-      }
-
-      .nav-icon-instructors {
-        aspect-ratio: 1.61;
-        margin: auto 0;
-        object-fit: auto;
-        object-position: center;
-        width: 13px;
-      }
+      /* 頁面連結 */
 
       .nav-item-about {
         display: flex;
         gap: 3px;
         justify-content: center;
         letter-spacing: 0.8px;
-      }
-
-      @media (max-width: 991px) {
-        .nav-item-about {
-          white-space: initial;
+        .nav-text-about {
+          font-family: Inter, sans-serif;
         }
-      }
-
-      .nav-text-about {
-        font-family: Inter, sans-serif;
-      }
-
-      .nav-icon-about {
-        aspect-ratio: 1.61;
-        margin: auto 0;
-        object-fit: auto;
-        object-position: center;
-        width: 13px;
+        /* 認識NutriPolls的英文字型 */
       }
     </style>
   </head>
@@ -485,6 +347,25 @@
       <header class="header">
         <div class="header-content">
           <div class="logo-wrapper">
+            <button class="mobile-menu">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+              >
+                <g fill="none">
+                  <path
+                    d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                  />
+                  <path
+                    fill="black"
+                    d="M20 17.5a1.5 1.5 0 0 1 .144 2.993L20 20.5H4a1.5 1.5 0 0 1-.144-2.993L4 17.5zm0-7a1.5 1.5 0 0 1 0 3H4a1.5 1.5 0 0 1 0-3zm0-7a1.5 1.5 0 0 1 0 3H4a1.5 1.5 0 1 1 0-3z"
+                  />
+                </g>
+              </svg>
+            </button>
+
             <a href="#"
               ><img
                 src="../public/images/np_logo.png"
@@ -560,15 +441,28 @@
             </button>
           </div>
           <div class="header-actions">
-            <a href="#" class="page-link"
-              ><span class="icon-text">
+            <a href="#" class="page-link">
+              <!-- 手機圖示svg -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+                class="icon-link-mobile"
+              >
+                <path
+                  fill="#50BF8B"
+                  d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
+                />
+              </svg>
+              <span class="icon-text">
                 <!-- 願望清單 heart -->
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
                   height="25"
                   viewBox="0 0 256 256"
-                  class="aBitMargin"
+                  class="aBitMargin mobile-none"
                 >
                   <path
                     fill="#253D4E"
@@ -578,14 +472,27 @@
                 願望清單</span
               ></a
             >
-            <a href="" class="page-link"
-              ><span class="icon-text"
+            <a href="#" class="page-link">
+              <!-- 手機圖示svg -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+                class="icon-link-mobile"
+              >
+                <path
+                  fill="#50BF8B"
+                  d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                />
+              </svg>
+              <span class="icon-text"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
                   height="25"
                   viewBox="0 0 24 24"
-                  class="aBitMargin"
+                  class="aBitMargin mobile-none"
                 >
                   <path
                     fill="none"
@@ -597,13 +504,27 @@
                 購物車</span
               ></a
             >
-            <a href="" class="page-link"
-              ><span class="icon-text"
+            <a href="" class="page-link">
+              <!-- 手機圖示svg -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+                class="icon-link-mobile"
+              >
+                <path
+                  fill="#50BF8B"
+                  d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
+                />
+              </svg>
+              <span class="icon-text"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
                   height="25"
                   viewBox="0 0 24 24"
+                  class="mobile-none"
                 >
                   <g
                     fill="none"
@@ -646,7 +567,7 @@
               <span class="nav-text-promotion">優惠活動</span></a
             >
           </li>
-          <li class="nav-item-products">
+          <li class="nav-item-page-links">
             <span class="nav-text-products">商品列表</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -665,7 +586,7 @@
               </g>
             </svg>
           </li>
-          <li class="nav-item-recipes">
+          <li class="nav-item-page-links">
             <span class="nav-text-recipes">食譜精選</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -684,7 +605,7 @@
               </g>
             </svg>
           </li>
-          <li class="nav-item-courses">
+          <li class="nav-item-page-links">
             <span class="nav-text-courses">精選課程</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -703,7 +624,7 @@
               </g>
             </svg>
           </li>
-          <li class="nav-item-instructors">
+          <li class="nav-item-page-links">
             <span class="nav-text-instructors">講師陣容</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
