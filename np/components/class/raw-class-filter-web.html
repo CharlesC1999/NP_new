@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .product-count-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: var(--green05, #def9ec);
+        width: 100%;
+        max-width: 1000px;
+        color: var(--light-green, rgba(56, 142, 101, 1));
+        border-radius: 5px;
+        margin-bottom: 25px;
+        padding: 0 30px;
+        font-size: 16px;
+        line-height: 120%;
+      }
+
+      @media (max-width: 375px) {
+        .product-count-container {
+          background-color: transparent;
+          padding-inline: 15px;
+        }
+      }
+
+      .product-count-header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-block: 5px;
+        padding-left: 10px;
+        gap: 10px;
+      }
+
+      .total-products {
+        margin: auto 0;
+        font-family: Inter, sans-serif;
+        font-weight: 700;
+      }
+      @media (max-width: 375px) {
+        .product-count-header {
+          padding-inline: 0;
+        }
+        .total-products {
+          display: none;
+        }
+      }
+
+      .product-count-controls {
+        display: flex;
+        justify-content: end;
+        gap: 16px;
+        padding: 1px 0;
+        font-weight: 400;
+      }
+
+      @media (max-width: 375px) {
+        .product-count-controls {
+          gap: 7px;
+        }
+      }
+
+      .celander-mobile {
+        display: none;
+        border: none;
+        background: none;
+        padding: 0;
+        /* cursor: pointer; 手機不用*/
+      }
+
+      @media (max-width: 375px) {
+        .celander-mobile {
+          display: block;
+        }
+      }
+
+      .items-per-page {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 2px 9px;
+        gap: 10px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 375px) {
+        .items-per-page {
+          display: none;
+        }
+      }
+
+      .items-per-page-value {
+        margin: auto 0;
+        font-family: Inter, sans-serif;
+      }
+
+      .number-increase-decrease {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        .select-btn {
+          height: 9px;
+          padding: 0px;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          .select-btn-icon {
+            margin-bottom: 3px;
+          }
+        }
+      }
+
+      .sort-by {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-self: start;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 4px 20px;
+        gap: 10px;
+        cursor: pointer;
+        /* limit width */
+      }
+
+      @media (max-width: 375px) {
+        .sort-by {
+          width: 120px;
+          border: 1px solid var(--gray-300, #dee2e7);
+          color: #636e72;
+          padding-inline: 16px 6px;
+          border-radius: 7px;
+        }
+        .sort-by-label {
+          display: none;
+        }
+      }
+
+      .sort-by-value {
+        text-align: center;
+        font-family: Inter, sans-serif;
+      }
+      .sort-mobile {
+        display: none;
+        margin-bottom: 3px;
+      }
+      @media (max-width: 375px) {
+        .sort-by-value {
+          width: 90px;
+          overflow: hidden;
+          margin-top: 3px;
+          text-wrap: nowrap;
+        }
+        .sort-mobile {
+          display: block;
+        }
+        .sort-order {
+          display: none;
+        }
+      }
+
+      .sort-by-options {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        z-index: 1;
+      }
+
+      .sort-by-option {
+        padding: 5px 20px;
+        font-family: Inter, sans-serif;
+        cursor: pointer;
+      }
+
+      .sort-by-option:hover {
+        background-color: #f5f5f5;
+      }
+
+      .sort-by.open .sort-by-options {
+        display: block;
+      }
+
+      .class-select {
+        position: relative;
+        display: none;
+        align-self: start;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 4px 20px;
+        gap: 10px;
+        cursor: pointer;
+        /* only for mobile */
+        border: 1px solid var(--gray-300, #dee2e7);
+        padding-inline: 16px 6px;
+        border-radius: 7px;
+      }
+
+      @media (max-width: 375px) {
+        .class-select {
+          display: flex;
+          justify-content: center;
+          .class-select-label {
+            color: #636e72;
+            margin-top: 3px;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="product-count-container">
+      <header class="product-count-header">
+        <h3 class="total-products">總共： # 項商品</h3>
+        <div class="product-count-controls">
+          <button class="celander-mobile">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                stroke="#78CEA6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <path d="M8 2v4m8-4v4" />
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <path d="M3 10h18" />
+              </g>
+            </svg>
+          </button>
+
+          <div class="items-per-page">
+            <span class="items-per-page-value" id="itemsPerPage">6</span>
+            <div class="number-increase-decrease">
+              <button class="select-btn" id="itemsPerPageUpIcon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10px"
+                  height="8px"
+                  viewBox="0 0 1024 1024"
+                  class="select-btn-icon"
+                >
+                  <path
+                    fill="#78CEA6"
+                    d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496"
+                  />
+                </svg>
+              </button>
+              <button class="select-btn" id="itemsPerPageDownIcon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10px"
+                  height="8px"
+                  viewBox="0 0 1024 1024"
+                  class="select-btn-icon"
+                >
+                  <path
+                    fill="#78CEA6"
+                    d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="sort-by" id="sortBy">
+            <span class="sort-by-label">依 :</span>
+            <span class="sort-by-value" id="sortByValue">Class ID</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              class="sort-mobile"
+            >
+              <path
+                fill="#8b96a5"
+                d="M4 18h4c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1M3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1m1 6h10c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1"
+              />
+            </svg>
+            <span class="sort-order">排序</span>
+            <div class="sort-by-options">
+              <div class="sort-by-option" data-value="Class ID">Class ID</div>
+              <div class="sort-by-option" data-value="Product Name">
+                Product Name
+              </div>
+              <div class="sort-by-option" data-value="Price">Price</div>
+              <div class="sort-by-option" data-value="Date Added">
+                Date Added
+              </div>
+            </div>
+          </div>
+          <div class="class-select">
+            <span class="class-select-label">分類(#)</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              class="sort-mobile"
+            >
+              <path
+                fill="#8b96a5"
+                d="M2.57 3h18.86l-6.93 9.817V21h-5v-8.183zm3.86 2l5.07 7.183V19h1v-6.817L17.57 5z"
+              />
+            </svg>
+          </div>
+        </div>
+      </header>
+    </section>
+
+    <script>
+      const itemsPerPage = document.getElementById("itemsPerPage");
+      const itemsPerPageUpIcon = document.getElementById("itemsPerPageUpIcon");
+      const itemsPerPageDownIcon = document.getElementById(
+        "itemsPerPageDownIcon"
+      );
+      let defaultValue = 6; // default
+
+      itemsPerPageUpIcon.addEventListener("click", () => {
+        if (defaultValue < 12) {
+          // limit 12
+          defaultValue++;
+          itemsPerPage.textContent = defaultValue;
+        }
+        toggleIconState();
+      });
+
+      itemsPerPageDownIcon.addEventListener("click", () => {
+        if (defaultValue > 4) {
+          // limit 4
+          defaultValue--;
+          itemsPerPage.textContent = defaultValue;
+        }
+        toggleIconState();
+      });
+
+      function toggleIconState() {
+        // 設置禁用
+        itemsPerPageUpIcon.classList.toggle("disabled", defaultValue >= 12);
+        // 設置禁用
+        itemsPerPageDownIcon.classList.toggle("disabled", defaultValue <= 4);
+      }
+      toggleIconState();
+
+      const sortBy = document.getElementById("sortBy");
+      const sortByValue = document.getElementById("sortByValue");
+      const sortByOptions = document.querySelectorAll(".sort-by-option");
+
+      sortBy.addEventListener("click", () => {
+        sortBy.classList.toggle("open");
+        event.stopPropagation(); // 阻止事件冒泡到document
+      });
+
+      sortByOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+          sortByValue.textContent = option.getAttribute("data-value");
+          sortBy.classList.remove("open");
+          event.stopPropagation(); // 阻止事件冒泡到document
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (
+          sortBy.classList.contains("open") &&
+          !sortBy.contains(event.target)
+        ) {
+          sortBy.classList.remove("open");
+        }
+      });
+    </script>
+  </body>
+</html>
