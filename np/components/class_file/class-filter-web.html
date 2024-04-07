@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>filter</title>
     <style>
       body {
         margin: 0;
@@ -64,7 +64,7 @@
 
       @media (max-width: 375px) {
         .product-count-controls {
-          gap: 7px;
+          gap: 6px;
         }
       }
 
@@ -140,7 +140,7 @@
           width: 120px;
           border: 1px solid var(--gray-300, #dee2e7);
           color: #636e72;
-          padding-inline: 16px 6px;
+          padding-inline: 10px 6px;
           border-radius: 7px;
         }
         .sort-by-label {
@@ -198,18 +198,19 @@
         display: block;
       }
 
+      /* class-selections-mobile-only */
       .class-select {
         position: relative;
         display: none;
         align-self: start;
         background-color: #fff;
         border-radius: 5px;
-        padding: 4px 20px;
-        gap: 10px;
+        padding-block: 4px;
+        gap: 6px;
         cursor: pointer;
         /* only for mobile */
         border: 1px solid var(--gray-300, #dee2e7);
-        padding-inline: 16px 6px;
+        padding-inline: 10px 6px;
         border-radius: 7px;
       }
 
@@ -221,6 +222,42 @@
             color: #636e72;
             margin-top: 3px;
           }
+        }
+      }
+      /* class-selections-mobile-only */
+
+      .grid-row-selections {
+        display: none;
+        width: 68px;
+
+        .grid-btn {
+          width: 34px;
+          height: 37px;
+          padding: 2px 0px;
+          background-color: transparent;
+          border: 1px solid var(--gray-300, #dee2e7);
+          border-radius: 7px 0 0 7px;
+          .selection-btn {
+            margin-top: 2px;
+            margin-left: 1px;
+          }
+        }
+        .row-btn {
+          width: 34px;
+          height: 37px;
+          padding: 2px 0px;
+          background-color: transparent;
+          border: 1px solid var(--gray-300, #dee2e7);
+          border-radius: 0 7px 7px 0;
+          .selection-btn-list {
+            margin-right: 1px;
+          }
+        }
+      }
+
+      @media (max-width: 375px) {
+        .grid-row-selections {
+          display: flex;
         }
       }
     </style>
@@ -311,6 +348,7 @@
               </div>
             </div>
           </div>
+          <!-- only for mobile -->
           <div class="class-select">
             <span class="class-select-label">分類(#)</span>
             <svg
@@ -325,6 +363,43 @@
                 d="M2.57 3h18.86l-6.93 9.817V21h-5v-8.183zm3.86 2l5.07 7.183V19h1v-6.817L17.57 5z"
               />
             </svg>
+          </div>
+          <!-- only for mobile -->
+          <div class="grid-row-selections">
+            <button class="grid-btn" id="selection-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="27px"
+                height="27px"
+                viewBox="0 0 24 24"
+                class="selection-btn"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <path
+                    d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                  />
+                  <path
+                    fill="#50bf8b"
+                    d="M9 13a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2zm10 0a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2zM9 3a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm10 0a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
+                  />
+                </g>
+              </svg>
+            </button>
+
+            <button class="row-btn" id="selection-btn-list">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30px"
+                height="30px"
+                viewBox="0 0 100 100"
+                class="selection-btn-list"
+              >
+                <path
+                  fill="#50bf8b"
+                  d="M17.563 30.277h.012a2.268 2.268 0 0 0 2.246 2.267v.002H80.18v-.001a2.269 2.269 0 0 0 2.259-2.268h.01V19.818a2.269 2.269 0 0 0-2.269-2.265H19.821a2.27 2.27 0 0 0-2.269 2.269c0 .039.01.076.012.115zm62.616 12.227H19.821a2.27 2.27 0 0 0-2.269 2.269c0 .039.01.076.012.115v10.34h.012a2.268 2.268 0 0 0 2.246 2.267v.002h60.359v-.001a2.269 2.269 0 0 0 2.259-2.268h.01V44.769a2.272 2.272 0 0 0-2.271-2.265m0 24.95H19.821a2.27 2.27 0 0 0-2.269 2.269c0 .039.01.076.012.115v10.34h.012a2.268 2.268 0 0 0 2.246 2.267v.002h60.359v-.001a2.27 2.27 0 0 0 2.259-2.269h.01V69.718a2.272 2.272 0 0 0-2.271-2.264"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </header>
@@ -388,6 +463,24 @@
         ) {
           sortBy.classList.remove("open");
         }
+      });
+
+      // mobile select view
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectionBtn = document.querySelector(".selection-btn");
+        const selectionBtnList = document.querySelector(".selection-btn-list");
+
+        selectionBtn.addEventListener("click", () => {
+          selectionBtnList.parentNode.style.backgroundColor = "#EFF2F4";
+
+          selectionBtn.parentNode.style.backgroundColor = "";
+        });
+
+        selectionBtnList.addEventListener("click", () => {
+          selectionBtn.parentNode.style.backgroundColor = "#EFF2F4";
+
+          selectionBtnList.parentNode.style.backgroundColor = "";
+        });
       });
     </script>
   </body>
