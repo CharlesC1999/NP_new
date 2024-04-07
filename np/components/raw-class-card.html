@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .truffled-rice-container {
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        justify-content: space-between;
+        margin: auto 0;
+        padding: 2px 0;
+        width: 100%;
+        max-width: 990px;
+      }
+
+      @media (max-width: 991px) {
+        .truffled-rice-container {
+          margin-top: 40px;
+          max-width: 100%;
+        }
+      }
+
+      .truffled-rice-header {
+        background-color: #fff;
+        color: var(--gray03, #454545);
+        display: flex;
+        font-size: 20px;
+        font-weight: 600;
+        gap: 20px;
+        justify-content: space-between;
+        line-height: 120%;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 991px) {
+        .truffled-rice-header {
+          flex-wrap: wrap;
+          max-width: 100%;
+          white-space: initial;
+        }
+      }
+
+      .truffled-rice-title {
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        font-family: Inter, sans-serif;
+        text-overflow: ellipsis;
+      }
+
+      @media (max-width: 991px) {
+        .truffled-rice-title {
+          max-width: 100%;
+        }
+      }
+
+      .truffled-rice-image {
+        aspect-ratio: 1.12;
+        object-fit: auto;
+        object-position: center;
+        width: 27px;
+      }
+
+      .truffled-rice-details {
+        display: flex;
+        gap: 6px;
+        justify-content: space-between;
+        margin-top: 27px;
+        white-space: nowrap;
+        width: 100%;
+      }
+
+      @media (max-width: 991px) {
+        .truffled-rice-details {
+          flex-wrap: wrap;
+          max-width: 100%;
+          white-space: initial;
+        }
+      }
+
+      .truffled-rice-description {
+        color: var(--gray03, #454545);
+        font: 500 15px/18px Inter, sans-serif;
+        margin-right: -5px;
+      }
+
+      @media (max-width: 991px) {
+        .truffled-rice-description {
+          max-width: 100%;
+        }
+      }
+
+      .truffled-rice-pricing {
+        align-self: end;
+        display: flex;
+        gap: 0;
+        justify-content: end;
+        line-height: 120%;
+        margin-top: 35px;
+        padding: 0 80px;
+      }
+
+      @media (max-width: 991px) {
+        .truffled-rice-pricing {
+          padding: 0 20px;
+          white-space: initial;
+        }
+      }
+
+      .truffled-rice-price {
+        color: var(--green-01, var(--green02, #50bf8b));
+        font: 700 16px Inter, sans-serif;
+      }
+
+      .truffled-rice-original-price {
+        color: var(--gray01, #919da6);
+        font: 600 13px Inter, sans-serif;
+        text-decoration-line: strikethrough;
+      }
+
+      .truffled-rice-meta {
+        color: var(--gray01, #747e85);
+        display: flex;
+        flex: 1;
+        font-size: 12px;
+        font-weight: 500;
+        gap: 20px;
+        justify-content: space-between;
+        line-height: 120%;
+        margin: auto 0 auto 0;
+        margin-top: 26px;
+        padding-right: 80px;
+      }
+
+      @media (max-width: 991px) {
+        .truffled-rice-meta {
+          flex-wrap: wrap;
+        }
+      }
+
+      .truffled-rice-date {
+        align-items: center;
+        background-color: #fff;
+        display: flex;
+        gap: 2px;
+        justify-content: center;
+        padding: 4px 0;
+      }
+
+      .calendar-icon {
+        align-self: start;
+        aspect-ratio: 1;
+        object-fit: auto;
+        object-position: center;
+        width: 12px;
+      }
+
+      .truffled-rice-date-text {
+        font-family: Inter, sans-serif;
+      }
+
+      .truffled-rice-author {
+        align-items: center;
+        background-color: #fff;
+        display: flex;
+        gap: 2px;
+        justify-content: center;
+        padding: 4px 0;
+      }
+
+      .author-icon {
+        align-self: start;
+        aspect-ratio: 1;
+        fill: var(--gray01, #747e85);
+        object-fit: auto;
+        object-position: center;
+        width: 12px;
+      }
+
+      .truffled-rice-author-name {
+        font-family: Inter, sans-serif;
+      }
+
+      .truffled-rice-actions {
+        color: #fff;
+        display: flex;
+        font-weight: 600;
+        gap: 16px;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 991px) {
+        .truffled-rice-actions {
+          white-space: initial;
+        }
+      }
+
+      .learn-more-button {
+        align-items: center;
+        background-color: var(--green02, #50bf8b);
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+        gap: 4px;
+        justify-content: center;
+        padding: 8px 16px;
+      }
+
+      @media (max-width: 991px) {
+        .learn-more-button {
+          white-space: initial;
+        }
+      }
+
+      .learn-more-icon {
+        aspect-ratio: 1;
+        fill: #fff;
+        object-fit: auto;
+        object-position: center;
+        width: 14px;
+      }
+
+      .signup-button {
+        align-items: center;
+        align-self: start;
+        background-color: var(--green02, #50bf8b);
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+        gap: 4px;
+        justify-content: center;
+        padding: 8px 16px;
+      }
+
+      @media (max-width: 991px) {
+        .signup-button {
+          white-space: initial;
+        }
+      }
+
+      .signup-icon {
+        aspect-ratio: 1;
+        object-fit: auto;
+        object-position: center;
+        width: 14px;
+      }
+
+      .heart-icon {
+        cursor: pointer;
+        fill: var(--gray01, #747e85);
+        transition: fill 0.3s ease;
+      }
+
+      .heart-icon.active {
+        fill: #ff4d4d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="truffled-rice-container">
+      <header class="truffled-rice-header">
+        <h2 class="truffled-rice-title">松露菜飯</h2>
+        <svg
+          class="heart-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          />
+        </svg>
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/056fa7d0c5029eeb4eadcfea992aaec5ab52572b45d83d5ec6eae9b314ff6bfb?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
+          alt=""
+          class="truffled-rice-image"
+        />
+      </header>
+      <div class="truffled-rice-details">
+        <p class="truffled-rice-description">
+          精心烹調的米飯與絕美松露相遇，為你帶來一場嗆辣的味蕾大戰。在黑暗中，化學元素交織出令人窒息的風味，彷彿在體驗一場驚心動魄的烹飪秘辛。
+        </p>
+        <div class="truffled-rice-pricing">
+          <span class="truffled-rice-price">$NT599</span>
+          <span class="truffled-rice-original-price">$999</span>
+        </div>
+      </div>
+      <div class="truffled-rice-meta">
+        <div class="truffled-rice-date">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/65215ace205dafab7c9841b18dd4d1fbef9587dbd9d74ba0658ec3741326bbea?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
+            alt=""
+            class="calendar-icon"
+          />
+          <span class="truffled-rice-date-text">2024 5月26日</span>
+        </div>
+        <div class="truffled-rice-author">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/93131f5815030c1cdd32ee255ecf205ad9cc0bcb0702f9b171e123382feb17bd?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
+            alt=""
+            class="author-icon"
+          />
+          <span class="truffled-rice-author-name">Walt White</span>
+        </div>
+      </div>
+      <div class="truffled-rice-actions">
+        <button class="learn-more-button">了解更多</button>
+        <button class="signup-button">立刻報名</button>
+      </div>
+    </div>
+
+    <script>
+      const heartIcon = document.querySelector(".heart-icon");
+
+      heartIcon.addEventListener("click", function () {
+        this.classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>
