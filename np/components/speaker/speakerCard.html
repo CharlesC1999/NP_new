@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>speakerCard</title>
-    <link rel="stylesheet" href="../../styles/globals.css" />
+    <link rel="stylesheet" href="../../styles/globals.css">
     <style>
-      /* 講師卡片 */
-      .speaker {
+/* 講師卡片 */
+    .speaker {
+        width: 265px;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        @media (max-width: 375px) {
-          margin-bottom: 15px;
-        }
+        text-decoration: none;
       }
       .speaker-img {
         width: 265px;
         height: 265px;
-        @media (max-width: 375px) {
-          width: 160px;
-          height: 160px;
-        }
         & img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
       }
-      /* 文字的部分配合頁面的 speaker-group 容器就會是正確的排版 */
       .speaker-name {
         display: flex;
         flex-direction: column;
@@ -41,27 +35,21 @@
         }
         & h5 {
           font-weight: 700;
-          @media (max-width: 375px) {
-            font-size: 20px;
-          }
-        }
-        & h6 {
-          font-size: 12px;
         }
       }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="speaker">
-      <a href="#">
-        <div class="speaker-img">
-          <img src="../../public/images/lecturer 16.jpg" alt="" />
+        <a href="#">
+          <div class="speaker-img">
+            <img src="../../public/images/lecturer 16.jpg" alt="" />
+          </div>
+        </a>
+        <div class="speaker-name">
+          <h5>戴于益</h5>
+          <h6>米其林藍帶 CEO</h6>
         </div>
-      </a>
-      <div class="speaker-name">
-        <h5>戴于益</h5>
-        <h6>米其林藍帶 CEO</h6>
       </div>
-    </div>
-  </body>
+</body>
 </html>

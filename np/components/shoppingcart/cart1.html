@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+ <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+            display: flex;
+            flex-direction: column; /* 垂直排列 */
+            align-items: center; /* 水平居中 */
+        }
+      nav {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 1000px;
+      }
+      .cir {
+        position: relative;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::before {
+          content: "1";
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          background-color: #50bf8b;
+          border-radius: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fefefe;
+        }
+        &::after {
+          content: "購物車";
+          position: absolute;
+          font-size: 20px;
+          bottom: -40px;
+          width: 80px;
+          left: -30px;
+        }
+      }
+
+      .circle2 {
+        &::before {
+          content: "2";
+          background: #d9d9d9;
+        }
+        &::after {
+            content: '填寫資料';
+            left:-40px;
+        }
+      }
+
+      .circle3 {
+        &::before {
+          content: "3";
+          background: #d9d9d9;
+        }
+        &::after {
+          content: '訂單確認';
+          left:-40px;
+        }
+      }
+      .line{
+        width: 200px;
+        height: 2px;
+        background: #d9d9d9;
+        margin-top: 15px;
+      }
+      main{
+        margin-top: 100px;
+        width: 70vw;
+      }
+      table{
+        border: 2px solid #DEF9EC;
+        width: 70vw;
+        border-radius: 100px;
+        border-collapse: collapse; 
+        /* overflow: hidden; */
+      }
+      thead{
+        border-radius: 100px;
+        /* border-collapse: collapse;  */
+        background: #DEF9EC;
+      }
+      .add{
+        width: 70px;
+        height: 45px;
+        border:1px solid #DEF9EC;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <nav>
+      <div class="cir circle1"></div>
+        <div class="line"></div>
+      <div class="cir circle2"></div>
+      <div class="line"></div>
+      <div class="cir circle3"></div>
+    </nav>
+
+    <main>
+      課程
+    </main>
+    <div class="container">
+
+    <table class="table1">
+      <!-- <caption>这是表格标题</caption> -->
+          <div class="row top">
+            <thead >
+            <form action="" method="">
+              <div class="col">
+                <th style="width: 100px;min-width: 77px;"> <input class=" mt-2 ms-3" type="checkbox" value="" id="">
+                <label class="mt-1 m-1" for="">
+                  全選
+                </label>
+              </th></div>
+                    <div class="col-auto">                  
+                        <th style="width: 200px;"></th>
+                    </div>
+                    <div class="col-auto">                  
+                        <th style="width: 250px;"></th>
+                    </div>
+                    <div class="col-auto">                  
+                        <th class="text-center">人數</th>
+                    </div>
+                    <div class="col-auto">                  
+                        <th class="text-center">價格</th>
+                    </div>
+                    <div class="col-auto">                   
+                       <th class="text-center">小記</th>
+                    </div>
+                    <div class="col-auto">                   
+                       <th class="text-center" style="min-width: 50px;">刪除</th>
+                    </div>
+            </form>
+          </thead>
+          </div>
+        <tbody>
+          <div class="row">
+            <div class="col"><tr>
+              <th style="width: 100px;"> <input class=" mt-2 ms-3" type="checkbox" value="" id="">
+              </th></div>
+            <div class="col">                
+              <td><img src="../../public/images/Rectangle 143.jpg" class="img-fluid mt-2 mb-2" alt="..." style="min-width: 75px;"></td>
+            </div>
+            <div class="col">
+              <td style="vertical-align: middle;text-align: center;"class="ps-4"><h4>肉桂捲初級班</h4> <p>2024/04/05</p></td> 
+            </div>    
+                <div class="col">
+                  <td style="vertical-align: middle;text-align: center;" class="d-flex align-items-center justify-content-center" style="height: 75%;">
+                    <div class="add">
+                      <span>-</span> 1 <span>+</span>
+                    </div>
+                  </td>
+                </div>
+                <div class="col">
+                  <td style="text-align: center;">$1399</td>
+                </div>
+                <div class="col">
+                  <td style="text-align: center;"> $1399</td>
+                </div>
+                <div class="col">
+                  <td class="d-flex align-items-center justify-content-center" style="height: 160px;">
+                    <img src="../../public/images/Delete.jpg" alt="">
+                  </td>
+                </div>
+            </tr>
+          </div>
+        </tbody>
+    </table>
+  </div>
+  </div> 
+
+  
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

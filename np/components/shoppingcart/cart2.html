@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+        nav {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 1000px;
+      }
+      .cir {
+        position: relative;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::before {
+          content: "1";
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          background-color: #50bf8b;
+          border-radius: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fefefe;
+        }
+        &::after {
+          content: "購物車";
+          position: absolute;
+          font-size: 20px;
+          bottom: -40px;
+          width: 80px;
+          left: -30px;
+        }
+      }
+
+      .circle2 {
+        &::before {
+          content: "2";
+          background:  #50bf8b;
+        }
+        &::after {
+            content: '填寫資料';
+            left:-40px;
+        }
+      }
+
+      .circle3 {
+        &::before {
+          content: "3";
+          background: #d9d9d9;
+        }
+        &::after {
+          content: '訂單確認';
+          left:-40px;
+        }
+      }
+      .line{
+        width: 200px;
+        height: 2px;
+        background: #d9d9d9;
+        margin-top: 15px;
+      }
+      .line1{
+        background: #50bf8b;
+      }
+
+      section{
+        border: 1px solid #D9D9D9;
+        margin-top: 100px;
+        width: 70vw;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding-block: 10px;
+      }
+      h4,h5{
+        margin: 0;
+        margin-block: 10px;
+      }
+        h5{
+            margin-inline: 5px;
+      }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="cir circle1"></div>
+          <div class="line line1"></div>
+        <div class="cir circle2"></div>
+        <div class="line"></div>
+        <div class="cir circle3"></div>
+      </nav>
+
+      <section>
+            <h4 class="mb-5">訂單總計 : <span style="color: #F0B559;">NT$2000 </span></h4>
+            <h5>購物車:(2件) <img src="../../public/images/arrow-down.png" alt="" style="width: 12px; margin-left: 15px;"></h5>
+      </section>
+
+      <article>
+        <aside class="left">
+            
+        </aside>
+        <aside class="right">
+
+        </aside>
+      </article>
+</body>
+</html>
