@@ -21,6 +21,14 @@ body {
   line-height: 120.313%;
 }
 
+.figma-h4 {
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
 .figma-h5 {
   font-family: Inter;
   font-size: 20px;
@@ -46,28 +54,13 @@ body {
   line-height: 120.313%;
 }
 
-// custom style
-.main-info {
-  padding: 0px 16px;
-  .info-left {
-    gap: 6px;
-    .title {
-      margin-bottom: 0;
-    }
-    .left-bottom {
-      gap: 10px;
-    }
-  }
-  .info-right {
-    gap: 35px;
-    .caption {
-      color: var(--gray01);
-    }
-  }
+.ingredients {
+  margin-left: 100px;
+  width: 1060px;
+  gap: 56px;
+  margin-top: 30px;
 }
-
-.pic {
-  padding-top: 49px;
-  height: 700px;
-  margin-bottom: 41px;
-}
+.ingredients .ingredient-info {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--gray01);
+}/*# sourceMappingURL=recipe-detail-ingredient.css.map */
