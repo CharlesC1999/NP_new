@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+recipe-detail-top.css
+recipe-detail-top.css.map
+recipe-detail-top.scss
