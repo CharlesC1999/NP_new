@@ -1,0 +1,66 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --black: #454545;
+  --gray01: #747e85;
+  --gray02: #d9e1e6;
+  --gray03: #454545;
+  --green02: #50bf8b;
+}
+
+/* typography */
+.figma-h3 {
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120.313%;
+}
+
+.figma-h4 {
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
+.figma-h5 {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
+.figma-h6 {
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 125%; /* 20px */
+  letter-spacing: 0.96px;
+}
+
+.figma-p {
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120.313%;
+}
+
+.ingredients {
+  margin-left: 100px;
+  width: 1060px;
+  gap: 56px;
+  margin-top: 30px;
+}
+.ingredients .ingredient-info {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--gray01);
+}/*# sourceMappingURL=recipe-detail-ingredient.css.map */
