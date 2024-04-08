@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>classification-selection</title>
+    <style>
+      body {
+        width: 100%;
+        max-width: 1200px;
+      }
+      .chinese-cuisine-container {
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        padding: 20px 0px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #75ae8e;
+        line-height: 120%;
+        white-space: nowrap;
+      }
+
+      .cuisine-arrow-button {
+        width: 60px;
+        aspect-ratio: 1;
+        object-fit: auto;
+        object-position: center;
+        align-self: stretch;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      /* 新增一個樣式來設置顯示按鈕的容器 */
+      .cuisine-buttons-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 50px;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+
+      .cuisine-buttons-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+
+      .cuisine-button {
+        box-sizing: border-box;
+        padding: 12px 22px;
+        border: 3px solid #75ae8e;
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: 900;
+        font-family: Inter, sans-serif;
+        align-self: stretch;
+        justify-content: center;
+        margin: auto 0;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .active-cuisine {
+        color: #fff;
+        background-color: #75ae8e;
+      }
+
+      .inactive-cuisine {
+        color: #75ae8e;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="chinese-cuisine-container">
+      <button class="cuisine-arrow-button" onclick="handleLeftArrowClick()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40px"
+          height="40px"
+          viewBox="0 0 1024 1024"
+        >
+          <path
+            fill="#50bf8b"
+            d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0"
+          />
+        </svg>
+      </button>
+      <div class="cuisine-buttons-container">
+        <button class="cuisine-button inactive-cuisine">台式料理</button>
+        <button class="cuisine-button inactive-cuisine">中式料理</button>
+        <button class="cuisine-button inactive-cuisine">西式料理</button>
+        <button class="cuisine-button inactive-cuisine">異國料理</button>
+        <button class="cuisine-button inactive-cuisine">健康養生 / 素食</button>
+        <button class="cuisine-button inactive-cuisine">烘焙 / 點心</button>
+      </div>
+
+      <button class="cuisine-arrow-button" onclick="handleRightArrowClick()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40px"
+          height="40px"
+          viewBox="0 0 1024 1024"
+        >
+          <path
+            fill="#50bf8b"
+            d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0"
+          />
+        </svg>
+      </button>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".cuisine-button");
+        let visibleStartIndex = 0;
+
+        function updateButtonsVisibility() {
+          buttons.forEach((button, index) => {
+            if (index >= visibleStartIndex && index < visibleStartIndex + 4) {
+              button.style.display = ""; // btn show
+            } else {
+              button.style.display = "none"; // btn hide
+            }
+          });
+        }
+
+        window.handleLeftArrowClick = function () {
+          if (visibleStartIndex > 0) {
+            visibleStartIndex--;
+            updateButtonsVisibility();
+          }
+        };
+
+        window.handleRightArrowClick = function () {
+          if (visibleStartIndex < buttons.length - 4) {
+            visibleStartIndex++;
+            updateButtonsVisibility();
+          }
+        };
+
+        updateButtonsVisibility();
+
+        const cuisineButtons = document.querySelectorAll(".cuisine-button");
+        cuisineButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // reset to  default color
+            cuisineButtons.forEach((btn) => {
+              btn.classList.remove("active-cuisine");
+              btn.classList.add("inactive-cuisine");
+            });
+
+            // active
+            this.classList.add("active-cuisine");
+            this.classList.remove("inactive-cuisine");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
