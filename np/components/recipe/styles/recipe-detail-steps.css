@@ -39,7 +39,6 @@
   line-height: 120.313%;
 }
 
-// custom style
 .row {
   width: 1060px;
 }
@@ -47,7 +46,7 @@
 .steps {
   list-style: decimal;
   width: 892px;
-  li {
-    padding-left: 5px;
-  }
 }
+.steps li {
+  padding-left: 5px;
+}/*# sourceMappingURL=recipe-detail-steps.css.map */
