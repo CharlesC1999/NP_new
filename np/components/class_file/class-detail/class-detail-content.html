@@ -25,6 +25,7 @@
             height: 100%;
           }
         }
+
         .class-informations {
           box-sizing: border-box;
           display: flex;
@@ -43,6 +44,42 @@
             font-style: normal;
             font-weight: 900;
             line-height: 120.313%;
+          }
+          .class-mobile-select-group {
+            display: none;
+            gap: 15px;
+            .class-mobile-select-active {
+              border-radius: 5px;
+              border: 1px solid var(--light-green, rgba(56, 142, 101, 0.7));
+              outline: none;
+              width: 102px;
+              height: 29px;
+              /* padding: 10px 20px; */
+              /* style */
+              color: #ffffff;
+              background-color: var(--light-green, rgba(56, 142, 101));
+              font-family: Inter;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 120.313%;
+            }
+            .class-mobile-select {
+              border-radius: 5px;
+              border: 1px solid var(--light-green, rgba(56, 142, 101, 0.7));
+              outline: none;
+              width: 102px;
+              height: 29px;
+              /* padding: 10px 20px; */
+              /* style */
+              color: var(--light-green, rgba(56, 142, 101, 0.7));
+              background-color: transparent;
+              font-family: Inter;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 120.313%;
+            }
           }
           .class-information-container {
             display: flex;
@@ -77,6 +114,9 @@
               }
             }
           }
+          .class-images-and-contents-web {
+            display: none;
+          }
           .class-links-container {
             display: flex;
             width: 270px;
@@ -108,6 +148,86 @@
                 font-weight: 700;
                 line-height: normal;
               }
+            }
+          }
+        }
+      }
+      @media (max-width: 375px) {
+        .class-detail-and-links {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 0px;
+          .class-image-container {
+            width: 305px;
+            height: 233px;
+            margin-block: 20px;
+          }
+          .class-informations {
+            gap: 0px;
+            padding: 0;
+            width: 305px;
+            justify-content: start;
+            .class-name {
+              color: var(--gray03, #454545);
+              text-overflow: ellipsis;
+              margin-bottom: 20px;
+              /* H4 */
+              font-family: Inter;
+              font-size: 24px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 120.313%;
+            }
+            .class-mobile-select-group {
+              width: 100%;
+              display: flex;
+              flex-direction: row;
+              justify-content: start;
+              margin-bottom: 20px;
+            }
+            .class-information-container {
+              padding: 0;
+              width: 100%;
+              height: 172px;
+              margin-bottom: 20px;
+              .class-infor {
+                gap: 16px;
+                .infor-title {
+                  width: 84px;
+                  font-size: 16px;
+                }
+                .infor-detail {
+                  font-size: 16px;
+                  font-weight: 500;
+                  line-height: 120.313%;
+                }
+              }
+            }
+            .class-images-and-contents-web {
+              display: flex;
+              flex-direction: column;
+              margin-bottom: 30px;
+              .image-text-set-web {
+                .class-intro-image-container-web {
+                  width: 305px;
+                  height: 200px;
+                  overflow: hidden;
+                  border-radius: 15px;
+                  margin-block: 20px;
+                  .class-intro-image-web {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                  }
+                }
+              }
+            }
+            .class-links-container {
+              width: 255px;
+              padding-right: 50px;
+              margin-bottom: 30px;
             }
           }
         }
@@ -188,6 +308,13 @@
           }
         }
       }
+
+      @media (max-width: 375px) {
+        .speaker-intro-and-link {
+          display: none;
+        }
+      }
+
       .class-images-and-contents {
         display: flex;
         flex-direction: column;
@@ -217,6 +344,11 @@
           }
         }
       }
+      @media (max-width: 375px) {
+        .class-images-and-contents {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -230,6 +362,17 @@
       </div>
       <div class="class-informations">
         <p class="class-name">松露菜飯</p>
+        <div class="class-mobile-select-group">
+          <button
+            class="class-mobile-select-active"
+            id="classMobileSelectInfor"
+          >
+            課程資訊
+          </button>
+          <button class="class-mobile-select" id="classMobileSelectgoods">
+            成品介紹
+          </button>
+        </div>
         <div class="class-information-container">
           <div class="class-infor">
             <div class="infor-title">上課時間：</div>
@@ -251,6 +394,33 @@
             <div class="infor-title">報名人數：</div>
             <div class="infor-detail">10 / 24</div>
           </div>
+        </div>
+        <div class="class-images-and-contents-web">
+          <div class="image-text-set-web">
+            <div class="class-intro-image-container-web">
+              <img
+                src="../../../public/images/class-intro-image.jfif"
+                alt=""
+                class="class-intro-image-web"
+              />
+            </div>
+            <div class="class-intro-text-web">
+              「探索松露的秘密」課程是一場關於這個珍貴食材的深度之旅。首先，我們會帶您深入了解松露的世界，包括不同種類、產地和風味特點。從白松露到黑松露，每種松露都有其獨特的味道和用途，我們將帶您探索它們的起源、生長環境以及如何挑選最佳的松露。透過視頻示範、教材閱讀和專家分享，您將對松露有更深入的認識。
+            </div>
+          </div>
+          <div class="image-text-set-web">
+            <div class="class-intro-image-container-web">
+              <img
+                src="../../../public/images/class-intro-image2.jfif"
+                alt=""
+                class="class-intro-image-web"
+              />
+            </div>
+            <div class="class-intro-text-web">
+              在「烹飪技巧與實踐」部分，我們將帶您一步步學習如何在家中製作出精美的松露菜飯。從準備食材到烹飪技巧，我們會分享專業廚師的秘訣和技巧，讓您能夠輕鬆地掌握製作松露菜飯的訣竅。透過實踐和反饋，您將不僅學會如何製作松露菜飯，還能夠將這些技巧應用到其他菜品的烹飪中。
+            </div>
+          </div>
+          <!-- basically, it only need one set -->
         </div>
         <div class="class-links-container">
           <a class="link-btn" href="#">
@@ -343,5 +513,40 @@
       </div>
       <!-- basically, it only need one set -->
     </section>
+    <script>
+      // 獲取兩個按鈕元素
+      var infoButton = document.getElementById("classMobileSelectInfor");
+      var goodsButton = document.getElementById("classMobileSelectgoods");
+
+      // 獲取兩個內容容器元素
+      var imagesAndContentsWeb = document.querySelector(
+        ".class-images-and-contents-web"
+      );
+      var informationContainer = document.querySelector(
+        ".class-information-container"
+      );
+
+      // 為信息按鈕添加點擊事件監聽器
+      infoButton.addEventListener("click", function () {
+        // 更新按鈕樣式
+        infoButton.className = "class-mobile-select-active";
+        goodsButton.className = "class-mobile-select";
+
+        // 顯示信息內容並隱藏成品介紹內容
+        imagesAndContentsWeb.style.display = "none"; // 隱藏
+        informationContainer.style.display = "flex"; // 顯示
+      });
+
+      // 為成品介紹按鈕添加點擊事件監聽器
+      goodsButton.addEventListener("click", function () {
+        // 更新按鈕樣式
+        goodsButton.className = "class-mobile-select-active";
+        infoButton.className = "class-mobile-select";
+
+        // 隱藏信息內容並顯示成品介紹內容
+        imagesAndContentsWeb.style.display = "block"; // 顯示
+        informationContainer.style.display = "none"; // 隱藏
+      });
+    </script>
   </body>
 </html>
