@@ -1,0 +1,59 @@
+/* * {
+  border: solid 1px gray;
+} */
+
+body {
+  height: 100svh;
+  background-image: url(../public/login-Image/login-bg01.png);
+}
+main {
+  height: 100svh;
+}
+.main {
+  background: var(--white);
+  width: 840px;
+  border: var(--gray02) solid 1px;
+  .h3 {
+    font-size: 3rem;
+    color: var(--green02);
+  }
+  .btn {
+    width: 315px;
+    height: 36px;
+    font-size: 20px;
+  }
+  .area3 {
+    .backhome {
+      color: var(--green03);
+    }
+  }
+}
+.member {
+  width: 100%;
+  .input-group {
+    border-radius: 10px;
+    margin-bottom: 40px;
+    .label {
+      font-size: 1.5rem;
+      color: var(--green03);
+    }
+  }
+  .check-group .form-check {
+    .form-check-input {
+      background: var(--gray02);
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .gender-label {
+    font-size: 1.5rem;
+    color: var(--green03);
+  }
+  .input {
+    width: 310px;
+    height: 35px;
+    background-color: var(--gray03);
+    border: none;
+    border-radius: 5px;
+  }
+}
