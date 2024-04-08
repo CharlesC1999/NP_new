@@ -41,11 +41,13 @@
 
 .row {
   width: 1060px;
+  gap: 30px;
 }
 
 .steps {
   list-style: decimal;
   width: 892px;
+  gap: 10px;
 }
 .steps li {
   padding-left: 5px;
