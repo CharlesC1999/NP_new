@@ -1,0 +1,25 @@
+name: PR Review Reminder
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check PR for Required Reviews
+      uses: actions/github-script@v5
+      with:
+        script: |
+          const github = require('@actions/github');
+          const core = require('@actions/core');
+          const prAuthor = github.context.payload.pull_request.user.login;
+          const creator = '指定的審核者GitHub用戶名'; // 這裡換成你想要強制審核的GitHub用戶名
+
+          // 檢查PR創建者是否為指定審核者之一
+          if (prAuthor === creator) {
+            core.setFailed('PR作者不能自己審核自己的PR。');
+          } else {
+            console.log('PR創建者和審核者不同，允許進行。');
+          }
