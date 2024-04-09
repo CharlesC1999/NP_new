@@ -12,14 +12,12 @@ jobs:
       uses: actions/github-script@v5
       with:
         script: |
-          const github = require('@actions/github');
-          const core = require('@actions/core');
           const prAuthor = github.context.payload.pull_request.user.login;
-          const creator = 'dorami520'; // 這裡換成你想要強制審核的GitHub用戶名
 
-          // 檢查PR創建者是否為指定審核者之一
-          if (prAuthor === creator) {
-            core.setFailed('PR作者不能自己審核自己的PR。');
+          const teamMembers = ['dorami520', 'lucas60ss', 'YUN105', 'zjq212054', 'john76391']; // 這裡換成你團隊所有成員的GitHub用戶名
+
+          // 檢查PR創建者是否為團隊成員之一
+          if (teamMembers.includes(prAuthor)) {
+            core.setFailed(`PR作者 ${prAuthor} 不能自己審核自己的PR。`);
           } else {
-            console.log('PR創建者和審核者不同，允許進行。');
-          }
+            console.log(`PR創建者 ${prAuthor} 和審核者不同，允許進行。`);

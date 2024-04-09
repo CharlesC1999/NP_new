@@ -7,7 +7,7 @@ body {
   flex-direction: column;
   justify-content: center;
   background-color: var(--green05, #def9ec);
-  width: 1000px;
+  width: 950px;
   color: var(--light-green, rgba(56, 142, 101, 1));
   border-radius: 5px;
   margin-bottom: 25px;
