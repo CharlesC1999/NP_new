@@ -16,23 +16,24 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/styles/globals.css" />
     <link rel="stylesheet" href="./top.css" />
   </head>
 
   <body>
     <div class="container">
-      <div class="row">
+      <div class="row top">
         <div class="col">
           <div class="pic w-100">
             <img
-              class="img-fluid object-fit-cover h-100"
+              class="object-fit-cover w-100 h-100"
               src="./5c57291e6ab0e7566941547a0cb18048.jpg"
               alt=""
             />
           </div>
         </div>
         <div class="w-100"></div>
-        <div class="col main-info">
+        <div class="col top-main-info">
           <div class="row">
             <div class="col-3 info-left">
               <div class="info-left d-flex flex-column">
@@ -118,6 +119,119 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row main">
+        <section class="col-3 aside"></section>
+        <section class="col main-content">
+          <div class="row ingredients-section">
+            <div class="col-12 figma-h4">食材</div>
+            <div class="row ingredients">
+              <div class="col-5 col-xl-3 ingredient-info">
+                <div class="content d-flex justify-content-between">
+                  <p>食材</p>
+                  <p>份量</p>
+                </div>
+              </div>
+              <div class="col-5 col-xl-3 ingredient-info">
+                <div class="content d-flex justify-content-between">
+                  <p>食材</p>
+                  <p>份量</p>
+                </div>
+              </div>
+              <div class="col-5 col-xl-3 ingredient-info">
+                <div class="content d-flex justify-content-between">
+                  <p>食材</p>
+                  <p>份量</p>
+                </div>
+              </div>
+              <div class="col-5 col-xl-3 ingredient-info">
+                <div class="content d-flex justify-content-between">
+                  <p>食材</p>
+                  <p>份量</p>
+                </div>
+              </div>
+              <div class="col-5 col-xl-3 ingredient-info">
+                <div class="content d-flex justify-content-between">
+                  <p>食材</p>
+                  <p>份量</p>
+                </div>
+              </div>
+              <div class="col-5 col-xl-3 ingredient-info">
+                <div class="content d-flex justify-content-between">
+                  <p>食材</p>
+                  <p>份量</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row steps-section d-flex flex-column align-items-center">
+            <div class="col-12 figma-h4">步驟</div>
+            <ol class="steps col-10 d-flex flex-column">
+              <li>
+                準備一湯鍋加水約八分滿大火燒開放入排骨、米酒、味淋以及薑、蒜末，持續大火熬煮並撈除浮沫，再加入淘洗好的米，撒入胡椒粉。
+              </li>
+              <li>
+                持續煮15-20分見米粒煮透後加入芹菜珠並以鹽巴調味後關火蓋上鍋蓋悶5-10分鐘即可上桌。
+              </li>
+              <li>
+                蒸煮熟透的馬鈴薯壓成泥跟豆腐泥混在一起，打入一顆雞蛋用攪拌機一邊攪拌分多次加入麵粉，攪拌到出筋不黏手
+              </li>
+              <li>將麵團搓成條狀，每次捏下一小團約湯圓大小搓成球狀麵疙瘩</li>
+              <li>煮一鍋水，水滾後將麵疙瘩倒進去，麵疙瘩浮起即可撈出</li>
+              <li>
+                洋蔥丁炒軟後倒入水煮蕃茄罐，Tabasco
+                辣醬、黑胡椒等辛香料調好味，再將煮好的麵疙瘩放進來，悶煮2-5分鐘後即可裝盤上桌享用
+              </li>
+            </ol>
+          </div>
+
+          <div class="row related-products-section">
+            <div class="col-12 figma-h4">相關食材</div>
+            <div class="col-10 related-products mx-auto">
+              <div class="related-products-top d-flex justify-content-between">
+                <div class="top-left d-flex align-items-end">
+                  <input type="checkbox" />
+                  <p class="check-all">全選</p>
+                </div>
+                <div class="top-right d-flex">
+                  <p>數量</p>
+                  <p>小計</p>
+                </div>
+              </div>
+              <div
+                class="related-products-middle d-flex justify-content-between"
+              >
+                <div class="col-5 middle-left d-flex align-items-center">
+                  <input type="checkbox" />
+                  <div class="product-pic">
+                    <img
+                      class="w-100 h-100 object-fit-cover"
+                      src="./eb0c2b4dc60ca444aaa6979ae5467f7a.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="product-description">
+                    <p class="product-name figma-h5">商品名稱</p>
+                    <div class="protion-and-price">
+                      <p>份量</p>
+                      <p>|</p>
+                      <p>單價 $ 165</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col"></div>
+                <div class="col-3 middle-right">
+                  <div class="quantity">
+                    <button type="button" class="btn btn-primary">-</button>
+                    <p>1</p>
+                    <button type="button" class="btn btn-primary">+</button>
+                  </div>
+                  <p class="subtotal">$ 165</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
 

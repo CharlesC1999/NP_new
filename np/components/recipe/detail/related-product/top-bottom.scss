@@ -48,7 +48,7 @@ body {
   width: 1060px;
 }
 
-.top {
+.table-top {
   padding: 18px 50px;
   border-bottom: 1px solid var(--green05);
   background: rgba(222, 249, 236, 0.5);
@@ -89,7 +89,7 @@ body {
   }
 }
 
-.main {
+.table-main {
   padding: 0;
   .product-card {
     padding: 15px 48px;
@@ -163,7 +163,7 @@ body {
   }
 }
 
-.bottom {
+.table-bottom {
   padding: 10px 24px;
   gap: 15px;
   background-color: #fff;
