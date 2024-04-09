@@ -19,5 +19,6 @@ jobs:
           // 檢查PR創建者是否為團隊成員之一
           if (teamMembers.includes(prAuthor)) {
             core.setFailed(`PR作者 ${prAuthor} 不能自己審核自己的PR。`);
+            console.log(`PR作者 ${prAuthor} 不能自己審核自己的PR。`);
           } else {
             console.log(`PR創建者 ${prAuthor} 和審核者不同，允許進行。`);
