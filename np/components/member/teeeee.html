@@ -1,0 +1,149 @@
+<div class=" mt-5 d-flex mian-input">
+    <form class="form1">
+        <div class="row mb-3 align-items-start box">
+            <label for="name" class=" col-form-label ">姓名 :</label>
+            <div class="">
+                <input type="text" class="form-control" id="name" placeholder="請輸入姓名">
+            </div>
+        </div>
+        <div class="row mb-3 align-items-start box">
+            <label for="email" class="col-sm-3 col-form-label">Email :</label>
+            <div class="col-sm-9">
+                <input type="email" class="form-control" id="email" placeholder="請輸入Email">
+            </div>
+        </div>
+        <div class="row mb-3 align-items-start box">
+            <label for="phone" class="col-sm-3 col-form-label">手機號碼 :</label>
+            <div class="col-sm-9">
+                <input type="tel" class="form-control" id="phone" placeholder="請輸入手機號碼">
+            </div>
+        </div>
+        <div class="row mb-3 align-items-start box">
+            <label for="address" class="col-sm-3 col-form-label">地址 :</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="address" placeholder="請輸入地址">
+            </div>
+        </div>
+        <div class="row mb-3 align-items-start box">
+            <label class="col-sm-3 col-form-label">性别 :</label>
+            <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="female" value="女">
+                    <label class="form-check-label" for="female">女</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="male" value="男">
+                    <label class="form-check-label" for="male">男</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="other" value="其他">
+                    <label class="form-check-label" for="other">其他</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 align-items-start box">
+            <label for="birthday" class="col-sm-3 col-form-label">生日 :</label>
+            <div class="col-sm-3">
+                <select class="form-select" id="year">
+                    <option selected>年份</option>
+                    <!-- 这里可以根据需求填充选项 -->
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <select class="form-select" id="month">
+                    <option selected>月份</option>
+                    <!-- 这里可以根据需求填充选项 -->
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <select class="form-select" id="day">
+                    <option selected>日期</option>
+                    <!-- 这里可以根据需求填充选项 -->
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3 align-items-start box">
+            <label for="password" class="col-sm-3 col-form-label">密碼 :</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" id="password" placeholder="請輸入密碼">
+
+            </div>
+        </div>
+        <a href="" class="reset  container-fluid text-end box">[重設密碼]</a>
+        <div class="row mb-3 align-items-start btn-center box">
+
+            <button type="submit" class="btn btn-primary  btn1 btnmargin">確認修改</button>
+
+        </div>
+    </form>
+    <div class="main-right">
+        <div class="userImageBig"><img src="" alt=""></div>
+        <div class="row mb-3 align-items-start btn-center">
+
+            <button type="submit" class="btn btn-primary  btn2 ">選擇圖片</button>
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    .form-label {
+            display: inline-block;
+            width: 150px;
+            /* 调整标题宽度 */
+            text-align: right;
+            /* 文本右对齐 */
+            margin-bottom: 0;
+            /* 移除标题下方的间距 */
+        }
+
+        /* 调整按钮居中 */
+        .btn-center {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        label {
+            color: var(--gray01, #747e85);
+
+        }
+
+        .col-form-label {
+            font-size: var(--font-size);
+        }
+        @media (max-width:375px) {
+          .col-form-label{
+            display: flex;
+            font-size: 14px;
+            
+          }
+        }
+        .form1 {
+            padding: 10px 50px 10px 112px;
+            width: 679px;
+        }
+        @media (max-width: 375px){
+          .form1{
+            padding: 0 15px 0 15px;
+           
+            
+          }
+        }
+        .box {
+    padding-right: 73px;
+    display: flex; /* 將元素設置為彈性容器 */
+    align-items: center; /* 將子元素垂直居中 */
+}
+        @media (max-width: 375px){
+          .box{
+           display: flex;
+            padding: 0;
+            white-space: nowrap;
+            
+          }
+        }
+       
+
+</style>
