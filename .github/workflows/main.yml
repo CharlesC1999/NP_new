@@ -13,7 +13,7 @@ jobs:
       with:
         script: |
           const prAuthor = github.context.payload.pull_request.user.login;
-          const teamMembers = ['成員1的GitHub用戶名', '成員2的GitHub用戶名', '成員3的GitHub用戶名']; // 這裡換成你團隊所有成員的GitHub用戶名
+          const teamMembers = ['dorami520', 'lucas60ss', 'YUN105', 'zjq212054', 'john76391']; // 這裡換成你團隊所有成員的GitHub用戶名
 
           // 檢查PR創建者是否為團隊成員之一
           if (teamMembers.includes(prAuthor)) {
