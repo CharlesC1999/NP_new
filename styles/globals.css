@@ -1,0 +1,171 @@
+/* 重置或規範化樣式 */
+html {
+  box-sizing: border-box;
+  font-size: 12px; /* 基礎字體大小，p = 12 */
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 字型 */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #454545;
+  /* 預設black = 454545 */
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Georgia", serif;
+  color: #454545;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 3.3rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2rem;
+}
+
+h5 {
+  font-size: 1.6rem;
+}
+
+h6 {
+  font-size: 1.3rem;
+}
+/* h1~6設定 */
+
+/* 顏色方案 */
+:root {
+  --green01: #547d63;
+  --green02: #50bf8b;
+  --green03: #78cea6;
+  --green04: #9cb4ac;
+  --green05: #def9ec;
+  --red: #c14d3c;
+  --orange01: #f2821a;
+  --orange02: #f6a56f;
+  --Beige: #fff2d9;
+  --yellow01: #cbac4c;
+  --yellow02: #fdc040;
+  --yellow03: #9a877a;
+  --blue: #67bcee;
+  --pink: #f74b81;
+  --black: #454545;
+  --gray01: #747e85;
+  --gray02: #d9e1e6;
+  --gray03: #ececec;
+  --white: #fefefe;
+}
+
+/* 間距 */
+.spacing-small {
+  margin: 1rem 0;
+  padding: 1rem 0;
+}
+
+.spacing-medium {
+  margin: 2rem 0;
+  padding: 2rem 0;
+}
+
+.spacing-large {
+  margin: 3rem 0;
+  padding: 3rem 0;
+}
+
+/* 容器 1440 */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* 按鈕和表單元素 */
+button,
+input,
+select,
+textarea {
+  display: block;
+  font-size: 1rem;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: darken(var(--primary-color), 10%);
+} */
+
+/* 按鈕個別設計，如果真的有重複很多的我這邊再加 */
+
+/* 響應式設計 */
+@media (max-width: 375px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+}
+
+/* 公用類別 */
+.text-center {
+  text-align: center;
+}
+
+.d-none {
+  display: none;
+}
