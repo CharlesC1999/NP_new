@@ -152,6 +152,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 0;
     gap: 0px;
     .class-image-container {
       width: 305px;

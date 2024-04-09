@@ -103,9 +103,24 @@ body {
         width: 134px;
         height: 108px;
         img {
+          border-radius: 10px;
           width: 100%;
           height: 100%;
           object-fit: cover;
+        }
+      }
+      .product-description {
+        .product-name {
+          color: var(--black);
+        }
+        .portion-price {
+          p {
+            font-family: Inter;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 500;
+            color: var(--gray01);
+          }
         }
       }
       input[type="checkbox"] {
@@ -123,6 +138,27 @@ body {
     .card-right {
       flex: 0 1 191px;
       gap: 52px;
+      .quantity {
+        gap: 5px;
+        button {
+          font-size: 24px;
+          background: none;
+          color: var(--green02);
+          border: none;
+        }
+        p {
+          font-size: 20px;
+          padding-left: 10px;
+          color: var(--black);
+        }
+      }
+      .subtotal {
+        color: var(--black);
+        font-family: Inter;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+      }
     }
   }
 }
@@ -130,6 +166,7 @@ body {
 .bottom {
   padding: 10px 24px;
   gap: 15px;
+  background-color: #fff;
   p {
     font-family: Inter;
     font-size: 20px;
