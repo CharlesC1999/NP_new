@@ -1,40 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+##### 全部文件都在 np 資料夾裡面，請在裡面的個個資料夾進行開發
 
-## Getting Started
+##### 因為私人存儲庫的主分支保護要錢，所以提 PR 時請不要直接自己按合併(綠色按鈕)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+##### 請大家從 NP_new 的存儲庫，建立 fork 以及[分支頁面](https://github.com/CharlesC1999/NP_new/branches)建立分支
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##### 建立完後請在自己 fork 後的存儲庫 git clone 把資料從 git hub 存儲下來
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+##### 在自己本機電腦上用 VS code 打開上傳後會把你所 commit 的更新同步到你的存儲庫，
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+##### 請在將自己存儲庫的進度同步到小組存儲庫(NP_new)之前，請將小組存儲庫最新進度同步到自己的存儲庫
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+##### 再將自己的存儲庫的進度 PR 到自己在小組存儲庫中的分支，這一個 PR 可以自己按同意
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+##### 之後再將自己分支的進度 PR 到主分支(main)，這一個 PR <font color=#FF6600>不能自己按通過</font>。
