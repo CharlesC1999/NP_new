@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Product</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -33,13 +33,13 @@
     </header>
     <main class="my-5">
       <div class="d-flex justify-content-center flex-column align-items-center">
-        <div class="d-flex flex-row justify-content-center">
-          <div class="left-side d-flex flex-column">
+        <div class="d-flex flex-column flex-sm-row justify-content-center ">
+          <div class="left-side d-flex flex-column d-none d-sm-flex">
             <div class="side-bar01">側邊欄一</div>
             <div class="side-bar02">側邊欄二</div>
           </div>
           <div class="right-main d-flex flex-column">
-            <div class="main-product d-flex flex-row justify-content-center">
+            <div class="main-product d-flex flex-sm-row flex-column justify-content-center">
               <div class="product-pic d-flex flex-column">
                 <div class="p-img">
                   <img
@@ -54,7 +54,10 @@
                   <li
                     class="position-absolute d-flex prov-pic align-items-center justify-content-center"
                   >
-                    <i class="fa-regular fa-circle-left"></i>
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/>
+                  </svg>
+                  
                   </li>
                   <li class="pic-item">
                     <img
@@ -87,7 +90,10 @@
                   <li
                     class="position-absolute d-flex next-pic align-items-center justify-content-center"
                   >
-                    <i class="fa-regular fa-circle-right"></i>
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+                  </svg>
+                  
                   </li>
                 </ul>
               </div>
@@ -101,30 +107,30 @@
                 <div
                   class="star-row d-flex flex-row my-2 align-items-center justify-content-between"
                 >
-                  <div class="star pe-2">
-                    &star;<span class="ps-2 star-text">(125則評論)</span>
+                  <div class="star pe-2 d-flex flex-row align-items-center justify-content-between">
+                    <div><i class="fa-solid fa-star"></i></div>
+                    <div class="ps-2 star-text">(125則評論)</div>
                   </div>
                   <a class="favorite-btn"
                     ><i class="fa-regular fa-heart"></i
                   ></a>
                 </div>
                 <input class="amount ps-4 my-2" type="number" value="1" />
-                <button class="buy-btn my-2">
+                <button type='submit' class="buy-btn my-2 btn btn-outline-success">
                   <i class="fa-solid fa-cart-shopping"></i>加入購物車
                 </button>
               </div>
             </div>
 
-            <div class="section2 m-3">
-              <div class="d-flex flex-row my-5">
-                <button class="detail-btn btn btn-outline-success me-4">
+            <div class="section2 m-sm-3">
+              <div class="d-flex flex-row my-sm-5">
+                <button class="p-detail-btn d-flex align-items-center justify-content-center detail-btn btn btn-outline-success me-4">
                   商品簡介
                 </button>
-                <button class="com-btn btn btn-outline-success">評論</button>
+                <button class="p-comment-btn d-flex align-items-center justify-content-center com-btn btn btn-outline-success">評論</button>
               </div>
-            <div class="p-detail d-flex flex-column p-5">
-              
-              <div class="d-flex flex-column detail-list">
+            <div class="p-detail flex-column p-sm-5">
+              <div class="flex-column detail-list">
                 <div class="d-flex flex-column">
                   <h5 class="h5">商品簡介</h5>
                   <p class="p">
@@ -145,8 +151,8 @@
                 </div>
               </div>
 
-              <div class="p-comment d-flex flex-column">
-                <div class="d-flex flex-column ">
+              <div class="p-comment flex-column">
+                <div class="d-flex flex-column">
                   <h5 class="h5">評論</h5>
                   <div class="d-flex flex-row align-items-center">
                   <div class="img"><img src="" alt="" /></div>
@@ -158,7 +164,8 @@
                 <p class="p mb-3">
                   以純海水放養的虱目魚，無土味且營養價值高。產地位於紅樹林溼地，水中含豐富有機質及浮游生物，提供充分的天然養份。生態養殖虱目魚活動力高，因而肉質極富彈性，肉色偏粉紅，是老饕心中的夢幻滋味。
                 </p>
-                <div class=""><i class="fa-regular fa-thumbs-up"></i><span class="px-2">5</span></div>
+                <div class=""><i class="fa-regular fa-thumbs-up"></i><span class="px-2">5</span>
+                </div>
               </div>
             </div>
             </div>
@@ -168,10 +175,9 @@
       </div>
       <div class="section3 d-flex flex-column justify-content-center">
         <div class="mlike d-flex flex-column my-4 positon-relative">
-          
-          <h5 class="h5 py-4">你可能喜歡</h5>
-          <div class="line position-absolute"></div>
-            <ul class="d-flex flex-row justify-content-between product-list">
+          <h5 class="h5 py-sm-4 mt-5 mt-sm-none">你可能喜歡</h5>
+          <div class="line position-absolute d-sm-flex d-none"></div>
+            <ul class="d-flex flex-sm-row flex-wrap justify-content-between  product-list ">
               <li>
                 <div class="product-card my-4">
                   <div class="object-fit">
@@ -182,10 +188,10 @@
                 /></div>
                   
   
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
   
-                    <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="product-rating d-flex flex-row justify-content-sm-between stars-row mb-3">
                       <div class="star">★<span class="score px-3">(4.2)</span></div>
                       <a class="favorite-btn pe-3"
                     ><i class="fa-regular fa-heart"></i
@@ -193,7 +199,7 @@
                     </div>
   
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
 
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
@@ -216,7 +222,7 @@
                 /></div>
                   
   
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
   
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
@@ -227,7 +233,7 @@
                     </div>
   
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
 
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
@@ -241,7 +247,7 @@
                 </div>
               </li>
               <li>
-                <div class="product-card my-4">
+                <div class="product-card my-4 last-card">
                   <div class="object-fit">
                   <img
                   src="../public/products-image/egg.png"
@@ -250,7 +256,7 @@
                 /></div>
                   
   
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
   
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
@@ -261,7 +267,7 @@
                     </div>
   
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
 
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
@@ -275,7 +281,7 @@
                 </div>
               </li>
               <li>
-                <div class="product-card my-4">
+                <div class="product-card my-4 last-card">
                   <div class="object-fit">
                   <img
                   src="../public/products-image/egg.png"
@@ -284,7 +290,7 @@
                 /></div>
                   
   
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
   
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
@@ -295,7 +301,7 @@
                     </div>
   
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
 
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
@@ -309,47 +315,40 @@
                 </div>
               </li>
               <li>
-                <div class="product-card my-4">
+                <div class="product-card last-card my-4">
                   <div class="object-fit">
-                  <img
-                  src="../public/products-image/egg.png"
-                  alt="商品圖片"
-                  class="product-image"
-                /></div>
-                  
-  
-                  <div class="product-info p-4">
+                      <img
+                      src="../public/products-image/egg.png"
+                      alt="商品圖片"
+                      class="product-image"
+                    />
+                  </div>
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
-  
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
                       <div class="star">★<span class="score px-3">(4.2)</span></div>
-                      <a class="favorite-btn pe-3"
-                    ><i class="fa-regular fa-heart"></i
-                  ></a>
+                            <a class="favorite-btn pe-3"
+                          ><i class="fa-regular fa-heart"></i
+                        ></a>
                     </div>
-  
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
-
+                      <div class="price">$500</div>
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
-                        <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
-                          <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
+                          <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                          </a>
                       </div>
-                      
                     </div>
                   </div>
                 </div>
               </li>
-              
             </ul>
         </div>
         <div class="history d-flex flex-column my-4 positon-relative">
-          <h5 class="h5 py-4">瀏覽紀錄</h5>
-          <div class="line position-absolute"></div>
-          
-            <ul class="d-flex flex-row justify-content-between product-list">
+          <h5 class="h5 py-sm-4">瀏覽紀錄</h5>
+          <div class="line position-absolute d-sm-flex d-none"></div>
+            <ul class="d-flex flex-sm-row flex-wrap justify-content-between product-list">
               <li>
                 <div class="product-card my-4">
                   <div class="object-fit">
@@ -359,7 +358,7 @@
                   class="product-image"
                   />
                   </div>
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
                       <div class="star">★<span class="score px-3">(4.2)</span></div>
@@ -368,7 +367,7 @@
                       </a>
                     </div>
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
                         <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
@@ -389,7 +388,7 @@
                   class="product-image"
                   />
                   </div>
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
                       <div class="star">★<span class="score px-3">(4.2)</span></div>
@@ -398,7 +397,7 @@
                       </a>
                     </div>
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
                         <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
@@ -411,7 +410,7 @@
                 </div>
               </li>
               <li>
-                <div class="product-card my-4">
+                <div class="product-card my-4 last-card">
                   <div class="object-fit">
                   <img
                   src="../public/products-image/egg.png"
@@ -419,7 +418,7 @@
                   class="product-image"
                   />
                   </div>
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
                       <div class="star">★<span class="score px-3">(4.2)</span></div>
@@ -428,7 +427,7 @@
                       </a>
                     </div>
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
                         <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
@@ -441,15 +440,15 @@
                 </div>
               </li>
               <li>
-                <div class="product-card my-4">
-                  <div class="object-fit">
+                <div class="product-card my-4 last-card">
+                  <div class="img">
                   <img
+                  class="object-fit"
                   src="../public/products-image/egg.png"
                   alt="商品圖片"
-                  class="product-image"
                   />
                   </div>
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
                       <div class="star">★<span class="score px-3">(4.2)</span></div>
@@ -458,7 +457,7 @@
                       </a>
                     </div>
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
                         <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
@@ -471,7 +470,7 @@
                 </div>
               </li>
               <li>
-                <div class="product-card my-4">
+                <div class="product-card my-4 last-card">
                   <div class="object-fit">
                   <img
                   src="../public/products-image/egg.png"
@@ -479,7 +478,7 @@
                   class="product-image"
                   />
                   </div>
-                  <div class="product-info p-4">
+                  <div class="product-info">
                     <h6 class="product-name my-2">超級雞蛋</h6>
                     <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
                       <div class="star">★<span class="score px-3">(4.2)</span></div>
@@ -488,7 +487,7 @@
                       </a>
                     </div>
                     <div class="product-price d-flex flex-row justify-content-between align-items-center">
-                      <div class="price">$TWD 500</div>
+                      <div class="price">$500</div>
                       <div class="d-flex flex-row align-items-center">
                         <div class="original-price px-3">$100</div>
                         <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
@@ -500,9 +499,7 @@
                   </div>
                 </div>
               </li>
-              
             </ul>
-          
         </div>
       
       </div>
@@ -523,5 +520,41 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+    <script>
+      const detailBtn = document.querySelector('.p-detail-btn');
+      const commentBtn = document.querySelector('.p-comment-btn');
+      const detailContent = document.querySelector('.detail-list');
+      const commentContent = document.querySelector('.p-comment');
+      const heartIcon=document.querySelector('.fa-heart');
+
+      detailBtn.addEventListener('click', function() {
+        detailContent.style.display = 'block';
+        commentContent.style.display = 'none';
+      });
+
+      commentBtn.addEventListener('click', function() {
+        detailContent.style.display = 'none';
+        commentContent.style.display = 'block';
+      });
+
+      heartIcon.addEventListener('mouseenter', function(){
+        // 移除“fa-regular”类，添加“fa-solid”类
+        this.classList.remove('fa-regular');
+        this.classList.add('fa-solid');
+      });
+
+      heartIcon.addEventListener('mouseleave', function(){
+          // 移除“fa-solid”类，添加“fa-regular”类
+          this.classList.remove('fa-solid');
+          this.classList.add('fa-regular');
+      });   
+
+      heartIcon.addEventListener('click', function(event){
+          this.classList.remove('fa-regular');
+          this.classList.add('fa-solid');
+          console.log('click')
+          event.stopPropagation();
+      });  
+    </script>
   </body>
 </html>
