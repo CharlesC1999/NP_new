@@ -40,7 +40,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #454545;
   /* 預設black = 454545 */
-  line-height: 1.6;
+  line-height: 120.313%;
 }
 
 h1,
@@ -52,6 +52,7 @@ h6 {
   font-family: "Georgia", serif;
   color: #454545;
   margin-bottom: 0.5rem;
+  letter-spacing: 0.96px;
 }
 
 h1 {
