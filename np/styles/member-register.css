@@ -3,11 +3,24 @@
 } */
 
 body {
+  box-sizing: border-box;
   height: 100svh;
   background-image: url(../public/login-Image/login-bg01.png);
 }
-main {
-  height: 100svh;
+
+@media (width:375px){
+  body{
+    background-color: var(--gray03);
+    
+  
+  }
+}
+@media (width:375px){
+main{
+  background-color: var(--gray03);
+  
+
+}
 }
 .main {
   background: var(--white);
@@ -28,7 +41,24 @@ main {
     }
   }
 }
+@media (width:375px){
+  .main{
+    width: 330px;
+  .input-group{
+    width: 300px;
+    .input{
+      width: 300px;
+    }
+  }
+  .btn{
+    width: 300px;
+    background-color: var(--green01);
+  }
+  }
+}
+
 .member {
+
   width: 100%;
   .input-group {
     border-radius: 10px;
@@ -55,5 +85,12 @@ main {
     background-color: var(--gray03);
     border: none;
     border-radius: 5px;
+  }
+}
+@media (max-width:375px) {
+  .member{
+    width: 330px;
+    display: flex;
+    flex-direction: column;
   }
 }
