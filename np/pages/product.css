@@ -1,0 +1,387 @@
+/* 全域 */
+.wrapper {
+  width: 1440px;
+}
+
+.container {
+  background-color: var(--white, #fefefe);
+  /* display: flex; */
+  /* 容器頂部開始垂直排列，而不是水平排列 */
+  /* flex-direction: column; */
+
+  /*1440 左右兩邊間距為 100px */
+  padding: 0px 0px;
+}
+@media (max-width: 375px) {
+  .header-375 {
+    display: none;
+  }
+  .side-bar{
+    display: none;
+  }
+  .product-top-rwd{
+    display: none;
+  }
+   /*排版*/
+   .container {
+    padding: 0 10px;
+  }
+
+  .wrapper {
+    width: 100%;
+  }
+}
+
+/* <!-- 假麵包屑 --> */
+.Bread-crumbs {
+  height: 40px;
+  background-color: var(--green03);
+}
+
+.top-40 {
+  /* border: #454545 solid 1px; */
+  margin-top: 40px;
+}
+
+/* 分類side-bar */
+/* side-bar總width */
+.side-bar {
+  width: 250px;
+  margin-right: 40px;
+}
+
+.side-title {
+  width: 209px;
+  height: auto;
+  margin: 10px;
+
+  & h5 {
+    padding-bottom: 5px;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to right, var(--green03), var(--gray01)) 1;
+    /* 將底線設為從左到右漸變 */
+  }
+
+}
+
+.side-bar-box {
+  width: auto;
+  height: auto;
+  margin-bottom: 66px;
+  border: var(--gray01) solid 1px;
+  border-radius: 5px;
+  /*水平右,下,模糊化*/
+  box-shadow: 5px 5px 5px var(--black);
+  /*陰影化*/
+
+  .g {
+    border: var(--gray01) solid 1px;
+  }
+
+  & .side-box {
+    width: 209px;
+    height: 45px;
+    margin: 10px;
+    border: var(--gray01) solid 1px;
+    border-radius: 5px;
+
+    & .side-img {
+      width: 35px;
+      height: 35px;
+      margin: 3px;
+
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    & .side-text {
+      display: flex;
+      width: 150px;
+      height: auto;
+
+      & a ,h6 {
+        text-decoration: none;
+        padding-inline: 3px;
+        margin-block: auto;
+        /* 水平置中 */
+      }
+    }
+
+    .side-text .left {
+      margin-right: auto;
+      /* 靠右 */
+    }
+
+    .side-text .right {
+      margin-left: auto;
+      /* 靠左*/
+      /* height: 20px;
+      width: 20px; */
+      /* border: #000 solid 1px; */
+      /* background-color: var(--green03); */
+      /* border-radius: 50%; */
+      /* align-items: center; */
+      /* justify-content: center; */
+    }
+  }
+}
+
+/* 熱門商品side-bar */
+
+& .hot-box {
+  width: 209px;
+  height: 91px;
+  margin: 10px;
+  border-bottom: var(--gray01) solid 2px;
+}
+
+& .hot-img {
+  width: 81px;
+  height: 81px;
+  padding-bottom: 5px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+& .hot-text {
+  width: auto;
+  height: auto;
+  margin-block: auto;
+  & a {
+    text-decoration: none;
+  }
+
+  /*垂直置中*/
+  & h6 {
+    padding-left: 10px;
+  }
+
+  & .hot-title {
+    color: var(--green02);
+  }
+}
+
+/* .<!-- product (上方限時特惠商品) --> */
+.discount-title{
+  color: var(--green02);
+}
+
+.discount-box {
+  background-color: #b3b3b3;
+  width: auto;
+  height: 420px;
+}
+
+.search-product{
+  width: auto;
+  height: 30px;
+  margin-block: 20px;
+  background-color: var(--green02);
+}
+
+
+/*product card 商品卡片*/
+/* 商品總width */
+.product-w {
+  /* border: #454545 solid 1px; */
+  width: 915px;
+}
+
+.icon-button {
+  border: none;
+  padding: 0;
+  background: none;
+  /* 移除背景色 */
+  cursor: pointer;
+}
+
+.product-card1 {
+  display: flex;
+  justify-content: flex-start;
+  gap: 7px;
+  row-gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card1 {
+  width: 210px;
+  height: 300px;
+  border: 1px solid var(--gray01);
+  border-radius: 5px;
+}
+
+.card1-img {
+  width: auto;
+  height: 178px;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.card1-body {
+  display: flex;
+  /* 垂直方向排列 */
+  flex-direction: column;
+  margin-inline: 10px;
+  & .card1-title a {
+    color: var(--black);
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.card1-btn {
+  position: relative;
+  width: 30px;
+  height: 25px;
+  background-color: var(--green03);
+
+  &:hover {
+    text-decoration: none;
+    color: #000;
+  }
+
+  & i {
+    color: var(--green01);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+}
+
+.card1-heart{
+  margin: 5px;
+}
+.cheart-icon {
+  align-items: center;
+  justify-content: center;
+
+}
+
+.card1-text {
+  margin: 10px;
+  align-items: center;
+  justify-content: center;
+
+  & h6 {
+    color: var(--green03);
+  }
+
+  & p {
+    /* 橫線 */
+    text-decoration: line-through;
+  }
+}
+
+@media (max-width: 375px) {
+  .icon-button {
+    border: none;
+    padding: 0;
+    background: none;
+    /* 移除背景色 */
+    cursor: pointer;
+  }
+  
+  .product-card1 {
+    display: flex;
+    justify-content: center;
+    gap: auto;
+    row-gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .card1 {
+    width: 166px;
+    height: 240px;
+    border: 1px solid var(--gray01);
+    border-radius: 5px;
+  }
+  
+  .card1-img {
+    width: auto;
+    height: 129px;
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .card1-body {
+    display: flex;
+    /* 垂直方向排列 */
+    flex-direction: column;
+    margin-inline: 10px;
+    & h5{
+      text-align: center;
+    }
+    & .card1-title a {
+      color: var(--black);
+  
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  
+  .card1-btn {
+    position: relative;
+    width: 30px;
+    height: 25px;
+    background-color: var(--green03);
+  
+    &:hover {
+      text-decoration: none;
+      color: #000;
+    }
+  
+    & i {
+      color: var(--green01);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  
+    }
+  }
+  
+  .card1-heart{
+    margin: 0px;
+  }
+  .cheart-icon {
+    align-items: center;
+    justify-content: center;
+  
+  }
+  
+  .card1-text {
+    margin: 0px;
+    margin-block: 10px;
+    align-items: center;
+    justify-content: center;
+  
+    & h6 {
+      color: var(--green03);
+      font-size: 12px;
+    }
+  
+    & p {
+      /* 橫線 */
+      text-decoration: line-through;
+    }
+  }
+  
+}

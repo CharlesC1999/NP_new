@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class-detail</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        gap: 50px;
+      }
+      .class-detail-and-links {
+        display: flex;
+        gap: 20px;
+        margin-top: 30px;
+        .class-image-container {
+          width: 567px;
+          height: 433px;
+          border-radius: 20px;
+          overflow: hidden;
+          .class-img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .class-informations {
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding-inline: 26px;
+          gap: 33px;
+          .class-name {
+            color: var(--light-green, rgba(56, 142, 101, 0.7));
+            text-overflow: ellipsis;
+            margin: 0;
+            /* H3 */
+            font-family: Inter;
+            font-size: 36px;
+            font-style: normal;
+            font-weight: 900;
+            line-height: 120.313%;
+          }
+          .class-mobile-select-group {
+            display: none;
+            gap: 15px;
+            .class-mobile-select-active {
+              border-radius: 5px;
+              border: #56b77e;
+              outline: none;
+              width: 102px;
+              height: 29px;
+              /* padding: 10px 20px; */
+              /* style */
+              color: #ffffff;
+              background-color: #56b77e;
+              font-family: Inter;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 120.313%;
+            }
+            .class-mobile-select {
+              border-radius: 5px;
+              border: 1px solid var(--light-green, rgba(56, 142, 101, 0.7));
+              outline: none;
+              width: 102px;
+              height: 29px;
+              /* padding: 10px 20px; */
+              /* style */
+              color: var(--light-green, rgba(56, 142, 101, 0.7));
+              background-color: transparent;
+              font-family: Inter;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 120.313%;
+            }
+          }
+          .class-information-container {
+            display: flex;
+            flex-direction: column;
+            height: 215px;
+            gap: 18px;
+            padding: 10px;
+            .class-infor {
+              display: flex;
+              width: 270px;
+              gap: 30px;
+
+              .infor-title {
+                width: 120px;
+                /* text-style */
+                color: var(--black, var(--gray03, #454545));
+                font-family: Inter;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 120.313%;
+              }
+              .infor-detail {
+                width: 120px;
+                /* text-style */
+                color: var(--green01, #547d63);
+                font-family: Inter;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 120.313%;
+              }
+            }
+          }
+          .class-images-and-contents-web {
+            display: none;
+          }
+          .class-links-container {
+            display: flex;
+            width: 270px;
+
+            justify-content: center;
+            align-items: flex-start;
+            gap: 15px;
+            .link-btn {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 135px;
+              height: 32px;
+              padding: 6px 16px;
+              border-radius: 5px;
+              background: #56b77e;
+              border: none;
+              gap: 4px;
+              text-decoration: none;
+              cursor: pointer;
+              .link-text {
+                margin: 0;
+
+                color: var(--Shades-White, #fff);
+                font-feature-settings: "clig" off, "liga" off;
+                font-family: Manrope;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+              }
+            }
+          }
+        }
+      }
+      @media (max-width: 375px) {
+        .class-detail-and-links {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin-top: 0;
+          gap: 0px;
+          .class-image-container {
+            width: 305px;
+            height: 233px;
+            margin-block: 20px;
+          }
+          .class-informations {
+            gap: 0px;
+            padding: 0;
+            width: 305px;
+            justify-content: start;
+            .class-name {
+              color: var(--gray03, #454545);
+              text-overflow: ellipsis;
+              margin-bottom: 20px;
+              /* H4 */
+              font-family: Inter;
+              font-size: 24px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 120.313%;
+            }
+            .class-mobile-select-group {
+              width: 100%;
+              display: flex;
+              flex-direction: row;
+              justify-content: start;
+              margin-bottom: 20px;
+            }
+            .class-information-container {
+              padding: 0;
+              width: 100%;
+              height: 172px;
+              margin-bottom: 20px;
+              .class-infor {
+                gap: 16px;
+                .infor-title {
+                  width: 84px;
+                  font-size: 16px;
+                }
+                .infor-detail {
+                  font-size: 16px;
+                  font-weight: 500;
+                  line-height: 120.313%;
+                }
+              }
+            }
+            .class-images-and-contents-web {
+              display: flex;
+              flex-direction: column;
+              margin-bottom: 30px;
+              .image-text-set-web {
+                .class-intro-image-container-web {
+                  width: 305px;
+                  height: 200px;
+                  overflow: hidden;
+                  border-radius: 15px;
+                  margin-block: 20px;
+                  .class-intro-image-web {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                  }
+                }
+              }
+            }
+            .class-links-container {
+              width: 255px;
+              padding-right: 50px;
+              margin-bottom: 30px;
+            }
+          }
+        }
+      }
+      .speaker-intro-and-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 0 30px 41px;
+        width: 866px;
+        gap: 10px;
+        .speaker-image {
+          width: 180px;
+          height: 180px;
+        }
+        .speaker-infor {
+          padding: 10px 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 24px;
+          .speaker-name-set {
+            display: flex;
+            flex-direction: column;
+            .speaker-name {
+              text-align: center;
+              margin: 0;
+              /* text-style */
+              color: var(--black, var(--gray03, #454545));
+              /* H4 */
+              font-family: Inter;
+              font-size: 24px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 120.313%;
+            }
+            .speaker-sub-name {
+              text-align: center;
+              margin: 0;
+              /* text-style */
+              color: var(--gray01, #747e85);
+              font-family: Inter;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 120.313%;
+            }
+          }
+          .speaker-background-infor {
+            /* text-style */
+            color: var(--gray01, #747e85);
+            font-family: Inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 137%;
+          }
+          .speaker-link-container {
+            width: 100%;
+            .speaker-detail-link {
+              display: flex;
+              justify-content: end;
+              text-decoration: none;
+              /* style */
+              color: var(--green02, var(--green02, #50bf8b));
+              font-feature-settings: "clig" off, "liga" off;
+              font-family: Manrope;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: normal;
+              gap: 4px;
+              cursor: pointer;
+              .speaker-link-icon {
+                margin-top: 2px;
+              }
+            }
+          }
+        }
+      }
+
+      @media (max-width: 375px) {
+        .speaker-intro-and-link {
+          display: none;
+        }
+      }
+
+      .class-images-and-contents {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 907px;
+        .image-text-set {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .class-intro-image-container {
+            width: 855px;
+            height: 623px;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-block: 40px;
+            .class-intro-image {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+          .class-intro-text {
+            width: 757px;
+            margin-bottom: 40px;
+          }
+        }
+      }
+      @media (max-width: 375px) {
+        .class-images-and-contents {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="class-detail-and-links">
+      <div class="class-image-container">
+        <img
+          src="../../../public/images/class-image.jfif"
+          alt=""
+          class="class-img"
+        />
+      </div>
+      <div class="class-informations">
+        <p class="class-name">松露菜飯</p>
+        <div class="class-mobile-select-group">
+          <button
+            class="class-mobile-select-active"
+            id="classMobileSelectInfor"
+          >
+            課程資訊
+          </button>
+          <button class="class-mobile-select" id="classMobileSelectgoods">
+            成品介紹
+          </button>
+        </div>
+        <div class="class-information-container">
+          <div class="class-infor">
+            <div class="infor-title">上課時間：</div>
+            <div class="infor-detail">2024/05/26</div>
+          </div>
+          <div class="class-infor">
+            <div class="infor-title">課程價格：</div>
+            <div class="infor-detail">$2500</div>
+          </div>
+          <div class="class-infor">
+            <div class="infor-title">優惠活動：</div>
+            <div class="infor-detail">無</div>
+          </div>
+          <div class="class-infor">
+            <div class="infor-title">優惠券：</div>
+            <div class="infor-detail">無</div>
+          </div>
+          <div class="class-infor">
+            <div class="infor-title">報名人數：</div>
+            <div class="infor-detail">10 / 24</div>
+          </div>
+        </div>
+        <div class="class-images-and-contents-web">
+          <div class="image-text-set-web">
+            <div class="class-intro-image-container-web">
+              <img
+                src="../../../public/images/class-intro-image.jfif"
+                alt=""
+                class="class-intro-image-web"
+              />
+            </div>
+            <div class="class-intro-text-web">
+              「探索松露的秘密」課程是一場關於這個珍貴食材的深度之旅。首先，我們會帶您深入了解松露的世界，包括不同種類、產地和風味特點。從白松露到黑松露，每種松露都有其獨特的味道和用途，我們將帶您探索它們的起源、生長環境以及如何挑選最佳的松露。透過視頻示範、教材閱讀和專家分享，您將對松露有更深入的認識。
+            </div>
+          </div>
+          <div class="image-text-set-web">
+            <div class="class-intro-image-container-web">
+              <img
+                src="../../../public/images/class-intro-image2.jfif"
+                alt=""
+                class="class-intro-image-web"
+              />
+            </div>
+            <div class="class-intro-text-web">
+              在「烹飪技巧與實踐」部分，我們將帶您一步步學習如何在家中製作出精美的松露菜飯。從準備食材到烹飪技巧，我們會分享專業廚師的秘訣和技巧，讓您能夠輕鬆地掌握製作松露菜飯的訣竅。透過實踐和反饋，您將不僅學會如何製作松露菜飯，還能夠將這些技巧應用到其他菜品的烹飪中。
+            </div>
+          </div>
+          <!-- basically, it only need one set -->
+        </div>
+        <div class="class-links-container">
+          <a class="link-btn" href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20px"
+              height="20px"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="white"
+                d="m9.55 18l-5.7-5.7l1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"
+              />
+            </svg>
+            <p class="link-text">立刻報名</p>
+          </a>
+          <a class="link-btn" href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20px"
+              height="20px"
+              viewBox="0 0 24 24"
+            >
+              <path fill="white" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z" />
+            </svg>
+            <p class="link-text">加入收藏</p>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="speaker-intro-and-link">
+      <img
+        src="../../../public/images/class-speaker.png"
+        alt=""
+        class="speaker-image"
+      />
+      <div class="speaker-infor">
+        <div class="speaker-name-set">
+          <p class="speaker-name">Walt White</p>
+          <p class="speaker-sub-name">化學分子料理師</p>
+        </div>
+        <div class="speaker-background-infor">
+          瓦爾特·懷特並是一位天才大廚，以其創新的烹飪技術和對食材化學的深刻理解聞名遐邇。這位前高中化學老師，面對生命中的重大轉折，一個無法忽視的健康挑戰，決定追隨自己長期以來的熱情：烹飪。瓦爾特將他對化學的知識轉化為烹飪創新，創造出前所未有的美食，這些美食不僅味覺上令人難以忘懷，更在視覺和嗅覺上提供獨特的體驗。
+        </div>
+        <div class="speaker-link-container">
+          <a href="#" class="speaker-detail-link"
+            ><span class="speaker-link-btn">了解更多</span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16px"
+              height="16px"
+              viewBox="0 0 16 16"
+              class="speaker-link-icon"
+            >
+              <path
+                fill="#50bf8b"
+                fill-rule="evenodd"
+                d="M1.25 8A.75.75 0 0 1 2 7.25h10.19L9.47 4.53a.75.75 0 0 1 1.06-1.06l4 4a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 1 1-1.06-1.06l2.72-2.72H2A.75.75 0 0 1 1.25 8"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="class-images-and-contents">
+      <div class="image-text-set">
+        <div class="class-intro-image-container">
+          <img
+            src="../../../public/images/class-intro-image.jfif"
+            alt=""
+            class="class-intro-image"
+          />
+        </div>
+        <div class="class-intro-text">
+          「探索松露的秘密」課程是一場關於這個珍貴食材的深度之旅。首先，我們會帶您深入了解松露的世界，包括不同種類、產地和風味特點。從白松露到黑松露，每種松露都有其獨特的味道和用途，我們將帶您探索它們的起源、生長環境以及如何挑選最佳的松露。透過視頻示範、教材閱讀和專家分享，您將對松露有更深入的認識。
+        </div>
+      </div>
+      <div class="image-text-set">
+        <div class="class-intro-image-container">
+          <img
+            src="../../../public/images/class-intro-image2.jfif"
+            alt=""
+            class="class-intro-image"
+          />
+        </div>
+        <div class="class-intro-text">
+          在「烹飪技巧與實踐」部分，我們將帶您一步步學習如何在家中製作出精美的松露菜飯。從準備食材到烹飪技巧，我們會分享專業廚師的秘訣和技巧，讓您能夠輕鬆地掌握製作松露菜飯的訣竅。透過實踐和反饋，您將不僅學會如何製作松露菜飯，還能夠將這些技巧應用到其他菜品的烹飪中。
+        </div>
+      </div>
+      <!-- basically, it only need one set -->
+    </section>
+    <script>
+      // 獲取兩個按鈕元素
+      var infoButton = document.getElementById("classMobileSelectInfor");
+      var goodsButton = document.getElementById("classMobileSelectgoods");
+
+      // 獲取兩個內容容器元素
+      var imagesAndContentsWeb = document.querySelector(
+        ".class-images-and-contents-web"
+      );
+      var informationContainer = document.querySelector(
+        ".class-information-container"
+      );
+
+      // 為信息按鈕添加點擊事件監聽器
+      infoButton.addEventListener("click", function () {
+        // 更新按鈕樣式
+        infoButton.className = "class-mobile-select-active";
+        goodsButton.className = "class-mobile-select";
+
+        // 顯示信息內容並隱藏成品介紹內容
+        imagesAndContentsWeb.style.display = "none"; // 隱藏
+        informationContainer.style.display = "flex"; // 顯示
+      });
+
+      // 為成品介紹按鈕添加點擊事件監聽器
+      goodsButton.addEventListener("click", function () {
+        // 更新按鈕樣式
+        goodsButton.className = "class-mobile-select-active";
+        infoButton.className = "class-mobile-select";
+
+        // 隱藏信息內容並顯示成品介紹內容
+        imagesAndContentsWeb.style.display = "block"; // 顯示
+        informationContainer.style.display = "none"; // 隱藏
+      });
+    </script>
+  </body>
+</html>

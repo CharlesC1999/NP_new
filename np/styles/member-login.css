@@ -1,0 +1,96 @@
+/* * {
+  border: var(--gray01) solid 1px;
+} */
+
+body {
+  background-color: var(--white);
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+.MainText {
+  width: 500px;
+  .h3 {
+    font-size: 36px;
+    color: var(--green03);
+    margin-block: 30px;
+    margin-inline: auto;
+  }
+}
+
+main {
+  background-image: url(../public/login-Image/login-bg02.png);
+  border: var(--gray01) solid 2px;
+  height: 100svh;
+  font-size: 16px;
+  .main {
+    border: var(--gray02) solid 2px;
+  }
+  .btn {
+    font-size: 16px;
+    margin-bottom: 30px;
+    width: 315px;
+  }
+  .icon-group i {
+    font-size: 20px;
+    cursor: pointer;
+
+    color: var(--green02);
+    margin-bottom: 30px;
+  }
+  .input-group {
+    margin-inline: auto;
+    width: 315px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: var(--green01) solid 1px;
+    label {
+      color: var(--green03);
+    }
+    input {
+      border: none;
+      outline: none;
+    }
+  }
+  .member {
+    width: 315px;
+    a {
+      color: var(--green03);
+    }
+  }
+  .social {
+    width: 315px;
+    a {
+      color: var(--green03);
+    }
+  }
+}
+@media (max-width: 375px) {
+  main{
+    background-image: none;
+    background-color: var(--gray03);
+    .main {
+      background-image:none;
+      background-color: var(--white);
+       width: 330px;
+       padding:30px 15px 30px 15px ;
+       .btn {
+        font-size: 16px;
+        margin-bottom: 30px;
+        width: 300px;
+        background: var(--green01);
+      }
+      .MainText{
+        width: 300px;
+    
+        .input-group {
+          width: 300px;
+        }
+      }
+      
+      }
+  }
+  
+}

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .product-card {
+        display: flex;
+        flex-direction: column;
+        max-width: 165px;
+      }
+
+      .product-image {
+        width: 100%;
+        aspect-ratio: 1.32;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .product-details {
+        display: flex;
+        flex-direction: column;
+        max-width: 133px;
+        width: 100%;
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid rgba(217, 225, 230, 1);
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+      }
+
+      .product-name {
+        margin: 0;
+        color: (var--gray03, #454545);
+        font-size: 20px;
+        font-weight: 800;
+        font-family: Inter, sans-serif;
+        letter-spacing: 0.96px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .product-date {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 4px;
+        padding: 4px 0;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 120%;
+        color: var(--gray01, #747e85);
+      }
+
+      .product-pricing {
+        display: flex;
+        gap: 6px;
+        margin-top: 10px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .current-price {
+        color: var(--green-01, var(--green02, #50bf8b));
+        font:
+          16px Inter,
+          sans-serif;
+        letter-spacing: 0.96px;
+      }
+
+      .original-price {
+        margin-top: 2px;
+        color: var(--gray01, #919da6);
+        font:
+          13px/120% Inter,
+          sans-serif;
+        text-decoration: line-through;
+      }
+
+      .product-actions {
+        display: flex;
+        gap: 16px;
+        margin-top: 10px;
+      }
+
+      .action-link {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        background-color: var(--green02, #50bf8b);
+        border-radius: 5px;
+        text-decoration: none;
+      }
+
+      .action-icon {
+        width: 14px;
+        height: 14px;
+        fill: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="product-card">
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a77577212d296ba1986c456e093d58e9a0d931127736f72d9307baa502fffcb?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
+        alt="松露菜飯 product image"
+        class="product-image"
+        loading="lazy"
+      />
+      <div class="product-details">
+        <h3 class="product-name">松露菜飯</h3>
+        <div class="product-date">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14px"
+            height="14px"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#747e85"
+              d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Z"
+            />
+            <rect width="2" height="7" x="11" y="6" fill="#747e85" rx="1">
+              <animateTransform
+                attributeName="transform"
+                dur="18s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="0 12 12;360 12 12"
+              />
+            </rect>
+            <rect width="2" height="9" x="11" y="11" fill="#747e85" rx="1">
+              <animateTransform
+                attributeName="transform"
+                dur="1.5s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="0 12 12;360 12 12"
+              />
+            </rect>
+          </svg>
+          <time datetime="2024-05-26">2024 5月26日</time>
+        </div>
+        <div class="product-pricing">
+          <div class="current-price">$NT599</div>
+          <div class="original-price">$999</div>
+        </div>
+        <div class="product-actions">
+          <a href="#" class="action-link">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/4cd0fa22651251ac90a3950b65de848025a94b63de491d78368103e6b2f1d098?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
+              alt="Action icon"
+              class="action-icon"
+              loading="lazy"
+            />
+          </a>
+          <a href="#" class="action-link">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b411245b92da64153133ecab20b8c3cb9120218c710e6bcdd22fd909b1d6230?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
+              alt="Action icon"
+              class="action-icon"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>
