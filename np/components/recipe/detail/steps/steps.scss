@@ -1,0 +1,54 @@
+.figma-h3 {
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120.313%;
+}
+
+.figma-h4 {
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
+.figma-h5 {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
+.figma-h6 {
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 125%; /* 20px */
+  letter-spacing: 0.96px;
+}
+
+.figma-p {
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120.313%;
+}
+
+// custom style
+.row {
+  width: 1060px;
+  gap: 30px;
+}
+
+.steps {
+  list-style: decimal;
+  gap: 10px;
+  li {
+    padding-left: 5px;
+  }
+}
