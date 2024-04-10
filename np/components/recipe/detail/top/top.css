@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* typography */
 .figma-h3 {
   font-family: Inter;
@@ -45,6 +46,9 @@
   height: 700px;
   margin-bottom: 41px;
 }
+.top .pic img {
+  border-radius: 10px;
+}
 .top .top-main-info {
   padding: 0px 16px;
 }
@@ -69,10 +73,6 @@
 .main .aside {
   border: 2px solid green;
   height: 800px;
-}
-.main .main-content {
-  border: 2px solid blue;
-  height: 1200px;
 }
 .main .main-content .ingredients-section .ingredients {
   margin-left: 80px;
@@ -187,4 +187,88 @@
 }
 .main .main-content .related-products-section .related-products .related-products-middle .middle-left .product-pic img {
   border-radius: 10px;
+}
+.main .main-content .related-products-section .related-products .related-products-middle .middle-left .product-description .portion-and-price .portion {
+  flex: 0 0 30px;
+}
+.main .main-content .related-products-section .related-products .related-products-middle .middle-left .product-description .portion-and-price .price {
+  flex: 0 0 60px;
+}
+.main .main-content .related-products-section .related-products .related-products-middle .middle-right {
+  gap: 60px;
+}
+.main .main-content .related-products-section .related-products .related-products-middle .middle-right .quantity button {
+  background: none;
+  border: none;
+  color: var(--green02);
+}
+.main .main-content .related-products-section .related-products .related-products-middle .middle-right .quantity p {
+  color: var(--black);
+}
+.main .main-content .related-products-section .related-products .related-products-middle .middle-right .subtotal {
+  color: var(--black);
+}
+.main .main-content .related-products-section .related-products .related-products-bottom {
+  padding: 10px 24px;
+}
+.main .main-content .related-products-section .related-products .related-products-bottom .total {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+}
+.main .main-content .related-products-section .related-products .related-products-bottom button {
+  background: var(--green02);
+  border: none;
+  padding: 10px 15px;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+}
+.main .main-content .related-products-section .related-products .related-products-bottom button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.recommended-recipe {
+  gap: 30px;
+  padding: 30px 0px 120px 0px;
+}
+.recommended-recipe .recipe-card {
+  gap: 11px;
+}
+.recommended-recipe .recipe-card .card-pic {
+  width: 403px;
+  height: 392px;
+}
+.recommended-recipe .recipe-card .card-pic img {
+  border-radius: 5px;
+}
+.recommended-recipe .recipe-card .card-content {
+  gap: 11px;
+}
+.recommended-recipe .recipe-card .card-content .recipe-description {
+  max-width: 210px;
+}
+.recommended-recipe .recipe-card .card-content .recipe-description.truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* 從第三行開始顯示ellipsis */
+  -webkit-line-clamp: 3; /* 指定要显示的行数 */
+}
+.recommended-recipe .pagination {
+  margin-top: 50px;
+}
+.recommended-recipe .pagination .page {
+  width: 40px;
+  height: 5px;
+  border-radius: 5px;
+  background: var(--gray01);
+}
+.recommended-recipe .pagination .page.current {
+  background: var(--green02);
 }/*# sourceMappingURL=top.css.map */

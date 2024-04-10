@@ -46,6 +46,9 @@
     padding-top: 49px;
     height: 700px;
     margin-bottom: 41px;
+    img {
+      border-radius: 10px;
+    }
   }
 
   .top-main-info {
@@ -74,8 +77,6 @@
     height: 800px;
   }
   .main-content {
-    border: 2px solid blue;
-    height: 1200px;
     .ingredients-section {
       .ingredients {
         margin-left: 80px;
@@ -185,8 +186,98 @@
                 border-radius: 10px;
               }
             }
+            .product-description {
+              .portion-and-price {
+                .portion {
+                  flex: 0 0 30px;
+                }
+                .price {
+                  flex: 0 0 60px;
+                }
+              }
+            }
+          }
+          .middle-right {
+            gap: 60px;
+            .quantity {
+              button {
+                background: none;
+                border: none;
+                color: var(--green02);
+              }
+              p {
+                color: var(--black);
+              }
+            }
+            .subtotal {
+              color: var(--black);
+            }
           }
         }
+        .related-products-bottom {
+          padding: 10px 24px;
+          .total {
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+          }
+          button {
+            svg {
+              width: 20px;
+              height: 20px;
+            }
+            background: var(--green02);
+            border: none;
+            padding: 10px 15px;
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.recommended-recipe {
+  gap: 30px;
+  padding: 30px 0px 120px 0px;
+  .recipe-card {
+    gap: 11px;
+    .card-pic {
+      width: 403px;
+      height: 392px;
+      img {
+        border-radius: 5px;
+      }
+    }
+    .card-content {
+      gap: 11px;
+      .recipe-description {
+        max-width: 210px;
+        &.truncate {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          /* 從第三行開始顯示ellipsis */
+          -webkit-line-clamp: 3; /* 指定要显示的行数 */
+        }
+      }
+    }
+  }
+  .pagination {
+    margin-top: 50px;
+    .page {
+      width: 40px;
+      height: 5px;
+      border-radius: 5px;
+      background: var(--gray01);
+      &.current {
+        background: var(--green02);
       }
     }
   }

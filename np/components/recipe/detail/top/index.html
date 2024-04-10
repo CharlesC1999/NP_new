@@ -16,7 +16,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/styles/globals.css" />
+    <link rel="stylesheet" href="/np/styles/globals.css" />
     <link rel="stylesheet" href="./top.css" />
   </head>
 
@@ -201,7 +201,7 @@
               <div
                 class="related-products-middle d-flex justify-content-between"
               >
-                <div class="col-5 middle-left d-flex align-items-center">
+                <div class="col-6 middle-left d-flex align-items-center">
                   <input type="checkbox" />
                   <div class="product-pic">
                     <img
@@ -212,26 +212,133 @@
                   </div>
                   <div class="product-description">
                     <p class="product-name figma-h5">商品名稱</p>
-                    <div class="protion-and-price">
-                      <p>份量</p>
-                      <p>|</p>
-                      <p>單價 $ 165</p>
+                    <div class="portion-and-price d-flex gap-2">
+                      <p class="portion">份量</p>
+                      <p class="divider">|</p>
+                      <p class="price">單價 $ 165</p>
                     </div>
                   </div>
                 </div>
                 <div class="col"></div>
-                <div class="col-3 middle-right">
-                  <div class="quantity">
-                    <button type="button" class="btn btn-primary">-</button>
-                    <p>1</p>
-                    <button type="button" class="btn btn-primary">+</button>
+                <div class="col-3 middle-right d-flex align-items-center">
+                  <div class="quantity d-flex align-items-center">
+                    <button type="button" class="btn btn-primary figma-h5">
+                      -
+                    </button>
+                    <p class="figma-h6">1</p>
+                    <button type="button" class="btn btn-primary figma-h5">
+                      +
+                    </button>
                   </div>
-                  <p class="subtotal">$ 165</p>
+                  <p class="subtotal figma-h6">$ 165</p>
                 </div>
+              </div>
+              <div
+                class="related-products-bottom d-flex justify-content-end align-items-center gap-3"
+              >
+                <p class="total">共選擇8項商品，共計1,320元</p>
+                <button type="button" class="btn btn-primary">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 15 15"
+                    fill="none"
+                  >
+                    <mask
+                      id="mask0_2921_33112"
+                      style="mask-type: luminance"
+                      maskUnits="userSpaceOnUse"
+                      x="0"
+                      y="0"
+                      width="15"
+                      height="15"
+                    >
+                      <path
+                        d="M14.5 0.662109H0.5V14.6621H14.5V0.662109Z"
+                        fill="white"
+                      />
+                    </mask>
+                    <g mask="url(#mask0_2921_33112)">
+                      <path
+                        d="M14.5 2.41211H2.9745L2.95 2.20736C2.89986 1.78177 2.69531 1.38937 2.37512 1.10455C2.05493 0.819739 1.64137 0.662309 1.21283 0.662109H0.5V1.82878H1.21283C1.35571 1.8288 1.49361 1.88125 1.60038 1.97619C1.70716 2.07114 1.77536 2.20196 1.79208 2.34386L2.71667 10.2002C2.7668 10.6258 2.97136 11.0182 3.29155 11.303C3.61174 11.5878 4.0253 11.7453 4.45383 11.7454H12.1666V10.5788H4.45383C4.31086 10.5788 4.17289 10.5262 4.06611 10.4311C3.95932 10.3361 3.89117 10.2051 3.87458 10.0631L3.79817 9.4121H13.2376L14.5 2.41211ZM12.2623 8.24543H3.66108L3.11217 3.57878H13.1041L12.2623 8.24543Z"
+                        fill="#F7F8F5"
+                      />
+                      <path
+                        d="M4.58317 14.6617C5.2275 14.6617 5.74984 14.1394 5.74984 13.495C5.74984 12.8507 5.2275 12.3284 4.58317 12.3284C3.93884 12.3284 3.4165 12.8507 3.4165 13.495C3.4165 14.1394 3.93884 14.6617 4.58317 14.6617Z"
+                        fill="#F7F8F5"
+                      />
+                      <path
+                        d="M10.4167 14.6617C11.061 14.6617 11.5833 14.1394 11.5833 13.495C11.5833 12.8507 11.061 12.3284 10.4167 12.3284C9.77238 12.3284 9.25 12.8507 9.25 13.495C9.25 14.1394 9.77238 14.6617 10.4167 14.6617Z"
+                        fill="#F7F8F5"
+                      />
+                    </g>
+                  </svg>
+                  加入購物車
+                </button>
               </div>
             </div>
           </div>
         </section>
+      </div>
+      <div class="recommended-recipe d-flex flex-column">
+        <div class="col-12 figma-h4">其他推薦食譜</div>
+        <div class="row recipe-cards">
+          <div class="col-4 recipe-card d-flex flex-column">
+            <div class="card-pic w-100">
+              <img
+                class="w-100 h-100 object-fit-cover"
+                src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                alt=""
+              />
+            </div>
+            <div class="card-content d-flex flex-column align-items-center">
+              <p class="recipe-name figma-h5">法式經典油封鴨腿</p>
+              <p class="recipe-description truncate">
+                法式經典油封鴨腿
+                選用宜蘭的櫻桃鴨，以法式古法鹽漬風乾後浸泡在大量鴨油與香料裡，低溫烘烤至酥爛。
+              </p>
+            </div>
+          </div>
+          <div class="col-4 recipe-card d-flex flex-column">
+            <div class="card-pic w-100">
+              <img
+                class="w-100 h-100 object-fit-cover"
+                src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                alt=""
+              />
+            </div>
+            <div class="card-content d-flex flex-column align-items-center">
+              <p class="recipe-name figma-h5">法式經典油封鴨腿</p>
+              <p class="recipe-description truncate">
+                法式經典油封鴨腿是一道傳統的法國美食，以鴨腿作為主要材料。首先，將鴨腿以低溫慢烤至皮脆肉嫩，然後浸泡在橄欖油中長時間保存，以增添風味並保持肉質的鮮嫩。這道菜通常搭配著新鮮的草莓或是其他時令水果，以及香草調味的沙拉一同享用。法式經典油封鴨腿擁有豐富的口感和深厚的風味，是法國料理中不可或缺的精品之一。
+              </p>
+            </div>
+          </div>
+          <div class="col-4 recipe-card d-flex flex-column">
+            <div class="card-pic w-100">
+              <img
+                class="w-100 h-100 object-fit-cover"
+                src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                alt=""
+              />
+            </div>
+            <div class="card-content d-flex flex-column align-items-center">
+              <p class="recipe-name figma-h5">法式經典油封鴨腿</p>
+              <p class="recipe-description truncate">
+                法式經典油封鴨腿
+                選用宜蘭的櫻桃鴨，以法式古法鹽漬風乾後浸泡在大量鴨油與香料裡，低溫烘烤至酥爛。
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="pagination d-flex gap-2 justify-content-center">
+            <div class="page current"></div>
+            <div class="page"></div>
+            <div class="page"></div>
+          </div>
+        </div>
       </div>
     </div>
 
