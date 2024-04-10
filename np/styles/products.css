@@ -104,9 +104,9 @@ body {
       background: white;
       color: var(--green02);
       &:hover{
-        background-color: var(--green02);
-        color: var(--white);
-      }
+      background-color: var(--green02);
+      color: var(--white);
+    }
     }
     
   }
