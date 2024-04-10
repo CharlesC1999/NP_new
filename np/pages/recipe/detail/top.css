@@ -41,6 +41,20 @@
   line-height: 120.313%;
 }
 
+@media screen and (max-width: 376px) {
+  .container {
+    max-width: 345px;
+  }
+}
+
+.top {
+  gap: 20px;
+}
+@media screen and (max-width: 376px) {
+  .top {
+    gap: 10px;
+  }
+}
 .top .pic {
   padding-top: 49px;
   height: 700px;
@@ -52,12 +66,23 @@
 .top .top-main-info {
   padding: 0px 16px;
 }
+@media screen and (max-width: 376px) {
+  .top .top-main-info .top-info-m {
+    gap: 5px;
+  }
+}
 .top .top-main-info .info-left {
   gap: 6px;
   padding-left: 0;
 }
+@media screen and (max-width: 376px) {
+  .top .top-main-info .info-left .title {
+    font-size: 24px;
+  }
+}
 .top .top-main-info .info-left .left-bottom {
   gap: 10px;
+  color: var(--gray01);
 }
 .top .top-main-info .info-right {
   gap: 35px;
@@ -70,14 +95,31 @@
   padding: 40px 0px;
   gap: 100px;
 }
+@media screen and (max-width: 376px) {
+  .main {
+    padding-bottom: 0px;
+    padding-top: 20px;
+  }
+}
 .main .aside {
   border: 2px solid green;
   height: 800px;
+}
+@media screen and (max-width: 376px) {
+  .main .main-content .ingredients-section .ingredient-title-m {
+    font-size: 20px;
+  }
 }
 .main .main-content .ingredients-section .ingredients {
   margin-left: 80px;
   gap: 56px;
   margin-top: 30px;
+}
+@media screen and (max-width: 376px) {
+  .main .main-content .ingredients-section .ingredients {
+    margin-left: 0px;
+    padding: 0;
+  }
 }
 .main .main-content .ingredients-section .ingredients .ingredient-info {
   padding: 5px 10px;
@@ -90,9 +132,24 @@
   font-weight: 400;
   color: var(--gray01);
 }
+@media screen and (max-width: 376px) {
+  .main .main-content .ingredients-section .ingredients .ingredient-info .content {
+    font-size: 12px;
+  }
+}
 .main .main-content .steps-section {
   padding-block: 30px;
   margin-top: 41px;
+}
+@media screen and (max-width: 376px) {
+  .main .main-content .steps-section {
+    padding-block: 0px;
+  }
+}
+@media screen and (max-width: 376px) {
+  .main .main-content .steps-section .step-title-m {
+    font-size: 20px;
+  }
 }
 .main .main-content .steps-section .steps {
   list-style: decimal;
@@ -105,11 +162,23 @@
   font-style: normal;
   font-weight: 500;
 }
+@media screen and (max-width: 376px) {
+  .main .main-content .steps-section .steps {
+    margin-left: 0px;
+    font-size: 14px;
+    padding: 0;
+  }
+}
 .main .main-content .steps-section .steps li {
   padding-left: 5px;
 }
 .main .main-content .related-products-section {
   padding: 30px 0px;
+}
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-ingredient-title-m {
+    font-size: 20px;
+  }
 }
 .main .main-content .related-products-section .related-products {
   padding: 0;
@@ -123,6 +192,11 @@
   padding: 18px 50px;
   border-bottom: 1px solid var(--green05);
   background: rgba(222, 249, 236, 0.5);
+}
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-products .related-products-top {
+    padding: 18px 15px;
+  }
 }
 .main .main-content .related-products-section .related-products .related-products-top .top-left {
   gap: 5px;
@@ -149,6 +223,11 @@
   letter-spacing: 1.2px;
   color: var(--green02);
 }
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-products .related-products-top .top-left .check-all {
+    font-size: 16px;
+  }
+}
 .main .main-content .related-products-section .related-products .related-products-top .top-right {
   gap: 82px;
 }
@@ -165,8 +244,18 @@
   padding: 15px 50px;
   border-bottom: 2px solid var(--green05);
 }
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-products .related-products-middle {
+    padding: 15px 15px;
+  }
+}
 .main .main-content .related-products-section .related-products .related-products-middle .middle-left {
   gap: 10px;
+}
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-products .related-products-middle .middle-left {
+    gap: 20px;
+  }
 }
 .main .main-content .related-products-section .related-products .related-products-middle .middle-left input[type=checkbox] {
   -webkit-appearance: none;
@@ -188,6 +277,14 @@
 .main .main-content .related-products-section .related-products .related-products-middle .middle-left .product-pic img {
   border-radius: 10px;
 }
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-products .related-products-middle .middle-left .product-description .product-name {
+    font-size: 16px;
+  }
+}
+.main .main-content .related-products-section .related-products .related-products-middle .middle-left .product-description .portion-and-price p {
+  color: var(--gray01);
+}
 .main .main-content .related-products-section .related-products .related-products-middle .middle-left .product-description .portion-and-price .portion {
   flex: 0 0 30px;
 }
@@ -196,6 +293,16 @@
 }
 .main .main-content .related-products-section .related-products .related-products-middle .middle-right {
   gap: 60px;
+}
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-products .related-products-middle .middle-right {
+    margin-left: 90px;
+    margin-top: 15px;
+  }
+}
+.main .main-content .related-products-section .related-products .related-products-middle .middle-right .quantity {
+  border-radius: 5px;
+  border: 2px solid var(--green05);
 }
 .main .main-content .related-products-section .related-products .related-products-middle .middle-right .quantity button {
   background: none;
@@ -218,6 +325,11 @@
   font-weight: 600;
   letter-spacing: 1.2px;
 }
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-products .related-products-bottom .total {
+    font-size: 16px;
+  }
+}
 .main .main-content .related-products-section .related-products .related-products-bottom button {
   background: var(--green02);
   border: none;
@@ -228,6 +340,11 @@
   font-weight: 600;
   letter-spacing: 1.2px;
 }
+@media screen and (max-width: 376px) {
+  .main .main-content .related-products-section .related-products .related-products-bottom button {
+    font-size: 16px;
+  }
+}
 .main .main-content .related-products-section .related-products .related-products-bottom button svg {
   width: 20px;
   height: 20px;
@@ -237,6 +354,16 @@
   gap: 30px;
   padding: 30px 0px 120px 0px;
 }
+@media screen and (max-width: 376px) {
+  .recommended-recipe {
+    padding-top: 0px;
+  }
+}
+@media screen and (max-width: 376px) {
+  .recommended-recipe .recommended-recipes-title-m {
+    font-size: 20px;
+  }
+}
 .recommended-recipe .recipe-card {
   gap: 11px;
 }
@@ -244,11 +371,21 @@
   width: 403px;
   height: 392px;
 }
+@media screen and (max-width: 376px) {
+  .recommended-recipe .recipe-card .card-pic {
+    height: 145px;
+  }
+}
 .recommended-recipe .recipe-card .card-pic img {
   border-radius: 5px;
 }
 .recommended-recipe .recipe-card .card-content {
   gap: 11px;
+}
+@media screen and (max-width: 376px) {
+  .recommended-recipe .recipe-card .card-content .recipe-name {
+    font-size: 16px;
+  }
 }
 .recommended-recipe .recipe-card .card-content .recipe-description {
   max-width: 210px;
@@ -262,6 +399,11 @@
 }
 .recommended-recipe .pagination {
   margin-top: 50px;
+}
+@media screen and (max-width: 376px) {
+  .recommended-recipe .pagination {
+    margin-top: 0px;
+  }
 }
 .recommended-recipe .pagination .page {
   width: 40px;

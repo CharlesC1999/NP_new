@@ -41,7 +41,17 @@
 }
 
 // custom style
+.container {
+  @media screen and (max-width: 376px) {
+    max-width: 345px;
+  }
+}
+
 .top {
+  gap: 20px;
+  @media screen and (max-width: 376px) {
+    gap: 10px;
+  }
   .pic {
     padding-top: 49px;
     height: 700px;
@@ -53,11 +63,22 @@
 
   .top-main-info {
     padding: 0px 16px;
+    .top-info-m {
+      @media screen and (max-width: 376px) {
+        gap: 5px;
+      }
+    }
     .info-left {
       gap: 6px;
       padding-left: 0;
+      .title {
+        @media screen and (max-width: 376px) {
+          font-size: 24px;
+        }
+      }
       .left-bottom {
         gap: 10px;
+        color: var(--gray01);
       }
     }
     .info-right {
@@ -72,14 +93,27 @@
 .main {
   padding: 40px 0px;
   gap: 100px;
+  @media screen and (max-width: 376px) {
+    padding-bottom: 0px;
+    padding-top: 20px;
+  }
   .aside {
     border: 2px solid green;
     height: 800px;
   }
   .main-content {
     .ingredients-section {
+      .ingredient-title-m {
+        @media screen and (max-width: 376px) {
+          font-size: 20px;
+        }
+      }
       .ingredients {
         margin-left: 80px;
+        @media screen and (max-width: 376px) {
+          margin-left: 0px;
+          padding: 0;
+        }
         gap: 56px;
         margin-top: 30px;
         .ingredient-info {
@@ -91,6 +125,9 @@
             font-style: normal;
             font-weight: 400;
             color: var(--gray01);
+            @media screen and (max-width: 376px) {
+              font-size: 12px;
+            }
           }
         }
       }
@@ -98,6 +135,14 @@
     .steps-section {
       padding-block: 30px;
       margin-top: 41px;
+      @media screen and (max-width: 376px) {
+        padding-block: 0px;
+      }
+      .step-title-m {
+        @media screen and (max-width: 376px) {
+          font-size: 20px;
+        }
+      }
       .steps {
         list-style: decimal;
         gap: 20px;
@@ -108,6 +153,11 @@
         font-size: 18px;
         font-style: normal;
         font-weight: 500;
+        @media screen and (max-width: 376px) {
+          margin-left: 0px;
+          font-size: 14px;
+          padding: 0;
+        }
         li {
           padding-left: 5px;
         }
@@ -116,6 +166,11 @@
 
     .related-products-section {
       padding: 30px 0px;
+      .related-ingredient-title-m {
+        @media screen and (max-width: 376px) {
+          font-size: 20px;
+        }
+      }
       .related-products {
         padding: 0;
         margin-top: 30px;
@@ -127,6 +182,9 @@
           padding: 18px 50px;
           border-bottom: 1px solid var(--green05);
           background: rgba(222, 249, 236, 0.5);
+          @media screen and (max-width: 376px) {
+            padding: 18px 15px;
+          }
           .top-left {
             gap: 5px;
             input[type="checkbox"] {
@@ -148,6 +206,9 @@
               line-height: 125%; /* 25px */
               letter-spacing: 1.2px;
               color: var(--green02);
+              @media screen and (max-width: 376px) {
+                font-size: 16px;
+              }
             }
           }
           .top-right {
@@ -166,8 +227,14 @@
         .related-products-middle {
           padding: 15px 50px;
           border-bottom: 2px solid var(--green05);
+          @media screen and (max-width: 376px) {
+            padding: 15px 15px;
+          }
           .middle-left {
             gap: 10px;
+            @media screen and (max-width: 376px) {
+              gap: 20px;
+            }
             input[type="checkbox"] {
               appearance: none;
               flex: 0 0 20px;
@@ -182,12 +249,21 @@
             .product-pic {
               width: 150px;
               height: 150px;
+
               img {
                 border-radius: 10px;
               }
             }
             .product-description {
+              .product-name {
+                @media screen and (max-width: 376px) {
+                  font-size: 16px;
+                }
+              }
               .portion-and-price {
+                p {
+                  color: var(--gray01);
+                }
                 .portion {
                   flex: 0 0 30px;
                 }
@@ -199,7 +275,13 @@
           }
           .middle-right {
             gap: 60px;
+            @media screen and (max-width: 376px) {
+              margin-left: 90px;
+              margin-top: 15px;
+            }
             .quantity {
+              border-radius: 5px;
+              border: 2px solid var(--green05);
               button {
                 background: none;
                 border: none;
@@ -222,8 +304,14 @@
             font-style: normal;
             font-weight: 600;
             letter-spacing: 1.2px;
+            @media screen and (max-width: 376px) {
+              font-size: 16px;
+            }
           }
           button {
+            @media screen and (max-width: 376px) {
+              font-size: 16px;
+            }
             svg {
               width: 20px;
               height: 20px;
@@ -246,17 +334,33 @@
 .recommended-recipe {
   gap: 30px;
   padding: 30px 0px 120px 0px;
+  @media screen and (max-width: 376px) {
+    padding-top: 0px;
+  }
+  .recommended-recipes-title-m {
+    @media screen and (max-width: 376px) {
+      font-size: 20px;
+    }
+  }
   .recipe-card {
     gap: 11px;
     .card-pic {
       width: 403px;
       height: 392px;
+      @media screen and (max-width: 376px) {
+        height: 145px;
+      }
       img {
         border-radius: 5px;
       }
     }
     .card-content {
       gap: 11px;
+      .recipe-name {
+        @media screen and (max-width: 376px) {
+          font-size: 16px;
+        }
+      }
       .recipe-description {
         max-width: 210px;
         &.truncate {
@@ -271,6 +375,9 @@
   }
   .pagination {
     margin-top: 50px;
+    @media screen and (max-width: 376px) {
+      margin-top: 0px;
+    }
     .page {
       width: 40px;
       height: 5px;
