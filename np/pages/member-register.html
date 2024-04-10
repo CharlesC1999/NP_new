@@ -29,14 +29,14 @@
 
   <body>
     <header></header>
-    <main class="d-flex align-items-center justify-content-center">
+    <main class="d-flex align-items-center justify-content-center my-5">
       <div
-        class="d-flex main flex-column justify-content-center align-items-center"
+        class="d-flex p-4 main flex-column justify-content-center align-items-center"
       >
         <div class="h3 my-5 text-align-center text-center">會員註冊</div>
-        <div class="member justify-content-evenly d-flex flex-row">
+        <div class="member justify-content-evenly d-flex flex-sm-row flex-column">
           <div
-            class="main-left d-flex flex-column justify-content-cetner align-items-center"
+            class="main-left d-flex flex-column justify-content-center align-items-center"
           >
             <div class="input-group d-flex flex-column">
               <label for="" class="label">姓名 (必填)</label>
@@ -130,16 +130,19 @@
             </div>
           </div>
         </div>
-        <div class="area3 my-5">
-          <button class="btn btn-success">註冊會員</button>
-          <p class="text-center mt-2">
-            我已經有會員帳號了?
-            <span
-              ><a href="" class="ms-2 backhome text-decoration-none"
-                >回登入頁面</a
-              ></span
-            >
-          </p>
+        <div class="area3 my-5 ">
+          <button class="btn btn-success d-flex align-items-center justify-content-center">註冊會員</button>
+          <div class="d-flex flex-column flex-sm-row justify-content-center mt-2">
+            <div class="text-center">
+              我已經有會員帳號了?
+          
+            </div>
+            <div class="justify-content-center d-flex"
+                ><a href="" class="ms-2 backhome text-decoration-none"
+                  >回登入頁面</a
+                ></div>
+          </div>
+          
         </div>
       </div>
     </main>

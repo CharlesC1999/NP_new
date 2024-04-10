@@ -274,7 +274,7 @@
             }
           }
           .middle-right {
-            gap: 60px;
+            gap: 55px;
             @media screen and (max-width: 376px) {
               margin-left: 90px;
               margin-top: 15px;
@@ -363,6 +363,9 @@
       }
       .recipe-description {
         max-width: 210px;
+        @media screen and (max-width: 376px) {
+          font-size: 16px;
+        }
         &.truncate {
           display: -webkit-box;
           -webkit-box-orient: vertical;
