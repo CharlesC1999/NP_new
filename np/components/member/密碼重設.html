@@ -1138,68 +1138,7 @@
           <!-- 資料顯示區 -->
             <div class=" mt-5 d-flex ">
                 <form class="form1">
-                    <div class="row mb-3 align-items-start box">
-                        <label for="name" class=" col-form-label col-3">姓名 :</label>
-                        <div class="col">
-                            <input type="text" class="form-control" id="name" placeholder="請輸入姓名">
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="email" class="col-3 col-form-label">Email :</label>
-                        <div class="col">
-                            <input type="email" class="form-control" id="email" placeholder="請輸入Email">
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="phone" class="col-3 col-form-label">手機號碼 :</label>
-                        <div class="col">
-                            <input type="tel" class="form-control" id="phone" placeholder="請輸入手機號碼">
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="address" class="col-3 col-form-label">地址 :</label>
-                        <div class="col">
-                            <input type="text" class="form-control" id="address" placeholder="請輸入地址">
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label class="col-3 col-form-label">性别 :</label>
-                        <div class="col">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="female" value="女">
-                                <label class="form-check-label" for="female">女</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="male" value="男">
-                                <label class="form-check-label" for="male">男</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="other" value="其他">
-                                <label class="form-check-label" for="other">其他</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="birthday" class="col-3 col-form-label">生日 :</label>
-                        <div class="col">
-                            <select class="form-select" id="year">
-                                <option selected>年份</option>
-                                <!-- 这里可以根据需求填充选项 -->
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select class="form-select" id="month">
-                                <option selected>月份</option>
-                                <!-- 这里可以根据需求填充选项 -->
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select class="form-select" id="day">
-                                <option selected>日期</option>
-                                <!-- 这里可以根据需求填充选项 -->
-                            </select>
-                        </div>
-                    </div>
+                    
                     <div class="row mb-3 align-items-start box">
                         <label for="password" class="col-3 col-form-label">密碼 :</label>
                         <div class="col">
@@ -1207,7 +1146,14 @@
 
                         </div>
                     </div>
-                    <a href="" class="reset  container-fluid text-end ">[重設密碼]</a>
+                    <!-- <a href="" class="reset  container-fluid text-end ">[重設密碼]</a> -->
+                    <div class="row mb-3 align-items-start box">
+                        <label for="password" class="col-3 col-form-label">確認密碼:</label>
+                        <div class="col">
+                            <input type="password" class="form-control" id="password" placeholder="請輸入密碼">
+
+                        </div>
+                    </div>
                     <div class="row mb-3 align-items-start btn-center box">
 
                         <button type="submit" class="btn btn-primary  btn1 btnmargin">確認修改</button>
