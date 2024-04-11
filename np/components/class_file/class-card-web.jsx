@@ -12,7 +12,7 @@ const ClassCard = () => {
     <div className={styles.cardContainer}>
       <div className={styles.imageWrapper}>
         <img
-          src="../../public/images/ceaf00dde24747272b6d1a4521c6c9f0.jpg"
+          src="/images/ceaf00dde24747272b6d1a4521c6c9f0.jpg"
           alt="class-img"
           className={styles.classImg}
         />
@@ -31,10 +31,7 @@ const ClassCard = () => {
             height="24"
           >
             {
-              <path
-                fill="#747e85"
-                d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
-              />
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             }
           </svg>
         </header>
@@ -48,7 +45,7 @@ const ClassCard = () => {
           </div>
         </div>
         <div className={styles.truffledRiceMeta}>
-          <div className={styles.classIinfromations}>
+          <div className={styles.classInfromations}>
             <div className={styles.classSubInformation}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
