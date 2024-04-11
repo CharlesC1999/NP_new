@@ -1,15 +1,12 @@
-body {
-  margin: 0;
-}
 /* image part */
 .cardContainer {
   box-sizing: border-box;
   width: 100%;
   max-width: 990px;
   gap: 40px;
+  margin: 0;
   display: flex;
   align-items: center;
-  gap: auto;
   padding: 15px 30px 15px 15px;
   align-self: stretch;
   border-radius: 5px;
@@ -43,7 +40,7 @@ body {
 }
 
 .truffledRiceHeader {
-  color: var(--gray03, #454545);
+  /* color: var(--gray03, #454545); */
   display: flex;
   font-size: 20px;
   font-weight: 600;
@@ -68,7 +65,7 @@ body {
   text-wrap: wrap;
   margin: 0;
   /* font style */
-  color: var(--gray03, #454545);
+  /* color: var(--gray03, #454545); */
   font-family: Inter;
   font-size: 15px;
   font-style: normal;

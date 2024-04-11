@@ -6,11 +6,9 @@
     <title>footer</title>
 
     <style>
-      * {
+      .footer {
         color: #ffffff;
         margin: 0;
-      }
-      .footer {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -33,11 +31,11 @@
             .footerSection {
               display: flex;
               flex-direction: column;
-              & .footer-title {
+              & .footerTitle {
                 font: 700 20px Inter, sans-serif;
               }
               @media (max-width: 375px) {
-                .footer-title {
+                .footerTitle {
                   font-size: 16px;
                 }
               }
@@ -50,6 +48,7 @@
                 font-weight: 400;
                 white-space: nowrap;
                 .footerLink {
+                  color: white;
                   font-family: Inter, sans-serif;
                   margin-top: 15px;
                   text-decoration: none;
@@ -61,6 +60,7 @@
                   }
                 }
                 .footerNoMargin {
+                  color: white;
                   font-family: Inter, sans-serif;
                   text-decoration: none;
                 }
@@ -87,7 +87,7 @@
                   text-decoration: none;
                 }
                 @media (max-width: 375px) {
-                  .footer-contact-item {
+                  .footerContactItem {
                     font-size: 14px;
                     margin-top: 20px;
                   }
@@ -108,12 +108,12 @@
                 }
               }
               /* social media */
-              .footerSocial-icons {
+              .footerSocialIcons {
                 display: flex;
                 justify-content: center;
                 margin-top: 30px;
                 gap: 20px;
-                .footerSocial-icon {
+                .footerSocialIcon {
                   width: 30px;
                   aspect-ratio: 1;
                   object-fit: auto;
@@ -121,7 +121,7 @@
                 }
               }
               @media (max-width: 375px) {
-                .footerSocial-icons {
+                .footerSocialIcons {
                   margin-top: 20px;
                 }
               }
@@ -169,11 +169,11 @@
           font-size: 14px;
         }
 
-        .footer-contact {
+        .footerContact {
           white-space: initial;
         }
 
-        .footer-contact-item {
+        .footerContactItem {
           margin-right: 10px;
         }
       }
@@ -184,7 +184,7 @@
       <div class="footerContent">
         <div class="footerTop">
           <div class="footerSection">
-            <h2 class="footer-title">營養大選 Nutripolls</h2>
+            <h2 class="footerTitle">營養大選 Nutripolls</h2>
             <nav class="footerLinks">
               <a href="#" class="footerNoMargin">關於我們</a>
               <a href="#" class="footerLink">會員權益</a>
@@ -193,15 +193,15 @@
             </nav>
           </div>
           <div class="footerSection">
-            <h2 class="footer-title">聯絡資訊</h2>
+            <h2 class="footerTitle">聯絡資訊</h2>
             <div class="footerContactInfo">
               <p class="footerNoMargin">服務信箱：service@mfee48.com.tw</p>
-              <p class="footer-contact-item">客服專線：0800-666-888</p>
-              <p class="footer-contact-item">客服時間：週一至週五9:00-18:00</p>
+              <p class="footerContactItem">客服專線：0800-666-888</p>
+              <p class="footerContactItem">客服時間：週一至週五9:00-18:00</p>
             </div>
           </div>
           <div class="footerSection">
-            <h2 class="footer-title">關注我們</h2>
+            <h2 class="footerTitle">關注我們</h2>
             <div class="footerSocial-icons">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
