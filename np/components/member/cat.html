@@ -18,7 +18,8 @@
       --black80:#636E72;
     }
 
-    .couponcat {
+   /* 分類欄 */
+   .couponcat {
       border-bottom: var(--green05) 1px solid;
       display: flex;
       max-width: 900px;
@@ -45,6 +46,8 @@
         white-space: initial;
         padding: 0 20px;
         font-size: 12px;
+        margin: 20px 0 20px 0;
+        border-bottom: none;
       }
     }
     
@@ -55,7 +58,13 @@
       text-decoration: none;
     }
    
-
+    @media (max-width:375px) {
+      .ccathover a{
+        color: var(--Black-80);
+        
+       
+      }
+    }
     .ccat a{
       font-family: Inter, sans-serif;
       color: var(--Black-80);
