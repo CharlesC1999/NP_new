@@ -1,3 +1,11 @@
+.widthMax {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
 .productCountContainer {
   display: flex;
   flex-direction: column;
@@ -191,7 +199,27 @@
   position: absolute;
   pointer-events: none; /* 避免在隱藏時可交互 */
   transform: translateY(-20px); /* 給出一點動畫效果 */
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  z-index: 1;
+}
+
+.sortByOptionList {
+  display: none;
+  position: absolute;
+  pointer-events: none; /* 避免在隱藏時可交互 */
+  transform: translateY(-20px); /* 給出一點動畫效果 */
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   top: 100%;
   left: 0;
   width: 100%;

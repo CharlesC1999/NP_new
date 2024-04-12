@@ -1,6 +1,6 @@
 \.([\w-]+)\s
 
-className="([^"]\*)"
+Name="([\w-]+)"
 
 1. Ctrl + F 選正規表達搜索所有的減號命名(kebab-case)
 2. Alt + Enter 全選
