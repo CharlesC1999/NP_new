@@ -37,6 +37,7 @@ img {
 
 /* 字型 */
 body {
+  width: 100%;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #454545;
   /* 預設black = 454545 */
