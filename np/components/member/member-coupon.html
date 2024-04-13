@@ -11,7 +11,6 @@
     :root {
 
       --font-size: 20px;
-      --gray02:#D9E1E6;
       --gray01: #747e85;
       --green03: #78CEA6;
       --green04: #9CB4AC;
@@ -30,135 +29,82 @@
             padding: 31px 20px 20px 0px;
         }
 
-    @media (max-width: 991px) {
-      .title {
-        max-width: 100%;
-        white-space: initial;
-        padding: 0 20px;
-      }
+        @media (max-width: 991px) {
+            .title {
+                max-width: 100%;
+                white-space: initial;
+                padding: 0 20px;
+            }
+        }
+
+        .titleNow {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            color: var(--black);
+            text-overflow: ellipsis;
+            font: 300 24px Inter, sans-serif;
+        }
+
+        @media (max-width: 375px) {
+            .titleNow {
+                display: none;
+            }
+        }
+
+        .title2 {
+            color: var(--gray01);
+            margin-top: 20px;
+            font: 500 15px Inter, sans-serif;
+        }
+
+        @media (max-width: 375px) {
+            .title2 {
+                max-width: 100%;
+                display: none;
+            }
+        }
+    
+
+
+
+   
+  
+
+    
+/* 側邊欄 */
+@media (max-width: 375px){
+    body{
+      margin: 0;
+      padding: 0;
     }
-
-    .titleNow {
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      color: var(--black);
-      text-overflow: ellipsis;
-      font: 300 24px Inter, sans-serif;
     }
-
-    @media (max-width: 991px) {
-      .titleNow {
-        max-width: 100%;
-      }
-    }
-
-    .title2 {
-      color: var(--gray01);
-      margin-top: 20px;
-      font: 500 15px Inter, sans-serif;
-    }
-
-    @media (max-width: 991px) {
-      .title2 {
-        max-width: 100%;
-      }
-    }
-
-    /* 调整标题和输入框的样式 */
-    .form-label {
-      display: inline-block;
-      width: 150px;
-      /* 调整标题宽度 */
-      text-align: right;
-      /* 文本右对齐 */
-      margin-bottom: 0;
-      /* 移除标题下方的间距 */
-    }
-
-    /* 调整按钮居中 */
-    .btn-center {
-      display: flex;
-      justify-content: center;
-
-    }
-
-    label {
-      color: var(--gray01, #747e85);
-
-    }
-
-    .col-form-label {
-      font-size: var(--font-size);
-    }
-
-    .btn1 {
-      background-color: var(--green01, #50BF8B);
-      border-color: var(--green01, #50BF8B);
-      font-size: var(--font-size);
-      width: 144px;
-      height: 44px;
-    }
-
-    .btnmargin {
-      margin: 87px 0 8px 0;
-    }
-
-    .reset {
-
-      color: var(--gray01);
-      text-decoration: none;
-
-      float: inline-end;
-    }
-
-    .userImageBig {
-      width: 293px;
-      height: 293px;
-      background-color: #D9D9D9;
-      border: var(--green03) 1px solid;
-      border-radius: 50%;
-    }
-
-    .btn2 {
-      background-color: white;
-      border: var(--green04) 2px solid;
-      font-size: var(--font-size);
-      width: 144px;
-      height: 44px;
-      color: var(--green04);
-      margin-top: 44px;
-    }
-
-    .form1 {
-      padding: 10px 50px 10px 112px;
-      width: 679px;
-    }
-
-    .box {
-      padding-right: 73px;
-    }
-
     a {
       color: var(--gray01);
       text-decoration: none;
     }
 
     .menu {
-    width: 247px;
-      display: flex;
-      /* flex-grow: 1; */
-      flex-direction: column;
-      color: var(--gray01, #747e85);
-      line-height: 120%;
-      padding: 17px 11px 0px 11px;
-      margin-right: auto;
-    }
+            width: 247px;
+            display: flex;
+            /* flex-grow: 1; */
+            flex-direction: column;
+            color: var(--gray01, #747e85);
+            line-height: 120%;
+            padding: 17px 11px 0px 11px;
+            margin-right: auto;
+        }
 
-    @media (max-width: 991px) {
-      .menu {
-        margin-top: 40px;
-      }
-    }
+
+
+@media (max-width: 375px) {
+  .menu {
+   padding: 0;
+   width: 375px;
+   margin: 0;
+
+  }
+}
+
 
     .ian {
       background-color: #fff;
@@ -168,9 +114,9 @@
       white-space: nowrap;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 375px) {
       .ian {
-        white-space: initial;
+        display: none;
       }
     }
 
@@ -208,6 +154,7 @@
       margin-top: 7px;
       font: 400 20px Inter, sans-serif;
     }
+    
 
     .menu1 {
       padding-top: 16px;
@@ -217,6 +164,8 @@
       font-size: 20px;
       font-weight: 500;
     }
+
+   
 
     .menu2 {
       border-color: rgba(217, 225, 230, 1);
@@ -230,10 +179,22 @@
     }
 
 
-    @media (max-width: 991px) {
+    @media (max-width: 375px) {
       .menu2 {
-        padding-left: 20px;
-      }
+        margin:  0;
+      font-size: 14px;
+      /* font-weight: 400; */
+      /* line-height: 120%; */
+      border-bottom: 1px solid rgba(217, 225, 230, 1);
+      background-color: var(--white, #fefefe);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: auto;
+      padding: 25px 19px;
+      color: var(--gray02);
+      border-top: none;
+  }
     }
 
     .myAccount {
@@ -246,15 +207,13 @@
       margin-top: 37px;
       text-align: center;
     }
-
-    @media (min-width: 1200px) {
-      .container {
-        max-width: 1440px;
+    @media (max-width: 375px){
+      .lefta{
+        margin: auto;
       }
     }
 
-
-
+   
     /* 下面是header的style */
 
     .header {
@@ -688,7 +647,7 @@
       font-family: Inter, sans-serif;
     }
 
-    .img-2 {
+    .img2 {
       aspect-ratio: 1;
       object-fit: auto;
       object-position: center;
@@ -847,17 +806,7 @@
       }
     }
 
-    .main {
-      /* 不知道要不要留，螢幕看不出來 ，原本80%剛好，有疑問看這*/
-      padding: 0 80px 0 80px;
-    }
-
-    .top {
-      background-color: var(--white, #fefefe);
-      display: flex;
-      flex-direction: column;
-      padding: 23px 0;
-    }
+   
     /* 分類欄 */
     .couponcat {
       border-bottom: var(--green05) 1px solid;
@@ -878,13 +827,34 @@
         flex-wrap: wrap;
         white-space: initial;
         padding: 0 20px;
+        
       }
     }
+    @media (max-width: 375px) {
+      .couponcat {
+        flex-wrap: wrap;
+        white-space: initial;
+        padding: 0 20px;
+        font-size: 12px;
+        margin: 20px 0 20px 0;
+        border-bottom: none;
+        
+      }
+    }
+    
 
     .ccathover a{
       color: var(--green02);
       font-family: Inter, sans-serif;
       text-decoration: none;
+    }
+   
+    @media (max-width:375px) {
+      .ccathover a{
+        color: var(--Black-80);
+        
+       
+      }
     }
 
     .ccat a{
@@ -892,8 +862,13 @@
       color: var(--Black-80);
       text-decoration: none;
     }
- 
-  
+    @media (max-width:375px) {
+      /* .ccat{
+        flex-grow: 1;
+        
+       
+      } */
+    }
         /* 分類攔下面的搜尋框 */
         .mainsearch {
       justify-content: space-between;
@@ -912,10 +887,10 @@
       padding: 10px 30px;
       margin: 13px 0 13px 0;
     }
-    @media (max-width: 991px) {
+    @media (max-width: 375px) {
       .mainsearch {
         flex-wrap: wrap;
-        padding: 0 20px;
+        margin: 0 15px 0 15px;
       }
     }
     .mscontent {
@@ -929,308 +904,142 @@
       margin: auto 0;
     }
 
-    /* 會員等級主內容
-     */
-
-    .buycard {
-      width: 900px;
-          background-color: var(--Black-0, #fff);
-          display: flex;
-          max-width: 900px;
-          flex-direction: column;
-          justify-content: center;
-          padding: 15px 20px;
-          box-shadow: inset 0px -2px 0px 0px var(--green05); /* 添加向内延伸的边框 */
+    /* 優惠券卡片 */
+    .coupmain {
+            width:949px; /* 容器宽度100% */
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            flex-wrap: wrap; /* 自动换行 */
+            padding: 16px 0 16px 0;
         }
+        @media (max-width:375px) {
+          .coupmain{
+            width: auto;
+          }
+        }
+    .couponCard {
+
+width: 400px;
+height: 126px;
+
+overflow: hidden;
+display: flex;
+margin-right: 20px;
+margin-bottom: 29px ;
+box-shadow: inset 0 -1px var(--green05);
+
+
+}
+@media (max-width:375px) {
+.couponCard{
+    width: auto;
+    margin: 20px 15px 20px 15px;
+    box-shadow: none;
+    border:var(--green05) 1px solid;
+}
+}
+
+.couponImg {
+width: 130px;
+height: 130px;
+background-color: #ccc;
+}
+@media (max-width:375px){
+.couponImg{
+    width: 145px;
+    height: 114px;
+    margin: auto;
+}
+}
+
+.couponContent {
+flex: 1;
+padding: 0 10px;
+display: flex;
+
+
+flex-direction: column;
+justify-content: space-between;
+
+}
+@media (max-width:375px) {
+.couponContent {
+    
+    margin-left: 30px;
+    
+}
+}
+
+.couponDetails {
+padding-top: 20px;
+
+}
+
+.couponButton {
+text-align: right;
+margin-bottom: 14px;
+
+}
+@media (max-width:375px) {
+.couponButton{
+    text-align: left;
+}
+}
+.couponBtn {
+width: 100px;
+height: 33px;
+font-weight: bold;
+font-size: 12px;
+color: var(--success1);
+background-color: var(--green05);
+border: var(--green05);
+border-radius: 5px;
+
+}
+
+.lowbuy {
+color: #454545;
+font-size: 20px;
+font-weight: bold;
+}
+@media (max-width:375px) {
+.lowbuy{
+    font-size: var(--font-size-m);
+}
+}
+.couponDate {
+color: var(--gray01);
+font-size: 12px;
+}
+   
+ 
+ /* 主區塊的部分 */
+ .main{
+        /* 不知道要不要留，螢幕看不出來 ，原本80%剛好，有疑問看這*/
+        padding: 0 80px 0 80px;
         
+        display: flex;
+        
+      }
+      @media (max-width:375px) {
+        .main{
+          display: block;
+          padding: 0;
           
-            .buyCardContent {
-              gap: 20px;
-              display: flex;
-            }
-            @media (max-width: 991px) {
-              .buyCardContent {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0px;
-              }
-            }
-            .bccolumn {
-              display: flex;
-              flex-direction: column;
-              line-height: normal;
-              width: 16%;
-              margin-left: 0px;
-            }
-            @media (max-width: 991px) {
-              .bccolumn {
-                width: 100%;
-              }
-            }
-            .bcimg {
-              background-color: var(--line, #d9d9d9);
-              width: 130px;
-              height: 130px;
-              margin: 0 auto;
-            }
-            @media (max-width: 991px) {
-              .bcimg {
-                margin-top: 28px;
-              }
-            }
-            .bccolumn-2 {
-              display: flex;
-              flex-direction: column;
-              line-height: normal;
-              width: 84%;
-              margin-left: 20px;
-            }
-            @media (max-width: 991px) {
-              .bccolumn-2 {
-                width: 100%;
-              }
-            }
-            .buy-item {
-              justify-content: end;
-              align-self: stretch;
-              display: flex;
-              width: 100%;
-              gap: 10px;
-              line-height: 120%;
-              margin: auto 0;
-            }
-            @media (max-width: 991px) {
-              .buy-item {
-                max-width: 100%;
-                margin-top: 40px;
-                flex-wrap: wrap;
-              }
-            }
-            .buy-item-main {
-              justify-content: center;
-              display: flex;
-              flex-direction: column;
-              font-size: 14px;
-              color: var(--gray01, #919da6);
-              font-weight: 500;
-              flex: 1;
-            }
-            .bi-content {
-              color: var(--black, var(--gray03, #454545));
-              font: 20px Inter, sans-serif;
-            }
-            .bi-number {
-              font-family: Inter, sans-serif;
-              margin-top: 10px;
-            }
-            .bi-state {
-              font-family: Inter, sans-serif;
-              margin-top: 10px;
-            }
-            .bi-mb {
-              align-self: end;
-              display: flex;
-              margin-top: 45px;
-              gap: 20px;
-              justify-content: space-between;
-            }
-            @media (max-width: 991px) {
-              .bi-mb {
-                margin-top: 40px;
-              }
-            }
-            .bi-money {
-              color: var(--gray01, #747e85);
-              align-self: start;
-              margin-top: 14px;
-              font: 500 16px Inter, sans-serif;
-            }
-            .bi-button {
-                    width: 100px;
-                    height: 33px;
-                    font-weight: bold;
-                    font-size: 12px;
-                    color: var(--success1);
-                    background-color: var(--green05);
-                    border: var(--green05);
-                    border-radius: 5px;
-        
-                }
-                .div-12 {
-      justify-content: center;
-      border-radius: 5px;
-      background-color: var(--green05, #def9ec);
-      color: var(--green02, var(--green02, #50bf8b));
-      white-space: nowrap;
-      padding: 10px 20px;
-      font: 600 14px Inter, sans-serif;
-    }
-    @media (max-width: 991px) {
-      .div-12 {
-        white-space: initial;
+        }
+      }
+      .top {
+        background-color: var(--white, #fefefe);
+        display: flex;
+        flex-direction: column;
+        padding: 23px 0;
+      }
+      
+      @media (min-width: 1200px) {
+      .container {
+        max-width: 1440px;
       }
     }
-    .buy-card-btn {
-  display: inline-flex; /* 将按钮的显示设置为内联弹性盒 */
-  align-items: center; /* 垂直居中按钮内的内容 */
-  width: 101px; /* 设置按钮宽度自适应 */
-  height: 33px; /* 设置按钮高度 */
-  text-decoration: none; /* 移除默认的超链接样式 */
-  padding: 10px 20px; /* 设置按钮的上下左右内边距 */
-  font-weight: bold;
-  font-size: 14px; 
-  background-color: var(--green05);
-  color: var(--success1);
-}
-.membership {
-        display: flex;
-        width: 788px;
-        flex-direction: column;
-        line-height: 120%;
-    }
-
-    
-
-    
-
-   
-
-   
-    .membership-details {
-        background-color: var(--Black-0, #fff);
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        font-size: 15px;
-        color: var(--Black-80, #636e72);
-        font-weight: 500;
-        padding: 0 0px 35px;
-    }
-
-    @media (max-width: 991px) {
-        .membership-details {
-            max-width: 100%;
-        }
-    }
-
-    .current-level {
-        width: 100%;
-        font: 400 20px Inter, sans-serif;
-    }
-
-    @media (max-width: 991px) {
-        .current-level {
-            max-width: 100%;
-        }
-    }
-
-    .current-level-info {
-        font-family: Inter, sans-serif;
-        align-self: start;
-        margin-top: 20px;
-    }
-
-    .next-level-info {
-        font-family: Inter, sans-serif;
-        align-self: start;
-        margin-top: 16px;
-    }
-
-    .upgrade-amount-info {
-        font-family: Inter, sans-serif;
-        align-self: start;
-        margin-top: 16px;
-    }
-
-    .level-benefits {
-    border-bottom: 1px solid var(--gray02);
-    padding: 3px 0;
-    font: 16px Inter, sans-serif;
-    margin-top: 52px;
-}
-
-    @media (max-width: 991px) {
-        .level-benefits {
-            max-width: 100%;
-            margin-top: 40px;
-            white-space: initial;
-        }
-    }
-
-    .level-cards {
-        justify-content: space-between;
-        display: flex;
-        margin-top: 37px;
-        gap: 0px;
-        font-size: 14px;
-    }
-
-    @media (max-width: 991px) {
-        .level-cards {
-            flex-wrap: wrap;
-        }
-    }
-
-    .level-card {
-        align-self: end;
-        display: flex;
-        margin-top: 90px;
-        flex-direction: column;
-        white-space: nowrap;
-        padding: 10px 0;
-    }
-
-    @media (max-width: 991px) {
-        .level-card {
-            margin-top: 40px;
-            white-space: initial;
-        }
-    }
-
-    .level-title {
-        font-family: Inter, sans-serif;
-    }
-
-    .level-description {
-        font-family: Inter, sans-serif;
-        margin-top: 10px;
-    }
-
-    .level-perks {
-        font-family: Inter, sans-serif;
-        margin-top: 10px;
-    }
-
-    .level-icon {
-        max-width: 1024px;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-    }
-
-    .level-image {
-        aspect-ratio: 1;
-        object-fit: auto;
-        object-position: center;
-        width: 80px;
-        border-radius: 50%;
-    }
-
-    .upgrade-rules {
-    border-bottom: 1px solid var(--gray02);
-    padding: 3px 0;
-    font: 14px Inter, sans-serif;
-    margin-top: 37px;
-}
-
-    @media (max-width: 991px) {
-        .upgrade-rules {
-            max-width: 100%;
-            white-space: initial;
-        }
-    }
-
 
   </style>
 </head>
@@ -1327,14 +1136,14 @@
         <div class="home1">首頁</div>
         <img loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ca25033ce40a3f01e111c68cb10c5fd503df8d7250381e77c1ee1462c68706d?"
-          class="img-2" />
+          class="img2" />
         <div class="pathMember">會員</div>
       </div>
     </div>
   </div>
 
   <!-- header+綠色路徑下面 -->
-  <div class="container d-flex main">
+  <div class="container  main">
     <!-- 下面是側邊攔 -->
     <div class="menu">
       <div class="ian">
@@ -1346,10 +1155,10 @@
       </div>
       <div class="menu1">
         <div class="menu2">
-          <div class="myAccount"> <a href="">我的帳戶</a></div>
+          <div class="myAccount lefta"> <a href="">我的帳戶</a></div>
 
           <div class="lefta"><a href="">購買清單</a></div>
-          <div class="lefta"><a href="">我的優惠券</a></div>
+          <div class="lefta"><a href="">優惠券</a></div>
           <div class="lefta"><a href="">會員等級</a></div>
           <div class="lefta"><a href="">願望清單</a></div>
         </div>
@@ -1359,76 +1168,81 @@
     <div class="">
       <!-- 主內容的標題 -->
       <div class="title">
-        <div class="titleNow fw-bold">會員等級</div>
+        <div class="titleNow fw-bold">購物清單</div>
         <div class="title2">我的帳戶</div>
       </div>
-   
-     
-     
-     <!-- 會員等級主內容 -->
-     <div class="membership">
-    
-      <div class="membership-details">
-          <div class="current-level">當前會員等級</div>
-          <div class="current-level-info">當前會員等級:</div>
-          <div class="next-level-info">下個等級:</div>
-          <div class="upgrade-amount-info">升級所需金額:</div>
-          <div class="level-benefits">各等級所需條件和福利</div>
-          <div class="level-cards">
-              <div class="level-card">
-                  <div class="level-title">會員等級</div>
-                  <div class="level-description">不知寫啥</div>
-                  <div class="level-perks">不知寫啥</div>
-              </div>
-              <div class="level-card">
-                  <div class="level-icon">
-                      <img loading="lazy" srcset="..." class="level-image" />
-                  </div>
-                  <div class="level-title">等級1</div>
-                  <div class="level-description">新鮮蔬菜</div>
-                  <div class="level-perks">新鮮蔬菜</div>
-              </div>
-              <div class="level-card">
-                  <div class="level-icon">
-                      <img loading="lazy" srcset="..." class="level-image" />
-                  </div>
-                  <div class="level-title">等級2</div>
-                  <div class="level-description">新鮮蔬菜</div>
-                  <div class="level-perks">新鮮蔬菜</div>
-              </div>
-              <div class="level-card">
-                  <div class="level-icon">
-                      <img loading="lazy" srcset="..." class="level-image" />
-                  </div>
-                  <div class="level-title">等級3</div>
-                  <div class="level-description">新鮮蔬菜</div>
-                  <div class="level-perks">新鮮蔬菜</div>
-              </div>
-              <div class="level-card">
-                  <div class="level-icon">
-                      <img loading="lazy" srcset="..." class="level-image" />
-                  </div>
-                  <div class="level-title">等級4</div>
-                  <div class="level-description">新鮮蔬菜</div>
-                  <div class="level-perks">新鮮蔬菜</div>
-              </div>
-              <div class="level-card">
-                  <div class="level-icon">
-                      <img loading="lazy" srcset="..." class="level-image" />
-                  </div>
-                  <div class="level-title">等級5</div>
-                  <div class="level-description">新鮮蔬菜</div>
-                  <div class="level-perks">新鮮蔬菜</div>
-              </div>
+      <!-- 主內容分類選單列 -->
+      <div class="couponcat">
+        <div class="ccathover ccat"><a href="">全部</a></div>
+        <div class="ccat"><a href="">已使用</a></div>
+        <div class="ccat"> <a href="">可使用</a></div>
+        <div class="ccat"><a href="">已失效</a></div>
+        
+      </div>
+      <!-- 分類欄下面的搜尋框 -->
+      <div class="mainsearch">
+        <div class="mscontent">Search for ltemss...</div>
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/4d7b4236db983404c60a8e6f407043967fd36bb8b4dd9dd5af142d2320770caa?"
+          class="img"
+        />
+      </div>
+     <!-- 一堆優惠券 -->
+     <div class="coupmain">
+      <div class="couponCard">
+        <div class="couponImg"></div>
+        <div class="couponContent ">
+            <div class="couponDetails">
+                <div class="lowbuy">低消$100</div>
+                <div class="couponDate">有效日期:2024/12/31</div>
+
+            </div>
+            <div class="couponButton">
+                <button class="btn btn-primary couponBtn">立即使用</button>
+            </div>
+        </div>
+    </div>
+    <div class="couponCard">
+      <div class="couponImg"></div>
+      <div class="couponContent ">
+          <div class="couponDetails">
+              <div class="lowbuy">低消$100</div>
+              <div class="couponDate">有效日期:2024/12/31</div>
+
+          </div>
+          <div class="couponButton">
+              <button class="btn btn-primary couponBtn">立即使用</button>
           </div>
       </div>
-      <div class="upgrade-rules">升級/降級規則</div>
   </div>
-  
+  <div class="couponCard">
+    <div class="couponImg"></div>
+    <div class="couponContent ">
+        <div class="couponDetails">
+            <div class="lowbuy">低消$100</div>
+            <div class="couponDate">有效日期:2024/12/31</div>
 
+        </div>
+        <div class="couponButton">
+            <button class="btn btn-primary couponBtn">立即使用</button>
+        </div>
+    </div>
+</div>
+<div class="couponCard">
+  <div class="couponImg"></div>
+  <div class="couponContent ">
+      <div class="couponDetails">
+          <div class="lowbuy">低消$100</div>
+          <div class="couponDate">有效日期:2024/12/31</div>
 
-
-
+      </div>
+      <div class="couponButton">
+          <button class="btn btn-primary couponBtn">立即使用</button>
+      </div>
+  </div>
+</div>
+  </div>
       
     </div>
   </div>

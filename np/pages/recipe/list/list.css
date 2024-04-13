@@ -46,6 +46,19 @@
   }
 }
 
+.top-bar .btn-sort {
+  border-radius: 5px;
+  border: 1px solid var(--gray03);
+}
+.top-bar .btn-filter {
+  border-radius: 5px;
+  border: 1px solid var(--gray03);
+}
+.top-bar .switch-card-qty {
+  border-radius: 5px;
+  border: 1px solid var(--gray03);
+}
+
 .list-wrapper {
   gap: 120px;
 }
