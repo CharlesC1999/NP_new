@@ -129,10 +129,6 @@
   justify-content: center;
 }
 
-.classSubInformationText {
-  font-family: Inter, sans-serif;
-}
-
 .classSubInformation {
   align-items: center;
   background-color: #fff;
@@ -140,10 +136,6 @@
   margin-top: 16px;
   gap: 2px;
   justify-content: center;
-}
-
-.classSubInformationText {
-  font-family: Inter, sans-serif;
 }
 
 .truffledRiceActions {
@@ -161,7 +153,6 @@
   color: #fff;
   cursor: pointer;
   display: flex;
-  font-family: Inter, sans-serif;
   font-size: 14px;
   font-weight: 700;
   gap: 4px;

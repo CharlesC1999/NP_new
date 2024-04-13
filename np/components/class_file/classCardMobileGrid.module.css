@@ -29,7 +29,6 @@
   color: (var--gray03, #454545);
   font-size: 20px;
   font-weight: 800;
-  font-family: Inter, sans-serif;
   letter-spacing: 0.96px;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -60,14 +59,12 @@
 
 .currentPrice {
   color: var(--green-01, var(--green02, #50bf8b));
-  font: 16px Inter, sans-serif;
   letter-spacing: 0.96px;
 }
 
 .originalPrice {
   margin-top: 2px;
   color: var(--gray01, #919da6);
-  font: 13px/120% Inter, sans-serif;
   text-decoration: line-through;
 }
 
