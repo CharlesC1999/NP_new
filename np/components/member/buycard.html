@@ -18,22 +18,26 @@
       --success1: #2ECC71;
     }
 
-    .buycard {
+    .buyCard {
       width: 900px;
       background-color: var(--Black-0, #fff);
       display: flex;
       max-width: 900px;
       flex-direction: column;
       justify-content: center;
-      padding: 15px 20px;
+      /* padding: 15px 20px; */
+      padding: 20px 15px 20px 15px;
       box-shadow: inset 0px -2px 0px 0px var(--green05);
       /* 添加向内延伸的边框 */
+      
     }
     @media (max-width: 375px){
-      .buycard{
+      .buyCard{
         width: 334px;
         height: 115px;
-      }
+        padding: 20px 15px 20px 15px;
+        margin: 20px 15px 0 15px;
+        }
     }
 
 
@@ -69,7 +73,7 @@
       }
     }
 
-    .bccolumn-2 {
+    .bccolumn2 {
       display: flex;
       /* flex-direction: column; */
       line-height: normal;
@@ -79,7 +83,7 @@
 
    
 
-    .buy-item {
+    .buyItem {
       justify-content: end;
       align-self: stretch;
       display: flex;
@@ -90,12 +94,12 @@
     }
 
     @media (max-width: 375px) {
-      .buy-item {
+      .buyItem {
        
       }
     }
 
-    .buy-item-main {
+    .buyItemMain {
       justify-content: center;
       display: flex;
       flex-direction: column;
@@ -105,40 +109,40 @@
       flex: 1;
     }
 
-    .bi-content {
+    .biContent {
       color: var(--black, var(--gray03, #454545));
       font: 20px Inter, sans-serif;
       font-weight: bold;
     }
     @media (max-width:375px) {
-      .bi-content{
+      .biContent{
         font-size: 14px;
       }
     }
 
-    .bi-number {
+    .biNumber {
       font-family: Inter, sans-serif;
       margin-top: 10px;
     }
     @media (max-width:375px) {
-      .bi-number{
+      .biNumber{
         font-size: 12px;
         margin-top: 0px;
       }
     }
 
-    .bi-state {
+    .biState {
       font-family: Inter, sans-serif;
       margin-top: 10px;
     }
     @media (max-width:375px) {
-      .bi-state{
+      .biState{
         font-size: 12px;
         margin-top: 0px;
       }
     }
 
-    .bi-mb {
+    .biMb {
       align-self: end;
       display: flex;
       margin-top: 45px;
@@ -147,28 +151,28 @@
     }
 
     @media (max-width: 375px) {
-      .bi-mb {
+      .biMb {
        display: block;
        margin: auto;
        
       }
     }
 
-    .bi-money {
+    .biMoney {
       color: var(--gray01, #747e85);
       align-self: start;
       margin-top: 14px;
       font: 500 16px Inter, sans-serif;
     }
     @media (max-width: 375px) {
-      .bi-money {
+      .biMoney {
        display: block;
        margin-bottom: 14px;
        font-size: 14px;
       }
     }
 
-    .bi-button {
+    .biButton {
       width: 100px;
       height: 33px;
       font-weight: bold;
@@ -180,23 +184,9 @@
 
     }
 
-    .div-12 {
-      justify-content: center;
-      border-radius: 5px;
-      background-color: var(--green05, #def9ec);
-      color: var(--green02, var(--green02, #50bf8b));
-      white-space: nowrap;
-      padding: 10px 20px;
-      font: 600 14px Inter, sans-serif;
-    }
+    
 
-    @media (max-width: 991px) {
-      .div-12 {
-        white-space: initial;
-      }
-    }
-
-    .buy-card-btn {
+    .buyCardBtn {
       display: inline-flex;
       /* 将按钮的显示设置为内联弹性盒 */
       align-items: center;
@@ -214,33 +204,28 @@
       background-color: var(--green05);
       color: var(--success1);
     }
+    .buyCardBtn:hover{
+      background-color: var(--green05);
+      color: var(--success1);
+    }
   </style>
 
 </head>
 
 <body>
-  <div class="buycard">
+  <div class="couponCard">
+        <div class="couponImg"></div>
+        <div class="couponContent ">
+            <div class="couponDetails">
+                <div class="lowbuy">低消$100</div>
+                <div class="couponDate">有效日期:2024/12/31</div>
 
-    <div class="buyCardContent">
-      <div class="bccolumn">
-        <div class="bcimg"></div>
-      </div>
-      <div class="bccolumn-2">
-        <div class="buy-item">
-          <div class="buy-item-main">
-            <div class="bi-content">新鮮 蔬菜 </div>
-            <div class="bi-number">商品規格數量..... </div>
-            <div class="bi-state">狀態 : 待收貨</div>
-          </div>
-          <div class="bi-mb ">
-            <div class="bi-money">訂單金額: $200</div>
-            <a href="" class="buy-card-btn btn ">查看詳情</a>
-          </div>
+            </div>
+            <div class="couponButton">
+                <button class="btn btn-primary couponBtn">立即使用</button>
+            </div>
         </div>
-      </div>
     </div>
-
-  </div>
 
 </body>
 
