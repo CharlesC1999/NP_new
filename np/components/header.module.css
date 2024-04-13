@@ -233,7 +233,6 @@ a:visited {
 }
 
 .searchBarText {
-  font-family: Inter, sans-serif;
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -241,13 +240,11 @@ a:visited {
 }
 
 .searchBarDivider {
-  font-family: Inter, sans-serif;
   align-self: center;
 }
 
 .searchBarPlaceholder {
   color: var(--gray02, #d9e1e6);
-  font-family: Inter, sans-serif;
 }
 
 .headerActions {
@@ -285,7 +282,6 @@ a:visited {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Inter, sans-serif;
   margin-top: 13px;
   color: #454545;
 }
@@ -375,8 +371,4 @@ a:visited {
   gap: 3px;
   justify-content: center;
   letter-spacing: 0.8px;
-  .nav-text-about {
-    font-family: Inter, sans-serif;
-  }
-  /* 認識NutriPolls的英文字型 */
 }

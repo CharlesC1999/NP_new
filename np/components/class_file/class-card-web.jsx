@@ -19,7 +19,7 @@ const ClassCard = () => {
       </div>
       <div className={styles.truffledRiceContainer}>
         <header className={styles.truffledRiceHeader}>
-          <p className={styles.truffledRiceTitle}>松露菜飯</p>
+          <p className={styles.truffledRiceTitle}>營養師手做年菜上桌</p>
           <svg
             className={`${styles.heartIcon} ${
               isHeartActive ? styles.active : ""
