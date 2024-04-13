@@ -68,7 +68,15 @@
   .switch-card-qty {
     border-radius: 5px;
     border: 1px solid var(--gray03);
-    padding: 5px 7px;
+    padding: 0;
+    .switch-grid {
+      padding: 5px;
+      border-right: 1px solid var(--gray03);
+    }
+    .switch-row {
+      padding: 5px;
+      background: var(--gray03);
+    }
   }
 }
 
