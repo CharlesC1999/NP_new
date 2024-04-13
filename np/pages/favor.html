@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>favor</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="../styles/globals.css" />
+    <link rel="stylesheet" href="./class-card-web.css" />
+    <link
+      rel="stylesheet"
+      href="../components/product/ProductCard.module.css"
+    />
+    <style>
+      /* 側邊欄 style */
+      a {
+        color: var(--gray01);
+        text-decoration: none;
+      }
+      .menu {
+        justify-content: center;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        color: var(--gray01, #747e85);
+        line-height: 120%;
+        padding: 17px 11px 0;
+        width: 247px;
+        /* 我加的 */
+        align-self: flex-start;
+      }
+      @media (max-width: 991px) {
+        .menu {
+          margin-top: 40px;
+        }
+      }
+      .ian {
+        background-color: #fff;
+        display: flex;
+        padding-left: 6px;
+        gap: 7px;
+        white-space: nowrap;
+      }
+      @media (max-width: 991px) {
+        .ian {
+          white-space: initial;
+        }
+      }
+      .userimage {
+        background-color: var(--line, #d9d9d9);
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        margin: auto 0;
+      }
+      .an {
+        justify-content: center;
+        align-items: start;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 20px;
+      }
+      @media (max-width: 991px) {
+        .an {
+          white-space: initial;
+        }
+      }
+      .accountleft {
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        text-overflow: ellipsis;
+        font: 600 16px Inter, sans-serif;
+      }
+      .nameleft {
+        margin-top: 7px;
+        font: 400 20px Inter, sans-serif;
+      }
+      .menu1 {
+        padding-top: 16px;
+        background-color: var(--Black-0, #fff);
+        display: flex;
+        flex-direction: column;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      .menu2 {
+        border-color: rgba(217, 225, 230, 1);
+        border-style: solid;
+        border-width: 0px 0px 0px 0px;
+        /* 顶部边框宽度为2px，其余边框为0px */
+        border-top-width: 2px;
+        display: flex;
+        flex-direction: column;
+        padding: 22px 20px 80px 25px;
+      }
+
+      @media (max-width: 991px) {
+        .menu2 {
+          padding-left: 20px;
+        }
+      }
+      .myAccount {
+        text-align: center;
+        font-family: Inter, sans-serif;
+      }
+      .lefta {
+        font-family: Inter, sans-serif;
+        margin-top: 37px;
+        text-align: center;
+      }
+
+      /*  */
+      .container {
+        display: flex;
+        padding: 60px 0px;
+      }
+      .content {
+        width: 1160px;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+      }
+      .tabs {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        border-bottom: 2px solid var(--gray02);
+      }
+      .tab {
+        display: flex;
+        padding-bottom: 10px;
+        justify-content: center;
+        align-items: center;
+        flex: 1 0 0;
+        cursor: pointer;
+        /* 字體 */
+        font-family: Inter;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        color: var(--gray01);
+      }
+      .tab.active {
+        border-bottom: 3px solid var(--green02);
+        color: var(--green02);
+      }
+      .cards {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- header -->
+    <!-- breadcrumb -->
+    <div class="container">
+      <!-- 會員側邊欄 -> 彭彭 -->
+      <div class="menu">
+        <div class="ian">
+          <div class="userimage"></div>
+          <div class="an">
+            <div class="accountleft"><a href="">帳號</a></div>
+            <div class="nameleft"><a href="">會員名稱</a></div>
+          </div>
+        </div>
+        <div class="menu1">
+          <div class="menu2">
+            <div class="myAccount"><a href="">我的帳戶</a></div>
+
+            <div class="lefta"><a href="">購買清單</a></div>
+            <div class="lefta"><a href="">我的優惠券</a></div>
+            <div class="lefta"><a href="">會員等級</a></div>
+            <div class="lefta"><a href="">願望清單</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-left"></div>
+      <div class="content">
+        <div class="tabs">
+          <div class="tab active">食譜</div>
+
+          <div class="tab">課程</div>
+
+          <div class="tab">商品</div>
+        </div>
+        <div class="cards">
+          <!-- card-recipe 偉鈞-->
+          <!-- card-lecture 宥毓-->
+          <div class="favor-card card-container">
+            <div class="image-wrapper">
+              <img
+                src="../public/images/ceaf00dde24747272b6d1a4521c6c9f0.jpg"
+                alt="class-img"
+                class="class-img"
+              />
+            </div>
+            <div class="truffled-rice-container">
+              <header class="truffled-rice-header">
+                <p class="truffled-rice-title">暖心和洋食—裙襬蛋包飯</p>
+                <svg
+                  class="heart-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="27"
+                  height="24"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </header>
+              <div class="truffled-rice-details">
+                <p class="truffled-rice-description">
+                  精心烹調的米飯與絕美松露相遇，為你帶來一場嗆辣的味蕾大戰。在黑暗中，化學元素交織出令人窒息的風味，彷彿在體驗一場驚心動魄的烹飪秘辛。
+                </p>
+                <div class="truffled-rice-pricing">
+                  <p class="truffled-rice-price">$NT599</p>
+                  <p class="truffled-rice-original-price">$999</p>
+                </div>
+              </div>
+              <div class="truffled-rice-meta">
+                <div class="class-infromations">
+                  <div class="class-sub-information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      class="infromation-icons"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                        />
+                        <path
+                          fill="#747e85"
+                          d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m0 2a1 1 0 0 1 .993.883L13 7v4.586l2.707 2.707a1 1 0 0 1-1.32 1.497l-.094-.083l-3-3a1 1 0 0 1-.284-.576L11 12V7a1 1 0 0 1 1-1"
+                        />
+                      </g>
+                    </svg>
+                    <span class="class-sub-information-text">2024 5月26日</span>
+                  </div>
+                  <div class="class-sub-information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      class="infromation-icons"
+                    >
+                      <path
+                        fill="#747e85"
+                        d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
+                      />
+                    </svg>
+                    <span class="class-sub-information-text">Walt White</span>
+                  </div>
+                </div>
+
+                <div class="truffled-rice-actions">
+                  <a class="links-buttons" href="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 24 24"
+                      class="links-buttons-icon"
+                    >
+                      <path
+                        fill="white"
+                        d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
+                      />
+                    </svg>
+                    <span class="link-button-text">了解更多</span>
+                  </a>
+                  <a class="links-buttons" href="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 24 24"
+                      class="links-buttons-icon"
+                    >
+                      <path
+                        fill="white"
+                        d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                      />
+                    </svg>
+                    <span class="link-button-text">立刻報名</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="favor-card card-container">
+            <div class="image-wrapper">
+              <img
+                src="../public/images/ceaf00dde24747272b6d1a4521c6c9f0.jpg"
+                alt="class-img"
+                class="class-img"
+              />
+            </div>
+            <div class="truffled-rice-container">
+              <header class="truffled-rice-header">
+                <p class="truffled-rice-title">暖心和洋食—裙襬蛋包飯</p>
+                <svg
+                  class="heart-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="27"
+                  height="24"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </header>
+              <div class="truffled-rice-details">
+                <p class="truffled-rice-description">
+                  精心烹調的米飯與絕美松露相遇，為你帶來一場嗆辣的味蕾大戰。在黑暗中，化學元素交織出令人窒息的風味，彷彿在體驗一場驚心動魄的烹飪秘辛。
+                </p>
+                <div class="truffled-rice-pricing">
+                  <p class="truffled-rice-price">$NT599</p>
+                  <p class="truffled-rice-original-price">$999</p>
+                </div>
+              </div>
+              <div class="truffled-rice-meta">
+                <div class="class-infromations">
+                  <div class="class-sub-information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      class="infromation-icons"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                        />
+                        <path
+                          fill="#747e85"
+                          d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m0 2a1 1 0 0 1 .993.883L13 7v4.586l2.707 2.707a1 1 0 0 1-1.32 1.497l-.094-.083l-3-3a1 1 0 0 1-.284-.576L11 12V7a1 1 0 0 1 1-1"
+                        />
+                      </g>
+                    </svg>
+                    <span class="class-sub-information-text">2024 5月26日</span>
+                  </div>
+                  <div class="class-sub-information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      class="infromation-icons"
+                    >
+                      <path
+                        fill="#747e85"
+                        d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
+                      />
+                    </svg>
+                    <span class="class-sub-information-text">Walt White</span>
+                  </div>
+                </div>
+
+                <div class="truffled-rice-actions">
+                  <a class="links-buttons" href="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 24 24"
+                      class="links-buttons-icon"
+                    >
+                      <path
+                        fill="white"
+                        d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
+                      />
+                    </svg>
+                    <span class="link-button-text">了解更多</span>
+                  </a>
+                  <a class="links-buttons" href="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 24 24"
+                      class="links-buttons-icon"
+                    >
+                      <path
+                        fill="white"
+                        d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                      />
+                    </svg>
+                    <span class="link-button-text">立刻報名</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="favor-card card-container">
+            <div class="image-wrapper">
+              <img
+                src="../public/images/ceaf00dde24747272b6d1a4521c6c9f0.jpg"
+                alt="class-img"
+                class="class-img"
+              />
+            </div>
+            <div class="truffled-rice-container">
+              <header class="truffled-rice-header">
+                <p class="truffled-rice-title">暖心和洋食—裙襬蛋包飯</p>
+                <svg
+                  class="heart-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="27"
+                  height="24"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </header>
+              <div class="truffled-rice-details">
+                <p class="truffled-rice-description">
+                  精心烹調的米飯與絕美松露相遇，為你帶來一場嗆辣的味蕾大戰。在黑暗中，化學元素交織出令人窒息的風味，彷彿在體驗一場驚心動魄的烹飪秘辛。
+                </p>
+                <div class="truffled-rice-pricing">
+                  <p class="truffled-rice-price">$NT599</p>
+                  <p class="truffled-rice-original-price">$999</p>
+                </div>
+              </div>
+              <div class="truffled-rice-meta">
+                <div class="class-infromations">
+                  <div class="class-sub-information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      class="infromation-icons"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                        />
+                        <path
+                          fill="#747e85"
+                          d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m0 2a1 1 0 0 1 .993.883L13 7v4.586l2.707 2.707a1 1 0 0 1-1.32 1.497l-.094-.083l-3-3a1 1 0 0 1-.284-.576L11 12V7a1 1 0 0 1 1-1"
+                        />
+                      </g>
+                    </svg>
+                    <span class="class-sub-information-text">2024 5月26日</span>
+                  </div>
+                  <div class="class-sub-information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      class="infromation-icons"
+                    >
+                      <path
+                        fill="#747e85"
+                        d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
+                      />
+                    </svg>
+                    <span class="class-sub-information-text">Walt White</span>
+                  </div>
+                </div>
+
+                <div class="truffled-rice-actions">
+                  <a class="links-buttons" href="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 24 24"
+                      class="links-buttons-icon"
+                    >
+                      <path
+                        fill="white"
+                        d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
+                      />
+                    </svg>
+                    <span class="link-button-text">了解更多</span>
+                  </a>
+                  <a class="links-buttons" href="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 24 24"
+                      class="links-buttons-icon"
+                    >
+                      <path
+                        fill="white"
+                        d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                      />
+                    </svg>
+                    <span class="link-button-text">立刻報名</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="favor-card card-container">
+            <div class="image-wrapper">
+              <img
+                src="../public/images/ceaf00dde24747272b6d1a4521c6c9f0.jpg"
+                alt="class-img"
+                class="class-img"
+              />
+            </div>
+            <div class="truffled-rice-container">
+              <header class="truffled-rice-header">
+                <p class="truffled-rice-title">暖心和洋食—裙襬蛋包飯</p>
+                <svg
+                  class="heart-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="27"
+                  height="24"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </header>
+              <div class="truffled-rice-details">
+                <p class="truffled-rice-description">
+                  精心烹調的米飯與絕美松露相遇，為你帶來一場嗆辣的味蕾大戰。在黑暗中，化學元素交織出令人窒息的風味，彷彿在體驗一場驚心動魄的烹飪秘辛。
+                </p>
+                <div class="truffled-rice-pricing">
+                  <p class="truffled-rice-price">$NT599</p>
+                  <p class="truffled-rice-original-price">$999</p>
+                </div>
+              </div>
+              <div class="truffled-rice-meta">
+                <div class="class-infromations">
+                  <div class="class-sub-information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      class="infromation-icons"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                        />
+                        <path
+                          fill="#747e85"
+                          d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m0 2a1 1 0 0 1 .993.883L13 7v4.586l2.707 2.707a1 1 0 0 1-1.32 1.497l-.094-.083l-3-3a1 1 0 0 1-.284-.576L11 12V7a1 1 0 0 1 1-1"
+                        />
+                      </g>
+                    </svg>
+                    <span class="class-sub-information-text">2024 5月26日</span>
+                  </div>
+                  <div class="class-sub-information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      class="infromation-icons"
+                    >
+                      <path
+                        fill="#747e85"
+                        d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
+                      />
+                    </svg>
+                    <span class="class-sub-information-text">Walt White</span>
+                  </div>
+                </div>
+
+                <div class="truffled-rice-actions">
+                  <a class="links-buttons" href="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 24 24"
+                      class="links-buttons-icon"
+                    >
+                      <path
+                        fill="white"
+                        d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
+                      />
+                    </svg>
+                    <span class="link-button-text">了解更多</span>
+                  </a>
+                  <a class="links-buttons" href="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 24 24"
+                      class="links-buttons-icon"
+                    >
+                      <path
+                        fill="white"
+                        d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                      />
+                    </svg>
+                    <span class="link-button-text">立刻報名</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- card-product 姵云-->
+          <ul class="d-flex flex-sm-row flex-wrap justify-content-between  product-list ">
+            <li>
+              <div class="product-card my-4">
+                <div class="object-fit">
+                <img
+                src="../public/products-image/egg.png"
+                alt="商品圖片"
+                class="product-image"
+              /></div>
+                
+
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+
+                  <div class="product-rating d-flex flex-row justify-content-sm-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                    <a class="favorite-btn pe-3"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                  </div>
+
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                      <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="product-card my-4">
+                <div class="object-fit">
+                <img
+                src="../public/products-image/egg.png"
+                alt="商品圖片"
+                class="product-image"
+              /></div>
+                
+
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+
+                  <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                    <a class="favorite-btn pe-3"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                  </div>
+
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                      <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="product-card my-4 last-card">
+                <div class="object-fit">
+                <img
+                src="../public/products-image/egg.png"
+                alt="商品圖片"
+                class="product-image"
+              /></div>
+                
+
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+
+                  <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                    <a class="favorite-btn pe-3"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                  </div>
+
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                      <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="product-card my-4 last-card">
+                <div class="object-fit">
+                <img
+                src="../public/products-image/egg.png"
+                alt="商品圖片"
+                class="product-image"
+              /></div>
+                
+
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+
+                  <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                    <a class="favorite-btn pe-3"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                  </div>
+
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                      <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="product-card last-card my-4">
+                <div class="object-fit">
+                    <img
+                    src="../public/products-image/egg.png"
+                    alt="商品圖片"
+                    class="product-image"
+                  />
+                </div>
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+                  <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                          <a class="favorite-btn pe-3"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                  </div>
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                        <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                          <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="d-flex flex-sm-row flex-wrap justify-content-between  product-list ">
+            <li>
+              <div class="product-card my-4">
+                <div class="object-fit">
+                <img
+                src="../public/products-image/egg.png"
+                alt="商品圖片"
+                class="product-image"
+              /></div>
+                
+
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+
+                  <div class="product-rating d-flex flex-row justify-content-sm-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                    <a class="favorite-btn pe-3"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                  </div>
+
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                      <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="product-card my-4">
+                <div class="object-fit">
+                <img
+                src="../public/products-image/egg.png"
+                alt="商品圖片"
+                class="product-image"
+              /></div>
+                
+
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+
+                  <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                    <a class="favorite-btn pe-3"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                  </div>
+
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                      <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="product-card my-4 last-card">
+                <div class="object-fit">
+                <img
+                src="../public/products-image/egg.png"
+                alt="商品圖片"
+                class="product-image"
+              /></div>
+                
+
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+
+                  <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                    <a class="favorite-btn pe-3"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                  </div>
+
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                      <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="product-card my-4 last-card">
+                <div class="object-fit">
+                <img
+                src="../public/products-image/egg.png"
+                alt="商品圖片"
+                class="product-image"
+              /></div>
+                
+
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+
+                  <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                    <a class="favorite-btn pe-3"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                  </div>
+
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                      <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="product-card last-card my-4">
+                <div class="object-fit">
+                    <img
+                    src="../public/products-image/egg.png"
+                    alt="商品圖片"
+                    class="product-image"
+                  />
+                </div>
+                <div class="product-info">
+                  <h6 class="product-name my-2">超級雞蛋</h6>
+                  <div class="product-rating d-flex flex-row justify-content-between stars-row mb-3">
+                    <div class="star">★<span class="score px-3">(4.2)</span></div>
+                          <a class="favorite-btn pe-3"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                  </div>
+                  <div class="product-price d-flex flex-row justify-content-between align-items-center">
+                    <div class="price">$500</div>
+                    <div class="d-flex flex-row align-items-center">
+                      <div class="original-price px-3">$100</div>
+                        <a class="add-to-cart-btn justify-content-center d-flex align-items-center">
+                          <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- footer -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.slim.js"
+      integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // tab 樣式切換
+      //   const tabs = document.querySelectorAll(".tab");
+      //   tabs.forEach((tab) => {
+      //     tab.addEventListener("click", (event) => {
+      //       event.target.classList.toggle("active");
+      //     });
+      //   });
+      $(".tab").on("click", function () {
+        $(this).addClass("active");
+        $(this).siblings().removeClass("active");
+        // 檢查是否點擊的是 "商品" 的 tab
+        if ($(this).text() === "商品") {
+          // 如果是，顯示對應的 product-card
+          $(".product-card").show();
+          $(".card-container").hide();
+        } else if ($(this).text() === "課程") {
+          // 如果不是，隱藏所有 product-card
+          $(".product-card").hide();
+          //   食譜卡片 hide
+          $(".card-container").show();
+        } else if ($(this).text() === "食譜") {
+          $(".product-card").hide();
+          $(".card-container").hide();
+        //   $("食譜卡片").show();
+        }
+      });
+    </script>
+  </body>
+</html>

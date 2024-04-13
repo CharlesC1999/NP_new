@@ -29,6 +29,12 @@
       box-shadow: inset 0px -2px 0px 0px var(--green05);
       /* 添加向内延伸的边框 */
     }
+    @media (max-width: 375px){
+      .buycard{
+        width: 334px;
+        height: 115px;
+      }
+    }
 
 
     .buyCardContent {
@@ -36,13 +42,7 @@
       display: flex;
     }
 
-    @media (max-width: 991px) {
-      .buyCardContent {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0px;
-      }
-    }
+    
 
     .bccolumn {
       display: flex;
@@ -52,11 +52,7 @@
       margin-left: 0px;
     }
 
-    @media (max-width: 991px) {
-      .bccolumn {
-        width: 100%;
-      }
-    }
+    
 
     .bcimg {
       background-color: var(--line, #d9d9d9);
@@ -65,25 +61,23 @@
       margin: 0 auto;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 375px) {
       .bcimg {
-        margin-top: 28px;
+        width: 80px;
+        height: 80px;
+        margin:auto;
       }
     }
 
     .bccolumn-2 {
       display: flex;
-      flex-direction: column;
+      /* flex-direction: column; */
       line-height: normal;
       width: 84%;
       margin-left: 20px;
     }
 
-    @media (max-width: 991px) {
-      .bccolumn-2 {
-        width: 100%;
-      }
-    }
+   
 
     .buy-item {
       justify-content: end;
@@ -95,11 +89,9 @@
       margin: auto 0;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 375px) {
       .buy-item {
-        max-width: 100%;
-        margin-top: 40px;
-        flex-wrap: wrap;
+       
       }
     }
 
@@ -116,16 +108,34 @@
     .bi-content {
       color: var(--black, var(--gray03, #454545));
       font: 20px Inter, sans-serif;
+      font-weight: bold;
+    }
+    @media (max-width:375px) {
+      .bi-content{
+        font-size: 14px;
+      }
     }
 
     .bi-number {
       font-family: Inter, sans-serif;
       margin-top: 10px;
     }
+    @media (max-width:375px) {
+      .bi-number{
+        font-size: 12px;
+        margin-top: 0px;
+      }
+    }
 
     .bi-state {
       font-family: Inter, sans-serif;
       margin-top: 10px;
+    }
+    @media (max-width:375px) {
+      .bi-state{
+        font-size: 12px;
+        margin-top: 0px;
+      }
     }
 
     .bi-mb {
@@ -136,9 +146,11 @@
       justify-content: space-between;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 375px) {
       .bi-mb {
-        margin-top: 40px;
+       display: block;
+       margin: auto;
+       
       }
     }
 
@@ -147,6 +159,13 @@
       align-self: start;
       margin-top: 14px;
       font: 500 16px Inter, sans-serif;
+    }
+    @media (max-width: 375px) {
+      .bi-money {
+       display: block;
+       margin-bottom: 14px;
+       font-size: 14px;
+      }
     }
 
     .bi-button {
@@ -213,7 +232,7 @@
             <div class="bi-number">商品規格數量..... </div>
             <div class="bi-state">狀態 : 待收貨</div>
           </div>
-          <div class="bi-mb d-flex">
+          <div class="bi-mb ">
             <div class="bi-money">訂單金額: $200</div>
             <a href="" class="buy-card-btn btn ">查看詳情</a>
           </div>
