@@ -1,5 +1,5 @@
 .productCard {
-  width: 315px;
+  width: 345px;
   border-radius: 5px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(217, 225, 230, 1);
@@ -23,6 +23,7 @@
 }
 
 .productDetails {
+  width: 178px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -34,16 +35,22 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   color: #454545;
-  text-overflow: ellipsis;
+
   letter-spacing: 0.96px;
   font-size: 20px;
   font-weight: 900;
+  /* over size adj */
+  white-space: nowrap; /* 確保文字不會換行 */
+  overflow: hidden; /* 隱藏超出容器的內容 */
+  display: block; /* 讓 h3 佔滿容器寬度 */
+  width: 100%; /* 設定寬度 */
+  text-overflow: ellipsis; /* 點點點 */
 }
 
 .productMeta {
   display: flex;
   margin-top: 4px;
-  gap: 12px;
+  gap: 10px;
   font-size: 12px;
   color: #747e85;
   font-weight: 500;
