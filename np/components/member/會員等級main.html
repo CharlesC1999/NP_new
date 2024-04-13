@@ -7,50 +7,60 @@
         <div class="upgrade-amount-info">升級所需金額:</div>
         <div class="level-benefits">各等級所需條件和福利</div>
         <div class="level-cards">
-            <div class="level-card">
+            <div class="level-card m-no">
                 <div class="level-title">會員等級</div>
-                <div class="level-description">不知寫啥</div>
-                <div class="level-perks">不知寫啥</div>
+                <div class="level-description">條件</div>
+                <div class="level-perks">福利</div>
             </div>
             <div class="level-card">
                 <div class="level-icon">
                     <img loading="lazy" srcset="..." class="level-image" />
                 </div>
+                <div class="level-content">
                 <div class="level-title">等級1</div>
-                <div class="level-description">新鮮蔬菜</div>
-                <div class="level-perks">新鮮蔬菜</div>
+                <div class="level-description">條件</div>
+                <div class="level-perks">福利</div>
+                </div>
             </div>
             <div class="level-card">
                 <div class="level-icon">
                     <img loading="lazy" srcset="..." class="level-image" />
                 </div>
+                <div class="level-content">
                 <div class="level-title">等級2</div>
                 <div class="level-description">新鮮蔬菜</div>
                 <div class="level-perks">新鮮蔬菜</div>
             </div>
+            </div>
             <div class="level-card">
                 <div class="level-icon">
                     <img loading="lazy" srcset="..." class="level-image" />
                 </div>
+                <div class="level-content">
                 <div class="level-title">等級3</div>
                 <div class="level-description">新鮮蔬菜</div>
                 <div class="level-perks">新鮮蔬菜</div>
             </div>
-            <div class="level-card">
-                <div class="level-icon">
-                    <img loading="lazy" srcset="..." class="level-image" />
-                </div>
-                <div class="level-title">等級4</div>
-                <div class="level-description">新鮮蔬菜</div>
-                <div class="level-perks">新鮮蔬菜</div>
             </div>
             <div class="level-card">
                 <div class="level-icon">
                     <img loading="lazy" srcset="..." class="level-image" />
                 </div>
+                <div class="level-content">
+                <div class="level-title">等級4</div>
+                <div class="level-description">新鮮蔬菜</div>
+                <div class="level-perks">新鮮蔬菜</div>
+            </div>
+            </div>
+            <div class="level-card">
+                <div class="level-icon">
+                    <img loading="lazy" srcset="..." class="level-image" />
+                </div>
+                <div class="level-content">
                 <div class="level-title">等級5</div>
                 <div class="level-description">新鮮蔬菜</div>
                 <div class="level-perks">新鮮蔬菜</div>
+            </div>
             </div>
         </div>
     </div>
@@ -155,9 +165,11 @@
         font-size: 14px;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 375px) {
         .level-cards {
+            display: block;
             flex-wrap: wrap;
+            
         }
     }
 
@@ -170,10 +182,19 @@
         padding: 10px 0;
     }
 
-    @media (max-width: 991px) {
+
+    @media (max-width: 375px) {
         .level-card {
             margin-top: 40px;
-            white-space: initial;
+            display: flex;
+            flex-direction: row;
+
+            
+        }
+    }
+    @media (max-width:375px) {
+        .m-no{
+            display: none;
         }
     }
 
@@ -198,6 +219,11 @@
         flex-direction: column;
         padding: 10px;
     }
+    @media (max-width:375px) {
+        .level-icon{
+          display: flex;
+        }
+    }
 
     .level-image {
         aspect-ratio: 1;
@@ -218,6 +244,11 @@
         .upgrade-rules {
             max-width: 100%;
             white-space: initial;
+        }
+    }
+    @media (max-width:375px) {
+        .level-content{
+            margin-left: 34px;
         }
     }
 </style>

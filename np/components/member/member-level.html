@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-
+            --font-size-m:14px;
             --font-size: 20px;
             --gray01: #747e85;
             --green03: #78CEA6;
@@ -41,9 +41,9 @@
             font: 300 24px Inter, sans-serif;
         }
 
-        @media (max-width: 991px) {
+        @media (max-width: 375px) {
             .titleNow {
-                max-width: 100%;
+                display: none;
             }
         }
 
@@ -56,89 +56,23 @@
         @media (max-width: 991px) {
             .title2 {
                 max-width: 100%;
+                display: none;
             }
         }
+        
+/* 側邊欄 */
+@media (max-width: 375px){
+    body{
+      margin: 0;
+      padding: 0;
+    }
+    }
+    a {
+      color: var(--gray01);
+      text-decoration: none;
+    }
 
-        /* 调整标题和输入框的样式 */
-        .form-label {
-            display: inline-block;
-            width: 150px;
-            /* 调整标题宽度 */
-            text-align: right;
-            /* 文本右对齐 */
-            margin-bottom: 0;
-            /* 移除标题下方的间距 */
-        }
-
-        /* 调整按钮居中 */
-        .btn-center {
-            display: flex;
-            justify-content: center;
-
-        }
-
-        label {
-            color: var(--gray01, #747e85);
-
-        }
-
-        .col-form-label {
-            font-size: var(--font-size);
-        }
-
-        .btn1 {
-            background-color: var(--green01, #50BF8B);
-            border-color: var(--green01, #50BF8B);
-            font-size: var(--font-size);
-            width: 144px;
-            height: 44px;
-        }
-
-        .btnmargin {
-            margin: 87px 0 8px 0;
-        }
-
-        .reset {
-
-            color: var(--gray01);
-            text-decoration: none;
-            
-            float: inline-end;
-        }
-
-        .userImageBig {
-            width: 293px;
-            height: 293px;
-            background-color: #D9D9D9;
-            border: var(--green03) 1px solid;
-            border-radius: 50%;
-        }
-
-        .btn2 {
-            background-color: white;
-            border: var(--green04) 2px solid;
-            font-size: var(--font-size);
-            width: 144px;
-            height: 44px;
-            color: var(--green04);
-            margin-top: 44px;
-        }
-
-        .form1 {
-            padding: 10px 50px 10px 112px;
-            width: 679px;
-        }
-
-        .box {
-            padding-right: 73px;
-        }
-
-        a {
-            color: var(--gray01);
-            text-decoration: none;
-        }
-
-        .menu {
+    .menu {
             width: 247px;
             display: flex;
             /* flex-grow: 1; */
@@ -149,106 +83,124 @@
             margin-right: auto;
         }
 
-        @media (max-width: 991px) {
-            .menu {
-                margin-top: 40px;
-            }
-        }
-
-        .ian {
-            background-color: #fff;
-            display: flex;
-            padding-left: 6px;
-            gap: 7px;
-            white-space: nowrap;
-        }
-
-        @media (max-width: 991px) {
-            .ian {
-                white-space: initial;
-            }
-        }
-
-        .userimage {
-            background-color: var(--line, #d9d9d9);
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin: auto 0;
-        }
-
-        .an {
-            justify-content: center;
-            align-items: start;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            padding: 20px;
-        }
-
-        @media (max-width: 991px) {
-            .an {
-                white-space: initial;
-            }
-        }
-
-        .accountleft {
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            text-overflow: ellipsis;
-            font: 600 16px Inter, sans-serif;
-        }
-
-        .nameleft {
-            margin-top: 7px;
-            font: 400 20px Inter, sans-serif;
-        }
-
-        .menu1 {
-            padding-top: 16px;
-            background-color: var(--Black-0, #fff);
-            display: flex;
-            flex-direction: column;
-            font-size: 20px;
-            font-weight: 500;
-        }
-
-        .menu2 {
-            border-color: rgba(217, 225, 230, 1);
-            border-style: solid;
-            border-width: 0px 0px 0px 0px;
-            /* 顶部边框宽度为2px，其余边框为0px */
-            border-top-width: 2px;
-            display: flex;
-            flex-direction: column;
-            padding: 22px 20px 80px 25px;
-        }
 
 
-        @media (max-width: 991px) {
-            .menu2 {
-                padding-left: 20px;
-            }
-        }
+@media (max-width: 375px) {
+  .menu {
+   padding: 0;
+   width: 375px;
+   margin: 0;
 
-        .myAccount {
-            text-align: center;
-            font-family: Inter, sans-serif;
-        }
+  }
+}
 
-        .lefta {
-            font-family: Inter, sans-serif;
-            margin-top: 37px;
-            text-align: center;
-        }
 
-        @media (min-width: 1200px) {
-        .container {
-            max-width: 1440px;
-        }
+    .ian {
+      background-color: #fff;
+      display: flex;
+      padding-left: 6px;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 375px) {
+      .ian {
+        display: none;
+      }
+    }
+
+    .userimage {
+      background-color: var(--line, #d9d9d9);
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      margin: auto 0;
+    }
+
+    .an {
+      justify-content: center;
+      align-items: start;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 20px;
+    }
+
+    @media (max-width: 991px) {
+      .an {
+        white-space: initial;
+      }
+    }
+
+    .accountleft {
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      text-overflow: ellipsis;
+      font: 600 16px Inter, sans-serif;
+    }
+
+    .nameleft {
+      margin-top: 7px;
+      font: 400 20px Inter, sans-serif;
+    }
+    
+
+    .menu1 {
+      padding-top: 16px;
+      background-color: var(--Black-0, #fff);
+      display: flex;
+      flex-direction: column;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+   
+
+    .menu2 {
+      border-color: rgba(217, 225, 230, 1);
+      border-style: solid;
+      border-width: 0px 0px 0px 0px;
+      /* 顶部边框宽度为2px，其余边框为0px */
+      border-top-width: 2px;
+      display: flex;
+      flex-direction: column;
+      padding: 22px 20px 80px 25px;
     }
 
 
+    @media (max-width: 375px) {
+      .menu2 {
+        margin:  0;
+      font-size: 14px;
+      /* font-weight: 400; */
+      /* line-height: 120%; */
+      border-bottom: 1px solid rgba(217, 225, 230, 1);
+      background-color: var(--white, #fefefe);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: auto;
+      padding: 25px 19px;
+      color: var(--gray02);
+      border-top: none;
+  }
+    }
+
+    .myAccount {
+      text-align: center;
+      font-family: Inter, sans-serif;
+    }
+
+    .lefta {
+      font-family: Inter, sans-serif;
+      margin-top: 37px;
+      text-align: center;
+    }
+    @media (max-width: 375px){
+      .lefta{
+        margin: auto;
+      }
+    }
 
     /* 下面是header的style */
     
@@ -676,7 +628,7 @@
         .home1 {
           font-family: Inter, sans-serif;
         }
-        .img-2 {
+        .img2 {
           aspect-ratio: 1;
           object-fit: auto;
           object-position: center;
@@ -835,6 +787,16 @@
       .main{
         /* 不知道要不要留，螢幕看不出來 ，原本80%剛好，有疑問看這*/
         padding: 0 80px 0 80px;
+        
+        display: flex;
+        
+      }
+      @media (max-width:375px) {
+        .main{
+          display: block;
+          padding: 0;
+          
+        }
       }
       .top {
         background-color: var(--white, #fefefe);
@@ -842,6 +804,209 @@
         flex-direction: column;
         padding: 23px 0;
       }
+      
+      @media (min-width: 1200px) {
+      .container {
+        max-width: 1440px;
+      }
+    }
+    
+
+      /* 等級主內容 */
+      .membership {
+        display: flex;
+        width: 788px;
+        flex-direction: column;
+        line-height: 120%;
+    }
+
+@media (max-width:375px) {
+  .membership{
+    width: auto;
+    padding: 20px 0;
+    margin: 0 15px;
+  }
+}
+
+
+
+
+
+
+    .membershipDetails {
+        background-color: var(--Black-0, #fff);
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        font-size: 15px;
+        color: var(--Black-80, #636e72);
+        font-weight: 500;
+        padding: 0 0px 35px;
+    }
+
+    @media (max-width: 991px) {
+        .membershipDetails {
+            max-width: 100%;
+        }
+    }
+
+    .currentLevel {
+        width: 100%;
+        font: 400 20px Inter, sans-serif;
+    }
+
+    @media (max-width: 375px) {
+        .currentLevel {
+            max-width: 100%;
+            font-size: 16px;
+        }
+    }
+
+    .currentLevelInfo {
+        font-family: Inter, sans-serif;
+        align-self: start;
+        margin-top: 20px;
+    }
+   @media (max-width:375px) {
+    .currentLevelInfo {
+      font-size: var(--font-size-m);
+    }
+   }
+    .nextLevelInfo {
+        font-family: Inter, sans-serif;
+        align-self: start;
+        margin-top: 16px;
+    }
+    @media (max-width:375px) {
+      .nextLevelInfo{
+        font-size: var(--font-size-m);
+      }
+    }
+
+    .upgradeAmountInfo {
+        font-family: Inter, sans-serif;
+        align-self: start;
+        margin-top: 16px;
+    }
+    @media (max-width:375px) {
+      .upgradeAmountInfo{
+        font-size: var(--font-size-m);
+      }
+    }
+    .levelBenefits {
+        border-bottom: 1px solid var(--gray02);
+        padding: 3px 0;
+        font: 16px Inter, sans-serif;
+        margin-top: 52px;
+    }
+
+    @media (max-width: 991px) {
+        .levelBenefits {
+            max-width: 100%;
+            margin-top: 40px;
+            white-space: initial;
+        }
+    }
+
+    .levelCards {
+        justify-content: space-between;
+        display: flex;
+        margin-top: 37px;
+        gap: 0px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 375px) {
+        .levelCards {
+            display: block;
+            flex-wrap: wrap;
+            
+        }
+    }
+
+    .levelCard {
+        align-self: end;
+        display: flex;
+        margin-top: 90px;
+        flex-direction: column;
+        white-space: nowrap;
+        padding: 10px 0;
+    }
+
+
+    @media (max-width: 375px) {
+        .levelCard {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: row;
+
+            
+        }
+    }
+    @media (max-width:375px) {
+        .mNo{
+            display: none;
+        }
+    }
+
+    .levelTitle {
+        font-family: Inter, sans-serif;
+    }
+   @media (max-width:375px) {
+    .levelTitle{
+      font-size: 16px;
+    }
+   }
+    .levelDescription {
+        font-family: Inter, sans-serif;
+        margin-top: 10px;
+    }
+
+    .levelPerks {
+        font-family: Inter, sans-serif;
+        margin-top: 10px;
+    }
+
+    .levelIcon  {
+        max-width: 1024px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+    @media (max-width:375px) {
+        .levelIcon {
+          display: flex;
+        }
+    }
+
+    .levelImage {
+        aspect-ratio: 1;
+        object-fit: auto;
+        object-position: center;
+        width: 80px;
+        border-radius: 50%;
+    }
+
+    .upgradeRules {
+      color: var(--Black-80);
+        border-bottom: 1px solid var(--gray02);
+        padding: 3px 0;
+        font: 14px Inter, sans-serif;
+        margin-top: 37px;
+    }
+
+    @media (max-width: 991px) {
+        .upgradeRules {
+            max-width: 100%;
+            white-space: initial;
+        }
+    }
+    @media (max-width:375px) {
+        .levelContent{
+            margin-left: 34px;
+        }
+    }
     </style>
 </head>
 
@@ -964,7 +1129,7 @@
             <img
               loading="lazy"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ca25033ce40a3f01e111c68cb10c5fd503df8d7250381e77c1ee1462c68706d?"
-              class="img-2"
+              class="img2"
             />
             <div class="pathMember">會員</div>
           </div>
@@ -972,7 +1137,7 @@
       </div>
     
       <!-- header+綠色路徑下面 -->
-    <div class="container d-flex main">
+    <div class="container   main">
       <!-- 下面是側邊攔 -->
         <div class="menu">
             <div class="ian">
@@ -985,109 +1150,91 @@
             <div class="menu1">
                 <div class="menu2">
                     <div class="myAccount"> <a href="">我的帳戶</a></div>
-
+                      
                     <div class="lefta"><a href="">購買清單</a></div>
-                    <div class="lefta"><a href="">我的優惠券</a></div>
+                    <div class="lefta"><a href="">優惠券</a></div>
                     <div class="lefta"><a href="">會員等級</a></div>
                     <div class="lefta"><a href="">願望清單</a></div>
                 </div>
             </div>
         </div>
         <!-- 這邊是主內容那塊 -->
-        <div class="">
+        <div class="levelright">
           <!-- 主內容的標題 -->
             <div class="title">
                 <div class="titleNow fw-bold">我的帳戶</div>
                 <div class="title2">我的帳戶</div>
             </div>
           <!-- 主內容的標題 -->
-            <div class=" mt-5 d-flex">
-                <form class="form1">
-                    <div class="row mb-3 align-items-start box">
-                        <label for="name" class="col-sm-3 col-form-label ">姓名 :</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="name" placeholder="請輸入姓名">
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="email" class="col-sm-3 col-form-label">Email :</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" id="email" placeholder="請輸入Email">
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="phone" class="col-sm-3 col-form-label">手機號碼 :</label>
-                        <div class="col-sm-9">
-                            <input type="tel" class="form-control" id="phone" placeholder="請輸入手機號碼">
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="address" class="col-sm-3 col-form-label">地址 :</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="address" placeholder="請輸入地址">
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label class="col-sm-3 col-form-label">性别 :</label>
-                        <div class="col-sm-9">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="female" value="女">
-                                <label class="form-check-label" for="female">女</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="male" value="男">
-                                <label class="form-check-label" for="male">男</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="other" value="其他">
-                                <label class="form-check-label" for="other">其他</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="birthday" class="col-sm-3 col-form-label">生日 :</label>
-                        <div class="col-sm-3">
-                            <select class="form-select" id="year">
-                                <option selected>年份</option>
-                                <!-- 这里可以根据需求填充选项 -->
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <select class="form-select" id="month">
-                                <option selected>月份</option>
-                                <!-- 这里可以根据需求填充选项 -->
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <select class="form-select" id="day">
-                                <option selected>日期</option>
-                                <!-- 这里可以根据需求填充选项 -->
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-start box">
-                        <label for="password" class="col-sm-3 col-form-label">密碼 :</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" placeholder="請輸入密碼">
+           <!-- 主內容顯示區 -->
+           <div class="membership">
 
+            <div class="membershipDetails">
+                <div class="currentLevel">當前會員等級</div>
+                <div class="currentLevelInfo">當前會員等級:</div>
+                <div class="nextLevelInfo">下個等級:</div>
+                <div class="upgradeAmountInfo">升級所需金額:</div>
+                <div class="levelBenefits">各等級所需條件和福利</div>
+                <div class="levelCards">
+                    <div class="levelCard mNo">
+                        <div class="levelTitle">會員等級</div>
+                        <div class="levelDescription">條件</div>
+                        <div class="levelPerks">福利</div>
+                    </div>
+                    <div class="levelCard">
+                        <div class="levelIcon ">
+                            <img loading="lazy" srcset="..." class="levelImage" />
+                        </div>
+                        <div class="levelContent">
+                        <div class="levelTitle">等級1</div>
+                        <div class="levelDescription">條件</div>
+                        <div class="levelPerks">福利</div>
                         </div>
                     </div>
-                    <a href="" class="reset  container-fluid text-end box">[重設密碼]</a>
-                    <div class="row mb-3 align-items-start btn-center box">
-
-                        <button type="submit" class="btn btn-primary  btn1 btnmargin">確認修改</button>
-
+                    <div class="levelCard">
+                        <div class="levelIcon ">
+                            <img loading="lazy" srcset="..." class="levelImage" />
+                        </div>
+                        <div class="levelContent">
+                        <div class="levelTitle">等級2</div>
+                        <div class="levelDescription">新鮮蔬菜</div>
+                        <div class="levelPerks">新鮮蔬菜</div>
                     </div>
-                </form>
-                <div class="">
-                    <div class="userImageBig"><img src="" alt=""></div>
-                    <div class="row mb-3 align-items-start btn-center">
-
-                        <button type="submit" class="btn btn-primary  btn2 ">選擇圖片</button>
+                    </div>
+                    <div class="levelCard">
+                        <div class="levelIcon ">
+                            <img loading="lazy" srcset="..." class="levelImage" />
+                        </div>
+                        <div class="levelContent">
+                        <div class="levelTitle">等級3</div>
+                        <div class="levelDescription">新鮮蔬菜</div>
+                        <div class="levelPerks">新鮮蔬菜</div>
+                    </div>
+                    </div>
+                    <div class="levelCard">
+                        <div class="levelIcon ">
+                            <img loading="lazy" srcset="..." class="levelImage" />
+                        </div>
+                        <div class="levelContent">
+                        <div class="levelTitle">等級4</div>
+                        <div class="levelDescription">新鮮蔬菜</div>
+                        <div class="levelPerks">新鮮蔬菜</div>
+                    </div>
+                    </div>
+                    <div class="levelCard">
+                        <div class="levelIcon ">
+                            <img loading="lazy" srcset="..." class="levelImage" />
+                        </div>
+                        <div class="levelContent">
+                        <div class="levelTitle">等級5</div>
+                        <div class="levelDescription">新鮮蔬菜</div>
+                        <div class="levelPerks">新鮮蔬菜</div>
+                    </div>
                     </div>
                 </div>
-
             </div>
+            <div class="upgradeRules">升級/降級規則</div>
+        </div>
         </div>
     </div>
     <!-- 最下面的footer -->
