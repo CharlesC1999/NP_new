@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>speaker-detail</title>
+    <link rel="stylesheet" href="../styles/globals.css" />
+    <style>
+      .container {
+        display: flex;
+        padding: 60px 0px;
+        justify-content: space-between;
+        align-items: flex-start;
+        @media (max-width: 375px) {
+          width: 375px;
+          padding: 0px 20px;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+      .nav-left {
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        padding: 30px 25px;
+        gap: 10px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.14);
+        box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.13);
+        @media (max-width: 375px) {
+          display: none;
+        }
+        & h5 {
+          color: var(--black, var(--gray03, #454545));
+          font-family: Inter;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 120.313%; /* 24.063px */
+        }
+      }
+      .divider {
+        display: flex;
+        padding-left: 1px;
+        align-self: stretch;
+        /* align-self: stretch; */
+        height: 3px;
+        background: linear-gradient(
+          to right,
+          var(--green03) 30%,
+          #d9e1e6c3 30%
+        );
+      }
+      .speaker-rmd-group {
+        display: flex;
+        padding: 15px 0px;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        & a {
+          text-decoration: none;
+          &:hover .speaker-rmd .speaker-img img {
+            transform: scale(1.05);
+            opacity: 0.8;
+          }
+        }
+      }
+      /* 推薦講師卡片 */
+      .speaker-rmd {
+        display: flex;
+        flex-direction: row;
+        width: 248px;
+        justify-content: center;
+        gap: 10px;
+        & .content-r {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          flex: 1 0 0;
+          align-self: stretch;
+          font-family: Inter;
+          font-style: normal;
+          & h6 {
+            color: var(--gray01, #747e85);
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 100%; /* 16px */
+            font-family: Inter;
+            font-style: normal;
+            margin-bottom: 0px;
+          }
+          & p {
+            color: var(--gray01, #747e85);
+            font-size: 12px;
+            line-height: 120.313%;
+            font-family: Inter;
+            font-style: normal;
+          }
+        }
+      }
+      .speaker-img {
+        width: 90px;
+        height: 86px;
+        overflow: hidden;
+        background-color: #777;
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 5px;
+          transition: 0.4s ease-in-out;
+        }
+      }
+      .content-r {
+        width: 148px;
+        & p {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 4;
+          align-self: stretch;
+          overflow: hidden;
+        }
+      }
+      .nav-right {
+        display: flex;
+        width: 1030px;
+        flex-direction: column;
+        align-items: center;
+        gap: 80px;
+        flex-shrink: 0;
+        @media (max-width: 375px) {
+          width: 100%;
+          gap: 30px;
+        }
+      }
+      .detail {
+        display: flex;
+        justify-content: space-between;
+        align-self: stretch;
+        @media (max-width: 375px) {
+          flex-direction: column;
+          /* width: 375px; */
+          width: 100%;
+          @media (max-width: 375px) {
+            gap: 20px;
+            padding: 20px 0px;
+          }
+        }
+        & .speaker-img-l {
+          width: 380px;
+          height: 488px;
+          @media (max-width: 375px) {
+            width: 325px;
+            height: 300px;
+          }
+          & img {
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+      .content {
+        display: flex;
+        width: 576px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        align-self: stretch;
+        @media (max-width: 375px) {
+          width: 100%;
+        }
+        & .name {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 5px;
+          & h3 {
+            color: var(--black);
+            font-weight: 700;
+            font-family: inter;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--black, var(--gray03, #454545));
+            @media (max-width: 375px) {
+              font-size: 28px;
+            }
+          }
+          & h5 {
+            color: var(--black);
+            font-family: Inter;
+            font-size: 20px;
+            font-weight: 400;
+            @media (max-width: 375px) {
+              font-size: 16px;
+            }
+          }
+        }
+        & .description {
+          width: 576px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          /* align-items: flex-start; */
+          gap: 25px;
+          @media (max-width: 375px) {
+            width: 100%;
+            align-self: stretch;
+          }
+          & .des {
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: flex-start;
+            gap: 10px;
+            align-self: stretch;
+            & h4 {
+              color: var(--black);
+              font-family: Inter;
+              font-size: 24px;
+              /* font-style: normal; */
+              font-weight: 600;
+              @media (max-width: 375px) {
+                font-size: 16px;
+              }
+            }
+            & p {
+              color: var(--black);
+              font-family: Inter;
+              font-size: 20px;
+              line-height: 150%;
+              @media (max-width: 375px) {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+      .sec-2 {
+        display: flex;
+        padding: 10px 0px;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        align-self: stretch;
+        padding-bottom: 50px;
+        @media (max-width: 375px) {
+          gap: 30px;
+        }
+        & .title {
+          display: flex;
+          justify-content: center;
+          font-size: 24px;
+          font-family: inter;
+          font-weight: 600;
+          @media (max-width: 375px) {
+            font-size: 16px;
+          }
+        }
+      }
+      .lecture-group {
+        display: flex;
+        justify-content: space-between;
+        align-self: stretch;
+        @media (max-width: 375px) {
+          width: 375px;
+          padding: 0 15px;
+          align-self: auto;
+        }
+      }
+      .lecture.card-hidden {
+        @media (max-width: 375px) {
+          display: none;
+        }
+      }
+      .lecture {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 245px;
+        background: #fff;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        @media (max-width: 375px) {
+          width: 166px;
+          gap: 0px;
+        }
+        & .lecture-img {
+          width: 245px;
+          height: 142px;
+          @media (max-width: 375px) {
+            width: 100%;
+            height: 107px;
+          }
+          & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        & .l-card-body {
+          display: flex;
+          padding: 15px;
+          flex-direction: column;
+          justify-content: center;
+          gap: 12px;
+          align-self: stretch;
+          align-items: flex-end;
+          @media (max-width: 375px) {
+            padding: 15px 10px;
+          }
+          & h5 {
+            color: var(--gray01, #747e85);
+            /* H5 */
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            @media (max-width: 375px) {
+              font-size: 16px;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+              overflow: hidden;
+              /* align-self: stretch; */
+            }
+          }
+          & p {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            color: var(--gray01, #747e85);
+            font-family: Inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            @media (max-width: 375px) {
+              font-size: 14px;
+            }
+          }
+        }
+
+        .btn {
+          display: flex;
+          width: 95px;
+          height: 35px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 5px;
+          background: var(--green05, #def9ec);
+          color: var(--green02);
+          text-decoration: none;
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 700;
+          transition: 0.5s;
+          box-shadow: 0px 1px 4px #aaa;
+          &:hover {
+            transform: translateY(-3px);
+            /* background-color: #c2e2d3;
+            color: #fff; */
+            box-shadow: 0 4px 7px #ccc;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- header -->
+    <picture>
+      <source media="(min-width: 1440px)" srcset="../public/images/Header.png">
+      <source media="(max-width: 576px)" srcset="../public/images/header-m.png">
+      <img src="../public/images/Header.png" alt="" />
+    </picture>
+    <!-- breadcrumb -->
+    <picture>
+      <source media="(min-width: 1440px)" srcset="../public/images/bread.png">
+      <source media="(max-width: 576px)" srcset="../public/images/bread-m.png">
+      <img src="../public/images/bread.png" alt="" />
+    </picture>
+    <!-- container -->
+    <div class="container">
+      <div class="nav-left">
+        <h5>推薦講師</h5>
+        <div class="divider">
+        </div>
+        <div class="speaker-rmd-group">
+          <a href="#">
+            <div class="speaker-rmd">
+              <div class="speaker-img">
+                <img src="../public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+              <div class="content-r">
+                <h6>林繼正</h6>
+                <p>
+                  50歲卸下福華飯店主廚職務，步入高雄餐旅大學的教學殿堂20多年，其間還遠赴法國、擔任藍帶客座大師講堂教師，桃李滿天下，把中式麵點的文化傳播海內外。不久前從高雄餐旅退休，以分享喜樂的心，要把在業界和學校所累積的豐富經驗，以系列課程在廚藝教室傳承，教好做、好包、好吃的中式麵食。
+                </p>
+              </div>
+            </div>
+          </a>
+
+          <a href="#">
+            <div class="speaker-rmd">
+              <div class="speaker-img">
+                <img src="../public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+              <div class="content-r">
+                <h6>林繼正</h6>
+                <p>
+                  50歲卸下福華飯店主廚職務，步入高雄餐旅大學的教學殿堂20多年，其間還遠赴法國、擔任藍帶客座大師講堂教師，桃李滿天下，把中式麵點的文化傳播海內外。不久前從高雄餐旅退休，以分享喜樂的心，要把在業界和學校所累積的豐富經驗，以系列課程在廚藝教室傳承，教好做、好包、好吃的中式麵食。
+                </p>
+              </div>
+            </div>
+          </a>
+          <a href="#">
+            <div class="speaker-rmd">
+              <div class="speaker-img">
+                <img src="../public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+              <div class="content-r">
+                <h6>林繼正</h6>
+                <p>
+                  50歲卸下福華飯店主廚職務，步入高雄餐旅大學的教學殿堂20多年，其間還遠赴法國、擔任藍帶客座大師講堂教師，桃李滿天下，把中式麵點的文化傳播海內外。不久前從高雄餐旅退休，以分享喜樂的心，要把在業界和學校所累積的豐富經驗，以系列課程在廚藝教室傳承，教好做、好包、好吃的中式麵食。
+                </p>
+              </div>
+            </div>
+          </a>
+          <a href="#">
+            <div class="speaker-rmd">
+              <div class="speaker-img">
+                <img src="../public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+              <div class="content-r">
+                <h6>林繼正</h6>
+                <p>
+                  50歲卸下福華飯店主廚職務，步入高雄餐旅大學的教學殿堂20多年，其間還遠赴法國、擔任藍帶客座大師講堂教師，桃李滿天下，把中式麵點的文化傳播海內外。不久前從高雄餐旅退休，以分享喜樂的心，要把在業界和學校所累積的豐富經驗，以系列課程在廚藝教室傳承，教好做、好包、好吃的中式麵食。
+                </p>
+              </div>
+            </div>
+          </a>
+          <a href="#">
+            <div class="speaker-rmd">
+              <div class="speaker-img">
+                <img src="../public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+              <div class="content-r">
+                <h6>林繼正</h6>
+                <p>
+                  50歲卸下福華飯店主廚職務，步入高雄餐旅大學的教學殿堂20多年，其間還遠赴法國、擔任藍帶客座大師講堂教師，桃李滿天下，把中式麵點的文化傳播海內外。不久前從高雄餐旅退休，以分享喜樂的心，要把在業界和學校所累積的豐富經驗，以系列課程在廚藝教室傳承，教好做、好包、好吃的中式麵食。
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="detail">
+          <div class="speaker-img-l">
+            <img src="../public/speaker-image/lecturer13.jpg" alt="" />
+          </div>
+          <div class="content">
+            <div class="name">
+              <h3>林繼正</h3>
+              <h5>化學分子料理師</h5>
+            </div>
+            <div class="description">
+              <div class="des">
+                <h4>關於我</h4>
+                <p>
+                  50歲卸下福華飯店主廚職務，步入高雄餐旅大學的教學殿堂 20
+                  多年，其間還遠赴法國、擔任藍帶客座大師講堂教師，桃李滿天下，把中式麵點的文化傳播海內外。不久前從高雄餐旅退休，以分享喜樂的心，要把在業界和學校所累積的豐富經驗，以系列課程在廚藝教室傳承，教好做、好包、好吃的中式麵食。
+                </p>
+              </div>
+              <div class="des">
+                <h4>證照</h4>
+                <p>西餐乙級執照、西餐乙級執照、西餐乙級執照、西餐乙級執照</p>
+              </div>
+              <div class="des">
+                <h4>經歷</h4>
+                <p>福華大飯店主廚、高雄餐旅大學講師</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sec-2">
+          <!-- <div class="title"> -->
+          <p class="title">近期課程</p>
+          <!-- </div> -->
+          <div class="lecture-group">
+            <div class="lecture">
+              <div class="lecture-img">
+                <img src="../public/lecture-image/bg-class3.jpg" alt="" />
+              </div>
+              <div class="l-card-body">
+                <h5>質感餐桌基礎手機攝影</h5>
+                <p>
+                  辛苦了一整周，週五晚上最適合來上一些邪惡美食搭配啤酒！擅長將複雜的料理簡單化的咚咚老師，這次要教大家用最輕鬆簡便的方式複製韓式酒館中的經典放縱料理！
+                  洋釀炸雞 (實作) 邪惡部隊鍋(示範)
+                  韓國炸雞酥脆的外皮加上濃稠的甜辣醬汁讓人欲罷不能，但是在家使用了大量的油油炸過後，剩下的油只能丟掉，對於一次只做幾人份的家庭來說相當不划算。咚咚老師要教大家不用油炸也能做出酥脆炸雞的做法，搭配秘製韓國洋釀醬汁比例，在家輕鬆就能享用「半半炸雞」！
+                  在韓式料理中獨具風格的部隊鍋，最標誌性的就是橘紅色的湯頭配上韓國泡麵及半融化的起司，讓人看了口水直流！將老師的特調湯底比例記下來，煮出一鍋辛香濃郁的鍋物其實一點都不難，在家煮還能盡情加入自己喜歡的火鍋料，澎湃的一鍋也相當聚餐時適合端出來款待家人朋友！
+                </p>
+                <a href="" role="button" class="btn"> 立刻報名</a>
+              </div>
+            </div>
+            <div class="lecture">
+              <div class="lecture-img">
+                <img src="../public/lecture-image/bg-class3.jpg" alt="" />
+              </div>
+              <div class="l-card-body">
+                <h5>質感餐桌基礎手機攝影</h5>
+                <p>
+                  辛苦了一整周，週五晚上最適合來上一些邪惡美食搭配啤酒！擅長將複雜的料理簡單化的咚咚老師，這次要教大家用最輕鬆簡便的方式複製韓式酒館中的經典放縱料理！
+                  洋釀炸雞 (實作) 邪惡部隊鍋(示範)
+                  韓國炸雞酥脆的外皮加上濃稠的甜辣醬汁讓人欲罷不能，但是在家使用了大量的油油炸過後，剩下的油只能丟掉，對於一次只做幾人份的家庭來說相當不划算。咚咚老師要教大家不用油炸也能做出酥脆炸雞的做法，搭配秘製韓國洋釀醬汁比例，在家輕鬆就能享用「半半炸雞」！
+                  在韓式料理中獨具風格的部隊鍋，最標誌性的就是橘紅色的湯頭配上韓國泡麵及半融化的起司，讓人看了口水直流！將老師的特調湯底比例記下來，煮出一鍋辛香濃郁的鍋物其實一點都不難，在家煮還能盡情加入自己喜歡的火鍋料，澎湃的一鍋也相當聚餐時適合端出來款待家人朋友！
+                </p>
+                <a href="" role="button" class="btn"> 立刻報名</a>
+              </div>
+            </div>
+            <div class="card-hidden lecture">
+              <div class="lecture-img">
+                <img src="../public/lecture-image/bg-class3.jpg" alt="" />
+              </div>
+              <div class="l-card-body">
+                <h5>質感餐桌基礎手機攝影</h5>
+                <p>
+                  辛苦了一整周，週五晚上最適合來上一些邪惡美食搭配啤酒！擅長將複雜的料理簡單化的咚咚老師，這次要教大家用最輕鬆簡便的方式複製韓式酒館中的經典放縱料理！
+                  洋釀炸雞 (實作) 邪惡部隊鍋(示範)
+                  韓國炸雞酥脆的外皮加上濃稠的甜辣醬汁讓人欲罷不能，但是在家使用了大量的油油炸過後，剩下的油只能丟掉，對於一次只做幾人份的家庭來說相當不划算。咚咚老師要教大家不用油炸也能做出酥脆炸雞的做法，搭配秘製韓國洋釀醬汁比例，在家輕鬆就能享用「半半炸雞」！
+                  在韓式料理中獨具風格的部隊鍋，最標誌性的就是橘紅色的湯頭配上韓國泡麵及半融化的起司，讓人看了口水直流！將老師的特調湯底比例記下來，煮出一鍋辛香濃郁的鍋物其實一點都不難，在家煮還能盡情加入自己喜歡的火鍋料，澎湃的一鍋也相當聚餐時適合端出來款待家人朋友！
+                </p>
+                <a href="" role="button" class="btn"> 立刻報名</a>
+              </div>
+            </div>
+            <div class="card-hidden lecture">
+              <div class="lecture-img">
+                <img src="../public/lecture-image/bg-class3.jpg" alt="" />
+              </div>
+              <div class="l-card-body">
+                <h5>質感餐桌基礎手機攝影</h5>
+                <p>
+                  辛苦了一整周，週五晚上最適合來上一些邪惡美食搭配啤酒！擅長將複雜的料理簡單化的咚咚老師，這次要教大家用最輕鬆簡便的方式複製韓式酒館中的經典放縱料理！
+                  洋釀炸雞 (實作) 邪惡部隊鍋(示範)
+                  韓國炸雞酥脆的外皮加上濃稠的甜辣醬汁讓人欲罷不能，但是在家使用了大量的油油炸過後，剩下的油只能丟掉，對於一次只做幾人份的家庭來說相當不划算。咚咚老師要教大家不用油炸也能做出酥脆炸雞的做法，搭配秘製韓國洋釀醬汁比例，在家輕鬆就能享用「半半炸雞」！
+                  在韓式料理中獨具風格的部隊鍋，最標誌性的就是橘紅色的湯頭配上韓國泡麵及半融化的起司，讓人看了口水直流！將老師的特調湯底比例記下來，煮出一鍋辛香濃郁的鍋物其實一點都不難，在家煮還能盡情加入自己喜歡的火鍋料，澎湃的一鍋也相當聚餐時適合端出來款待家人朋友！
+                </p>
+                <a href="" role="button" class="btn"> 立刻報名</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer -->
+    <picture>
+      <source media="(min-width: 1440px)" srcset="../public/images/footer.png">
+      <source media="(max-width: 576px)" srcset="../public/images/footer-m.png">
+      <img src="../public/images/footer.png" alt="" />
+    </picture>
+  </body>
+</html>

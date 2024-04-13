@@ -1,0 +1,302 @@
+.widthMax {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.productCountContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--green05, #def9ec);
+  width: 100%;
+  max-width: 1000px;
+  color: var(--light-green, rgba(56, 142, 101, 1));
+  border-radius: 5px;
+  margin-bottom: 25px;
+  padding: 0 30px;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+@media (max-width: 375px) {
+  .productCountContainer {
+    background-color: transparent;
+    padding-inline: 15px;
+  }
+}
+
+.productCountHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-block: 5px;
+  padding-left: 10px;
+  gap: 10px;
+}
+
+.totalProducts {
+  /* 應該要是h3 */
+  font-size: 19px;
+  margin: auto 0;
+  font-weight: 700;
+}
+@media (max-width: 375px) {
+  .productCountHeader {
+    padding-inline: 0;
+  }
+  .totalProducts {
+    display: none;
+  }
+}
+
+.productCountControls {
+  display: flex;
+  justify-content: end;
+  gap: 16px;
+  padding: 1px 0;
+  font-weight: 400;
+}
+
+@media (max-width: 375px) {
+  .productCountControls {
+    gap: 10px;
+  }
+}
+
+.celanderMobile {
+  display: none;
+  border: none;
+  background: none;
+  padding: 0;
+  /* cursor: pointer; 手機不用*/
+}
+
+@media (max-width: 375px) {
+  .celanderMobile {
+    display: block;
+    width: 44px; /* 調整適合的大小 */
+    height: 44px; /* 調整適合的大小 */
+    margin: 5px;
+    background-color: transparent;
+    border-radius: 50%;
+  }
+}
+
+.itemsPerPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 2px 9px;
+  gap: 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 375px) {
+  .itemsPerPage {
+    display: none;
+  }
+}
+
+.itemsPerPageValue {
+  margin: auto 0;
+}
+
+.numberIncreaseDecrease {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.selectBtn {
+  height: 9px;
+  padding: 0px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.selectBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(120, 206, 166, 0.5);
+}
+
+.selectBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selectBtnIcon {
+  margin-bottom: 3px;
+}
+
+.sortBy {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-self: start;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 4px 20px;
+  gap: 10px;
+  cursor: pointer;
+  /* limit width */
+}
+
+@media (max-width: 375px) {
+  .sortBy {
+    width: 120px;
+    border: 1px solid var(--gray-300, #dee2e7);
+    color: #636e72;
+    padding-inline: 10px 6px;
+    border-radius: 7px;
+  }
+  .sortByLabel {
+    display: none;
+  }
+}
+
+.sortByValue {
+  text-align: center;
+}
+.sortMobile {
+  display: none;
+  margin-bottom: 3px;
+}
+@media (max-width: 375px) {
+  .sortByValue {
+    width: 90px;
+    overflow: hidden;
+    margin-top: 3px;
+    text-wrap: nowrap;
+  }
+  .sortMobile {
+    display: block;
+  }
+  .sortOrder {
+    display: none;
+  }
+}
+
+.sortBy.open .sortByOptions {
+  display: block;
+  opacity: 1;
+  pointer-events: auto; /* 使其可交互 */
+  transform: translateY(0);
+}
+
+.sortByOptions {
+  display: none;
+  position: absolute;
+  pointer-events: none; /* 避免在隱藏時可交互 */
+  transform: translateY(-20px); /* 給出一點動畫效果 */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  z-index: 1;
+}
+
+.sortByOptionList {
+  display: none;
+  position: absolute;
+  pointer-events: none; /* 避免在隱藏時可交互 */
+  transform: translateY(-20px); /* 給出一點動畫效果 */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  z-index: 1;
+}
+
+.sortByOption {
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+.sortByOption:hover {
+  background-color: #f5f5f5;
+}
+
+.sortBy.open.sortByOptions {
+  display: block;
+}
+
+/* class-selections-mobile-only */
+.classSelect {
+  position: relative;
+  display: none;
+  align-self: start;
+  background-color: #fff;
+  border-radius: 5px;
+  padding-block: 4px;
+  gap: 6px;
+  cursor: pointer;
+  /* only for mobile */
+  border: 1px solid var(--gray-300, #dee2e7);
+  padding-inline: 10px 6px;
+  border-radius: 7px;
+}
+
+@media (max-width: 375px) {
+  .classSelect {
+    display: flex;
+    justify-content: center;
+  }
+
+  .classSelectLabel {
+    color: #636e72;
+    margin-top: 3px;
+  }
+}
+/* class-selections-mobile-only */
+
+.gridRowSelections {
+  display: none;
+  width: 68px;
+}
+
+.gridBtn {
+  width: 34px;
+  height: 37px;
+  padding: 2px 0px;
+  background-color: transparent;
+  border: 1px solid var(--gray-300, #dee2e7);
+  border-radius: 7px 0 0 7px;
+}
+.selectionBtn {
+  margin-top: 2px;
+  margin-left: 1px;
+}
+
+.rowBtn {
+  width: 34px;
+  height: 37px;
+  padding: 2px 0px;
+  background-color: transparent;
+  border: 1px solid var(--gray-300, #dee2e7);
+  border-radius: 0 7px 7px 0;
+}
+.selectionBtnList {
+  margin-right: 1px;
+}
+
+@media (max-width: 375px) {
+  .gridRowSelections {
+    display: flex;
+  }
+}
