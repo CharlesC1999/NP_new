@@ -1,0 +1,23 @@
+.profile__section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    & h4 {
+      color: var(--black);
+      font-size: 24px;
+      font-weight: 600;
+      @media (max-width: 375px) {
+        font-size: 16px;
+      }
+    }
+    & p {
+      color: var(--black);
+      font-size: 20px;
+      line-height: 150%;
+      @media (max-width: 375px) {
+        font-size: 16px;
+      }
+    }
+  }
