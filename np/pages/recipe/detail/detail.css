@@ -292,7 +292,7 @@
   flex: 0 0 60px;
 }
 .main .main-content .related-products-section .related-products .related-products-middle .middle-right {
-  gap: 60px;
+  gap: 55px;
 }
 @media screen and (max-width: 376px) {
   .main .main-content .related-products-section .related-products .related-products-middle .middle-right {
@@ -390,6 +390,11 @@
 .recommended-recipe .recipe-card .card-content .recipe-description {
   max-width: 210px;
 }
+@media screen and (max-width: 376px) {
+  .recommended-recipe .recipe-card .card-content .recipe-description {
+    font-size: 16px;
+  }
+}
 .recommended-recipe .recipe-card .card-content .recipe-description.truncate {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -413,4 +418,4 @@
 }
 .recommended-recipe .pagination .page.current {
   background: var(--green02);
-}/*# sourceMappingURL=top.css.map */
+}/*# sourceMappingURL=detail.css.map */
