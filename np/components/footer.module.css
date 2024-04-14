@@ -32,8 +32,10 @@
 }
 
 .footerTitle {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #fefefe;
-  font: 700 20px Inter, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
 }
 @media (max-width: 375px) {
   .footerTitle {
@@ -52,7 +54,6 @@
 
 .footerLink {
   color: white;
-  font-family: Inter, sans-serif;
   margin-top: 15px;
   text-decoration: none;
 }
@@ -64,7 +65,6 @@
 }
 .footerNoMargin {
   color: white;
-  font-family: Inter, sans-serif;
   text-decoration: none;
 }
 @media (max-width: 375px) {
@@ -98,7 +98,6 @@
   }
 }
 .footerNoMargin {
-  font-family: Inter, sans-serif;
   text-decoration: none;
 }
 @media (max-width: 375px) {
@@ -147,11 +146,13 @@
 .footerBottom {
   align-self: center;
   margin-top: 40px;
-  font: 400 16px Inter, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 }
 @media (max-width: 375px) {
   .footerBottom {
-    font: 400 14px Inter, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
   }
 }
 
