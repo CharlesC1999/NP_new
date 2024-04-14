@@ -82,9 +82,6 @@
 .list-wrapper {
   gap: 120px;
 }
-.list-wrapper .side-bar {
-  border: 3px solid green;
-}
 .list-wrapper .side-bar .side-bar-wrapper {
   border-radius: 20px;
   border: 1px solid var(--gray02);
