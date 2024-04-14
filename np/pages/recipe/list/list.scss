@@ -44,11 +44,12 @@
 .container {
   @media screen and (max-width: 376px) {
     max-width: 345px;
+    padding: 0px;
   }
 }
 
 .top-bar {
-  margin-block: 15px;
+  margin: 15px 0px;
   .btn-sort {
     border-radius: 5px;
     border: 1px solid var(--gray03);
@@ -80,10 +81,46 @@
   }
 }
 
+.top-bar-grid {
+  margin: 15px 0px;
+  .btn-sort {
+    border-radius: 5px;
+    border: 1px solid var(--gray03);
+    .sort {
+      flex: 1 0 25px;
+      font-size: 13px;
+    }
+  }
+  .btn-filter {
+    border-radius: 5px;
+    border: 1px solid var(--gray03);
+    .category {
+      flex: 1 0 45px;
+      font-size: 13px;
+    }
+  }
+  .switch-card-qty {
+    border-radius: 5px;
+    border: 1px solid var(--gray03);
+    padding: 0;
+    .switch-grid {
+      padding: 5px;
+      border-right: 1px solid var(--gray03);
+      background: var(--gray03);
+
+    }
+    .switch-row {
+      padding: 5px;
+    }
+  }
+}
+
 .list-wrapper {
   gap: 120px;
+  @media screen and (max-width: 376px) {
+    margin-inline: 0px;
+  }
   .side-bar {
-    border: 3px solid green;
     .side-bar-wrapper {
       border-radius: 20px;
       border: 1px solid var(--gray02);
@@ -120,49 +157,92 @@
     }
   }
 
-  .main-content {
-    height: 1000px;
+  .list-layout {
+    .main-content {
+      height: 1000px;
+      .recipe-card {
+        padding: 15px;
+        gap: 30px;
+        border-radius: 5px;
+        border-right: 1px solid var(--gray02);
+        border-bottom: 1px solid var(--gray02);
+        @media screen and (max-width: 376px) {
+          gap: 0px;
+        }
+        .card-pic {
+          img {
+            border-radius: 5px;
+          }
+          @media screen and (max-width: 376px) {
+            padding: 0;
+          }
+        }
+        .recipe-title {
+          color: var(--black);
+        }
+        .card-content-middle {
+          color: var(--black);
+        }
+        .bottom-left {
+          .date {
+            color: var(--gray01);
+          }
+          .recipe-category {
+            color: var(--gray01);
+          }
+          @media screen and (max-width: 376px) {
+            margin-bottom: 10px;
+          }
+        }
+        .btn-more-detail {
+          border-radius: 5px;
+          background: var(--green02);
+          padding: 8px 15px;
+          border: none;
+          @media screen and (max-width: 376px) {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .grid-layout {
+    margin: 0;
+    padding: 0;
     .recipe-card {
-      padding: 15px;
-      gap: 30px;
+      width: 165px;
+      padding: 0;
+      margin: 0;
       border-radius: 5px;
       border-right: 1px solid var(--gray02);
       border-bottom: 1px solid var(--gray02);
-      @media screen and (max-width: 376px) {
-        gap: 0px;
-      }
+      border-left: 1px solid var(--gray02);
       .card-pic {
-        img {
-          border-radius: 5px;
-        }
-        @media screen and (max-width: 376px) {
-          padding: 0;
-        }
+        padding: 0;
       }
-      .recipe-title {
-        color: var(--black);
-      }
-      .card-content-middle {
-        color: var(--black);
-      }
-      .bottom-left {
-        .date {
-          color: var(--gray01);
+      .card-content {
+        padding: 10px 15px;
+        .card-content-top {
+          .heart {
+            svg {
+              height: 100%;
+            }
+          }
         }
-        .recipe-category {
-          color: var(--gray01);
-        }
-        @media screen and (max-width: 376px) {
-          margin-bottom: 10px;
-        }
-      }
-      .btn-more-detail {
-        border-radius: 5px;
-        background: var(--green02);
-        padding: 8px 15px;
-        border: none;
-        @media screen and (max-width: 376px) {
-          font-size: 14px;
+        .card-content-bottom {
+          .bottom-left {
+            .date {
+              color: var(--gray01);
+            }
+            .recipe-category {
+              color: var(--gray01);
+            }
+          }
+          .btn-more-detail {
+            background: var(--green02);
+            border: 0px;
+          }
         }
       }
     }
