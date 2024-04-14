@@ -1,0 +1,17 @@
+.classIntroImageContainerMobile {
+  width: 305px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 15px;
+  margin-block: 20px;
+}
+
+.classIntroImageMobile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.classIntroTextMobile {
+  width: 305px;
+}

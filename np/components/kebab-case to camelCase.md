@@ -9,6 +9,24 @@ Name="([\w-]+)"
 
 ---
 
+`class=".*?"`
+
+class=" "
+
+`className=\{styles\..*?\}`
+
+className={styles.所有內容}
+
+`className=".*?"`
+
+className="(所有內容)"
+
+`className=\{styles\['.*?'\]\}`
+
+className={styles['所有內容']}
+
+---
+
 駝峰命名後，className = " "， to className = {styles.}
 
 1. Ctrl + H 取代
