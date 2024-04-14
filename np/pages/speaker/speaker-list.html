@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>speaker-list</title>
+    <link rel="stylesheet" href="/np/styles/globals.css" />
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        padding-block: 40px;
+        gap: 30px;
+        @media (max-width: 375px) {
+          width: 375px;
+          padding: 20px 0px;
+          gap: 10px;
+        }
+      }
+      .title {
+        display: flex;
+        justify-content: center;
+        & h3 {
+        font-family: inter;
+        font-size: 32px;
+        @media (max-width: 375px) {
+          font-size: 24px;
+        }
+      }
+      }
+      .speaker-card-container {
+        display: flex;
+        flex-direction: column;
+        padding-inline: 120px;
+        @media (max-width: 375px) {
+          padding-inline: 15px;
+        }
+        & .speaker-group {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          align-self: stretch;
+          margin-bottom: 30px;
+          @media (max-width: 375px) {
+            /* 使用 wrap 之後換行的間隔用 speaker 卡片的 margin-bottom 打開 */
+            flex-wrap: wrap;
+            margin-bottom: 0px;
+          }
+        }
+      }
+      /* 講師卡片 */
+      .speaker-card-link{
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .speaker {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 265px;
+        /* 游標進入卡片時，圖片放大效果 */
+        &:hover img {
+          transition: 0.4s ease-in-out;
+          transform: scale(1.03);
+          opacity: 0.8;
+        }
+        @media (max-width: 375px) {
+          width: 160px;
+          margin-bottom: 15px;
+        }
+      }
+      .speaker-img {
+        width: 265px;
+        height: 265px;
+        @media (max-width: 375px) {
+          width: 160px;
+          height: 160px;
+        }
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .speaker-name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap:5px;
+        & h5,
+        & h6 {
+          font-family: inter;
+          color: var(--gray01);
+          margin: 0;
+        }
+        & h5 {
+          font-weight: 700;
+          @media (max-width: 375px) {
+            font-size: 16px;
+          }
+        }
+        & h6 {
+          font-size: 16px;
+          @media (max-width: 375px) {
+            font-size: 12px;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <header></header> -->
+    <picture>
+      <source
+        media="(min-width: 1440px)"
+        srcset="/np/public/images/Header.png"
+      />
+      <source
+        media="(max-width: 576px)"
+        srcset="/np/public/images/header-m.png"
+      />
+      <img src="/np/public/images/Header.png" alt="" />
+    </picture>
+    <!-- breadcrumb -->
+    <picture>
+      <source media="(min-width: 1440px)" srcset="/np/public/images/bread.png" />
+      <source
+        media="(max-width: 576px)"
+        srcset="/np/public/images/bread-m.png"
+      />
+      <img src="/np/public/images/bread.png" alt="" />
+    </picture>
+    <div class="container">
+      <div class="title"><h3>講師陣容</h3></div>
+      <div class="speaker-card-container">
+        <div class="speaker-group">
+          <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+        </div>
+        <div class="speaker-group">
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+        </div>
+        <div class="speaker-group">
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+           <a href="#" class="speaker-card-link">
+          <div class="speaker">
+              <div class="speaker-img">
+                <img src="/np/public/speaker-image/lecturer 16.jpg" alt="" />
+              </div>
+            <div class="speaker-name">
+              <h5>戴于益</h5>
+              <h6>米其林藍帶 CEO</h6>
+            </div>
+          </div>
+        </a>
+        </div>
+      </div>
+      <!-- <pages> -->
+      <picture>
+        <source
+          media="(min-width: 1440px)"
+          srcset="/np/public/images/paginationList.png"
+        />
+        <source
+          media="(max-width: 576px)"
+          srcset="/np/public/images/pages-m.png"
+        />
+        <img src="/np/public/images/paginationList.png" alt="" />
+      </picture>
+    </div>
+    <!-- <footer></footer> -->
+    <!-- 不支援 picture 或是不符合設定的寬度條件，就會讀取 img 中的內容 -->
+    <picture>
+      <source
+        media="(min-width: 1440px)"
+        srcset="/np/public/images/footer.png"
+      />
+      <source
+        media="(max-width: 576px)"
+        srcset="/np/public/images/footer-m.png"
+      />
+      <img src="/np/public/images/footer.png" alt="" />
+    </picture>
+  </body>
+</html>
