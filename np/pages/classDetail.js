@@ -1,4 +1,6 @@
 import React from "react";
+// import DisplayNoneInMobile from "@/pages/forThoseDisplayNoneInMobile.module.css";
+import DetailStyles from "@/pages/classDetail.module.css";
 import Header from "@/components/header";
 import ClassDetail from "@/components/class_file/class-detail/class-detail-content";
 import Footer from "@/components/footer";
@@ -11,25 +13,12 @@ const ForTest2 = () => {
     justifyContent: "center",
   };
 
-  const dF = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "91px",
-    marginTop: "30px",
-    marginBottom: "50px",
-  };
-
-  const dFC = {
-    display: "flex",
-    flexDirection: "column",
-  };
-
   return (
     <div style={containerStyle}>
       <Header />
-      <img src="/images/bread.png" />
-      <div style={dF}>
-        <div style={dFC}>
+      <img src="/images/bread.png" className={DetailStyles.webNone} />
+      <div className={DetailStyles.dF}>
+        <div className={DetailStyles.dFC}>
           <img src="/images/sidebar1.PNG" />
           <img src="/images/sidebar2.PNG" />
         </div>

@@ -1,0 +1,34 @@
+.webNone {
+  display: block; /* 默认显示 */
+}
+
+@media (max-width: 375px) {
+  .webNone {
+    display: none; /* 在小屏幕上隐藏 */
+  }
+}
+
+.dF {
+  display: flex;
+  justify-content: center;
+  gap: 91px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 375px) {
+  .dF {
+    gap: 0px;
+  }
+}
+
+.dFC {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 375px) {
+  .dFC {
+    display: none; /* 在小屏幕上隐藏 */
+  }
+}

@@ -24,7 +24,7 @@ a:visited {
 
 @media (max-width: 375px) {
   .container {
-    padding: 16px;
+    padding: 8px 0px;
   }
   .header {
     max-width: 100%;
@@ -161,7 +161,7 @@ a:visited {
 }
 
 @media (max-width: 375px) {
-  .header-content {
+  .headerContent {
     flex-wrap: wrap;
     max-width: 100%;
   }

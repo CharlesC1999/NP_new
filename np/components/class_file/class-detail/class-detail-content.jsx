@@ -18,13 +18,13 @@ const ClassDetail = () => {
           />
         </div>
         <div className={styles.classInformations}>
-          <p className={styles.className}>松露菜飯</p>
+          <p className={styles.className}>探索松露的秘密</p>
           <div className={styles.classMobileSelectGroup}>
             <button
               className={
                 activeTab === "info"
-                  ? "class-mobile-select-active"
-                  : "class-mobile-select"
+                  ? styles.classMobileSelectActive
+                  : styles.classMobileSelect
               }
               onClick={() => setActiveTab("info")}
             >
@@ -33,8 +33,8 @@ const ClassDetail = () => {
             <button
               className={
                 activeTab === "goods"
-                  ? "class-mobile-select-active"
-                  : "class-mobile-select"
+                  ? styles.classMobileSelectActive
+                  : styles.classMobileSelect
               }
               onClick={() => setActiveTab("goods")}
             >
