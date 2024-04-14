@@ -12,7 +12,7 @@ const ProductCardMobileList = () => {
         />
       </figure>
       <div className={styles.productDetails}>
-        <h3 className={styles.productName}>營養師手做年菜上桌啦啦啦</h3>
+        <h3 className={styles.productName}>營養師手做年菜上桌</h3>
         <div className={styles.productMeta}>
           <div className={styles.productDate}>
             <svg
