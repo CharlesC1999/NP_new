@@ -23,6 +23,16 @@ const ClassList = () => {
     alignItems: "center",
   };
 
+  const cardWidth = {
+    width: "990px",
+    gap: "25px",
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    justifySelf: "center",
+    alignContent: "center",
+  };
+
   const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid
   const [activeButton, setActiveButton] = useState("grid"); // 選擇哪一個是被選擇的狀態
 
@@ -57,12 +67,14 @@ const ClassList = () => {
               activeButton={activeButton}
             />
             <div className={CardStyle.WebCardContainer}>
-              <ClassCard />
-              <ClassCard />
-              <ClassCard />
-              <ClassCard />
-              <ClassCard />
-              <ClassCard />
+              <div style={cardWidth}>
+                <ClassCard />
+                <ClassCard />
+                <ClassCard />
+                <ClassCard />
+                <ClassCard />
+                <ClassCard />
+              </div>
             </div>
             {displayGrid ? (
               <div className={CardStyle.MobileCardContainer}>
