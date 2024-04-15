@@ -75,12 +75,12 @@
 
   & h5 {
     padding-bottom: 15px;
-    /* 將底線設為從左到右漸變 */
+    font-weight: 700;  
   }
 
 }
 .line {
-
+  /* 將底線設為從左到右漸變 */
   margin: 10px;
   width: 205px;
   height: 4px;
@@ -186,10 +186,12 @@
   /*垂直置中*/
   & h6 {
     padding-left: 10px;
+    font-weight: 700;
   }
 
   & .hot-title {
     color: var(--green02);
+    
   }
 }
 
@@ -207,6 +209,7 @@
 /* .<!-- product (上方限時特惠商品) --> */
 .discount-title{
   color: var(--green02);
+  font-weight: 600;
 }
 
 .discount-box {
@@ -503,6 +506,13 @@
   /* 移除背景色 */
   cursor: pointer;
 }
+.star-color {
+  color: var(--yellow02);
+}
+
+.heart-color{
+  color: var(--green02);
+}
 
 .product-card1 {
   display: flex;
@@ -534,6 +544,9 @@
   /* 垂直方向排列 */
   flex-direction: column;
   margin-inline: 10px;
+  & h5{
+    font-weight: 700;
+  }
   & .card1-title a {
     color: var(--black);
 
@@ -547,6 +560,7 @@
   position: relative;
   width: 30px;
   height: 25px;
+  border-radius: 5px;
   background-color: var(--green05);
 
   &:hover {
@@ -579,12 +593,14 @@
     color: var(--green03);
     font-size: 14px;
     margin-top: 5px;
+    font-weight: 700;
   }
 
   & p {
     /* 橫線 */
     text-decoration: line-through;
     margin-top: 6px;
+    font-weight: 600;
   }
 
 }

@@ -7,7 +7,7 @@
     /* gap:70px; */
     flex-wrap: wrap;
   }
-  
+ 
   .card2-box {
     display: flex;
     width: 350px;
@@ -26,6 +26,19 @@
       object-fit: hidden;
     }
   }
+  .card2-h6{
+    width: auto;
+    height: 60px;
+  }
+  .card2-btn{
+    color: var(--green02) !important ;
+    border: var(--green02) 1px solid !important;
+    &:hover{
+      background-color: var(--green02) !important;
+      border: var(--green02) 1px solid !important;
+      color: var(--white) !important;
+    }
+}
   
   .card2-box-text {
     width: 200px;
