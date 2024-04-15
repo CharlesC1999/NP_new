@@ -1,41 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        main{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-            height: 80vh;
-        }
-        main{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        button{
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Document</title>
+  <style>
+    /* body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    } */
+
+    .container2 {
+      display: flex;
+      flex-direction: column;
+      /* 垂直排列 */
+      align-items: center;
+      /* 水平居中 */
+    }
+
+    nav {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .cir {
+      position: relative;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &::before {
+        content: "1";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: #50bf8b;
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fefefe;
+      }
+
+      &::after {
+        content: "購物車";
+        position: absolute;
+        font-size: 20px;
+        bottom: -40px;
+        width: 80px;
+        left: -30px;
+      }
+    }
+
+    .circle2 {
+      &::before {
+        content: "2";
+        /* background: #d9d9d9; */
+      }
+
+      &::after {
+        content: '填寫資料';
+        left: -40px;
+      }
+    }
+
+    .circle3 {
+      &::before {
+        content: "3";
+        /* background: #d9d9d9; */
+      }
+
+      &::after {
+        content: '訂單確認';
+        left: -40px;
+      }
+    }
+
+    .line {
+      width: 20vw;
+      height: 2px;
+      background: #d9d9d9;
+      margin-top: 15px;
+    }
+    .line1{
+        background: #50bf8b;
+      }
+
+    main {
+      /* margin-top: 100px; */
+      width: 70vw;
+      color: #50BF8B;
+    }
+
+    table {
+      border: 2px solid #DEF9EC;
+      width: 70vw;
+      border-radius: 100px;
+      border-collapse: collapse;
+      /* overflow: hidden; */
+    }
+
+    thead {
+      border-radius: 100px;
+      /* border-collapse: collapse;  */
+      background: #DEF9EC;
+    }
+
+    .add {
+      width: 70px;
+      height: 45px;
+      border: 1px solid #DEF9EC;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    article {
+      border: 1px solid #D9D9D9;
+      /* width: 1200px; */
+      background-color: #FFF2D9;
+    }
+    button {
       height: 50px;
       width: 200px;
-        }
-    </style>
+    }
+  </style>
 </head>
+
 <body>
-    <main>
-        <img src="../../public/images/Frame 40128.png" alt="">
-        <h3 class="mt-4">訂單完成</h3>
-        <div class="pay2 d-flex justify-content-center py-5" style="width: 100%;">
-            <button class="me-2" type="submit" style="background-color: #FFFFFF; color: #78CEA6; border: 1px solid #78CEA6;">繼續購物</button>
-            <button class="ms-4" type="submit" style="background-color: #78CEA6; color: #FFFFFF; border: 1px solid #78CEA6;">送出</button>
-          
-          </div>
+  <div class="container container2">
+    <!--  -->
+    <nav>
+      <div class="cir circle1"></div>
+      <div class="line line1"></div>
+      <div class="cir circle2"></div>
+      <div class="line line1"></div>
+      <div class="cir circle3"></div>
+    </nav>
+
+    <!-- 課程欄位 -->
+    <main style="min-width: 480px;" class="mt-5 mb-2 fw-bold fs-5">
+      購物明細
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="container3" style="max-width: 1440px;">
+      <table class="table1">
+        <!-- <caption>这是表格标题</caption> -->
+        <form action="" method="">
+
+        <div class="row top">
+          <thead>
+            
+              <div class="col">
+                <th style="width: 100px;min-width: 77px;"> <input class=" mt-2 ms-3" type="checkbox" value="" id="">
+                  <label class="mt-1 m-1" for="">
+                    全選
+                  </label>
+                </th>
+              </div>
+              <div class="col-auto">
+                <th style="width: 200px;"></th>
+              </div>
+              <div class="col-auto">
+                <th style="width: 250px;"></th>
+              </div>
+              <div class="col-auto">
+                <th class="text-center">人數</th>
+              </div>
+              <div class="col-auto">
+                <th class="text-center">價格</th>
+              </div>
+              <div class="col-auto">
+                <th class="text-center">小記</th>
+              </div>
+              <div class="col-auto">
+                <th class="text-center" style="min-width: 50px;">刪除</th>
+              </div>
+            
+          </thead>
+        </div>
+
+        <tbody>
+          <div class="row">
+            <div class="col">
+              <tr>
+                <th style="width: 100px;"> <input class=" mt-2 ms-3" type="checkbox" value="" id="">
+                </th>
+            </div>
+            <div class="col">
+              <td><img src="../../public/images/Rectangle 143.jpg" class="img-fluid mt-2 mb-2" alt="..."
+                  style="min-width: 75px;"></td>
+            </div>
+            <div class="col">
+              <td style="vertical-align: middle;text-align: center;" class="ps-4">
+                <h4>肉桂捲初級班</h4>
+                <p>2024/04/05</p>
+              </td>
+            </div>
+            <div class="col">
+              <td style="vertical-align: middle;text-align: center;"
+                class="d-flex align-items-center justify-content-center" style="height: 75%;">
+                <div class="add">
+                  <span>-</span> 1 <span>+</span>
+                </div>
+              </td>
+            </div>
+            <div class="col">
+              <td style="text-align: center;">$1399</td>
+            </div>
+            <div class="col">
+              <td style="text-align: center;"> $1399</td>
+            </div>
+            <div class="col">
+              <td class="d-flex align-items-center justify-content-center" style="height: 160px;">
+                <img src="../../public/images/Delete.jpg" alt="">
+              </td>
+            </div>
+            </tr>
+          </div>
+        </tbody>
+
+        <!-- 第二個課程 -->
+        <tbody>
+          <tr>
+              <div class="row">
+                <td>
+                <div class="col">
+                  <input class=" mt-2 ms-3" type="checkbox" value="" id="">
+                </div>
+              </td>
+              <td>
+                <div class="col">
+                  <img src="../../public/images/Rectangle 143.jpg" class="img-fluid mt-2 mb-2" alt="..." style="min-width: 75px;">
+                </div>
+              </td>
+              <td>
+                <div class="col" style="vertical-align: middle;text-align: center;" class="ps-4">
+                  <h4>肉桂捲初級班</h4>
+                  <p>2024/04/05</p>
+                </div>
+                </td>
+                <td>
+                <div class="col d-flex justify-content-center" >
+                  <div class="add">
+                    <span>-</span> 1 <span>+</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="col d-flex justify-content-center">
+                  $1399
+                </div>
+              </td>
+              <td>
+                <div class="col d-flex justify-content-center">
+                  $1399
+                </div>
+              </td>
+              <td>
+                <div class="col d-flex justify-content-center">
+                  <img src="../../public/images/Delete.jpg" alt="">
+                </div>
+              </td>
+              </div>
+            
+          </tr>
+        </tbody>
+      </form>
+      </table>
+    </div>
+
+     <!-- 商品欄位 -->
+     <main style="min-width: 480px;" class="mt-5 mb-2 fw-bold fs-5">
+      商品
+    </main>
+
+    <div class="container3" style="max-width: 1440px;">
+      <table class="table1">
+        <!-- <caption>这是表格标题</caption> -->
+        <form action="" method="">
+
+        <div class="row top">
+          <thead>
+            
+              <div class="col">
+                <th style="width: 100px;min-width: 77px;"> <input class=" mt-2 ms-3" type="checkbox" value="" id="">
+                  <label class="mt-1 m-1" for="">
+                    全選
+                  </label>
+                </th>
+              </div>
+              <div class="col-auto">
+                <th style="width: 200px;"></th>
+              </div>
+              <div class="col-auto">
+                <th style="width: 250px;"></th>
+              </div>
+              <div class="col-auto">
+                <th class="text-center">人數</th>
+              </div>
+              <div class="col-auto">
+                <th class="text-center">價格</th>
+              </div>
+              <div class="col-auto">
+                <th class="text-center">小記</th>
+              </div>
+              <div class="col-auto">
+                <th class="text-center" style="min-width: 50px;">刪除</th>
+              </div>
+            
+          </thead>
+        </div>
+
+        <tbody>
+          <div class="row">
+            <div class="col">
+              <tr>
+                <th style="width: 100px;"> <input class=" mt-2 ms-3" type="checkbox" value="" id="">
+                </th>
+            </div>
+            <div class="col">
+              <td><img src="../../public/images/Rectangle 143.jpg" class="img-fluid mt-2 mb-2" alt="..."
+                  style="min-width: 75px;"></td>
+            </div>
+            <div class="col">
+              <td style="vertical-align: middle;text-align: center;" class="ps-4">
+                <h4>肉桂捲初級班</h4>
+                <p>2024/04/05</p>
+              </td>
+            </div>
+            <div class="col">
+              <td style="vertical-align: middle;text-align: center;"
+                class="d-flex align-items-center justify-content-center" style="height: 75%;">
+                <div class="add">
+                  <span>-</span> 1 <span>+</span>
+                </div>
+              </td>
+            </div>
+            <div class="col">
+              <td style="text-align: center;">$1399</td>
+            </div>
+            <div class="col">
+              <td style="text-align: center;"> $1399</td>
+            </div>
+            <div class="col">
+              <td class="d-flex align-items-center justify-content-center" style="height: 160px;">
+                <img src="../../public/images/Delete.jpg" alt="">
+              </td>
+            </div>
+            </tr>
+          </div>
+        </tbody>
+
+        <!-- 第二個課程 -->
+        <tbody>
+          <tr>
+              <div class="row">
+                <td>
+                <div class="col">
+                  <input class=" mt-2 ms-3" type="checkbox" value="" id="">
+                </div>
+              </td>
+              <td>
+                <div class="col">
+                  <img src="../../public/images/Rectangle 143.jpg" class="img-fluid mt-2 mb-2" alt="..." style="min-width: 75px;">
+                </div>
+              </td>
+              <td>
+                <div class="col" style="vertical-align: middle;text-align: center;" class="ps-4">
+                  <h4>肉桂捲初級班</h4>
+                  <p>2024/04/05</p>
+                </div>
+                </td>
+                <td>
+                <div class="col d-flex justify-content-center" >
+                  <div class="add">
+                    <span>-</span> 1 <span>+</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="col d-flex justify-content-center">
+                  $1399
+                </div>
+              </td>
+              <td>
+                <div class="col d-flex justify-content-center">
+                  $1399
+                </div>
+              </td>
+              <td>
+                <div class="col d-flex justify-content-center">
+                  <img src="../../public/images/Delete.jpg" alt="">
+                </div>
+              </td>
+              </div>
+            
+          </tr>
+        </tbody>
+      </form>
+      </table>
+    </div>
+
+    
+  
+
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>

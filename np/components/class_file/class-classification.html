@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -120,12 +120,13 @@
         const buttons = document.querySelectorAll(".cuisine-button");
         let visibleStartIndex = 0;
 
+        // 顯示幾個的function
         function updateButtonsVisibility() {
           buttons.forEach((button, index) => {
             if (index >= visibleStartIndex && index < visibleStartIndex + 4) {
-              button.style.display = ""; // btn show
+              button.style.display = ""; // btn show; do nothing to the style of btn
             } else {
-              button.style.display = "none"; // btn hide
+              button.style.display = "none"; // btn hide; make the btn unable to use style
             }
           });
         }
@@ -139,6 +140,7 @@
 
         window.handleRightArrowClick = function () {
           if (visibleStartIndex < buttons.length - 4) {
+            // buttons.length 有六個按鈕，所以常態維持6
             visibleStartIndex++;
             updateButtonsVisibility();
           }

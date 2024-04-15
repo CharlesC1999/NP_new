@@ -1,3 +1,4 @@
+
 /* 全域 */
 .wrapper {
   width: 1440px;
@@ -19,7 +20,10 @@
   .side-bar{
     display: none;
   }
-  .product-top-rwd{
+  .discount-title-main{
+    display: none;
+  }
+  .discount-box-main{
     display: none;
   }
    /*排版*/
@@ -38,6 +42,12 @@
   background-color: var(--green03);
 }
 
+@media (max-width: 375px) {
+  .Bread-crumbs {
+    height: 30px;
+  }
+}
+
 .top-40 {
   /* border: #454545 solid 1px; */
   margin-top: 40px;
@@ -49,6 +59,14 @@
   width: 250px;
   margin-right: 40px;
 }
+.line {
+  position: absolute;
+  top: 290px;
+  width: 80px;
+  margin-inline: 10px;
+  height: 5px;
+  background: var(--green05);
+}
 
 .side-title {
   width: 209px;
@@ -56,33 +74,40 @@
   margin: 10px;
 
   & h5 {
-    padding-bottom: 5px;
-    border-bottom: 3px solid transparent;
-    border-image: linear-gradient(to right, var(--green03), var(--gray01)) 1;
+    padding-bottom: 15px;
     /* 將底線設為從左到右漸變 */
   }
 
 }
+.line {
+
+  margin: 10px;
+  width: 205px;
+  height: 4px;
+  background: linear-gradient(
+      to right,
+      var(--green03) 30%,
+      #d9e1e6c3 30%
+    );
+}
+
 
 .side-bar-box {
   width: auto;
   height: auto;
   margin-bottom: 66px;
-  border: var(--gray01) solid 1px;
+  border: var(--gray02) solid 1px;
   border-radius: 5px;
   /*水平右,下,模糊化*/
-  box-shadow: 5px 5px 5px var(--black);
+  box-shadow: 2px 2px 2px var(--gray02);
   /*陰影化*/
 
-  .g {
-    border: var(--gray01) solid 1px;
-  }
 
   & .side-box {
     width: 209px;
     height: 45px;
     margin: 10px;
-    border: var(--gray01) solid 1px;
+    border: var(--gray02) solid 1px;
     border-radius: 5px;
 
     & .side-img {
@@ -168,6 +193,17 @@
   }
 }
 
+.hot-line{
+  margin-inline: 10px;
+  width: 205px;
+  height: 4px;
+  background: linear-gradient(
+      to right,
+      var(--green03) 30%,
+      #d9e1e6c3 30%
+    );
+}
+
 /* .<!-- product (上方限時特惠商品) --> */
 .discount-title{
   color: var(--green02);
@@ -177,6 +213,12 @@
   background-color: #b3b3b3;
   width: auto;
   height: 420px;
+
+  & img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .search-product{
@@ -184,7 +226,267 @@
   height: 30px;
   margin-block: 20px;
   background-color: var(--green02);
+
 }
+
+/* 總共 #項商品 排序 */
+.product-count-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--green05, #def9ec);
+  width: 100%;
+  max-width: 1000px;
+  color: var(--light-green, rgba(56, 142, 101, 1));
+  border-radius: 5px;
+  margin-block: 30px;
+  padding: 0 30px;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+@media (max-width: 375px) {
+  .product-count-container {
+    background-color: transparent;
+    padding-inline: 15px;
+    margin-block: 10px;
+  }
+}
+
+.product-count-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-block: 0px;
+  padding-left: 10px;
+  gap: 10px;
+}
+
+.total-products {
+  margin: auto 0;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+}
+@media (max-width: 375px) {
+  .product-count-header {
+    padding-inline: 0;
+  }
+  .total-products {
+    display: none;
+  }
+  .top-40 {
+    margin-top: 5px;
+  }
+}
+
+.product-count-controls {
+  display: flex;
+  justify-content: end;
+  gap: 16px;
+  padding: 1px 0;
+  font-weight: 400;
+}
+
+@media (max-width: 375px) {
+  .product-count-controls {
+    gap: 10px;
+  }
+}
+
+.celander-mobile {
+  display: none;
+  border: none;
+  background: none;
+  padding: 0;
+  /* cursor: pointer; 手機不用*/
+}
+
+@media (max-width: 375px) {
+  .celander-mobile {
+    display: block;
+  }
+}
+
+.items-per-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 2px 9px;
+  gap: 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 375px) {
+  .items-per-page {
+    display: none;
+  }
+}
+
+.items-per-page-value {
+  margin: auto 0;
+  font-family: Inter, sans-serif;
+}
+
+.number-increase-decrease {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  .select-btn {
+    height: 9px;
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    .select-btn-icon {
+      margin-bottom: 12px;
+    }
+  }
+}
+
+.sort-by {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-self: start;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 4px 20px;
+  gap: 10px;
+  cursor: pointer;
+  /* limit width */
+}
+
+@media (max-width: 375px) {
+  .sort-by {
+    width: 120px;
+    border: 1px solid var(--gray-300, #dee2e7);
+    color: #636e72;
+    padding-inline: 10px 6px;
+    border-radius: 7px;
+  }
+  .sort-by-label {
+    display: none;
+  }
+}
+
+.sort-by-value {
+  text-align: center;
+  font-family: Inter, sans-serif;
+}
+.sort-mobile {
+  display: none;
+  margin-bottom: 3px;
+}
+@media (max-width: 375px) {
+  .sort-by-value {
+    width: 90px;
+    overflow: hidden;
+    margin-top: 3px;
+    text-wrap: nowrap;
+  }
+  .sort-mobile {
+    display: block;
+  }
+  .sort-order {
+    display: none;
+  }
+}
+
+.sort-by-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  z-index: 1;
+}
+
+.sort-by-option {
+  padding: 5px 20px;
+  font-family: Inter, sans-serif;
+  cursor: pointer;
+}
+
+.sort-by-option:hover {
+  background-color: #f5f5f5;
+}
+
+.sort-by.open .sort-by-options {
+  display: block;
+}
+
+/* class-selections-mobile-only */
+.class-select {
+  position: relative;
+  display: none;
+  align-self: start;
+  background-color: #fff;
+  border-radius: 5px;
+  padding-block: 4px;
+  gap: 6px;
+  cursor: pointer;
+  /* only for mobile */
+  border: 1px solid var(--gray-300, #dee2e7);
+  padding-inline: 10px 6px;
+  border-radius: 7px;
+}
+
+@media (max-width: 375px) {
+  .class-select {
+    display: flex;
+    justify-content: center;
+    .class-select-label {
+      color: #636e72;
+      margin-top: 3px;
+    }
+  }
+}
+/* class-selections-mobile-only */
+
+.grid-row-selections {
+  display: none;
+  width: 68px;
+
+  .grid-btn {
+    width: 34px;
+    height: 37px;
+    padding: 2px 0px;
+    background-color: transparent;
+    border: 1px solid var(--gray-300, #dee2e7);
+    border-radius: 7px 0 0 7px;
+    .selection-btn {
+      margin-top: 2px;
+      margin-left: 1px;
+    }
+  }
+  .row-btn {
+    width: 34px;
+    height: 37px;
+    padding: 2px 0px;
+    background-color: transparent;
+    border: 1px solid var(--gray-300, #dee2e7);
+    border-radius: 0 7px 7px 0;
+    .selection-btn-list {
+      margin-right: 1px;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .grid-row-selections {
+    display: flex;
+  }
+}
+
+
 
 
 /*product card 商品卡片*/
@@ -213,7 +515,7 @@
 .card1 {
   width: 210px;
   height: 300px;
-  border: 1px solid var(--gray01);
+  border: 1px solid var(--gray02);
   border-radius: 5px;
 }
 
@@ -245,7 +547,7 @@
   position: relative;
   width: 30px;
   height: 25px;
-  background-color: var(--green03);
+  background-color: var(--green05);
 
   &:hover {
     text-decoration: none;
@@ -253,7 +555,7 @@
   }
 
   & i {
-    color: var(--green01);
+    color: var(--green02);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -263,29 +565,29 @@
 }
 
 .card1-heart{
-  margin: 5px;
+  margin: 10px 0px 5px 0px;
 }
-.cheart-icon {
-  align-items: center;
-  justify-content: center;
 
+.icon-button[disabled] {
+  cursor: auto;
 }
 
 .card1-text {
-  margin: 10px;
-  align-items: center;
-  justify-content: center;
-
+  margin-block: 0px;
+ 
   & h6 {
     color: var(--green03);
+    font-size: 14px;
+    margin-top: 5px;
   }
 
   & p {
     /* 橫線 */
     text-decoration: line-through;
+    margin-top: 6px;
   }
-}
 
+}
 @media (max-width: 375px) {
   .icon-button {
     border: none;
@@ -306,7 +608,7 @@
   .card1 {
     width: 166px;
     height: 240px;
-    border: 1px solid var(--gray01);
+    border: 1px solid var(--gray02);
     border-radius: 5px;
   }
   
@@ -341,7 +643,7 @@
     position: relative;
     width: 30px;
     height: 25px;
-    background-color: var(--green03);
+    background-color: var(--green05);
   
     &:hover {
       text-decoration: none;
@@ -360,6 +662,7 @@
   
   .card1-heart{
     margin: 0px;
+    margin-top: 5px;
   }
   .cheart-icon {
     align-items: center;
@@ -369,7 +672,7 @@
   
   .card1-text {
     margin: 0px;
-    margin-block: 10px;
+    margin-top: 0px;
     align-items: center;
     justify-content: center;
   
