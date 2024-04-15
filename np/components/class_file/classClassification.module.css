@@ -14,6 +14,12 @@
   white-space: nowrap;
 }
 
+@media (max-width: 375px) {
+  .chineseCuisineContainer {
+    display: none;
+  }
+}
+
 .cuisineArrowButton {
   width: 60px;
   aspect-ratio: 1;

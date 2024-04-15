@@ -1,7 +1,7 @@
 /* 重置或規範化樣式 */
 html {
   box-sizing: border-box;
-  font-size: 12px; /* 基礎字體大小，p = 12 */
+  font-size: 16px; /* 基礎字體大小，p = 12 */
 }
 
 *,
@@ -36,12 +36,6 @@ img {
 }
 
 /* 字型 */
-body {
-  width: 100%;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #454545;
-  /* 預設black = 454545 */
-}
 
 h1,
 h2,
@@ -49,8 +43,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Georgia", serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #454545;
+  font-style: normal;
   /* margin-bottom: 0.5rem; */
   /* letter-spacing: 0.96px; */
   line-height: 120.313%;
