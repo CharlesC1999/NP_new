@@ -84,7 +84,7 @@
 }
 
 
-    .ian {
+    .menuTop {
       background-color: #fff;
       display: flex;
       padding-left: 6px;
@@ -93,7 +93,7 @@
     }
 
     @media (max-width: 375px) {
-      .ian {
+      .menuTop {
         display: none;
       }
     }
@@ -106,7 +106,7 @@
       margin: auto 0;
     }
 
-    .an {
+    .menuTitle {
       justify-content: center;
       align-items: start;
       display: flex;
@@ -116,7 +116,7 @@
     }
 
     @media (max-width: 991px) {
-      .an {
+      .menuTitle {
         white-space: initial;
       }
     }
