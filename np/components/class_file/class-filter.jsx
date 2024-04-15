@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./classFilter.module.css";
 
-const ClassFilter = () => {
+const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
   const [defaultValue, setDefaultValue] = useState(6);
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
@@ -51,6 +51,12 @@ const ClassFilter = () => {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, [sortByOpen]);
+
+  // 按鈕遮罩
+  const buttonStyle = (buttonType) => ({
+    opacity: activeButton === buttonType ? "1" : "0.5",
+    cursor: activeButton === buttonType ? "default" : "pointer",
+  });
 
   return (
     <div className={styles.widthMax}>
@@ -201,7 +207,12 @@ const ClassFilter = () => {
             </div>
             {/* only for mobile */}
             <div className={styles.gridRowSelections}>
-              <button className={styles.gridBtn} id="selection-btn">
+              <button
+                className={styles.gridBtn}
+                id="selection-btn"
+                onClick={onShowGrid}
+                style={buttonStyle("grid")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="27px"
@@ -218,7 +229,12 @@ const ClassFilter = () => {
                   </g>
                 </svg>
               </button>
-              <button className={styles.rowBtn} id="selection-btn-list">
+              <button
+                className={styles.rowBtn}
+                id="selection-btn-list"
+                onClick={onShowList}
+                style={buttonStyle("list")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30px"

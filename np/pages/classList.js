@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ContentSetting from "./ContentSetting.module.css";
 import Header from "@/components/header";
 import ClassClassifacion from "@/components/class_file/class-classification";
@@ -23,6 +23,21 @@ const ClassList = () => {
     alignItems: "center",
   };
 
+  const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid
+  const [activeButton, setActiveButton] = useState("grid"); // 選擇哪一個是被選擇的狀態
+
+  // 切換到Grid模式
+  const showGrid = () => {
+    setDisplayGrid(true);
+    setActiveButton("grid");
+  };
+
+  // 切換到List模式
+  const showList = () => {
+    setDisplayGrid(false);
+    setActiveButton("list");
+  };
+
   return (
     <div style={containerStyle}>
       <Header />
@@ -36,7 +51,11 @@ const ClassList = () => {
             className={ContentSetting.MobileNone}
           />
           <div className={CardStyle.SearchResultContainer}>
-            <ClassFilter />
+            <ClassFilter
+              onShowGrid={showGrid}
+              onShowList={showList}
+              activeButton={activeButton}
+            />
             <div className={CardStyle.WebCardContainer}>
               <ClassCard />
               <ClassCard />
@@ -45,28 +64,31 @@ const ClassList = () => {
               <ClassCard />
               <ClassCard />
             </div>
-            <div className={CardStyle.MobileCardContainer}>
-              <ClassCardMobileList />
-              <ClassCardMobileList />
-              <ClassCardMobileList />
-              <ClassCardMobileList />
-              <ClassCardMobileList />
-              <ClassCardMobileList />
-            </div>
-            <div className={CardStyle.MobileCardContainer}>
-              <div className={CardStyle.GridCardSet}>
-                <ClassCardMobileGrid />
-                <ClassCardMobileGrid />
+            {displayGrid ? (
+              <div className={CardStyle.MobileCardContainer}>
+                <ClassCardMobileList />
+                <ClassCardMobileList />
+                <ClassCardMobileList />
+                <ClassCardMobileList />
+                <ClassCardMobileList />
+                <ClassCardMobileList />
               </div>
-              <div className={CardStyle.GridCardSet}>
-                <ClassCardMobileGrid />
-                <ClassCardMobileGrid />
+            ) : (
+              <div className={CardStyle.MobileCardContainer}>
+                <div className={CardStyle.GridCardSet}>
+                  <ClassCardMobileGrid />
+                  <ClassCardMobileGrid />
+                </div>
+                <div className={CardStyle.GridCardSet}>
+                  <ClassCardMobileGrid />
+                  <ClassCardMobileGrid />
+                </div>
+                <div className={CardStyle.GridCardSet}>
+                  <ClassCardMobileGrid />
+                  <ClassCardMobileGrid />
+                </div>
               </div>
-              <div className={CardStyle.GridCardSet}>
-                <ClassCardMobileGrid />
-                <ClassCardMobileGrid />
-              </div>
-            </div>
+            )}
             <img
               src="/images/paginationList.png"
               className={CardStyle.paginationListMargin}
