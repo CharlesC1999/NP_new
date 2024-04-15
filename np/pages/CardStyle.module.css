@@ -1,0 +1,71 @@
+.SearchResultContainer {
+  width: 1150px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 375px) {
+  .SearchResultContainer {
+    width: 375px;
+  }
+}
+
+.WebCardContainer {
+  width: 1150px;
+  margin-block: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-self: center;
+  align-content: center;
+  gap: 25px;
+}
+@media (max-width: 375px) {
+  .WebCardContainer {
+    display: none;
+  }
+}
+
+.MobileCardContainer {
+  width: 345px;
+  margin-inline: 15px;
+  margin-bottom: 15px;
+  display: none;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 15px;
+}
+@media (max-width: 375px) {
+  .MobileCardContainer {
+    display: flex;
+  }
+}
+
+.GridCardSet {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 15px;
+}
+
+.paginationListMargin {
+  margin: 0 0 60px 0;
+}
+
+.paginationListMarginMobile {
+  display: none;
+}
+@media (max-width: 375px) {
+  .paginationListMargin {
+    display: none;
+  }
+  .paginationListMarginMobile {
+    display: block;
+  }
+}
