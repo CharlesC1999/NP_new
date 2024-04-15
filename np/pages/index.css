@@ -577,13 +577,13 @@ Nutripoll-card5 熱門課程 */
   width: 595px;
   border: 1px solid var(--gray02);
   border-radius: 5px;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
   margin-right: 80px;
 }
 
 .card5-img {
   width: 420px;
-  height: 265px;
+  height: 275px;
   display: flex;
   flex-direction: column;
   
@@ -595,7 +595,10 @@ Nutripoll-card5 熱門課程 */
     border-radius: 5px 0px 0px 5px;
   }
 }
-
+.card5-text-rwd{
+  width: 250px;
+  height: auto;
+}
 .card5-text {
   display: flex;
   flex-direction: column;
@@ -626,7 +629,7 @@ Nutripoll-card5 熱門課程 */
 
   & .card5-p {
     border-top: var(--red) 1px solid;
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0px 0px 0px;
 
     & .line-p {
       /* 橫線 */
@@ -758,7 +761,7 @@ Nutripoll-card5 熱門課程 */
   
     & .card5-p {
       border-top: none;
-      padding: 10px 0px 10px 0px;
+      padding: 10px 0px 0px 0px;
   
       & .line-p {
         /* 橫線 */
