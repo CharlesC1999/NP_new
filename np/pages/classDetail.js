@@ -5,7 +5,7 @@ import Header from "@/components/header";
 import ClassDetail from "@/components/class_file/class-detail/class-detail-content";
 import Footer from "@/components/footer";
 
-const ForTest2 = () => {
+const ClassDetailPage = () => {
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -29,4 +29,4 @@ const ForTest2 = () => {
   );
 };
 
-export default ForTest2;
+export default ClassDetailPage;

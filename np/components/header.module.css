@@ -141,6 +141,7 @@ a:visited {
   text-decoration: none;
   display: flex;
   align-items: start;
+  color: #454545;
 }
 .pageLink:active {
   color: #78cea6;
