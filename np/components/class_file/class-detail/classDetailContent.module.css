@@ -111,7 +111,6 @@
   width: 120px;
   /* text-style */
   color: var(--green01, #547d63);
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
@@ -124,6 +123,7 @@
 .classLinksContainer {
   display: flex;
   width: 270px;
+  margin-top: 30px;
   justify-content: center;
   align-items: flex-start;
   gap: 15px;
@@ -181,7 +181,7 @@
   }
 
   .className {
-    color: var(--gray03, #454545);
+    color: var(--black);
     text-overflow: ellipsis;
     margin-bottom: 20px;
     /* H4 */
@@ -202,7 +202,6 @@
     padding: 0;
     width: 100%;
     height: 172px;
-    margin-bottom: 20px;
   }
 
   .classInfor {
@@ -236,7 +235,7 @@
     object-fit: cover;
   }
   .classLinksContainer {
-    width: 255px;
+    width: 305px;
     padding-right: 50px;
     margin-bottom: 30px;
   }

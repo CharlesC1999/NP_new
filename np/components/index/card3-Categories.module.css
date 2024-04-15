@@ -1,0 +1,45 @@
+/* <!-- Nutripoll-card3 商品分類 --> */
+
+.arrow {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .Nutripoll-card3 {
+    /* 均勻分佈距離 */
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 56px;
+  }
+  
+  .card3-box {
+    width: 125px;
+    height: 165px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green05);
+  
+    & h6 {
+      text-align: center;
+      color: var(--gray01);
+      
+    }
+  }
+  
+  .card3-box-img a{
+    text-decoration: none !important; 
+  }
+  
+  /* <!-- Nutripoll-card3 商品分類 (RWD)--> */
+  @media (max-width: 375px) {
+    .category-rwd{
+      display: none;
+    }
+  }
+  

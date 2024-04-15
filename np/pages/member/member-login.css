@@ -21,12 +21,16 @@ body {
 }
 
 main {
-  background-image: url(../public/login-Image/login-bg02.png);
+  background-image: url(../../public/login-Image/login-bg02.png);
   border: var(--gray01) solid 2px;
   height: 100svh;
   font-size: 16px;
   .main {
     border: var(--gray02) solid 2px;
+    .h3{
+    color: var(--green03);
+      
+    }
   }
   .btn {
     font-size: 16px;
@@ -76,6 +80,10 @@ main {
       background-color: var(--white);
        width: 330px;
        padding:30px 15px 30px 15px ;
+       .h3{
+        font-size: 1.9rem;
+
+       }
        .btn {
         font-size: 16px;
         margin-bottom: 30px;

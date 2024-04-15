@@ -1,7 +1,7 @@
 /* 重置或規範化樣式 */
 html {
   box-sizing: border-box;
-  font-size: 12px; /* 基礎字體大小，p = 12 */
+  font-size: 16px; /* 基礎字體大小，p = 12 */
 }
 
 *,
