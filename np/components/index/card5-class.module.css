@@ -1,0 +1,156 @@
+.card5-title {
+    padding: 0px 0px 35px 0px;
+  }
+  
+  .card5 {
+    width: 595px;
+    border: 1px solid var(--gray02);
+    border-radius: 5px;
+    margin-bottom: 35px;
+    margin-right: 80px;
+  }
+  
+  .card5-img {
+    width: 420px;
+    height: 275px;
+    display: flex;
+    flex-direction: column;
+    
+  
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: hidden;
+      border-radius: 5px 0px 0px 5px;
+    }
+  }
+  
+  .card5-text {
+    display: flex;
+    flex-direction: column;
+    padding-block: 5px;
+    color: var(--black, #454545);
+    width: 345px;
+    margin-left: 20px;
+    padding-right: 10px;
+  
+    & h5 {
+      text-align: center;
+    }
+  
+    & .border-p {
+      overflow: hidden;
+      /* 超出部分隐藏 */
+      text-overflow: ellipsis;
+      /* 超出部分省略 */
+      display: -webkit-box;
+      /* 這個屬性告訴瀏覽器將元素顯示為一個或多個內聯框 */
+      -webkit-box-orient: vertical;
+      /* 垂直方向排列 */
+      /* 當使用這個屬性時，可以結合其他屬性來控製文字的顯示方式 */
+      -webkit-line-clamp: 3;
+      /* 顯示的行數 */
+  
+    }
+  
+    & .card5-p {
+      border-top: var(--red) 1px solid;
+      padding: 10px 0px 0px 0px;
+  
+      & .line-p {
+        /* 橫線 */
+        text-decoration: line-through;
+      }
+  
+      & .color-p {
+        color: var(--green02);
+      }
+    }
+  
+    & h6 {
+      color: var(--red);
+    }
+  }
+  
+  .card5-btn {
+    background-color: var(--green03);
+    border: 0px;
+  
+    &:hover {
+      background-color: var(--green02);
+    }
+  }
+
+  @media (max-width: 375px) {
+      
+    .card5-btn {
+        display: none !important;
+      }
+
+    .card5 {
+      width: 345px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      margin-right: 80px;
+    }
+    
+    .card5-img {
+      width: 131px;
+      height: 139px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 5px 0px 0px 5px;
+    
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: hidden;
+      }
+    }
+    
+    .card5-text {
+      display: flex;
+      flex-direction: column;
+      padding-block: 0px;
+      color: var(--black, #454545);
+      width: 215px;
+      margin-left: 5px;
+      padding-right: 10px;
+      justify-content: center;
+  
+      & .card5-text-rwd {
+        display: flex;
+      }
+    
+      & h5 {
+        text-align: center;
+        font-size: 14px;
+      }
+    
+      & .border-p {
+        display: none;
+      }
+    
+      & .card5-p {
+        border-top: none;
+        padding: 10px 0px 10px 0px;
+    
+        & .line-p {
+          /* 橫線 */
+          text-decoration: line-through;
+        }
+    
+        & .color-p {
+          color: var(--green02);
+        }
+      }
+    
+      & h6 {
+        color: var(--red);
+        font-size: 12px;
+      }
+    }
+    
+  }
+
