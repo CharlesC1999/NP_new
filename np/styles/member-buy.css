@@ -91,7 +91,7 @@ margin: 0;
 }
 
 
-.ian {
+.menuTop {
   background-color: #fff;
   display: flex;
   padding-left: 6px;
@@ -100,7 +100,7 @@ margin: 0;
 }
 
 @media (max-width: 375px) {
-  .ian {
+  .menuTop {
     display: none;
   }
 }
@@ -113,7 +113,7 @@ margin: 0;
   margin: auto 0;
 }
 
-.an {
+.menuTitle {
   justify-content: center;
   align-items: start;
   display: flex;
@@ -123,7 +123,7 @@ margin: 0;
 }
 
 @media (max-width: 991px) {
-  .an {
+  .menuTitle {
     white-space: initial;
   }
 }

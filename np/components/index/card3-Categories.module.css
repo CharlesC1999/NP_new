@@ -27,7 +27,8 @@
   
     & h6 {
       text-align: center;
-      color: var(--gray01);
+      color: var(--black);
+      font-weight: 600;
       
     }
   }
