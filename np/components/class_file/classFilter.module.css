@@ -134,7 +134,7 @@
 }
 
 .selectBtnIcon {
-  margin-bottom: 3px;
+  margin-bottom: 10px;
 }
 
 .sortBy {
@@ -197,7 +197,9 @@
   position: absolute;
   pointer-events: none; /* 避免在隱藏時可交互 */
   transform: translateY(-20px); /* 給出一點動畫效果 */
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   top: 100%;
   left: 0;
   width: 100%;
@@ -213,7 +215,9 @@
   position: absolute;
   pointer-events: none; /* 避免在隱藏時可交互 */
   transform: translateY(-20px); /* 給出一點動畫效果 */
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   top: 100%;
   left: 0;
   width: 100%;
