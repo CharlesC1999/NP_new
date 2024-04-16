@@ -33,6 +33,9 @@
     & a {
       color: var(--black, #454545);
       text-decoration: none;
+      & h5{
+        font-weight: 700;  
+      }
     }
   
     & p {

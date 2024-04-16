@@ -5,7 +5,7 @@
 body {
   box-sizing: border-box;
   height: 100svh;
-  background-image: url(../public/login-Image/login-bg01.png);
+  background-image: url(../../public/login-Image/login-bg01.png);
 }
 
 @media (width:375px){
@@ -28,7 +28,7 @@ main{
   border: var(--gray02) solid 1px;
   .h3 {
     font-size: 3rem;
-    color: var(--green02);
+    color: var(--green03);
   }
   .btn {
     width: 315px;
@@ -44,6 +44,10 @@ main{
 @media (width:375px){
   .main{
     width: 330px;
+    .h3{
+    font-size: 1.9rem;
+
+    }
   .input-group{
     width: 300px;
     .input{
