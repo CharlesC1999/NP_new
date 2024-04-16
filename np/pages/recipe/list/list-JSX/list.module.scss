@@ -41,8 +41,7 @@
 }
 
 // custom styles
-.wrapper {
-  max-width: 1440px;
+.container {
   @media screen and (max-width: 376px) {
     max-width: 345px;
     padding: 0px;
@@ -119,7 +118,6 @@
 
 .list-wrapper {
   gap: 120px;
-  margin-inline: 0px;
   @media screen and (max-width: 376px) {
     margin-inline: 0px;
   }
@@ -132,9 +130,6 @@
       .side-bar-top {
         gap: 15px;
         border-bottom: 3px solid var(--gray02);
-        p {
-          margin-bottom: 0px;
-        }
       }
       .green-divider {
         border-bottom: 2px solid var(--green02);
