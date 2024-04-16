@@ -1,0 +1,100 @@
+/* <!-- Nutripoll-card2 --> */
+.Nutripoll-card2 {
+    display: flex;
+    padding: 56px 0px;
+    justify-content: space-between;
+    row-gap: 70px;
+    /* gap:70px; */
+    flex-wrap: wrap;
+  }
+ 
+  .card2-box {
+    display: flex;
+    width: 350px;
+    padding: 30px 35px;
+    gap: 25px;
+    background-color: var(--gray03);
+    border: var(--white) 1px solid;
+    border-radius: 10px;
+  }
+  
+  .card2-box-img {
+    width: 50px;
+  
+    & img {
+      width: 100%;
+      object-fit: hidden;
+    }
+  }
+  .card2-h6{
+    width: auto;
+    height: 60px;
+  }
+  .card2-btn{
+    color: var(--green02) !important ;
+    border: var(--green02) 1px solid !important;
+    &:hover{
+      background-color: var(--green02) !important;
+      border: var(--green02) 1px solid !important;
+      color: var(--white) !important;
+    }
+}
+  
+  .card2-box-text {
+    width: 200px;
+  
+    & h5,
+    h6 {
+      padding-bottom: 10%;
+    }
+  }
+  
+  /* <!-- Nutripoll-card2 (RWD)--> */
+  @media (max-width: 375px) {
+    .Nutripoll-card2 {
+      display: flex;
+      padding: 56px 0px;
+      justify-content: space-between;
+      row-gap: 20px;
+      flex-wrap: wrap;
+    }
+  
+    .card2-box {
+      display: flex;
+      width: 175px;
+      padding: 5px 5px;
+      gap: 25px;
+      background-color: var(--white);
+    }
+  
+    .card2-box-img {
+      display: none;
+    }
+  
+    .card2-box-text {
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* 水平居中 */
+      justify-content: center;
+  
+      /* 垂直居中 */
+      & h5 {
+        font-size: 14px;
+        text-align: center;
+      }
+  
+      & h5,
+      h6 {
+        padding-bottom: 5%;
+      }
+  
+      & .btn-outline-success,
+      .btn-success {
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  
+  }

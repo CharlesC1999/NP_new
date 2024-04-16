@@ -2,7 +2,7 @@
 .cardContainer {
   box-sizing: border-box;
   width: 100%;
-  max-width: 990px;
+  /* max-width: 990px; */
   gap: 40px;
   margin: 0;
   display: flex;
@@ -35,7 +35,7 @@
   margin: auto 0;
   padding: 2px 0;
   width: 100%;
-  max-width: 637px;
+  /* max-width: 637px; */
   gap: 32.5px;
 }
 

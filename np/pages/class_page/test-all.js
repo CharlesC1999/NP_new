@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "@/components/header";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import ClassClassifacion from "@/components/class_file/class-classification";
 import ClassFilter from "@/components/class_file/class-filter";
 import ClassCard from "@/components/class_file/class-card-web";
@@ -18,6 +19,7 @@ const ForTest = () => {
   return (
     <div style={containerStyle}>
       <Header />
+      <Breadcrumbs />
       <ClassClassifacion />
       <ClassFilter />
       <ClassCard />
