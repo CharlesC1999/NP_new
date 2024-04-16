@@ -1,0 +1,100 @@
+/* * {
+  border: solid 1px gray;
+} */
+
+body {
+  box-sizing: border-box;
+  height: 100svh;
+  background-image: url(../../public/login-Image/login-bg01.png);
+}
+
+@media (width:375px){
+  body{
+    background-color: var(--gray03);
+    
+  
+  }
+}
+@media (width:375px){
+main{
+  background-color: var(--gray03);
+  
+
+}
+}
+.main {
+  background: var(--white);
+  width: 840px;
+  border: var(--gray02) solid 1px;
+  .h3 {
+    font-size: 3rem;
+    color: var(--green03);
+  }
+  .btn {
+    width: 315px;
+    height: 36px;
+    font-size: 20px;
+  }
+  .area3 {
+    .backhome {
+      color: var(--green03);
+    }
+  }
+}
+@media (width:375px){
+  .main{
+    width: 330px;
+    .h3{
+    font-size: 1.9rem;
+
+    }
+  .input-group{
+    width: 300px;
+    .input{
+      width: 300px;
+    }
+  }
+  .btn{
+    width: 300px;
+    background-color: var(--green01);
+  }
+  }
+}
+
+.member {
+
+  width: 100%;
+  .input-group {
+    border-radius: 10px;
+    margin-bottom: 40px;
+    .label {
+      font-size: 1.5rem;
+      color: var(--green03);
+    }
+  }
+  .check-group .form-check {
+    .form-check-input {
+      background: var(--gray02);
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .gender-label {
+    font-size: 1.5rem;
+    color: var(--green03);
+  }
+  .input {
+    width: 310px;
+    height: 35px;
+    background-color: var(--gray03);
+    border: none;
+    border-radius: 5px;
+  }
+}
+@media (max-width:375px) {
+  .member{
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+  }
+}
