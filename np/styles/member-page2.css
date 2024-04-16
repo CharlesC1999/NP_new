@@ -258,7 +258,7 @@ align-items: start;
 display: flex;
 flex-direction: column;
 flex: 1;
-padding: 20px;
+padding: 15px;
 }
 
 @media (max-width: 991px) {
