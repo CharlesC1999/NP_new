@@ -238,6 +238,7 @@
               line-height: 125%; /* 25px */
               letter-spacing: 1.2px;
               color: var(--green02);
+              margin-bottom: 0;
               @media screen and (max-width: 376px) {
                 font-size: 16px;
               }
@@ -253,6 +254,7 @@
               line-height: 125%; /* 25px */
               letter-spacing: 1.2px;
               color: var(--gray01);
+              margin-bottom: 0;
             }
           }
         }
@@ -295,12 +297,10 @@
               .portion-and-price {
                 p {
                   color: var(--gray01);
-                }
-                .portion {
-                  flex: 0 0 30px;
-                }
-                .price {
-                  flex: 0 0 60px;
+                  margin-bottom: 0;
+                  @media screen and (max-width: 376px) {
+                    font-size: 14px;
+                  }
                 }
               }
             }
@@ -321,10 +321,12 @@
               }
               p {
                 color: var(--black);
+                margin-bottom: 0;
               }
             }
             .subtotal {
               color: var(--black);
+              margin-bottom: 0;
             }
           }
         }
@@ -336,6 +338,7 @@
             font-style: normal;
             font-weight: 600;
             letter-spacing: 1.2px;
+            margin-bottom: 0;
             @media screen and (max-width: 376px) {
               font-size: 16px;
             }
