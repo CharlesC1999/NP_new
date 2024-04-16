@@ -78,7 +78,7 @@
 @media (max-width: 375px) {
   .celanderMobile {
     display: block;
-    width: 44px; /* 調整適合的大小 */
+    width: 28px; /* 調整適合的大小 */
     height: 44px; /* 調整適合的大小 */
     margin: 0;
     background-color: transparent;
@@ -134,7 +134,7 @@
 }
 
 .selectBtnIcon {
-  margin-bottom: 3px;
+  margin-bottom: 10px;
 }
 
 .sortBy {
@@ -152,7 +152,7 @@
 
 @media (max-width: 375px) {
   .sortBy {
-    width: 100px;
+    width: 116px;
     border: 1px solid var(--gray-300, #dee2e7);
     color: #636e72;
     padding-inline: 10px 6px;

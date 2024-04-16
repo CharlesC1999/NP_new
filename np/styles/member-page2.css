@@ -230,7 +230,7 @@ margin: 0;
 }
 
 
-.ian {
+.menuTop {
 background-color: #fff;
 display: flex;
 padding-left: 6px;
@@ -239,7 +239,7 @@ white-space: nowrap;
 }
 
 @media (max-width: 375px) {
-.ian {
+.menuTop {
 display: none;
 }
 }
@@ -252,17 +252,17 @@ height: 100px;
 margin: auto 0;
 }
 
-.an {
+.menuTitle {
 justify-content: center;
 align-items: start;
 display: flex;
 flex-direction: column;
 flex: 1;
-padding: 20px;
+padding: 15px;
 }
 
 @media (max-width: 991px) {
-.an {
+.menuTitle {
 white-space: initial;
 }
 }
