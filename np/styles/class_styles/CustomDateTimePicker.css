@@ -1,0 +1,114 @@
+.react-datepicker {
+  width: 210px;
+  height: 375px;
+  border: 1px solid var(--green02);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.react-datepicker__navigation {
+  /* 最上方按鈕 */
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  top: 15px;
+  margin-inline: 15px;
+}
+
+/* arrow按鈕 */
+.react-datepicker__navigation-icon {
+  /* 按鈕內arrow */
+  top: 0;
+  /* color: #56b77e; */
+}
+.react-datepicker__navigation-icon::before {
+  border-color: #56b77e;
+}
+
+.react-datepicker__navigation-icon--previous {
+  right: 1px;
+}
+.react-datepicker__navigation-icon--next {
+  left: 1px;
+}
+/* arrow按鈕 */
+/* 星期名稱行 */
+.react-datepicker__header {
+  padding-top: 17px;
+  padding-bottom: 12px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: none;
+}
+
+.react-datepicker__current-month {
+  color: #527b64;
+  margin-bottom: 56px;
+}
+
+.react-datepicker__day-names {
+  /* 星期名稱 */
+  width: 180px;
+  border-top: 1px solid #e7eaee;
+  display: flex;
+}
+
+.react-datepicker__day-name {
+  padding: 6px 4px;
+  margin: 0px;
+  width: 25.5px;
+  height: 32px;
+  line-height: 20px;
+  font-size: 15px;
+}
+/* 星期名稱行 */
+
+.react-datepicker__month {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding-inline: 15px;
+}
+
+.react-datepicker__week {
+  width: 180px;
+  height: 28px;
+  display: flex;
+  gap: 1px;
+  margin-bottom: 1px;
+}
+
+.react-datepicker__day {
+  width: 24.5px;
+  height: 28px;
+  padding: 6px 4px;
+  margin: 0;
+  line-height: 16px;
+  font-size: 14px;
+}
+
+.react-datepicker__day--in-range {
+  border-radius: 3px;
+  background-color: #ecfdf5;
+  color: var(--gray01);
+}
+
+.react-datepicker__day--range-start {
+  border-radius: 3px;
+  background-color: #56b77e;
+  color: #fefefe;
+  font-weight: 700;
+}
+
+.react-datepicker__day--keyboard-selected {
+  border-radius: 3px;
+  background-color: #56b77e;
+  color: #fefefe;
+  font-weight: 700;
+}
