@@ -8,6 +8,8 @@ import BreadcrumbsStyles from "./BreadcrumbsStyles.module.css";
 const pathNameMapping = {
   class_page: "精選課程",
   ClassDetail: "動態，到時候抓classID去對名稱",
+  speaker: "講師陣容",
+  speakerDetail:"講師姓名（動態）"
   // 繼續添加其他路徑和對應的中文名稱
 };
 
@@ -36,6 +38,14 @@ const Breadcrumbs = () => {
           style={anchorStyle}
           className={BreadcrumbsStyles.homeFont}
         >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24px"
+            height="24px"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#78CEA6" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z" />
+          </svg>
           首頁
         </Link>
         <svg
