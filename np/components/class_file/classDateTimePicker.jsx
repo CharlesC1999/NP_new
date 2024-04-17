@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
+import ButtonStyles from "@/styles/class_styles/DateTimePickerButtonStyles.module.css";
 
 function CustomDatePicker() {
   const [date, setDate] = useState(null);
@@ -29,6 +30,7 @@ function CustomDatePicker() {
           showYearPicker
           dateFormat="yyyy"
           onChange={handleYearChange}
+          inline
         />
       );
       break;
@@ -36,8 +38,9 @@ function CustomDatePicker() {
       datePickerComponent = (
         <DatePicker
           showMonthYearPicker
-          dateFormat="MM/yyyy"
+          dateFormat="MM"
           onChange={handleMonthChange}
+          inline
         />
       );
       break;
@@ -57,12 +60,24 @@ function CustomDatePicker() {
   }
 
   return (
-    <div>
-      <div>
-        <button onClick={() => setPickerView("year")}>選擇年份</button>
-        <button onClick={() => setPickerView("month")}>選擇月份</button>
-        <button onClick={() => setPickerView("range")}>選擇日期區間</button>
+    <div className={ButtonStyles.DisplayStyleRelative}>
+      <div className={ButtonStyles.DisplayStyle}>
+        <div className={ButtonStyles.buttonSet}>
+          <button
+            onClick={() => setPickerView("year")}
+            className={ButtonStyles.buttonStyle}
+          >
+            <sapn className={ButtonStyles.buttonTextStyle}>Year</sapn>
+          </button>
+          <button
+            onClick={() => setPickerView("month")}
+            className={ButtonStyles.buttonStyle}
+          >
+            <sapn className={ButtonStyles.buttonTextStyle}>Month</sapn>
+          </button>
+        </div>
       </div>
+
       {datePickerComponent}
     </div>
   );
