@@ -5,7 +5,10 @@ import ClassPriceRange from "./class-price-range";
 
 const classSidebar = () => {
   return (
-    <div className={classSidebarStyles.sidebarContainer}>
+    <div
+      className={classSidebarStyles.sidebarContainer}
+      style={{ marginTop: "30px" }}
+    >
       <div>
         {/* 篩選標題 */}
         <p className={classSidebarStyles.title}>篩選</p>
@@ -15,24 +18,42 @@ const classSidebar = () => {
       </div>
       <div className={classSidebarStyles.DetailPageSetting}>
         <div className={classSidebarStyles.buttonSetForDetailPage}>
-          <button className={classSidebarStyles.buttonForDetailPage}>
+          <a
+            className={classSidebarStyles.buttonForDetailPage}
+            href="/class_page"
+          >
             中式餐點
-          </button>
-          <button className={classSidebarStyles.buttonForDetailPage}>
+          </a>
+          <a
+            className={classSidebarStyles.buttonForDetailPage}
+            href="/class_page"
+          >
             西式餐點
-          </button>
-          <button className={classSidebarStyles.buttonForDetailPage}>
+          </a>
+          <a
+            className={classSidebarStyles.buttonForDetailPage}
+            href="/class_page"
+          >
             日式餐點
-          </button>
-          <button className={classSidebarStyles.buttonForDetailPage}>
+          </a>
+          <a
+            className={classSidebarStyles.buttonForDetailPage}
+            href="/class_page"
+          >
             台味餐點
-          </button>
-          <button className={classSidebarStyles.buttonForDetailPage}>
+          </a>
+          <a
+            className={classSidebarStyles.buttonForDetailPage}
+            href="/class_page"
+          >
             健康養生
-          </button>
-          <button className={classSidebarStyles.buttonForDetailPage}>
+          </a>
+          <a
+            className={classSidebarStyles.buttonForDetailPage}
+            href="/class_page"
+          >
             烘焙點心
-          </button>
+          </a>
         </div>
         <div className={classSidebarStyles.onlyBorderBottom}>
           <img src="/images/Vector 3.svg" alt="" />
