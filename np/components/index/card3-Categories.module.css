@@ -10,14 +10,14 @@
     justify-content: center;
   }
   
-  .Nutripoll-card3 {
+  .Nutripollcard3 {
     /* 均勻分佈距離 */
     justify-content: space-between;
     flex-wrap: wrap;
     padding-bottom: 56px;
   }
   
-  .card3-box {
+  .card3box {
     width: 125px;
     height: 165px;
     display: flex;
@@ -33,7 +33,7 @@
     }
   }
   
-  .card3-box-img a{
+  .card3boxImg a{
     text-decoration: none !important; 
   }
   
@@ -41,6 +41,10 @@
   @media (max-width: 375px) {
     .category-rwd{
       display: none;
+    }
+
+    .Nutripollcard3 {
+      display: none !important;
     }
   }
   
