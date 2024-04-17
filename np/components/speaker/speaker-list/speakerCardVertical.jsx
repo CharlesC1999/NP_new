@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./SpeakerCardVertical.module.css"
+import styles from "./SpeakerCardVertical.module.scss"
 
 function SpeakerCardVertical() {
   return( <a href="#" className={styles.speakerCardLink}>
