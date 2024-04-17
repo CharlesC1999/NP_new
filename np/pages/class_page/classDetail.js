@@ -1,5 +1,5 @@
 import React from "react";
-import DetailStyles from "@/pages/class_page/classDetail.module.css";
+import DetailStyles from "@/styles/class_styles/classDetail.module.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ClassDetail from "@/components/class_file/class-detail/class-detail-content";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ContentSetting from "./ContentSetting.module.css";
+import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
 import Header from "@/components/header";
 import ClassClassifacion from "@/components/class_file/class-classification";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -7,7 +7,7 @@ import ClassFilter from "@/components/class_file/class-filter";
 import ClassCard from "@/components/class_file/class-card-web";
 import ClassCardMobileGrid from "@/components/class_file/class-card-mobile-grid";
 import ClassCardMobileList from "@/components/class_file/class-card-mobile-list";
-import CardStyle from "./CardStyle.module.css";
+import CardStyle from "@/styles/class_styles/CardStyle.module.css";
 import Footer from "@/components/footer";
 
 const ClassList = () => {
