@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./LectureCardVertical.module.css";
+import styles from "./LectureCardVertical.module.scss";
 function LectureCardVertical() {
   return(<div className={`${styles.lecture} ${styles.boxShadow}`}>
   <div className={styles.lectureImg}>
