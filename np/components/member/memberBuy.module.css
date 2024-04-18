@@ -900,4 +900,9 @@ padding: 23px 0;
   margin-left: auto;
   margin-right: auto;
 }
+@media (max-width:375px) {
+  .container1{
+    width: auto;
+  }
+}
 
