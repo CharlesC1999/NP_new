@@ -77,6 +77,13 @@
     }
     .info-right {
       gap: 35px;
+      .heart {
+        cursor: pointer;
+        padding-bottom: 25px;
+        svg {
+          width: 40px;
+        }
+      }
       .caption {
         margin-top: 5px;
         color: var(--gray01);
