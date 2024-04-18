@@ -92,13 +92,10 @@ justify-content: center;
 
 }
 
-label {
-color: var(--gray01, #747e85);
-
-}
 
 .lb {
-font-size: var(--font-size);
+font-size: 20px;
+color:  #747e85;
 }
 @media (max-width:375px) {
 .lb{
@@ -112,7 +109,7 @@ font-size: 14px;
 .btn1 {
 background-color: var(--green02, #50BF8B);
 border-color: var(--green02, #50BF8B);
-font-size: var(--font-size);
+font-size: 20px;
 width: 144px;
 height: 44px;
 color: #fefefe;
@@ -127,7 +124,7 @@ margin: 87px 0 8px 0;
 }
 
 .reset {
-font-size: var(--font-size);
+font-size: 20px;
 color: var(--gray01);
 text-decoration: none;
 
@@ -143,9 +140,9 @@ font-size: 12px;
 display: none;
 }
 }
-input[type="file"] {
-display: none;
-}
+.inputfile{
+    display: none;
+  }
 .userImageBig {
 width: 293px;
 height: 293px;
@@ -157,7 +154,7 @@ border-radius: 50%;
 .btn2 {
 background-color: white;
 border: var(--green04) 2px solid;
-font-size: var(--font-size);
+font-size: 20px;
 width: 144px;
 height: 44px;
 color: var(--green04);
@@ -974,7 +971,7 @@ max-width: 1440px;
 }
 }
 .userContent{
-font-size: var(--font-size);
+font-size: 20px;
 color: var(--gray01);
 display: inline-block;
 padding: 7px 12px;

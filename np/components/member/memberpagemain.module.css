@@ -1,10 +1,6 @@
 
   
-  :root {
-    
-    --font-size: 20px;
-    
-  }
+ 
   
   .title {
     display: flex;
@@ -235,18 +231,18 @@ display: none;
   
   
   /* 側邊欄 */
-  @media (max-width: 375px) {
+  /* @media (max-width: 375px) {
     body {
       margin: 0;
       padding: 0;
     }
-  }
+  } */
   
-  a {
+  /* a {
     color: var(--gray01);
     text-decoration: none;
   }
-  
+   */
   .menu {
     width: 247px;
     display: flex;
@@ -364,12 +360,14 @@ display: none;
   .myAccount {
     text-align: center;
     font-family: Inter, sans-serif;
+    color:#747e85;
   }
   
   .lefta {
     font-family: Inter, sans-serif;
     margin-top: 37px;
     text-align: center;
+    color: #747e85;
   }
   
   @media (max-width: 375px) {
@@ -810,151 +808,7 @@ display: none;
   }
   
   /* footer的style */
-  * {
-    --text_color: #ffffff;
-  }
   
-  .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 35px 60px;
-    background-color: var(--light-green, rgba(56, 142, 101, 0.7));
-  }
-  
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1520px;
-  }
-  
-  .footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    padding-top: 20px;
-    gap: 20px;
-  }
-  
-  .footer-section {
-    display: flex;
-    flex-direction: column;
-    color: var(--text_color);
-  }
-  
-  .footer-title {
-    font: 700 20px Inter, sans-serif;
-    color: var(--text_color);
-  }
-  
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    font-size: 18px;
-    font-weight: 400;
-    white-space: nowrap;
-  }
-  
-  .footer-link {
-    font-family: Inter, sans-serif;
-    margin-top: 15px;
-    text-decoration: none;
-    color: var(--text_color);
-  }
-  
-  .footer-contact {
-    display: flex;
-    flex-direction: column;
-    color: var(--text_color);
-    white-space: nowrap;
-  }
-  
-  .footer-contact-info {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    font-size: 18px;
-    font-weight: 400;
-  }
-  
-  .footer-contact-item {
-    font-family: Inter, sans-serif;
-    margin-top: 15px;
-  }
-  
-  .footer-social {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .footer-social-icons {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    gap: 20px;
-  }
-  
-  .footer-social-icon {
-    width: 30px;
-    aspect-ratio: 1;
-    object-fit: auto;
-    object-position: center;
-    fill: var(--text_color);
-  }
-  
-  .footer-social-icon-line {
-    width: 30px;
-    aspect-ratio: 1.37;
-    object-fit: auto;
-    object-position: center;
-    fill: var(--text_color);
-    margin: auto 0;
-  }
-  
-  .footer-social-icon-youtube {
-    width: 30px;
-    aspect-ratio: 1.08;
-    object-fit: auto;
-    object-position: center;
-    fill: var(--text_color);
-    align-self: start;
-  }
-  
-  .footer-bottom {
-    color: var(--text_color);
-    align-self: center;
-    margin-top: 40px;
-    font: 400 16px Inter, sans-serif;
-  }
-  
-  @media (max-width: 991px) {
-    .footer {
-      padding: 0 20px;
-    }
-  
-    .footer-content {
-      max-width: 100%;
-    }
-  
-    .footer-top {
-      max-width: 100%;
-      flex-wrap: wrap;
-    }
-  
-    .footer-links {
-      white-space: initial;
-    }
-  
-    .footer-contact {
-      white-space: initial;
-    }
-  
-    .footer-contact-item {
-      margin-right: 10px;
-    }
-  }
   
   .main {
     /* 不知道要不要留，螢幕看不出來 ，原本80%剛好，有疑問看這*/
@@ -979,9 +833,11 @@ display: none;
     padding: 23px 0;
   }
   
-  @media (min-width: 1200px) {
-    .container {
-      max-width: 1440px;
+  
+    .container1 {
+      width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
     }
-  }
+   
  
