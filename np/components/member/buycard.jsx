@@ -4,7 +4,9 @@ import styles from "./buycard.module.css";
 
 
 function Buycard(){
-  return (<div className={styles.buyCard}>
+  return (
+  <>
+  <div className={styles.buyCard}>
   <div className={styles.buyCardContent}>
     <div className={styles.bccolumn}>
       <div className={styles.bcimg} />
@@ -23,7 +25,8 @@ function Buycard(){
       </div>
     </div>
   </div>
-</div>)
+</div>
+</>)
 }
 
 export default Buycard
