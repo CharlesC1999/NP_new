@@ -1,4 +1,5 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 import TopBarList from "@/components/recipe/list/top-bar-list";
@@ -8,7 +9,6 @@ import RecipeCardsList from "@/components/recipe/list/recipe-cards-list";
 import RecipeCardsGrid from "@/components/recipe/list/recipe-cards-grid";
 import Footer from "@/components/footer";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./recipe-list.module.scss";
 
 export default function RecipeList() {
