@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import UnsavedHeart from "@/components/recipe/detail/heart/unsaved-heart";
+import SavedHeart from "@/components/recipe/detail/heart/saved-heart";
 import styles from "./detail-top.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -8,9 +10,11 @@ export default function DetailTop() {
 
   const notify = () => {
     if (saved) {
-      return toast("成功加入收藏");
-    } else {
+      setSaved(false);
       return toast("成功移除收藏");
+    } else {
+      setSaved(true);
+      return toast("成功加入收藏");
     }
   };
 
@@ -53,11 +57,10 @@ export default function DetailTop() {
                     title="點擊加入收藏"
                     className={`${styles["heart"]} h-100`}
                     onClick={() => {
-                      setSaved(!saved);
                       notify();
                     }}
                   >
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
                       height={15}
@@ -69,7 +72,8 @@ export default function DetailTop() {
                         d="M14.0454 1.37628C12.3805 -0.0117086 9.9045 0.237952 8.37635 1.7805L7.77785 2.38384L7.17935 1.7805C5.65423 0.237952 3.17516 -0.0117086 1.5103 1.37628C-0.397615 2.96935 -0.497872 5.82856 1.20953 7.55538L7.0882 13.4937C7.46796 13.8771 8.08469 13.8771 8.46445 13.4937L14.3431 7.55538C16.0536 5.82856 15.9533 2.96935 14.0454 1.37628Z"
                         fill="#C14D3C"
                       />
-                    </svg>
+                    </svg> */}
+                    {saved ? <SavedHeart /> : <UnsavedHeart />}
                   </div>
                 </div>
                 <div className={styles["small-card"]}>
