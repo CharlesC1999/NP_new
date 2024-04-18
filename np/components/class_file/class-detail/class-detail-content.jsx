@@ -110,7 +110,7 @@ const ClassDetail = () => {
       </section>
       <section className={styles.speakerIntroAndLink}>
         <img
-          src="images/class-speaker.png"
+          src="/images/class-speaker.png"
           alt
           className={styles.speakerImage}
         />

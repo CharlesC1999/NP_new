@@ -6,8 +6,10 @@ import BreadcrumbsStyles from "./BreadcrumbsStyles.module.css";
 //  這裡大家共編一下，因為檔案命名是英文的，但麵包屑需要是中文的，所以大家請放上英文檔名以及對應的中文名稱
 
 const pathNameMapping = {
-  classList: "精選課程",
-  classDetail: "動態，到時候抓classID去對名稱",
+  class_page: "精選課程",
+  ClassDetail: "動態，到時候抓classID去對名稱",
+  speaker: "講師陣容",
+  speakerDetail:"講師姓名（動態）"
   // 繼續添加其他路徑和對應的中文名稱
 };
 
@@ -22,8 +24,10 @@ const Breadcrumbs = () => {
   const pathSegments = router.asPath.split("/").filter((v) => v);
 
   const breadcrumbs = pathSegments.map((segment, index) => {
-    const href = "/" + pathSegments.slice(0, index + 1).join("/");
-    return { name: segment, href };
+    const baseHref = "/" + pathSegments.slice(0, index + 1).join("/");
+    const href = `${baseHref}`; // 指向資料夾中的 index.js
+    const displayName = pathNameMapping[segment] || segment; // 使用映射的中文名稱或原名稱
+    return { name: displayName, href };
   });
 
   return (
