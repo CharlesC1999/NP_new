@@ -8,7 +8,7 @@ export default function SideBar() {
       <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
         <div className={`row ${styles["row"]}`}>
           <section
-            className={`${styles["side-bar-wrapper"]} col-10 d-flex flex-column ms-auto`}
+            className={`${styles["side-bar-wrapper"]} col-10 d-flex flex-column`}
           >
             <div className={`${styles["side-bar-top"]} d-flex flex-column`}>
               <p className={styles["figma-h5"]}>推薦食譜</p>
