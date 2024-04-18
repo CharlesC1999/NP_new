@@ -1,5 +1,5 @@
 /* <!-- Nutripoll-card4 熱銷商品 --> */
-.Nutripoll-card4 {
+.Nutripollcard4 {
     display: flex;
     padding: 33px 0px;
     justify-content: space-between;
@@ -8,12 +8,12 @@
   }
   
   .card4 {
-    width: 170px;
+    width: 190px;
     border: 1px solid var(--gray02);
     border-radius: 5px;
   }
   
-  .card4-img {
+  .card4Img {
     width: 100%;
     height: 170px;
   
@@ -24,7 +24,7 @@
     }
   }
   
-  .card4-body {
+  .card4Body {
     display: flex;
     /* 垂直方向排列 */
     flex-direction: column;
@@ -32,9 +32,11 @@
     align-items: center;
     gap: 10px;
   
-    & .card4-title a {
+    & .card4Title a {
       color: var(--black);
       text-decoration: none;
+      font-size: 16px;
+      display: flex;
   
       &:hover {
         text-decoration: none;
@@ -42,44 +44,50 @@
     }
   }
   
-  /* .card4-btn{
-    background: none;
-    border: none;
-    outline: none; /* 移除默认的按钮边框样式 */
-  /* &:hover{
-      border: none;
-    } */
   
-  .card4-btn {
+  .card4Btn {
     color: var(--green03);
     text-decoration: none;
-  
+    font-size: 14px;
+   
     &:hover {
       text-decoration: none;
       color: var(--black);
     }
   }
   
-  .card4-text {
+  .card4Text {
+    height: 20px;
     & h6 {
+      font-size: 16px;
       color: var(--green03);
     }
   
     & p {
       /* 橫線 */
       text-decoration: line-through;
+      font-size: 14px;
     }
   }
-  .title-rwd{
-    display: none;
-  }
-  
+
   /* <!-- Nutripoll-card4 熱銷商品(RWD) --> */
   
   @media (max-width: 375px) {
-    .title-rwd{
-      display: block;
-      text-decoration: none;
+    .card4 {
+      width: 170px;
+      border: 1px solid var(--gray02);
+      border-radius: 5px;
+    }
+    
+    .card4Img {
+      width: 100%;
+      height: 170px;
+    
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
   

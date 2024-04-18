@@ -1,0 +1,161 @@
+.bodyStyles {
+  box-sizing: border-box;
+  height: 100svh;
+  background-image: url(/images/login-Image/login-bg01.png);
+}
+
+@media (width: 375px) {
+  .bodyStyles {
+    background-color: var(--gray03);
+  }
+}
+@media (width: 375px) {
+  .mainStyle {
+    background-color: var(--gray03);
+  }
+}
+.main {
+  background: var(--white);
+  width: 840px;
+  border: var(--gray02) solid 1px;
+  .h3 {
+    font-size: 3rem;
+    color: var(--green03);
+  }
+  .btn {
+    width: 315px;
+    height: 36px;
+    font-size: 20px;
+  }
+  .backhome {
+    color: var(--green03);
+    cursor: pointer;
+  }
+}
+@media (width: 375px) {
+  .main {
+    width: 330px;
+    .h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .inputGroup {
+      width: 280px;
+      .input {
+        width: 280px;
+      }
+      .label {
+        font-size: 1.2rem !important;
+      }
+    }
+    .btn {
+      width: 300px;
+      background-color: var(--green01);
+    }
+  }
+}
+
+.member {
+  width: 100%;
+  .inputGroup {
+    border-radius: 10px;
+    margin-bottom: 40px;
+    .label {
+      font-size: 1.5rem;
+      color: var(--green03);
+    }
+  }
+  .checkGroup {
+    .formCheckInput {
+      background: var(--gray02);
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .genderLabel {
+    font-size: 1.5rem;
+    color: var(--green03);
+  }
+  .input {
+    width: 310px;
+    height: 35px;
+    background-color: var(--gray03);
+    border: none;
+    border-radius: 5px;
+  }
+}
+@media (max-width: 375px) {
+  .member {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+  }
+  .label {
+    font-size: 1.2rem;
+    color: var(--green03);
+  }
+  .genderLabel {
+    font-size: 1.2rem !important;
+    color: var(--green03);
+  }
+}
+
+.signUpButton {
+  display: flex;
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+  padding: 0px 15px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background: var(--green02);
+  color: var(--white);
+  border: none;
+  animation: ease-in-out;
+  transition: 0.15s;
+}
+
+.signUpButton:hover {
+  background-color: #50a97f;
+}
+
+@media (max-width: 375px) {
+  .signUpButton {
+    width: 280px;
+  }
+}
+
+.sex {
+  font-size: 1.5rem;
+  color: var(--green03);
+  width: 310px;
+}
+
+@media (max-width: 375px) {
+  .sex {
+    width: 280px;
+    margin-bottom: 10px;
+  }
+}
+
+.formCheck {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.formCheckInput {
+  //   background: var(--gray02);
+  margin-top: 1px;
+  width: 25px;
+  height: 25px;
+}
+
+.formCheckInput:checked {
+  margin-top: 1px;
+  background-color: #28a745 !important; /* 綠色 */
+  border-color: #28a745 !important; /* 綠色 */
+}

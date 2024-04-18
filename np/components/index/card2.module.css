@@ -1,16 +1,18 @@
 /* <!-- Nutripoll-card2 --> */
-.Nutripoll-card2 {
+.NutripollCard2{
+    width: 350px;
     display: flex;
-    padding: 56px 0px;
+    padding: 36px 0px;
     justify-content: space-between;
     row-gap: 70px;
     /* gap:70px; */
     flex-wrap: wrap;
   }
  
-  .card2-box {
+  .card2Box{
     display: flex;
     width: 350px;
+    height: 200px;
     padding: 30px 35px;
     gap: 25px;
     background-color: var(--gray03);
@@ -18,7 +20,7 @@
     border-radius: 10px;
   }
   
-  .card2-box-img {
+  .card2BoxImg{
     width: 50px;
   
     & img {
@@ -26,11 +28,14 @@
       object-fit: hidden;
     }
   }
-  .card2-h6{
+  .card2h6{
     width: auto;
     height: 60px;
+    margin-bottom: 20px;
+    
   }
-  .card2-btn{
+  .card2btn{
+    
     color: var(--green02) !important ;
     border: var(--green02) 1px solid !important;
     &:hover{
@@ -40,58 +45,57 @@
     }
 }
   
-  .card2-box-text {
+  .card2BoxText{
     width: 200px;
-  
-    & h5,
-    h6 {
-      padding-bottom: 10%;
+    height: auto;
+    
+    & h6{
+      font-weight: 700;
     }
+ 
   }
   
   /* <!-- Nutripoll-card2 (RWD)--> */
   @media (max-width: 375px) {
-    .Nutripoll-card2 {
+    .NutripollCard2{
       display: flex;
-      padding: 56px 0px;
+      padding: 0px 0px;
       justify-content: space-between;
-      row-gap: 20px;
+      row-gap: 0px;
       flex-wrap: wrap;
     }
   
-    .card2-box {
+    .card2Box{
       display: flex;
       width: 175px;
+      height: auto;
       padding: 5px 5px;
       gap: 25px;
       background-color: var(--white);
     }
   
-    .card2-box-img {
+    .card2BoxImg{
       display: none;
     }
+    .card2h6{
+      width: auto;
+      height: auto;
+      margin-bottom: 5px;
+
+    }
   
-    .card2-box-text {
+    .card2BoxText{
       width: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       /* 水平居中 */
       justify-content: center;
-  
       /* 垂直居中 */
-      & h5 {
-        font-size: 14px;
-        text-align: center;
-      }
-  
-      & h5,
-      h6 {
-        padding-bottom: 5%;
-      }
+     
   
       & .btn-outline-success,
-      .btn-success {
+      .btnSuccess{
         align-items: center;
         justify-content: center;
       }
