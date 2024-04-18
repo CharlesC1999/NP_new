@@ -53,45 +53,45 @@ import styles from "./memberPage2.module.css"
         <div className={`${styles.box} row mb-3 align-items-start`}>
           <label htmlFor="name" className={`col-form-label  col-3 ${styles.lb }`}>姓名 :</label>
           <div className="col">
-            <span className="userContent">許宗力</span>
+            <span className={styles.userContent}>許宗力</span>
           </div>
         </div>
         <div className={`${styles.box} row mb-3 align-items-start`}>
           <label htmlFor="email" className={`col-form-label  col-3 ${styles.lb }`}>Email :</label>
           <div className="col">
-             <span className="userContent">sss@test.com</span>
+             <span className={styles.userContent}>sss@test.com</span>
           </div>
         </div>
         <div className={`${styles.box} row mb-3 align-items-start`}>
           <label htmlFor="phone" className={`col-form-label  col-3 ${styles.lb }`}>手機號碼 :</label>
           <div className="col">
-            <span className="userContent">0923656363</span>
+            <span className={styles.userContent}>0923656363</span>
           </div>
         </div>
         <div className={`${styles.box} row mb-3 align-items-start`}>
           <label htmlFor="address" className={`col-form-label  col-3 ${styles.lb }`}>地址 :</label>
           <div className="col">
-            <span className="userContent">台北市大安區</span>
+            <span className={styles.userContent}>台北市大安區</span>
           </div>
         </div>
         <div className={`${styles.box} row mb-3 align-items-start`}>
           <label className={`col-form-label  col-3 ${styles.lb }`}>性别 :</label>
           <div className={`${styles.checkAlignment} col`}>
-          <span className="userContent">男</span>
+          <span className={styles.userContent}>男</span>
           </div>
         </div>
         <div className={`${styles.box} row mb-3 align-items-start`}>
           <label htmlFor="birthday" className={`col-form-label  col-3 ${styles.lb }`}>生日 :</label>
           <div className="col">
-          <span className="userContent">年</span>
-            <span className="userContent">月</span>
-            <span className="userContent">日</span>
+          <span className={styles.userContent}>年</span>
+            <span className={styles.userContent}>月</span>
+            <span className={styles.userContent}>日</span>
           </div>
         </div>
         <div className={`${styles.box} row mb-3 align-items-start`}>
           <label htmlFor="password" className={`col-form-label  col-3 ${styles.lb }`}>密碼 :</label>
           <div className="col">
-            <span className="userContent">12345</span>
+            <span className={styles.userContent}>12345</span>
           </div>
         </div>
         <a href className={`${styles.reset}   container-fluid text-end `}>[重設密碼]</a>
