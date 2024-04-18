@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./detail.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "./detail.module.scss";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 
@@ -9,7 +9,7 @@ export default function Index() {
     <>
       <Header />
       <Breadcrumbs />
-      <div className="container">
+      <div className={`${styles["wrapper"]} mx-auto`}>
         <div className={`row ${styles["top"]}`}>
           <div className="col">
             <div className={`${styles["pic"]} w-100 h-100`}>

@@ -41,7 +41,8 @@
 }
 
 // custom style
-.container {
+.wrapper {
+  max-width: 1440px;
   @media screen and (max-width: 376px) {
     max-width: 345px;
   }
