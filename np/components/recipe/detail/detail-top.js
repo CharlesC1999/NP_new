@@ -1,8 +1,18 @@
-import React from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./detail-top.module.scss";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function DetailTop() {
+  const [saved, setSaved] = useState(false);
+
+  const notify = () => {
+    if (saved) {
+      return toast("成功加入收藏");
+    } else {
+      return toast("成功移除收藏");
+    }
+  };
 
   return (
     <>
@@ -42,7 +52,10 @@ export default function DetailTop() {
                   <div
                     title="點擊加入收藏"
                     className={`${styles["heart"]} h-100`}
-                    
+                    onClick={() => {
+                      setSaved(!saved);
+                      notify();
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -127,6 +140,7 @@ export default function DetailTop() {
           </div>
         </div>
       </div>
+      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 }
