@@ -1,0 +1,59 @@
+/* 講師卡片 */
+.speakerCardLink{
+  text-decoration: none;
+  cursor: pointer;
+}
+.speaker{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 265px;
+  /* 游標進入卡片時，圖片放大效果 */
+  &:hover img {
+    transition: 0.4s ease-in-out;
+    transform: scale(1.03);
+    opacity: 0.8;
+  }
+  @media (max-width: 375px) {
+    width: 160px;
+    margin-bottom: 15px;
+  }
+}
+.speakerImg{
+  width: 265px;
+  height: 265px;
+  @media (max-width: 375px) {
+    width: 160px;
+    height: 160px;
+  }
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.speakerName{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap:5px;
+  & h5,
+  & h6 {
+    font-family: inter;
+    color: var(--gray01);
+    margin: 0;
+  }
+  & h5 {
+    font-weight: 700;
+    @media (max-width: 375px) {
+      font-size: 16px;
+    }
+  }
+  & h6 {
+    font-size: 16px;
+    @media (max-width: 375px) {
+      font-size: 12px;
+    }
+  }
+}

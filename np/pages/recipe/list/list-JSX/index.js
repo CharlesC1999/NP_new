@@ -1,19 +1,24 @@
-import React from 'react'
-import styles from './list.module.scss'
-import Image from 'next/image'
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "./list.module.scss";
+import Image from "next/image";
+import Header from "@/components/header";
+import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 
 export default function Test() {
   return (
     <>
-      <div className={`container ${styles['container']}`}>
+      <Header />
+      <Breadcrumbs />
+      <div className={`${styles["wrapper"]} mx-auto`}>
         {/* 篩選bar */}
         <div
-          className={`${styles['top-bar']} row d-flex d-xxl-none justify-content-between`}
+          className={`${styles["top-bar"]} row d-flex d-xxl-none justify-content-between`}
         >
           <div
-            className={`col-4 ${styles['btn-sort']} d-flex align-items-center`}
+            className={`col-4 ${styles["btn-sort"]} d-flex align-items-center`}
           >
-            <p className={`${styles['sort']} text-center`}>排序</p>
+            <p className={`${styles["sort"]} text-center`}>排序</p>
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -30,9 +35,9 @@ export default function Test() {
             </div>
           </div>
           <div
-            className={`col-5 ${styles['btn-filter']} d-flex align-items-center`}
+            className={`col-5 ${styles["btn-filter"]} d-flex align-items-center`}
           >
-            <p className={`${styles['category']} text-center`}>分類(12)</p>
+            <p className={`${styles["category"]} text-center`}>分類(12)</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={18}
@@ -46,8 +51,8 @@ export default function Test() {
               />
             </svg>
           </div>
-          <div className={`col-auto ${styles['switch-card-qty']} d-flex`}>
-            <div className={styles['switch-grid']}>
+          <div className={`col-auto ${styles["switch-card-qty"]} d-flex`}>
+            <div className={styles["switch-grid"]}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={20}
@@ -70,7 +75,7 @@ export default function Test() {
                 />
               </svg>
             </div>
-            <div className={styles['switch-row']}>
+            <div className={styles["switch-row"]}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={20}
@@ -88,12 +93,12 @@ export default function Test() {
         </div>
         {/* 篩選bar (grid) */}
         <div
-          className={`d-none ${styles['top-bar-grid']} row d-flex d-xxl-none justify-content-between`}
+          className={`d-none ${styles["top-bar-grid"]} row d-flex d-xxl-none justify-content-between`}
         >
           <div
-            className={`col-4 ${styles['btn-sort']} d-flex align-items-center`}
+            className={`col-4 ${styles["btn-sort"]} d-flex align-items-center`}
           >
-            <p className={`${styles['sort']} text-center`}>排序</p>
+            <p className={`${styles["sort"]} text-center`}>排序</p>
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -110,9 +115,9 @@ export default function Test() {
             </div>
           </div>
           <div
-            className={`col-5 ${styles['btn-filter']} d-flex align-items-center`}
+            className={`col-5 ${styles["btn-filter"]} d-flex align-items-center`}
           >
-            <p className={`${styles['category']} text-center`}>分類(12)</p>
+            <p className={`${styles["category"]} text-center`}>分類(12)</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={18}
@@ -126,8 +131,8 @@ export default function Test() {
               />
             </svg>
           </div>
-          <div className={`col-auto ${styles['switch-card-qty']} d-flex`}>
-            <div className={styles['switch-grid']}>
+          <div className={`col-auto ${styles["switch-card-qty"]} d-flex`}>
+            <div className={styles["switch-grid"]}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={20}
@@ -150,7 +155,7 @@ export default function Test() {
                 />
               </svg>
             </div>
-            <div className={styles['switch-row']}>
+            <div className={styles["switch-row"]}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={20}
@@ -167,87 +172,87 @@ export default function Test() {
           </div>
         </div>
         {/* 食譜卡片 */}
-        <div className={`row ${styles['list-wrapper']}`}>
+        <div className={`row ${styles["list-wrapper"]}`}>
           {/* 側邊欄 */}
-          <div className={`d-none d-xxl-block col-3 ${styles['side-bar']}`}>
+          <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
             <div className="row">
               <section
-                className={`${styles['side-bar-wrapper']} col-10 d-flex flex-column ms-auto`}
+                className={`${styles["side-bar-wrapper"]} col-10 d-flex flex-column ms-auto`}
               >
-                <div className={`${styles['side-bar-top']} d-flex flex-column`}>
-                  <p className={styles['figma-h5']}>推薦食譜</p>
-                  <div className={`${styles['green-divider']} w-25`} />
+                <div className={`${styles["side-bar-top"]} d-flex flex-column`}>
+                  <p className={styles["figma-h5"]}>推薦食譜</p>
+                  <div className={`${styles["green-divider"]} w-25`} />
                 </div>
                 {/* 食譜卡片 */}
-                <div className={`${styles['side-card']} row d-flex`}>
+                <div className={`${styles["side-card"]} row d-flex`}>
                   <div className="col-6">
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./side-bar-pic.png"
+                      src="/images/recipe/list/side-bar-pic.png"
                       alt=""
                     />
                   </div>
                   <div className="col-5 d-flex flex-column justify-content-between">
                     <p
-                      className={`${styles['side-card-title']} ${styles['figma-h6']}`}
+                      className={`${styles["side-card-title"]} ${styles["figma-h6"]}`}
                     >
                       法式經典油封鴨腿
                     </p>
-                    <p className={styles['side-card-description']}>
+                    <p className={styles["side-card-description"]}>
                       一夜干午仔魚一包
                       3包組這組一夜干午仔魚以新鮮午仔魚經過嚴格製程製成，每包240克，總共3包。透過一夜的自然風乾，保留了午仔魚的鮮味和營養價值。魚肉質鮮嫩，風味獨特，適合當零嘴或配菜，是海味愛好者的美味選擇。
                     </p>
-                    <p className={styles['side-card-date']}>2023-11-15</p>
+                    <p className={styles["side-card-date"]}>2023-11-15</p>
                   </div>
                 </div>
-                <div className={`${styles['side-card']} row d-flex`}>
+                <div className={`${styles["side-card"]} row d-flex`}>
                   <div className="col-6">
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./side-bar-pic.png"
+                      src="/images/recipe/list/side-bar-pic.png"
                       alt=""
                     />
                   </div>
                   <div className="col-5 d-flex flex-column justify-content-between">
                     <p
-                      className={`${styles['side-card-title']} ${styles['figma-h6']}`}
+                      className={`${styles["side-card-title"]} ${styles["figma-h6"]}`}
                     >
                       法式經典油封鴨腿
                     </p>
-                    <p className={styles['side-card-description']}>
+                    <p className={styles["side-card-description"]}>
                       一夜干午仔魚一包
                       3包組這組一夜干午仔魚以新鮮午仔魚經過嚴格製程製成，每包240克，總共3包。透過一夜的自然風乾，保留了午仔魚的鮮味和營養價值。魚肉質鮮嫩，風味獨特，適合當零嘴或配菜，是海味愛好者的美味選擇。
                     </p>
-                    <p className={styles['side-card-date']}>2023-11-15</p>
+                    <p className={styles["side-card-date"]}>2023-11-15</p>
                   </div>
                 </div>
               </section>
             </div>
           </div>
           {/* 主要內容(list排列) */}
-          <div className={`${styles['list-layout']} col-12 col-xxl-7`}>
-            <section className={styles['main-content']}>
-              <div className={styles['cards']}>
-                <div className={`${styles['recipe-card']} row d-flex`}>
-                  <div className={`col-4 ${styles['card-pic']}`}>
+          <div className={`${styles["list-layout"]} col`}>
+            <section className={styles["main-content"]}>
+              <div className={styles["cards"]}>
+                <div className={`${styles["recipe-card"]} row d-flex`}>
+                  <div className={`col-4 ${styles["card-pic"]}`}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./1_MVMlYcSvoU 1.png"
+                      src="/images/recipe/list/1_MVMlYcSvoU 1.png"
                       alt=""
                     />
                   </div>
                   <div
-                    className={`col ${styles['card-content']} d-flex flex-column justify-content-between justify-content-xxl-start gap-3`}
+                    className={`col ${styles["card-content"]} d-flex flex-column justify-content-between justify-content-xxl-start gap-3`}
                   >
                     <div
-                      className={`${styles['card-content-top']} d-flex justify-content-between`}
+                      className={`${styles["card-content-top"]} d-flex justify-content-between`}
                     >
                       <div
-                        className={`${styles['recipe-title']}${styles[' figma-h5']}`}
+                        className={`${styles["recipe-title"]} ${styles["figma-h5"]}`}
                       >
                         羊肉燉湯
                       </div>
-                      <div className={styles['heart']}>
+                      <div className={styles["heart"]}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width={19}
@@ -263,18 +268,18 @@ export default function Test() {
                       </div>
                     </div>
                     <div
-                      className={`${styles['card-content-middle']} d-none d-xxl-block col-xxl-9 mb-auto`}
+                      className={`${styles["card-content-middle"]} d-none d-xxl-block col-xxl-9 mb-auto`}
                     >
                       精心烹調的米飯與絕美松露相遇，為你帶來一場嗆辣的味蕾大戰。在黑暗中，化學元素交織出令人窒息的風味，彷彿在體驗一場驚心動魄的烹飪秘辛。
                     </div>
                     <div
-                      className={`${styles['card-content-bottom']} d-flex flex-column flex-xxl-row align-items-xxl-end justify-content-xxl-between`}
+                      className={`${styles["card-content-bottom"]} d-flex flex-column flex-xxl-row align-items-xxl-end justify-content-xxl-between`}
                     >
                       <div
-                        className={`${styles['bottom-left']} d-flex justify-content-between gap-xxl-5`}
+                        className={`${styles["bottom-left"]} d-flex justify-content-between gap-xxl-5`}
                       >
                         <div
-                          className={`${styles['published-date']} d-flex align-items-center`}
+                          className={`${styles["published-date"]} d-flex align-items-center`}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -293,20 +298,20 @@ export default function Test() {
                             />
                           </svg>
                           <p
-                            className={`${styles['figma-p']} ${styles['date']}`}
+                            className={`${styles["figma-p"]} ${styles["date"]}`}
                           >
                             2024年5月26日
                           </p>
                         </div>
                         <div
-                          className={`${styles['recipe-category']} ${styles['figma-p']}`}
+                          className={`${styles["recipe-category"]} ${styles["figma-p"]}`}
                         >
                           分類：湯品
                         </div>
                       </div>
                       <button
                         type="button"
-                        className={`btn btn-primary ${styles['btn-more-detail']} col-8 col-xxl-auto ${styles['figma-h6']}`}
+                        className={`btn btn-primary ${styles["btn-more-detail"]} col-8 col-xxl-auto ${styles["figma-h6"]}`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -330,28 +335,28 @@ export default function Test() {
           </div>
           {/* 主要內容grid排列 */}
           <div
-            className={`d-none row ${styles['grid-layout']} d-flex justify-content-between`}
+            className={`d-none row ${styles["grid-layout"]} d-flex justify-content-between`}
           >
-            <div className={`${styles['recipe-card']} row d-flex`}>
-              <div className={`col-12 ${styles['card-pic']}`}>
+            <div className={`${styles["recipe-card"]} row d-flex`}>
+              <div className={`col-12 ${styles["card-pic"]}`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="./1_MVMlYcSvoU 1.png"
+                  src="/images/recipe/list/1_MVMlYcSvoU 1.png"
                   alt=""
                 />
               </div>
               <div
-                className={`col ${styles['card-content']} d-flex flex-column justify-content-between justify-content-xxl-start gap-2`}
+                className={`col ${styles["card-content"]} d-flex flex-column justify-content-between justify-content-xxl-start gap-2`}
               >
                 <div
-                  className={`${styles['card-content-top']} d-flex justify-content-between`}
+                  className={`${styles["card-content-top"]} d-flex justify-content-between`}
                 >
                   <div
-                    className={`${styles['recipe-title']} ${styles['figma-h5']}`}
+                    className={`${styles["recipe-title"]} ${styles["figma-h5"]}`}
                   >
                     羊肉燉湯
                   </div>
-                  <div className={styles['heart']}>
+                  <div className={styles["heart"]}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={19}
@@ -367,18 +372,18 @@ export default function Test() {
                   </div>
                 </div>
                 <div
-                  className={`${styles['card-content-middle']} d-none d-xxl-block col-xxl-9 mb-auto`}
+                  className={`${styles["card-content-middle"]} d-none d-xxl-block col-xxl-9 mb-auto`}
                 >
                   精心烹調的米飯與絕美松露相遇，為你帶來一場嗆辣的味蕾大戰。在黑暗中，化學元素交織出令人窒息的風味，彷彿在體驗一場驚心動魄的烹飪秘辛。
                 </div>
                 <div
-                  className={`${styles['card-content-bottom']} d-flex flex-column gap-2`}
+                  className={`${styles["card-content-bottom"]} d-flex flex-column gap-2`}
                 >
                   <div
-                    className={`${styles['bottom-left']} d-flex flex-column justify-content-between gap-2 gap-xxl-5`}
+                    className={`${styles["bottom-left"]} d-flex flex-column justify-content-between gap-2 gap-xxl-5`}
                   >
                     <div
-                      className={`${styles['published-date']} d-flex align-items-center`}
+                      className={`${styles["published-date"]} d-flex align-items-center`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -396,19 +401,19 @@ export default function Test() {
                           fill="#747E85"
                         />
                       </svg>
-                      <p className={`${styles['figma-p']} ${styles['date']}`}>
+                      <p className={`${styles["figma-p"]} ${styles["date"]}`}>
                         2024年5月26日
                       </p>
                     </div>
                     <div
-                      className={`${styles['recipe-category']} ${styles['figma-p']}`}
+                      className={`${styles["recipe-category"]} ${styles["figma-p"]}`}
                     >
                       分類：湯品
                     </div>
                   </div>
                   <button
                     type="button"
-                    className={`btn btn-primary ${styles['btn-more-detail']} col-12 ${styles['figma-h6']}`}
+                    className={`btn btn-primary ${styles["btn-more-detail"]} col-12 ${styles["figma-h6"]}`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -427,26 +432,26 @@ export default function Test() {
                 </div>
               </div>
             </div>
-            <div className={`${styles['recipe-card']} row d-flex"`}>
-              <div className={`col-12 ${styles['card-pic']}`}>
+            <div className={`${styles["recipe-card"]} row d-flex"`}>
+              <div className={`col-12 ${styles["card-pic"]}`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="./1_MVMlYcSvoU 1.png"
+                  src="/images/recipe/list/1_MVMlYcSvoU 1.png"
                   alt=""
                 />
               </div>
               <div
-                className={`col ${styles['card-content']} d-flex flex-column justify-content-between justify-content-xxl-start gap-2`}
+                className={`col ${styles["card-content"]} d-flex flex-column justify-content-between justify-content-xxl-start gap-2`}
               >
                 <div
-                  className={`${styles['card-content-top']} d-flex justify-content-between`}
+                  className={`${styles["card-content-top"]} d-flex justify-content-between`}
                 >
                   <div
-                    className={`${styles['recipe-title']} ${styles['figma-h5']}`}
+                    className={`${styles["recipe-title"]} ${styles["figma-h5"]}`}
                   >
                     羊肉燉湯
                   </div>
-                  <div className={styles['heart']}>
+                  <div className={styles["heart"]}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={19}
@@ -462,18 +467,18 @@ export default function Test() {
                   </div>
                 </div>
                 <div
-                  className={`${styles['card-content-middle']} d-none d-xxl-block col-xxl-9 mb-auto`}
+                  className={`${styles["card-content-middle"]} d-none d-xxl-block col-xxl-9 mb-auto`}
                 >
                   精心烹調的米飯與絕美松露相遇，為你帶來一場嗆辣的味蕾大戰。在黑暗中，化學元素交織出令人窒息的風味，彷彿在體驗一場驚心動魄的烹飪秘辛。
                 </div>
                 <div
-                  className={`${styles['card-content-bottom']} d-flex flex-column gap-2`}
+                  className={`${styles["card-content-bottom"]} d-flex flex-column gap-2`}
                 >
                   <div
-                    className={`${styles['bottom-left']} d-flex flex-column justify-content-between gap-2 gap-xxl-5`}
+                    className={`${styles["bottom-left"]} d-flex flex-column justify-content-between gap-2 gap-xxl-5`}
                   >
                     <div
-                      className={`${styles['published-date']} d-flex align-items-center`}
+                      className={`${styles["published-date"]} d-flex align-items-center`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -491,19 +496,19 @@ export default function Test() {
                           fill="#747E85"
                         />
                       </svg>
-                      <p className={`${styles['figma-p']} ${styles['date']}`}>
+                      <p className={`${styles["figma-p"]} ${styles["date"]}`}>
                         2024年5月26日
                       </p>
                     </div>
                     <div
-                      className={`${styles['recipe-category']} ${styles['figma-p']}`}
+                      className={`${styles["recipe-category"]} ${styles["figma-p"]}`}
                     >
                       分類：湯品
                     </div>
                   </div>
                   <button
                     type="button"
-                    className={`btn btn-primary ${styles['btn-more-detail']} col-12 figma-h6`}
+                    className={`btn btn-primary ${styles["btn-more-detail"]} col-12 figma-h6`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -526,5 +531,5 @@ export default function Test() {
         </div>
       </div>
     </>
-  )
+  );
 }

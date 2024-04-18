@@ -1,0 +1,130 @@
+.bodyStyle {
+  background-color: var(--white);
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.MainText {
+  width: 500px;
+  & .h3 {
+    font-size: 36px;
+    color: var(--green03);
+    margin-block: 30px;
+    margin-inline: auto;
+  }
+}
+
+.mainStyle {
+  background-image: url(/images/login-Image/login-bg02.png);
+  // border: var(--gray01) solid 2px;
+  height: 100svh;
+  font-size: 16px;
+  & .main {
+    border: var(--gray02) solid 2px;
+    & .h3 {
+      color: var(--green03);
+    }
+  }
+  & .btn {
+    font-size: 16px;
+    margin-bottom: 30px;
+    width: 315px;
+  }
+
+  & .iconGroup {
+    cursor: pointer;
+    width: 80px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    color: var(--green02);
+    margin-bottom: 30px;
+
+    & .socialMediaIcon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  & .inputGroup {
+    margin-inline: auto;
+    width: 315px;
+    padding-bottom: 4px;
+    margin-bottom: 30px;
+    border-bottom: var(--green01) solid 1px;
+    label {
+      color: var(--green03);
+      font-weight: 700;
+    }
+    & input {
+      border: none;
+      outline: none;
+    }
+  }
+  & .member {
+    width: 300px;
+    a {
+      color: var(--green03);
+    }
+  }
+  & .social {
+    width: 315px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 0px;
+    color: var(--green03);
+    & a {
+      color: var(--green03);
+    }
+  }
+}
+@media (max-width: 375px) {
+  .member {
+    width: 300px;
+  }
+  .mainStyle {
+    background-image: none;
+    background-color: var(--gray03);
+    & .main {
+      background-image: none;
+      background-color: var(--white);
+      width: 330px;
+      padding: 30px 15px 30px 15px;
+      & .h3 {
+        font-size: 1.9rem;
+      }
+      & .btn {
+        font-size: 16px;
+        margin-bottom: 30px;
+        width: 300px;
+        background: var(--green01);
+      }
+      & .MainText {
+        width: 296px;
+
+        & .inputGroup {
+          border-bottom: var(--green01) solid 2px;
+          width: 296px;
+        }
+      }
+    }
+  }
+}
+
+// new add
+.buttonContainer {
+  width: 315px;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 375px) {
+  .buttonContainer {
+    width: 300px;
+  }
+}
+
+.buttonStyle {
+  width: 100%;
+}

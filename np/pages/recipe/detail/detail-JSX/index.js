@@ -1,34 +1,39 @@
-import React from 'react'
-import styles from './detail.module.scss'
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "./detail.module.scss";
+import Header from "@/components/header";
+import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 
 export default function Index() {
   return (
     <>
-      <div className="container">
-        <div className={`row ${styles['top']}`}>
+      <Header />
+      <Breadcrumbs />
+      <div className={`${styles["wrapper"]} mx-auto`}>
+        <div className={`row ${styles["top"]}`}>
           <div className="col">
-            <div className={`${styles['pic']} w-100 h-100`}>
+            <div className={`${styles["pic"]} w-100 h-100`}>
               <img
                 className="object-fit-cover w-100 h-100"
-                src="./5c57291e6ab0e7566941547a0cb18048.jpg"
+                src="/images/recipe/detail/5c57291e6ab0e7566941547a0cb18048.jpg"
                 alt=""
               />
             </div>
           </div>
           <div className="w-100" />
-          <div className={`col ${styles['top-main-info']}`}>
-            <div className={`row ${styles['top-info-m']}`}>
-              <div className={`col-12 col-xxl-3 ${styles['info-left']}`}>
-                <div className={`${styles['info-left']} d-flex flex-column`}>
+          <div className={`col ${styles["top-main-info"]}`}>
+            <div className={`row ${styles["top-info-m"]}`}>
+              <div className={`col-12 col-xxl-3 ${styles["info-left"]}`}>
+                <div className={`${styles["info-left"]} d-flex flex-column`}>
                   <p
-                    className={`${styles['title']} ${styles['figma-h3']} mb-0 text-center text-xxl-start`}
+                    className={`${styles["title"]} ${styles["figma-h3"]} mb-0 text-center text-xxl-start`}
                   >
                     綠咖哩牛肉
                   </p>
                   <div
-                    className={`${styles['left-bottom']} d-flex justify-content-center justify-content-xxl-start`}
+                    className={`${styles["left-bottom"]} d-flex justify-content-center justify-content-xxl-start`}
                   >
-                    <p className={styles['figma-p']}>分類：主食 / 2023-10-08</p>
+                    <p className={styles["figma-p"]}>分類：主食 / 2023-10-08</p>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
@@ -45,12 +50,12 @@ export default function Index() {
                 </div>
               </div>
               <div className="col-12 col-xl-6" />
-              <div className={`col-12 col-xxl-3 ${styles['info-right']}`}>
+              <div className={`col-12 col-xxl-3 ${styles["info-right"]}`}>
                 <div
-                  className={`${styles['info-right']} d-flex justify-content-center justify-content-xxl-start`}
+                  className={`${styles["info-right"]} d-flex justify-content-center justify-content-xxl-start`}
                 >
-                  <div className={`${styles['small-card']} ms-xl-auto`}>
-                    <div className={styles['person']}>
+                  <div className={`${styles["small-card"]} ms-xl-auto`}>
+                    <div className={styles["person"]}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={35}
@@ -68,12 +73,12 @@ export default function Index() {
                         />
                       </svg>
                     </div>
-                    <p className={`${styles['figma-p']} ${styles['caption']}`}>
+                    <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
                       3人份
                     </p>
                   </div>
-                  <div className={styles['small-card']}>
-                    <div className={styles['tableware']}>
+                  <div className={styles["small-card"]}>
+                    <div className={styles["tableware"]}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={36}
@@ -88,12 +93,12 @@ export default function Index() {
                         />
                       </svg>
                     </div>
-                    <p className={`${styles['figma-p']} ${styles['caption']}`}>
+                    <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
                       8樣食材
                     </p>
                   </div>
-                  <div className={styles['small-card']}>
-                    <div className={styles['clock']}>
+                  <div className={styles["small-card"]}>
+                    <div className={styles["clock"]}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={36}
@@ -108,7 +113,7 @@ export default function Index() {
                         />
                       </svg>
                     </div>
-                    <p className={`${styles['figma-p']} ${styles['caption']}`}>
+                    <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
                       30分鐘
                     </p>
                   </div>
@@ -117,138 +122,138 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <div className={`row ${styles['main']}`}>
-          <section className={`d-none d-xxl-block col-3 ${styles['side-bar']}`}>
+        <div className={`row ${styles["main"]}`}>
+          <section className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
             <div className="row">
               <section
-                className={`${styles['side-bar-wrapper']} col-10 d-flex flex-column`}
+                className={`${styles["side-bar-wrapper"]} col-10 d-flex flex-column`}
               >
-                <div className={`${styles['side-bar-top']} d-flex flex-column`}>
+                <div className={`${styles["side-bar-top"]} d-flex flex-column`}>
                   <p
-                    className={`${styles['side-bar-title']} ${styles['figma-h5']}`}
+                    className={`${styles["side-bar-title"]} ${styles["figma-h5"]}`}
                   >
                     推薦食譜
                   </p>
-                  <div className={`${styles['green-divider']} w-25`} />
+                  <div className={`${styles["green-divider"]} w-25`} />
                 </div>
                 {/* 食譜卡片 */}
-                <div className={`${styles['side-card']} row d-flex`}>
-                  <div className={`${styles['side-card-pic']} col-6`}>
+                <div className={`${styles["side-card"]} row d-flex`}>
+                  <div className={`${styles["side-card-pic"]} col-6`}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./side-bar-pic.png"
+                      src="/images/recipe/detail/side-bar-pic.png"
                       alt=""
                     />
                   </div>
                   <div
-                    className={`${styles['side-bar-content']} col-5 d-flex flex-column justify-content-between`}
+                    className={`${styles["side-bar-content"]} col-5 d-flex flex-column justify-content-between`}
                   >
                     <p
-                      className={`${styles['side-card-title']} ${styles['figma-h6']}`}
+                      className={`${styles["side-card-title"]} ${styles["figma-h6"]}`}
                     >
                       法式經典油封鴨腿
                     </p>
-                    <p className={styles['side-card-description']}>
+                    <p className={styles["side-card-description"]}>
                       一夜干午仔魚一包
                       3包組這組一夜干午仔魚以新鮮午仔魚經過嚴格製程製成，每包240克，總共3包。透過一夜的自然風乾，保留了午仔魚的鮮味和營養價值。魚肉質鮮嫩，風味獨特，適合當零嘴或配菜，是海味愛好者的美味選擇。
                     </p>
-                    <p className={styles['side-card-date']}>2023-11-15</p>
+                    <p className={styles["side-card-date"]}>2023-11-15</p>
                   </div>
                 </div>
-                <div className={`${styles['side-card']} row d-flex`}>
-                  <div className={`${styles['side-card-pic']} col-6`}>
+                <div className={`${styles["side-card"]} row d-flex`}>
+                  <div className={`${styles["side-card-pic"]} col-6`}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./side-bar-pic.png"
+                      src="/images/recipe/detail/side-bar-pic.png"
                       alt=""
                     />
                   </div>
                   <div
-                    className={`${styles['side-bar-content']} col-5 d-flex flex-column justify-content-between`}
+                    className={`${styles["side-bar-content"]} col-5 d-flex flex-column justify-content-between`}
                   >
                     <p
-                      className={`${styles['side-card-title']} ${styles['figma-h6']}`}
+                      className={`${styles["side-card-title"]} ${styles["figma-h6"]}`}
                     >
                       法式經典油封鴨腿
                     </p>
-                    <p className={styles['side-card-description']}>
+                    <p className={styles["side-card-description"]}>
                       一夜干午仔魚一包
                       3包組這組一夜干午仔魚以新鮮午仔魚經過嚴格製程製成，每包240克，總共3包。透過一夜的自然風乾，保留了午仔魚的鮮味和營養價值。魚肉質鮮嫩，風味獨特，適合當零嘴或配菜，是海味愛好者的美味選擇。
                     </p>
-                    <p className={styles['side-card-date']}>2023-11-15</p>
+                    <p className={styles["side-card-date"]}>2023-11-15</p>
                   </div>
                 </div>
-                <div className={`${styles['side-card']} row d-flex`}>
-                  <div className={`${styles['side-card-pic']} col-6`}>
+                <div className={`${styles["side-card"]} row d-flex`}>
+                  <div className={`${styles["side-card-pic"]} col-6`}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./side-bar-pic.png"
+                      src="/images/recipe/detail/side-bar-pic.png"
                       alt=""
                     />
                   </div>
                   <div
-                    className={`${styles['side-bar-content']} col-5 d-flex flex-column justify-content-between`}
+                    className={`${styles["side-bar-content"]} col-5 d-flex flex-column justify-content-between`}
                   >
                     <p
-                      className={`${styles['side-card-title']} ${styles['figma-h6']}`}
+                      className={`${styles["side-card-title"]} ${styles["figma-h6"]}`}
                     >
                       法式經典油封鴨腿
                     </p>
-                    <p className={styles['side-card-description']}>
+                    <p className={styles["side-card-description"]}>
                       一夜干午仔魚一包
                       3包組這組一夜干午仔魚以新鮮午仔魚經過嚴格製程製成，每包240克，總共3包。透過一夜的自然風乾，保留了午仔魚的鮮味和營養價值。魚肉質鮮嫩，風味獨特，適合當零嘴或配菜，是海味愛好者的美味選擇。
                     </p>
-                    <p className={styles['side-card-date']}>2023-11-15</p>
+                    <p className={styles["side-card-date"]}>2023-11-15</p>
                   </div>
                 </div>
               </section>
             </div>
           </section>
-          <section className={`col ${styles['main-content']}`}>
-            <div className={`row ${styles['ingredients-section']}`}>
+          <section className={`col ${styles["main-content"]}`}>
+            <div className={`row ${styles["ingredients-section"]}`}>
               <div
-                className={`col-12 ${styles['figma-h4']} ${styles['ingredient-title-m']} text-center text-xxl-start`}
+                className={`col-12 ${styles["figma-h4"]} ${styles["ingredient-title-m"]} text-center text-xxl-start`}
               >
                 食材
               </div>
               <div
-                className={`row ${styles['ingredients']} d-flex justify-content-center justify-content-xxl-start`}
+                className={`row ${styles["ingredients"]} d-flex justify-content-center justify-content-xxl-start`}
               >
-                <div className={`col-4 col-xl-3 ${styles['ingredient-info']}`}>
+                <div className={`col-4 col-xl-3 ${styles["ingredient-info"]}`}>
                   <div
-                    className={`${styles['content']} d-flex justify-content-between`}
+                    className={`${styles["content"]} d-flex justify-content-between`}
                   >
                     <p>食材</p>
                     <p>份量</p>
                   </div>
                 </div>
-                <div className={`col-4 col-xl-3 ${styles['ingredient-info']}`}>
+                <div className={`col-4 col-xl-3 ${styles["ingredient-info"]}`}>
                   <div
-                    className={`${styles['content']} d-flex justify-content-between`}
+                    className={`${styles["content"]} d-flex justify-content-between`}
                   >
                     <p>食材</p>
                     <p>份量</p>
                   </div>
                 </div>
-                <div className={`col-4 col-xl-3 ${styles['ingredient-info']}`}>
+                <div className={`col-4 col-xl-3 ${styles["ingredient-info"]}`}>
                   <div
-                    className={`${styles['content']} d-flex justify-content-between`}
+                    className={`${styles["content"]} d-flex justify-content-between`}
                   >
                     <p>食材</p>
                     <p>份量</p>
                   </div>
                 </div>
-                <div className={`col-4 col-xl-3 ${styles['ingredient-info']}`}>
+                <div className={`col-4 col-xl-3 ${styles["ingredient-info"]}`}>
                   <div
-                    className={`${styles['content']} d-flex justify-content-between`}
+                    className={`${styles["content"]} d-flex justify-content-between`}
                   >
                     <p>食材</p>
                     <p>份量</p>
                   </div>
                 </div>
-                <div className={`col-4 col-xl-3 ${styles['ingredient-info']}`}>
+                <div className={`col-4 col-xl-3 ${styles["ingredient-info"]}`}>
                   <div
-                    className={`${styles['content']} d-flex justify-content-between`}
+                    className={`${styles["content"]} d-flex justify-content-between`}
                   >
                     <p>食材</p>
                     <p>份量</p>
@@ -257,15 +262,15 @@ export default function Index() {
               </div>
             </div>
             <div
-              className={`row ${styles['steps-section']} d-flex flex-column align-items-center`}
+              className={`row ${styles["steps-section"]} d-flex flex-column align-items-center`}
             >
               <div
-                className={`col-12 ${styles['figma-h4']} ${styles['step-title-m']} text-center text-xxl-start`}
+                className={`col-12 ${styles["figma-h4"]} ${styles["step-title-m"]} text-center text-xxl-start`}
               >
                 步驟
               </div>
               <ol
-                className={`${styles['steps']} col-11 col-xxl-10 d-flex flex-column`}
+                className={`${styles["steps"]} col-11 col-xxl-10 d-flex flex-column`}
               >
                 <li>
                   準備一湯鍋加水約八分滿大火燒開放入排骨、米酒、味淋以及薑、蒜末，持續大火熬煮並撈除浮沫，再加入淘洗好的米，撒入胡椒粉。
@@ -284,90 +289,89 @@ export default function Index() {
                 </li>
               </ol>
             </div>
-            <div className={`row ${styles['related-products-section']}`}>
+            <div className={`row ${styles["related-products-section"]}`}>
               <div
-                className={`col-12 ${styles['figma-h4']} text-center text-xxl-start ${styles['related-ingredient-title-m']}`}
+                className={`col-12 ${styles["figma-h4"]} text-center text-xxl-start ${styles["related-ingredient-title-m"]}`}
               >
                 相關食材
               </div>
               <div
-                className={`col-12 col-xxl-10 ${styles['related-products']} mx-auto`}
+                className={`col-12 col-xxl-10 ${styles["related-products"]} mx-auto`}
               >
                 <div
-                  className={`${styles['related-products-top']} d-flex justify-content-between`}
+                  className={`${styles["related-products-top"]} d-flex justify-content-between`}
                 >
                   <div
-                    className={`${styles['top-left']} d-flex align-items-end`}
+                    className={`${styles["top-left"]} d-flex align-items-end`}
                   >
                     <input type="checkbox" />
-                    <p className={styles['check-all']}>全選</p>
+                    <p className={styles["check-all"]}>全選</p>
                   </div>
-                  <div className={`${styles['top-right']} d-xxl-flex d-none`}>
+                  <div className={`${styles["top-right"]} d-xxl-flex d-none`}>
                     <p>數量</p>
                     <p>小計</p>
                   </div>
                 </div>
                 <div
-                  className={`${styles['related-products-middle']} d-flex flex-column flex-xxl-row justify-content-between`}
+                  className={`${styles["related-products-middle"]} d-flex flex-column flex-xxl-row justify-content-between`}
                 >
                   <div
-                    className={`col-12 col-xxl-6 ${styles['middle-left']} d-flex align-items-center`}
+                    className={`col-12 col-xxl-7 ${styles["middle-left"]} d-flex align-items-center`}
                   >
                     <input type="checkbox" />
-                    <div className={styles['product-pic']}>
+                    <div className={styles["product-pic"]}>
                       <img
                         className="w-100 h-100 object-fit-cover"
-                        src="./eb0c2b4dc60ca444aaa6979ae5467f7a.jpg"
+                        src="/images/recipe/detail/eb0c2b4dc60ca444aaa6979ae5467f7a.jpg"
                         alt=""
                       />
                     </div>
-                    <div className={styles['product-description']}>
+                    <div className={styles["product-description"]}>
                       <p
-                        className={`${styles['product-name']} ${styles['figma-h5']}`}
+                        className={`${styles["product-name"]} ${styles["figma-h5"]}`}
                       >
                         商品名稱
                       </p>
                       <div
-                        className={`${styles['portion-and-price']} d-flex gap-2`}
+                        className={`${styles["portion-and-price"]} d-flex gap-2`}
                       >
-                        <p className={styles['portion']}>份量</p>
-                        <p className={styles['divider']}>|</p>
-                        <p className={styles['price']}>單價 $ 165</p>
+                        <p className={styles["portion"]}>份量</p>
+                        <p className={styles["divider"]}>|</p>
+                        <p className={styles["price"]}>單價 $ 165</p>
                       </div>
                     </div>
                   </div>
-                  <div className="col" />
                   <div
-                    className={`col-xxl-3 ${styles['middle-right']} d-flex align-items-center`}
+                    className={`${styles["middle-right"]} d-flex align-items-center`}
                   >
                     <div
-                      className={`${styles['quantity']} d-flex align-items-center`}
+                      className={`${styles["quantity"]} d-flex align-items-center`}
                     >
                       <button
                         type="button"
-                        className={`btn btn-primary ${styles['figma-h5']}`}
+                        className={`btn btn-primary ${styles["figma-h5"]}`}
                       >
                         -
                       </button>
-                      <p className={styles['figma-h6']}>1</p>
+                      <p className={styles["figma-h6"]}>1</p>
                       <button
                         type="button"
-                        className={`btn btn-primary ${styles['figma-h5']}`}
+                        className={`btn btn-primary ${styles["figma-h5"]}`}
                       >
                         +
                       </button>
                     </div>
                     <p
-                      className={`${styles['subtotal']} ${styles['figma-h6']}`}
+                      className={`${styles["subtotal"]} ${styles["figma-h6"]}`}
                     >
                       $ 165
                     </p>
                   </div>
                 </div>
                 <div
-                  className={`${styles['related-products-bottom']} d-flex flex-column flex-xxl-row justify-content-end align-items-center gap-3`}
+                  className={`${styles["related-products-bottom"]} d-flex flex-column flex-xxl-row justify-content-end align-items-center gap-3`}
                 >
-                  <p className={styles['total']}>共選擇8項商品，共計1,320元</p>
+                  <p className={styles["total"]}>共選擇8項商品，共計1,320元</p>
                   <button type="button" className="btn btn-primary">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -378,7 +382,7 @@ export default function Index() {
                     >
                       <mask
                         id="mask0_2921_33112"
-                        style={{ maskType: 'luminance' }}
+                        style={{ maskType: "luminance" }}
                         maskUnits="userSpaceOnUse"
                         x={0}
                         y={0}
@@ -412,31 +416,32 @@ export default function Index() {
             </div>
           </section>
         </div>
-        <div className={`${styles['recommended-recipe']} d-flex flex-column`}>
+        
+        <div className={`${styles["recommended-recipe"]} d-flex flex-column`}>
           <div
-            className={`col-12 ${styles['figma-h4']} text-center text-xxl-start ${styles['recommended-recipes-title-m']}`}
+            className={`col-12 ${styles["figma-h4"]} text-center text-xxl-start ${styles["recommended-recipes-title-m"]}`}
           >
             其他推薦食譜
           </div>
-          <div className={`row ${styles['recipe-cards']}`}>
+          <div className={`row ${styles["recipe-cards"]}`}>
             <div
-              className={`col-6 col-xxl-4 ${styles['recipe-card']} d-flex flex-column`}
+              className={`col-6 col-xxl-4 ${styles["recipe-card"]} d-flex flex-column`}
             >
-              <div className={`${styles['card-pic']} w-100`}>
+              <div className={`${styles["card-pic"]} w-100`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                  src="/images/recipe/detail/38f958b0414526b33f0cd55c033c8be6.jpg"
                   alt=""
                 />
               </div>
               <div
-                className={`${styles['card-content']} d-flex flex-column align-items-center`}
+                className={`${styles["card-content"]} d-flex flex-column align-items-center`}
               >
-                <p className={`${styles['recipe-name']} ${styles['figma-h5']}`}>
+                <p className={`${styles["recipe-name"]} ${styles["figma-h5"]}`}>
                   法式經典油封鴨腿
                 </p>
                 <p
-                  className={`${styles['recipe-description']} ${styles['truncate']}`}
+                  className={`${styles["recipe-description"]} ${styles["truncate"]}`}
                 >
                   法式經典油封鴨腿
                   選用宜蘭的櫻桃鴨，以法式古法鹽漬風乾後浸泡在大量鴨油與香料裡，低溫烘烤至酥爛。
@@ -444,46 +449,47 @@ export default function Index() {
               </div>
             </div>
             <div
-              className={`col-6 col-xxl-4 ${styles['recipe-card']} d-flex flex-column`}
+              className={`col-6 col-xxl-4 ${styles["recipe-card"]} d-flex flex-column`}
             >
-              <div className={`${styles['card-pic']} w-100`}>
+              <div className={`${styles["card-pic"]} w-100`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                  src="/images/recipe/detail/38f958b0414526b33f0cd55c033c8be6.jpg"
                   alt=""
                 />
               </div>
               <div
-                className={`${styles['card-content']} d-flex flex-column align-items-center`}
+                className={`${styles["card-content"]} d-flex flex-column align-items-center`}
               >
-                <p className={`${styles['recipe-name']} ${styles['figma-h5']}`}>
+                <p className={`${styles["recipe-name"]} ${styles["figma-h5"]}`}>
                   法式經典油封鴨腿
                 </p>
                 <p
-                  className={`${styles['recipe-description']} ${styles['truncate']}`}
+                  className={`${styles["recipe-description"]} ${styles["truncate"]}`}
                 >
                   法式經典油封鴨腿是一道傳統的法國美食，以鴨腿作為主要材料。首先，將鴨腿以低溫慢烤至皮脆肉嫩，然後浸泡在橄欖油中長時間保存，以增添風味並保持肉質的鮮嫩。這道菜通常搭配著新鮮的草莓或是其他時令水果，以及香草調味的沙拉一同享用。法式經典油封鴨腿擁有豐富的口感和深厚的風味，是法國料理中不可或缺的精品之一。
                 </p>
               </div>
             </div>
             <div
-              className={`col-6 col-xxl-4 ${styles['recipe-card']} d-flex flex-column`}
+              className={`col-4 d-none d-xxl-inline-flex ${styles["recipe-card"]} d-flex flex-column`}
+              // className={`col-6 col-xxl-4 ${styles['recipe-card']} d-flex flex-column`}
             >
-              <div className={`${styles['card-pic']} w-100`}>
+              <div className={`${styles["card-pic"]} w-100`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                  src="/images/recipe/detail/38f958b0414526b33f0cd55c033c8be6.jpg"
                   alt=""
                 />
               </div>
               <div
-                className={`${styles['card-content']} d-flex flex-column align-items-center`}
+                className={`${styles["card-content"]} d-flex flex-column align-items-center`}
               >
-                <p className={`${styles['recipe-name']} ${styles['figma-h5']}`}>
+                <p className={`${styles["recipe-name"]} ${styles["figma-h5"]}`}>
                   法式經典油封鴨腿
                 </p>
                 <p
-                  className={`${styles['recipe-description']} ${styles['truncate']}`}
+                  className={`${styles["recipe-description"]} ${styles["truncate"]}`}
                 >
                   法式經典油封鴨腿是一道傳統的法國美食，以鴨腿作為主要材料。首先，將鴨腿以低溫慢烤至皮脆肉嫩，然後浸泡在橄欖油中長時間保存，以增添風味並保持肉質的鮮嫩。這道菜通常搭配著新鮮的草莓或是其他時令水果，以及香草調味的沙拉一同享用。法式經典油封鴨腿擁有豐富的口感和深厚的風味，是法國料理中不可或缺的精品之一。
                 </p>
@@ -492,15 +498,15 @@ export default function Index() {
           </div>
           <div className="row">
             <div
-              className={`${styles['pagination']} d-flex gap-2 justify-content-center`}
+              className={`${styles["pagination"]} d-flex gap-2 justify-content-center`}
             >
-              <div className={`${styles['page']} ${styles['current']}`} />
-              <div className={styles['page']} />
-              <div className={styles['page']} />
+              <div className={`${styles["page"]} ${styles["current"]}`} />
+              <div className={styles["page"]} />
+              <div className={styles["page"]} />
             </div>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }

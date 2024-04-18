@@ -10,7 +10,7 @@
     margin-right: 80px;
   }
   
-  .card5-img {
+  .card5Img {
     width: 420px;
     height: 275px;
     display: flex;
@@ -24,12 +24,13 @@
     }
   }
 
-  .card5-text-rwd{
+  .card5TextRwd{
     width: 100px;
     height: auto;
     margin-left: 75px;
     padding-top: 5px;
     & h5{
+      font-size: 18px;
       font-weight: 700;
       overflow: hidden;
       /* 超出部分隐藏 */
@@ -46,10 +47,10 @@
     }
   }
   
-  .card5-text {
+  .card5Text {
     display: flex;
     flex-direction: column;
-    padding-block: 5px;
+    padding-block: 3px;
     color: var(--black, #454545);
     width: 345px;
     margin-left: 20px;
@@ -59,7 +60,7 @@
       text-align: center;
     }
   
-    & .border-p {
+    & .BorderP {
       overflow: hidden;
       /* 超出部分隐藏 */
       text-overflow: ellipsis;
@@ -71,31 +72,37 @@
       /* 當使用這個屬性時，可以結合其他屬性來控製文字的顯示方式 */
       -webkit-line-clamp: 3;
       /* 顯示的行數 */
+      font-size: 12px;
   
     }
   
-    & .card5-p {
+    & .card5P {
       border-top: var(--yellow03) 1px solid;
       padding: 10px 0px 0px 0px;
       font-weight: 600;
+      font-size: 12px;
+      & p{
+        margin-bottom: 5px;
+      }
   
-      & .line-p {
+      & .LineP {
         /* 橫線 */
         text-decoration: line-through;
       }
   
-      & .color-p {
+      & .ColorP {
         color: var(--green02);
       }
     }
   
     & h6 {
       color: var(--yellow03);
+      font-size: 14px;
       font-weight: 700;
     }
   }
   
-  .card5-btn {
+  .card5Btn {
     background-color: var(--green03) !important;
     border: 0px !important;
   
@@ -106,7 +113,7 @@
 
   @media (max-width: 375px) {
       
-    .card5-btn {
+    .card5Btn {
         display: none !important;
       }
 
@@ -118,7 +125,7 @@
       margin-right: 80px;
     }
     
-    .card5-img {
+    .card5Img {
       width: 131px;
       height: 139px;
       display: flex;
@@ -132,7 +139,7 @@
       }
     }
     
-    .card5-text {
+    .card5Text {
       display: flex;
       flex-direction: column;
       padding-block: 0px;
@@ -141,8 +148,9 @@
       margin-left: 5px;
       padding-right: 10px;
       justify-content: center;
+      
   
-      & .card5-text-rwd {
+      & .card5TextRwd {
       padding-top: 0px;
       display: flex;
       width: 215px;
@@ -164,23 +172,23 @@
       }
     }
     
-      & .border-p {
+      & .BorderP {
         display: none;
       }
     
-      & .card5-p {
+      & .card5P {
         border-top: none;
         padding: 10px 0px 10px 0px;
         & p{
           margin-bottom: 0px;
         }
     
-        & .line-p {
+        & .LineP {
           /* 橫線 */
           text-decoration: line-through;
         }
     
-        & .color-p {
+        & .ColorP {
           color: var(--green02);
         }
       }

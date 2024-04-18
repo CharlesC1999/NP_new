@@ -1,0 +1,22 @@
+.wrapper {
+  max-width: 1440px;
+  @media screen and (max-width: 376px) {
+    max-width: 345px;
+  }
+
+  .main {
+    padding: 40px 0px;
+    gap: 100px;
+    @media screen and (max-width: 376px) {
+      padding-bottom: 0px;
+      padding-top: 20px;
+    }
+  }
+
+  .recommended-recipe {
+    gap: 30px;
+    @media screen and (max-width: 376px) {
+      padding: 0 0 20px 0;
+    }
+  }
+}

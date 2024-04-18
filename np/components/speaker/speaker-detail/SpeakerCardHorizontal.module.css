@@ -1,19 +1,18 @@
-.speaker-card-list-link {
+.speakerCardListLink{
   text-decoration: none;
-  &:hover .speaker-card-list .speaker-img img {
+  &:hover .speakerCardList .speakerImg img {
     transform: scale(1.05);
     opacity: 0.8;
   }
 }
 
-/* 推薦講師卡片 */
-.speaker-card-list {
+.speakerCardList{
   display: flex;
   flex-direction: row;
   width: 248px;
   justify-content: center;
   gap: 10px;
-  & .speaker-content {
+  & .speakerContent{
     width: 148px;
     display: flex;
     flex-direction: column;
@@ -39,7 +38,7 @@
     }
   }
 }
-.speaker-img {
+.speakerImg{
   width: 90px;
   height: 92px;
   overflow: hidden;
