@@ -19,7 +19,7 @@ export default function Index() {
       <HeaderComponent/>
       <HeroSlider />
       <div className={`container ${styles.wrapper} ${styles.nutripollP}`}>
-        <div className={`${styles.wrapper} ${styles.container} ${styles.titleP}`}>
+        <div className={` container ${styles.titleP}`}>
           <h1 className={`${styles.titleNutripoll}`}>營養大選 Nutripolls</h1>
           <h6>精挑細選 賣自己想吃的好食物</h6><br />
         </div>
