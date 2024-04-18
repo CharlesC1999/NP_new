@@ -1,7 +1,7 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./list.module.scss";
 import Image from "next/image";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 
@@ -10,7 +10,7 @@ export default function Test() {
     <>
       <Header />
       <Breadcrumbs />
-      <div className={`container ${styles["container"]}`}>
+      <div className={`${styles["wrapper"]} mx-auto`}>
         {/* 篩選bar */}
         <div
           className={`${styles["top-bar"]} row d-flex d-xxl-none justify-content-between`}
@@ -230,7 +230,7 @@ export default function Test() {
             </div>
           </div>
           {/* 主要內容(list排列) */}
-          <div className={`${styles["list-layout"]} col-12 col-xxl-7`}>
+          <div className={`${styles["list-layout"]} col`}>
             <section className={styles["main-content"]}>
               <div className={styles["cards"]}>
                 <div className={`${styles["recipe-card"]} row d-flex`}>
