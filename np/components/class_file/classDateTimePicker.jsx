@@ -6,7 +6,7 @@ function CustomDatePicker() {
   const [date, setDate] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  const [pickerView, setPickerView] = useState("year"); // "year", "month", "range"
+  const [pickerView, setPickerView] = useState("range"); // "year", "month", "range"
 
   const handleYearChange = (year) => {
     setDate(year);

@@ -3,6 +3,7 @@ import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
 import Header from "@/components/header";
 import ClassClassifacion from "@/components/class_file/class-classification";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ClassSidebar from "@/components/class_file/class-sidebar";
 import ClassFilter from "@/components/class_file/class-filter";
 import ClassCard from "@/components/class_file/class-card-web";
 import ClassCardMobileGrid from "@/components/class_file/class-card-mobile-grid";
@@ -56,11 +57,10 @@ const ClassList = () => {
       <div style={subContainerStyle}>
         <ClassClassifacion />
         <div className={ContentSetting.DisplaySetting}>
-          <img
-            src="/images/class-page-sidebar.png"
-            style={{ height: "100%" }}
-            className={ContentSetting.MobileNone}
-          />
+          <div style={{ height: "100%" }} className={ContentSetting.MobileNone}>
+            <ClassSidebar />
+          </div>
+
           <div className={CardStyle.SearchResultContainer}>
             <ClassFilter
               onShowGrid={showGrid}
