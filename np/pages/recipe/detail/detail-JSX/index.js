@@ -1,16 +1,21 @@
 import React from "react";
 import styles from "./detail.module.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "@/components/header";
+import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 
 export default function Index() {
   return (
     <>
+      <Header />
+      <Breadcrumbs />
       <div className="container">
         <div className={`row ${styles["top"]}`}>
           <div className="col">
             <div className={`${styles["pic"]} w-100 h-100`}>
               <img
                 className="object-fit-cover w-100 h-100"
-                src="./5c57291e6ab0e7566941547a0cb18048.jpg"
+                src="/images/recipe/detail/5c57291e6ab0e7566941547a0cb18048.jpg"
                 alt=""
               />
             </div>
@@ -136,7 +141,7 @@ export default function Index() {
                   <div className={`${styles["side-card-pic"]} col-6`}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./side-bar-pic.png"
+                      src="/images/recipe/detail/side-bar-pic.png"
                       alt=""
                     />
                   </div>
@@ -159,7 +164,7 @@ export default function Index() {
                   <div className={`${styles["side-card-pic"]} col-6`}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./side-bar-pic.png"
+                      src="/images/recipe/detail/side-bar-pic.png"
                       alt=""
                     />
                   </div>
@@ -182,7 +187,7 @@ export default function Index() {
                   <div className={`${styles["side-card-pic"]} col-6`}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="./side-bar-pic.png"
+                      src="/images/recipe/detail/side-bar-pic.png"
                       alt=""
                     />
                   </div>
@@ -317,7 +322,7 @@ export default function Index() {
                     <div className={styles["product-pic"]}>
                       <img
                         className="w-100 h-100 object-fit-cover"
-                        src="./eb0c2b4dc60ca444aaa6979ae5467f7a.jpg"
+                        src="/images/recipe/detail/eb0c2b4dc60ca444aaa6979ae5467f7a.jpg"
                         alt=""
                       />
                     </div>
@@ -424,7 +429,7 @@ export default function Index() {
               <div className={`${styles["card-pic"]} w-100`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                  src="/images/recipe/detail/38f958b0414526b33f0cd55c033c8be6.jpg"
                   alt=""
                 />
               </div>
@@ -448,7 +453,7 @@ export default function Index() {
               <div className={`${styles["card-pic"]} w-100`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                  src="/images/recipe/detail/38f958b0414526b33f0cd55c033c8be6.jpg"
                   alt=""
                 />
               </div>
@@ -472,7 +477,7 @@ export default function Index() {
               <div className={`${styles["card-pic"]} w-100`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="./38f958b0414526b33f0cd55c033c8be6.jpg"
+                  src="/images/recipe/detail/38f958b0414526b33f0cd55c033c8be6.jpg"
                   alt=""
                 />
               </div>
