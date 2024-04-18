@@ -839,5 +839,10 @@ display: none;
       margin-left: auto;
       margin-right: auto;
     }
+    @media (max-width:375px) {
+      .container1{
+        width: auto;
+      }
+    }
    
  
