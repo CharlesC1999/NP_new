@@ -416,6 +416,7 @@ export default function Index() {
             </div>
           </section>
         </div>
+        
         <div className={`${styles["recommended-recipe"]} d-flex flex-column`}>
           <div
             className={`col-12 ${styles["figma-h4"]} text-center text-xxl-start ${styles["recommended-recipes-title-m"]}`}
