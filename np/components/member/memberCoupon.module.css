@@ -2,47 +2,48 @@
 
 
 .title {
-  display: flex;
-  flex-direction: column;
-  white-space: nowrap;
-  line-height: 120%;
-  padding: 31px 20px 20px 0px;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    line-height: 120%;
+    padding: 31px 20px 20px 0px;
 }
 
 @media (max-width: 991px) {
-  .title {
-      max-width: 100%;
-      white-space: initial;
-      padding: 0 20px;
-  }
+    .title {
+        max-width: 100%;
+        white-space: initial;
+        padding: 0 20px;
+    }
 }
 
 .titleNow {
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  color: var(--black);
-  text-overflow: ellipsis;
-  font: 300 24px Inter, sans-serif;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: var(--black);
+    text-overflow: ellipsis;
+    font: 300 24px Inter, sans-serif;
 }
 
 @media (max-width: 375px) {
-  .titleNow {
-      display: none;
-  }
+    .titleNow {
+        display: none;
+    }
 }
 
 .title2 {
-  color: var(--gray01);
-  margin-top: 20px;
-  font: 500 15px Inter, sans-serif;
+    color: var(--gray01);
+    margin-top: 20px;
+    font: 500 15px Inter, sans-serif;
 }
 
 @media (max-width: 375px) {
-  .title2 {
-      max-width: 100%;
-      display: none;
-  }
+    .title2 {
+        max-width: 100%;
+        display: none;
+    }
 }
+
 
 
 
@@ -63,14 +64,14 @@ text-decoration: none;
 } */
 
 .menu {
-  width: 247px;
-  display: flex;
-  /* flex-grow: 1; */
-  flex-direction: column;
-  color: var(--gray01, #747e85);
-  line-height: 120%;
-  padding: 17px 11px 0px 11px;
-  margin-right: auto;
+    width: 247px;
+    display: flex;
+    /* flex-grow: 1; */
+    flex-direction: column;
+    color: var(--gray01, #747e85);
+    line-height: 120%;
+    padding: 17px 11px 0px 11px;
+    margin-right: auto;
 }
 
 
@@ -179,14 +180,12 @@ border-top: none;
 .myAccount {
 text-align: center;
 font-family: Inter, sans-serif;
-color:#747e85;
 }
 
 .lefta {
 font-family: Inter, sans-serif;
 margin-top: 37px;
 text-align: center;
-color:#747e85;
 }
 @media (max-width: 375px){
 .lefta{
@@ -196,7 +195,13 @@ margin: auto;
 
 
 /* 下面是header的style */
-
+.top {
+background-color: var(--white, #fefefe);
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 23px 0;
+}
 .header {
 align-items: center;
 justify-content: center;
@@ -209,11 +214,11 @@ width: 100%;
 
 @media (max-width: 375px) {
 .container {
-padding: 16px;
+  padding: 16px;
 }
 .header {
-max-width: 100%;
-padding: 0 20px;
+  max-width: 100%;
+  padding: 0 20px;
 }
 }
 
@@ -315,8 +320,8 @@ width: 100%;
 
 @media (max-width: 375px) {
 .header-content {
-flex-wrap: wrap;
-max-width: 100%;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 }
 
@@ -326,17 +331,17 @@ align-self: stretch;
 display: flex;
 justify-content: center;
 .mobile-menu {
-display: none;
+  display: none;
 }
 @media (max-width: 375px) {
-.mobile-menu {
-  display: block;
-  margin-bottom: 6px;
-  background: none;
-  outline: none;
-  border: none;
-  padding: 0;
-}
+  .mobile-menu {
+    display: block;
+    margin-bottom: 6px;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+  }
 }
 }
 
@@ -347,7 +352,7 @@ width: 235px;
 }
 @media (max-width: 375px) {
 .logo {
-width: 130px;
+  width: 130px;
 }
 }
 
@@ -370,7 +375,7 @@ padding: 0px 24px;
 
 @media (max-width: 375px) {
 .search-bar {
-display: none;
+  display: none;
 }
 }
 
@@ -413,7 +418,7 @@ white-space: nowrap;
 
 @media (max-width: 375px) {
 .header-actions {
-white-space: initial;
+  white-space: initial;
 }
 }
 
@@ -424,7 +429,7 @@ gap: 0;
 
 @media (max-width: 375px) {
 .cart-action {
-white-space: initial;
+  white-space: initial;
 }
 }
 
@@ -435,7 +440,7 @@ justify-content: center;
 font-family: Inter, sans-serif;
 margin-top: 13px;
 & .aBitMargin {
-margin-inline-end: 2px;
+  margin-inline-end: 2px;
 }
 }
 
@@ -444,14 +449,14 @@ display: none;
 }
 @media (max-width: 375px) {
 .icon-text {
-font-size: 0px;
-color: #78cea6;
+  font-size: 0px;
+  color: #78cea6;
 }
 .mobile-none {
-display: none;
+  display: none;
 }
 .icon-link-mobile {
-display: block;
+  display: block;
 }
 }
 
@@ -464,7 +469,7 @@ margin-top: 8px;
 
 @media (max-width: 375px) {
 .member-action {
-white-space: initial;
+  white-space: initial;
 }
 }
 
@@ -483,7 +488,7 @@ width: 100%;
 
 @media (max-width: 375px) {
 .nav {
-display: none;
+  display: none;
 }
 }
 
@@ -514,11 +519,10 @@ gap: 3px;
 justify-content: center;
 letter-spacing: 0.8px;
 .nav-text-about {
-font-family: Inter, sans-serif;
+  font-family: Inter, sans-serif;
 }
 /* 認識NutriPolls的英文字型 */
 }
-
 /* header下面那塊綠色 */
 .path {
 justify-content: center;
@@ -617,6 +621,7 @@ padding: 0 80px;
 flex-wrap: wrap;
 white-space: initial;
 padding: 0 20px;
+
 }
 }
 @media (max-width: 375px) {
@@ -627,6 +632,7 @@ padding: 0 20px;
 font-size: 12px;
 margin: 20px 0 20px 0;
 border-bottom: none;
+
 }
 }
 
@@ -644,10 +650,18 @@ color: var(--Black-80);
 
 }
 }
+
 .ccat a{
 font-family: Inter, sans-serif;
 color: var(--Black-80);
 text-decoration: none;
+}
+@media (max-width:375px) {
+/* .ccat{
+flex-grow: 1;
+
+
+} */
 }
 /* 分類攔下面的搜尋框 */
 .mainsearch {
@@ -684,195 +698,119 @@ width: 12px;
 margin: auto 0;
 }
 
-/* 購買清單卡片 */
+/* 優惠券卡片 */
+.coupmain {
+    width:949px; /* 容器宽度100% */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    flex-wrap: wrap; /* 自动换行 */
+    padding: 16px 0 16px 0;
+}
+@media (max-width:375px) {
+  .coupmain{
+    width: auto;
+  }
+}
+.couponCard {
 
+width: 400px;
+height: 126px;
 
-.buyCard {
-width: 900px;
-background-color: var(--Black-0, #fff);
+overflow: hidden;
 display: flex;
-max-width: 900px;
-flex-direction: column;
-justify-content: center;
-/* padding: 15px 20px; */
-padding: 20px 15px 20px 15px;
-box-shadow: inset 0px -2px 0px 0px var(--green05);
-/* 添加向内延伸的边框 */
+margin-right: 20px;
+margin-bottom: 29px ;
+box-shadow: inset 0 -1px var(--green05);
+
 
 }
-@media (max-width: 375px){
-.buyCard{
-width: 334px;
-height: 115px;
-padding: 20px 15px 20px 15px;
-margin: 20px 15px 0 15px;
+@media (max-width:375px) {
+.couponCard{
+width: auto;
+margin: 20px 15px 20px 15px;
+box-shadow: none;
+border:var(--green05) 1px solid;
 }
 }
 
-
-.buyCardContent {
-gap: 20px;
-display: flex;
-}
-
-
-
-.bccolumn {
-display: flex;
-flex-direction: column;
-line-height: normal;
-width: 16%;
-margin-left: 0px;
-}
-
-
-
-.bcimg {
-background-color: var(--line, #d9d9d9);
+.couponImg {
 width: 130px;
 height: 130px;
-margin: 0 auto;
+background-color: #ccc;
 }
-
-@media (max-width: 375px) {
-.bcimg {
-width: 80px;
-height: 80px;
-margin:auto;
-}
-}
-
-.bccolumn2 {
-display: flex;
-/* flex-direction: column; */
-line-height: normal;
-width: 84%;
-margin-left: 20px;
-}
-
-
-
-.buyItem {
-justify-content: end;
-align-self: stretch;
-display: flex;
-width: 100%;
-gap: 10px;
-line-height: 120%;
-margin: auto 0;
-}
-
-
-.buyItemMain {
-justify-content: center;
-display: flex;
-flex-direction: column;
-font-size: 14px;
-color: var(--gray01, #919da6);
-font-weight: 500;
-flex: 1;
-}
-
-.biContent {
-color: var(--black, var(--gray03, #454545));
-font: 20px Inter, sans-serif;
-font-weight: bold;
-}
-@media (max-width:375px) {
-.biContent{
-font-size: 14px;
-}
-}
-
-.biNumber {
-font-family: Inter, sans-serif;
-margin-top: 10px;
-}
-@media (max-width:375px) {
-.biNumber{
-font-size: 12px;
-margin-top: 0px;
-}
-}
-
-.biState {
-font-family: Inter, sans-serif;
-margin-top: 10px;
-}
-@media (max-width:375px) {
-.biState{
-font-size: 12px;
-margin-top: 0px;
-}
-}
-
-.biMb {
-align-self: end;
-display: flex;
-margin-top: 45px;
-gap: 20px;
-justify-content: space-between;
-}
-
-@media (max-width: 375px) {
-.biMb {
-display: block;
+@media (max-width:375px){
+.couponImg{
+width: 145px;
+height: 114px;
 margin: auto;
+}
+}
+
+.couponContent {
+flex: 1;
+padding: 0 10px;
+display: flex;
+
+
+flex-direction: column;
+justify-content: space-between;
+
+}
+@media (max-width:375px) {
+.couponContent {
+
+margin-left: 30px;
 
 }
 }
 
-.biMoney {
-color: var(--gray01, #747e85);
-align-self: start;
-margin-top: 14px;
-font: 500 16px Inter, sans-serif;
+.couponDetails {
+padding-top: 20px;
+
 }
-@media (max-width: 375px) {
-.biMoney {
-display: block;
+
+.couponButton {
+text-align: right;
 margin-bottom: 14px;
-font-size: 14px;
-}
-}
 
-.biButton {
+}
+@media (max-width:375px) {
+.couponButton{
+text-align: left;
+}
+}
+.couponBtn {
 width: 100px;
 height: 33px;
 font-weight: bold;
 font-size: 12px;
-color: #50bf8b;
+color: #2ECC71;
 background-color: var(--green05);
 border: var(--green05);
 border-radius: 5px;
 
+
 }
-
-
-
-
-.buyCardBtn {
-display: inline-flex;
-/* 将按钮的显示设置为内联弹性盒 */
-align-items: center;
-/* 垂直居中按钮内的内容 */
-width: 101px;
-/* 设置按钮宽度自适应 */
-height: 33px;
-/* 设置按钮高度 */
-text-decoration: none;
-/* 移除默认的超链接样式 */
-padding: 10px 20px;
-/* 设置按钮的上下左右内边距 */
+.couponBtn:hover{
+color: #2ECC71;
+background-color: var(--green05);
+}
+.lowbuy {
+color: #454545;
+font-size: 20px;
 font-weight: bold;
-font-size: 14px;
-background-color: var(--green05);
-color: #50bf8b;
 }
-.buyCardBtn:hover{
-background-color: var(--green05);
-color: #50bf8b;
+@media (max-width:375px) {
+.lowbuy{
+font-size: var(--font-size-m);
 }
+}
+.couponDate {
+color: var(--gray01);
+font-size: 12px;
+}
+
+
 /* 主區塊的部分 */
 .main{
 /* 不知道要不要留，螢幕看不出來 ，原本80%剛好，有疑問看這*/
@@ -883,9 +821,9 @@ display: flex;
 }
 @media (max-width:375px) {
 .main{
-display: block;
-padding: 0;
-
+  display: block;
+  padding: 0;
+  
 }
 }
 .top {
@@ -896,8 +834,8 @@ padding: 23px 0;
 }
 
 .container1 {
-  width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-}
+    width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 

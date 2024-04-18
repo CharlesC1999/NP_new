@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; 
-import styles from "./memberpagemain.module.css"
+import styles from "./membePageMain.module.css"
 
 
  const MemberPageMain =() => {
