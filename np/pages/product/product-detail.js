@@ -17,6 +17,7 @@ import Filter from "@/components/product/Product-filter";
 import SideBarTop from "@/components/product/sideBar/SideBarCategory";
 import SideBarDetailFiltet from "@/components/product/sideBar/SideBarDetailFilter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ProductMayLike from "@/components/product/productMayLike";
 
 // import productCard from '@/components/product/productCard.js'
 export default function ProductDetail() {
@@ -41,7 +42,7 @@ export default function ProductDetail() {
                 <SideBarDetailFiltet />
               </div>
             </div>
-            <div className={`${style["right-main"]} d-flex flex-column`}>
+            <div className={`${style["right-main"]} d-flex flex-column ms-5`}>
               <div
                 className={`${style["main-product"]} d-flex flex-sm-row flex-column justify-content-center`}
               >
@@ -153,7 +154,10 @@ export default function ProductDetail() {
                     <a
                       className={`${style["favorite-btn"]} ${style["icon-link"]} `}
                     >
-                      <i className={`fa-regular fa-heart`} />
+                      <i
+                        className={`fa-regular fa-heart`}
+                        style={{ color: "#78CEA6" }}
+                      />
                     </a>
                   </div>
                   <input
@@ -274,7 +278,7 @@ export default function ProductDetail() {
           <div
             className={`${style["section3"]} d-flex flex-column justify-content-center`}
           >
-            <div className={`${style["mlike"]} d-flex flex-column my-4`}>
+            {/* <div className={`${style["mlike"]} d-flex flex-column my-4`}>
               <h5 className={`${style["h5"]} py-sm-4 mt-5 mt-sm-none`}>
                 你可能喜歡
               </h5>
@@ -282,55 +286,6 @@ export default function ProductDetail() {
               <ul
                 className={`${style["product-list"]} d-flex flex-sm-row flex-wrap justify-content-between`}
               >
-                <li>
-                  <div className={`${style["product-card"]} my-4`}>
-                    <div className={`${style["object-fit"]}`}>
-                      <img
-                        src="/images/
-                            products-image/egg.png"
-                        alt="商品圖片"
-                        className={`${style["product-image"]}`}
-                      />
-                    </div>
-                    <div className={`${style["product-info"]}`}>
-                      <h6 className={`${style["product-name"]} my-2`}>
-                        超級雞蛋
-                      </h6>
-                      <div
-                        className={`${style["product-rating"]} ${style["stars-row"]}  d-flex flex-row justify-content-sm-between  mb-3`}
-                      >
-                        <div className={`${style["star"]}`}>
-                          ★
-                          <span className={`${style["score"]} px-3`}>
-                            (4.2)
-                          </span>
-                        </div>
-                        <a className={`${style["favorite-btn"]} pe-3`}>
-                          <i className={`fa-regular fa-heart`} />
-                          <FontAwesomeIcon icon={`fa-heart`} color="#5BF8B" />
-                        </a>
-                      </div>
-                      <div
-                        className={`${style["product-price"]} d-flex flex-row justify-content-between align-items-center`}
-                      >
-                        <div className={`${style["price"]}`}>$500</div>
-                        <div className={`d-flex flex-row align-items-center`}>
-                          <div className={`${style["original-price"]} px-3`}>
-                            $100
-                          </div>
-                          <a
-                            className={`add-to-cart-btn justify-content-center d-flex align-items-center`}
-                          >
-                            <FontAwesomeIcon
-                              icon={faCartShopping}
-                              color="#50BF8B"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
                 <li>
                   <div className={`${style["product-card"]} my-4`}>
                     <div className={`${style["object-fit"]}`}>
@@ -524,7 +479,8 @@ export default function ProductDetail() {
                   </div>
                 </li>
               </ul>
-            </div>
+            </div> */}
+            <ProductMayLike />
           </div>
         </div>
       </main>
