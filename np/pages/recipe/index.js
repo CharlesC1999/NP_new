@@ -1,13 +1,22 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
+<<<<<<< HEAD
 import TopBarList from "@/components/recipe/list/TopBarList";
 import TopBarGrid from "@/components/recipe/list/TopBarGrid";
 import SideBar from "@/components/recipe/list/SideBar";
 import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";
 import Footer from "@/components/footer";
+=======
+import TopBarList from "@/components/recipe/list/top-bar-list";
+import TopBarGrid from "@/components/recipe/list/top-bar-grid";
+import SideBar from "@/components/recipe/list/side-bar";
+import RecipeCardsList from "@/components/recipe/list/recipe-cards-list";
+import RecipeCardsGrid from "@/components/recipe/list/recipe-cards-grid";
+import Footer from "@/components/Footer";
+>>>>>>> e5eb21c (檔案調整，命名調整，麵包屑調整)
 
 import styles from "@/styles/recipe/recipe-list.module.scss";
 

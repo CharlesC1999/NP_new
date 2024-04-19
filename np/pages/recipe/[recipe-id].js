@@ -1,8 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e5eb21c (檔案調整，命名調整，麵包屑調整)
 <<<<<<< HEAD:np/pages/recipe/[recipe-id].js
 import DetailTop from "@/components/recipe/detail/DetailTop";
 import SideBar from "@/components/recipe/list/SideBarRecipe";
@@ -17,6 +20,9 @@ import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecip
 import Footer from "@/components/footer";
 import styles from "@/styles/recipe/recipe-detail.module.scss";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e5eb21c (檔案調整，命名調整，麵包屑調整)
 =======
 import DetailTop from "@/components/recipe/detail/detail-top";
 import SideBar from "@/components/recipe/list/side-bar";
@@ -27,8 +33,11 @@ import DetailRecommendedRecipe from "@/components/recipe/detail/recommended-reci
 import Footer from "@/components/Footer";
 import styles from "./recipe-detail.module.scss";
 >>>>>>> 5890885 (檔案調整，命名調整，麵包屑調整):np/pages/recipe/detail/index.js
+<<<<<<< HEAD
 =======
 >>>>>>> a67f04e (統一修改食譜類檔名)
+=======
+>>>>>>> e5eb21c (檔案調整，命名調整，麵包屑調整)
 
 export default function RecipeDetail() {
   return (
