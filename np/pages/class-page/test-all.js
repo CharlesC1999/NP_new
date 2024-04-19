@@ -28,6 +28,7 @@ const ForTest = () => {
       <ClassCard />
       <ClassCardMobileList />
       <ClassCardMobileGrid />
+      <Pagination />
       <Footer />;
     </div>
   );
