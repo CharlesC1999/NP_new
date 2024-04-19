@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; 
-import styles from "./MemberCoupon.module.css"
+import styles from "./MemberCouponMain.module.css"
 
 
  const MemberCouponMain =() => {
@@ -20,17 +20,20 @@ import styles from "./MemberCoupon.module.css"
     <div>
   <div className={styles.couponcat}>
     <div className={styles.ccathover}><a href>全部</a></div>
-    <div className={styles.ccat}><a href>待付款</a></div>
-    <div className={styles.ccat}> <a href>待出貨</a></div>
-    <div className={styles.ccat}><a href>待收貨</a></div>
-    <div className={styles.ccat}><a href>已完成</a></div>
-    <div className={styles.ccat}><a href>取消</a></div>
+    <div className={styles.ccat}><a href>可使用</a></div>
+    <div className={styles.ccat}> <a href>已使用</a></div>
+    <div className={styles.ccat}><a href>已失效</a></div>
+    
   </div>
   {/* 分類欄下面的搜尋框 */}
-  <div className={styles.mainsearch}>
-    <div className={styles.mscontent}>Search for ltemss...</div>
-    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/4d7b4236db983404c60a8e6f407043967fd36bb8b4dd9dd5af142d2320770caa?" className={styles.img} />
-  </div>
+  <div className={styles.searchContainer}>
+  <input className={styles.searchBar} type="text" placeholder="Search for items..." />
+  <button type="submit" className={styles.searchButton}>
+    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
+      <path fill="none" stroke="#747E85" strokelinecap="round" strokelinejoin="round" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314" />
+    </svg>
+  </button>
+</div>
 </div>
 <div className={styles.coupmain}>
   <div className={styles.couponCard}>
