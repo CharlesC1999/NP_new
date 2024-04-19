@@ -1,97 +1,56 @@
 /* 分類side-bar */
 /* side-bar總width */
-.side-bar {
-    width: 250px;
-    margin-right: 40px;
-  }
-  
-  .side-title {
-    width: 209px;
-    height: auto;
-    margin: 10px;
-  
-    & h5 {
-      padding-bottom: 5px;
-      /* 將底線設為從左到右漸變 */
 
-    }
-  }
-  .line {
-    margin: 10px;
-    width: 205px;
-    height: 4px;
-    background: linear-gradient(
-        to right,
-        var(--green03) 30%,
-        #d9e1e6c3 30%
-      );
-  }
+.sideBox {
+  border: var(--gray02) solid 1px;
+  border-radius: 5px;
+}
+.sideImg {
+  width: 35px;
+  height: 35px;
+  margin: 3px;
 
-  .side-bar-box {
-    width: auto;
-    height: auto;
-    margin-bottom: 66px;
-    border: var(--gray02) solid 1px;
-    border-radius: 5px;
-    /*水平右,下,模糊化*/
-    box-shadow: 2px 2px 2px var(--gray02);
-    /*陰影化*/
-  
-  
-    & .side-box {
-      width: 209px;
-      height: 45px;
-      margin: 10px;
-      border: var(--gray02) solid 1px;
-      border-radius: 5px;
-  
-      & .side-img {
-        width: 35px;
-        height: 35px;
-        margin: 3px;
-  
-        & img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-  
-      & .side-text {
-        display: flex;
-        width: 150px;
-        height: auto;
-  
-        & a ,h6 {
-          text-decoration: none;
-          padding-inline: 3px;
-          margin-block: auto;
-          color: var(--gray01);
-          /* 水平置中 */
-        }
-      }
-  
-      .side-text .left {
-        margin-right: auto;
-        /* 靠右 */
-      }
-  
-      .side-text .right {
-        margin-left: auto;
-        /* 靠左*/
-        /* height: 20px;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+& .sideText {
+  display: flex;
+  width: 150px;
+  height: auto;
+
+  & a {
+    text-decoration: none;
+    padding-inline: 3px;
+    margin-block: auto;
+    color: var(--gray01);
+    /* 水平置中 */
+  }
+  & h6 {
+    text-decoration: none;
+    padding-inline: 3px;
+    margin-block: auto;
+    color: var(--gray01);
+    /* 水平置中 */
+  }
+}
+
+.left {
+  margin-right: auto;
+  /* 靠右 */
+}
+
+.right {
+  margin-left: auto;
+  /* 靠左*/
+  /* height: 20px;
         width: 20px; */
-        /* border: #000 solid 1px; */
-        /* background-color: var(--green03); */
-        /* border-radius: 50%; */
-        /* align-items: center; */
-        /* justify-content: center; */
-      }
-    }
-  }
-
-  @media (max-width: 375px) {
-    .side-bar{
-        display: none !important;
-      }
-  }
+  /* border: #000 solid 1px; */
+  /* background-color: var(--green03); */
+  /* border-radius: 50%; */
+  /* align-items: center; */
+  /* justify-content: center; */
+}
