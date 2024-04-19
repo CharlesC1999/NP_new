@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginStyle from "@/styles/Login/login.module.scss";
 // import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer";
 
 const Login = () => {
   //   const [showHeader, setShowHeader] = useState(false);

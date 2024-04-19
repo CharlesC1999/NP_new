@@ -1,10 +1,10 @@
 import React from "react";
 import DetailStyles from "@/styles/class_styles/classDetail.module.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ClassSidebar from "@/components/class_file/class-sidebar-detail-version";
-import ClassDetail from "@/components/class_file/class-detail/class-detail-content";
-import Footer from "@/components/footer";
+import ClassSidebar from "@/components/class_file/ClassSidebarDetailVersion";
+import ClassDetail from "@/components/class_file/class-detail/ClassDetailContent";
+import Footer from "@/components/Footer";
 
 const ClassDetailPage = () => {
   const containerStyle = {
