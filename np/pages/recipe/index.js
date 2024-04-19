@@ -2,9 +2,10 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
+import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategory";
+import SideBarRecipe from "@/components/recipe/list/SideBarRecipe";
 import TopBarList from "@/components/recipe/list/TopBarList";
 import TopBarGrid from "@/components/recipe/list/TopBarGrid";
-import SideBar from "@/components/recipe/list/SideBar";
 import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";
 import Footer from "@/components/footer";
@@ -21,7 +22,10 @@ export default function RecipeList() {
         <TopBarList />
         <TopBarGrid />
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
-          <SideBar />
+          <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
+            <SideBarTop />
+            <SideBarRecipe />
+          </div>
           {/* 食譜卡片 (list排列) */}
           <div className={`${styles["cards-list"]} d-flex flex-column `}>
             <RecipeCardsList />
