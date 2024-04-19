@@ -47,9 +47,17 @@ export default function DetailTop() {
                 <div className={`${styles["small-card"]} ms-xl-auto`}>
                   <div
                     title="點擊加入收藏"
-                    className={`${styles["heart"]} h-100`}
+                    className="h-100"
+                    onClick={() => {
+                      notify();
+                    }}
                   >
-                    {saved ? <SavedHeart /> : <UnsavedHeart />}
+                    {/* {saved ? <SavedHeart /> : <UnsavedHeart />} */}
+                    <FaHeart
+                      className={`${styles["heart"]} ${
+                        saved ? styles["saved"] : styles["unsaved"]
+                      }`}
+                    />
                   </div>
                 </div>
                 <div className={styles["small-card"]}>
