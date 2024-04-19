@@ -7,6 +7,14 @@ import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import style from "@/components/product/products.module.scss";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import ProductMainPic from "@/components/product/productMainPic";
+import ProductMainText from "@/components/product/productMainText";
+import ProductSection01 from "@/components/product/ProductSection01";
+import ProductSection02 from "@/components/product/ProductSection02";
+import CateSidebar from "@/components/product/Cate-sidebar";
+import NewSidebar from "@/components/product/New-sidebar";
+import Filter from "@/components/product/Product-filter";
+
 // import productCard from '@/components/product/productCard.js'
 export default function ProductDetail() {
   return (
@@ -22,25 +30,17 @@ export default function ProductDetail() {
             <div
               className={`${style["left-side"]} d-flex flex-column d-none d-sm-flex`}
             >
-              <div
-                className={`${style["side-bar01"]}`}
-                style={{
-                  width: "260px",
-                  height: "410px",
-                  border: "1px black solid",
-                }}
-              >
-                側邊欄一
+              <div>
+                <CateSidebar />
+                <CateSidebar />
+                <CateSidebar />
+                <CateSidebar />
               </div>
-              <div
-                className={`side-bar02`}
-                style={{
-                  width: "260px",
-                  height: "410px",
-                  border: "1px black solid",
-                }}
-              >
-                側邊欄二
+              <div className={`side-bar02`}>
+                <NewSidebar />
+                <NewSidebar />
+                <NewSidebar />
+                <NewSidebar />
               </div>
             </div>
             <div className={`${style["right-main"]} d-flex flex-column`}>
