@@ -1,86 +1,5 @@
-<div class="membership">
 
-    <div class="membershipDetails">
-        <div class="currentLevel">當前會員等級</div>
-        <div class="currentLevelInfo">當前會員等級:</div>
-        <div class="nextLevelInfo">下個等級:</div>
-        <div class="upgradeAmountInfo">升級所需金額:</div>
-        <div class="levelBenefits">各等級所需條件和福利</div>
-        <div class="levelCards">
-            <div class="levelCard mNo">
-                <div class="levelTitle">會員等級</div>
-                <div class="levelDescription">條件</div>
-                <div class="levelPerks">福利</div>
-            </div>
-            <div class="levelCard">
-                <div class="levelIcon ">
-                    <img loading="lazy" srcset="..." class="levelImage" />
-                </div>
-                <div class="levelContent">
-                <div class="levelTitle">等級1</div>
-                <div class="levelDescription">條件</div>
-                <div class="levelPerks">福利</div>
-                </div>
-            </div>
-            <div class="levelCard">
-                <div class="levelIcon ">
-                    <img loading="lazy" srcset="..." class="levelImage" />
-                </div>
-                <div class="levelContent">
-                <div class="levelTitle">等級2</div>
-                <div class="levelDescription">新鮮蔬菜</div>
-                <div class="levelPerks">新鮮蔬菜</div>
-            </div>
-            </div>
-            <div class="levelCard">
-                <div class="levelIcon ">
-                    <img loading="lazy" srcset="..." class="levelImage" />
-                </div>
-                <div class="levelContent">
-                <div class="levelTitle">等級3</div>
-                <div class="levelDescription">新鮮蔬菜</div>
-                <div class="levelPerks">新鮮蔬菜</div>
-            </div>
-            </div>
-            <div class="levelCard">
-                <div class="levelIcon ">
-                    <img loading="lazy" srcset="..." class="levelImage" />
-                </div>
-                <div class="levelContent">
-                <div class="levelTitle">等級4</div>
-                <div class="levelDescription">新鮮蔬菜</div>
-                <div class="levelPerks">新鮮蔬菜</div>
-            </div>
-            </div>
-            <div class="levelCard">
-                <div class="levelIcon ">
-                    <img loading="lazy" srcset="..." class="levelImage" />
-                </div>
-                <div class="levelContent">
-                <div class="levelTitle">等級5</div>
-                <div class="levelDescription">新鮮蔬菜</div>
-                <div class="levelPerks">新鮮蔬菜</div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <div class="upgradeRules">升級/降級規則</div>
-</div>
-
-<style>
-    :root {
-
-        --font-size: 20px;
-        --gray02: #D9E1E6;
-        --gray01: #747e85;
-        --green03: #78CEA6;
-        --green04: #9CB4AC;
-        --black: #454545;
-        --green02: #50bf8b;
-        --green05: #DEF9EC;
-        --success1: #2ECC71;
-        --black80: #636E72;
-    }
+    
 
     .membership {
         display: flex;
@@ -276,4 +195,3 @@
             margin-left: 34px;
         }
     }
-</style>

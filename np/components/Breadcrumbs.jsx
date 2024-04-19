@@ -12,6 +12,7 @@ const pathNameMapping = {
   speakerDetail: "講師姓名",
   member: "會員",
   favor: "願望清單",
+  recipe: "食譜列表",
   // 繼續添加其他路徑和對應的中文名稱
 };
 

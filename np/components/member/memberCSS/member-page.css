@@ -98,13 +98,11 @@
   
   }
   
-  label {
-    color: var(--gray01, #747e85);
-  
-  }
+ 
   
   .lb {
-    font-size: var(--font-size);
+    font-size: 20px;
+    color:  #747e85;
   }
   
   @media (max-width:375px) {
@@ -116,7 +114,7 @@
   }
   
   .formCheck {
-    font-size: var(--font-size);
+    font-size: 20px;
     display: inline-flex;
     /* 将容器设置为内联 Flexbox 布局 */
     align-items: center;
@@ -141,7 +139,7 @@
   .btn1 {
     background-color: var(--green02, #50BF8B);
     border-color: var(--green02, #50BF8B);
-    font-size: var(--font-size);
+    font-size: 20px;
     width: 144px;
     height: 44px;
     color: #fefefe;
@@ -157,7 +155,7 @@
   }
   
   .reset {
-    font-size: var(--font-size);
+    font-size: 20px;
     color: var(--gray01);
     text-decoration: none;
   
@@ -175,8 +173,11 @@
       display: none;
     }
   }
-  input[type="file"] {
+  /* input[type="file"] {
 display: none;
+} */
+.inputfile{
+  display: none;
 }
   .userImageBig {
     width: 293px;
@@ -189,7 +190,7 @@ display: none;
   .btn2 {
     background-color: white;
     border: var(--green04) 2px solid;
-    font-size: var(--font-size);
+    font-size: 20px;
     width: 144px;
     height: 44px;
     color: var(--green04);
