@@ -3,6 +3,10 @@ import { GiKnifeFork } from "react-icons/gi";
 import { FaUserLarge } from "react-icons/fa6";
 import { LuAlarmClock } from "react-icons/lu";
 import { FaHeart } from "react-icons/fa";
+import { GiKnifeFork } from "react-icons/gi";
+import { FaUserLarge } from "react-icons/fa6";
+import { LuAlarmClock } from "react-icons/lu";
+import { FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UnsavedHeart from "@/components/recipe/detail/heart/unsaved-heart";
 import SavedHeart from "@/components/recipe/detail/heart/saved-heart";
@@ -49,24 +53,12 @@ export default function DetailTop() {
                     title="點擊加入收藏"
                     className={`${styles["heart"]} h-100`}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={16}
-                      height={15}
-                      viewBox="0 0 16 15"
-                      fill="none"
-                      className="h-100"
-                    >
-                      <path
-                        d="M14.0454 1.37628C12.3805 -0.0117086 9.9045 0.237952 8.37635 1.7805L7.77785 2.38384L7.17935 1.7805C5.65423 0.237952 3.17516 -0.0117086 1.5103 1.37628C-0.397615 2.96935 -0.497872 5.82856 1.20953 7.55538L7.0882 13.4937C7.46796 13.8771 8.08469 13.8771 8.46445 13.4937L14.3431 7.55538C16.0536 5.82856 15.9533 2.96935 14.0454 1.37628Z"
-                        fill="#C14D3C"
-                      />
-                    </svg>
+                    {saved ? <SavedHeart /> : <UnsavedHeart />}
                   </div>
                 </div>
                 <div className={styles["small-card"]}>
-                  <div className={styles["person"]}>
-                    <svg
+                  <div>
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={35}
                       height={36}
@@ -81,10 +73,12 @@ export default function DetailTop() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                    </svg>{" "}
-                    */}
+                    </svg> */}
                     <FaUserLarge className={styles["person"]} />
                   </div>
+                  <p
+                    className={`${styles["figma-p"]} ${styles["caption"]} text-center`}
+                  >
                   <p
                     className={`${styles["figma-p"]} ${styles["caption"]} text-center`}
                   >
@@ -92,6 +86,8 @@ export default function DetailTop() {
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
+                  <div>
+                    {/* <svg
                   <div>
                     {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -107,12 +103,16 @@ export default function DetailTop() {
                       />
                     </svg> */}
                     <GiKnifeFork className={styles["tableware"]} />
+                    </svg> */}
+                    <GiKnifeFork className={styles["tableware"]} />
                   </div>
                   <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
                     8樣食材
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
+                  <div>
+                    {/* <svg
                   <div>
                     {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -126,6 +126,8 @@ export default function DetailTop() {
                         fill="#50BF8B"
                         stroke="#50BF8B"
                       />
+                    </svg> */}
+                    <LuAlarmClock className={styles["clock"]} />
                     </svg> */}
                     <LuAlarmClock className={styles["clock"]} />
                   </div>
