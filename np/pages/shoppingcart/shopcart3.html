@@ -116,25 +116,23 @@
         border-radius: 5px;
       }
 
-      article {
+      /* article {
         border: 1px solid #d9d9d9;
-        /* width: 1200px; */
+        width: 1200px;
         background-color: #fff2d9;
         width: 70vw;
-      }
-      button {
+      } */
+
+      /* button {
         height: 50px;
         width: 100px;
-      }
+      } */
 
       a {
         height: 50px;
         width: 100px;
       }
-      .buttonMobile {
-        height: 50px;
-        width: 100px;
-      }
+      
       /* 大於375桌機樣式 */
       .line {
         width: 20vw;
@@ -145,6 +143,7 @@
       section {
         /* margin-top: 100px; */
         width: 70vw;
+        max-width: 1200px !important;
         /* color: #50bf8b; */
       }
 
@@ -160,21 +159,29 @@
         padding-bottom: 10px;
       }
 
-      article {
+      /* article {
         border: 1px solid #d9d9d9;
-        /* width: 1200px; */
+        width: 1200px;
         background-color: #fff2d9;
         width: 70vw;
-      }
-      button {
-        height: 50px;
-        width: 200px;
-      }
+      } */
+     
       /* 設大於375樣式 */
       @media (min-width: 376px) {
         .mobile {
           display: none;
         }
+        button {
+        height: 50px;
+        width: 200px;
+      }
+      .keepbuy {
+        background-color: #ffffff;
+        color: #78cea6;
+        border: 1px solid #78cea6;
+        height: 50px;
+        width: 200px;
+      }
       }
 
       /* 設小於375樣式 */
@@ -182,6 +189,21 @@
         .desktop {
           display: none;
         }
+        button {
+        height: 50px;
+        width: 100px;
+        background-color: #78cea6;
+        color: #ffffff;
+        border: 1px solid #78cea6;
+      }
+      .keepbuy {
+        height: 50px;
+        width: 100px;
+        background-color: #ffffff;
+        color: #78cea6;
+        border: 1px solid #78cea6;
+      }
+
       }
       .fc {
         color: #547d63;
@@ -195,17 +217,17 @@
         font-size: 14px;
       }
       /* 都有 */
-      .add {
+      /* .add {
         border: 1px solid #50bf8b;
         width: 100%;
         display: flex;
         justify-content: space-evenly;
         border-radius: 5px;
-      }
+      } */
       /* m */
-      aside {
+      /* aside {
         width: 350px;
-      }
+      } */
     </style>
   </head>
 
@@ -290,28 +312,16 @@
       </section>
       <!-- 折價券、付款 -->
       <div class="pay2 d-flex justify-content-center py-4" style="width: 100%">
-        <button
-          class="me-5"
-          type="submit"
-          style="
-            background-color: #ffffff;
-            color: #78cea6;
-            border: 1px solid #78cea6;
-          "
-        >
-          繼續購物
-        </button>
-        <button
-          class="ms-4"
-          type="submit"
-          style="
-            background-color: #78cea6;
-            color: #ffffff;
-            border: 1px solid #78cea6;
-          "
-        >
-          前往結帳
-        </button>
+        <a href="" class="keepbuy d-flex justify-content-center align-items-center mt-1" type="submit" style="
+       
+        ">返回上一頁</a>
+          <button class="ms-4 mt-1" type="submit" style="
+                background-color: #78cea6;
+                color: #ffffff;
+                border: 1px solid #78cea6;
+              ">
+            送出訂單.
+          </button>
       </div>
       <!-- </form> -->
       <!-- </div> -->
@@ -411,28 +421,17 @@
 
       <!-- 折價券、付款 -->
       <div class="pay2 d-flex justify-content-center py-4" style="width: 100%">
-        <button
-          class="me-5"
-          type="submit"
-          style="
-            background-color: #ffffff;
-            color: #78cea6;
-            border: 1px solid #78cea6;
-          "
-        >
-          繼續購物
-        </button>
-        <button
-          class="ms-4"
-          type="submit"
-          style="
-            background-color: #78cea6;
-            color: #ffffff;
-            border: 1px solid #78cea6;
-          "
-        >
-          前往結帳
-        </button>
+        <div class="pay2 d-flex justify-content-center py-4" style="width: 100%;">
+          <a href="" class="keepbuy d-flex justify-content-center align-items-center mt-1" type="submit" style="
+       
+        ">返回上一頁</a>
+          <button class="ms-4 mt-1" type="submit" style="
+                background-color: #78cea6;
+                color: #ffffff;
+                border: 1px solid #78cea6;
+              ">
+            送出訂單
+          </button>
       </div>
       <!-- </form> -->
       <!-- </div> -->
