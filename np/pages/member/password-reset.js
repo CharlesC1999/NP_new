@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import PasswordResetMain from "@/components/member/PasswordRsetMain";
+import PasswordResetMain from "@/components/member/PasswordResetMain";
 import Sidebar from "@/components/member/Sidebar";
 import styles from "@/styles/member-styles/Container1.module.css"
 import Header from "@/components/header"

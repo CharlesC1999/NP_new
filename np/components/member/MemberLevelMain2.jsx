@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./memberLevelMain2.module.css";
+import styles from "./MemberLevelMain2.module.css";
 
 
 function MemberLevelMain2(){
