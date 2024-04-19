@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./recipe-cards-grid.module.scss";
+import styles from "./RecipeCardsGrid.module.scss";
 
 export default function RecipeCardsGrid() {
   return (

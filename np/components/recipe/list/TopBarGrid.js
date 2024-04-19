@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./top-bar-list.module.scss";
+import styles from "./TopBarGrid.module.scss";
 
-export default function TopBar() {
+export default function TopBarGrid() {
   return (
     <>
       <div

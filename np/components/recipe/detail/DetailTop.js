@@ -2,7 +2,7 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UnsavedHeart from "@/components/recipe/detail/heart/unsaved-heart";
 import SavedHeart from "@/components/recipe/detail/heart/saved-heart";
-import styles from "./detail-top.module.scss";
+import styles from "./DetailTop.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function DetailTop() {

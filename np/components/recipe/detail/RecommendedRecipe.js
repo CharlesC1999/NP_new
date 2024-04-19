@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./recommended-recipe.module.scss";
+import styles from "./RecommendedRecipe.module.scss";
 
 export default function RecommendedRecipe() {
   return (

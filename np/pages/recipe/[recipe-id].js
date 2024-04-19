@@ -2,14 +2,14 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
-import DetailTop from "@/components/recipe/detail/detail-top";
-import SideBar from "@/components/recipe/list/side-bar";
-import DetailIngredients from "@/components/recipe/detail/detail-ingredients";
-import DetailSteps from "@/components/recipe/detail/detail-steps";
-import DetailRelatedProducts from "@/components/recipe/detail/detail-related-products";
-import DetailRecommendedRecipe from "@/components/recipe/detail/recommended-recipe";
-import Footer from "@/components/footer"
-import styles from "./recipe-detail.module.scss";
+import DetailTop from "@/components/recipe/detail/DetailTop";
+import SideBar from "@/components/recipe/list/SideBar";
+import DetailIngredients from "@/components/recipe/detail/DetailIngredients";
+import DetailSteps from "@/components/recipe/detail/DetailSteps";
+import DetailRelatedProducts from "@/components/recipe/detail/DetailRelatedProducts";
+import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipe";
+import Footer from "@/components/footer";
+import styles from "@/styles/recipe/recipe-detail.module.scss";
 
 export default function RecipeDetail() {
   return (
@@ -34,7 +34,7 @@ export default function RecipeDetail() {
           <DetailRecommendedRecipe />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
