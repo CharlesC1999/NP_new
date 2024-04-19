@@ -77,15 +77,30 @@
     }
     .info-right {
       gap: 35px;
+      .caption {
+        margin-top: 5px;
+        color: var(--gray01);
+      }
       .heart {
         padding-bottom: 25px;
-       
         svg {
           width: 40px;
         }
       }
-      .caption {
-        color: var(--gray01);
+      .person {
+        width: 35px;
+        height: 35px;
+        color: var(--green02);
+      }
+      .tableware {
+        width: 35px;
+        height: 35px;
+        color: var(--green02);
+      }
+      .clock {
+        width: 35px;
+        height: 35px;
+        color: var(--green02);
       }
     }
   }
