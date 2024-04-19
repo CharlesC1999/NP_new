@@ -809,6 +809,11 @@ border-radius: 5px;
 color: #2ECC71;
 background-color: var(--green05);
 }
+/* 滑鼠壓下去的時候按鈕效果 */
+.couponBtn:active {
+  background-color: #def9ec !important;
+  color: #50bf8b !important;;
+}
 .lowbuy {
 color: #454545;
 font-size: 20px;
