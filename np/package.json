@@ -38,13 +38,10 @@
     "react": "^18.2.0",
     "react-datepicker": "^6.8.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
     "react-hot-toast": "^2.4.1",
-    "sass": "^1.75.0"
-=======
+    "sass": "^1.75.0",
     "sass": "^1.75.0",
     "scss": "^0.2.4"
->>>>>>> f8a2660 (productsJSX)
   },
   "devDependencies": {
     "eslint": "^8",
