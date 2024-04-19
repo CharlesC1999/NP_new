@@ -17,6 +17,7 @@ import Filter from "@/components/product/Product-filter";
 import SideBarTop from "@/components/product/sideBar/SideBarCategory";
 import SideBarDetailFiltet from "@/components/product/sideBar/SideBarDetailFilter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+// import productCard from '@/components/product/productCard.js'
 
 // import productCard from '@/components/product/productCard.js'
 export default function ProductDetail() {
