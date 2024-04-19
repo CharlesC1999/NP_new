@@ -64,6 +64,15 @@
       .recipe-title {
         color: var(--black);
       }
+      .heart {
+        cursor: pointer;
+        &.saved {
+          color: rgb(193, 77, 60);
+        }
+        &.unsaved {
+          color: rgb(217, 217, 217);
+        }
+      }
       .card-content-middle {
         color: var(--black);
       }
