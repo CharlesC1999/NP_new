@@ -1,8 +1,14 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+<<<<<<<< HEAD:np/components/recipe/list/TopBarGrid.js
 import styles from "./TopBarGrid.module.scss";
 
 export default function TopBarGrid() {
+========
+import styles from "./TopBarList.module.scss";
+
+export default function TopBarList() {
+>>>>>>>> a67f04e (統一修改食譜類檔名):np/components/recipe/list/TopBarList.js
   return (
     <>
       <div
