@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import ButtonStyles from "@/styles/class_styles/DateTimePickerButtonStyles.module.css";
+import ButtonStyles from "./DateTimePickerButtonStyles.module.css";
 
 function CustomDatePicker() {
   const [date, setDate] = useState(null);

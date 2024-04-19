@@ -4,7 +4,6 @@ import SpeakerCardVertical from "@/components/speaker/speaker-list/speakerCardVe
 import Breadcrumbs from "@/components/Breadcrumbs";
 import HeaderComponent from "@/components/header";
 import Footer from "@/components/footer";
-import LectureCardVertical from "@/components/speaker/speaker-detail/LectureCardVertical";
 
 export default function Speaker() {
   return (

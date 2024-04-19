@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PriceRangeStyle from "@/styles/class_styles/priceRangeStyle.module.css";
+import PriceRangeStyle from "./priceRangeStyle.module.css";
 
 const RangeSlider = ({ min, max, onRangeChange }) => {
   const rangeBoxSet = {

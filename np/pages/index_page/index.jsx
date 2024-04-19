@@ -1,8 +1,10 @@
 import React from "react";
 import '@fortawesome/fontawesome-free/css/all.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from 'react';
 import styles from "./index.module.css";
-import Header from "@/components/header";
+import HeaderComponent from "@/components/header";
+import HeroSlider from "@/components/index/HeroSlider";
 import Card2 from "@/components/index/card2";
 import Card3 from "@/components/index/card3-Categories";
 import Card4Hot from "@/components/index/card4-Hot";
@@ -11,67 +13,13 @@ import Card6Recipe from "@/components/index/card6- recipe";
 import Footer from "@/components/footer";
 
 export default function Index() {
-  // Hero slider功能
-  const Slider = () => {
-    const sliders = ["Herosection01.png", "Herosection02.png"];
-    const [slideIndex, setSlideIndex] = useState(0);
-    
-    useEffect(() => {
-      const slideWidth = document.getElementById("Hero").offsetWidth;
-      const slideCount = sliders.length;
-      const slideImage = document.getElementById("slideImage");
-      slideImage.style.width = `${slideCount * slideWidth}px`;
-  
-      const autoSlide = setInterval(goNextSlide, 3000);
-  
-      return () => clearInterval(autoSlide);
-    }, []);
-  
-    const slideGo = (index) => {
-      const slideWidth = document.getElementById("Hero").offsetWidth;
-      const slideMove = 0 - (slideWidth * index) + "px";
-      const slideImage = document.getElementById("slideImage");
-      slideImage.style.left = slideMove;
-  
-      setSlideIndex(index);
-  
-      const pages = document.querySelectorAll("#pages li");
-      pages.forEach((page, i) => {
-        if (i === index) {
-          page.classList.add("current");
-        } else {
-          page.classList.remove("current");
-        }
-      });
-    };
-  
-    const goNextSlide = () => {
-      let nextIndex = slideIndex + 1;
-      if (nextIndex >= sliders.length) {
-        nextIndex = 0;
-      }
-      slideGo(nextIndex);
-    };
-  
-    const handleMouseEnter = () => {
-      clearInterval(autoSlide);
-    };
-  
-    const handleMouseLeave = () => {
-      const autoSlide = setInterval(goNextSlide, 5000);
-    };
-  
-    const handleResize = () => {
-      slideGo(slideIndex);
-    };
-  }
-  
+
   return (
     <>
-      <Header/>
-      
+      <HeaderComponent/>
+      <HeroSlider />
       <div className={`container ${styles.wrapper} ${styles.nutripollP}`}>
-        <div className={`${styles.wrapper} ${styles.container} ${styles.titleP}`}>
+        <div className={` container ${styles.titleP}`}>
           <h1 className={`${styles.titleNutripoll}`}>營養大選 Nutripolls</h1>
           <h6>精挑細選 賣自己想吃的好食物</h6><br />
         </div>
@@ -92,9 +40,9 @@ export default function Index() {
           </div>
           <div className={styles.card1Text}>
             <h3>從餐桌開始，做出更好的選擇</h3>
-            <h5>在您日常享用的每一口食物中，您是否真正放心？當食品添加物與過度加工成為常態，農藥殘留悄悄侵入我們的餐盤，健康食物的美味被誤解，進口食材的碳足跡無形中加重，而包裝浪費更是環境的隱憂</h5><br />
-            <h5>我們可以，也應該為自己、為環境作出更好的選擇！讓我們一同回歸飲食的本質 —「減法」的智慧。不是減少食物的選擇，而是減少對健康和環境的負擔</h5><br />
-            <h5>這場由內而外的轉變，就從您的餐桌開始</h5>
+            <h6>在您日常享用的每一口食物中，您是否真正放心？當食品添加物與過度加工成為常態，農藥殘留悄悄侵入我們的餐盤，健康食物的美味被誤解，進口食材的碳足跡無形中加重，而包裝浪費更是環境的隱憂</h6><br />
+            <h6>我們可以，也應該為自己、為環境作出更好的選擇！讓我們一同回歸飲食的本質 —「減法」的智慧。不是減少食物的選擇，而是減少對健康和環境的負擔</h6><br />
+            <h6>這場由內而外的轉變，就從您的餐桌開始</h6>
           </div>
         </div>
     </div>
