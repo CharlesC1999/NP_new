@@ -3,14 +3,12 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HeaderComponent from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import styles from "@/pages/product/product.module.css";
-import CateSidebar from "@/components/product/Cate-sidebar";
-import NewSidebar from "@/components/product/New-sidebar";
-import ProductCard from "@/components/product/Product-card";
+import styles from "@/styles/product/product.module.css";
+import CateSidebar from "@/components/product/CateSidebar";
+import NewSidebar from "@/components/product/Newsidebar";
+import ProductCard from "@/components/product/ProductCard";
 import ProductCardList from "@/components/product/ProductCardList"
-import ProductFilter from "@/components/product/Product-filter";
-
-
+import ProductFilter from "@/components/product/ProductFilter";
 import Footer from "@/components/Footer";
 
 export default function Product() {

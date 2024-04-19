@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./ProductCardList.module.css";
+import styles from "@/styles/Product/ProductCardList.module.css";
 
 function ProductCardList() {
 

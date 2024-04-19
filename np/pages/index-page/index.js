@@ -6,10 +6,10 @@ import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
 import HeroSlider from "@/components/index/HeroSlider";
 import Card2 from "@/components/index/card2";
-import Card3 from "@/components/index/card3-Categories";
-import Card4Hot from "@/components/index/card4-Hot";
-import Card5className from "@/components/index/card5-class";
-import Card6Recipe from "@/components/index/card6- recipe";
+import Card3 from "@/components/index/Card3Categories";
+import Card4Hot from "@/components/index/Card4Hot";
+import Card5class from "@/components/index/Card5class";
+import Card6Recipe from "@/components/index/Card6Recipe";
 import Footer from "@/components/Footer";
 
 export default function Index() {
@@ -132,8 +132,8 @@ export default function Index() {
             </a>
           </div>
           <div className={`Nutripollcard5`}>
-            <Card5className />
-            <Card5className />
+            <Card5class />
+            <Card5class />
           </div>
         </div>
         <div className={`card6Main`}>
