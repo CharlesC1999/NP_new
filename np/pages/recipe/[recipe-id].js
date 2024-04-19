@@ -22,7 +22,9 @@ export default function RecipeDetail() {
         {/* 側邊欄跟主要內容 */}
         <div className={`row ${styles["main"]} d-flex`}>
           {/* 側邊欄 */}
-          <SideBar />
+          <div className="col-3 d-none d-xxl-block">
+            <SideBar />
+          </div>
           {/* 主要內容 */}
           <div className={`col styles["main-content"]`}>
             <DetailIngredients />
