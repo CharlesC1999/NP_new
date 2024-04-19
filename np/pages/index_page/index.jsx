@@ -2,7 +2,7 @@ import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
-import styles from "./index.module.css";
+import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
 import HeroSlider from "@/components/index/HeroSlider";
 import Card2 from "@/components/index/card2";

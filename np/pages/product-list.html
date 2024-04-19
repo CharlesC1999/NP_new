@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../styles/globals.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .card1-body-list {
+            width: 205px;
+
+
+            display: flex;
+            /* 垂直方向排列 */
+            flex-direction: column;
+            margin: 15px 0px 0px 15px;
+
+            & .card1-title a {
+                color: var(--black);
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .card1-list {
+            width: 345px;
+            height: auto;
+            border: 1px solid var(--gray02);
+            border-radius: 5px;
+        }
+
+        .card1-list-img {
+            width: 80px;
+            height: 80px;
+            margin: 15px 0px 15px 15px;
+            
+
+            & img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+
+        .icon-button {
+            border: none;
+            padding: 0;
+            background: none;
+            /* 移除背景色 */
+            cursor: pointer;
+        }
+
+        .star-color {
+            color: var(--yellow02);
+        }
+
+        .heart-color {
+            color: var(--green02);
+            margin-right: 5px;
+        }
+
+        .product-card1 {
+            display: flex;
+            justify-content: flex-start;
+            gap: 7px;
+            row-gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card1 {
+            width: 210px;
+            height: 300px;
+            border: 1px solid var(--gray02);
+            border-radius: 5px;
+        }
+
+        .card1-img {
+            width: auto;
+            height: 178px;
+
+            & img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .card1-btn {
+            position: relative;
+            width: 30px;
+            height: 25px;
+            border-radius: 5px;
+            background-color: var(--green05);
+            
+
+            &:hover {
+                text-decoration: none;
+                color: #000;
+            }
+
+            & i {
+                color: var(--green02);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+            }
+        }
+
+        .card1-heart {
+            margin: 10px 0px 0px 0px;
+            width: auto;
+            height: 30px;
+        }
+
+        .icon-button[disabled] {
+            cursor: auto;
+        }
+
+        .card1-text {
+            margin-block: 0px;
+
+            & h6 {
+                color: var(--green03);
+                font-size: 14px;
+                margin-top: 5px;
+                font-weight: 700;
+            }
+
+            & p {
+                /* 橫線 */
+                text-decoration: line-through;
+                margin-top: 6px;
+                font-weight: 600;
+                font-size: 12px;
+            }
+
+        }
+        .heart-icon p {
+            font-size: 13px;
+            line-height: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card1-list d-flex">
+        <div class="card1-list-img">
+            <a href=""><img src="../public/index-images/image1.png" class="card4-img-top" alt="..."></a>
+        </div>
+        <div class="card1-body-list">
+            <h6 class="card1-title"><a href="">煙燻鮭魚</a></h6>
+            <div class="card1-heart d-flex justify-content-between">
+                <div class="heart-icon d-flex">
+                    <button disabled class="icon-button pb-3" type=""><i
+                            class="fa-solid fa-star star-color"></i></button>&emsp;
+                    <p>(4.0)</p>
+                </div>
+                <div class="">
+                    <button class="icon-button" type="button"><i
+                            class="fa-sharp fa-regular fa-heart heart-color"></i></button>
+                </div>
+            </div>
+            <div class="card1-text d-flex justify-content-between">
+                <div class="d-flex center">
+                    <h6>NT$ 600</h6>&emsp;
+                </div>
+                <div>
+                    <button class="card1-btn icon-button" type="button"><i
+                            class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -7,7 +7,9 @@ import styles from "@/pages/product/product.module.css";
 import CateSidebar from "@/components/product/Cate-sidebar";
 import NewSidebar from "@/components/product/New-sidebar";
 import ProductCard from "@/components/product/Product-card";
+import ProductCardList from "@/components/product/ProductCardList"
 import ProductFilter from "@/components/product/Product-filter";
+
 
 import Footer from "@/components/Footer";
 
@@ -56,7 +58,9 @@ export default function Product() {
             </div>
             <div className={`${styles.line}`}></div>
             <NewSidebar />
+            <div className={`${styles.Line}`}></div>
             <NewSidebar />
+            <div className={`${styles.Line}`}></div>
             <NewSidebar />
           </div>
         </div>
@@ -91,6 +95,11 @@ export default function Product() {
             <ProductCard />
             <ProductCard />
             <ProductCard />
+            <div className={`${styles.List}`}>
+              <ProductCardList/>
+              <ProductCardList/>
+            </div>
+            
           </div>
         </div>
       </div>

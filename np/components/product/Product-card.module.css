@@ -8,6 +8,7 @@
   
   .starColor{
     color: var(--yellow02);
+    margin-bottom: 15px;
   }
   
   .heartColor{
@@ -162,7 +163,6 @@
       }
     
       & i {
-        color: var(--green01);
         position: absolute;
         top: 50%;
         left: 50%;
