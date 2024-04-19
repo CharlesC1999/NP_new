@@ -9,7 +9,7 @@ const pathNameMapping = {
   class_page: "精選課程",
   ClassDetail: "動態，到時候抓classID去對名稱",
   speaker: "講師陣容",
-  speakerDetail:"講師姓名（動態）"
+  speakerDetail: "講師姓名（動態）",
   // 繼續添加其他路徑和對應的中文名稱
 };
 

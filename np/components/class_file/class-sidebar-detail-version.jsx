@@ -1,5 +1,5 @@
 import React from "react";
-import classSidebarStyles from "@/styles/class_styles/classSidebarStyles.module.css";
+import classSidebarStyles from "./classSidebarStyles.module.css";
 import DateTimePicker from "./classDateTimePicker";
 import ClassPriceRange from "./class-price-range";
 
