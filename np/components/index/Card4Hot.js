@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./card4-Hot.module.css";
+import styles from "./Card4Hot.module.css";
 import '@fortawesome/fontawesome-free/css/all.css';
 
 function Card4Hot() {

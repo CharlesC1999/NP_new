@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./New-sidebar.module.css";
+import styles from "@/styles/Product/Newsidebar.module.css";
 
 function Newsidebar() {
   return(

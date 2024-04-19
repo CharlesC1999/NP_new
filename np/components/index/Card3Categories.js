@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./card3-Categories.module.css";
+import styles from "./Card3Categories.module.css";
 
 function Card3Categories() {
   return(
