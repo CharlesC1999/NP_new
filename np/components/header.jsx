@@ -22,10 +22,10 @@ const HeaderComponent = () => {
 
   const handleItemClick = (name) => {
     setSelectedText(name);
-    setIsOpen(false); // 关闭下拉菜单
+    setIsOpen(false); // 關閉下拉
   };
 
-  // 点击外部关闭下拉菜单
+  // 點擊選單外範圍關閉
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
