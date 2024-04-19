@@ -1,11 +1,5 @@
 
-:root {
 
-  --font-size: 20px;
-
-  --success1: #2ECC71;
- 
-}
 
 .title {
         display: flex;
@@ -991,7 +985,7 @@ margin: 0;
   height: 33px;
   font-weight: bold;
   font-size: 12px;
-  color: var(--success1);
+  color: #50bf8b;
   background-color: var(--green05);
   border: var(--green05);
   border-radius: 5px;
@@ -1016,11 +1010,11 @@ margin: 0;
   font-weight: bold;
   font-size: 14px;
   background-color: var(--green05);
-  color: var(--success1);
+  color: #50bf8b;
 }
 .buyCardBtn:hover{
   background-color: var(--green05);
-  color: var(--success1);
+  color: #50bf8b;
 }
 /* 主區塊的部分 */
 .main{
