@@ -159,6 +159,7 @@
           margin-top: 15px;
         }
         .quantity {
+          width: 84px;
           border-radius: 5px;
           border: 2px solid var(--green05);
           button {
@@ -172,6 +173,7 @@
           }
         }
         .subtotal {
+          min-width: 50px;
           color: var(--black);
           margin-bottom: 0;
         }
