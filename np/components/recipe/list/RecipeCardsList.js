@@ -49,6 +49,7 @@ export default function RecipeCardsList() {
                     <div>
                       <FaHeart
                         onClick={(e) => {
+                          e.preventDefault();
                           notify();
                         }}
                         className={`${styles["heart"]} ${
