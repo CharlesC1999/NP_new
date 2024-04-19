@@ -10,8 +10,8 @@ const pathNameMapping = {
   ClassDetail: "動態，到時候抓classID去對名稱",
   speaker: "講師陣容",
   speakerDetail: "講師姓名",
-  member:"會員",
-  favor:"願望清單"
+  member: "會員",
+  favor: "願望清單",
   // 繼續添加其他路徑和對應的中文名稱
 };
 
