@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Products from "@/data/recipeDetail/Product.json";
+import CheckBoxCustom from "@/components/checkbox-custom/CheckBoxCustom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailRelatedProducts.module.scss";
 
@@ -56,7 +57,7 @@ export default function DetailRelatedProducts() {
             className={`${styles["related-products-top"]} d-flex justify-content-between`}
           >
             <div className={`${styles["top-left"]} d-flex align-items-end`}>
-              <input type="checkbox" />
+              <CheckBoxCustom />
               <p className={styles["check-all"]}>全選</p>
             </div>
             <div className={`${styles["top-right"]} d-xxl-flex d-none`}>
@@ -72,7 +73,7 @@ export default function DetailRelatedProducts() {
                 <div
                   className={`col-12 col-xxl-7 ${styles["middle-left"]} d-flex align-items-center`}
                 >
-                  <input type="checkbox" />
+                  <CheckBoxCustom />
                   <div className={styles["product-pic"]}>
                     <img
                       className="w-100 h-100 object-fit-cover"
