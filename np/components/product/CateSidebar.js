@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Cate-sidebar.module.css";
+import styles from "@/styles/Product/Catesidebar.module.css";
 
 function CateSidebar() {
   return (

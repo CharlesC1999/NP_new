@@ -33,10 +33,9 @@
 /* 熱門商品side-bar */
 
 & .hotBox {
-  width: 209px;
+  width: 198px;
   height: 91px;
-  margin: 10px;
-  border-bottom: var(--gray02) solid 2px;
+  margin-top: 10px;
 }
 
 & .hotImg {
