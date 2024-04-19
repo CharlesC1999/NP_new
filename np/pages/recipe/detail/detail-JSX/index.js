@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./detail.module.scss";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 
 export default function Index() {
@@ -416,7 +416,7 @@ export default function Index() {
             </div>
           </section>
         </div>
-        
+
         <div className={`${styles["recommended-recipe"]} d-flex flex-column`}>
           <div
             className={`col-12 ${styles["figma-h4"]} text-center text-xxl-start ${styles["recommended-recipes-title-m"]}`}

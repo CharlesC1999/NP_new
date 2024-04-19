@@ -1,14 +1,14 @@
 import React from "react";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ClassClassifacion from "@/components/class_file/class-classification";
-import ClassSidebar from "@/components/class_file/class-sidebar";
+import ClassClassifacion from "@/components/class_file/ClassClassification";
+import ClassSidebar from "@/components/class_file/ClassSidebar";
 // import ClassDateTimePicker from "@/components/class_file/classDateTimePicker";
-import ClassFilter from "@/components/class_file/class-filter";
-import ClassCard from "@/components/class_file/class-card-web";
-import ClassCardMobileList from "@/components/class_file/class-card-mobile-list";
-import ClassCardMobileGrid from "@/components/class_file/class-card-mobile-grid";
-import Footer from "@/components/footer";
+import ClassFilter from "@/components/class_file/ClassFilter";
+import ClassCard from "@/components/class_file/ClassCardCeb";
+import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
+import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
+import Footer from "@/components/Footer";
 
 const ForTest = () => {
   const containerStyle = {

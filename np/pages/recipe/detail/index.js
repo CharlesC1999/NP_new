@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 import DetailTop from "@/components/recipe/detail/detail-top";
 import SideBar from "@/components/recipe/list/side-bar";
@@ -8,7 +8,7 @@ import DetailIngredients from "@/components/recipe/detail/detail-ingredients";
 import DetailSteps from "@/components/recipe/detail/detail-steps";
 import DetailRelatedProducts from "@/components/recipe/detail/detail-related-products";
 import DetailRecommendedRecipe from "@/components/recipe/detail/recommended-recipe";
-import Footer from "@/components/footer"
+import Footer from "@/components/Footer";
 import styles from "./recipe-detail.module.scss";
 
 export default function RecipeDetail() {
@@ -34,7 +34,7 @@ export default function RecipeDetail() {
           <DetailRecommendedRecipe />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
