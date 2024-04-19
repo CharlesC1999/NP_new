@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./buycard.module.css";
+import styles from "./Buycard.module.css";
 
 
 function Buycard(){
