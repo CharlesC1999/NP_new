@@ -1,7 +1,7 @@
 import React from "react";
-import classSidebarStyles from "./classSidebarStyles.module.css";
-import DateTimePicker from "./ClassDateTimePicker";
-import ClassPriceRange from "./ClassPriceRange";
+import classSidebarStyles from "@/styles/class_styles/classSidebarStyles.module.css";
+import DateTimePicker from "./classDateTimePicker";
+import ClassPriceRange from "./class-price-range";
 
 const classSidebar = () => {
   return (
