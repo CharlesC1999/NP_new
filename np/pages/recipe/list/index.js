@@ -1,13 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 import TopBarList from "@/components/recipe/list/top-bar-list";
 import TopBarGrid from "@/components/recipe/list/top-bar-grid";
 import SideBar from "@/components/recipe/list/side-bar";
 import RecipeCardsList from "@/components/recipe/list/recipe-cards-list";
 import RecipeCardsGrid from "@/components/recipe/list/recipe-cards-grid";
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer";
 
 import styles from "./recipe-list.module.scss";
 

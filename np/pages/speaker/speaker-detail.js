@@ -3,8 +3,8 @@ import styles from "./speaker-detail.module.scss";
 import SpeakerCardHorizontal from "@/components/speaker/speaker-detail/SpeakerCardHorizontal";
 import SpeakerProfileSection from "@/components/speaker/speaker-detail/SpeakerProfileSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import HeaderComponent from "@/components/header";
-import Footer from "@/components/footer";
+import HeaderComponent from "@/components/Header";
+import Footer from "@/components/Footer";
 import LectureCardVertical from "@/components/speaker/speaker-detail/LectureCardVertical";
 
 export default function SpeakerDetail() {
@@ -24,7 +24,6 @@ export default function SpeakerDetail() {
             <SpeakerCardHorizontal />
           </div>
         </div>
-
         <div className={styles.navRight}>
           <div className={styles.profile}>
             <div className={styles.profileImg}>

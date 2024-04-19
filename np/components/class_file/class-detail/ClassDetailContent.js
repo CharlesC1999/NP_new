@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./classDetailContent.module.css";
-import MArticle from "./M-class-detail-content-article-web";
-import WArticle from "./W-class-detail-content-article-web";
+import MArticle from "./MClassDetailContentArticleWeb";
+import WArticle from "./WClassDetailContentArticleWeb";
 
 const ClassDetail = () => {
   // 用來管理哪個標籤頁是激活的狀態

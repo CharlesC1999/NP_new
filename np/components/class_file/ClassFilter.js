@@ -156,7 +156,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
               <span className={styles.sortOrder}>排序</span>
 
               <div className={styles.sortByOptions}>
-                {["Class ID", "Product Name", "Price", "Date Added"].map(
+                {["Class ID", "Class Name", "Price", "Date Added"].map(
                   (option, index) => (
                     <div
                       key={index}
