@@ -7,9 +7,11 @@ import BreadcrumbsStyles from "./BreadcrumbsStyles.module.css";
 
 const pathNameMapping = {
   class_page: "精選課程",
-  ClassDetail: "動態，到時候抓classID去對名稱",
+  "class-detail": "課程介紹",
   speaker: "講師陣容",
-  speakerDetail:"講師姓名（動態）"
+  speakerDetail: "講師姓名",
+  member: "會員",
+  favor: "願望清單",
   // 繼續添加其他路徑和對應的中文名稱
 };
 
@@ -26,7 +28,11 @@ const Breadcrumbs = () => {
   const breadcrumbs = pathSegments.map((segment, index) => {
     const baseHref = "/" + pathSegments.slice(0, index + 1).join("/");
     const href = `${baseHref}`; // 指向資料夾中的 index.js
-    const displayName = pathNameMapping[segment] || segment; // 使用映射的中文名稱或原名稱
+    // 如果是最後一個元素，名稱設為 '當前頁面'
+    const isLast = index === pathSegments.length - 1;
+    const displayName = isLast
+      ? "當前頁面"
+      : pathNameMapping[segment] || segment; // 使用映射的中文名稱或原名稱
     return { name: displayName, href };
   });
 

@@ -1,0 +1,67 @@
+/* typography */
+.figma-h3 {
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120.313%;
+}
+
+.figma-h4 {
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
+.figma-h5 {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
+.figma-h6 {
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 125%; /* 20px */
+  letter-spacing: 0.96px;
+}
+
+.figma-p {
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120.313%;
+}
+
+.ingredient-info {
+}
+.ingredients {
+  margin-left: 80px;
+  @media screen and (max-width: 376px) {
+    margin-left: 0px;
+    padding: 0;
+  }
+  gap: 56px;
+  margin-top: 30px;
+  .ingredient-info {
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--gray01);
+    .content {
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      color: var(--gray01);
+      @media screen and (max-width: 376px) {
+        font-size: 12px;
+      }
+    }
+  }
+}

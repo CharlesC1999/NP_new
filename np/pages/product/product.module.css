@@ -1,0 +1,110 @@
+/* 全域 */
+.wrapper {
+  width: 1440px;
+}
+
+.container {
+  background-color: var(--white, #fefefe);
+  /* display: flex; */
+  /* 容器頂部開始垂直排列，而不是水平排列 */
+  /* flex-direction: column; */
+
+  /*1440 左右兩邊間距為 100px */
+  padding: 0px 0px;
+}
+
+.Top40 {
+  /* border: #454545 solid 1px; */
+  margin-top: 40px;
+}
+@media (max-width: 375px) {
+  /*排版*/
+  .container {
+    padding: 0 10px;
+  }
+
+  .wrapper {
+    width: 100%;
+  }
+}
+
+/* 分類side-bar 框架 */
+/* side-bar總width */
+.sideBar {
+  width: 250px;
+  margin-right: 40px;
+}
+
+.sideTitle {
+  & h5 {
+    padding-bottom: 5px;
+    /* 將底線設為從左到右漸變 */
+  }
+}
+.line {
+  height: 4px;
+  background: linear-gradient(to right, var(--green03) 30%, #d9e1e6c3 30%);
+}
+
+.sideBarBox {
+  padding: 25px;
+  width: auto;
+  height: auto;
+  margin-bottom: 66px;
+  border: var(--gray02) solid 1px;
+  border-radius: 20px;
+  /*水平右,下,模糊化*/
+  box-shadow: 2px 2px 2px var(--gray02);
+  /*陰影化*/
+}
+
+/* .<!-- product (上方限時特惠商品) --> */
+.DiscountTitle {
+  color: var(--green02);
+  font-weight: 600;
+}
+
+.DiscountBox {
+  background-color: #b3b3b3;
+  width: auto;
+  height: 420px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* side-bar 以及 上方優惠商品文字及圖片 (不顯示) RWD*/
+@media (max-width: 375px) {
+  .Top40 {
+    /* border: #454545 solid 1px; */
+    margin-top: 0px;
+  }
+  .sideBar {
+    display: none !important;
+  }
+  .DiscountTitleMain {
+    display: none;
+  }
+  .DiscountBox {
+    display: none;
+  }
+}
+
+/*product card1 商品卡片*/
+/* 商品總width 框架 */
+.productW {
+  /* border: #454545 solid 1px; */
+  width: 915px;
+}
+
+.productCard1 {
+  display: flex;
+  justify-content: flex-start;
+  gap: 7px;
+  row-gap: 30px;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
