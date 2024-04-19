@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import BreadcrumbsStyles from "./BreadcrumbsStyles.module.css";
+import Product from "@/pages/product/product";
 
 //  這裡大家共編一下，因為檔案命名是英文的，但麵包屑需要是中文的，所以大家請放上英文檔名以及對應的中文名稱
 
@@ -12,6 +13,9 @@ const pathNameMapping = {
   speakerDetail: "講師姓名",
   member: "會員",
   favor: "願望清單",
+  product: "商品列表",
+  "product-detail": "商品介紹",
+
   // 繼續添加其他路徑和對應的中文名稱
 };
 

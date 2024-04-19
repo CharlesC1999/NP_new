@@ -14,33 +14,31 @@ import ProductSection02 from "@/components/product/ProductSection02";
 import CateSidebar from "@/components/product/Cate-sidebar";
 import NewSidebar from "@/components/product/New-sidebar";
 import Filter from "@/components/product/Product-filter";
+import SideBarTop from "@/components/product/sideBar/SideBarCategory";
+import SideBarDetailFiltet from "@/components/product/sideBar/SideBarDetailFilter";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 // import productCard from '@/components/product/productCard.js'
 export default function ProductDetail() {
   return (
     <>
       <HeaderComponent />
+      <Breadcrumbs />
       <main className={`my-5`}>
         <div
           className={`d-flex justify-content-center flex-column align-items-center`}
         >
           <div
-            className={`d-flex flex-column flex-sm-row justify-content-center `}
+            className={`${style["MainContent"]} d-flex flex-column flex-sm-row justify-content-center `}
           >
             <div
               className={`${style["left-side"]} d-flex flex-column d-none d-sm-flex`}
             >
               <div>
-                <CateSidebar />
-                <CateSidebar />
-                <CateSidebar />
-                <CateSidebar />
+                <SideBarTop />
               </div>
               <div className={`side-bar02`}>
-                <NewSidebar />
-                <NewSidebar />
-                <NewSidebar />
-                <NewSidebar />
+                <SideBarDetailFiltet />
               </div>
             </div>
             <div className={`${style["right-main"]} d-flex flex-column`}>
