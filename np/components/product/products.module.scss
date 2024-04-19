@@ -18,14 +18,13 @@
 }
 
 .right-main {
-  //mainPic
   width: 1090px;
   .p-img {
     width: 520px;
     height: 360px;
   }
   .product-pic {
-    width: 100%;
+    width: 520px;
   }
   .sliders {
     width: 520px;
@@ -42,6 +41,7 @@
         background: rgba(0, 0, 0, 0.1);
       }
     }
+
     .next-pic {
       font-size: 1.5rem;
       color: var(--white);
@@ -54,35 +54,11 @@
         background: rgba(0, 0, 0, 0.1);
       }
     }
+
     .pic-item {
       cursor: pointer;
       width: 110px;
       height: 110px;
-    }
-  }
-  //@media mainPic
-  @media (width: 375px) {
-    .right-main {
-      width: 320px;
-      .product-pic {
-        width: 100%;
-        .silders {
-          width: 100%;
-        }
-      }
-    }
-  }
-
-  // section2
-  .detail-btn,
-  .com-btn {
-    width: 140px;
-    height: 40px;
-    font-size: 1.3rem;
-    border: var(--green03) solid 1px;
-    color: var(--green03);
-    &:hover {
-      color: var(--white);
     }
   }
 
@@ -91,7 +67,9 @@
     font-size: 1.5rem;
     margin-block: 20px 30px;
   }
-
+  // .truck-text-box {
+  //   flex-shrink:;
+  // }
   .big-truck-text-box {
     color: var(--black);
     padding-bottom: 40px;
@@ -114,12 +92,77 @@
     font-weight: 900;
   }
 
+  .product-text {
+    margin-left: 60px;
+    width: 380px;
+    .h3 {
+      font-size: 2.3rem;
+    }
+    .p {
+      font-size: 1.1rem;
+    }
+    .d-price {
+      font-size: 1.5rem;
+      text-decoration: line-through;
+      color: var(--black);
+    }
+    .price {
+      font-size: 2.2rem;
+      color: var(--green02);
+    }
+    .star-row {
+      .star {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--yellow02);
+        .star-text {
+          color: var(--gray01);
+          font-size: 1.2rem;
+        }
+      }
+      .icon-link .fa-heart {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--green02);
+      }
+    }
+    .amount {
+      width: 380px;
+      height: 50px;
+      font-size: 1.8rem;
+      border: var(--green02) solid 1px;
+      border-radius: 10px;
+    }
+    .buy-btn {
+      width: 380px;
+      height: 50px;
+      font-size: 1.8rem;
+      border: var(--green02) solid 1px;
+      border-radius: 10px;
+      background: white;
+      color: var(--green02);
+      &:hover {
+        background-color: var(--green02);
+        color: var(--white);
+      }
+    }
+  }
+  .detail-btn,
+  .com-btn {
+    width: 140px;
+    height: 40px;
+    font-size: 1.3rem;
+    border: var(--green03) solid 1px;
+    color: var(--green03);
+    &:hover {
+      color: var(--white);
+    }
+  }
   .p-detail {
     display: block;
     box-shadow: var(--gray03) 0 3px 15px 5px;
   }
 
-  //media section2
   @media (width: 375px) {
     .p-detail {
       box-shadow: none;
@@ -129,7 +172,7 @@
     .com-btn {
       width: 95px;
       height: 30px;
-      font-size: 1rem;
+      font-size: 1.2rem;
       border: var(--green03) solid 2px;
       color: var(--green03);
       &:hover {
@@ -159,7 +202,7 @@
     }
   }
 }
-//media mainText
+
 @media (width: 375px) {
   .right-main {
     width: 320px;
@@ -170,7 +213,6 @@
         height: 230px;
       }
       .sliders {
-        width: 320px;
         .prov-pic,
         .next-pic {
           width: 15px;
@@ -230,7 +272,6 @@
   }
 }
 
-//section 3
 .section3 {
   width: 1100px;
   .mlike {
@@ -355,7 +396,6 @@
   }
 }
 
-//@media section3
 @media (width: 375px) {
   .section3 {
     width: 375px;
