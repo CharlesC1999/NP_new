@@ -1,9 +1,5 @@
 import "@/styles/globals.css";
-//  Datepicker
-import "react-datepicker/dist/react-datepicker.css";
-import "@/styles/class_styles/CustomDateTimePicker.css";
-//  Contexts
-import { AuthProvider } from "../contexts/AuthContext";
+// import "@/node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 export default function App({ Component, pageProps }) {
   return (
