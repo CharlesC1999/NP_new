@@ -1,7 +1,7 @@
-.box-shadow {
+.boxShadow{
     box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.13);
   }
-.lecture {
+.lecture{
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -12,7 +12,7 @@
       width: 166px;
       gap: 0px;
     }
-    & .lecture-img {
+    & .lectureImg{
       width: 245px;
       height: 142px;
       @media (max-width: 375px) {
@@ -25,7 +25,7 @@
         object-fit: cover;
       }
     }
-    & .lecture-card-body {
+    & .lectureCardBody{
       display: flex;
       padding: 15px;
       flex-direction: column;
@@ -68,7 +68,7 @@
       }
     }
 
-    .btn {
+    .btn{
       display: flex;
       width: 95px;
       height: 35px;

@@ -1,0 +1,49 @@
+.list-layout {
+  .main-content {
+    height: 1000px;
+    .recipe-card {
+      padding: 15px;
+      gap: 30px;
+      border-radius: 5px;
+      border-right: 1px solid var(--gray02);
+      border-bottom: 1px solid var(--gray02);
+      @media screen and (max-width: 376px) {
+        gap: 0px;
+      }
+      .card-pic {
+        img {
+          border-radius: 5px;
+        }
+        @media screen and (max-width: 376px) {
+          padding: 0;
+        }
+      }
+      .recipe-title {
+        color: var(--black);
+      }
+      .card-content-middle {
+        color: var(--black);
+      }
+      .bottom-left {
+        .date {
+          color: var(--gray01);
+        }
+        .recipe-category {
+          color: var(--gray01);
+        }
+        @media screen and (max-width: 376px) {
+          margin-bottom: 10px;
+        }
+      }
+      .btn-more-detail {
+        border-radius: 5px;
+        background: var(--green02);
+        padding: 8px 15px;
+        border: none;
+        @media screen and (max-width: 376px) {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

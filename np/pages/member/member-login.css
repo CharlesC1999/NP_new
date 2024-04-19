@@ -9,10 +9,9 @@ body {
   margin: 0;
 }
 
-
 .MainText {
   width: 500px;
-  .h3 {
+  & .h3 {
     font-size: 36px;
     color: var(--green03);
     margin-block: 30px;
@@ -21,26 +20,29 @@ body {
 }
 
 main {
-  background-image: url(../public/login-Image/login-bg02.png);
+  background-image: url(../../public/login-Image/login-bg02.png);
   border: var(--gray01) solid 2px;
   height: 100svh;
   font-size: 16px;
-  .main {
+  & .main {
     border: var(--gray02) solid 2px;
+    & .h3 {
+      color: var(--green03);
+    }
   }
-  .btn {
+  & .btn {
     font-size: 16px;
     margin-bottom: 30px;
     width: 315px;
   }
-  .icon-group i {
+  & .icon-group i {
     font-size: 20px;
     cursor: pointer;
 
     color: var(--green02);
     margin-bottom: 30px;
   }
-  .input-group {
+  & .input-group {
     margin-inline: auto;
     width: 315px;
     padding-bottom: 20px;
@@ -49,48 +51,49 @@ main {
     label {
       color: var(--green03);
     }
-    input {
+    & input {
       border: none;
       outline: none;
     }
   }
-  .member {
+  & .member {
     width: 315px;
     a {
       color: var(--green03);
     }
   }
-  .social {
+  & .social {
     width: 315px;
-    a {
+    & a {
       color: var(--green03);
     }
   }
 }
 @media (max-width: 375px) {
-  main{
+  main {
     background-image: none;
     background-color: var(--gray03);
-    .main {
-      background-image:none;
+    & .main {
+      background-image: none;
       background-color: var(--white);
-       width: 330px;
-       padding:30px 15px 30px 15px ;
-       .btn {
+      width: 330px;
+      padding: 30px 15px 30px 15px;
+      & .h3 {
+        font-size: 1.9rem;
+      }
+      & .btn {
         font-size: 16px;
         margin-bottom: 30px;
         width: 300px;
         background: var(--green01);
       }
-      .MainText{
+      & .MainText {
         width: 300px;
-    
-        .input-group {
+
+        & .input-group {
           width: 300px;
         }
       }
-      
-      }
+    }
   }
-  
 }
