@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./detail-steps.module.scss";
+import styles from "./DetailSteps.module.scss";
 
 export default function DetailSteps() {
   return (

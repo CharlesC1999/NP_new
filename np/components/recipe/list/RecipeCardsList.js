@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./recipe-cards-list.module.scss";
+import styles from "./RecipeCardsList.module.scss";
 
 export default function RecipeCardsList() {
   return (
