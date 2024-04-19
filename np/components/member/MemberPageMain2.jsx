@@ -79,7 +79,7 @@ import styles from "./MemberPageMain2.module.css"
         </div>
         <a href className={`${styles.reset}   container-fluid text-end `}>[重設密碼]</a>
         <div className={`${styles.btnCenter} ${styles.box} row mb-3 align-items-start `}>
-          <button type="submit" className={`${styles.btn1 } ${styles.btnmargin} btn`}>確認修改</button>
+          <button type="submit" className={`${styles.btn1 } ${styles.btnmargin} btn`}>修改資料</button>
         </div>
       </div>
       <div className={styles.mainRight}>
