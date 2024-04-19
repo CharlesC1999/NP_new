@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./recommended-recipe.module.scss";
+import styles from "./RecommendedRecipe.module.scss";
 
 export default function RecommendedRecipe() {
   return (
@@ -10,9 +10,9 @@ export default function RecommendedRecipe() {
       >
         其他推薦食譜
       </div>
-      <div className={`row ${styles["recipe-cards"]}`}>
+      <div className={`row ${styles["recipe-cards"]} justify-content-between`}>
         <div
-          className={`col-6 col-xxl-4 ${styles["recipe-card"]} d-flex flex-column`}
+          className={`col-6 col-xxl-3 ${styles["recipe-card"]} d-flex flex-column`}
         >
           <div className={`${styles["card-pic"]} w-100`}>
             <img
@@ -36,7 +36,7 @@ export default function RecommendedRecipe() {
           </div>
         </div>
         <div
-          className={`col-6 col-xxl-4 ${styles["recipe-card"]} d-flex flex-column`}
+          className={`col-6 col-xxl-3 ${styles["recipe-card"]} d-flex flex-column`}
         >
           <div className={`${styles["card-pic"]} w-100`}>
             <img
@@ -59,8 +59,32 @@ export default function RecommendedRecipe() {
           </div>
         </div>
         <div
-          className={`col-4 d-none d-xxl-inline-flex ${styles["recipe-card"]} d-flex flex-column`}
-          // className={`col-6 col-xxl-4 ${styles['recipe-card']} d-flex flex-column`}
+          className={`col-4 col-xxl-3 d-none d-xxl-inline-flex ${styles["recipe-card"]} d-flex flex-column`}
+          // className={`col-6 col-xxl-3 ${styles['recipe-card']} d-flex flex-column`}
+        >
+          <div className={`${styles["card-pic"]} w-100`}>
+            <img
+              className="w-100 h-100 object-fit-cover"
+              src="/images/recipe/detail/38f958b0414526b33f0cd55c033c8be6.jpg"
+              alt=""
+            />
+          </div>
+          <div
+            className={`${styles["card-content"]} d-flex flex-column align-items-center`}
+          >
+            <p className={`${styles["recipe-name"]} ${styles["figma-h5"]}`}>
+              法式經典油封鴨腿
+            </p>
+            <p
+              className={`${styles["recipe-description"]} ${styles["truncate"]}`}
+            >
+              法式經典油封鴨腿是一道傳統的法國美食，以鴨腿作為主要材料。首先，將鴨腿以低溫慢烤至皮脆肉嫩，然後浸泡在橄欖油中長時間保存，以增添風味並保持肉質的鮮嫩。這道菜通常搭配著新鮮的草莓或是其他時令水果，以及香草調味的沙拉一同享用。法式經典油封鴨腿擁有豐富的口感和深厚的風味，是法國料理中不可或缺的精品之一。
+            </p>
+          </div>
+        </div>
+        <div
+          className={`col-4 col-xxl-3 d-none d-xxl-inline-flex ${styles["recipe-card"]} d-flex flex-column`}
+          // className={`col-6 col-xxl-3 ${styles['recipe-card']} d-flex flex-column`}
         >
           <div className={`${styles["card-pic"]} w-100`}>
             <img

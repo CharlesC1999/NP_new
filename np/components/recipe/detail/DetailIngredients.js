@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./detail-ingredients.module.scss";
+import styles from "./DetailIngredients.module.scss";
 
-export default function DetailMain() {
+export default function DetailIngredients() {
   return (
     <>
       <div className={`row ${styles["ingredients-section"]}`}>

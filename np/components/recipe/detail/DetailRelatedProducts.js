@@ -1,6 +1,6 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./detail-related-products.module.scss"
+import styles from "./DetailRelatedProducts.module.scss"
 
 
 export default function DetailRelatedProducts() {
