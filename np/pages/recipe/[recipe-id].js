@@ -1,7 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
+<<<<<<< HEAD:np/pages/recipe/[recipe-id].js
 import DetailTop from "@/components/recipe/detail/DetailTop";
 import SideBar from "@/components/recipe/list/SideBarRecipe";
 import DetailIngredients from "@/components/recipe/detail/DetailIngredients";
@@ -10,6 +11,16 @@ import DetailRelatedProducts from "@/components/recipe/detail/DetailRelatedProdu
 import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipe";
 import Footer from "@/components/footer";
 import styles from "@/styles/recipe/recipe-detail.module.scss";
+=======
+import DetailTop from "@/components/recipe/detail/detail-top";
+import SideBar from "@/components/recipe/list/side-bar";
+import DetailIngredients from "@/components/recipe/detail/detail-ingredients";
+import DetailSteps from "@/components/recipe/detail/detail-steps";
+import DetailRelatedProducts from "@/components/recipe/detail/detail-related-products";
+import DetailRecommendedRecipe from "@/components/recipe/detail/recommended-recipe";
+import Footer from "@/components/Footer";
+import styles from "./recipe-detail.module.scss";
+>>>>>>> 5890885 (檔案調整，命名調整，麵包屑調整):np/pages/recipe/detail/index.js
 
 export default function RecipeDetail() {
   return (
