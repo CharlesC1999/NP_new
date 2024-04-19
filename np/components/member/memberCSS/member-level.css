@@ -817,7 +817,7 @@
     }
    @media (max-width:375px) {
     .currentLevelInfo {
-      font-size: var(--font-size-m);
+      font-size: 14px;
     }
    }
     .nextLevelInfo {
@@ -827,7 +827,7 @@
     }
     @media (max-width:375px) {
       .nextLevelInfo{
-        font-size: var(--font-size-m);
+        font-size: 14px;
       }
     }
 
@@ -838,7 +838,7 @@
     }
     @media (max-width:375px) {
       .upgradeAmountInfo{
-        font-size: var(--font-size-m);
+        font-size: 14px;
       }
     }
     .levelBenefits {
