@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
-import Header from "@/components/header";
-import ClassClassifacion from "@/components/class_file/class-classification";
+import Header from "@/components/Header";
+import ClassClassifacion from "@/components/class_file/ClassClassification";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ClassSidebar from "@/components/class_file/class-sidebar";
-import ClassFilter from "@/components/class_file/class-filter";
-import ClassCard from "@/components/class_file/class-card-web";
-import ClassCardMobileGrid from "@/components/class_file/class-card-mobile-grid";
-import ClassCardMobileList from "@/components/class_file/class-card-mobile-list";
+import ClassSidebar from "@/components/class_file/ClassSidebar";
+import ClassFilter from "@/components/class_file/ClassFilter";
+import ClassCard from "@/components/class_file/ClassCardCeb";
+import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
+import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import CardStyle from "@/styles/class_styles/CardStyle.module.css";
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer";
 
 const ClassList = () => {
   const containerStyle = {

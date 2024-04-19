@@ -224,16 +224,8 @@
   }
 }
 
-.search-product{
-  width: auto;
-  height: 30px;
-  margin-block: 20px;
-  background-color: var(--green02);
-
-}
-
 /* 總共 #項商品 排序 */
-.product-count-container {
+.count-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -680,7 +672,7 @@
     margin: 0px;
     margin-top: 5px;
   }
-  .cheart-icon {
+  .heart-icon {
     align-items: center;
     justify-content: center;
   
