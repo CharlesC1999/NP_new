@@ -7,7 +7,7 @@ export default function PaginationRounded() {
     <Stack spacing={2}>
       <Pagination
         count={10} //之後根據比數改寫，目前先寫死
-        variant="outlined"
+        // variant="outlined"
         shape="rounded"
         sx={{
           "& .MuiPaginationItem-root": {
