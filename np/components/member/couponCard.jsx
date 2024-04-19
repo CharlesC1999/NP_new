@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./couponCard.module.css";
+import styles from "./CouponCard.module.css";
 
 
 function CouponCard(){

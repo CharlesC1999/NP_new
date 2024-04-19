@@ -1,13 +1,14 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MemberLevel from "@/components/member/memberLevel";
+
+import CouponCard from "@/components/member/CouponCard";
 
 
 
 export default function Member() {
     return (
       <>
-       <MemberLevel/>
+       <CouponCard/>
       </>
     );
   }

@@ -1,13 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Sidebar from "@/components/member/siber";
+import Cat from "@/components/member/Cat";
 
 
 
 export default function Member() {
     return (
       <>
-       <Sidebar/>
+       <Cat/>
       </>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./cat.module.css";
+import styles from "./Cat.module.css";
 
 
 function Cat(){

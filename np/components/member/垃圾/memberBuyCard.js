@@ -1,6 +1,6 @@
 import React from "react";
 
-import Buycard from "@/components/member/buycard";
+import Buycard from "@/components/member/Buycard";
 
 
 
