@@ -61,7 +61,7 @@ const HeaderComponent = () => {
               </svg>
             </button>
 
-            <a href="/">
+            <a href="#">
               <img
                 src="/images/np_logo.png"
                 alt="Company Logo"
