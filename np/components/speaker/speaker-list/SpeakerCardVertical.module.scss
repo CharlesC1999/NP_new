@@ -1,9 +1,9 @@
 /* 講師卡片 */
-.speaker-card-link{
+.speakerCardLink{
   text-decoration: none;
   cursor: pointer;
 }
-.speaker {
+.speaker{
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -19,7 +19,7 @@
     margin-bottom: 15px;
   }
 }
-.speaker-img {
+.speakerImg{
   width: 265px;
   height: 265px;
   @media (max-width: 375px) {
@@ -32,7 +32,7 @@
     object-fit: cover;
   }
 }
-.speaker-name {
+.speakerName{
   display: flex;
   flex-direction: column;
   align-items: center;

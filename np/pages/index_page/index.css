@@ -33,16 +33,17 @@ button:hover {
   /* padding: 23px 0; */
 }
 
+
 /* hero */
 .Hero {
   max-width: 1920px;
-  margin: 0 auto;
-  padding: 36px 12px;
+  margin: auto;
+  padding: 36px 0px;
   gap: 404px;
 }
 
 .slider {
-  height: 893px;
+  height: 905px;
   background: #000;
   overflow: hidden;
 }
@@ -52,7 +53,7 @@ button:hover {
   transition: .4s;
 
   & li {
-    height: 893px;
+    height: 905px;
     flex: 1 0 0;
 
     & img {
@@ -87,7 +88,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
+  width: 30px;
   opacity: .5;
 
   &:hover {
@@ -169,6 +170,11 @@ button:hover {
 }
 
 /* <!-- Nutripoll-p and button--> */
+
+.title-Nutripoll{
+  font-weight: 600;
+  color: var(var(--black));
+}
 .nutripoll-p {
   display: flex;
   padding: 15px 0px;
@@ -190,6 +196,12 @@ button:hover {
 .text-Nutripoll {
   display: flex;
   flex-direction: column;
+  & h5{
+    font-weight: 400;
+    line-height: 30.8px; /* 40.8px */
+
+  }
+
 }
 
 .button-Nutripoll {
@@ -271,7 +283,7 @@ button:hover {
 
 .card1-img {
   width: 650px;
-  height: 300px;
+  height: 270px;
   display: flex;
   flex-direction: column;
 
@@ -290,9 +302,10 @@ button:hover {
   height: auto;
   margin-left: 40px;
 
-  & h4 {
+
+  & h3 {
     padding-bottom: 5%;
-    
+    font-weight: 700;
   }
 }
 
@@ -326,12 +339,12 @@ button:hover {
     flex-direction: column;
     color: var(--black, #454545);
     width: 375px;
-    padding: 0px 20px;
+    padding: 0px 15px;
     margin-left: 0px;
     height: auto;
 
     /* border: 1px solid var(--black); */
-    & h4 {
+    & h3 {
       padding-top: 5%;
       padding-bottom: 10px;
       text-align: center;
@@ -372,13 +385,25 @@ button:hover {
     object-fit: hidden;
   }
 }
+.card2-h6{
+  width: auto;
+  height: 60px;
+}
+.card2-btn{
+  color: var(--green02) ;
+  border: var(--green02) 1px solid;
+  &:hover{
+    background-color: var(--green02);
+    border: var(--green02) 1px solid;
+  }
+}
 
 .card2-box-text {
   width: 200px;
 
-  & h5,
-  h6 {
+  & h5{
     padding-bottom: 10%;
+    font-weight: 700;
   }
 }
 
@@ -386,7 +411,7 @@ button:hover {
 @media (max-width: 375px) {
   .Nutripoll-card2 {
     display: flex;
-    padding: 56px 0px;
+    padding: 30px 0px 56px 0px;
     justify-content: space-between;
     row-gap: 20px;
     flex-wrap: wrap;
@@ -414,7 +439,7 @@ button:hover {
 
     /* 垂直居中 */
     & h5 {
-      font-size: 14px;
+      font-size: 15px;
       text-align: center;
     }
 
@@ -433,7 +458,10 @@ button:hover {
 }
 
 /* <!-- Nutripoll-card3 商品分類 --> */
+.me-auto{
+  font-weight: 700;
 
+}
 .arrow {
   width: 25px;
   height: 25px;
@@ -460,7 +488,8 @@ button:hover {
   background-color: var(--green05);
 
   & h6 {
-    text-align: center
+    text-align: center;
+    font-weight: 600;
   }
 }
 
@@ -532,7 +561,7 @@ button:hover {
 
   &:hover {
     text-decoration: none;
-    color: #000;
+    color: var(--black);
   }
 }
 
@@ -586,7 +615,6 @@ Nutripoll-card5 熱門課程 */
   height: 275px;
   display: flex;
   flex-direction: column;
-  
 
   & img {
     width: 100%;
@@ -595,9 +623,27 @@ Nutripoll-card5 熱門課程 */
     border-radius: 5px 0px 0px 5px;
   }
 }
+
 .card5-text-rwd{
-  width: 250px;
+  width: 100px;
   height: auto;
+  margin-left: 75px;
+  padding-top: 5px;
+  & h5{
+    font-weight: 700;
+    overflow: hidden;
+    /* 超出部分隐藏 */
+    text-overflow: ellipsis;
+    /* 超出部分省略 */
+    display: -webkit-box;
+    /* 這個屬性告訴瀏覽器將元素顯示為一個或多個內聯框 */
+    -webkit-box-orient: vertical;
+    /* 垂直方向排列 */
+    /* 當使用這個屬性時，可以結合其他屬性來控製文字的顯示方式 */
+    -webkit-line-clamp: 2;
+    /* 顯示的行數 */
+    
+  }
 }
 .card5-text {
   display: flex;
@@ -628,8 +674,9 @@ Nutripoll-card5 熱門課程 */
   }
 
   & .card5-p {
-    border-top: var(--red) 1px solid;
+    border-top: var(--yellow03) 1px solid;
     padding: 10px 0px 0px 0px;
+    font-weight: 600;
 
     & .line-p {
       /* 橫線 */
@@ -642,7 +689,8 @@ Nutripoll-card5 熱門課程 */
   }
 
   & h6 {
-    color: var(--red);
+    color: var(--yellow03);
+    font-weight: 700;
   }
 }
 
@@ -687,8 +735,13 @@ Nutripoll-card5 熱門課程 */
   height: auto;
   margin-left: 10px;
   justify-content: center;
+
+  
   & a {
     text-decoration: none;
+    & h5{
+      font-weight: 700;  
+    }
   }
 
   & p {
@@ -703,6 +756,7 @@ Nutripoll-card5 熱門課程 */
     /* 當使用這個屬性時，可以結合其他屬性來控製文字的顯示方式 */
     -webkit-line-clamp: 3;
     /* 顯示的行數 */
+
   }
 }
 
@@ -724,7 +778,7 @@ Nutripoll-card5 熱門課程 */
   
   .card5-img {
     width: 131px;
-    height: 139px;
+    height: 131px;
     display: flex;
     flex-direction: column;
     border-radius: 5px 0px 0px 5px;
@@ -742,27 +796,42 @@ Nutripoll-card5 熱門課程 */
     padding-block: 0px;
     color: var(--black, #454545);
     width: 215px;
-    margin-left: 5px;
+    margin-left: 10px;
     padding-right: 10px;
     justify-content: center;
 
     & .card5-text-rwd {
+      padding-top: 0px;
       display: flex;
+      width: 215px;
+      height: auto;
+      margin-left: 0px;
+      & h5{
+        font-weight: 700;
+        overflow: hidden;
+        /* 超出部分隐藏 */
+        text-overflow: ellipsis;
+        /* 超出部分省略 */
+        display: -webkit-box;
+        /* 這個屬性告訴瀏覽器將元素顯示為一個或多個內聯框 */
+        -webkit-box-orient: vertical;
+        /* 垂直方向排列 */
+        /* 當使用這個屬性時，可以結合其他屬性來控製文字的顯示方式 */
+        -webkit-line-clamp: 1;
+        /* 顯示的行數 */
+        
+      }
     }
-  
-    & h5 {
-      text-align: center;
-      font-size: 14px;
-    }
-  
     & .border-p {
       display: none;
     }
   
     & .card5-p {
       border-top: none;
-      padding: 10px 0px 0px 0px;
-  
+      padding: 0px 0px 0px 0px;
+      & p{
+        margin-bottom: 0px;
+      }
       & .line-p {
         /* 橫線 */
         text-decoration: line-through;
@@ -774,7 +843,7 @@ Nutripoll-card5 熱門課程 */
     }
   
     & h6 {
-      color: var(--red);
+      color: var(--yellow03);
       font-size: 12px;
     }
   }

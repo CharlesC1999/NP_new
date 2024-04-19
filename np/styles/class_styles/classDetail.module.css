@@ -1,7 +1,3 @@
-.webNone {
-  display: block; /* 默认显示 */
-}
-
 @media (max-width: 375px) {
   .webNone {
     display: none; /* 在小屏幕上隐藏 */
