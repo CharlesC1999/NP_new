@@ -15,18 +15,6 @@
   }
 }
 
-.LoginHeader {
-  position: fixed; // 讓 Header 固定在頁面頂部
-  top: 0; // 置頂
-  width: 100%; // 滿寬
-  z-index: 1000; // 確保 Header 在最上層
-  display: none;
-}
-
-.LoginHeader.show {
-  display: block; // 當需要顯示時
-}
-
 .mainStyle {
   background-image: url(/images/login-Image/login-bg02.png);
   // border: var(--gray01) solid 2px;
@@ -76,7 +64,7 @@
     }
   }
   & .member {
-    width: 315px;
+    width: 300px;
     a {
       color: var(--green03);
     }
@@ -93,6 +81,9 @@
   }
 }
 @media (max-width: 375px) {
+  .member {
+    width: 300px;
+  }
   .mainStyle {
     background-image: none;
     background-color: var(--gray03);
@@ -111,10 +102,11 @@
         background: var(--green01);
       }
       & .MainText {
-        width: 300px;
+        width: 296px;
 
         & .inputGroup {
-          width: 300px;
+          border-bottom: var(--green01) solid 2px;
+          width: 296px;
         }
       }
     }
@@ -125,6 +117,12 @@
 .buttonContainer {
   width: 315px;
   margin-bottom: 25px;
+}
+
+@media (max-width: 375px) {
+  .buttonContainer {
+    width: 300px;
+  }
 }
 
 .buttonStyle {
