@@ -9,7 +9,7 @@ import TopBarGrid from "@/components/recipe/list/TopBarGrid";
 import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";
 import Footer from "@/components/footer";
-
+import Filter from "@/components/class_file/ClassFilter.js";
 import styles from "@/styles/recipe/recipe-list.module.scss";
 
 export default function RecipeList() {
@@ -28,6 +28,9 @@ export default function RecipeList() {
           </div>
           {/* 食譜卡片 (list排列) */}
           <div className={`${styles["cards-list"]} d-flex flex-column `}>
+            <div className="d-none d-xxl-block">
+              <Filter />
+            </div>
             <RecipeCardsList />
             <RecipeCardsList />
             <RecipeCardsList />
