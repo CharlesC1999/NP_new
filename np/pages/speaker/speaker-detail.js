@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./speakerDetail.module.scss";
+import styles from "./speaker-detail.module.scss";
 import SpeakerCardHorizontal from "@/components/speaker/speaker-detail/SpeakerCardHorizontal";
 import SpeakerProfileSection from "@/components/speaker/speaker-detail/SpeakerProfileSection";
 import Breadcrumbs from "@/components/Breadcrumbs";

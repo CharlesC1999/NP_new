@@ -1,5 +1,5 @@
 import React from "react"
-import styles from "./SpeakerProfileSection.module.css"
+import styles from "./SpeakerProfileSection.module.scss"
 
 function SpeakerProfileSection() {
   return(<div className={styles.profileSection}>
