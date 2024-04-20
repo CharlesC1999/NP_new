@@ -57,6 +57,9 @@
   box-shadow: 2px 2px 2px var(--gray02);
   /*陰影化*/
 }
+.Line{
+  border-bottom: var(--gray02) solid 1px;
+}
 
 /* .<!-- product (上方限時特惠商品) --> */
 .DiscountTitle {
@@ -91,6 +94,9 @@
   .DiscountBox {
     display: none;
   }
+  .List{
+    display: block !important;
+  }
 }
 
 /*product card1 商品卡片*/
@@ -108,3 +114,9 @@
   flex-wrap: wrap;
   padding-bottom: 30px;
 }
+
+.List{
+  display: none;
+}
+
+

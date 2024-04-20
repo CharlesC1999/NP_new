@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./card6-recipe.module.css";
+import styles from "./Card6Recipe.module.css";
 
 function Card6Recipe() {
   return(

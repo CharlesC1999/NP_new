@@ -1,5 +1,5 @@
 import React from "react";
-import Newsidebar from "@/components/product/New-sidebar";
+import Newsidebar from "@/components/product/Newsidebar";
 import styles from "@/components/product/sideBar/SideBarCategory.module.css";
 
 export default function SideBarDetailFilter() {

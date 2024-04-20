@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./card5-class.module.css";
+import styles from "./Card5class.module.css";
 
-function Card5className() {
+function Card5class() {
   return(
     <>
     <div>
@@ -32,4 +32,4 @@ function Card5className() {
      )
 }
 
-export default Card5className
+export default Card5class

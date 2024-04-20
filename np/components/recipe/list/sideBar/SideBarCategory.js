@@ -1,5 +1,5 @@
 import React from "react";
-import CateSidebar from "@/components/product/Cate-sidebar";
+import CateSidebar from "@/components/product/CateSidebar";
 import styles from "@/components/recipe/list/sideBar/SideBarCategory.module.scss";
 
 export default function SideBarTop() {
