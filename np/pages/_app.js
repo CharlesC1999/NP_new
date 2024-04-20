@@ -1,10 +1,8 @@
 import "@/styles/globals.css";
-// import "@/node_modules/bootstrap/dist/css/bootstrap.min.css"
+//  Datepicker
+import "react-datepicker/dist/react-datepicker.css";
+import "@/styles/class_styles/CustomDateTimePicker.css";
 
 export default function App({ Component, pageProps }) {
-  return (
-    <AuthProvider>
-      <Component {...pageProps} />
-    </AuthProvider>
-  );
+  return <Component {...pageProps} />;
 }
