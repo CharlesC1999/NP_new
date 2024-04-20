@@ -9,7 +9,7 @@ const pathNameMapping = {
   "class-page": "精選課程",
   "class-detail": "課程介紹",
   speaker: "講師陣容",
-  speakerDetail: "講師姓名",
+  "speaker-detail": "講師姓名",
   member: "會員",
   favor: "願望清單",
   recipe: "食譜列表",
