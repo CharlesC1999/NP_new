@@ -1,8 +1,8 @@
 import React from "react";
 import CateSidebar from "@/components/product/CateSidebar";
-import styles from "@/components/recipe/list/sideBar/SideBarCategory.module.css";
+import styles from "@/components/product/sideBar/SideBarCategory.module.css";
 
-export default function SideBarTop() {
+export default function ProductSidebarCate() {
   return (
     <>
       <div className={`${styles.sideBarBox}`}>

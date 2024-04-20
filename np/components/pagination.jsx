@@ -6,17 +6,45 @@ export default function PaginationRounded() {
   return (
     <Stack spacing={2}>
       <Pagination
-        count={10}
+        count={10} //之後根據比數改寫，目前先寫死
+        // variant="outlined"
         shape="rounded"
         sx={{
           "& .MuiPaginationItem-root": {
-            bgcolor: "#DEF9EC", // 更改背景顏色
-            color: "#747E85", // 更改文字顏色
+            bgcolor: "#F7F8F5 !important",
+            color: "#747E85 !important",
+            fontWeight: "700 !important",
+            fontSize: "15px !important",
+            marginInline: "8px !important",
+            marginBottom: "60px",
+            "&:hover": {
+              bgcolor: "#CCEADD !important",
+              color: "#505A60 !important",
+            },
           },
-          "& .MuiPaginationItem-root.Mui-selected": {
-            bgcolor: "#50BF8B",
-            color: "#fefefe",
-            fontWeight: "700",
+          "& .MuiButtonBase-root.MuiPaginationItem-root.Mui-selected": {
+            bgcolor: "#50BF8B !important",
+            color: "#FEFEFE !important",
+            fontWeight: "700 !important",
+            fontSize: "15px !important",
+          },
+          "& .MuiButtonBase-root.MuiPaginationItem-root.Mui-selected:hover": {
+            bgcolor: "#36A075 !important",
+            color: "#FEFEFE !important",
+            fontWeight: "700 !important",
+            fontSize: "15px !important",
+          },
+          "& .MuiPaginationItem-ellipsis": {
+            color: "#747E85 !important",
+            bgcolor: "transparent !important",
+            fontWeight: "700 !important",
+            fontSize: "15px !important",
+          },
+          "& .MuiPaginationItem-ellipsis:hover": {
+            color: "#747E85 !important",
+            bgcolor: "transparent !important",
+            fontWeight: "700 !important",
+            fontSize: "15px !important",
           },
         }}
       />
