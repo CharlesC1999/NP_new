@@ -302,7 +302,7 @@ const HeaderComponent = () => {
             </button>
           </li>
           <li className={styles.navItemPageLinks}>
-            <a href="/recipe/list" className={styles.pageLink}>
+            <a href="/recipe" className={styles.pageLink}>
               <div>食譜精選</div>
             </a>
             <button className={styles.navTextButton}>
