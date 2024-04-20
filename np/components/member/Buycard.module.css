@@ -1,0 +1,192 @@
+.buyCard {
+  width: 900px;
+  background-color: var(--Black-0, #fefefe);
+  display: flex;
+  max-width: 900px;
+  flex-direction: column;
+  justify-content: center;
+  /* padding: 15px 20px; */
+  padding: 20px 15px 20px 15px;
+  box-shadow: inset 0px -2px 0px 0px var(#def9ec);
+  /* 添加向内延伸的边框 */
+  
+}
+@media (max-width: 375px){
+  .buyCard{
+    width: 334px;
+    height: 115px;
+    padding: 20px 15px 20px 15px;
+    margin: 20px 15px 0 15px;
+    }
+}
+
+
+.buyCardContent {
+  gap: 20px;
+  display: flex;
+}
+
+
+
+.bccolumn {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 16%;
+  margin-left: 0px;
+}
+
+
+
+.bcimg {
+  background-color: var(--line, #d9d9d9);
+  width: 130px;
+  height: 130px;
+  margin: 0 auto;
+}
+
+@media (max-width: 375px) {
+  .bcimg {
+    width: 80px;
+    height: 80px;
+    margin:auto;
+  }
+}
+
+.bccolumn2 {
+  display: flex;
+  /* flex-direction: column; */
+  line-height: normal;
+  width: 84%;
+  margin-left: 20px;
+}
+
+
+
+.buyItem {
+  justify-content: end;
+  align-self: stretch;
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  line-height: 120%;
+  margin: auto 0;
+}
+
+
+
+.buyItemMain {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: var(--gray01, #919da6);
+  font-weight: 500;
+  flex: 1;
+}
+
+.biContent {
+  color: var(--black, var(--gray03, #454545));
+  font: 20px Inter, sans-serif;
+  font-weight: bold;
+}
+@media (max-width:375px) {
+  .biContent{
+    font-size: 14px;
+  }
+}
+
+.biNumber {
+  font-family: Inter, sans-serif;
+  margin-top: 10px;
+}
+@media (max-width:375px) {
+  .biNumber{
+    font-size: 12px;
+    margin-top: 0px;
+  }
+}
+
+.biState {
+  font-family: Inter, sans-serif;
+  margin-top: 10px;
+}
+@media (max-width:375px) {
+  .biState{
+    font-size: 12px;
+    margin-top: 0px;
+  }
+}
+
+.biMb {
+  align-self: end;
+  display: flex;
+  margin-top: 45px;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+@media (max-width: 375px) {
+  .biMb {
+   display: block;
+   margin: auto;
+   
+  }
+}
+
+.biMoney {
+  color: var(--gray01, #747e85);
+  align-self: start;
+  margin-top: 14px;
+  font: 500 16px Inter, sans-serif;
+}
+@media (max-width: 375px) {
+  .biMoney {
+   display: block;
+   margin-bottom: 14px;
+   font-size: 14px;
+  }
+}
+
+.biButton {
+  width: 100px;
+  height: 33px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #50bf8b;
+  background-color: #78cea6;
+  border: #78cea6;
+  border-radius: 5px;
+
+}
+
+
+
+.buyCardBtn {
+  display: inline-flex;
+  /* 将按钮的显示设置为内联弹性盒 */
+  align-items: center;
+  /* 垂直居中按钮内的内容 */
+  width: 101px;
+  /* 设置按钮宽度自适应 */
+  height: 33px;
+  /* 设置按钮高度 */
+  text-decoration: none;
+  /* 移除默认的超链接样式 */
+  padding: 10px 20px;
+  /* 设置按钮的上下左右内边距 */
+  font-weight: bold;
+  font-size: 14px;
+  background-color: #def9ec;
+  color: #50bf8b;
+}
+.buyCardBtn:hover{
+  background-color: #def9ec;
+  color: #50bf8b;
+}
+
+/* 滑鼠壓下去的時候按鈕效果 */
+.buyCardBtn:active {
+  background-color: #def9ec !important;
+  color: #50bf8b !important;;
+}
