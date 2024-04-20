@@ -10,7 +10,7 @@ export default function Speaker() {
     <>
       <HeaderComponent />
       <Breadcrumbs />
-      <div className={`container ${styles.container}`}>
+      <div className={`globalContainer ${styles.container}`}>
         <div className={styles.title}>
           <h3>講師陣容</h3>
         </div>
