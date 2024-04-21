@@ -221,7 +221,7 @@ const HeaderComponent = () => {
                 購物車
               </span>
             </a>
-            <a href="#" className={styles.pageLink}>
+            <a href="/member/login" className={styles.pageLink}>
               {/* <!-- 手機圖示svg --> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -254,7 +254,7 @@ const HeaderComponent = () => {
                     <circle cx="12" cy="7" r="4" />
                   </g>
                 </svg>
-                會員
+                會員登入
               </span>
             </a>
           </div>
@@ -302,7 +302,7 @@ const HeaderComponent = () => {
             </button>
           </li>
           <li className={styles.navItemPageLinks}>
-            <a href="/recipe/list" className={styles.pageLink}>
+            <a href="/recipe" className={styles.pageLink}>
               <div>食譜精選</div>
             </a>
             <button className={styles.navTextButton}>

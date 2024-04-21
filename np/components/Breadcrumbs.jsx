@@ -6,10 +6,11 @@ import BreadcrumbsStyles from "./BreadcrumbsStyles.module.css";
 //  這裡大家共編一下，因為檔案命名是英文的，但麵包屑需要是中文的，所以大家請放上英文檔名以及對應的中文名稱
 
 const pathNameMapping = {
+  "search-result":"搜尋結果",
   "class-page": "精選課程",
   "class-detail": "課程介紹",
   speaker: "講師陣容",
-  speakerDetail: "講師姓名",
+  "speaker-detail": "講師介紹",
   member: "會員",
   favor: "願望清單",
   recipe: "食譜列表",
