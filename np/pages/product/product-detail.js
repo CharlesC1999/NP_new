@@ -19,6 +19,8 @@ import ProductSection02 from "@/components/product/ProductSection02";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductMayLike from "@/components/product/ProductMayLike";
 
+import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipe";
+
 //sidebar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
 import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
@@ -86,6 +88,11 @@ export default function ProductDetail() {
             className={`${style["section3"]} d-flex flex-column justify-content-center`}
           >
             <ProductMayLike />
+          </div>
+          <div
+            className={`${style["recommended-recipe"]} d-flex flex-column my-4`}
+          >
+            <DetailRecommendedRecipe />
           </div>
         </div>
       </main>

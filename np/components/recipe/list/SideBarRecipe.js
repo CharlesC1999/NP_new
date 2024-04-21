@@ -21,7 +21,7 @@ export default function SideBar() {
               />
             </div>
             <div
-              className={`col-5 d-flex flex-column justify-content-between ${styles["side-card-content"]}`}
+              className={`col d-flex flex-column justify-content-between gap-2 ${styles["side-card-content"]}`}
             >
               <p
                 className={`${styles["side-card-title"]} ${styles["figma-h6"]}`}
@@ -44,7 +44,7 @@ export default function SideBar() {
               />
             </div>
             <div
-              className={`col-5 d-flex flex-column justify-content-between ${styles["side-card-content"]}`}
+              className={`col d-flex flex-column justify-content-between gap-2 ${styles["side-card-content"]}`}
             >
               <p
                 className={`${styles["side-card-title"]} ${styles["figma-h6"]}`}
