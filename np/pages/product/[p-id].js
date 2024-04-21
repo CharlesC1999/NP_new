@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 //style
 import "bootstrap/dist/css/bootstrap.min.css";
+import style from "@/styles/Product/products.module.scss";
 
 //fontAwsome
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import style from "@/components/product/products.module.scss";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 //components
@@ -18,18 +18,13 @@ import ProductSection01 from "@/components/product/ProductSection01";
 import ProductSection02 from "@/components/product/ProductSection02";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductMayLike from "@/components/product/ProductMayLike";
-
+//推薦食譜component
 import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipe";
-
 //sidebar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
 import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
-
 import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDetail";
 
-// import productCard from '@/components/product/productCard.js'
-
-// import productCard from '@/components/product/productCard.js'
 export default function ProductDetail() {
   return (
     <>

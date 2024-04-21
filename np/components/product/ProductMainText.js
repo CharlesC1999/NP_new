@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
+//components
 import HeaderComponent from "@/components/header";
 import Footer from "@/components/footer";
+//styles
+import style from "@/styles/Product/products.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 //Font Awsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import style from "@/components/product/products.module.scss";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ProductCard.module.css";
 
