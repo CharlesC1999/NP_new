@@ -108,13 +108,19 @@
     width: 380px;
     height: 50px;
     font-size: 1.8rem;
-    // border: var(--green02) solid 1px;
+    border: var(--green02) solid 1px;
     border-radius: 10px;
     background: white;
-    color: var(--green02);
+    color: var(--green03);
     &:hover {
-      background-color: var(--green02);
+      background-color: var(--green03);
       color: var(--white);
+    }
+    .fa-cart-shopping {
+      &:hover {
+        background-color: var(--green03);
+        color: var(--white);
+      }
     }
   }
 }
@@ -337,7 +343,7 @@
     }
     .line {
       position: absolute;
-      top: 120px;
+      top: 123px;
       width: 150px;
       height: 3px;
       background: var(--green05);
