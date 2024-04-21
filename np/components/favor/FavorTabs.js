@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./FavorTabs.module.css";
+import styles from "./FavorTabs.module.scss";
 
 function FavorTabs() {
   return (

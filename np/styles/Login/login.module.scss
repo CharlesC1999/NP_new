@@ -52,7 +52,7 @@
     margin-inline: auto;
     width: 315px;
     padding-bottom: 4px;
-    margin-bottom: 30px;
+
     border-bottom: var(--green01) solid 1px;
     label {
       color: var(--green03);
@@ -63,6 +63,11 @@
       outline: none;
     }
   }
+
+  & .inputGroupFirst {
+    margin-bottom: 30px;
+  }
+
   & .member {
     width: 300px;
     a {
@@ -127,4 +132,7 @@
 
 .buttonStyle {
   width: 100%;
+}
+.startShopping {
+  margin-top: 30px;
 }

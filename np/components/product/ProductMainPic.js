@@ -15,8 +15,7 @@ export default function ProductMainPic() {
         <div className={`${style["p-img"]}`}>
           <img
             className={`${style["object-fit"]}`}
-            src="/images/products-image/Rectangle 48.png"
-            alt
+            src="/images/products/Rectangle48.png"
           />
         </div>
         <ul
@@ -46,28 +45,28 @@ export default function ProductMainPic() {
           <li className={`${style["pic-item"]}`}>
             <img
               className={`${style["object-fit"]}`}
-              src="/images/products-image/Rectangle 51.png"
+              src="/images/products/Rectangle48.png"
               alt
             />
           </li>
           <li className={`${style["pic-item"]}`}>
             <img
               className={`${style["object-fit"]}`}
-              src="/images/products-image/Rectangle 51.png"
+              src="/images/products/Rectangle51.png"
               alt
             />
           </li>
           <li className={`${style["pic-item"]}`}>
             <img
               className={`${style["object-fit"]}`}
-              src="/images/products-image/Rectangle 51.png"
+              src="/images/products/Rectangle51.png"
               alt
             />
           </li>
           <li className={`${style["pic-item"]}`}>
             <img
               className={`${style["object-fit"]}`}
-              src="/images/products-image/Rectangle 51.png"
+              src="/images/products/Rectangle51.png"
               alt
             />
           </li>
