@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; 
-import styles from "./sidebar.module.css"
+import styles from "./Sidebar.module.css"
 
 const Sidebar =() => {
   return(
