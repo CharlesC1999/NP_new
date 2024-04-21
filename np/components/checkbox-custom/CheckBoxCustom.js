@@ -10,6 +10,7 @@ export default function Test() {
     <>
       <div className={styles["checkbox-wrapper"]}>
         <FaCheck
+          style={{ "font-size": "16px" }}
           className={`${styles["fa-check"]} ${checked ? "d-block" : "d-none"}`}
         />
         <input
