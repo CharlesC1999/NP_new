@@ -4,8 +4,6 @@ import { FaUserLarge } from "react-icons/fa6";
 import { LuAlarmClock } from "react-icons/lu";
 import { FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import UnsavedHeart from "@/components/recipe/detail/heart/unsaved-heart";
-import SavedHeart from "@/components/recipe/detail/heart/saved-heart";
 import styles from "./DetailTop.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 
