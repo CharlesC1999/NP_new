@@ -21,7 +21,10 @@ export default function RecipeCardsList() {
   return (
     <>
       <div className={`${styles["list-layout"]} col`}>
-        <section className={styles["main-content"]}>
+        <section
+          className={styles["main-content"]}
+          style={{ "margin-bottom": "40px" }}
+        >
           <div className={styles["cards"]}>
             <Link
               href={"/recipe/5"}
