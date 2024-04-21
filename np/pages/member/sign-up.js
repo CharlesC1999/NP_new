@@ -138,7 +138,7 @@ const SignUpPage = () => {
                 <div className={`text-center`}>我已經有會員帳號了?</div>
                 <div className={`justify-content-center d-flex`}>
                   <a
-                    href
+                    href="./login"
                     className={`${signUp.backhome} ms-2 text-decoration-none`}
                   >
                     回登入頁面

@@ -2,7 +2,7 @@ import React from "react";
 import Newsidebar from "@/components/product/Newsidebar";
 import styles from "@/components/product/sideBar/SideBarCategory.module.css";
 
-export default function SideBarDetailFilter() {
+export default function ProductSidebarNew() {
   return (
     <>
       <div className={`${styles.sideBarBox}`}>
