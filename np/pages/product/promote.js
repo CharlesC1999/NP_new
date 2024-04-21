@@ -23,7 +23,7 @@ import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarD
 
 //style
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./product-discount.module.scss";
+import styles from "@/styles/Product/promote.module.css";
 
 export default function Product() {
   const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid

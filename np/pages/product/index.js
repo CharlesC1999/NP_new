@@ -11,9 +11,9 @@ import ProductCardList from "@/components/product/ProductCardList";
 import ProductFilter from "@/components/product/ProductFilter";
 import Footer from "@/components/Footer";
 //荃做版本sideBar
-import CateSidebar from "@/components/product/CateSidebar";
-import NewSidebar from "@/components/product/Newsidebar";
-import ProductCard from "@/components/product/ProductCard";
+// import CateSidebar from "@/components/product/CateSidebar";
+// import NewSidebar from "@/components/product/Newsidebar";
+// import ProductCard from "@/components/product/ProductCard";
 
 //side bar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
@@ -89,10 +89,6 @@ export default function Product() {
             <ProductCard02 />
             <ProductCard02 />
             <ProductCard02 />
-            {/* <div className={`${styles.List}`}>
-              <ProductCardList />
-              <ProductCardList />
-            </div> */}
           </div>
         </div>
       </div>
