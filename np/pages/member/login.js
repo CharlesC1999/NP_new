@@ -1,34 +1,50 @@
 import React, { useState, useEffect } from "react";
+// axios
+import axios from "axios";
+// styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginStyle from "@/styles/Login/login.module.scss";
-// import Header from "@/components/header";
 import Footer from "@/components/Footer";
 
 const Login = () => {
-  //   const [showHeader, setShowHeader] = useState(false);
+  const errorText = {
+    color: "red",
+    marginTop: "4px",
+    width: "315px",
+  };
+  // style
 
-  //   useEffect(() => {
-  //     const handleMouseMove = (event) => {
-  //       // 設置顯示 Header 的垂直位置範圍，例如頁面頂端的 50px 內
-  //       const shouldShow = event.clientY <= 160;
-  //       setShowHeader(shouldShow);
-  //     };
+  const goSignUp = () => {
+    window.location.href = "./sign-up";
+  };
 
-  //     // 添加滑鼠移動事件監聽器
-  //     document.addEventListener("mousemove", handleMouseMove);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  //     // 清理函數，在組件卸載時移除事件監聽器
-  //     return () => document.removeEventListener("mousemove", handleMouseMove);
-  //   }, []);
-  //   header好麻煩，不加了
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("/api/login", { username, password });
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        console.log("登入成功!");
+        window.location.href = "/";
+        // 登入成功後，可能需要重定向或其他操作
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        console.error("登入失敗", error.response.data.message);
+        setError("帳號或密碼錯誤，請重新嘗試");
+      } else {
+        setError("登入時發生錯誤，請稍後再試");
+      }
+      // 處理錯誤情況（例如顯示錯誤消息）
+    }
+  };
 
   return (
     <main className={LoginStyle.bodyStyle}>
-      {/* {showHeader && (
-        <Header
-          className={`${showHeader ? "LoginHeader show" : "LoginHeader"}`}
-        />
-      )} */}
       <div
         className={`${LoginStyle.mainStyle} d-flex align-items-center justify-content-center`}
       >
@@ -40,18 +56,35 @@ const Login = () => {
             className={`${LoginStyle.MainText} d-flex flex-column justify-content-cetner align-items-center`}
           >
             <div className={`${LoginStyle.h3} text-align-center`}>會員登入</div>
-            <div className={`${LoginStyle.inputGroup} d-flex flex-column`}>
-              <label htmlFor>帳號：</label>
-              <input type="account" />
+            <div
+              className={`${LoginStyle.inputGroup} ${LoginStyle.inputGroupFirst} d-flex flex-column`}
+            >
+              <label htmlFor="username">帳號：</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
             <div className={`${LoginStyle.inputGroup} d-flex flex-column`}>
-              <label htmlFor>密碼：</label>
-              <input type="password" />
+              <label htmlFor="password">密碼：</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
+            {/* 如果有错误，显示错误消息 */}
+            {error && <div style={errorText}>{error}</div>}
             <div
               className={`${LoginStyle.buttonContainer} d-flex text-align-center justify-content-center`}
             >
-              <button className={`${LoginStyle.buttonStyle} btn btn-success`}>
+              <button
+                onClick={handleLogin}
+                className={`${LoginStyle.buttonStyle} ${LoginStyle.startShopping} btn btn-success`}
+              >
                 開始購物吧！
               </button>
             </div>
@@ -98,7 +131,7 @@ const Login = () => {
             >
               <a
                 href
-                className={`d-inline-block text-center ${LoginStyle.notMember} text-decoration-none`}
+                className={`${LoginStyle.notMember} d-inline-block text-center text-decoration-none`}
               >
                 還不是會員？
               </a>
@@ -108,6 +141,7 @@ const Login = () => {
             >
               <button
                 className={`${LoginStyle.buttonStyle} btn btn-success mt-2 text-align-center`}
+                onClick={goSignUp}
               >
                 註冊會員
               </button>
