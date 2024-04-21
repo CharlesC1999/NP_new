@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+
+//styles
 import "bootstrap/dist/css/bootstrap.min.css";
-import style from "@/components/product/products.module.scss";
+import style from "@/styles/Product/products.module.scss";
 
 export default function ProductSection01() {
   return (
