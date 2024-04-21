@@ -79,7 +79,11 @@
     font-size: 20px;
     font-weight: 500;
   }
-  
+  @media(max-width: 375px){
+    .menu1{
+      padding: 0px;
+    }
+  }
   
   
   .menu2 {
@@ -106,7 +110,7 @@
       flex-direction: row;
       justify-content: space-between;
       gap: auto;
-      padding: 25px 19px;
+      padding: 20px 19px;
       color: var(--gray02);
       border-top: none;
     }
