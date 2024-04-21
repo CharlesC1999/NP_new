@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  padding: 60px 0px;
+  justify-content: space-between;
+  @media (max-width: 375px) {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+  }
+}
+.navRight {
+  width: 1130px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  @media (max-width: 375px) {
+    width: 375px;
+    padding-inline: 15px;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.hidden{
+  display: none;
+}
+// 用靖荃的卡片容器樣式
+.productCard1 {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  row-gap: 30px;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
+.classCardMobile {
+  display: none;
+}
+.productCardMobile {
+  display: none;
+
+}
+
+@media (max-width: 375px) {
+  .classCardMobile {
+    display: block;
+  }
+  .classCard {
+    display: none;
+  }
+  .productCard1 {
+    display: none;
+  }
+  .productCardMobile {
+    display: block;
+  }
+}
