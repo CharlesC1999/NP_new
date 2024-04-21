@@ -124,6 +124,7 @@
   }
   .formCheckLabel{
     padding-top: 2px;
+    color: #747e85;
   }
   
   @media (max-width:375px) {
