@@ -1,7 +1,7 @@
 // import React from "react";
 import styles3 from "./shopStyle3.module.css";
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
-import styles from "../../components/header.module.css";
+import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";

@@ -2,7 +2,7 @@
 import styles2 from "./shopStyle2.module.css";
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect, useRef } from "react";
-import styles from "../../components/header.module.css";
+import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
