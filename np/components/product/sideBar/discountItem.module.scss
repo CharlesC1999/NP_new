@@ -1,0 +1,14 @@
+/* 分類side-bar */
+/* side-bar總width */
+
+.sideBox {
+  border: var(--gray02) solid 1px;
+  border-radius: 5px;
+
+  .discountText {
+    color: var(--gray01);
+  }
+  .amount {
+    color: var(--gray01);
+  }
+}

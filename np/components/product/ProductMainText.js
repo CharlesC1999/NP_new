@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import HeaderComponent from "@/components/header";
 import Footer from "@/components/footer";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+//Font Awsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import style from "@/components/product/products.module.scss";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -30,7 +32,7 @@ function ProductMainText() {
             <div className={`${style["star-text"]} ps-2 `}>(125則評論)</div>
           </div>
           <a className={`${style["favorite-btn"]} ${style["icon-link"]} `}>
-            <i className={`fa-regular fa-heart`} />
+            <i className={`fa-regular fa-heart`} style={{ color: "#50BF8B" }} />
           </a>
         </div>
         <input
