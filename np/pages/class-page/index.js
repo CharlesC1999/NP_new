@@ -9,6 +9,7 @@ import ClassCard from "@/components/class_file/ClassCardCeb";
 import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import CardStyle from "@/styles/class_styles/CardStyle.module.css";
+import Pagination from "@/components/pagination";
 import Footer from "@/components/Footer";
 
 const ClassList = () => {
@@ -102,10 +103,7 @@ const ClassList = () => {
                 </div>
               </div>
             )}
-            <img
-              src="/images/paginationList.png"
-              className={CardStyle.paginationListMargin}
-            />
+            <Pagination />
             <img
               src="/images/pages-m.png"
               className={CardStyle.paginationListMarginMobile}

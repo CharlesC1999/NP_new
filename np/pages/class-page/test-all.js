@@ -8,6 +8,7 @@ import ClassFilter from "@/components/class_file/ClassFilter";
 import ClassCard from "@/components/class_file/ClassCardCeb";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
+import Pagination from "@/components/Pagination";
 import Footer from "@/components/Footer";
 
 const ForTest = () => {
@@ -28,6 +29,7 @@ const ForTest = () => {
       <ClassCard />
       <ClassCardMobileList />
       <ClassCardMobileGrid />
+      <Pagination />
       <Footer />;
     </div>
   );

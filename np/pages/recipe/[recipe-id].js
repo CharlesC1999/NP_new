@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 import DetailTop from "@/components/recipe/detail/DetailTop";
-import SideBar from "@/components/recipe/list/SideBarRecipe";
+import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategory";
 import DetailIngredients from "@/components/recipe/detail/DetailIngredients";
 import DetailSteps from "@/components/recipe/detail/DetailSteps";
 import DetailRelatedProducts from "@/components/recipe/detail/DetailRelatedProducts";
@@ -22,7 +22,9 @@ export default function RecipeDetail() {
         {/* 側邊欄跟主要內容 */}
         <div className={`row ${styles["main"]} d-flex`}>
           {/* 側邊欄 */}
-          <SideBar />
+          <div className="col-3 d-none d-xxl-block">
+            <SideBarTop />
+          </div>
           {/* 主要內容 */}
           <div className={`col styles["main-content"]`}>
             <DetailIngredients />
