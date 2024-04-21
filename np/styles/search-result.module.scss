@@ -1,0 +1,33 @@
+.container{
+    max-width: 1250px;
+    display: flex;
+    flex-direction: column;
+    margin-inline: auto;
+    padding: 60px 0px;
+    gap: 30px;
+}
+.cards{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.productCard1{
+    display: flex;
+    justify-content: space-between;
+    
+    row-gap: 30px;
+    flex-wrap: wrap;
+    padding-bottom: 30px;
+}
+.noResult{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-block: 50px;
+    gap: 30px;
+}
+.noResultImg img{
+    width: 300px;
+    height: 300px;
+}
