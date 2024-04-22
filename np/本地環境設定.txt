@@ -1,6 +1,6 @@
 DB_HOST=localhost
 DB_USER=vvvv4577
-DB_PASS=jk451244
+DB_PASS=jk451244zxc
 DB_NAME=nutripolls
 
 因為被gitignore掉，所以放這
