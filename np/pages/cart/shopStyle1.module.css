@@ -1,0 +1,298 @@
+.container2 {
+  display: flex;
+  flex-direction: column;
+  /* 垂直排列 */
+  align-items: center;
+  /* 水平居中 */
+}
+
+/* nav {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+} */
+
+/* 設大於375樣式 桌機樣式 */
+@media (min-width: 376px) {
+  .navbar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cir {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: "1";
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: #50bf8b;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fefefe;
+      font-size: 24px;
+    }
+
+    &::after {
+      content: "購物車";
+      position: absolute;
+      font-size: 24px;
+      bottom: -50px;
+      width: 80px;
+      left: -46px;
+      margin-left: 10px;
+      min-width: 30px;
+    }
+  }
+
+  .circle2 {
+    &::before {
+      content: "2";
+      background: #d9d9d9;
+    }
+
+    &::after {
+      content: "填寫資料";
+      left: -55px;
+      min-width: 100px;
+    }
+  }
+
+  .circle3 {
+    &::before {
+      content: "3";
+      background: #d9d9d9;
+    }
+
+    &::after {
+      content: "訂單確認";
+      min-width: 100px;
+      left: -55px;
+    }
+  }
+  .mobile {
+    display: none;
+  }
+
+  .line {
+    width: 20vw;
+    height: 2px;
+    background: #d9d9d9;
+    margin-top: 19px;
+  }
+
+  .main {
+    /* margin-top: 100px; */
+    width: 70vw;
+    max-width: 1200px;
+    font-size: 24px;
+  }
+
+  .ProductBorder {
+    max-width: 1200px;
+    border: 2px solid #def9ec;
+    /* padding: 10px; */
+    padding: 0 10px 10px 10px;
+    border-radius: 5px;
+  }
+
+  .topBar {
+    background: #def9ec;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .button {
+    height: 50px;
+    width: 200px;
+  }
+
+  .keepbuy {
+    background-color: #ffffff;
+    color: #78cea6;
+    border: 1px solid #78cea6;
+    height: 50px;
+    width: 200px;
+    text-decoration: none;
+  }
+
+  .article {
+    border: 1px solid #d9d9d9;
+    /* width: 1200px; */
+    background-color: #fff2d9;
+    width: 70vw;
+    max-width: 1200px !important;
+  }
+  .add {
+    border: 1px solid #50bf8b;
+    /* width: 50px; */
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    /* margin-left: 10px; */
+    /* margin-right: 10px; */
+  }
+}
+
+/* 設小於375樣式 手機樣式*/
+@media (max-width: 376px) {
+  .navbar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cir {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: "1";
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: #50bf8b;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fefefe;
+    }
+
+    &::after {
+      content: "購物車";
+      position: absolute;
+      font-size: 16px;
+      bottom: -30px;
+      width: 80px;
+      left: -35px;
+      margin-left: 10px;
+      min-width: 30px;
+    }
+  }
+
+  .circle2 {
+    &::before {
+      content: "2";
+      background: #d9d9d9;
+    }
+
+    &::after {
+      content: "填寫資料";
+      left: -42px;
+      min-width: 100px;
+    }
+  }
+
+  .circle3 {
+    &::before {
+      content: "3";
+      background: #d9d9d9;
+    }
+
+    &::after {
+      content: "訂單確認";
+      min-width: 100px;
+      left: -42px;
+    }
+  }
+  .desktop {
+    display: none;
+  }
+
+  .line {
+    width: 30vw;
+    height: 2px;
+    background: #d9d9d9;
+    margin-top: 19px;
+  }
+
+  .main {
+    /* margin-top: 100px; */
+    width: 345px;
+    font-size: 20px;
+
+    /* color: #50bf8b; */
+  }
+
+  .ProductBorder {
+    padding: 0 10px 10px 10px;
+    border-radius: 5px;
+  }
+
+  .topBar {
+    width: 345px;
+    background: #def9ec;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .button {
+    height: 50px;
+    width: 100px;
+    background-color: #78cea6;
+    color: #ffffff;
+    border: 1px solid #78cea6;
+  }
+
+  .article {
+    width: 350px;
+  }
+  .send {
+    box-shadow: 0px -1px 1px 1px rgba(0, 0, 0, 0.1);
+    /* padding-right: 100px; */
+    border: 1px solid #d9d9d9;
+  }
+  .add {
+    border: 1px solid #50bf8b;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 5px;
+  }
+}
+
+.fc {
+  color: #547d63;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.fb {
+  font-weight: bold;
+}
+
+.fs {
+  font-size: 20px;
+}
+.fs12 {
+  font-size: 12px;
+}
+
+.mobileFc {
+  color: #547d63;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.span {
+  font-size: 14px;
+}
+
+/* 都有 */
