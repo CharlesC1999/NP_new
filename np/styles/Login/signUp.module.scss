@@ -1,7 +1,9 @@
 .bodyStyles {
   box-sizing: border-box;
   height: 100svh;
-  background-image: url(/images/login-Image/login-bg01.png);
+  background-image: url(/images/login-Image/sign-up-bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 @media (width: 375px) {
