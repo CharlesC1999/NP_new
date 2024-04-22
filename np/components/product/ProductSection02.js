@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+//FontAwsome
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+//styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/components/product/productSection02.module.scss";
 

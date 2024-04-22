@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import style from "@/components/product/products.module.scss";
 import ProductCard from "@/components/product/ProductCard02";
+//styles
+import style from "@/styles/Product/products.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 export default function ProductMayLike() {
   return (
