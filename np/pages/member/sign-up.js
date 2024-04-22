@@ -3,6 +3,13 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import signUp from "@/styles/Login/signUp.module.scss";
 import Footer from "@/components/Footer";
+// for mui
+// import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const SignUpPage = () => {
   const Checked = {
@@ -11,13 +18,37 @@ const SignUpPage = () => {
     borderColor: "#28a745",
   };
 
+  // const CustomTextField = styled(TextField)({
+  //   width: "310px !important", // 直接設置寬度
+  //   "& .MuiInputBase-root": {
+  //     width: "100% !important", // 確保填滿容器
+  //   },
+  //   "& label.Mui-focused": {
+  //     color: "green",
+  //   },
+  //   "& .MuiInput-underline:after": {
+  //     borderBottomColor: "green",
+  //   },
+  //   "& .MuiOutlinedInput-root": {
+  //     "& fieldset": {
+  //       borderColor: "red",
+  //     },
+  //     "&:hover fieldset": {
+  //       borderColor: "yellow",
+  //     },
+  //     "&.Mui-focused fieldset": {
+  //       borderColor: "green",
+  //     },
+  //   },
+  // });
+
   const [formData, setFormData] = useState({
     user_name: "",
     account: "",
     email: "",
     phone: "",
     gender: "M",
-    date_of_birth: "",
+    date_of_birth: null,
     password: "",
     confirmPassword: "",
   });
@@ -26,12 +57,28 @@ const SignUpPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleDateChange = (newValue) => {
+    setFormData({
+      ...formData,
+      date_of_birth: newValue ? dayjs(newValue) : null,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
+
+    // 在发送前确保日期是正确的 dayjs 格式或者为空
+    const submitData = {
+      ...formData,
+      date_of_birth: formData.date_of_birth
+        ? formData.date_of_birth.toISOString()
+        : "",
+    };
+
     try {
       await axios.post("/api/sign-up", formData);
       alert("Registration successful");
@@ -126,14 +173,33 @@ const SignUpPage = () => {
                     <label htmlFor className={signUp.label}>
                       生日
                     </label>
-                    <input
-                      type="date"
-                      name="date_of_birth"
-                      value={formData.date_of_birth}
-                      onChange={handleChange}
-                      className={`${signUp.input} ps-2`}
-                      placeholder="請輸入您的生日"
-                    />
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        label="請輸入您的生日"
+                        disableFuture //禁用未來日期
+                        value={formData.date_of_birth}
+                        onChange={handleDateChange}
+                        sx={{
+                          width: "310px",
+                          height: "35px",
+                          bgcolor: "#ECECEC",
+                          border: "none",
+                          "& .MuiInputBase-input": {
+                            paddingBlock: "0px",
+                            height: "35px",
+                            lineHeight: "35px",
+                          },
+                          "& .MuiFormLabel-root": {
+                            left: "-5px",
+                            top: "-9px",
+                          },
+                          "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#50bf8b",
+                          },
+                        }}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </LocalizationProvider>
                   </div>
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
                     <label htmlFor className={signUp.label}>
