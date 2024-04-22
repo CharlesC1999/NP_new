@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 // axios
 import axios from "axios";
+// contexts
+import { useAuth } from "@/contexts/AuthContext";
 // styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginStyle from "@/styles/Login/login.module.scss";
@@ -21,7 +23,7 @@ const Login = () => {
   const goSignUp = () => {
     window.location.href = "./sign-up";
   };
-
+  const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -41,7 +43,8 @@ const Login = () => {
     try {
       const response = await axios.post("/api/login", { username, password });
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
+        login(response.data.token);
+        // 使用Context的login方法
         console.log("登入成功!");
         window.location.href = "/";
         // 登入成功後，可能需要重定向或其他操作

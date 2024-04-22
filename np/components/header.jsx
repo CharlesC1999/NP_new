@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
 // import classNames from "classnames";
@@ -7,6 +8,7 @@ const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
   const dropdownRef = useRef(null);
+  const { auth, logout } = useAuth();
 
   let hasMargin = true;
   let isMobile = false;
@@ -257,6 +259,28 @@ const HeaderComponent = () => {
                 會員登入
               </span>
             </a>
+            {auth.isLoggedIn ? (
+              <button className={styles.logout} onClick={logout} id="logout">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 30 30"
+                  className={styles.logoutSvg}
+                >
+                  <path
+                    fill="#50bf8b"
+                    d="M6 2h9a2 2 0 0 1 2 2v1a1 1 0 0 1-2 0V4H6v16h9v-1a1 1 0 0 1 2 0v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"
+                  />
+                  <path
+                    fill="#50bf8b"
+                    d="M16.795 16.295c.39.39 1.02.39 1.41 0l3.588-3.588a1 1 0 0 0 0-1.414l-3.588-3.588a.999.999 0 0 0-1.411 1.411L18.67 11H10a1 1 0 0 0 0 2h8.67l-1.876 1.884a.999.999 0 0 0 .001 1.411"
+                  />
+                </svg>
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </header>
