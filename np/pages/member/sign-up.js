@@ -18,30 +18,6 @@ const SignUpPage = () => {
     borderColor: "#28a745",
   };
 
-  // const CustomTextField = styled(TextField)({
-  //   width: "310px !important", // 直接設置寬度
-  //   "& .MuiInputBase-root": {
-  //     width: "100% !important", // 確保填滿容器
-  //   },
-  //   "& label.Mui-focused": {
-  //     color: "green",
-  //   },
-  //   "& .MuiInput-underline:after": {
-  //     borderBottomColor: "green",
-  //   },
-  //   "& .MuiOutlinedInput-root": {
-  //     "& fieldset": {
-  //       borderColor: "red",
-  //     },
-  //     "&:hover fieldset": {
-  //       borderColor: "yellow",
-  //     },
-  //     "&.Mui-focused fieldset": {
-  //       borderColor: "green",
-  //     },
-  //   },
-  // });
-
   const [formData, setFormData] = useState({
     user_name: "",
     account: "",
@@ -82,6 +58,7 @@ const SignUpPage = () => {
     try {
       await axios.post("/api/sign-up", formData);
       alert("Registration successful");
+      window.location.href = "./login";
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
@@ -183,11 +160,14 @@ const SignUpPage = () => {
                           width: "310px",
                           height: "35px",
                           bgcolor: "#ECECEC",
+                          borderRadius: "5px",
                           border: "none",
                           "& .MuiInputBase-input": {
                             paddingBlock: "0px",
                             height: "35px",
                             lineHeight: "35px",
+
+                            border: "none",
                           },
                           "& .MuiFormLabel-root": {
                             left: "-5px",
@@ -195,6 +175,13 @@ const SignUpPage = () => {
                           },
                           "& .MuiInputLabel-root.Mui-focused": {
                             color: "#50bf8b",
+                          },
+
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            border: "none",
+                          },
+                          "& .MuiOutlinedInput-root": {
+                            "&:hover > fieldset": { borderColor: "none" },
                           },
                         }}
                         renderInput={(params) => <TextField {...params} />}
