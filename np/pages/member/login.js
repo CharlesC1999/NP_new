@@ -6,6 +6,8 @@ import { useAuth } from "@/contexts/AuthContext";
 // styles
 import { useRouter } from "next/router";
 // useRouter
+import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
+// React Icon
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginStyle from "@/styles/Login/login.module.scss";
 import Footer from "@/components/Footer";
@@ -34,6 +36,8 @@ const Login = () => {
   const [attempts, setAttempts] = useState(0);
   // 嘗試登入次數
   const [loginBlocked, setLoginBlocked] = useState(false);
+  // 開眼
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -72,6 +76,10 @@ const Login = () => {
     }
   };
 
+  const openEyes = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <main className={LoginStyle.bodyStyle}>
       <div
@@ -99,12 +107,21 @@ const Login = () => {
               </div>
               <div className={`${LoginStyle.inputGroup} d-flex flex-column`}>
                 <label htmlFor="password">密碼：</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className={LoginStyle.openYourEyes}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    className={LoginStyle.yourEyes}
+                    onClick={openEyes}
+                    type="button"
+                  >
+                    {showPassword ? <PiEyeBold /> : <PiEyeClosedBold />}
+                  </button>
+                </div>
               </div>
               {/* if error, show error */}
               <div style={errorText}>{error ? <div>{error}</div> : null}</div>
