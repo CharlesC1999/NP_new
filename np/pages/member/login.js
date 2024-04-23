@@ -4,6 +4,8 @@ import axios from "axios";
 // contexts
 import { useAuth } from "@/contexts/AuthContext";
 // styles
+import { useRouter } from "next/router";
+// useRouter
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginStyle from "@/styles/Login/login.module.scss";
 import Footer from "@/components/Footer";
@@ -23,6 +25,7 @@ const Login = () => {
   const goSignUp = () => {
     window.location.href = "./sign-up";
   };
+  const router = useRouter();
   const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +49,8 @@ const Login = () => {
         login(response.data.token);
         // 使用Context的login方法
         console.log("登入成功!");
-        window.location.href = "/";
+        router.push("/");
+        // 用useRouter跳轉
         // 登入成功後，可能需要重定向或其他操作
       }
     } catch (error) {
@@ -102,7 +106,7 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {/* 如果有错误，显示错误消息 */}
+              {/* if error, show error */}
               <div style={errorText}>{error ? <div>{error}</div> : null}</div>
               <div
                 className={`${LoginStyle.buttonContainer} d-flex text-align-center justify-content-center`}
