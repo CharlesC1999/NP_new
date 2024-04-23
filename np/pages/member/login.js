@@ -25,7 +25,8 @@ const Login = () => {
   const goSignUp = () => {
     window.location.href = "./sign-up";
   };
-  const router = useRouter();
+
+
   const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
