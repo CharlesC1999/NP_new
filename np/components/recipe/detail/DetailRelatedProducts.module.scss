@@ -66,17 +66,6 @@
       }
       .top-left {
         gap: 5px;
-        input[type="checkbox"] {
-          appearance: none;
-          width: 20px;
-          height: 20px;
-          margin-right: 5px;
-          border: 2px solid var(--green02);
-          border-radius: 3px;
-          &:hover {
-            border: 2px solid var(--green03);
-          }
-        }
         .check-all {
           font-family: Inter;
           font-size: 20px;
@@ -159,6 +148,7 @@
           margin-top: 15px;
         }
         .quantity {
+          width: 84px;
           border-radius: 5px;
           border: 2px solid var(--green05);
           button {
@@ -172,6 +162,7 @@
           }
         }
         .subtotal {
+          min-width: 50px;
           color: var(--black);
           margin-bottom: 0;
         }

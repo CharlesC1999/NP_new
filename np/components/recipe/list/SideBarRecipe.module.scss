@@ -61,8 +61,11 @@
       border-radius: 50px;
     }
     .side-card {
-      .side-card-content{
+      .side-card-content {
         padding-inline: 0;
+        p {
+          margin-bottom: 0;
+        }
         .side-card-title {
           display: -webkit-box;
           -webkit-box-orient: vertical;
@@ -72,7 +75,7 @@
         .side-card-description {
           display: -webkit-box;
           -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 3;
           overflow: hidden;
           font-size: 10px;
         }

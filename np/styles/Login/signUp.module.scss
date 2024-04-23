@@ -1,7 +1,9 @@
 .bodyStyles {
   box-sizing: border-box;
   height: 100svh;
-  background-image: url(/images/login-Image/login-bg01.png);
+  background-image: url(/images/login-Image/sign-up-bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 @media (width: 375px) {
@@ -83,6 +85,13 @@
     border: none;
     border-radius: 5px;
   }
+  .input2 {
+    width: 282px;
+    height: 35px;
+    background-color: var(--gray03);
+    border: none;
+    border-radius: 5px;
+  }
 }
 @media (max-width: 375px) {
   .member {
@@ -158,4 +167,15 @@
   margin-top: 1px;
   background-color: #28a745 !important; /* 綠色 */
   border-color: #28a745 !important; /* 綠色 */
+}
+
+.openYourEyes {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.yourEyes {
+  border: none;
+  background: none;
 }

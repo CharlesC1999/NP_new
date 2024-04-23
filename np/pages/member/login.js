@@ -1,46 +1,83 @@
 import React, { useState, useEffect } from "react";
 // axios
 import axios from "axios";
+// contexts
+import { useAuth } from "@/contexts/AuthContext";
 // styles
+import { useRouter } from "next/router";
+// useRouter
+import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
+// React Icon
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginStyle from "@/styles/Login/login.module.scss";
 import Footer from "@/components/Footer";
 
 const Login = () => {
   const errorText = {
+    height: "24px",
     color: "red",
     marginTop: "4px",
     width: "315px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
   };
   // style
 
   const goSignUp = () => {
     window.location.href = "./sign-up";
   };
-
+  const router = useRouter();
+  const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  // 錯誤次數
+  const [attempts, setAttempts] = useState(0);
+  // 嘗試登入次數
+  const [loginBlocked, setLoginBlocked] = useState(false);
+  // 開眼
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (loginBlocked) {
+      setError("錯誤次數過多，請15分鐘後再次嘗試");
+      return;
+    }
+
     try {
       const response = await axios.post("/api/login", { username, password });
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
+        login(response.data.token);
+        // 使用Context的login方法
         console.log("登入成功!");
-        window.location.href = "/";
+        router.push("/");
+        // 用useRouter跳轉
         // 登入成功後，可能需要重定向或其他操作
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
         console.error("登入失敗", error.response.data.message);
+        setAttempts((prevAttempts) => prevAttempts + 1);
+        if (attempts >= 5) {
+          setLoginBlocked(true);
+          setError("錯誤次數過多，請15分鐘後再次嘗試");
+          setTimeout(() => setLoginBlocked(false), 15 * 60 * 1000);
+          setTimeout(() => setAttempts(0), 15 * 60 * 1000);
+        } else {
+        }
         setError("帳號或密碼錯誤，請重新嘗試");
       } else {
         setError("登入時發生錯誤，請稍後再試");
       }
       // 處理錯誤情況（例如顯示錯誤消息）
     }
+  };
+
+  const openEyes = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -56,38 +93,49 @@ const Login = () => {
             className={`${LoginStyle.MainText} d-flex flex-column justify-content-cetner align-items-center`}
           >
             <div className={`${LoginStyle.h3} text-align-center`}>會員登入</div>
-            <div
-              className={`${LoginStyle.inputGroup} ${LoginStyle.inputGroupFirst} d-flex flex-column`}
-            >
-              <label htmlFor="username">帳號：</label>
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className={`${LoginStyle.inputGroup} d-flex flex-column`}>
-              <label htmlFor="password">密碼：</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            {/* 如果有错误，显示错误消息 */}
-            {error && <div style={errorText}>{error}</div>}
-            <div
-              className={`${LoginStyle.buttonContainer} d-flex text-align-center justify-content-center`}
-            >
-              <button
-                onClick={handleLogin}
-                className={`${LoginStyle.buttonStyle} ${LoginStyle.startShopping} btn btn-success`}
+            <form onSubmit={handleLogin}>
+              <div
+                className={`${LoginStyle.inputGroup} ${LoginStyle.inputGroupFirst} d-flex flex-column`}
               >
-                開始購物吧！
-              </button>
-            </div>
+                <label htmlFor="username">帳號：</label>
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className={`${LoginStyle.inputGroup} d-flex flex-column`}>
+                <label htmlFor="password">密碼：</label>
+                <div className={LoginStyle.openYourEyes}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    className={LoginStyle.yourEyes}
+                    onClick={openEyes}
+                    type="button"
+                  >
+                    {showPassword ? <PiEyeBold /> : <PiEyeClosedBold />}
+                  </button>
+                </div>
+              </div>
+              {/* if error, show error */}
+              <div style={errorText}>{error ? <div>{error}</div> : null}</div>
+              <div
+                className={`${LoginStyle.buttonContainer} d-flex text-align-center justify-content-center`}
+              >
+                <button
+                  onClick={handleLogin}
+                  className={`${LoginStyle.buttonStyle} ${LoginStyle.startShopping} btn btn-success`}
+                >
+                  開始購物吧！
+                </button>
+              </div>
+            </form>
             <div classclassName={LoginStyle.social}>
               <p
                 href

@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       const token = jwt.sign(
         { id: user.id, username: user.User_name }, // 注意这里使用了正确的数据库字段
         "your-secret-key",
-        { expiresIn: "10m" }
+        { expiresIn: "25m" }
       );
       res.status(200).json({ token });
       // 驗證正確
