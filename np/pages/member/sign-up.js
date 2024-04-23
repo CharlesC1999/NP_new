@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import signUp from "@/styles/Login/signUp.module.scss";
@@ -17,6 +18,7 @@ import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 import _ from "lodash";
 
 const SignUpPage = () => {
+  const router = useRouter();
   const Checked = {
     color: "#28a745",
     backgroundColor: "#28a745",
@@ -124,7 +126,7 @@ const SignUpPage = () => {
     try {
       await axios.post("/api/sign-up", submitData);
       alert("註冊成功");
-      window.location.href = "./login";
+      router.push("/member/login");
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
@@ -139,6 +141,12 @@ const SignUpPage = () => {
   const handleEmailChange = (e) => {
     handleChange(e);
     checkEmailExists(e.target.value);
+  };
+
+  // 連結用router導
+  const goLogin = () => {
+    // 導到登入
+    router.push("/member/login");
   };
 
   return (
@@ -396,7 +404,7 @@ const SignUpPage = () => {
                 <div className={`text-center`}>我已經有會員帳號了?</div>
                 <div className={`justify-content-center d-flex`}>
                   <a
-                    href="./login"
+                    onClick={goLogin}
                     className={`${signUp.backhome} ms-2 text-decoration-none`}
                   >
                     回登入頁面
