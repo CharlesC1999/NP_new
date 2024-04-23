@@ -52,6 +52,11 @@ const HeaderComponent = () => {
     };
   }, []);
 
+  // 監測auth變化
+  useEffect(() => {
+    console.log("Auth state changed:", auth);
+  }, [auth]);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>

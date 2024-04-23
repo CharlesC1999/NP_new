@@ -7,7 +7,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     setAuth({ token, isLoggedIn: true });
-    localStorage.setItem("token", token); // 将token存储在localStorage中以持久化登录状态
+    localStorage.setItem("token", token);
+    // 將token存儲在localStorage中以維持登入狀態
+    // 用localStorage存儲會有安全性問題，因為localStorage是存儲在瀏覽器中，
+    // 任何人都可以訪問localStorage，所以可以用cookie來存儲token
   };
 
   const logout = () => {
