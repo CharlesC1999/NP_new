@@ -1,14 +1,15 @@
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import shopStyles from "./shopStyle1.module.css";
-import styles from "@/components/header.module.scss"
+import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 import Header from "@/components/Header";
 import Footer from "../../components/footer";
 import Navbar from "@/components/shopcart/Navbar";
-import Class from "@/components/shopcart/Class"
-import Commodity from "@/components/shopcart/Commodity"
+import Class from "@/components/shopcart/Class";
+import Commodity from "@/components/shopcart/Commodity";
 // 購物車用到的主鍵
 const ShopCart1 = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,53 +48,59 @@ const ShopCart1 = () => {
     };
   }, []);
 
-  const classIndex=[
-    {id:0,count:1,name :"肉桂捲初級班",price:1500},
-    {id:1,count:1,name :"cake初級班",price:1200},
-    {id:2,count:1,name :"肉捲初級班",price:1000}
-  ]
-   const [classData,classProductsData] = useState(classIndex)
+  const classIndex = [
+    { id: 0, count: 1, name: "肉桂捲初級班", price: 1500 },
+    { id: 1, count: 1, name: "cake初級班", price: 1200 },
+    { id: 2, count: 1, name: "肉捲初級班", price: 1000 },
+  ];
+  const [classData, classProductsData] = useState(classIndex);
 
-   const prodcts =[
-    {id:0,count:1,name :"肉桂捲",price:1500},
-    {id:1,count:1,name :"meet",price:1200},
-    {id:2,count:1,name :"肉捲",price:1000}
-  ]
-   const [productData,setProductsData] = useState(prodcts)
+  const prodcts = [
+    { id: 0, count: 1, name: "肉桂捲", price: 1500 },
+    { id: 1, count: 1, name: "meet", price: 1200 },
+    { id: 2, count: 1, name: "肉捲", price: 1000 },
+  ];
+  const [productData, setProductsData] = useState(prodcts);
   // const [quantity,setQuantity] = useState(0)
-  const increase = (id)=>{
+  const increase = (id) => {
     // setQuantity(quantity + 1)
-    const addProducts = classData.map((v,i)=>{
-      if(v.id === id ) return{...v, count:v.count+1}
-      else return v
-    })
+    const addProducts = classData.map((v, i) => {
+      if (v.id === id) return { ...v, count: v.count + 1 };
+      else return v;
+    });
 
-    classProductsData(addProducts)
-  }
+    classProductsData(addProducts);
+  };
 
-  const decrease = (id)=>{
+  const decrease = (id) => {
     // if(quantity>0){
     //   setQuantity(quantity - 1)
     // }
-    const reduceProducts = classData.map((v,i)=>{
-      if(v.id === id && v.count>0 ) return{...v, count:v.count-1}
-      else return v
-    })
+    const reduceProducts = classData.map((v, i) => {
+      if (v.id === id && v.count > 0) return { ...v, count: v.count - 1 };
+      else return v;
+    });
 
-    classProductsData(reduceProducts)
-  }
+    classProductsData(reduceProducts);
+  };
 
-  const remove =(id)=>{
-    const removeProduct =classData.filter((v,i)=>{
-      return v.id !==id
-    })
+  const remove = (id) => {
+    const removeProduct = classData.filter((v, i) => {
+      return v.id !== id;
+    });
 
-    classProductsData(removeProduct)
-  }
+    classProductsData(removeProduct);
+  };
 
-  const productDataTotal = productData.reduce((total, product) => total + product.count * product.price, 0);
-const classDataTotal = classData.reduce((total, product) => total + product.count * product.price, 0);
-const combinedTotal = productDataTotal + classDataTotal;
+  const productDataTotal = productData.reduce(
+    (total, product) => total + product.count * product.price,
+    0
+  );
+  const classDataTotal = classData.reduce(
+    (total, product) => total + product.count * product.price,
+    0
+  );
+  const combinedTotal = productDataTotal + classDataTotal;
   return (
     <>
       <Header />
@@ -104,9 +111,9 @@ const combinedTotal = productDataTotal + classDataTotal;
         {/*  */}
         <Navbar />
         {/* 課程欄位 */}
-        <Class/>
+        <Class />
         {/* 商品欄位 */}
-        <Commodity/>
+        <Commodity />
         {/* 折價券、付款 */}
         <article
           className={`${shopStyles.article} d-flex justify-content-center align-items-center flex-column mt-5 mb-5`}
@@ -208,9 +215,9 @@ const combinedTotal = productDataTotal + classDataTotal;
         <Navbar />
         {/* 課程欄位 */}
         {/* <main class="mt-5 mb-2 fw-bold fs-5" style="color: #50bf8b">商品</main> */}
-        <Class/>
+        <Class />
         {/* 商品欄位 */}
-        <Commodity/>
+        <Commodity />
         {/* 折價券、付款 */}
         <article
           className={`${shopStyles.send} ${shopStyles.article} d-flex justify-content-center align-items-center py-2 `}
@@ -220,7 +227,9 @@ const combinedTotal = productDataTotal + classDataTotal;
               <span className={`${shopStyles.fs} ${shopStyles.fb} `}>
                 結帳金額:
               </span>
-              <span className={`${shopStyles.fc} fs-4 pe-3`}>{combinedTotal}</span>
+              <span className={`${shopStyles.fc} fs-4 pe-3`}>
+                {combinedTotal}
+              </span>
             </div>
             <div className="col">
               <button
