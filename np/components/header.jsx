@@ -323,7 +323,7 @@ const HeaderComponent = () => {
                   width="30px"
                   height="30px"
                   viewBox="0 0 30 30"
-                  className={styles.logoutSvg}
+                  className={styles.logoutSVG}
                 >
                   <path
                     fill="#50bf8b"
