@@ -106,7 +106,7 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {/* 如果有错误，显示错误消息 */}
+              {/* if error, show error */}
               <div style={errorText}>{error ? <div>{error}</div> : null}</div>
               <div
                 className={`${LoginStyle.buttonContainer} d-flex text-align-center justify-content-center`}
