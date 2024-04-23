@@ -1,19 +1,18 @@
 import React from "react";
 import styles from "./SpeakerCardVertical.module.scss"
-import Link from "next/link"
 
-function SpeakerCardVertical(props) {
-  return( <Link href={`/speaker/${props.id}`} className={styles.speakerCardLink}>
+function SpeakerCardVertical() {
+  return( <a href="#" className={styles.speakerCardLink}>
   <div className={styles.speaker}>
     <div className={styles.speakerImg}>
       <img src="/speaker-image/lecturer16.jpg" alt />
     </div>
     <div className={styles.speakerName}>
-      <h5>{props.name}</h5>
-      <h6>{props.title}</h6>
+      <h5>戴于益</h5>
+      <h6>米其林藍帶 CEO</h6>
     </div>
   </div>
-</Link>
+</a>
 )
 }
    

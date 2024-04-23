@@ -13,9 +13,6 @@ export default async function handler(req, res) {
       password,
     } = req.body;
 
-    const defaultDOB = "1901-01-01";
-    const dob = date_of_birth || defaultDOB;
-
     try {
       //   從前端收取資料
       const salt = bcrypt.genSaltSync(10);
@@ -29,7 +26,7 @@ export default async function handler(req, res) {
         email,
         phone,
         gender,
-        dob,
+        date_of_birth,
         hashedPassword,
       ]);
       res.status(201).send("會員註冊成功");

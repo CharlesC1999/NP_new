@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import signUp from "@/styles/Login/signUp.module.scss";
@@ -9,12 +9,7 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// dayjs
 import dayjs from "dayjs";
-// React Icon
-import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
-// lodash
-import _ from "lodash";
 
 const SignUpPage = () => {
   const Checked = {
@@ -34,13 +29,6 @@ const SignUpPage = () => {
     confirmPassword: "",
   });
 
-  // 開眼
-  const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordC, setShowPasswordC] = useState(false);
-  // 帳號信箱是否存在
-  const [accountExists, setAccountExists] = useState("");
-  const [emailExists, setEmailExists] = useState("");
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -52,61 +40,10 @@ const SignUpPage = () => {
     });
   };
 
-  const openEyes = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const openEyesC = () => {
-    setShowPasswordC(!showPasswordC);
-  };
-
-  const checkAccountExists = useCallback(
-    _.debounce(async (account) => {
-      if (!account) return;
-      try {
-        const response = await axios.get(`/api/check-account`, {
-          params: { account: account }, // 使用查询参数
-        });
-        console.log("Account check response:", response.data);
-        setAccountExists(response.data.exists ? "帳號已存在" : "");
-      } catch (error) {
-        console.error("Error checking account", error);
-        setAccountExists("檢查帳號時發生錯誤");
-      }
-    }, 300),
-    []
-  );
-
-  const checkEmailExists = useCallback(
-    _.debounce(async (email) => {
-      if (!email) return;
-      try {
-        const response = await axios.get(`/api/check-email`, {
-          params: { email: email }, // 使用查詢參數
-        });
-        console.log("Email check response:", response.data);
-        setEmailExists(response.data.exists ? "郵箱已存在" : "");
-      } catch (error) {
-        console.error("Error checking email", error);
-        setAccountExists("檢查信箱時發生錯誤");
-      }
-    }, 300),
-    []
-  );
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
-      return;
-    }
-
-    // 確保在表單提交前完成帳號和郵箱的檢查
-    await checkAccountExists(formData.account);
-    await checkEmailExists(formData.email);
-
-    if (accountExists || emailExists) {
-      alert("有重複的帳號或密碼");
       return;
     }
 
@@ -119,23 +56,13 @@ const SignUpPage = () => {
     };
 
     try {
-      await axios.post("/api/sign-up", submitData);
-      alert("註冊成功");
+      await axios.post("/api/sign-up", formData);
+      alert("Registration successful");
       window.location.href = "./login";
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
     }
-  };
-
-  const handleAccountChange = (e) => {
-    handleChange(e);
-    checkAccountExists(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    handleChange(e);
-    checkEmailExists(e.target.value);
   };
 
   return (
@@ -182,14 +109,11 @@ const SignUpPage = () => {
                       type="account"
                       name="account"
                       value={formData.account}
-                      onChange={handleAccountChange}
+                      onChange={handleChange}
                       className={`${signUp.input} ps-2`}
                       placeholder="請輸入您的帳號"
                       required
                     />
-                    {accountExists && (
-                      <div className="text-danger">{accountExists}</div>
-                    )}
                   </div>
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
                     <label htmlFor className={signUp.label}>
@@ -199,14 +123,11 @@ const SignUpPage = () => {
                       type="email"
                       name="email"
                       value={formData.email}
-                      onChange={handleEmailChange}
+                      onChange={handleChange}
                       className={`${signUp.input} ps-2`}
                       placeholder="請輸入您的Email"
                       required
                     />
-                    {emailExists && (
-                      <div className="text-danger">{emailExists}</div>
-                    )}
                   </div>
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
                     <label htmlFor className={signUp.label}>
@@ -271,47 +192,29 @@ const SignUpPage = () => {
                     <label htmlFor className={signUp.label}>
                       密碼(必填)
                     </label>
-                    <div className={signUp.openYourEyes}>
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        className={`${signUp.input2} ps-2`}
-                        placeholder="請輸您的密碼"
-                        required
-                      />
-                      <button
-                        className={signUp.yourEyes}
-                        onClick={openEyes}
-                        type="button"
-                      >
-                        {showPassword ? <PiEyeBold /> : <PiEyeClosedBold />}
-                      </button>
-                    </div>
+                    <input
+                      type="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      className={`${signUp.input} ps-2`}
+                      placeholder="請輸您的密碼"
+                      required
+                    />
                   </div>
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
                     <label htmlFor className={signUp.label}>
                       密碼確認(必填)
                     </label>
-                    <div className={signUp.openYourEyes}>
-                      <input
-                        type={showPasswordC ? "text" : "password"}
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        className={`${signUp.input2} ps-2`}
-                        placeholder="再輸入一次密碼"
-                        required
-                      />
-                      <button
-                        className={signUp.yourEyes}
-                        onClick={openEyesC}
-                        type="button"
-                      >
-                        {showPasswordC ? <PiEyeBold /> : <PiEyeClosedBold />}
-                      </button>
-                    </div>
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      className={`${signUp.input} ps-2`}
+                      placeholder="再輸入一次密碼"
+                      required
+                    />
                   </div>
                   <div className={signUp.sex}>
                     <label htmlFor="flexRadioDefault1" className={signUp.label}>
