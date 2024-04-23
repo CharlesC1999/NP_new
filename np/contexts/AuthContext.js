@@ -1,9 +1,24 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({ token: null, isLoggedIn: false });
+  // 初始化時從localStorage獲取token來設定登入狀態
+  const [auth, setAuth] = useState({
+    token: null,
+    isLoggedIn: false,
+  });
+
+  useEffect(() => {
+    // 組件掛載後，從localStorage中讀取token並更新狀態
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuth({
+        token: token,
+        isLoggedIn: true,
+      });
+    }
+  }, []);
 
   const login = (token) => {
     setAuth({ token, isLoggedIn: true });
