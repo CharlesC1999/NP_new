@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
 // import classNames from "classnames";
@@ -9,7 +8,6 @@ const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
   const dropdownRef = useRef(null);
-  const router = useRouter();
   const { auth, logout } = useAuth();
 
   let hasMargin = true;
@@ -90,7 +88,7 @@ const HeaderComponent = () => {
               </svg>
             </button>
 
-            <a onClick={goIndex}>
+            <a href="/">
               <img
                 src="/images/np_logo.png"
                 alt="Company Logo"
@@ -239,82 +237,42 @@ const HeaderComponent = () => {
                 購物車
               </span>
             </a>
-            {auth.isLoggedIn ? (
-              // 這邊放登入後
-              <a onClick={goMemberDashboard} className={styles.pageLink}>
-                {/* <!-- 手機圖示svg --> */}
+            <a href="/member/login" className={styles.pageLink}>
+              {/* <!-- 手機圖示svg --> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+                className={styles.iconLinkMobile}
+              >
+                <path
+                  fill="#50BF8B"
+                  d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
+                />
+              </svg>
+              <span className={styles.iconText}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="30px"
-                  height="30px"
+                  width="25"
+                  height="25"
                   viewBox="0 0 24 24"
-                  className={styles.iconLinkMobile}
+                  className={styles.mobileNone}
                 >
-                  <path
-                    fill="#50BF8B"
-                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
-                  />
-                </svg>
-                <span className={styles.iconText}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 24 24"
-                    className={styles.mobileNone}
+                  <g
+                    fill="none"
+                    stroke="#253D4E"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                   >
-                    <g
-                      fill="none"
-                      stroke="#253D4E"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </g>
-                  </svg>
-                  會員中心
-                </span>
-              </a>
-            ) : (
-              <a onClick={doLogin} className={styles.pageLink}>
-                {/* <!-- 手機圖示svg --> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="30px"
-                  height="30px"
-                  viewBox="0 0 24 24"
-                  className={styles.iconLinkMobile}
-                >
-                  <path
-                    fill="#50BF8B"
-                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
-                  />
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </g>
                 </svg>
-                <span className={styles.iconText}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 24 24"
-                    className={styles.mobileNone}
-                  >
-                    <g
-                      fill="none"
-                      stroke="#253D4E"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </g>
-                  </svg>
-                  會員登入
-                </span>
-              </a>
-            )}
+                會員登入
+              </span>
+            </a>
             {auth.isLoggedIn ? (
               <button className={styles.logout} onClick={logout} id="logout">
                 <svg
@@ -322,7 +280,7 @@ const HeaderComponent = () => {
                   width="30px"
                   height="30px"
                   viewBox="0 0 30 30"
-                  className={styles.logoutSVG}
+                  className={styles.logoutSvg}
                 >
                   <path
                     fill="#50bf8b"

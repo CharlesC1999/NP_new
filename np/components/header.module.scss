@@ -142,7 +142,6 @@ a:visited {
   display: flex;
   align-items: start;
   color: #454545;
-  cursor: pointer;
 }
 .pageLink:active {
   color: #78cea6;
@@ -174,7 +173,6 @@ a:visited {
   align-self: stretch;
   display: flex;
   justify-content: center;
-  cursor: pointer;
 }
 
 .mobileMenu {
@@ -295,12 +293,12 @@ a:visited {
 .logout {
   border: none;
   background: transparent;
-  margin-top: 9px;
+  margin-top: 6px;
   margin-bottom: 2px;
   padding-inline: 0px;
 }
 
-.logoutSVG {
+.logoutSvg {
   width: 100%;
   height: 100%;
 }

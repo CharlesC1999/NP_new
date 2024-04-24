@@ -10,12 +10,7 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// dayjs
 import dayjs from "dayjs";
-// React Icon
-import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
-// lodash
-import _ from "lodash";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -197,7 +192,7 @@ const SignUpPage = () => {
                       minlength="8"
                       maxlength="24"
                       value={formData.account}
-                      onChange={handleAccountChange}
+                      onChange={handleChange}
                       className={`${signUp.input} ps-2`}
                       placeholder="請輸入您的帳號"
                       required
@@ -218,7 +213,7 @@ const SignUpPage = () => {
                       type="email"
                       name="email"
                       value={formData.email}
-                      onChange={handleEmailChange}
+                      onChange={handleChange}
                       className={`${signUp.input} ps-2`}
                       placeholder="請輸入您的Email"
                       required
