@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import signUp from "@/styles/Login/signUp.module.scss";
@@ -10,10 +9,14 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// dayjs
 import dayjs from "dayjs";
+// React Icon
+import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
+// lodash
+import _ from "lodash";
 
 const SignUpPage = () => {
-  const router = useRouter();
   const Checked = {
     color: "#28a745",
     backgroundColor: "#28a745",
@@ -121,7 +124,7 @@ const SignUpPage = () => {
     try {
       await axios.post("/api/sign-up", submitData);
       alert("註冊成功");
-      router.push("/member/login");
+      window.location.href = "./login";
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
@@ -136,12 +139,6 @@ const SignUpPage = () => {
   const handleEmailChange = (e) => {
     handleChange(e);
     checkEmailExists(e.target.value);
-  };
-
-  // 連結用router導
-  const goLogin = () => {
-    // 導到登入
-    router.push("/member/login");
   };
 
   return (
@@ -192,7 +189,7 @@ const SignUpPage = () => {
                       minlength="8"
                       maxlength="24"
                       value={formData.account}
-                      onChange={handleChange}
+                      onChange={handleAccountChange}
                       className={`${signUp.input} ps-2`}
                       placeholder="請輸入您的帳號"
                       required
@@ -213,7 +210,7 @@ const SignUpPage = () => {
                       type="email"
                       name="email"
                       value={formData.email}
-                      onChange={handleChange}
+                      onChange={handleEmailChange}
                       className={`${signUp.input} ps-2`}
                       placeholder="請輸入您的Email"
                       required
@@ -399,7 +396,7 @@ const SignUpPage = () => {
                 <div className={`text-center`}>我已經有會員帳號了?</div>
                 <div className={`justify-content-center d-flex`}>
                   <a
-                    onClick={goLogin}
+                    href="./login"
                     className={`${signUp.backhome} ms-2 text-decoration-none`}
                   >
                     回登入頁面
