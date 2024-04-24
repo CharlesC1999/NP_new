@@ -7,10 +7,13 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 // useRouter
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
+import { FaArrowLeft } from "react-icons/fa";
 // React Icon
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginStyle from "@/styles/Login/login.module.scss";
 import Footer from "@/components/Footer";
+// 導入路徑配置
+import routes from "@/contexts/routes";
 
 const Login = () => {
   const errorText = {
@@ -82,9 +85,16 @@ const Login = () => {
     // 導到註冊
     router.push("/member/sign-up");
   };
+  const goIndex = () => router.push(routes.home);
 
   return (
     <main className={LoginStyle.bodyStyle}>
+      <FaArrowLeft
+        className={LoginStyle.goBack}
+        size={40}
+        color="#50bf8b"
+        onClick={goIndex}
+      />
       <div
         className={`${LoginStyle.mainStyle} d-flex align-items-center justify-content-center`}
       >
