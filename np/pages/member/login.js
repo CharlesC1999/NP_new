@@ -22,9 +22,6 @@ const Login = () => {
   };
   // style
 
-  const goSignUp = () => {
-    window.location.href = "./sign-up";
-  };
   const router = useRouter();
   const { login } = useAuth();
   const [username, setUsername] = useState("");
@@ -70,6 +67,16 @@ const Login = () => {
       }
       // 處理錯誤情況（例如顯示錯誤消息）
     }
+  };
+
+  const openEyes = () => {
+    setShowPassword(!showPassword);
+  };
+
+  // 連結用router導
+  const goSignUp = () => {
+    // 導到註冊
+    router.push("/member/sign-up");
   };
 
   return (

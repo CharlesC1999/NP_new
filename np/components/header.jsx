@@ -52,10 +52,19 @@ const HeaderComponent = () => {
     };
   }, []);
 
-  // 監測auth變化
-  useEffect(() => {
-    console.log("Auth state changed:", auth);
-  }, [auth]);
+  // 會員連結變化
+  const goMemberDashboard = () => {
+    // 導到會員中心
+    router.push("/member");
+  };
+  const doLogin = () => {
+    // 導到登入頁面
+    router.push("/member/login");
+  };
+  const goIndex = () => {
+    // 導回首頁
+    router.push("/");
+  };
 
   return (
     <div className={styles.container}>
