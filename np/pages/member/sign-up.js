@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import signUp from "@/styles/Login/signUp.module.scss";
@@ -17,6 +18,7 @@ import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 import _ from "lodash";
 
 const SignUpPage = () => {
+  const router = useRouter();
   const Checked = {
     color: "#28a745",
     backgroundColor: "#28a745",
@@ -40,6 +42,8 @@ const SignUpPage = () => {
   // 帳號信箱是否存在
   const [accountExists, setAccountExists] = useState("");
   const [emailExists, setEmailExists] = useState("");
+  // 密碼確認錯誤
+  const [confirmError, setConfirmError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -73,7 +77,7 @@ const SignUpPage = () => {
         console.error("Error checking account", error);
         setAccountExists("檢查帳號時發生錯誤");
       }
-    }, 300),
+    }, 500),
     []
   );
 
@@ -85,7 +89,7 @@ const SignUpPage = () => {
           params: { email: email }, // 使用查詢參數
         });
         console.log("Email check response:", response.data);
-        setEmailExists(response.data.exists ? "郵箱已存在" : "");
+        setEmailExists(response.data.exists ? "信箱已存在" : "");
       } catch (error) {
         console.error("Error checking email", error);
         setAccountExists("檢查信箱時發生錯誤");
@@ -97,7 +101,8 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      // alert("Passwords do not match");
+      setConfirmError("密碼不一致");
       return;
     }
 
@@ -106,7 +111,7 @@ const SignUpPage = () => {
     await checkEmailExists(formData.email);
 
     if (accountExists || emailExists) {
-      alert("有重複的帳號或密碼");
+      alert("帳號或信箱已存在");
       return;
     }
 
@@ -121,7 +126,7 @@ const SignUpPage = () => {
     try {
       await axios.post("/api/sign-up", submitData);
       alert("註冊成功");
-      window.location.href = "./login";
+      router.push("/member/login");
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
@@ -136,6 +141,12 @@ const SignUpPage = () => {
   const handleEmailChange = (e) => {
     handleChange(e);
     checkEmailExists(e.target.value);
+  };
+
+  // 連結用router導
+  const goLogin = () => {
+    // 導到登入
+    router.push("/member/login");
   };
 
   return (
@@ -174,26 +185,34 @@ const SignUpPage = () => {
                       required
                     />
                   </div>
-                  <div className={`${signUp.inputGroup} d-flex flex-column`}>
+                  <div
+                    className={`${signUp.inputGroupForError} d-flex flex-column`}
+                  >
                     <label htmlFor className={signUp.label}>
                       帳號 (必填)
                     </label>
                     <input
                       type="account"
                       name="account"
+                      minlength="8"
+                      maxlength="24"
                       value={formData.account}
                       onChange={handleAccountChange}
                       className={`${signUp.input} ps-2`}
                       placeholder="請輸入您的帳號"
                       required
                     />
-                    {accountExists && (
-                      <div className="text-danger">{accountExists}</div>
-                    )}
+                    <div className={signUp.errorText}>
+                      {accountExists && (
+                        <div className="text-danger">{accountExists}</div>
+                      )}
+                    </div>
                   </div>
-                  <div className={`${signUp.inputGroup} d-flex flex-column`}>
+                  <div
+                    className={`${signUp.inputGroupForError} d-flex flex-column`}
+                  >
                     <label htmlFor className={signUp.label}>
-                      電子郵件(必填)
+                      電子信箱(必填)
                     </label>
                     <input
                       type="email"
@@ -204,9 +223,11 @@ const SignUpPage = () => {
                       placeholder="請輸入您的Email"
                       required
                     />
-                    {emailExists && (
-                      <div className="text-danger">{emailExists}</div>
-                    )}
+                    <div className={signUp.errorText}>
+                      {emailExists && (
+                        <div className="text-danger">{emailExists}</div>
+                      )}
+                    </div>
                   </div>
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
                     <label htmlFor className={signUp.label}>
@@ -275,6 +296,9 @@ const SignUpPage = () => {
                       <input
                         type={showPassword ? "text" : "password"}
                         name="password"
+                        minlength="8"
+                        pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" //至少要有大小寫及8個字符以上
+                        title="密碼必須包含至少8個字符，包含一個小寫字母和一個大寫字母。"
                         value={formData.password}
                         onChange={handleChange}
                         className={`${signUp.input2} ps-2`}
@@ -290,7 +314,9 @@ const SignUpPage = () => {
                       </button>
                     </div>
                   </div>
-                  <div className={`${signUp.inputGroup} d-flex flex-column`}>
+                  <div
+                    className={`${signUp.inputGroupForError} d-flex flex-column`}
+                  >
                     <label htmlFor className={signUp.label}>
                       密碼確認(必填)
                     </label>
@@ -298,6 +324,9 @@ const SignUpPage = () => {
                       <input
                         type={showPasswordC ? "text" : "password"}
                         name="confirmPassword"
+                        minlength="8"
+                        pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" //至少要有大小寫及8個字符以上
+                        title="密碼必須包含至少8個字符，包含一個小寫字母和一個大寫字母。"
                         value={formData.confirmPassword}
                         onChange={handleChange}
                         className={`${signUp.input2} ps-2`}
@@ -311,6 +340,11 @@ const SignUpPage = () => {
                       >
                         {showPasswordC ? <PiEyeBold /> : <PiEyeClosedBold />}
                       </button>
+                    </div>
+                    <div className={signUp.errorText}>
+                      {confirmError && (
+                        <div className="text-danger">{confirmError}</div>
+                      )}
                     </div>
                   </div>
                   <div className={signUp.sex}>
@@ -370,7 +404,7 @@ const SignUpPage = () => {
                 <div className={`text-center`}>我已經有會員帳號了?</div>
                 <div className={`justify-content-center d-flex`}>
                   <a
-                    href="./login"
+                    onClick={goLogin}
                     className={`${signUp.backhome} ms-2 text-decoration-none`}
                   >
                     回登入頁面

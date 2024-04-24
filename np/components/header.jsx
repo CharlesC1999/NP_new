@@ -63,7 +63,6 @@ const HeaderComponent = () => {
     // 導到登入頁面
     router.push("/member/login");
   };
-  // 會員連結變化
   const goIndex = () => {
     // 導回首頁
     router.push("/");

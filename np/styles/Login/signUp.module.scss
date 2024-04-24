@@ -50,6 +50,15 @@
         font-size: 1.2rem !important;
       }
     }
+    .inputGroupForError {
+      width: 280px;
+      .input {
+        width: 280px;
+      }
+      .label {
+        font-size: 1.2rem !important;
+      }
+    }
     .btn {
       width: 300px;
       background-color: var(--green01);
@@ -67,6 +76,16 @@
       color: var(--green03);
     }
   }
+
+  .inputGroupForError {
+    border-radius: 10px;
+    margin-bottom: 16px;
+    .label {
+      font-size: 1.5rem;
+      color: var(--green03);
+    }
+  }
+
   .checkGroup {
     .formCheckInput {
       background: var(--gray02);
@@ -178,4 +197,8 @@
 .yourEyes {
   border: none;
   background: none;
+}
+
+.errorText {
+  height: 24px;
 }
