@@ -67,6 +67,22 @@ const HeaderComponent = () => {
     // 導回首頁
     router.push("/");
   };
+  const goClassList = () => {
+    // 導到課程頁
+    router.push("/class-page");
+  };
+  const goSpeekerList = () => {
+    // 導到講師頁
+    router.push("/speaker");
+  };
+  const goProductList = () => {
+    // 導到商品頁
+    router.push("/product");
+  };
+  const goRecipeList = () => {
+    // 導到商品頁
+    router.push("/recipe");
+  };
 
   return (
     <div className={styles.container}>
@@ -403,7 +419,7 @@ const HeaderComponent = () => {
             </button>
           </li>
           <li className={styles.navItemPageLinks}>
-            <a href="/class-page" className={styles.pageLink}>
+            <a className={styles.pageLink} onClick={goClassList}>
               <div>精選課程</div>
             </a>
             <svg
