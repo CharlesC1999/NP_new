@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
 // import classNames from "classnames";
+import routes from "@/contexts/routes"; // 導入路徑配置
 
 const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,35 +55,14 @@ const HeaderComponent = () => {
     };
   }, []);
 
-  // 會員連結變化
-  const goMemberDashboard = () => {
-    // 導到會員中心
-    router.push("/member");
-  };
-  const doLogin = () => {
-    // 導到登入頁面
-    router.push("/member/login");
-  };
-  const goIndex = () => {
-    // 導回首頁
-    router.push("/");
-  };
-  const goClassList = () => {
-    // 導到課程頁
-    router.push("/class-page");
-  };
-  const goSpeekerList = () => {
-    // 導到講師頁
-    router.push("/speaker");
-  };
-  const goProductList = () => {
-    // 導到商品頁
-    router.push("/product");
-  };
-  const goRecipeList = () => {
-    // 導到商品頁
-    router.push("/recipe");
-  };
+  // 使用配置的路由導航
+  const goMemberDashboard = () => router.push(routes.dashboard);
+  const doLogin = () => router.push(routes.login);
+  const goIndex = () => router.push(routes.home);
+  const goClassList = () => router.push(routes.classList);
+  const goProductList = () => router.push(routes.productList);
+  const goRecipeList = () => router.push(routes.recipeList);
+  const goSpeekerList = () => router.push(routes.speakerList);
 
   return (
     <div className={styles.container}>
