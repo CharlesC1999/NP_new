@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Products from "@/data/recipeDetail/Product.json";
+import Products from "@/data/recipe/product.json";
 import CheckBoxCustom from "@/components/checkbox-custom/CheckBoxCustom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailRelatedProducts.module.scss";
@@ -12,6 +12,7 @@ export default function DetailRelatedProducts() {
   // 相關產品的state
   const [products, setProducts] = useState(initProducts);
 
+  //增加商品數量
   const increaseItem = (id) => {
     const newItems = products.map((v) => {
       if (v.id === id) {
@@ -23,6 +24,7 @@ export default function DetailRelatedProducts() {
     setProducts(newItems);
   };
 
+  //減少商品數量
   const decreaseItem = (id) => {
     const newItems = products.map((v) => {
       if (v.id === id) {
@@ -34,6 +36,7 @@ export default function DetailRelatedProducts() {
     setProducts(newItems);
   };
 
+  //各項商品的小計
   const subtotal = (qty, price) => {
     return qty * price;
   };
