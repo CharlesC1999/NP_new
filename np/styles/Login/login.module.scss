@@ -49,9 +49,14 @@
     color: var(--green02);
     margin-bottom: 30px;
 
-    & .socialMediaIcon {
-      width: 28px;
-      height: 28px;
+    & .socialMediaButton {
+      border: none;
+      background: none;
+      cursor: pointer;
+      & .socialMediaIcon {
+        width: 28px;
+        height: 28px;
+      }
     }
   }
 
