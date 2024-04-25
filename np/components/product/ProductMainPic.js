@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
+//components
 import HeaderComponent from "@/components/header";
 import Footer from "@/components/footer";
+//styles
 import "bootstrap/dist/css/bootstrap.min.css";
+import style from "@/styles/Product/products.module.scss";
+
+//FontAwsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import style from "@/components/product/products.module.scss";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductMainPic() {

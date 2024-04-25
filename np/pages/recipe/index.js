@@ -19,6 +19,7 @@ export default function RecipeList() {
       <Breadcrumbs />
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
+
         <TopBarList />
         <TopBarGrid />
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
@@ -31,10 +32,16 @@ export default function RecipeList() {
             <div className="d-none d-xxl-block">
               <Filter />
             </div>
-            <RecipeCardsList />
-            <RecipeCardsList />
-            <RecipeCardsList />
-            <RecipeCardsList />
+            <div className={`${styles["list-layout"]} col`}>
+              <section
+                className={`d-flex flex-column ${styles["main-content"]}`}
+              >
+                <RecipeCardsList />
+                <RecipeCardsList />
+                <RecipeCardsList />
+                <RecipeCardsList />
+              </section>
+            </div>
           </div>
           {/* 食譜卡片 (grid排列) */}
           <div

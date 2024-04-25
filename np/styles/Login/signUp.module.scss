@@ -1,7 +1,9 @@
 .bodyStyles {
   box-sizing: border-box;
   height: 100svh;
-  background-image: url(/images/login-Image/login-bg01.png);
+  background-image: url(/images/login-Image/sign-up-bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 @media (width: 375px) {
@@ -48,6 +50,15 @@
         font-size: 1.2rem !important;
       }
     }
+    .inputGroupForError {
+      width: 280px;
+      .input {
+        width: 280px;
+      }
+      .label {
+        font-size: 1.2rem !important;
+      }
+    }
     .btn {
       width: 300px;
       background-color: var(--green01);
@@ -65,6 +76,16 @@
       color: var(--green03);
     }
   }
+
+  .inputGroupForError {
+    border-radius: 10px;
+    margin-bottom: 16px;
+    .label {
+      font-size: 1.5rem;
+      color: var(--green03);
+    }
+  }
+
   .checkGroup {
     .formCheckInput {
       background: var(--gray02);
@@ -78,6 +99,13 @@
   }
   .input {
     width: 310px;
+    height: 35px;
+    background-color: var(--gray03);
+    border: none;
+    border-radius: 5px;
+  }
+  .input2 {
+    width: 282px;
     height: 35px;
     background-color: var(--gray03);
     border: none;
@@ -158,4 +186,19 @@
   margin-top: 1px;
   background-color: #28a745 !important; /* 綠色 */
   border-color: #28a745 !important; /* 綠色 */
+}
+
+.openYourEyes {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.yourEyes {
+  border: none;
+  background: none;
+}
+
+.errorText {
+  height: 24px;
 }

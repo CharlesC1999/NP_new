@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
+//components
 import HeaderComponent from "@/components/header";
 import Footer from "@/components/footer";
+//styles
+import style from "@/styles/Product/products.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 //Font Awsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import style from "@/components/product/products.module.scss";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import styles from "./ProductCard.module.css";
 
 function ProductMainText() {
   return (
@@ -42,25 +44,12 @@ function ProductMainText() {
         />
         <button
           type="submit"
-          className={`${style["buy-btn"]}  my-2 btn btn-outline-success`}
+          className={`${style["buy-btn"]}  my-2 btn d-flex justify-content-center align-items-center`}
         >
-          <span className={``}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 24 24"
-              class="aBitMargin mobile-none"
-            >
-              <path
-                fill="none"
-                stroke="#50BF8B"
-                stroke-width="2"
-                d="M5 5h17l-2 9H7L4 2H0m7 12l1 4h13m-2 5a1 1 0 1 1 0-2a1 1 0 0 1 0 2ZM9 23a1 1 0 1 1 0-2a1 1 0 0 1 0 2Z"
-              />
-            </svg>
-          </span>
-          &nbsp;&nbsp;加入購物車
+          &nbsp;&nbsp;加入購物車{" "}
+          <i
+            className={`${style["fa-cart-shopping"]} fa-solid fa-cart-shopping ms-2`}
+          ></i>
         </button>
       </div>
     </>

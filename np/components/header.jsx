@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
 // import classNames from "classnames";
+import routes from "@/contexts/routes"; // 導入路徑配置
+//  react icon
+import { IoLogOutOutline } from "react-icons/io5";
 
 const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
   const dropdownRef = useRef(null);
+  const router = useRouter();
+  const { auth, logout } = useAuth();
 
   let hasMargin = true;
   let isMobile = false;
@@ -50,6 +57,15 @@ const HeaderComponent = () => {
     };
   }, []);
 
+  // 使用配置的路由導航
+  const goMemberDashboard = () => router.push(routes.dashboard);
+  const doLogin = () => router.push(routes.login);
+  const goIndex = () => router.push(routes.home);
+  const goClassList = () => router.push(routes.classList);
+  const goProductList = () => router.push(routes.productList);
+  const goRecipeList = () => router.push(routes.recipeList);
+  const goSpeekerList = () => router.push(routes.speakerList);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -72,7 +88,7 @@ const HeaderComponent = () => {
               </svg>
             </button>
 
-            <a href="/">
+            <a onClick={goIndex}>
               <img
                 src="/images/np_logo.png"
                 alt="Company Logo"
@@ -221,42 +237,89 @@ const HeaderComponent = () => {
                 購物車
               </span>
             </a>
-            <a href="/member/login" className={styles.pageLink}>
-              {/* <!-- 手機圖示svg --> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="30px"
-                height="30px"
-                viewBox="0 0 24 24"
-                className={styles.iconLinkMobile}
-              >
-                <path
-                  fill="#50BF8B"
-                  d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
-                />
-              </svg>
-              <span className={styles.iconText}>
+            {auth.isLoggedIn ? (
+              // 這邊放登入後
+              <a onClick={goMemberDashboard} className={styles.pageLink}>
+                {/* <!-- 手機圖示svg --> */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
+                  width="30px"
+                  height="30px"
                   viewBox="0 0 24 24"
-                  className={styles.mobileNone}
+                  className={styles.iconLinkMobile}
                 >
-                  <g
-                    fill="none"
-                    stroke="#253D4E"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                  >
-                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </g>
+                  <path
+                    fill="#50BF8B"
+                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
+                  />
                 </svg>
-                會員登入
-              </span>
-            </a>
+                <span className={styles.iconText}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 24 24"
+                    className={styles.mobileNone}
+                  >
+                    <g
+                      fill="none"
+                      stroke="#253D4E"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </g>
+                  </svg>
+                  會員中心
+                </span>
+              </a>
+            ) : (
+              <a onClick={doLogin} className={styles.pageLink}>
+                {/* <!-- 手機圖示svg --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 24 24"
+                  className={styles.iconLinkMobile}
+                >
+                  <path
+                    fill="#50BF8B"
+                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
+                  />
+                </svg>
+                <span className={styles.iconText}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 24 24"
+                    className={styles.mobileNone}
+                  >
+                    <g
+                      fill="none"
+                      stroke="#253D4E"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </g>
+                  </svg>
+                  會員登入
+                </span>
+              </a>
+            )}
+            {auth.isLoggedIn ? (
+              <button className={styles.logout} onClick={logout} id="logout">
+                <IoLogOutOutline size={30} color="#50bf8b" />
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </header>
@@ -323,7 +386,7 @@ const HeaderComponent = () => {
             </button>
           </li>
           <li className={styles.navItemPageLinks}>
-            <a href="/class-page" className={styles.pageLink}>
+            <a className={styles.pageLink} onClick={goClassList}>
               <div>精選課程</div>
             </a>
             <svg

@@ -11,6 +11,10 @@
   .product-info {
     padding: 20px;
     .product-name {
+      max-width: 170px; /* 可以調整寬度以符合你的設計需求 */
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       color: var(--black);
     }
     .stars-row {
@@ -70,6 +74,10 @@
     .product-info {
       padding: 10px 15px;
       .product-name {
+        max-width: 150px; /* 根據你的實際需求調整寬度 */
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         color: var(--black);
         font-size: 0.9rem;
       }

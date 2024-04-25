@@ -1,0 +1,50 @@
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 60vh;
+  flex-direction: column;
+}
+
+/* 設大於375樣式 */
+@media (min-width: 376px) {
+  .return {
+    background-color: #ffffff;
+    color: #78cea6;
+    border: 1px solid #78cea6;
+    height: 50px;
+    width: 200px;
+    text-decoration: none;
+  }
+  .keepbuy {
+    background-color: #78cea6;
+    color: #ffffff;
+    border: 1px solid #78cea6;
+    height: 50px;
+    width: 200px;
+  }
+}
+
+/* 設小於375樣式 */
+@media (max-width: 376px) {
+  .return {
+    background-color: #ffffff;
+    color: #78cea6;
+    border: 1px solid #78cea6;
+    height: 48px;
+    width: 100px;
+    text-decoration: none;
+  }
+  .keepbuy {
+    background-color: #78cea6;
+    color: #ffffff;
+    border: 1px solid #78cea6;
+    height: 48px;
+    width: 100px;
+  }
+}
+/* button {
+  height: 50px;
+  width: 200px;
+} */
