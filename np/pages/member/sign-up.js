@@ -126,7 +126,7 @@ const SignUpPage = () => {
       return;
     }
 
-    // 在发送前确保日期是正确的 dayjs 格式或者为空
+    // 確保日期是正確的 dayjs 格式
     const submitData = {
       ...formData,
       date_of_birth: formData.date_of_birth
