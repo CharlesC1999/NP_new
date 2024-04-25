@@ -3,6 +3,12 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  & .goBack {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+  }
 }
 
 .MainText {
@@ -43,9 +49,14 @@
     color: var(--green02);
     margin-bottom: 30px;
 
-    & .socialMediaIcon {
-      width: 28px;
-      height: 28px;
+    & .socialMediaButton {
+      border: none;
+      background: none;
+      cursor: pointer;
+      & .socialMediaIcon {
+        width: 28px;
+        height: 28px;
+      }
     }
   }
 
