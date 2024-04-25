@@ -15,8 +15,14 @@ import dayjs from "dayjs";
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 // lodash
 import _ from "lodash";
+// useRouter
+import { useRouter } from "next/router";
+// 導入路徑配置
+import routes from "@/contexts/routes";
 
 const SignUpPage = () => {
+  const router = useRouter();
+
   const Checked = {
     color: "#28a745",
     backgroundColor: "#28a745",
@@ -140,6 +146,8 @@ const SignUpPage = () => {
     handleChange(e);
     checkEmailExists(e.target.value);
   };
+
+  const goLogin = () => router.push(routes.login);
 
   return (
     <>
@@ -396,7 +404,7 @@ const SignUpPage = () => {
                 <div className={`text-center`}>我已經有會員帳號了?</div>
                 <div className={`justify-content-center d-flex`}>
                   <a
-                    href="./login"
+                    onClick={goLogin}
                     className={`${signUp.backhome} ms-2 text-decoration-none`}
                   >
                     回登入頁面

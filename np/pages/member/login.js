@@ -19,6 +19,8 @@ import firebase from "@/utils/firebase-config";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // 讀取畫面
 import { useLoader } from "@/hooks/use-loader";
+// Link
+import Link from "next/link";
 
 const Login = () => {
   // 導入讀取鉤子
@@ -100,7 +102,15 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         //成功
-        console.log(result.user);
+        const token = result.credential.accessToken; // Google 令牌
+        const userData = {
+          name: result.user.displayName,
+          email: result.user.email,
+          photoURL: result.user.photoURL,
+        };
+        console.log("登入成功", result.user);
+        // 使用 AuthContext 的 login 方法更新應用狀態
+        login(token, userData);
       })
       .catch((error) => {
         // Error
