@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Products from "@/data/recipe/product.json";
-import CheckBoxCustom from "@/components/checkbox-custom/CheckBoxCustom";
+import CheckBoxCustom from "@/components/checkbox-custom/RecipeCheckbox.js/RecipeCheckBox";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailRelatedProducts.module.scss";
 
