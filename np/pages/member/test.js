@@ -2,13 +2,14 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-import MemberSearchBar from "@/components/member/MemberSearchBar";
+
+import SideBar from "@/components/member/Sidebar";
 
 
 export default function MemberBuy() {
     return (
       <>
-      <MemberSearchBar/>
+      <SideBar/>
       </>
     );
   }
