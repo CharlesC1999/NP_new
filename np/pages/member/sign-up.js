@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import signUp from "@/styles/Login/signUp.module.scss";
@@ -16,9 +15,14 @@ import dayjs from "dayjs";
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 // lodash
 import _ from "lodash";
+// useRouter
+import { useRouter } from "next/router";
+// 導入路徑配置
+import routes from "@/contexts/routes";
 
 const SignUpPage = () => {
   const router = useRouter();
+
   const Checked = {
     color: "#28a745",
     backgroundColor: "#28a745",
@@ -126,7 +130,7 @@ const SignUpPage = () => {
     try {
       await axios.post("/api/sign-up", submitData);
       alert("註冊成功");
-      router.push("/member/login");
+      window.location.href = "./login";
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
@@ -143,11 +147,7 @@ const SignUpPage = () => {
     checkEmailExists(e.target.value);
   };
 
-  // 連結用router導
-  const goLogin = () => {
-    // 導到登入
-    router.push("/member/login");
-  };
+  const goLogin = () => router.push(routes.login);
 
   return (
     <>
