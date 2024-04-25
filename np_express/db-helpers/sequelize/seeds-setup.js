@@ -18,7 +18,11 @@ export default async function applySeeds(sequelize) {
     )
     const seeds = JSON.parse(data)
     const prop = filename.split('.')[0]
-
+    
+    if (!sequelize.models[prop]) {
+      console.error(`找不到模型: ${prop}`) // 加入錯誤訊息來幫助調試
+      continue // 略過這個檔案的處理
+    }
     await sequelize.models[prop].bulkCreate(seeds, {
       ignoreDuplicates: true,
       individualHooks: true, // trigger the beforeCreate hook
