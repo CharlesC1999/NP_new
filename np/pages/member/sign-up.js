@@ -69,12 +69,15 @@ const SignUpPage = () => {
   };
 
   const checkAccountExists = useCallback(
-    _.debounce(async (account) => {
-      if (!account) return;
+    _.debounce(async (Account) => {
+      if (!Account) return;
       try {
-        const response = await axios.get(`/api/check-account`, {
-          params: { account: account }, // 使用查询参数
-        });
+        const response = await axios.get(
+          `http://localhost:3005/api/checkAccount`,
+          {
+            params: { Account: Account }, // 使用查询参数
+          }
+        );
         console.log("Account check response:", response.data);
         setAccountExists(response.data.exists ? "帳號已存在" : "");
       } catch (error) {
@@ -86,12 +89,15 @@ const SignUpPage = () => {
   );
 
   const checkEmailExists = useCallback(
-    _.debounce(async (email) => {
-      if (!email) return;
+    _.debounce(async (Email) => {
+      if (!Email) return;
       try {
-        const response = await axios.get(`/api/check-email`, {
-          params: { email: email }, // 使用查詢參數
-        });
+        const response = await axios.get(
+          `http://localhost:3005/api/checkEmail`,
+          {
+            params: { Email: Email }, // 使用查詢參數
+          }
+        );
         console.log("Email check response:", response.data);
         setEmailExists(response.data.exists ? "信箱已存在" : "");
       } catch (error) {
