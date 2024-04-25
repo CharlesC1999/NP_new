@@ -13,12 +13,12 @@ export default async function handler(req, res) {
 }
 
 // 檢查Email是否存在的函數
-async function checkEmailInDatabase(email) {
+async function checkEmailInDatabase(Email) {
   try {
     // 使用參數化查詢來避免SQL注入
     const [rows, fields] = await pool.query(
       "SELECT COUNT(*) AS count FROM member WHERE Email = ?",
-      [email]
+      [Email]
     );
 
     // 如果記數大於0，說明數據庫中存在該電子郵件

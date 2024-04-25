@@ -1,0 +1,36 @@
+.orange-loader-bg {
+  content: "";
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  /* margin-bottom: 40px; */
+  /* margin-top: 56px; */
+  background-color: rgba(173, 181, 184, 0.8);
+  z-index: 9999;
+}
+
+.orange-loader {
+  position: absolute;
+  top: calc(50% - 4em);
+  left: calc(50% - 7.5em);
+  width: auto;
+  height: 8em;
+  font-weight: bold;
+  display: inline-block;
+}
+
+@media (max-width: 375px) {
+  .orange-loader {
+    top: calc(50% - 2.5em);
+    left: calc(50% - 4em);
+    width: auto;
+    height: 5em;
+  }
+}
+
+.orange-loader--hide {
+  display: none;
+}

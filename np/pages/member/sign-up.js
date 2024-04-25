@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import signUp from "@/styles/Login/signUp.module.scss";
@@ -16,9 +15,14 @@ import dayjs from "dayjs";
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 // lodash
 import _ from "lodash";
+// useRouter
+import { useRouter } from "next/router";
+// 導入路徑配置
+import routes from "@/contexts/routes";
 
 const SignUpPage = () => {
   const router = useRouter();
+
   const Checked = {
     color: "#28a745",
     backgroundColor: "#28a745",
@@ -65,12 +69,15 @@ const SignUpPage = () => {
   };
 
   const checkAccountExists = useCallback(
-    _.debounce(async (account) => {
-      if (!account) return;
+    _.debounce(async (Account) => {
+      if (!Account) return;
       try {
-        const response = await axios.get(`/api/check-account`, {
-          params: { account: account }, // 使用查询参数
-        });
+        const response = await axios.get(
+          `http://localhost:3005/api/checkAccount`,
+          {
+            params: { Account: Account }, // 使用查询参数
+          }
+        );
         console.log("Account check response:", response.data);
         setAccountExists(response.data.exists ? "帳號已存在" : "");
       } catch (error) {
@@ -82,12 +89,15 @@ const SignUpPage = () => {
   );
 
   const checkEmailExists = useCallback(
-    _.debounce(async (email) => {
-      if (!email) return;
+    _.debounce(async (Email) => {
+      if (!Email) return;
       try {
-        const response = await axios.get(`/api/check-email`, {
-          params: { email: email }, // 使用查詢參數
-        });
+        const response = await axios.get(
+          `http://localhost:3005/api/checkEmail`,
+          {
+            params: { Email: Email }, // 使用查詢參數
+          }
+        );
         console.log("Email check response:", response.data);
         setEmailExists(response.data.exists ? "信箱已存在" : "");
       } catch (error) {
@@ -126,7 +136,7 @@ const SignUpPage = () => {
     try {
       await axios.post("/api/sign-up", submitData);
       alert("註冊成功");
-      router.push("/member/login");
+      window.location.href = "./login";
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
@@ -143,11 +153,7 @@ const SignUpPage = () => {
     checkEmailExists(e.target.value);
   };
 
-  // 連結用router導
-  const goLogin = () => {
-    // 導到登入
-    router.push("/member/login");
-  };
+  const goLogin = () => router.push(routes.login);
 
   return (
     <>
