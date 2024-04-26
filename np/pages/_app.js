@@ -32,19 +32,25 @@ export default function App({ Component, pageProps }) {
 }
 
 function ManageRouteChanges({ children }) {
+  // 橘子奔跑指南
   const { setLoading } = useLoader();
-
-  React.useEffect(() => {
+  // 把橘子抓過來跑步，跑步方式如下
+  useEffect(() => {
     const handleStart = () => {
-      setLoading(true);
+      // 這裡是橘子跑起來的動作
+      setLoading(true); //橘子，開跑!
     };
     const handleComplete = () => {
-      setLoading(false);
+      // 這裡是橘子跑完的動作
+      setLoading(false); //橘子，站住!
     };
 
     Router.events.on("routeChangeStart", handleStart);
+    // 這裡是橘子在路徑開始改變時，走起
     Router.events.on("routeChangeComplete", handleComplete);
+    // 這裡是橘子在路徑改變時，走了(ㄌㄧㄠˇ)
     Router.events.on("routeChangeError", handleComplete);
+    // 這裡是橘子在路徑改變時，走錯了(ㄌㄧㄠˇ)
 
     return () => {
       Router.events.off("routeChangeStart", handleStart);
