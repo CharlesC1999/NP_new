@@ -1,22 +1,13 @@
 import { useState, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import recipes from "@/data/recipe/recipes.json";
 import styles from "./RecipeCardsList.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 
 export default function RecipeCardsList() {
   //食譜資料庫data
-  const [recipesData, setRecipesData] = useState({
-    Recipe_ID: 0,
-    Title_R_name: "",
-    Image_URL: "",
-    Content: "",
-    Publish_date: "",
-    Recipe_category_ID: 0,
-    recipe_valid: 1,
-  });
+  const [recipesData, setRecipesData] = useState([]);
 
   //收藏與否的state
   const [saved, setSaved] = useState(false);
@@ -31,6 +22,7 @@ export default function RecipeCardsList() {
     }
   };
 
+  //串上後端取得資料
   const getRecipes = async () => {
     const url = "http://localhost:3005/api/recipes";
 
@@ -56,7 +48,7 @@ export default function RecipeCardsList() {
 
   return (
     <>
-      {recipes.map((v, i) => {
+      {recipesData.map((v, i) => {
         return (
           <Link
             href={`/recipe/${v.Recipe_ID}`}
@@ -124,7 +116,7 @@ export default function RecipeCardsList() {
                         />
                       </svg>
                       <p className={`${styles["figma-p"]} ${styles["date"]}`}>
-                        {v.Publish_date}
+                        {v.Publish_date.split("T")[0]}
                       </p>
                     </div>
                     <div
