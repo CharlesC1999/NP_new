@@ -42,12 +42,13 @@
 
 .top {
   gap: 20px;
+  margin-inline: 0;
   @media screen and (max-width: 376px) {
     gap: 10px;
   }
   .pic {
     padding-top: 49px;
-    height: 700px;
+    height: 750px;
     margin-bottom: 41px;
     img {
       border-radius: 10px;
