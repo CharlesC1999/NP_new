@@ -30,6 +30,7 @@ export default function App({ Component, pageProps }) {
     </AuthProvider>
   );
 }
+//暫時先擱置，右下角的那個光明會三角形
 
 function ManageRouteChanges({ children }) {
   // 橘子奔跑指南
@@ -48,7 +49,7 @@ function ManageRouteChanges({ children }) {
     Router.events.on("routeChangeStart", handleStart);
     // 這裡是橘子在路徑開始改變時，走起
     Router.events.on("routeChangeComplete", handleComplete);
-    // 這裡是橘子在路徑改變時，走了(ㄌㄧㄠˇ)
+    // 這裡是橘子在路徑改變時，走完了(ㄌㄧㄠˇ)
     Router.events.on("routeChangeError", handleComplete);
     // 這裡是橘子在路徑改變時，走錯了(ㄌㄧㄠˇ)
 

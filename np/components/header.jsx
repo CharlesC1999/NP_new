@@ -11,21 +11,24 @@ import { IoLogOutOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 
 const HeaderComponent = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isProductOpen, setIsProductOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
   const dropdownRef = useRef(null);
+  const productDropdownRef = useRef(null); // 產品下拉列表的參考
   const router = useRouter();
   const { auth, logout } = useAuth();
 
   let hasMargin = true;
   let isMobile = false;
 
+  // 搜索下拉選單
   const menuItems = [
-    { id: 1, name: "所有分類", href: "#", className: styles.selectionLink },
-    { id: 2, name: "商品列表", href: "#", className: styles.selectionLink },
-    { id: 3, name: "食譜精選", href: "#", className: styles.selectionLink },
-    { id: 4, name: "精選課程", href: "#", className: styles.selectionLink },
-    { id: 5, name: "講師陣容", href: "#", className: styles.selectionLink },
+    { id: 1, name: "所有分類", className: styles.selectionLink },
+    { id: 2, name: "商品列表", className: styles.selectionLink },
+    { id: 3, name: "食譜精選", className: styles.selectionLink },
+    { id: 4, name: "精選課程", className: styles.selectionLink },
+    { id: 5, name: "講師陣容", className: styles.selectionLink },
   ];
 
   // 暫時預設不更改
@@ -38,18 +41,36 @@ const HeaderComponent = () => {
     { id: 6, name: "沙拉", href: "#" },
   ];
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  // 商品下拉選單
+
+  const productCategory = [
+    { id: 1, name: "新鮮蔬菜", href: "#", className: styles.selectionLink },
+    { id: 2, name: "新鮮水果", href: "#", className: styles.selectionLink },
+    { id: 3, name: "嚴選肉類", href: "#", className: styles.selectionLink },
+    { id: 4, name: "海鮮水產", href: "#", className: styles.selectionLink },
+    { id: 5, name: "乳品烘焙", href: "#", className: styles.selectionLink },
+    { id: 6, name: "風味精粹", href: "#", className: styles.selectionLink },
+  ];
+
+  const toggleDropdown = () => setIsSearchOpen(!isSearchOpen);
+  const ProductToggleDropdown = (event) => {
+    event.stopPropagation();
+    setIsProductOpen((prev) => !prev);
+  };
+  const handleMouseUp = (event) => {
+    event.stopPropagation();
+  };
 
   const handleItemClick = (name) => {
     setSelectedText(name);
-    setIsOpen(false); // 關閉下拉
+    setIsSearchOpen(false); // 點選項關閉下拉
   };
 
-  // 點擊選單外範圍關閉
+  // 點擊搜尋分類選單外範圍關閉
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
+        setIsSearchOpen(false);
       }
     };
 
@@ -59,7 +80,28 @@ const HeaderComponent = () => {
     };
   }, []);
 
-  // 登出彈出確認
+  const handleProductClick = () => {
+    setIsProductOpen(false); // 點選項關閉下拉
+  };
+
+  // 點擊搜尋分類選單外範圍關閉
+  useEffect(() => {
+    const handleClickProductOutside = (event) => {
+      if (
+        productDropdownRef.current &&
+        !productDropdownRef.current.contains(event.target)
+      ) {
+        setIsProductOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickProductOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickProductOutside);
+    };
+  }, []);
+
+  // swal登出彈出確認
   const logoutButton = () => {
     Swal.fire({
       title: "確定要登出嗎？",
@@ -152,12 +194,11 @@ const HeaderComponent = () => {
                     {/* <!-- 所有分類 arrow down --> */}
                   </span>
                 </button>
-                {isOpen && (
+                {isSearchOpen && (
                   <div className={styles.dropdownContent}>
                     {menuItems.map((item, index) => (
                       <React.Fragment key={item.id}>
                         <a
-                          href={item.href}
                           onClick={() => handleItemClick(item.name)}
                           className={item.className}
                         >
@@ -428,7 +469,11 @@ const HeaderComponent = () => {
             <a onClick={goProductList} className={styles.pageLink}>
               <div>商品列表</div>
             </a>
-            <button className={styles.navTextButton}>
+            <button
+              className={styles.navTextButton}
+              onMouseDown={ProductToggleDropdown}
+              onMouseUp={handleMouseUp}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -444,6 +489,33 @@ const HeaderComponent = () => {
                 </g>
               </svg>
             </button>
+            {isProductOpen && (
+              <div
+                className={styles.dropdownContent}
+                ref={productDropdownRef}
+                style={{
+                  marginTop: "50px",
+                  marginRight: "4px",
+                  width: "110px",
+                }}
+              >
+                {productCategory.map((item, index) => (
+                  <React.Fragment key={item.id}>
+                    <a
+                      key={item.id}
+                      onClick={() => handleProductClick()}
+                      href={item.href}
+                      className={item.className}
+                    >
+                      {item.name}
+                    </a>
+                    {index < productCategory.length - 1 && (
+                      <hr className={styles.noMargin} />
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
           </li>
           <li className={styles.navItemPageLinks}>
             <a onClick={goRecipeList} className={styles.pageLink}>
