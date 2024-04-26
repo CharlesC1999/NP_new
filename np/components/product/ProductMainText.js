@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
-//components
-import HeaderComponent from "@/components/header";
-import Footer from "@/components/footer";
+
 //styles
 import style from "@/styles/Product/products.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-//Font Awsome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import styles from "./ProductCard.module.css";
+import toast, { Toaster } from "react-hot-toast";
+
+const notify = () => toast("已加入收藏 💚");
+const notifyBtn = () => toast("已加入購物車 🛒");
 
 function ProductMainText() {
   return (
@@ -34,7 +30,10 @@ function ProductMainText() {
             <div className={`${style["star-text"]} ps-2 `}>(125則評論)</div>
           </div>
           <a className={`${style["favorite-btn"]} ${style["icon-link"]} `}>
-            <i className={`fa-regular fa-heart`} style={{ color: "#50BF8B" }} />
+            <i
+              className={`${style["heart123"]}  fa-solid fa-heart`}
+              onClick={notify}
+            ></i>
           </a>
         </div>
         <input
@@ -45,6 +44,7 @@ function ProductMainText() {
         <button
           type="submit"
           className={`${style["buy-btn"]}  my-2 btn d-flex justify-content-center align-items-center`}
+          onClick={notifyBtn}
         >
           &nbsp;&nbsp;加入購物車{" "}
           <i
@@ -52,6 +52,7 @@ function ProductMainText() {
           ></i>
         </button>
       </div>
+      <Toaster />
     </>
   );
 }

@@ -10,6 +10,8 @@ import { LoaderProvider } from "@/hooks/use-loader";
 import { OrangeLoader } from "@/hooks/use-loader/components";
 // loader樣式
 import "@/styles/loader.scss";
+//fontawesome
+import "@fortawesome/fontawesome-free/css/all.css";
 
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page); // 提供默認佈局
