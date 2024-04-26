@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import recipes from "@/data/recipe/recipes.json";
+// import recipes from "@/data/recipe/recipes.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
@@ -28,12 +28,27 @@ export default function RecipeDetail() {
   });
 
   //取得對應的食譜
-  const getRecipe = (rid) => {
-    const recipe = recipes.filter((v, i) => {
-      return v.Recipe_ID === rid;
-    });
-    console.log(recipe);
-    setRecipe(recipe[0]);
+  const getRecipe = async (rid) => {
+    // const recipe = recipes.filter((v, i) => {
+    //   return v.Recipe_ID === rid;
+    // });
+    // console.log(recipe);
+    // setRecipe(recipe[0]);
+
+    try {
+      const url = `http://localhost:3005/api/recipes/${rid}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log(data);
+
+      if (typeof data.data.recipe === "object" && data.data.recipe !== null) {
+        setRecipe(data.data.recipe);
+      } else {
+        console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   //初次渲染頁面時執行取得對應食譜的function

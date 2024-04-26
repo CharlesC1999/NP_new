@@ -47,7 +47,8 @@ export default function DetailTop({ recipe }) {
                   className={`${styles["left-bottom"]} d-flex justify-content-center justify-content-xxl-start`}
                 >
                   <p className={styles["figma-p"]}>
-                    分類：{recipe.Recipe_category_ID} / {recipe.Publish_date}
+                    分類：{recipe.Recipe_category_ID} /{" "}
+                    {recipe.Publish_date.split("T")[0]}
                   </p>
                 </div>
               </div>

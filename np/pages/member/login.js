@@ -59,7 +59,10 @@ const Login = () => {
 
     try {
       setLoading(true); // 開始加載畫面
-      const response = await axios.post("/api/login", { username, password });
+      const response = await axios.post("http://localhost:3005/api/login", {
+        username,
+        password,
+      });
       if (response.status === 200) {
         login(response.data.token);
         // 使用Context的login方法

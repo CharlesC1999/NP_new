@@ -68,6 +68,7 @@ const SignUpPage = () => {
     setShowPasswordC(!showPasswordC);
   };
 
+  // 檢查帳號是否重複
   const checkAccountExists = useCallback(
     _.debounce(async (Account) => {
       if (!Account) return;
@@ -78,7 +79,7 @@ const SignUpPage = () => {
             params: { Account: Account }, // 使用查询参数
           }
         );
-        console.log("Account check response:", response.data);
+        console.log("帳號回傳結果:", response.data);
         setAccountExists(response.data.exists ? "帳號已存在" : "");
       } catch (error) {
         console.error("Error checking account", error);
@@ -87,7 +88,7 @@ const SignUpPage = () => {
     }, 500),
     []
   );
-
+  // 檢查信箱是否重複
   const checkEmailExists = useCallback(
     _.debounce(async (Email) => {
       if (!Email) return;
@@ -98,7 +99,7 @@ const SignUpPage = () => {
             params: { Email: Email }, // 使用查詢參數
           }
         );
-        console.log("Email check response:", response.data);
+        console.log("信箱回傳結果:", response.data);
         setEmailExists(response.data.exists ? "信箱已存在" : "");
       } catch (error) {
         console.error("Error checking email", error);
@@ -125,7 +126,7 @@ const SignUpPage = () => {
       return;
     }
 
-    // 在发送前确保日期是正确的 dayjs 格式或者为空
+    // 確保日期是正確的 dayjs 格式
     const submitData = {
       ...formData,
       date_of_birth: formData.date_of_birth
@@ -134,9 +135,9 @@ const SignUpPage = () => {
     };
 
     try {
-      await axios.post("/api/sign-up", submitData);
+      await axios.post("http://localhost:3005/api/signUp", submitData);
       alert("註冊成功");
-      window.location.href = "./login";
+      router.push(routes.login);
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
