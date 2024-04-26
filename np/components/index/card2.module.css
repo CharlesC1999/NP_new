@@ -1,20 +1,11 @@
 /* <!-- Nutripoll-card2 --> */
-.NutripollCard2{
-    width: 350px;
-    display: flex;
-    padding: 36px 0px;
-    justify-content: space-between;
-    row-gap: 70px;
-    /* gap:70px; */
-    flex-wrap: wrap;
-  }
  
   .card2Box{
     display: flex;
-    width: 350px;
-    height: 200px;
+    width: 430px;
+    height: 280px;
     padding: 30px 35px;
-    gap: 25px;
+    gap: 30px;
     background-color: var(--gray03);
     border: var(--white) 1px solid;
     border-radius: 10px;
@@ -32,10 +23,12 @@
     width: auto;
     height: 60px;
     margin-bottom: 20px;
-    
+    & p{
+      font-size: 20px;
+    }
   }
   .card2btn{
-    
+    font-size: 20px;
     color: var(--green02) !important ;
     border: var(--green02) 1px solid !important;
     &:hover{
@@ -46,11 +39,13 @@
 }
   
   .card2BoxText{
-    width: 200px;
-    height: auto;
-    
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap:30px;
     & h6{
       font-weight: 700;
+      font-size: 24px;
     }
  
   }
@@ -63,6 +58,7 @@
       justify-content: space-between;
       row-gap: 0px;
       flex-wrap: wrap;
+      gap:0px;
     }
   
     .card2Box{
@@ -70,7 +66,7 @@
       width: 175px;
       height: auto;
       padding: 5px 5px;
-      gap: 25px;
+      gap: 15px;
       background-color: var(--white);
     }
   
@@ -81,7 +77,9 @@
       width: auto;
       height: auto;
       margin-bottom: 5px;
-
+      & p {
+        font-size: 14px;
+      }
     }
   
     .card2BoxText{
@@ -91,13 +89,19 @@
       align-items: center;
       /* 水平居中 */
       justify-content: center;
+      gap:0px;
       /* 垂直居中 */
-     
+     & h6 {
+      font-size: 18px;
+     }
   
       & .btn-outline-success,
       .btnSuccess{
         align-items: center;
         justify-content: center;
+      }
+      .card2btn{
+        font-size: 16px;
       }
     }
   

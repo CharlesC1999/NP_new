@@ -9,14 +9,14 @@
     align-items: center;
     justify-content: center;
   }
-  
-  .Nutripollcard3 {
-    /* 均勻分佈距離 */
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding-bottom: 56px;
+  .card3boxLink{
+    text-decoration: none;
+    &:hover .card3box{
+      transform: translateY(-3px);
+      box-shadow: 0 4px 5px #ccc;
+      transition: 0.5s;
+    }
   }
-  
   .card3box {
     width: 125px;
     height: 165px;
@@ -24,17 +24,18 @@
     justify-content: center;
     align-items: center;
     background-color: var(--green05);
-  
+    border-radius: 10px;
+    box-shadow: 0 2px 4px #ddd;
+  }
+  .card3CategoryContent{
+    display:flex;
+    flex-direction: column;
     & h6 {
       text-align: center;
       color: var(--black);
       font-weight: 600;
-      
+      font-size:18px;
     }
-  }
-  
-  .card3boxImg a{
-    text-decoration: none !important; 
   }
   
   /* <!-- Nutripoll-card3 商品分類 (RWD)--> */
