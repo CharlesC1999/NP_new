@@ -57,10 +57,10 @@ const ShopCart4 = () => {
             className={`${styles4.return} me-2 d-flex justify-content-center align-items-center`}
             type="submit"
           >
-            <h3 className="fw-bold">返回首頁</h3>
+            <h3 className={`${styles4.h3} fw-bold `}>返回首頁</h3>
           </a>
           <button className={`${styles4.keepbuy} ms-4`} type="submit">
-            <h3 className="fw-bold pt-1">繼續購物</h3>
+            <h3 className={`${styles4.h3} fw-bold pt-1`}>繼續購物</h3>
           </button>
         </div>
       </div>
