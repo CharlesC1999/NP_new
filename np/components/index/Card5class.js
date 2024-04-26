@@ -2,34 +2,42 @@ import React from "react";
 import styles from "./Card5class.module.css";
 
 function Card5class() {
-  return(
+  return (
     <>
-    <div>
         <div className={`${styles.card5}`}>
-            <div className={`d-flex`}>
-                <div className={`${styles.card5Img}`}>
-                    <img src="/index-images/Herosection02.png" alt=""/>
-                </div>
-                <div className={`${styles.card5Text}`}>
-                    <div className={`${styles.card5TextRwd}`}>
-                        <h5>手作情人節大餐質感餐桌感餐桌感餐桌</h5>
-                    </div>
-                    <h6>食物造型師</h6>
-                    <p className={`${styles.BorderP}`}>有機敏豆(四季豆)－古坑
-                        古坑的有機敏豆(四季豆)是經過有機認證的高品質蔬菜，栽培過程中不使用農藥，確保食材的安全。敏豆的嫩莢爽脆，富含纖維和維生素，是營養均衡飲食的佳選。以古坑的有機敏豆，為您的餐桌增添清新的味道。
-                    </p>
-                    <div className={`${styles.card5P}`}>
-                        <p>課程定價&emsp;<span className={`${styles.LineP}`}>$ 300</span></p>
-                        <p>課程時間&emsp;03月02日(六) 14:30-17:00</p>
-                        <p>限時優惠&emsp;<span className={`${styles.ColorP}`}>$ 2000</span></p>
-                    </div>
-                    <button className={`btn btn-success ${styles.card5Btn}`}>了解更多</button>
-                </div>
+          <div className={`d-flex`}>
+            <div className={`${styles.card5Img}`}>
+              <img src="/lecture-image/bg-class3.jpg" alt="" />
             </div>
+            <div className={`d-flex ${styles.card5Text}`}>
+              <div className={`${styles.card5TextRwd}`}>
+                <h5>草莓季！生巧克力草莓塔</h5>
+                          </div>
+                          <div className={`d-flex`}>
+                          <h6>食物造型師</h6>&ensp;
+                          <h6>施建斌</h6>
+                          </div>
+              <p className={`${styles.BorderP}`}>
+              "當季酸香的草莓是許多人又愛又怕的水果，獨特的香氣及鮮紅的外表讓人難以抗拒，但同時也有讓人眉頭緊皺的酸味。將草莓與甜甜的食材一起品嘗，甜味平衡了草莓的酸味而留下香氣，與甜味融合的草莓甜點就成了大家都喜愛的心頭好！
+              </p>
+              <div className={`${styles.card5P}`}>
+                <p className={styles.lectureTime}>課程時間&emsp;03月02日(六) 14:30-17:00</p>
+                <p>
+                  課程定價&emsp;<span className={`${styles.LineP}`}>$ 2999</span>
+                </p>
+                <p>
+                  限時優惠&emsp;
+                  <span className={`${styles.ColorP}`}>$ 2000</span>
+                </p>
+              </div>
+              <button className={`btn btn-success ${styles.card5Btn}`}>
+                了解更多
+              </button>
+            </div>
+          </div>
         </div>
-    </div>
     </>
-     )
+  );
 }
 
-export default Card5class
+export default Card5class;
