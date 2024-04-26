@@ -1,0 +1,272 @@
+[
+    {
+     "speaker_id": 1,
+     "speaker_name": "施建偉",
+     "speaker_title": "國際美食總冠軍",
+     "speaker_description": "2014 年獲選為 FDA 年度優良廚師，更在 2015 年台灣國際美食展職業組比賽中榮獲總冠軍，他不僅在國際賽事中表現出色，也致力於烹飪教育和料理創新。他的教學兼具理論與實踐，強調食材的選擇與處理技術，以及如何將傳統與創新完美融合。他的課程深受學生歡迎，培養出許多業界專業人才。",
+     "speaker_experience": "明上園楓味館廚藝總監、德霖技術學院廚藝系助理教授",
+     "speaker_license": "西餐乙級證照、中餐乙級證照",
+     "speaker_image": "lecturer1.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 2,
+     "speaker_name": "Jack",
+     "speaker_title": "異國美食創意家",
+     "speaker_description": "來自法國，在西班牙成長，在加拿大的廚藝學校求學，曾旅居印度，豐富的遊歷經驗擴展了 Jack 老師料理的多樣性，也深知如何挑動當地人的味蕾，因此他用他的雙手打造了一套又一套的異國經典美食！",
+     "speaker_experience": "印度阿杜納飯店行政主廚",
+     "speaker_license": "西餐乙級證照",
+     "speaker_image": "lecturer2.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 3,
+     "speaker_name": "陳定宣",
+     "speaker_title": "創意素食推手",
+     "speaker_description": "從葷菜大廚搖身一變為素點達人的陳定宣師傅，擁有二十多年主廚資歷，他耗費四年多研發改良，以新鮮蔬果取代葷腥食材，為素食灌注了全新的生命，並且創立了大受歡迎的台灣功德林上海素點餐廳，為素食界創造了更精緻多元的美味選擇。為求完美他還不斷到中國、香港、東南亞等國家，學習更新的烹飪技巧和各國最新的風味料理，再將各異國料理研發成更精緻的生態素食。認真勤快、樂觀幽默和熱心分享，加上從不停止的認真思考和永不放棄的努力實現，陳師傅帶給我們的，除了一道道的美味點心外，還有一個成功人士的生活態度與處事典範。",
+     "speaker_experience": "功德林上海素點餐廳創辦人",
+     "speaker_license": "中餐乙級證照、點心乙級證照",
+     "speaker_image": "lecturer3.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 4,
+     "speaker_name": "何建彬",
+     "speaker_title": "國際藍帶麵點大師",
+     "speaker_description": "50歲卸下福華飯店主廚職務，步入高雄餐旅大學的教學殿堂20多年，其間還遠赴法國、擔任藍帶客座大師講堂教師，桃李滿天下，把中式麵點的文化傳播海內外。不久前從高雄餐旅退休，以分享喜樂的心，要把在業界和學校所累積的豐富經驗，以系列課程在廚藝教室傳承，教好做、好包、好吃的中式麵食。",
+     "speaker_experience": "福華大飯店主廚、高雄餐旅大學講師",
+     "speaker_license": "中餐乙級證照、中餐丙級證照",
+     "speaker_image": "lecturer4.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 5,
+     "speaker_name": "李佳其",
+     "speaker_title": "亞洲廚神",
+     "speaker_description": "近年來，因頻頻在國際廚藝大賽得獎，如2009香港國際美食大賽金牌、2010新加坡FHA 國際烹飪挑戰賽最佳亞洲廚師獎、2012 IFK 韓國大田國際廚藝競賽餐廳達人團隊賽銀牌等，所以有「亞洲廚神」的封號！",
+     "speaker_experience": "香港國際美食大賽金牌、2新加坡FHA 國際烹飪挑戰賽最佳亞洲廚師獎",
+     "speaker_license": "中餐乙級證照、中餐丙級證照",
+     "speaker_image": "lecturer5.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 6,
+     "speaker_name": "林國汶",
+     "speaker_title": "新世代粵菜主廚",
+     "speaker_description": "18歲進港籍師傅的粵菜館，從洗碗小學徒做起，認真努力，未滿三十歲就成為獨當一面的主廚，是七年級生中少見穩紮穩打、底子厚又有創意的料理人。現任新葡苑復興館主廚，最近和廚藝名師李德全合著「我家也是茶餐廳」食譜書。因和李德全老師有些神似，聲音和笑聲都像，手藝又了得，故有「小李德全」之稱。",
+     "speaker_experience": "著有「我家也是茶餐廳」食譜書",
+     "speaker_license": "中餐乙級證照、中餐丙級證照",
+     "speaker_image": "lecturer6.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 7,
+     "speaker_name": "戴于益",
+     "speaker_title": "藍帶主廚 CEO",
+     "speaker_description": "戴于益老師參加過多次兩岸廚藝競賽，法國米其林藍帶騎士勳章得主，現在是宸上名品飯店的行政主廚、CEO。從學徒開始做起，，一路走來靠著扎實的基礎功夫，充實的食材知識，他將多年來習得的傳統菜製作精髓，創造出集健康、時尚、美味於一身的料理。「對食材產生尊重，才能產出美味的料理」這句話是戴師傅的座右銘，但他說，「尊重」不僅能套用在料理上，而是對任何事物都一樣，只要先尊重，就能用正確的態度去面對，當然也就較容易有好的結果了。",
+     "speaker_experience": "宸上名品飯店的行政主廚、CEO",
+     "speaker_license": "中餐乙級證照、西餐丙級證照",
+     "speaker_image": "lecturer7.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 8,
+     "speaker_name": "李德全",
+     "speaker_title": "粵菜點心技藝師傅",
+     "speaker_description": "中菜共有八大菜系，各個菜系都有各自的點心，其中以粵菜最為發達，也就是我們常見的港式茶樓裡的點心，而這些點心的製作技術涵蓋蒸、煎、焗、炸...等等，要做出美味道地的廣式點心，其實技術上需要有一定的要求。",
+     "speaker_experience": "超過二十年港式餐廳資歷",
+     "speaker_license": "中餐乙級證照、中餐丙級證照、點心乙級證照",
+     "speaker_image": "lecturer8.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 9,
+     "speaker_name": "林繼正",
+     "speaker_title": "跨界粵菜創新料理大師",
+     "speaker_description": "現任老爺酒店咖啡廳主廚、飯店國宴大廚，除了拿手的粵菜料理，還進入粵菜和川菜、粵菜和上海菜結合的新粵菜領域。而除了中式料理，學貫中西又不斷精益求精的林師傅，擄獲許多饕客的心。曾在救國團教學八年，具豐富教學經驗，是學員心目中的好老師。",
+     "speaker_experience": "老爺酒店咖啡廳主廚、救國團講師",
+     "speaker_license": "西餐乙級證照",
+     "speaker_image": "lecturer9.jpeg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 10,
+     "speaker_name": "蕭冠之",
+     "speaker_title": "國際金牌獎廚藝總監",
+     "speaker_description": "擁有豐富的中餐烹調及創業輔導經驗，尤其精通湘菜、川菜、廣東菜、泰國菜和客家菜。他不僅在台灣小吃和中餐領域內具有深厚的教學背景，還擁有中餐乙、丙級授課資格。此外，他在大型外燴辦桌方面亦有卓越表現，經常負責策劃和執行各類大型餐飲活動。他的課程結合理論與實踐，不僅教授烹飪技術，也深入探討食材選擇與創業策略，使學生能夠在烹飪與餐飲管理領域中取得成功。",
+     "speaker_experience": "創業輔導顧問、台灣小吃及中餐乙、丙級授課講師",
+     "speaker_license": "中餐甲級證照、中餐乙級證照、中餐丙級證照",
+     "speaker_image": "lecturer10.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 11,
+     "speaker_name": "林鎔標",
+     "speaker_title": "創意點心師傅",
+     "speaker_description": "意誠餐飲集團的技術顧問，同時也擔任添好運站前總店及廣晟食品的副主廚，具備豐富的經驗與深厚的專業知識。在逗點心創意點心擔任主廚期間，創造了多款深受歡迎的創意點心，深得顧客好評。他的料理風格融合創新與傳統，精通各式烹飪技巧，尤其擅長將現代元素融入傳統食品中，創造出獨特的口感與呈現。透過實戰經驗的分享，他希望能啟發更多人對烹飪的熱情，提升料理技術的層次。",
+     "speaker_experience": "意誠餐飲集團的技術顧問、廣晟食品的副主廚",
+     "speaker_license": "點心乙級證照、西餐乙級證照",
+     "speaker_image": "lecturer11.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 12,
+     "speaker_name": "歐士銘",
+     "speaker_title": "創新行政主廚",
+     "speaker_description": "歐士銘師傅一脈師承御廚的手藝，動作行雲如水調味點石成金，把餐廳招牌菜用家庭版做法，一入口就讓人感動的傳統味，卻不是濃油赤醬。歐士銘師傅曾任學學文創一口一口學食驗室行政主廚，知名大飯店資歷豐富，經常應邀於平面媒體及機構做食譜研發及展示，教學經驗豐富，廣獲學員好評。",
+     "speaker_experience": "學學文創一口一口學食驗室行政主廚",
+     "speaker_license": "中餐乙級證照、中餐丙級證照",
+     "speaker_image": "lecturer12.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 13,
+     "speaker_name": "蘇祐荃",
+     "speaker_title": "跨領域鬼才廚師",
+     "speaker_description": "具有料理天賦的他，17歲就當飯店主廚，旗下曾帶領三、四十位廚師、創下龍蝦13吃的紀錄，也通過考試得到大陸五星七段行政主廚認證，是少數悠遊於中、西創意料理、烘焙也在行的鬼才型廚師。",
+     "speaker_experience": "五星七段行政主廚",
+     "speaker_license": "中餐乙級證照、西餐乙級證照",
+     "speaker_image": "lecturer13.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 14,
+     "speaker_name": "陳偉勝",
+     "speaker_title": "跨文化印度主廚",
+     "speaker_description": "陳偉勝老師是印度籍華人，父親在印度經營一家頗富盛名的中餐廳，自小就在廚房穿梭，尤其喜愛到各印度鄰家廚房流連，看印度媽媽做菜，這一道道色香味美的印度料理，和如何運用香料的迷人手法，激發其學習並立志成為一位廚師。2008到巴黎藍帶廚藝學員進修，來台後，延續對料理的熱愛，擔任餐廳主廚和鑽研多國及健康取向的料理，希望以烹飪教學推廣簡單又美味的印度料理。",
+     "speaker_experience": "餐廳主廚",
+     "speaker_license": "中餐乙級證照、西餐乙級證照",
+     "speaker_image": "lecturer14.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 15,
+     "speaker_name": "黃景龍",
+     "speaker_title": "國際美食創新教育家",
+     "speaker_description": "現任臺北城市科技大學餐飲管理系助理教授，亦是海外巡演與美食研習班的特聘講師。他專長於烹飪技術與餐飲管理，結合理論與實務經驗，推動創新教學方法。此外，他還參與多國美食文化的交流與研究，致力於融合東西方烹飪精髓，創造出具有國際視野的菜餚。他的課程不僅涵蓋技術訓練，更重視培養學生的創新思維與領導能力，使學生能在全球化的餐飲產業中脫穎而出。",
+     "speaker_experience": "臺北城市科技大學餐飲管理系助理教授、海外巡演及美食研習班特聘講師",
+     "speaker_license": "中餐乙級證照、西餐乙級證照",
+     "speaker_image": "lecturer15.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 16,
+     "speaker_name": "雷廣隆",
+     "speaker_title": "泰式料理推廣家",
+     "speaker_description": "在泰國清邁土生土長、娶了泰國妻子的華僑雷廣隆，非常熱愛廚藝，在清邁和母親學會了許多家常菜。六年前來臺，在泰國辦事處工作，日常愛逛市場、深入了解台灣食材，辦事處同仁都說，想吃家鄉味就找雷廣隆，其以台灣食材做出最道地泰式口味的手藝，備受親朋好友及泰籍友人好評。經常教做菜的雷老師，希望藉由教學，來分享推廣泰式料理，教大家如何在日常生活，更會運用泰國香料和醬料。",
+     "speaker_experience": "泰美味料理工作室創辦人",
+     "speaker_license": "中餐乙級證照、西餐乙級證照",
+     "speaker_image": "lecturer16.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 17,
+     "speaker_name": "徐孟楷",
+     "speaker_title": "藍帶漢堡創辦人",
+     "speaker_description": "16年前，徐孟楷老師遠赴澳洲藍帶學院取經，進修9個月，光學費就要新台幣80萬元左右，透過極度嚴格的訓練琢磨廚藝，因為他不只要當廚師，更要成為頂尖的餐飲經營者。回國後自創品牌，將國外相當風行的中東漢堡「沙威瑪」，結合藍帶廚藝，成為獨樹一幟的「都拿其堡」（Doner Kebab）。",
+     "speaker_experience": "澳洲藍帶學院畢業、都拿其堡餐廳創辦人",
+     "speaker_license": "西餐乙級證照、西餐丙級證照",
+     "speaker_image": "lecturer17.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 18,
+     "speaker_name": "張振名",
+     "speaker_title": "資深酒家菜師傅",
+     "speaker_description": "13歲入行，在台北黑美人等知名酒店學酒家菜，後被有國寶級總舖師之譽的林添盛師傅延攬，進入其團隊，是少數同時擁有酒家菜和辦桌菜手藝的老師傅。",
+     "speaker_experience": "黑美人飯店總鋪師",
+     "speaker_license": "中餐乙級證照、中餐丙級證照",
+     "speaker_image": "lecturer18.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 19,
+     "speaker_name": "黃迺恆",
+     "speaker_title": "五星級藍帶主廚",
+     "speaker_description": "從小愛吃、愛下廚的黃迺恆老師，大學就讀景文科大餐飲專科，2013年赴澳洲雪梨就讀藍帶餐飲管理學院一年半、上到第四級〈共五級〉，結業後服務於雪梨最大的餐飲集團the merivale旗下的一頂帽子餐廳felix、及五星級觀光酒店the langham Sydney。",
+     "speaker_experience": "藍帶餐飲管理學院畢業、一頂帽子餐廳主廚",
+     "speaker_license": "西餐乙級證照、西餐丙級證照",
+     "speaker_image": "lecturer19.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 20,
+     "speaker_name": "盧華黔",
+     "speaker_title": "多元料理專業講師",
+     "speaker_description": "實務與學術經驗豐富的黃迺恆老師，同時是講師、廚師、調酒師，曾在進口食品公司任職、任景文科技大學專業講師、高雄餐旅學院飲料調酒客座講師等經歷。在國外期間，自己經常下廚請外國朋友，練就一身中式家常菜的手藝；回台後，發覺不管是精打細算的小資族、新嫁娘、新手媽媽等朋友，都想學做菜了，因此，他開始在家裡教，但沒想到參加的人越來越多，自己家裡擠不下了。",
+     "speaker_experience": "景文科技大學專業講師、高雄餐旅學院飲料調酒客座講師",
+     "speaker_license": "中餐乙級證照、中餐丙級證照",
+     "speaker_image": "lecturer20.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 21,
+     "speaker_name": "吳武憲",
+     "speaker_title": "太陽之手",
+     "speaker_description": "在烘焙界有「太陽之手」〈出自漫畫「烘焙王」，意喻手溫高於常人，做出更好吃的麵包〉美譽的吳武憲師傅，2022年3月擔任總教練，讓台灣首次拿下有「烘焙界奧運」之稱的法國路易樂斯福世界盃麵包大賽團體賽冠軍，振奮台灣烘焙業。",
+     "speaker_experience": "超過二十年烘培經驗、法國路易樂斯福世界盃麵包大賽指導教練",
+     "speaker_license": "西餐乙級證照、點心乙級證照",
+     "speaker_image": "lecturer21.jpeg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 22,
+     "speaker_name": "林聖智",
+     "speaker_title": "新創蔬食推廣家",
+     "speaker_description": "今年27歲、畢業於佛光大學健康與創意蔬食產業學系的林聖智老師，年紀輕輕就取得中餐素食乙級，和Haccp食品安全、西餐、麵食、西點、烘焙等12張證照，且參加國、內外廚藝競賽得獎無數，是蔬食素食界實力堅強的後起之秀。專研素食、創作素食的他，兩年多來在廚藝教學，獲得許多學員的肯定和讚賞，走出一條新創蔬食之路。",
+     "speaker_experience": "蔬活料理教室講師",
+     "speaker_license": "中餐素食乙級、西餐、麵食、西點、烘焙等12張證照",
+     "speaker_image": "lecturer22.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 23,
+     "speaker_name": "顏文生",
+     "speaker_title": "青年廚藝刀工冠軍",
+     "speaker_description": "今年27歲的顏文生老師，16歲開始對廚藝有興趣，尤其對砍、剁、劃、拍等刀功著迷，18歲以高中生身分和大學、青年廚師競爭，在六協杯亞洲青年廚師刀工及廚藝賽取得銅牌，闖出名號。報考國立高雄餐旅大學研究所，以榜首之資入學。持續對刀工認真鍛鍊、講究刀韻，在數多廚藝競賽奪冠，是師長眼中「第一把」。目前任職普門中學高職部餐飲管理科，葷、素的家常和宴客料理皆擅長，除了刀工，對於菜品創新和烹飪技巧都有獨到見解。",
+     "speaker_experience": "高雄餐旅大學研究所、普門中學高職部餐飲管理科老師",
+     "speaker_license": "西餐乙級證照、中餐乙級證照",
+     "speaker_image": "lecturer23.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 24,
+     "speaker_name": "何金源",
+     "speaker_title": "知名中式點心作家",
+     "speaker_description": "中式點心主廚、台灣觀光學院餐飲系副教授級專業技術講師，曾出版「皮薄肉餡小籠包」「健康養生中式點心」「愛上米食-從認識稻米到做出美味米食料理等」多本中式點心食譜書。",
+     "speaker_experience": "中式點心主廚、台灣觀光學院餐飲系副教授級專業技術講師",
+     "speaker_license": "點心乙級證照、中餐乙級證照",
+     "speaker_image": "lecturer24.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 25,
+     "speaker_name": "張華九",
+     "speaker_title": "川湘飯店名廚",
+     "speaker_description": "民國七十年代，擔任來來飯店〈喜來登飯店前身〉行政主廚的張華九師傅，可說是第一代的飯店名廚，以川湘料理見長、餐飲界人人尊稱九哥的華九師，當年所帶動的料理嘗試及飲食風潮，至今仍讓老饕傳頌。飯店退休後在職訓局教學及擔任國家評審，不但其家族出了多位主廚，還擁有無數徒子徒孫。如今華九師想來廚藝教室傳承快要失傳的老菜，並分享大廚們私下聚會比菜的創意吃法。",
+     "speaker_experience": "來來飯店行政主廚、職訓局講師",
+     "speaker_license": "西餐乙級證照、中餐乙級證照",
+     "speaker_image": "lecturer25.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 26,
+     "speaker_name": "葉宸",
+     "speaker_title": "正宗義式料理達人",
+     "speaker_description": "葉宸老師在台念餐飲專科7年，曾到西班牙遊學、在Barcelona cooking school等餐廳體驗，曾任歐傑洛義式餐廳廚師、歐奇窯烤比薩廚師，料理經驗 15年、廚藝教學 5年，熱愛學習不同的烹調技巧與添增風味的秘方，是熱情認真的年輕一代廚師。",
+     "speaker_experience": "歐傑洛義式餐廳廚師、歐奇窯烤比薩廚師",
+     "speaker_license": "西餐乙級證照、西餐丙級證照",
+     "speaker_image": "lecturer26.jpg",
+     "valid": 1
+    },
+    {
+     "speaker_id": 27,
+     "speaker_name": "吳國棟",
+     "speaker_title": "江浙廚神傳人",
+     "speaker_description": "吳國棟師傅年少入行，師承第一代亞洲廚神、江浙菜名廚許堂仁、和榮榮園大廚黃呈郎阿洛師。在60年代知名的江浙餐廳，都有他學藝的經歷，後被延攬到福華飯店。擔任台北、高雄江南春主廚20多年，因手藝精湛，許多達官貴人、名人名流回味江浙菜老味道，就一定指名國棟師掌廚。",
+     "speaker_experience": "福華飯店、江南春飯店主廚",
+     "speaker_license": "中餐乙級證照、中餐丙級證照",
+     "speaker_image": "lecturer27.jpg",
+     "valid": 1
+    }
+   ]

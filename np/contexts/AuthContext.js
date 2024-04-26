@@ -6,7 +6,9 @@ export const AuthProvider = ({ children }) => {
   // 初始化時從localStorage獲取token來設定登入狀態
   const [auth, setAuth] = useState({
     token: null,
+    // 預設token為空值，login讀取時會將空值讀取成false
     isLoggedIn: false,
+    // 判定是否為登入狀態，判定否
   });
 
   useEffect(() => {
@@ -15,17 +17,24 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       setAuth({
         token: token,
+        // login讀取將token讀進來
         isLoggedIn: true,
+        // 判定為登入狀態，頁面轉換時不會丟失token
       });
     }
   }, []);
 
-  const login = (token) => {
-    setAuth({ token, isLoggedIn: true });
+  const login = (token, userData = {}) => {
+    setAuth({ token, isLoggedIn: true, userData });
     localStorage.setItem("token", token);
     // 將token存儲在localStorage中以維持登入狀態
     // 用localStorage存儲會有安全性問題，因為localStorage是存儲在瀏覽器中，
     // 任何人都可以訪問localStorage，所以可以用cookie來存儲token
+  };
+
+  const updateUser = (userData) => {
+    setAuth((prev) => ({ ...prev, user: userData }));
+    // 更新用戶數據
   };
 
   const logout = () => {

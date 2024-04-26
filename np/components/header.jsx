@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
 // import classNames from "classnames";
+import routes from "@/contexts/routes"; // 導入路徑配置
+//  react icon
+import { IoLogOutOutline } from "react-icons/io5";
 
 const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,20 +57,14 @@ const HeaderComponent = () => {
     };
   }, []);
 
-  // 會員連結變化
-  const goMemberDashboard = () => {
-    // 導到會員中心
-    router.push("/member");
-  };
-  const doLogin = () => {
-    // 導到登入頁面
-    router.push("/member/login");
-  };
-  // 會員連結變化
-  const goIndex = () => {
-    // 導回首頁
-    router.push("/");
-  };
+  // 使用配置的路由導航
+  const goMemberDashboard = () => router.push(routes.dashboard);
+  const doLogin = () => router.push(routes.login);
+  const goIndex = () => router.push(routes.home);
+  const goClassList = () => router.push(routes.classList);
+  const goProductList = () => router.push(routes.productList);
+  const goRecipeList = () => router.push(routes.recipeList);
+  const goSpeekerList = () => router.push(routes.speakerList);
 
   return (
     <div className={styles.container}>
@@ -318,22 +315,7 @@ const HeaderComponent = () => {
             )}
             {auth.isLoggedIn ? (
               <button className={styles.logout} onClick={logout} id="logout">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="30px"
-                  height="30px"
-                  viewBox="0 0 30 30"
-                  className={styles.logoutSvg}
-                >
-                  <path
-                    fill="#50bf8b"
-                    d="M6 2h9a2 2 0 0 1 2 2v1a1 1 0 0 1-2 0V4H6v16h9v-1a1 1 0 0 1 2 0v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"
-                  />
-                  <path
-                    fill="#50bf8b"
-                    d="M16.795 16.295c.39.39 1.02.39 1.41 0l3.588-3.588a1 1 0 0 0 0-1.414l-3.588-3.588a.999.999 0 0 0-1.411 1.411L18.67 11H10a1 1 0 0 0 0 2h8.67l-1.876 1.884a.999.999 0 0 0 .001 1.411"
-                  />
-                </svg>
+                <IoLogOutOutline size={30} color="#50bf8b" />
               </button>
             ) : (
               <></>
@@ -404,7 +386,7 @@ const HeaderComponent = () => {
             </button>
           </li>
           <li className={styles.navItemPageLinks}>
-            <a href="/class-page" className={styles.pageLink}>
+            <a className={styles.pageLink} onClick={goClassList}>
               <div>精選課程</div>
             </a>
             <svg
