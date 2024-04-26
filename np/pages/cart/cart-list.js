@@ -87,7 +87,7 @@ const ShopCart2 = () => {
               >
                 {/* <myH4 className="myH4">顧客資訊</myH4> */}
                 {/* <div className={styles2.myH4}>顧客資訊</div> */}
-                <div className={styles2.myH4}>顧客資訊</div>
+                {/* <div className={styles2.myH4}>顧客資訊</div>
                 <div className="mb-3">
                   <label htmlFor="name" className={`${styles2.label} mt-3`}>
                     姓名:
@@ -113,7 +113,7 @@ const ShopCart2 = () => {
                     aria-describedby="emailHelp"
                   />
                 </div>
-                {/* 套bs5套件 */}
+                套bs5套件
                 <label htmlFor="phone" className={`${styles2.label}`}>
                   電話號碼:
                 </label>
@@ -158,10 +158,10 @@ const ShopCart2 = () => {
                     aria-label="Text input with dropdown button"
                   />
                 </div>
-                <div className="form-group form-check">
-                  {/* <input type="radio" id="rememberPhone" name="rememberPhone" value="rememberPhone">
+                <div className="form-group form-check"> */}
+                {/* <input type="radio" id="rememberPhone" name="rememberPhone" value="rememberPhone">
           儲存這個號碼 */}
-                  <input
+                {/* <input
                     className="form-check-input"
                     type="checkbox"
                     id="rememberPhone"
@@ -169,12 +169,12 @@ const ShopCart2 = () => {
                     aria-label="..."
                   />
                   <h5>儲存這個號碼</h5>
-                </div>
+                </div> */}
                 {/* 第二段 */}
                 {/* <myH4>訂單備註</myH4> */}
                 {/* <myH4 className="myH4">訂單備註</myH4> */}
                 {/* <div className={styles2.myH4}>訂單備註</div> */}
-                <div className={styles2.myH4} style={{ marginTop: "15px" }}>
+                {/* <div className={styles2.myH4} style={{ marginTop: "15px" }}>
                   訂單備註
                 </div>
                 <div className="form-floating">
@@ -184,8 +184,8 @@ const ShopCart2 = () => {
                     id="floatingTextarea2"
                     style={{ height: 100 }}
                     defaultValue={""}
-                  />
-                </div>
+                  /> */}
+                {/* </div> */}
                 {/* 第三段 */}
                 <div
                   className={`${styles2.backage} d-flex justify-content-between mt-5`}
@@ -518,10 +518,10 @@ const ShopCart2 = () => {
             >
               <a
                 href=""
-                className={`${styles2.keepbuy} d-flex justify-content-center align-items-center mt-1`}
+                className={`${styles2.keepbuy} d-flex justify-content-center align-items-center mt-1 fs-3`}
                 type="submit"
               >
-                <h3 className="fw-bold pt-1">繼續購物</h3>
+                <h3 className={`${styles2.h3} fw-bold pt-1`}>繼續購物</h3>
               </a>
               <button
                 className={` ${styles2.butt1} ms-4 mt-1`}
@@ -532,7 +532,7 @@ const ShopCart2 = () => {
                   border: "1px solid #78cea6",
                 }}
               >
-                <h3 className="fw-bold pt-1">前往結帳</h3>
+                <h3 className={`${styles2.h3} fw-bold pt-1`}>前往結帳</h3>
               </button>
             </div>
           </article>
