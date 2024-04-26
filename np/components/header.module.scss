@@ -251,13 +251,13 @@ a:visited {
 }
 
 .headerActions {
-  align-items: start;
+  align-items: end;
   align-self: stretch;
   color: var(--gray01, #919da6);
   display: flex;
   font-size: 16px;
   font-weight: 500;
-  gap: 13px;
+  gap: 16px;
   line-height: 120%;
   margin: auto 0;
   text-align: center;
@@ -295,11 +295,10 @@ a:visited {
 .logout {
   border: none;
   background: transparent;
-  margin-top: 6px;
-  margin-bottom: 2px;
   padding-inline: 0px;
-  width: 30px;
-  height: 30px;
+  // margin-bottom: 2px;
+  width: 34px;
+  height: 34px;
 }
 
 .aBitMargin {

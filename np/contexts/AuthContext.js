@@ -24,12 +24,17 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (token) => {
-    setAuth({ token, isLoggedIn: true });
+  const login = (token, userData = {}) => {
+    setAuth({ token, isLoggedIn: true, userData });
     localStorage.setItem("token", token);
     // 將token存儲在localStorage中以維持登入狀態
     // 用localStorage存儲會有安全性問題，因為localStorage是存儲在瀏覽器中，
     // 任何人都可以訪問localStorage，所以可以用cookie來存儲token
+  };
+
+  const updateUser = (userData) => {
+    setAuth((prev) => ({ ...prev, user: userData }));
+    // 更新用戶數據
   };
 
   const logout = () => {
