@@ -137,7 +137,7 @@ const SignUpPage = () => {
     try {
       await axios.post("http://localhost:3005/api/signUp", submitData);
       alert("註冊成功");
-      window.location.href = "./login";
+      router.push(routes.login);
     } catch (error) {
       console.error("Registration failed", error);
       alert("Registration failed");
