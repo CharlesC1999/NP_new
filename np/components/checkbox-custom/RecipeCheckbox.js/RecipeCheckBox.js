@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./CheckBoxCustom.module.scss";
+import styles from "./RecipeCheckBox.module.scss";
 
 export default function Test() {
   const [checked, setChecked] = useState(false);
