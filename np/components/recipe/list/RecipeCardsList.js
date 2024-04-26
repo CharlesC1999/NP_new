@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import recipes from "@/data/recipe/recipes.json";
@@ -7,6 +7,17 @@ import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 
 export default function RecipeCardsList() {
+  //食譜資料庫data
+  const [recipesData, setRecipesData] = useState({
+    Recipe_ID: 0,
+    Title_R_name: "",
+    Image_URL: "",
+    Content: "",
+    Publish_date: "",
+    Recipe_category_ID: 0,
+    recipe_valid: 1,
+  });
+
   //收藏與否的state
   const [saved, setSaved] = useState(false);
 
@@ -19,6 +30,29 @@ export default function RecipeCardsList() {
       return toast("成功加入收藏");
     }
   };
+
+  const getRecipes = async () => {
+    const url = "http://localhost:3005/api/recipes";
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log(data);
+
+      // 為了要確保資料是陣列，所以檢查後再設定
+      if (Array.isArray(data.data.recipes)) {
+        setRecipesData(data.data.recipes);
+      } else {
+        console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getRecipes();
+  }, []);
 
   return (
     <>
