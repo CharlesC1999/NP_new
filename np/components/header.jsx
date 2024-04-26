@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
 // import classNames from "classnames";
+import routes from "@/contexts/routes"; // 導入路徑配置
+//  react icon
+import { IoLogOutOutline } from "react-icons/io5";
 
 const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
   const dropdownRef = useRef(null);
+  const router = useRouter();
   const { auth, logout } = useAuth();
 
   let hasMargin = true;
@@ -52,6 +57,17 @@ const HeaderComponent = () => {
     };
   }, []);
 
+  // 使用配置的路由導航
+  const goMemberDashboard = () => router.push(routes.dashboard);
+  const goFavor = () => router.push(routes.favor);
+  const doLogin = () => router.push(routes.login);
+  const goIndex = () => router.push(routes.home);
+  const goCart = () => router.push(routes.cartList);
+  const goClassList = () => router.push(routes.classList);
+  const goProductList = () => router.push(routes.productList);
+  const goRecipeList = () => router.push(routes.recipeList);
+  const goSpeekerList = () => router.push(routes.speakerList);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -74,7 +90,7 @@ const HeaderComponent = () => {
               </svg>
             </button>
 
-            <a href="/">
+            <a onClick={goIndex}>
               <img
                 src="/images/np_logo.png"
                 alt="Company Logo"
@@ -160,123 +176,217 @@ const HeaderComponent = () => {
             </button>
           </div>
           <div className={styles.headerActions}>
-            <a href="#" className={styles.pageLink}>
-              {/* <!-- 手機圖示svg --> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="30px"
-                height="30px"
-                viewBox="0 0 24 24"
-                className={styles.iconLinkMobile}
-              >
-                <path
-                  fill="#50BF8B"
-                  d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
-                />
-              </svg>
-              <span className={styles.iconText}>
-                {/* <!-- 願望清單 heart --> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 256 256"
-                  className={styles.mobileNone}
-                >
-                  <path
-                    fill="#253D4E"
-                    d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
-                  />
-                </svg>
-                願望清單
-              </span>
-            </a>
-            <a href="#" className={styles.pageLink}>
-              {/* <!-- 手機圖示svg --> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="30px"
-                height="30px"
-                viewBox="0 0 24 24"
-                className={styles.iconLinkMobile}
-              >
-                <path
-                  fill="#50BF8B"
-                  d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
-                />
-              </svg>
-              <span className={styles.iconText}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 24 24"
-                  className={styles.mobileNone}
-                >
-                  <path
-                    fill="none"
-                    stroke="#253D4E"
-                    strokeWidth="2"
-                    d="M5 5h17l-2 9H7L4 2H0m7 12l1 4h13m-2 5a1 1 0 1 1 0-2a1 1 0 0 1 0 2ZM9 23a1 1 0 1 1 0-2a1 1 0 0 1 0 2Z"
-                  />
-                </svg>
-                購物車
-              </span>
-            </a>
-            <a href="/member/login" className={styles.pageLink}>
-              {/* <!-- 手機圖示svg --> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="30px"
-                height="30px"
-                viewBox="0 0 24 24"
-                className={styles.iconLinkMobile}
-              >
-                <path
-                  fill="#50BF8B"
-                  d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
-                />
-              </svg>
-              <span className={styles.iconText}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 24 24"
-                  className={styles.mobileNone}
-                >
-                  <g
-                    fill="none"
-                    stroke="#253D4E"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                  >
-                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </g>
-                </svg>
-                會員登入
-              </span>
-            </a>
             {auth.isLoggedIn ? (
-              <button className={styles.logout} onClick={logout} id="logout">
+              <a onClick={goFavor} className={styles.pageLink}>
+                {/* <!-- 手機圖示svg --> */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30px"
                   height="30px"
-                  viewBox="0 0 30 30"
-                  className={styles.logoutSvg}
+                  viewBox="0 0 24 24"
+                  className={styles.iconLinkMobile}
                 >
                   <path
-                    fill="#50bf8b"
-                    d="M6 2h9a2 2 0 0 1 2 2v1a1 1 0 0 1-2 0V4H6v16h9v-1a1 1 0 0 1 2 0v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"
-                  />
-                  <path
-                    fill="#50bf8b"
-                    d="M16.795 16.295c.39.39 1.02.39 1.41 0l3.588-3.588a1 1 0 0 0 0-1.414l-3.588-3.588a.999.999 0 0 0-1.411 1.411L18.67 11H10a1 1 0 0 0 0 2h8.67l-1.876 1.884a.999.999 0 0 0 .001 1.411"
+                    fill="#50BF8B"
+                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
                   />
                 </svg>
+                <span className={styles.iconText}>
+                  {/* <!-- 願望清單 heart --> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 256 256"
+                    className={styles.mobileNone}
+                  >
+                    <path
+                      fill="#253D4E"
+                      d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
+                    />
+                  </svg>
+                  願望清單
+                </span>
+              </a>
+            ) : (
+              <a href="#" className={styles.pageLink}>
+                {/* <!-- 手機圖示svg --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 24 24"
+                  className={styles.iconLinkMobile}
+                >
+                  <path
+                    fill="#50BF8B"
+                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
+                  />
+                </svg>
+                <span className={styles.iconText}>
+                  {/* <!-- 願望清單 heart --> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 256 256"
+                    className={styles.mobileNone}
+                  >
+                    <path
+                      fill="#253D4E"
+                      d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
+                    />
+                  </svg>
+                  願望清單
+                </span>
+              </a>
+            )}
+            {auth.isLoggedIn ? (
+              <a onClick={goCart} className={styles.pageLink}>
+                {/* <!-- 手機圖示svg --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 24 24"
+                  className={styles.iconLinkMobile}
+                >
+                  <path
+                    fill="#50BF8B"
+                    d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                  />
+                </svg>
+                <span className={styles.iconText}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 24 24"
+                    className={styles.mobileNone}
+                  >
+                    <path
+                      fill="none"
+                      stroke="#253D4E"
+                      strokeWidth="2"
+                      d="M5 5h17l-2 9H7L4 2H0m7 12l1 4h13m-2 5a1 1 0 1 1 0-2a1 1 0 0 1 0 2ZM9 23a1 1 0 1 1 0-2a1 1 0 0 1 0 2Z"
+                    />
+                  </svg>
+                  購物車
+                </span>
+              </a>
+            ) : (
+              <a onClick={doLogin} className={styles.pageLink}>
+                {/* <!-- 手機圖示svg --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 24 24"
+                  className={styles.iconLinkMobile}
+                >
+                  <path
+                    fill="#50BF8B"
+                    d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                  />
+                </svg>
+                <span className={styles.iconText}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 24 24"
+                    className={styles.mobileNone}
+                  >
+                    <path
+                      fill="none"
+                      stroke="#253D4E"
+                      strokeWidth="2"
+                      d="M5 5h17l-2 9H7L4 2H0m7 12l1 4h13m-2 5a1 1 0 1 1 0-2a1 1 0 0 1 0 2ZM9 23a1 1 0 1 1 0-2a1 1 0 0 1 0 2Z"
+                    />
+                  </svg>
+                  購物車
+                </span>
+              </a>
+            )}
+            {auth.isLoggedIn ? (
+              // 這邊放登入後
+              <a onClick={goMemberDashboard} className={styles.pageLink}>
+                {/* <!-- 手機圖示svg --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 24 24"
+                  className={styles.iconLinkMobile}
+                >
+                  <path
+                    fill="#50BF8B"
+                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
+                  />
+                </svg>
+                <span className={styles.iconText}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 24 24"
+                    className={styles.mobileNone}
+                  >
+                    <g
+                      fill="none"
+                      stroke="#253D4E"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </g>
+                  </svg>
+                  會員中心
+                </span>
+              </a>
+            ) : (
+              <a onClick={doLogin} className={styles.pageLink}>
+                {/* <!-- 手機圖示svg --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 24 24"
+                  className={styles.iconLinkMobile}
+                >
+                  <path
+                    fill="#50BF8B"
+                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
+                  />
+                </svg>
+                <span className={styles.iconText}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 24 24"
+                    className={styles.mobileNone}
+                  >
+                    <g
+                      fill="none"
+                      stroke="#253D4E"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </g>
+                  </svg>
+                  會員登入
+                </span>
+              </a>
+            )}
+            {auth.isLoggedIn ? (
+              <button className={styles.logout} onClick={logout} id="logout">
+                <IoLogOutOutline size={30} color="#50bf8b" />
               </button>
             ) : (
               <></>
@@ -307,8 +417,10 @@ const HeaderComponent = () => {
             </a>
           </li>
           <li className={styles.navItemPageLinks}>
-            <button className={styles.navTextButton}>
+            <a onClick={goProductList} className={styles.pageLink}>
               <div>商品列表</div>
+            </a>
+            <button className={styles.navTextButton}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -326,7 +438,7 @@ const HeaderComponent = () => {
             </button>
           </li>
           <li className={styles.navItemPageLinks}>
-            <a href="/recipe" className={styles.pageLink}>
+            <a onClick={goRecipeList} className={styles.pageLink}>
               <div>食譜精選</div>
             </a>
             <button className={styles.navTextButton}>
@@ -347,7 +459,7 @@ const HeaderComponent = () => {
             </button>
           </li>
           <li className={styles.navItemPageLinks}>
-            <a href="/class-page" className={styles.pageLink}>
+            <a className={styles.pageLink} onClick={goClassList}>
               <div>精選課程</div>
             </a>
             <svg
@@ -367,7 +479,7 @@ const HeaderComponent = () => {
             </svg>
           </li>
           <li className={styles.navItemPageLinks}>
-            <a href="/speaker" className={styles.pageLink}>
+            <a onClick={goSpeekerList} className={styles.pageLink}>
               <span className={styles.navText}>講師陣容</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// 讀取鉤子
+import { useLoader } from "@/hooks/use-loader";
 import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
 import Header from "@/components/Header";
 import ClassClassifacion from "@/components/class_file/ClassClassification";
@@ -13,6 +15,9 @@ import Pagination from "@/components/pagination";
 import Footer from "@/components/Footer";
 
 const ClassList = () => {
+  // 先導入讀取鉤子
+  const { setLoading } = useLoader();
+
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -35,6 +40,18 @@ const ClassList = () => {
     justifySelf: "center",
     alignContent: "center",
   };
+
+  useEffect(() => {
+    setLoading(true); // 開始加載畫面
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000); // 延遲2秒以模擬
+
+    return () => {
+      setLoading(false); // 移除加載狀態
+    };
+  }, []);
 
   const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid
   const [activeButton, setActiveButton] = useState("grid"); // 選擇哪一個是被選擇的狀態

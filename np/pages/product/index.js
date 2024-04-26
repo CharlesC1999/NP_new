@@ -1,3 +1,4 @@
+//React
 import React, { useState } from "react";
 
 //fontAwsome
@@ -10,6 +11,7 @@ import ProductCard02 from "@/components/product/ProductCard02";
 import ProductCardList from "@/components/product/ProductCardList";
 import ProductFilter from "@/components/product/ProductFilter";
 import Footer from "@/components/Footer";
+// import PaginationRounded from "@/components/pagination";
 //荃做版本sideBar
 // import CateSidebar from "@/components/product/CateSidebar";
 // import NewSidebar from "@/components/product/Newsidebar";
@@ -23,6 +25,9 @@ import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDet
 //style
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "@/styles/Product/product.module.css";
+
+//Data json
+import items from "@/data/product/productItems.json";
 
 export default function Product() {
   const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid
@@ -77,18 +82,16 @@ export default function Product() {
           <div
             className={`d-flex ${styles.productCard1} justify-content-between`}
           >
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
-            <ProductCard02 />
+            {items.map((item) => (
+              <ProductCard02
+                key={item.id}
+                id={item.id}
+                category_id={item.category_id}
+                name={item.name}
+                description={item.description}
+                price={item.price}
+              />
+            ))}
           </div>
         </div>
       </div>
