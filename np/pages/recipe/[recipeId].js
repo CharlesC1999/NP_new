@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-// import recipes from "@/data/recipe/recipes.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
@@ -53,8 +52,10 @@ export default function RecipeDetail() {
 
   //初次渲染頁面時執行取得對應食譜的function
   useEffect(() => {
-    getRecipe(router.query.recipeId);
-  }, []);
+    if (router.isReady) {
+      getRecipe(router.query.recipeId);
+    }
+  }, [router.isReady]);
 
   return (
     <>

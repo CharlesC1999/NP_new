@@ -4,7 +4,6 @@ import styles from "./card2.module.css";
 function Card2() {
   return(
     <>
-     
         <div className={styles.card2Box}>
             <div className={styles.card2BoxImg}>
                 <img src="/index-images/Vector.png" alt="" />
@@ -19,7 +18,6 @@ function Card2() {
                 </a>
             </div>
         </div>
-  
     </>
      )
 }

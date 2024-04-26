@@ -58,7 +58,7 @@ export default function RecipeCardsList() {
               <div className={`col-4 ${styles["card-pic"]}`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src="/images/recipe/list/1_MVMlYcSvoU 1.png"
+                  src={`/images/recipe/list/${v.Image_URL}`}
                   alt=""
                 />
               </div>
