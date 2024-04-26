@@ -35,6 +35,9 @@
     height: 48px;
     width: 100px;
     text-decoration: none;
+    .h3 {
+      font-size: 20px;
+    }
   }
   .keepbuy {
     background-color: #78cea6;
@@ -42,6 +45,9 @@
     border: 1px solid #78cea6;
     height: 48px;
     width: 100px;
+    .h3 {
+      font-size: 20px;
+    }
   }
 }
 /* button {

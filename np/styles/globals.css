@@ -130,6 +130,21 @@ textarea {
   color: inherit;
 }
 
+/* .form-control:focus {
+  box-shadow: 0 0 0 0.05rem #547d63 !important;
+  border-color: #547d63 !important;
+}
+
+
+input[type="text"]:focus {
+  box-shadow: 0 0 0 0.05rem #547d63;
+  border-color: #547d63;
+}
+input[type="email"]:focus {
+  box-shadow: 0 0 0 0.05rem #547d63;
+  border-color: #547d63;
+} */
+
 /* button {
   background: var(--primary-color);
   color: white;
