@@ -7,6 +7,8 @@ import styles from "./header.module.scss";
 import routes from "@/contexts/routes"; // 導入路徑配置
 //  react icon
 import { IoLogOutOutline } from "react-icons/io5";
+// sweetAlert
+import Swal from "sweetalert2";
 
 const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,6 +58,29 @@ const HeaderComponent = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // 登出彈出確認
+  const logoutButton = () => {
+    Swal.fire({
+      title: "確定要登出嗎？",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#c14d3c",
+      cancelButtonColor: "#50bf8b",
+      confirmButtonText: "登出",
+      cancelButtonText: "取消",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+        goIndex();
+        Swal.fire({
+          title: "已登出",
+          icon: "success",
+          confirmButtonColor: "#50bf8b",
+        });
+      }
+    });
+  };
 
   // 使用配置的路由導航
   const goMemberDashboard = () => router.push(routes.dashboard);
@@ -191,25 +216,25 @@ const HeaderComponent = () => {
                     d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
                   />
                 </svg>
-                <span className={styles.iconText}>
-                  {/* <!-- 願望清單 heart --> */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 256 256"
-                    className={styles.mobileNone}
-                  >
-                    <path
-                      fill="#253D4E"
-                      d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
-                    />
-                  </svg>
-                  願望清單
-                </span>
+                {/* <span className={styles.iconText}> */}
+                {/* <!-- 願望清單 heart --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 256 256"
+                  className={styles.mobileNone}
+                >
+                  <path
+                    fill="#50BF8B"
+                    d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
+                  />
+                </svg>
+                {/* 願望清單
+                </span> */}
               </a>
             ) : (
-              <a href="#" className={styles.pageLink}>
+              <a onClick={doLogin} className={styles.pageLink}>
                 {/* <!-- 手機圖示svg --> */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -223,22 +248,22 @@ const HeaderComponent = () => {
                     d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
                   />
                 </svg>
-                <span className={styles.iconText}>
-                  {/* <!-- 願望清單 heart --> */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 256 256"
-                    className={styles.mobileNone}
-                  >
-                    <path
-                      fill="#253D4E"
-                      d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
-                    />
-                  </svg>
-                  願望清單
-                </span>
+                {/* <span className={styles.iconText}> */}
+                {/* <!-- 願望清單 heart --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 256 256"
+                  className={styles.mobileNone}
+                >
+                  <path
+                    fill="#253D4E"
+                    d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
+                  />
+                </svg>
+                {/* 願望清單
+                </span> */}
               </a>
             )}
             {auth.isLoggedIn ? (
@@ -256,23 +281,21 @@ const HeaderComponent = () => {
                     d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
                   />
                 </svg>
-                <span className={styles.iconText}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 24 24"
-                    className={styles.mobileNone}
-                  >
-                    <path
-                      fill="none"
-                      stroke="#253D4E"
-                      strokeWidth="2"
-                      d="M5 5h17l-2 9H7L4 2H0m7 12l1 4h13m-2 5a1 1 0 1 1 0-2a1 1 0 0 1 0 2ZM9 23a1 1 0 1 1 0-2a1 1 0 0 1 0 2Z"
-                    />
-                  </svg>
-                  購物車
-                </span>
+                {/* <span className={styles.iconText}> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32px"
+                  height="32px"
+                  viewBox="0 0 24 24"
+                  className={styles.mobileNone}
+                >
+                  <path
+                    fill="#50bf8b"
+                    d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                  />
+                </svg>
+                {/* 購物車
+                </span> */}
               </a>
             ) : (
               <a onClick={doLogin} className={styles.pageLink}>
@@ -289,23 +312,21 @@ const HeaderComponent = () => {
                     d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
                   />
                 </svg>
-                <span className={styles.iconText}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 24 24"
-                    className={styles.mobileNone}
-                  >
-                    <path
-                      fill="none"
-                      stroke="#253D4E"
-                      strokeWidth="2"
-                      d="M5 5h17l-2 9H7L4 2H0m7 12l1 4h13m-2 5a1 1 0 1 1 0-2a1 1 0 0 1 0 2ZM9 23a1 1 0 1 1 0-2a1 1 0 0 1 0 2Z"
-                    />
-                  </svg>
-                  購物車
-                </span>
+                {/* <span className={styles.iconText}> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32px"
+                  height="32px"
+                  viewBox="0 0 24 24"
+                  className={styles.mobileNone}
+                >
+                  <path
+                    fill="#253D4E"
+                    d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
+                  />
+                </svg>
+                {/* 購物車
+                </span> */}
               </a>
             )}
             {auth.isLoggedIn ? (
@@ -324,27 +345,18 @@ const HeaderComponent = () => {
                     d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
                   />
                 </svg>
-                <span className={styles.iconText}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 24 24"
-                    className={styles.mobileNone}
-                  >
-                    <g
-                      fill="none"
-                      stroke="#253D4E"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </g>
-                  </svg>
-                  會員中心
-                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32px"
+                  height="32px"
+                  viewBox="0 0 24 24"
+                  className={styles.mobileNone}
+                >
+                  <path
+                    fill="#50bf8b"
+                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
+                  />
+                </svg>
               </a>
             ) : (
               <a onClick={doLogin} className={styles.pageLink}>
@@ -361,32 +373,28 @@ const HeaderComponent = () => {
                     d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
                   />
                 </svg>
-                <span className={styles.iconText}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 24 24"
-                    className={styles.mobileNone}
-                  >
-                    <g
-                      fill="none"
-                      stroke="#253D4E"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </g>
-                  </svg>
-                  會員登入
-                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32px"
+                  height="32px"
+                  viewBox="0 0 24 24"
+                  className={styles.mobileNone}
+                >
+                  <path
+                    fill="#253D4E"
+                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
+                  />
+                </svg>
               </a>
             )}
             {auth.isLoggedIn ? (
-              <button className={styles.logout} onClick={logout} id="logout">
-                <IoLogOutOutline size={30} color="#50bf8b" />
+              // 登出按鈕
+              <button
+                className={styles.logout}
+                onClick={logoutButton}
+                id="logout"
+              >
+                <IoLogOutOutline size={36} color="#50bf8b" />
               </button>
             ) : (
               <></>
