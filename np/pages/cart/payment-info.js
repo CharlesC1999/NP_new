@@ -300,7 +300,7 @@ const ShopCart3 = () => {
               type="submit"
               style={{}}
             >
-              <h3 className="fw-bold pt-1">返回上頁</h3>
+              <h3 className={`${styles3.h3} fw-bold pt-1`}>返回上頁</h3>
             </a>
             <button
               className={`${styles3.button} ms-4 mt-1`}
@@ -311,7 +311,7 @@ const ShopCart3 = () => {
                 border: "1px solid #78cea6",
               }}
             >
-              <h3 className="fw-bold pt-1">送出訂單</h3>
+              <h3 className={`${styles3.h3} fw-bold pt-1`}>送出訂單</h3>
             </button>
           </div>
           {/* </form> */}

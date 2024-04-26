@@ -9,6 +9,7 @@ import Pagination from "@/components/pagination";
 import Footer from "@/components/Footer";
 
 export default function Speaker() {
+  
   const groupSpeakers = (speakers, itemsPerGroup) => {
   return speakers.reduce((allGroups, current, index) => {
     const groupIndex = Math.floor(index / itemsPerGroup);

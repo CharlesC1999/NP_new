@@ -37,9 +37,9 @@ export default function RecipeList() {
                 className={`d-flex flex-column ${styles["main-content"]}`}
               >
                 <RecipeCardsList />
+                {/* <RecipeCardsList />
                 <RecipeCardsList />
-                <RecipeCardsList />
-                <RecipeCardsList />
+                <RecipeCardsList /> */}
               </section>
             </div>
           </div>

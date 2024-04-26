@@ -7,7 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailTop.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function DetailTop() {
+export default function DetailTop({ recipe }) {
+  //收藏與否
   const [saved, setSaved] = useState(false);
 
   const notify = () => {
@@ -40,12 +41,15 @@ export default function DetailTop() {
                 <p
                   className={`${styles["title"]} ${styles["figma-h3"]} mb-0 text-center text-xxl-start`}
                 >
-                  綠咖哩牛肉
+                  {recipe.Title_R_name}
                 </p>
                 <div
                   className={`${styles["left-bottom"]} d-flex justify-content-center justify-content-xxl-start`}
                 >
-                  <p className={styles["figma-p"]}>分類：主食 / 2023-10-08</p>
+                  <p className={styles["figma-p"]}>
+                    分類：{recipe.Recipe_category_ID} /{" "}
+                    {recipe.Publish_date.split("T")[0]}
+                  </p>
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@ const router = express.Router()
 import sequelize from '##/configs/db.js'
 const { Member } = sequelize.models
 
-// 定義 GET 路由處理 '/' 請求
+// 定義 GET 路由處理 '/' 請求，不用再多輸入
 router.get('/', async (req, res) => {
   const { Email } = req.query
   console.log('Received email check request for:', Email)
