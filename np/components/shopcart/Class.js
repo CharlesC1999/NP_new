@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import ClassStyles from "./class.module.css";
 import Check from "@/components/checkbox-custom/CheckBoxCustom";
@@ -130,6 +129,7 @@ const Class = () => {
               >
                 {/* <div class="add d-flex align-items-center"> */}
                 <span
+                  className={`${ClassStyles.plus}`}
                   onClick={() => {
                     const nextCount = element.count - 1;
                     if (nextCount === 0) {
@@ -146,7 +146,7 @@ const Class = () => {
                   onClick={() => {
                     increase(element.id);
                   }}
-                  className="plus"
+                  className={`${ClassStyles.plus}`}
                 >
                   +
                 </span>
@@ -164,7 +164,7 @@ const Class = () => {
               >
                 <img
                   src="/images/Delete.jpg"
-                  alt=""
+                  className={`${ClassStyles.plus}`}
                   onClick={() => {
                     const nextData = classData.filter((v, i) => {
                       return v.id !== element.id;
@@ -200,7 +200,6 @@ const Class = () => {
                 <img
                   src="/images/Rectangle 143.jpg"
                   alt=""
-                  className=""
                   style={{ objectFit: "cover", height: "100%", width: "121px" }}
                 />
               </div>
@@ -210,6 +209,7 @@ const Class = () => {
                   <div className="col ps-4">
                     <img
                       src="/images/Frame 40118.png"
+                      className={`${ClassStyles.plus}`}
                       alt=""
                       onClick={() => {
                         const nextData = classData.filter((v, i) => {
@@ -239,7 +239,7 @@ const Class = () => {
                     </span>
                     <div className={`${ClassStyles.add}`}>
                       <span
-                        className={ClassStyles.fc}
+                        className={`${ClassStyles.plus} ${ClassStyles.fc}`}
                         onClick={() => {
                           const nextCount = element.count - 1;
                           if (nextCount === 0) {
@@ -253,7 +253,7 @@ const Class = () => {
                       </span>
                       <span>{element.count}</span>
                       <span
-                        className={ClassStyles.fc}
+                        className={`${ClassStyles.plus} ${ClassStyles.fc}`}
                         onClick={() => {
                           increase(element.id);
                         }}
@@ -333,13 +333,6 @@ const Class = () => {
       </main>
     </>
   );
-=======
-import React from "react";
-import ClassStyles from "./class.module.css";
-
-const Class = () => {
-  return <></>;
->>>>>>> 8fdf8c3 (切版加上組件)
 };
 
 export default Class;

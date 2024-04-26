@@ -185,7 +185,8 @@
     margin-top: 80px;
   }
   .pay1 {
-    padding-left: 200px;
+    padding-left: 150px;
+    margin-left: 50px;
   }
 
   .button {
@@ -205,6 +206,7 @@
     width: 200px;
     text-decoration: none;
   }
+
   .article {
     border: 1px solid #d9d9d9;
   }
@@ -309,7 +311,7 @@
 
   .pay1 {
     border: 1px solid #d9d9d9;
-    padding-left: 120px;
+    /* padding-left: 120px; */
   }
 
   .article {
@@ -331,9 +333,15 @@
     color: #78cea6;
     border: 1px solid #78cea6;
     text-decoration: none;
+    .h3 {
+      font-size: 20px;
+    }
   }
   .butt1 {
     height: 50px;
     width: 100px;
+    .h3 {
+      font-size: 20px;
+    }
   }
 }

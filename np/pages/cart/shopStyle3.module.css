@@ -274,6 +274,9 @@
     background-color: #78cea6;
     color: #ffffff;
     border: 1px solid #78cea6;
+    .h3 {
+      font-size: 20px;
+    }
   }
   .keepbuy {
     height: 50px;
@@ -282,6 +285,9 @@
     color: #78cea6;
     border: 1px solid #78cea6;
     text-decoration: none;
+    .h3 {
+      font-size: 20px;
+    }
   }
 }
 .fc {
