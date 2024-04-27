@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 
 //styles
 import "bootstrap/dist/css/bootstrap.min.css";

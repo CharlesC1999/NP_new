@@ -3,12 +3,6 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/styles/Product/products.module.scss";
 
-//fontAwsome
-import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-
 //components
 import HeaderComponent from "@/components/header";
 import Footer from "@/components/footer";
@@ -26,6 +20,7 @@ import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
 import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDetail";
 
 export default function ProductDetail() {
+  const [activeTab, setActiveTab] = useState("product");
   return (
     <>
       <HeaderComponent />
@@ -62,19 +57,21 @@ export default function ProductDetail() {
               <div className={`${style["section2"]} my-3 m-sm-2`}>
                 <div className={`d-flex flex-row my-4`}>
                   <button
-                    className={`${style["detail-btn"]}  d-flex align-items-center justify-content-center btn me-4`}
+                    className={`${style["detail-btn"]} d-flex align-items-center justify-content-center btn me-4`}
+                    onClick={() => setActiveTab("product")} // 设置点击事件更新状态
                   >
                     商品簡介
                   </button>
                   <button
                     className={`${style["com-btn"]} d-flex align-items-center justify-content-center com-btn btn btn-outline-success`}
+                    onClick={() => setActiveTab("review")} // 设置点击事件更新状态
                   >
                     評論
                   </button>
                 </div>
                 <div className={`${style["p-detail"]} flex-column p-sm-5`}>
-                  <ProductSection01 />
-                  <ProductSection02 />
+                  {activeTab === "product" && <ProductSection01 />}
+                  {activeTab === "review" && <ProductSection02 />}
                 </div>
               </div>
             </div>

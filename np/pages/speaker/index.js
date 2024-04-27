@@ -64,44 +64,18 @@ export default function Speaker() {
           <h3>講師陣容</h3>
         </div>
         <div className={styles.speakerCardContainer}>
-          {/* <div className={styles.speakerGroup}>
-            {speakers.map((speaker) => {
-              return (
-                <SpeakerCardVertical
-                  key={speaker.speaker_id}
-                  name={speaker.speaker_name}
-                  title={speaker.speaker_title}
-                />
-              );
-            })}
-          </div> */}
-          {groupSpeakers(speakers, 4).map((group, index) => (
-      <div key={index} className={styles.speakerGroup}>
-        {group.map((speaker) => (
-          <SpeakerCardVertical
-            key={speaker.speaker_id}
-            id={speaker.speaker_id}
-            name={speaker.speaker_name}
-            title={speaker.speaker_title}
-            img={speaker.speaker_image}
-          />
-        ))}
-      </div>
-    ))}
-          {/* <div className={styles.speakerGroup}>
-            <SpeakerCardVertical />
-            <SpeakerCardVertical />
-            <SpeakerCardVertical />
-            <SpeakerCardVertical />
-          </div>
           <div className={styles.speakerGroup}>
-            <SpeakerCardVertical />
-            <SpeakerCardVertical />
-            <SpeakerCardVertical />
-            <SpeakerCardVertical />
-          </div> */}
+            {speakers.map(speaker => {
+              return (<SpeakerCardVertical
+                key={speaker.speaker_id}
+                id={speaker.speaker_id}
+                name={speaker.speaker_name}
+                title={speaker.speaker_title}
+                img={speaker.speaker_image} />)
+            })}
+            </div>
+            <Pagination/>
         </div>
-        <Pagination/>
       </div>
 
       <Footer />

@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 
 //fontAwsome
-import "@fortawesome/fontawesome-free/css/all.css";
-import HeaderComponent from "@/components/Header";
 
 //components
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -11,6 +9,8 @@ import ProductCard02 from "@/components/product/ProductCard02";
 import ProductCardList from "@/components/product/ProductCardList";
 import ProductFilter from "@/components/product/ProductFilter";
 import Footer from "@/components/Footer";
+import HeaderComponent from "@/components/Header";
+
 // import PaginationRounded from "@/components/pagination";
 //荃做版本sideBar
 // import CateSidebar from "@/components/product/CateSidebar";
