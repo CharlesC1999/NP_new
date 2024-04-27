@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+// 測試用的 json
 import data from "@/data/speaker.json";
 import styles from "@/styles/speaker/speaker-detail.module.scss";
 import SpeakerCardHorizontal from "@/components/speaker/speaker-detail/SpeakerCardHorizontal";
@@ -113,9 +114,9 @@ export default function SpeakerDetail() {
             <div className={styles.lectureGroup}>
               <LectureCardVertical />
               <LectureCardVertical />
-              {/* <LectureCardVertical />
-              <LectureCardVertical /> */}
-              {/*   RWD 要隱藏最後兩張卡片，用 js 寫 */}
+              <LectureCardVertical />
+              <LectureCardVertical />
+              {/*   <= 375px 要隱藏最後兩張卡片*/}
             </div>
           </div>
         </div>
