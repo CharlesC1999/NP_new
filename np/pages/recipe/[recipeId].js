@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 import DetailTop from "@/components/recipe/detail/DetailTop";
-import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategory";
+import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategories";
 import DetailIngredients from "@/components/recipe/detail/DetailIngredients";
 import DetailSteps from "@/components/recipe/detail/DetailSteps";
 import DetailRelatedProducts from "@/components/recipe/detail/DetailRelatedProducts";

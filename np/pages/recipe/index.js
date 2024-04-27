@@ -2,14 +2,14 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
-import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategory";
+import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategories";
 import SideBarRecipe from "@/components/recipe/list/SideBarRecipe";
 import TopBarList from "@/components/recipe/list/TopBarList";
 import TopBarGrid from "@/components/recipe/list/TopBarGrid";
 import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";
 import Footer from "@/components/footer";
-import Filter from "@/components/class_file/ClassFilter.js";
+import Filter from "@/components/recipe/list/filter/RecipeFilter";
 import styles from "@/styles/recipe/recipe-list.module.scss";
 
 export default function RecipeList() {

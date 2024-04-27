@@ -7,14 +7,23 @@ import { getIdParam } from '#db-helpers/db-tool.js'
 // 資料庫使用
 import sequelize from '#configs/db.js'
 const { Recipe } = sequelize.models
+const { Recipe_Categories } = sequelize.models
+
+// 一般sql
+import db from '#configs/mysql.js'
 
 // GET - 得到所有資料
 router.get('/', async function (req, res) {
   const recipes = await Recipe.findAll({ logging: console.log })
   // 處理如果沒找到資料
 
+  //得到所有食譜分類名稱
+  const recipesCategories = await Recipe_Categories.findAll({
+    logging: console.log,
+  })
+
   // 標準回傳JSON
-  return res.json({ status: 'success', data: { recipes } })
+  return res.json({ status: 'success', data: { recipes, recipesCategories } })
 })
 
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)

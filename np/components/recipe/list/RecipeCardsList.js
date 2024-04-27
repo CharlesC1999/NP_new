@@ -29,7 +29,6 @@ export default function RecipeCardsList() {
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
 
       // 為了要確保資料是陣列，所以檢查後再設定
       if (Array.isArray(data.data.recipes)) {
