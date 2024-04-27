@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import style from "@/components/product/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-//fontAwsome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 // {
 //   "id": "171",
 //   "category_id": "19",

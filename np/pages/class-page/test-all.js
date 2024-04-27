@@ -5,7 +5,7 @@ import ClassClassifacion from "@/components/class_file/ClassClassification";
 import ClassSidebar from "@/components/class_file/ClassSidebar";
 // import ClassDateTimePicker from "@/components/class_file/classDateTimePicker";
 import ClassFilter from "@/components/class_file/ClassFilter";
-import ClassCard from "@/components/class_file/ClassCardCeb";
+import ClassCard from "@/components/class_file/ClassCardWeb";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
 import Pagination from "@/components/Pagination";

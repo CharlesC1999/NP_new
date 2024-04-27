@@ -11,45 +11,93 @@ import { IoLogOutOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 
 const HeaderComponent = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedText, setSelectedText] = useState("所有分類");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isProductOpen, setIsProductOpen] = useState(false);
+  const [isRecipeOpen, setIsRecipeOpen] = useState(false);
+  const [isClassOpen, setIsClassOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const productDropdownRef = useRef(null); // 產品下拉列表的參考
+  const recipeDropdownRef = useRef(null); // 食譜下拉列表的參考
+  const calssDropdownRef = useRef(null); // 課程下拉列表的參考
+  const [selectedText, setSelectedText] = useState("所有分類");
   const router = useRouter();
   const { auth, logout } = useAuth();
 
   let hasMargin = true;
   let isMobile = false;
 
+  // 搜索下拉選單
   const menuItems = [
-    { id: 1, name: "所有分類", href: "#", className: styles.selectionLink },
-    { id: 2, name: "商品列表", href: "#", className: styles.selectionLink },
-    { id: 3, name: "食譜精選", href: "#", className: styles.selectionLink },
-    { id: 4, name: "精選課程", href: "#", className: styles.selectionLink },
-    { id: 5, name: "講師陣容", href: "#", className: styles.selectionLink },
+    { id: 1, name: "所有分類", className: styles.selectionLink },
+    { id: 2, name: "商品列表", className: styles.selectionLink },
+    { id: 3, name: "食譜精選", className: styles.selectionLink },
+    { id: 4, name: "精選課程", className: styles.selectionLink },
+    { id: 5, name: "講師陣容", className: styles.selectionLink },
   ];
 
-  // 暫時預設不更改
-  const recipeClassifaction = [
-    { id: 1, name: "主食", href: "#" },
-    { id: 2, name: "醬料", href: "#" },
-    { id: 3, name: "湯品", href: "#" },
-    { id: 4, name: "飲品", href: "#" },
-    { id: 5, name: "點心", href: "#" },
-    { id: 6, name: "沙拉", href: "#" },
+  // 食譜下拉選單
+  const recipeCategory = [
+    { id: 1, name: "主食", href: "#", className: styles.selectionLink },
+    { id: 2, name: "醬料", href: "#", className: styles.selectionLink },
+    { id: 3, name: "湯品", href: "#", className: styles.selectionLink },
+    { id: 4, name: "飲品", href: "#", className: styles.selectionLink },
+    { id: 5, name: "點心", href: "#", className: styles.selectionLink },
+    { id: 6, name: "沙拉", href: "#", className: styles.selectionLink },
   ];
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  // 商品下拉選單
+  const productCategory = [
+    { id: 1, name: "新鮮蔬菜", href: "#", className: styles.selectionLink },
+    { id: 2, name: "新鮮水果", href: "#", className: styles.selectionLink },
+    { id: 3, name: "嚴選肉類", href: "#", className: styles.selectionLink },
+    { id: 4, name: "海鮮水產", href: "#", className: styles.selectionLink },
+    { id: 5, name: "乳品烘焙", href: "#", className: styles.selectionLink },
+    { id: 6, name: "風味精粹", href: "#", className: styles.selectionLink },
+  ];
 
+  // 課程下拉選單
+  const classCategory = [
+    { id: 1, name: "台式料理", href: "#", className: styles.selectionLink },
+    { id: 2, name: "中式料理", href: "#", className: styles.selectionLink },
+    { id: 3, name: "西式料理", href: "#", className: styles.selectionLink },
+    { id: 4, name: "異國料理", href: "#", className: styles.selectionLink },
+    { id: 5, name: "養生/素食", href: "#", className: styles.selectionLink },
+    { id: 6, name: "烘焙/點心", href: "#", className: styles.selectionLink },
+  ];
+  // -----------------------開關控制區--------------------------------
+  // 開關控制
+  const toggleDropdown = () => setIsSearchOpen(!isSearchOpen);
+
+  // 開關控制
+  const ProductToggleDropdown = (event) => {
+    event.stopPropagation();
+    setIsProductOpen((prev) => !prev);
+  };
+  const ClassToggleDropdown = (event) => {
+    event.stopPropagation();
+    setIsClassOpen((prev) => !prev);
+  };
+  const RecipeToggleDropdown = (event) => {
+    event.stopPropagation();
+    setIsRecipeOpen((prev) => !prev);
+  };
+  const handleMouseUp = (event) => {
+    // 滑鼠點擊彈上後停止冒泡
+    event.stopPropagation();
+  };
+  // ----------------------------------------------------------------
+
+  // -----------------------點擊選項和區域外關閉控制區-----------------
   const handleItemClick = (name) => {
     setSelectedText(name);
-    setIsOpen(false); // 關閉下拉
+    setIsSearchOpen(false); // 點選項關閉下拉
   };
 
-  // 點擊選單外範圍關閉
+  // 點擊搜尋分類選單外範圍關閉
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
+        setIsSearchOpen(false);
       }
     };
 
@@ -59,7 +107,71 @@ const HeaderComponent = () => {
     };
   }, []);
 
-  // 登出彈出確認
+  const handleProductClick = () => {
+    setIsProductOpen(false); // 點選項關閉下拉
+  };
+
+  // 點擊搜尋分類選單外範圍關閉
+  useEffect(() => {
+    const handleClickProductOutside = (event) => {
+      if (
+        productDropdownRef.current &&
+        !productDropdownRef.current.contains(event.target)
+      ) {
+        setIsProductOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickProductOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickProductOutside);
+    };
+  }, []);
+
+  const handleClassClick = () => {
+    setIsClassOpen(false); // 點選項關閉下拉
+  };
+
+  // 點擊搜尋分類選單外範圍關閉
+  useEffect(() => {
+    const handleClickClassOutside = (event) => {
+      if (
+        calssDropdownRef.current &&
+        !calssDropdownRef.current.contains(event.target)
+      ) {
+        setIsClassOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickClassOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickClassOutside);
+    };
+  }, []);
+
+  const handleRecipeClick = () => {
+    setIsRecipeOpen(false); // 點選項關閉下拉
+  };
+
+  // 點擊搜尋分類選單外範圍關閉
+  useEffect(() => {
+    const handleClickRecipeOutside = (event) => {
+      if (
+        recipeDropdownRef.current &&
+        !recipeDropdownRef.current.contains(event.target)
+      ) {
+        setIsRecipeOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickRecipeOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickRecipeOutside);
+    };
+  }, []);
+  // ---------------------------------------------------------------------
+
+  // swal登出彈出確認
   const logoutButton = () => {
     Swal.fire({
       title: "確定要登出嗎？",
@@ -152,12 +264,11 @@ const HeaderComponent = () => {
                     {/* <!-- 所有分類 arrow down --> */}
                   </span>
                 </button>
-                {isOpen && (
+                {isSearchOpen && (
                   <div className={styles.dropdownContent}>
                     {menuItems.map((item, index) => (
                       <React.Fragment key={item.id}>
                         <a
-                          href={item.href}
                           onClick={() => handleItemClick(item.name)}
                           className={item.className}
                         >
@@ -428,63 +539,208 @@ const HeaderComponent = () => {
             <a onClick={goProductList} className={styles.pageLink}>
               <div>商品列表</div>
             </a>
-            <button className={styles.navTextButton}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <g fill="none" fillRule="evenodd">
-                  <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                  <path
-                    fill="#D9E1E6"
-                    d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
-                  />
-                </g>
-              </svg>
+            <button
+              className={styles.navTextButton}
+              onMouseDown={ProductToggleDropdown}
+              onMouseUp={handleMouseUp}
+            >
+              {isProductOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" fillRule="evenodd">
+                    <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                    <path
+                      fill="#50bf8b"
+                      d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
+                    />
+                  </g>
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" fillRule="evenodd">
+                    <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                    <path
+                      fill="#D9E1E6"
+                      d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
+                    />
+                  </g>
+                </svg>
+              )}
             </button>
+            {isProductOpen && (
+              <div
+                className={styles.dropdownContent}
+                ref={productDropdownRef}
+                style={{
+                  marginTop: "50px",
+                  marginRight: "4px",
+                  width: "110px",
+                }}
+              >
+                {productCategory.map((item, index) => (
+                  <React.Fragment key={item.id}>
+                    <a
+                      key={item.id}
+                      onClick={() => handleProductClick()}
+                      href={item.href}
+                      className={item.className}
+                    >
+                      {item.name}
+                    </a>
+                    {index < productCategory.length - 1 && (
+                      <hr className={styles.noMargin} />
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
           </li>
           <li className={styles.navItemPageLinks}>
             <a onClick={goRecipeList} className={styles.pageLink}>
               <div>食譜精選</div>
             </a>
-            <button className={styles.navTextButton}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <g fill="none" fillRule="evenodd">
-                  <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                  <path
-                    fill="#D9E1E6"
-                    d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
-                  />
-                </g>
-              </svg>
+            <button
+              className={styles.navTextButton}
+              onMouseDown={RecipeToggleDropdown}
+              onMouseUp={handleMouseUp}
+            >
+              {isRecipeOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" fillRule="evenodd">
+                    <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                    <path
+                      fill="#50bf8b"
+                      d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
+                    />
+                  </g>
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" fillRule="evenodd">
+                    <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                    <path
+                      fill="#D9E1E6"
+                      d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
+                    />
+                  </g>
+                </svg>
+              )}
             </button>
+            {isRecipeOpen && (
+              <div
+                className={styles.dropdownContent}
+                ref={recipeDropdownRef}
+                style={{
+                  marginTop: "50px",
+                  marginRight: "4px",
+                  width: "110px",
+                }}
+              >
+                {recipeCategory.map((item, index) => (
+                  <React.Fragment key={item.id}>
+                    <a
+                      key={item.id}
+                      onClick={() => handleRecipeClick()}
+                      href={item.href}
+                      className={item.className}
+                    >
+                      {item.name}
+                    </a>
+                    {index < recipeCategory.length - 1 && (
+                      <hr className={styles.noMargin} />
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
           </li>
           <li className={styles.navItemPageLinks}>
             <a className={styles.pageLink} onClick={goClassList}>
               <div>精選課程</div>
             </a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+            <button
               className={styles.navTextButton}
+              onMouseDown={ClassToggleDropdown}
+              onMouseUp={handleMouseUp}
             >
-              <g fill="none" fillRule="evenodd">
-                <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                <path
-                  fill="#D9E1E6"
-                  d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
-                />
-              </g>
-            </svg>
+              {isClassOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" fillRule="evenodd">
+                    <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                    <path
+                      fill="#50bf8b"
+                      d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
+                    />
+                  </g>
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" fillRule="evenodd">
+                    <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                    <path
+                      fill="#D9E1E6"
+                      d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
+                    />
+                  </g>
+                </svg>
+              )}
+            </button>
+            {isClassOpen && (
+              <div
+                className={styles.dropdownContent}
+                ref={calssDropdownRef}
+                style={{
+                  marginTop: "50px",
+                  marginRight: "4px",
+                  width: "110px",
+                }}
+              >
+                {classCategory.map((item, index) => (
+                  <React.Fragment key={item.id}>
+                    <a
+                      key={item.id}
+                      onClick={() => handleClassClick()}
+                      href={item.href}
+                      className={item.className}
+                    >
+                      {item.name}
+                    </a>
+                    {index < classCategory.length - 1 && (
+                      <hr className={styles.noMargin} />
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
           </li>
           <li className={styles.navItemPageLinks}>
             <a onClick={goSpeekerList} className={styles.pageLink}>

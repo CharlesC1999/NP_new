@@ -52,6 +52,7 @@ a:visited {
   text-decoration: none;
   display: block;
   width: 100%;
+  cursor: pointer;
 }
 
 .dropdown {
@@ -74,9 +75,9 @@ a:visited {
   margin: 0;
 }
 
-.dropdownContent {
-  display: block;
-}
+// .dropdownContent {
+//   display: block;
+// }
 /* 下拉hover */
 .dropdownAll:hover {
   color: #78cea6;
