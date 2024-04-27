@@ -4,6 +4,9 @@
 .sideBox {
   border: var(--gray02) solid 1px;
   border-radius: 5px;
+  &:hover {
+    border: var(--green03) solid 2px;
+  }
 }
 .sideImg {
   width: 35px;
