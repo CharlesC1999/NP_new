@@ -18,11 +18,11 @@ router.get('/', async function (req, res) {
   // const recipes = await Recipe.findAll({ logging: console.log })
 
   // 從網址查詢字串解構的值
-  const { page = 1, perpage = 5 } = req.query
+  const { page = 1, perpage = 6 } = req.query
 
   // 分頁用
   // page預設為1，perpage預設為3
-  const perpageNow = Number(perpage) || 5
+  const perpageNow = Number(perpage) || 6
   const pageNow = Number(page) || 1
   const limit = perpageNow
   const offset = (pageNow - 1) * perpageNow
@@ -34,8 +34,6 @@ router.get('/', async function (req, res) {
   ON r.recipe_category__i_d = rcs.recipe_cate__i_d 
   LIMIT ${limit} OFFSET ${offset}
   `
-  console.log('pagination: ' + sqlCate)
-
   const sqlCountCate = `SELECT COUNT(*) AS countCate FROM recipe`
 
   // 食譜join分類表查詢結果

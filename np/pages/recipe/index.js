@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategories";
@@ -28,7 +29,6 @@ export default function RecipeList() {
     // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
     const searchParams = new URLSearchParams(params);
     const url = `http://localhost:3005/api/recipes/?${searchParams.toString()}`;
-    console.log(url);
 
     try {
       const res = await fetch(url);
@@ -39,7 +39,6 @@ export default function RecipeList() {
         setRecipesData(data.data.recipesRawSql);
       } else {
         console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
-        console.log("typeof: " + typeof data.data.recipesRawSql);
       }
 
       if (data.status === "success") {
@@ -82,7 +81,7 @@ export default function RecipeList() {
             <SideBarRecipe />
           </div>
           {/* 食譜卡片 (list排列) */}
-          <div className={`${styles["cards-list"]} d-flex flex-column `}>
+          <div className={`${styles["cards-list"]} d-flex flex-column`}>
             <div className="d-none d-xxl-block">
               <Filter />
             </div>
@@ -91,23 +90,22 @@ export default function RecipeList() {
                 className={`d-flex flex-column ${styles["main-content"]}`}
               >
                 <RecipeCardsList recipesData={recipesData} />
-                {/* <RecipeCardsList />
-                <RecipeCardsList />
-                <RecipeCardsList /> */}
               </section>
             </div>
-            <div className="d-flex gap-3">
+            <div className="d-flex gap-3 justify-content-center mt-4 align-items-center">
               <button
                 onClick={() => {
                   const newPageNow = page - 1 > 1 ? page - 1 : 1;
                   setPage(newPageNow);
                 }}
                 type="button"
-                class="btn btn-primary"
+                className={`btn ${styles["prev"]} ${
+                  page - 1 >= 1 ? "" : "disabled"
+                }`}
               >
-                prev
+                <FiChevronsLeft />
               </button>
-              <ul className="d-flex list-unstyled">
+              <ul className="d-flex list-unstyled mb-0 pagination gap-2">
                 {Array(pageCount)
                   .fill("")
                   .map((v, i) => {
@@ -117,10 +115,12 @@ export default function RecipeList() {
                           onClick={() => {
                             setPage(i + 1);
                           }}
-                          className="text-bg-success"
+                          className={`btn ${styles["next"]} ${
+                            i + 1 === page ? styles["current"] : ""
+                          }`}
                         >
-                          {i + 1} &nbsp;{" "}
-                        </button>{" "}
+                          {i + 1}
+                        </button>
                       </li>
                     );
                   })}
@@ -132,9 +132,11 @@ export default function RecipeList() {
                   setPage(newPageNow);
                 }}
                 type="button"
-                class="btn btn-primary"
+                className={`btn ${styles["next"]} ${
+                  page + 1 > pageCount ? "disabled" : ""
+                }`}
               >
-                next
+                <FiChevronsRight />
               </button>
             </div>
           </div>
