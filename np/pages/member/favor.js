@@ -5,7 +5,7 @@ import HeaderComponent from "@/components/Header";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/member/Sidebar";
 import FavorTabs from "@/components/favor/FavorTabs";
-import ClassCard from "@/components/class_file/ClassCardCeb";
+import ClassCard from "@/components/class_file/ClassCardWeb";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import ProductCard from "@/components/product/ProductCard";
 import ProductCardList from "@/components/product/ProductCardList";
