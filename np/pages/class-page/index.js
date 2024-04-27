@@ -7,7 +7,7 @@ import ClassClassifacion from "@/components/class_file/ClassClassification";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ClassSidebar from "@/components/class_file/ClassSidebar";
 import ClassFilter from "@/components/class_file/ClassFilter";
-import ClassCard from "@/components/class_file/ClassCardCeb";
+import ClassCard from "@/components/class_file/ClassCardWeb";
 import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import CardStyle from "@/styles/class_styles/CardStyle.module.css";
