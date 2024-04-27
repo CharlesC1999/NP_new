@@ -21,6 +21,8 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useLoader } from "@/hooks/use-loader";
 // Link
 import Link from "next/link";
+// sweetAlert
+import Swal from "sweetalert2";
 
 const Login = () => {
   // 導入讀取鉤子
@@ -67,6 +69,13 @@ const Login = () => {
         login(response.data.token);
         // 使用Context的login方法
         console.log("登入成功!");
+        Swal.fire({
+          title: "登入成功",
+          // text: "That thing is still around?",
+          icon: "success",
+          // 按鈕綠色
+          confirmButtonColor: "#50bf8b",
+        });
         setLoading(false);
         router.push("/");
         // 用useRouter跳轉

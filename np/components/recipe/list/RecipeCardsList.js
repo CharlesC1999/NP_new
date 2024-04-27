@@ -5,10 +5,7 @@ import styles from "./RecipeCardsList.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 
-export default function RecipeCardsList() {
-  //食譜資料庫data
-  const [recipesData, setRecipesData] = useState([]);
-
+export default function RecipeCardsList({ recipesData }) {
   //收藏與否的state
   const [saved, setSaved] = useState(false);
 
@@ -22,43 +19,19 @@ export default function RecipeCardsList() {
     }
   };
 
-  //串上後端取得資料
-  const getRecipes = async () => {
-    const url = "http://localhost:3005/api/recipes";
-
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      console.log(data);
-
-      // 為了要確保資料是陣列，所以檢查後再設定
-      if (Array.isArray(data.data.recipes)) {
-        setRecipesData(data.data.recipes);
-      } else {
-        console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    getRecipes();
-  }, []);
-
   return (
     <>
       {recipesData.map((v, i) => {
         return (
           <Link
-            href={`/recipe/${v.Recipe_ID}`}
+            href={`/recipe/${v.recipe__i_d}`}
             className="link-underline link-underline-opacity-0"
           >
             <div className={`${styles["recipe-card"]} row d-flex`}>
               <div className={`col-4 ${styles["card-pic"]}`}>
                 <img
                   className="w-100 h-100 object-fit-cover"
-                  src={`/images/recipe/list/${v.Image_URL}`}
+                  src={`/images/recipe/list/${v.image__u_r_l}`}
                   alt=""
                 />
               </div>
@@ -71,7 +44,7 @@ export default function RecipeCardsList() {
                   <div
                     className={`${styles["recipe-title"]} ${styles["figma-h5"]}`}
                   >
-                    {v.Title_R_name}
+                    {v.title__r_name}
                   </div>
                   <div>
                     <FaHeart
@@ -88,7 +61,7 @@ export default function RecipeCardsList() {
                 <div
                   className={`${styles["card-content-middle"]} d-none d-xxl-block col-xxl-9 mb-auto`}
                 >
-                  {v.Content}
+                  {v.content}
                 </div>
                 <div
                   className={`${styles["card-content-bottom"]} d-flex flex-column flex-xxl-row align-items-xxl-end justify-content-xxl-between`}
@@ -116,13 +89,13 @@ export default function RecipeCardsList() {
                         />
                       </svg>
                       <p className={`${styles["figma-p"]} ${styles["date"]}`}>
-                        {v.Publish_date.split("T")[0]}
+                        {v.publish_date.split(" ")[0]}
                       </p>
                     </div>
                     <div
                       className={`${styles["recipe-category"]} ${styles["figma-p"]}`}
                     >
-                      分類：{v.Recipe_category_ID}
+                      分類：{v.Recipe_cate_Name}
                     </div>
                   </div>
                   <button

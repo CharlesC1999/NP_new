@@ -1,6 +1,6 @@
 import React from "react";
-import CateSidebar from "@/components/product/CateSidebar";
-import styles from "@/components/recipe/list/sideBar/SideBarCategory.module.scss";
+import CateSidebar from "./CateSidebar";
+import styles from "@/components/recipe/list/sideBar/SideBarCategories.module.scss";
 
 export default function SideBarTop() {
   return (
@@ -10,10 +10,6 @@ export default function SideBarTop() {
           <h5 className={styles["figma-h5"]}>分類</h5>
         </div>
         <div className={`${styles.line}`}></div>
-        <CateSidebar />
-        <CateSidebar />
-        <CateSidebar />
-        <CateSidebar />
         <CateSidebar />
       </div>
     </>
