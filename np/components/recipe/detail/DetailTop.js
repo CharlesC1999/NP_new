@@ -25,10 +25,10 @@ export default function DetailTop({ recipe }) {
     <>
       <div className={`row ${styles["top"]}`}>
         <div className="col">
-          <div className={`${styles["pic"]} w-100 h-100`}>
+          <div className={`${styles["pic"]} w-100 `}>
             <img
               className="object-fit-cover w-100 h-100"
-              src="/images/recipe/detail/5c57291e6ab0e7566941547a0cb18048.jpg"
+              src={`/images/recipe/list/${recipe.Image_URL}`}
               alt=""
             />
           </div>
