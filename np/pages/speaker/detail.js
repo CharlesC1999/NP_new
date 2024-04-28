@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 // 測試用的 json
-import data from "@/data/speaker.json";
+// import data from "@/data/speaker.json";
 import styles from "@/styles/speaker/speaker-detail.module.scss";
 import SpeakerCardHorizontal from "@/components/speaker/speaker-detail/SpeakerCardHorizontal";
 import SpeakerProfileSection from "@/components/speaker/speaker-detail/SpeakerProfileSection";
@@ -46,7 +46,7 @@ export default function SpeakerDetail() {
 
   // 與伺服器要求獲取資料的 async 函式
   const getSpeakers = async (sid) => {
-    const url = `http://localhost:3005/api/test/${sid}`
+    const url = `http://localhost:3005/api/speakers/${sid}`
     // 如果有用 async-await，要習慣使用 try...catch 處理錯誤
     try {
       const res = await fetch(url)
