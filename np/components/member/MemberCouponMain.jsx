@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; 
 import styles from "./MemberCouponMain.module.css"
-
+import Cat from "./Cat"
 
  const MemberCouponMain =() => {
   return(
@@ -18,13 +18,8 @@ import styles from "./MemberCouponMain.module.css"
     </div>
     {/* 主內容的標題 */}
     <div>
-  <div className={styles.couponcat}>
-    <div className={styles.ccathover}><a href>全部</a></div>
-    <div className={styles.ccat}><a href>可使用</a></div>
-    <div className={styles.ccat}> <a href>已使用</a></div>
-    <div className={styles.ccat}><a href>已失效</a></div>
-    
-  </div>
+      {/* 分類欄 */}
+  <Cat/>
   {/* 分類欄下面的搜尋框 */}
   <div className={styles.searchContainer}>
   <input className={styles.searchBar} type="text" placeholder="Search for items..." />

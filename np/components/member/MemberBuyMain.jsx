@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import BuyCard from "./MemberBuyCard";
 import styles from "./MemberBuymain.module.css";
 
+import CatBuy from "./CatBuy";
+
 // function BuyCard({ onCommentClick }) {
 //   // 添加 props 參數
 //   const [showReview, setShowReview] = useState(false);
@@ -71,30 +73,11 @@ const MemberBuyMain = () => {
             <div className={styles.title2}>我的帳戶</div>
           </div>
           {/* 主內容的標題 */}
+          {/* 分類欄 */}
           <div
             className={`d-flex flex-column justify-content-center align-items-cente`}
           >
-            <div className={styles.couponcat}>
-              <div className={styles.ccathover}>
-                <a href>全部</a>
-              </div>
-              <div className={styles.ccat}>
-                <a href>待付款</a>
-              </div>
-              <div className={styles.ccat}>
-                {" "}
-                <a href>待出貨</a>
-              </div>
-              <div className={styles.ccat}>
-                <a href>待收貨</a>
-              </div>
-              <div className={styles.ccat}>
-                <a href>已完成</a>
-              </div>
-              <div className={styles.ccat}>
-                <a href>取消</a>
-              </div>
-            </div>
+           <CatBuy />
             {/* 分類欄下面的搜尋框 */}
             <div className={styles.searchContainer}>
               <input
