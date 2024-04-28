@@ -21,10 +21,6 @@ export default function (sequelize) {
       parent_id: {
         type: DataTypes.INTEGER,
         allowNull: true, // 允许 NULL
-        references: {
-          model: 'ProductCategory', // 这是自参照外键
-          key: 'id',
-        },
       },
     },
     {

@@ -13,10 +13,6 @@ export default function (sequelize) {
       product_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-          model: 'products', // 指定外键对应的表名
-          key: 'id', // 指定外键对应的表中的列
-        },
       },
       image_url: {
         type: DataTypes.STRING(255),
