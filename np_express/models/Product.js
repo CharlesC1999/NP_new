@@ -13,10 +13,6 @@ export default async function (sequelize) {
       category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-          model: 'categories', // 指定外鍵對應的表名
-          key: 'id', // 指定外鍵對應的表中的列
-        },
       },
       name: {
         type: DataTypes.STRING(255),
@@ -48,7 +44,7 @@ export default async function (sequelize) {
       },
     },
     {
-      tableName: 'products', // 直接提供資料表名稱
+      tableName: 'product', // 直接提供資料表名稱
       timestamps: true, // 使用時間戳
       paranoid: false, // 軟性刪除
       underscored: true, // 所有自動建立欄位，使用snake_case命名
