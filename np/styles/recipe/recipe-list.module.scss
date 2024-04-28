@@ -19,6 +19,15 @@
     @media screen and (max-width: 376px) {
       margin-inline: 0px;
     }
+    .prev,
+    .next {
+      // background-color: rgb(233, 233, 233);
+      background-color: var(--gray02);
+    }
+    .current {
+      background-color: var(--green02);
+      color: white;
+    }
 
     .grid-layout {
       margin: 0;
