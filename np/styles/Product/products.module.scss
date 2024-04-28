@@ -64,6 +64,7 @@
   }
 }
 .product-text {
+  user-select: none;
   margin-left: 60px;
   width: 380px;
   .h3 {
@@ -91,10 +92,15 @@
         font-size: 1.2rem;
       }
     }
-    .icon-link .fa-heart {
-      cursor: pointer;
-      font-size: 1.5rem;
-      color: var(--green02);
+    .icon-link {
+      .heart123 {
+        cursor: pointer;
+        font-size: 1.7rem;
+        color: var(--green05);
+        &:hover {
+          color: var(--green03);
+        }
+      }
     }
   }
   .amount {
@@ -291,10 +297,13 @@
               font-size: 1rem;
             }
           }
-          .icon-link .fa-heart {
+          .icon-link .heart123 {
             cursor: pointer;
             font-size: 1.5rem;
             color: var(--green02);
+            &:hover {
+              color: var(--green02);
+            }
           }
           .favorite-btn {
             border: none;

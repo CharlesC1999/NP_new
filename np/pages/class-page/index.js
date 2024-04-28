@@ -7,7 +7,7 @@ import ClassClassifacion from "@/components/class_file/ClassClassification";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ClassSidebar from "@/components/class_file/ClassSidebar";
 import ClassFilter from "@/components/class_file/ClassFilter";
-import ClassCard from "@/components/class_file/ClassCardCeb";
+import ClassCard from "@/components/class_file/ClassCardWeb";
 import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import CardStyle from "@/styles/class_styles/CardStyle.module.css";
@@ -41,17 +41,18 @@ const ClassList = () => {
     alignContent: "center",
   };
 
-  useEffect(() => {
-    setLoading(true); // 開始加載畫面
+  // 目前橘子不用走的，用飛奔的，想他慢、想多看看他，再來這邊解註解
+  // useEffect(() => {
+  //   setLoading(true); // 開始加載畫面
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000); // 延遲2秒以模擬
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000); // 延遲2秒以模擬
 
-    return () => {
-      setLoading(false); // 移除加載狀態
-    };
-  }, []);
+  //   return () => {
+  //     setLoading(false); // 移除加載狀態
+  //   };
+  // }, []);
 
   const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid
   const [activeButton, setActiveButton] = useState("grid"); // 選擇哪一個是被選擇的狀態
