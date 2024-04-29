@@ -34,7 +34,7 @@ function CateSidebar({ setRecipeCategory, handleConditionsChange }) {
         onClick={() => {
           setRecipeCategory("");
         }}
-        className="d-flex gap-3 flex-column mt-3"
+        className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
       >
         <div className={`d-flex ${styles.sideBox}`}>
           <div className={styles.sideImg}>
@@ -59,7 +59,7 @@ function CateSidebar({ setRecipeCategory, handleConditionsChange }) {
             onClick={() => {
               setRecipeCategory(v.Recipe_cate_ID);
             }}
-            className="d-flex gap-3 flex-column mt-3"
+            className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
           >
             <div className={`d-flex ${styles.sideBox}`}>
               <div className={styles.sideImg}>
