@@ -64,11 +64,13 @@ router.get('/', async function (req, res) {
 router.get('/:id', async function (req, res) {
   // 使用 getIdParam() 將查詢參數（原本是 string）轉為數字
   const id = getIdParam(req)
-
+  const speakers = await Speaker.findAll({
+    logging: console.log,
+  })
   const speaker = await Speaker.findByPk(id, {
     raw: true, //只需要資料表中資料
   })
-  return res.json({ status: 'success', data: { speaker } })
+  return res.json({ status: 'success', data: { speaker,speakers } })
 })
 
 export default router

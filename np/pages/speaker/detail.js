@@ -38,7 +38,9 @@ export default function SpeakerDetail() {
     speaker_image: "",
     valid: 1,
   });
-
+  const [speakers, setSpeakers] = useState([]);
+  // 新增一個狀態來存儲過濾後的講師數據
+  const [filteredSpeakers, setFilteredSpeakers] = useState([]);  
   // 宣告出 router 物件，可以取得兩個值
   // 1. router.query，是一個物件，其中有動態路由的參數值pid
   // 2. router.isReady，是一個布林值，代表本頁面元件已完成水合作用，可以得到pid值
@@ -46,33 +48,43 @@ export default function SpeakerDetail() {
 
   // 與伺服器要求獲取資料的 async 函式
   const getSpeakers = async (sid) => {
-    const url = `http://localhost:3005/api/speakers/${sid}`
+    const url = `http://localhost:3005/api/speakers/${sid}`;
     // 如果有用 async-await，要習慣使用 try...catch 處理錯誤
     try {
-      const res = await fetch(url)
-      const data = await res.json()
-      console.log(data)
+      const res = await fetch(url);
+      const data = await res.json();
 
       // 為了確保是資料是物件，所以先檢查後再設定
       if (typeof data.data.speaker === "object" && data !== null) {
         // 設定到狀態中
-        setSpeaker(data.data.speaker)
+        setSpeaker(data.data.speaker);
       } else {
-        console.log("伺服器回傳資料類型錯誤（需為物件），無法設定到狀態中")
+        console.log("伺服器回傳資料類型錯誤（需為物件），無法設定到狀態中");
       }
-    } catch(e) {
-      console.log(e)
+      if (data.status === "success") {
+        setSpeakers(data.data.speakers);
+      }
+    } catch (e) {
+      console.log(e);
     }
-  }
-
-  // 頁面初次渲染後向伺服器要求資料
-  // 監聽router.isReady，true 時才能得到 sid
+  };
+  // 將 speakers 篩選出推薦講師的資料來源 filterSpeakers （也是一個陣列）
+  // 規則：當頁講師 id 的後五筆資料，若是排序最後五筆的講師，側邊推薦講師都顯示最後五筆
   useEffect(() => {
-    console.log('isReady', router.isReady, 'query', router.query)
+    const id = Number(router.query.sid);
+    let filterSpeakers;
+    id <speakers.length-4 ? filterSpeakers = speakers.slice(id, id + 5):filterSpeakers = speakers.slice(speakers.length-5, speakers.length)
+    console.log(filterSpeakers)
+    setFilteredSpeakers(filterSpeakers)
+  }, [speakers,router.query.sid]);
+  // 頁面初次渲染後向伺服器要求資料
+  // 監聽router.isReady，true 或是sid有變動時，都會重新向伺服器取得資料
+  useEffect(() => {
+    console.log("isReady", router.isReady, "query", router.query);
     if (router.isReady) {
-      getSpeakers(router.query.sid)
+      getSpeakers(router.query.sid);
     }
-  },[router.isReady])
+  }, [router.isReady,router.query.sid]);
 
   return (
     <>
@@ -83,17 +95,18 @@ export default function SpeakerDetail() {
           <h5>推薦講師</h5>
           <div className={styles.divider}></div>
           <div className={styles.speakerCardListGroup}>
-            <SpeakerCardHorizontal />
-            <SpeakerCardHorizontal />
-            <SpeakerCardHorizontal />
-            <SpeakerCardHorizontal />
-            <SpeakerCardHorizontal />
+            {filteredSpeakers.map((v) => {
+              return (<SpeakerCardHorizontal key={v.speaker_id} id={v.speaker_id} name={v.speaker_name} description={v.speaker_description} image={v.speaker_image } />)
+            })}
           </div>
         </div>
         <div className={styles.navRight}>
           <div className={styles.profile}>
             <div className={styles.profileImg}>
-              <img src={`/speaker-image/${speaker.speaker_image}`} alt={speaker.speaker_name} />
+              <img
+                src={`/speaker-image/${speaker.speaker_image}`}
+                alt={speaker.speaker_name}
+              />
             </div>
             <div className={styles.profileContent}>
               <div className={styles.profileName}>

@@ -5,8 +5,8 @@ import styles from "@/styles/speaker/index.module.scss";
 import SpeakerCardVertical from "@/components/speaker/speaker-list/SpeakerCardVertical";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import HeaderComponent from "@/components/Header";
-import Pagination from "@/components/pagination";
 import Footer from "@/components/Footer";
+import PaginationMUI from "@/components/speaker/speaker-list/PaginationMUI";
 
 export default function Speaker() {
   // 初始化值
@@ -48,27 +48,19 @@ export default function Speaker() {
       console.log(e);
     }
   };
-  // 創建一個包含分頁信息的對象，page 和 perpage 分別表示當前頁碼和每頁顯示的項目數
-  // 調用 getSpeakers 函數，並將 params 作為參數傳遞，這個函數負責根據提供的分頁參數向後端 API 發送請求，獲取相應頁面的食譜數據
-  const handlePageChange = () => {
+  // 在組件加載時無參數地調用 getSpeakers，意味著獲取第一頁的數據或默認的數據集
+  useEffect(() => {
+    getSpeakers();
+  }, []);
+    // 創建一個包含分頁信息的對象，page 和 perpage 分別表示當前頁碼和每頁顯示的項目數
+  // 調用 getSpeakers 函數，並將 params 作為參數傳遞，這個函數負責根據提供的分頁參數向後端 API 發送請求，獲取相應頁面的數據
+  //  每當 page 變量改變（用戶翻頁時），就調用 getSpeakers 以依據新的頁碼去透過 API 獲取相應的數據
+  useEffect(() => {
     const params = {
       page,
       perpage,
     };
     getSpeakers(params);
-  };
-  // 在組件加載時無參數地調用 getSpeakers，意味著獲取第一頁的數據或默認的數據集
-  useEffect(() => {
-    const params = {
-          page,// 每次搜尋會返回第一頁
-          perpage,
-        };
-    getSpeakers(params);
-  }, []);
-  //  每當 page 變量改變（用戶翻頁時），就調用 handlePageChange 函數以依據新的頁碼去獲取相應的數據
-  useEffect(() => {
-    handlePageChange();
-    // getSpeakers();
   }, [page]);
   return (
     <>
@@ -92,30 +84,17 @@ export default function Speaker() {
               );
             })}
           </div>
-          {/* <Pagination pageCount={pageCount} perpage={perpage} onClick={handlePageChange} /> */}
-          <div className="my-3">
-        <button
-          onClick={() => {
-            // min is 1 (不能小於1)
-            const newPageNow = page - 1 > 1 ? page - 1 : 1
-            setPage(newPageNow)
-          }}
-        >
-          上一頁
-        </button>
-        <button
-          onClick={() => {
-            // max is pageCount (不能大於總頁數)
-            const newPageNow = page + 1 < pageCount ? page + 1 : pageCount
-            setPage(newPageNow)
-          }}
-        >
-          下一頁
-        </button>
-        <span className="mx-2">
-          目前頁面: {page} / 總頁數: {pageCount} / 總項目數: {total}
-        </span>
-      </div>
+          {/* 將 onChange 事件設定為直接更新頁碼，這會觸發 useEffect 來重新加載數據 */}
+          <PaginationMUI
+            count={pageCount}
+            page={page}
+            onChange={(event, value) => setPage(value)}
+          />
+        <div className="my-3">
+          <span className="mx-2">
+            目前頁面: {page} / 總頁數: {pageCount} / 總項目數: {total}
+          </span>
+        </div>
         </div>
       </div>
 

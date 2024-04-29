@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
 
-export default function (sequelize) {
-  const ProductCategory = sequelize.define(
-    'Product_Category', // 类名称，通常首字母大写
+export default async function (sequelize) {
+  return sequelize.define(
+    'Product_categories', // 类名称，通常首字母大写
     {
       id: {
         type: DataTypes.INTEGER,
@@ -21,28 +21,12 @@ export default function (sequelize) {
       parent_id: {
         type: DataTypes.INTEGER,
         allowNull: true, // 允许 NULL
-        references: {
-          model: 'ProductCategory', // 这是自参照外键
-          key: 'id',
-        },
       },
     },
     {
-      tableName: 'product_categories', // 直接提供数据表名称
-      timestamps: false, // 如果您的表中没有自动生成的时间戳字段
-      underscored: true, // 使用蛇形命名规则
+      tableName: 'product_categories',
+      timestamps: false,
+      underscored: true,
     }
   )
-
-  // 如果有父子关系，可以设置自参照的关联
-  ProductCategory.hasMany(ProductCategory, {
-    as: 'Children',
-    foreignKey: 'parent_id',
-  })
-  ProductCategory.belongsTo(ProductCategory, {
-    as: 'Parent',
-    foreignKey: 'parent_id',
-  })
-
-  return ProductCategory
 }
