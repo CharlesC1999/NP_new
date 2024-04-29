@@ -24,7 +24,7 @@ export default function List() {
 
   // 與伺服器要求獲取資料的async函式
   const getProducts = async () => {
-    const url = 'http://localhost:3005/api/Ordertest';
+    const url = 'http://localhost:3005/api/ordertest2';
 
     // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
     try {
