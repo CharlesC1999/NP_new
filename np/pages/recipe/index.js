@@ -88,14 +88,9 @@ export default function RecipeList() {
     getRecipes(params);
   }, [page]);
 
-  //每次condition改變時重新取得食譜列表資料
+  //每次食譜分類改變時重新取得食譜列表資料，並且重設回第一頁
   useEffect(() => {
-    const params = {
-      page,
-      perpage,
-      recipe_category__i_d: recipeCategory,
-    };
-    getRecipes(params);
+    handleConditionsChange();
   }, [recipeCategory]);
 
   return (
@@ -117,7 +112,7 @@ export default function RecipeList() {
           {/* 食譜卡片 (list排列) */}
           <div className={`${styles["cards-list"]} d-flex flex-column`}>
             <div className="d-none d-xxl-block">
-              <Filter />
+              <Filter page={page} setPage={setPage} />
             </div>
             <div className={`${styles["list-layout"]} col`}>
               <section

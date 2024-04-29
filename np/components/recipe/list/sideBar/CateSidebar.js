@@ -29,6 +29,30 @@ function CateSidebar({ setRecipeCategory, handleConditionsChange }) {
 
   return (
     <>
+      {/* 顯示所有類別的食譜 */}
+      <div
+        onClick={() => {
+          setRecipeCategory("");
+        }}
+        className="d-flex gap-3 flex-column mt-3"
+      >
+        <div className={`d-flex ${styles.sideBox}`}>
+          <div className={styles.sideImg}>
+            {/* 原本是a */}
+            <div>
+              <img src="/index-images/category-1.png" alt />
+            </div>
+          </div>
+          <div className={styles.sideText}>
+            {/* 原本是a */}
+            <div>
+              <h6 className={styles.left}>全部</h6>
+            </div>
+            <h6 className={styles.right}>3</h6>
+          </div>
+        </div>
+      </div>
+
       {categories.map((v, i) => {
         return (
           <div
