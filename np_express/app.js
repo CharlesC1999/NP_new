@@ -6,6 +6,7 @@ import express from 'express'
 import logger from 'morgan'
 import path from 'path'
 import session from 'express-session'
+import authRoutes from '##/routes/auth.js'
 
 // 使用檔案的session store，存在sessions資料夾
 import sessionFileStore from 'session-file-store'
@@ -69,6 +70,11 @@ const filenames = await fs.promises.readdir(routePath)
 
 for (const filename of filenames) {
   const item = await import(pathToFileURL(path.join(routePath, filename)))
+  // console.log(filename, item.default) // 查看导入的模块是否为函数
+  if (typeof item.default !== 'function') {
+    console.error(`Module ${filename} does not export a function`)
+    continue // 如果不是函数，则跳过
+  }
   const slug = filename.split('.')[0]
   app.use(`${apiPath}/${slug === 'index' ? '' : slug}`, item.default)
 }
@@ -90,5 +96,7 @@ app.use(function (err, req, res, next) {
   // 更改為錯誤訊息預設為JSON格式
   res.status(500).send({ error: err })
 })
+
+app.use('/api/auth', authRoutes) // 使用 auth 路由，並設定路由前綴為 /api/auth
 
 export default app
