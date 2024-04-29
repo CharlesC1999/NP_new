@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./CateSidebar.module.css";
 
-function CateSidebar() {
+function CateSidebar({ setRecipeCategory, handleConditionsChange }) {
   //食譜類別state初始值
   const [categories, setCategories] = useState([]);
 
@@ -31,17 +31,24 @@ function CateSidebar() {
     <>
       {categories.map((v, i) => {
         return (
-          <div className="d-flex gap-3 flex-column mt-3">
+          <div
+            onClick={() => {
+              setRecipeCategory(v.Recipe_cate_ID);
+            }}
+            className="d-flex gap-3 flex-column mt-3"
+          >
             <div className={`d-flex ${styles.sideBox}`}>
               <div className={styles.sideImg}>
-                <a href="">
+                {/* 原本是a */}
+                <div>
                   <img src="/index-images/category-1.png" alt />
-                </a>
+                </div>
               </div>
               <div className={styles.sideText}>
-                <a href="">
+                {/* 原本是a */}
+                <div>
                   <h6 className={styles.left}>{v.Recipe_cate_name}</h6>
-                </a>
+                </div>
                 <h6 className={styles.right}>3</h6>
               </div>
             </div>

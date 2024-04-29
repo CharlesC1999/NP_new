@@ -14,13 +14,20 @@ import Filter from "@/components/recipe/list/filter/RecipeFilter";
 import styles from "@/styles/recipe/recipe-list.module.scss";
 
 export default function RecipeList() {
+  // ----------------------篩選條件 start ------------------------
+  // 1. 食譜分類
+  const [recipeCategory, setRecipeCategory] = useState("");
+
+  // ----------------------篩選條件 end --------------------------
+
   // 分頁用
   const [page, setPage] = useState(1);
   const [perpage, setPerpage] = useState(5);
 
-  //  最後得到的資料
+  // 總共幾筆資料、總頁數
   const [total, setTotal] = useState(0);
   const [pageCount, setPageCount] = useState(0);
+
   //食譜資料庫data
   const [recipesData, setRecipesData] = useState([]);
 
@@ -29,10 +36,12 @@ export default function RecipeList() {
     // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
     const searchParams = new URLSearchParams(params);
     const url = `http://localhost:3005/api/recipes/?${searchParams.toString()}`;
+    console.log("url: " + url);
 
     try {
       const res = await fetch(url);
       const data = await res.json();
+      console.log(data.data.recipesRawSql);
 
       // 為了要確保資料是陣列，所以檢查後再設定
       if (Array.isArray(data.data.recipesRawSql)) {
@@ -50,12 +59,17 @@ export default function RecipeList() {
     }
   };
 
-  // 點擊上/下一頁時去資料庫撈資料
-  const handlePageChange = () => {
+  // 篩選用
+  const handleConditionsChange = () => {
     const params = {
-      page,
+      // 每次篩選會返回第一頁
+      page: 1,
       perpage,
+      recipe_category__i_d: recipeCategory,
     };
+    // 每次篩選會返回第一頁
+    setPage(1);
+
     getRecipes(params);
   };
 
@@ -64,9 +78,26 @@ export default function RecipeList() {
     getRecipes();
   }, []);
 
+  // 每次頁碼變動時重新取得食譜列表資料
   useEffect(() => {
-    handlePageChange();
+    const params = {
+      page,
+      perpage,
+      recipe_category__i_d: recipeCategory,
+    };
+    getRecipes(params);
   }, [page]);
+
+  //每次condition改變時重新取得食譜列表資料
+  useEffect(() => {
+    const params = {
+      page,
+      perpage,
+      recipe_category__i_d: recipeCategory,
+    };
+    getRecipes(params);
+  }, [recipeCategory]);
+
   return (
     <>
       <Header />
@@ -77,7 +108,10 @@ export default function RecipeList() {
         <TopBarGrid />
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
           <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
-            <SideBarTop />
+            <SideBarTop
+              setRecipeCategory={setRecipeCategory}
+              handleConditionsChange={handleConditionsChange}
+            />
             <SideBarRecipe />
           </div>
           {/* 食譜卡片 (list排列) */}
