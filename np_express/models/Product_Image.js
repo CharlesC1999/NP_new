@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 
 export default async function (sequelize) {
   return sequelize.define(
-    'ProductImage', // 類名稱，通常首字母大寫
+    'Product_image', // 類名稱，通常首字母大寫
     {
       id: {
         type: DataTypes.INTEGER,

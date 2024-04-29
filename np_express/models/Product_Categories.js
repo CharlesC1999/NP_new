@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
 
-export default function (sequelize) {
-  const ProductCategory = sequelize.define(
-    'Product_Category', // 类名称，通常首字母大写
+export default async function (sequelize) {
+  return sequelize.define(
+    'Product_category', // 类名称，通常首字母大写
     {
       id: {
         type: DataTypes.INTEGER,
@@ -29,16 +29,4 @@ export default function (sequelize) {
       underscored: true, // 使用蛇形命名规则
     }
   )
-
-  // 如果有父子关系，可以设置自参照的关联
-  ProductCategory.hasMany(ProductCategory, {
-    as: 'Children',
-    foreignKey: 'parent_id',
-  })
-  ProductCategory.belongsTo(ProductCategory, {
-    as: 'Parent',
-    foreignKey: 'parent_id',
-  })
-
-  return ProductCategory
 }

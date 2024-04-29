@@ -54,10 +54,6 @@ export default async function (sequelize) {
         type: DataTypes.INTEGER(10),
         allowNull: false,
       },
-      image_url: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-      },
       valid: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
