@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 //style
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/styles/Product/products.module.scss";
@@ -21,6 +22,48 @@ import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDet
 
 export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("product");
+  const [product, setProduct] = useState({
+    id: 0,
+    category_id: "",
+    product_name: "",
+    product_description: "",
+    product_price: 0,
+    discount_price: "",
+    product_stock: 0,
+    coupon_id: 0,
+    upload_date: "",
+    valid: true,
+  });
+
+  const getProduct = async (productId) => {
+    console.log("Product ID:", productId);
+    try {
+      const url = `http://localhost:3005/api/products/${productId}`;
+      const res = await fetch(url);
+      console.log(url);
+      const data = await res.json();
+      console.log(data);
+      if (typeof data === "object" && data !== null) {
+        setProduct(data.data.product);
+        // console.log(product);
+      }
+    } catch (e) {
+      console.log(e);
+      // console.log(typeof data);
+    }
+  };
+
+  //動態路由需要router來確定是否收到值 1.isReady是布林值 2.query是回傳的id值
+  const router = useRouter();
+  useEffect(() => {
+    if (router.isReady) {
+      console.log("isReady", router.isReady, "query", router.query);
+      // 確保能得從router.query到pid後，再向伺服器要求對應資料
+      getProduct(router.query.productId);
+    }
+  }, [router.isReady]);
+  // console.log(product);
+
   return (
     <>
       <HeaderComponent />
@@ -52,7 +95,14 @@ export default function ProductDetail() {
                 className={`${style["main-product"]} d-flex flex-sm-row flex-column justify-content-center`}
               >
                 <ProductMainPic />
-                <ProductMainText />
+                <ProductMainText
+                  key={product.id}
+                  id={product.id}
+                  name={product.product_name}
+                  description={product.product_description}
+                  price={product.product_price}
+                  discount_price={product.discount_price}
+                />
               </div>
               <div className={`${style["section2"]} my-3 m-sm-2`}>
                 <div className={`d-flex flex-row my-4`}>
@@ -70,7 +120,11 @@ export default function ProductDetail() {
                   </button>
                 </div>
                 <div className={`${style["p-detail"]} flex-column p-sm-5`}>
-                  {activeTab === "product" && <ProductSection01 />}
+                  {activeTab === "product" && (
+                    <ProductSection01
+                      description={product.product_description}
+                    />
+                  )}
                   {activeTab === "review" && <ProductSection02 />}
                 </div>
               </div>
