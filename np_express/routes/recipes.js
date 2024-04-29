@@ -18,7 +18,13 @@ router.get('/', async function (req, res) {
   // const recipes = await Recipe.findAll({ logging: console.log })
 
   // 從網址查詢字串解構的值
-  const { page = 1, perpage = 6, recipe_category__i_d = '' } = req.query
+  const {
+    page = 1,
+    perpage = 6,
+    recipe_category__i_d = '',
+    sort = 'recipe__i_d',
+    order = 'asc',
+  } = req.query
 
   // 分頁用
   // page預設為1，perpage預設為3
@@ -44,16 +50,19 @@ router.get('/', async function (req, res) {
       ? `WHERE ` + conditionsValues.map((v) => `( ${v} )`).join(` AND `)
       : ''
 
+  // 排序用
+  const orderby = `ORDER BY ${sort} ${order}`
+
   // 食譜join分類表
   const sqlCate = `
   SELECT r.*, rcs.Recipe_cate_Name 
   FROM recipe AS r JOIN recipe_categories AS rcs 
   ON r.recipe_category__i_d = rcs.recipe_cate__i_d 
-  ${where}
+  ${where} ${orderby}
   LIMIT ${limit} OFFSET ${offset}
   `
-  console.log('sql語法：--------------' + sqlCate)
 
+  // 查詢總筆數的sql語法
   const sqlCountCate = `SELECT COUNT(*) AS countCate FROM recipe  ${where}`
 
   // 食譜join分類表查詢結果
