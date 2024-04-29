@@ -6,7 +6,7 @@ import BreadcrumbsStyles from "./BreadcrumbsStyles.module.css";
 //  這裡大家共編一下，因為檔案命名是英文的，但麵包屑需要是中文的，所以大家請放上英文檔名以及對應的中文名稱
 
 const pathNameMapping = {
-  "search-result":"搜尋結果",
+  "search-result": "搜尋結果",
   "class-page": "精選課程",
   "class-detail": "課程介紹",
   speaker: "講師陣容",
@@ -27,12 +27,29 @@ const Breadcrumbs = () => {
   };
 
   const router = useRouter();
-  const pathSegments = router.asPath.split("/").filter((v) => v);
+  const pathSegments = router.asPath
+    .split("?")[0]
+    .split("/")
+    .filter((v) => v);
 
   const breadcrumbs = pathSegments.map((segment, index) => {
+    const nextSegment = pathSegments[index + 1];
     const baseHref = "/" + pathSegments.slice(0, index + 1).join("/");
-    const href = `${baseHref}`; // 指向資料夾中的 index.js
+    let href = `${baseHref}`; // 指向資料夾中的 index.js
+
+    // 檢查是否是動態路由的情況，比如包含查詢參數的課程介紹頁
+    if (segment === "class-detail" && nextSegment === undefined) {
+      // 如果是 class-detail 並且沒有下一個路徑段，認為是查詢參數情況
+      href += `?${router.asPath.split("?")[1]}`; // 保持原有查詢參數
+    }
+
+    if (segment === "speaker-detail" && nextSegment === undefined) {
+      // 如果是 speaker-detail 並且沒有下一個路徑段，認為是查詢參數情況
+      href += `?${router.asPath.split("?")[1]}`; // 保持原有查詢參數
+    }
+
     const displayName = pathNameMapping[segment] || segment; // 使用映射的中文名稱或原名稱
+
     return { name: displayName, href };
   });
 
