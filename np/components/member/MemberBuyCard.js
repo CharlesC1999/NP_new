@@ -111,6 +111,8 @@ export default function BuyCard() {
         </div>
       </div> */}
 {orders.map((v, i) => {
+  //到時候把57改成當前會員ID
+  if(v.member_id===57)
           return (
       <div className={`${styles.buyCard} my-0 my-sm-4`}>
         <div
@@ -118,7 +120,7 @@ export default function BuyCard() {
         >
           <div className={`${styles.bccolumn}`}>
             <div className={styles.objectFit} />
-            <img src={v.image_url} alt="" />
+            {/* <img src={v.image_url} alt="" /> */}
           </div>
           <div
             className={`${styles.buyItem} d-flex flex-row justify-content-between`}
