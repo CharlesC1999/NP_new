@@ -18,7 +18,7 @@ router.get('/', async function (req, res) {
   // const recipes = await Recipe.findAll({ logging: console.log })
 
   // 從網址查詢字串解構的值
-  const { page = 1, perpage = 6 } = req.query
+  const { page = 1, perpage = 6, recipe_category__i_d = '' } = req.query
 
   // 分頁用
   // page預設為1，perpage預設為3
@@ -27,13 +27,33 @@ router.get('/', async function (req, res) {
   const limit = perpageNow
   const offset = (pageNow - 1) * perpageNow
 
+  // 建立資料庫搜尋條件(where從句用)，每個條件用陣列存放，串接時用join(' AND ')
+  const conditions = []
+
+  // 食譜類別
+  conditions[0] = recipe_category__i_d
+    ? `recipe_category__i_d = ${recipe_category__i_d}`
+    : ''
+
+  // 去除空字串
+  const conditionsValues = conditions.filter((v) => v)
+
+  // 各條件需要先包含在`()`中，因各自內查詢是OR, 與其它的是AND
+  const where =
+    conditionsValues.length > 0
+      ? `WHERE ` + conditionsValues.map((v) => `( ${v} )`).join(` AND `)
+      : ''
+
   // 食譜join分類表
   const sqlCate = `
   SELECT r.*, rcs.Recipe_cate_Name 
   FROM recipe AS r JOIN recipe_categories AS rcs 
   ON r.recipe_category__i_d = rcs.recipe_cate__i_d 
+  ${where}
   LIMIT ${limit} OFFSET ${offset}
   `
+  console.log('sql語法：--------------' + sqlCate)
+
   const sqlCountCate = `SELECT COUNT(*) AS countCate FROM recipe`
 
   // 食譜join分類表查詢結果
