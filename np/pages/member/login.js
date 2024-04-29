@@ -19,8 +19,6 @@ import firebase from "@/utils/firebase-config";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // 讀取畫面
 import { useLoader } from "@/hooks/use-loader";
-// Link
-import Link from "next/link";
 // sweetAlert
 import Swal from "sweetalert2";
 
@@ -58,9 +56,8 @@ const Login = () => {
       setError("錯誤次數過多，請15分鐘後再次嘗試");
       return;
     }
-
+    setLoading(true); // 開始加載畫面
     try {
-      setLoading(true); // 開始加載畫面
       const response = await axios.post("http://localhost:3005/api/login", {
         username,
         password,
@@ -80,23 +77,24 @@ const Login = () => {
         router.push("/");
         // 用useRouter跳轉
         // 登入成功後，可能需要重定向或其他操作
+      } else {
+        throw new Error("登入失敗");
       }
     } catch (error) {
+      setLoading(false);
       if (error.response && error.response.status === 401) {
         console.error("登入失敗", error.response.data.message);
         setAttempts((prevAttempts) => prevAttempts + 1);
         if (attempts >= 5) {
           setLoginBlocked(true);
-          setLoading(false);
           setError("錯誤次數過多，請15分鐘後再次嘗試");
           setTimeout(() => setLoginBlocked(false), 15 * 60 * 1000);
           setTimeout(() => setAttempts(0), 15 * 60 * 1000);
         } else {
         }
-        setLoading(false);
+
         setError("帳號或密碼錯誤，請重新嘗試");
       } else {
-        setLoading(false);
         setError("登入時發生錯誤，請稍後再試");
       }
       // 處理錯誤情況（例如顯示錯誤消息）

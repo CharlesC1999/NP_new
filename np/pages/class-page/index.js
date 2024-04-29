@@ -56,6 +56,57 @@ const ClassList = () => {
 
   const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid
   const [activeButton, setActiveButton] = useState("grid"); // 選擇哪一個是被選擇的狀態
+  const [page, setPage] = useState(1); //預設分頁1
+  const [perpage, setPerpage] = useState(6); //預設顯示6筆
+  //  最後得到的資料
+  const [total, setTotal] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  //食譜資料庫data
+  const [classesData, setClassesData] = useState([]);
+
+  //串上後端取得資料
+  const getClasses = async (params = {}) => {
+    // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
+    const searchParams = new URLSearchParams(params);
+    const url = `http://localhost:3005/api/classes/?${searchParams.toString()}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      // 為了要確保資料是陣列，所以檢查後再設定
+      if (Array.isArray(data.data.classesRawSql)) {
+        setClassesData(data.data.classesRawSql);
+      } else {
+        console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
+      }
+
+      if (data.status === "success") {
+        setTotal(data.data.total);
+        setPageCount(data.data.pageCount);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // 點擊上/下一頁時去資料庫撈資料
+  const handlePageChange = () => {
+    const params = {
+      page,
+      perpage,
+    };
+    getClasses(params);
+  };
+
+  // 初次渲染時取得食譜列表資料
+  useEffect(() => {
+    getClasses();
+  }, []);
+
+  useEffect(() => {
+    handlePageChange();
+  }, [page]);
 
   // 切換到Grid模式
   const showGrid = () => {
@@ -88,12 +139,7 @@ const ClassList = () => {
             />
             <div className={CardStyle.WebCardContainer}>
               <div style={cardWidth}>
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
+                <ClassCard classesData={classesData} />
               </div>
             </div>
             {displayGrid ? (

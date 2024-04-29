@@ -61,6 +61,7 @@
   align-items: flex-end;
 }
 .truffledRiceDescription {
+  display: -webkit-box;
   width: 100%;
   width: 480px;
   text-wrap: wrap;
@@ -68,10 +69,14 @@
   /* font style */
   /* color: var(--gray03, #454545); */
   font-family: Inter;
-  font-size: 15px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 120.313%;
+  line-height: 135%;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .truffledRicePricing {
   width: 100%;
@@ -158,6 +163,7 @@
   gap: 4px;
   padding: 6px 16px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .linksButtonsIcon {
@@ -180,4 +186,9 @@
 
 .heartIcon.active {
   fill: #ff4d4d;
+}
+
+/* 資料串接影響 */
+.forDataUnderLine {
+  text-decoration: none;
 }

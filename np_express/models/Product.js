@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
 
 export default async function (sequelize) {
-  return sequelize.define(
-    'Product', // 類名稱，通常首字母大寫
+  const Product = sequelize.define(
+    'Product',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -13,33 +13,33 @@ export default async function (sequelize) {
       category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-          model: 'categories', // 指定外鍵對應的表名
-          key: 'id', // 指定外鍵對應的表中的列
-        },
       },
-      name: {
-        type: DataTypes.STRING(255),
+      product_name: {
+        type: DataTypes.STRING(20),
         allowNull: false,
       },
-      description: {
-        type: DataTypes.TEXT,
-        allowNull: false, // 描述可以為空
+      product_description: {
+        type: DataTypes.TEXT('medium'), // 或者 DataTypes.MEDIUMTEXT 根據 Sequelize 的版本
+        allowNull: true, // 根據您的圖表允許 NULL
       },
-      origin_price: {
-        type: DataTypes.DECIMAL(10, 2), // 假設價格有兩位小數
-        allowNull: false,
-      },
-      discount_price: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: true, // 折扣價可能為空，表示沒有折扣
-      },
-      stock: {
+      product_price: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      discount_price: {
+        type: DataTypes.INTEGER,
+        allowNull: true, // 允許 NULL
+      },
+      product_stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      coupon_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true, // 允許 NULL
+      },
       upload_date: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       valid: {
@@ -48,7 +48,7 @@ export default async function (sequelize) {
       },
     },
     {
-      tableName: 'products', // 直接提供資料表名稱
+      tableName: 'product', // 直接提供資料表名稱
       timestamps: true, // 使用時間戳
       paranoid: false, // 軟性刪除
       underscored: true, // 所有自動建立欄位，使用snake_case命名
@@ -56,4 +56,6 @@ export default async function (sequelize) {
       updatedAt: 'updated_at', // 更新的時間戳
     }
   )
+
+  return Product
 }
