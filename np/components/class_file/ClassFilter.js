@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styles from "./classFilter.module.css";
 
-const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
-  const [defaultValue, setDefaultValue] = useState(6);
+const ClassFilter = ({
+  onShowGrid,
+  onShowList,
+  activeButton,
+  perpage,
+  setPerpage,
+}) => {
+  const [defaultValue, setDefaultValue] = useState(6); //先前預設
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
 
@@ -12,14 +18,14 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
 
   // 增加或減少項目數量
   function handleIncrease() {
-    if (defaultValue < 12) {
-      setDefaultValue((prev) => prev + 1);
+    if (perpage < 12) {
+      setPerpage(perpage + 1);
     }
   }
 
   function handleDecrease() {
-    if (defaultValue > 4) {
-      setDefaultValue((prev) => prev - 1);
+    if (perpage > 4) {
+      setPerpage(perpage - 1);
     }
   }
 
@@ -86,7 +92,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
             </button>
             <div className={styles.itemsPerPage}>
               <span className={styles.itemsPerPageValue} id="itemsPerPage">
-                {defaultValue}
+                {perpage}
               </span>
               <div className={styles.numberIncreaseDecrease}>
                 <button

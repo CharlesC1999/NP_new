@@ -105,8 +105,12 @@ const ClassList = () => {
   }, []);
 
   useEffect(() => {
-    handlePageChange();
-  }, [page]);
+    const params = {
+      page,
+      perpage,
+    };
+    getClasses(params);
+  }, [page, perpage]);
 
   // 切換到Grid模式
   const showGrid = () => {
@@ -136,6 +140,8 @@ const ClassList = () => {
               onShowGrid={showGrid}
               onShowList={showList}
               activeButton={activeButton}
+              perpage={perpage}
+              setPerpage={setPerpage}
             />
             <div className={CardStyle.WebCardContainer}>
               <div style={cardWidth}>
