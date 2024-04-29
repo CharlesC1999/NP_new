@@ -63,6 +63,10 @@ const ClassList = () => {
   const [pageCount, setPageCount] = useState(0);
   //食譜資料庫data
   const [classesData, setClassesData] = useState([]);
+  // 用於儲存排序
+  const [sortBy, setSortBy] = useState("");
+  // 用於選擇分類
+  const [categoryId, setCategoryId] = useState(null);
 
   //串上後端取得資料
   const getClasses = async (params = {}) => {
@@ -83,20 +87,12 @@ const ClassList = () => {
 
       if (data.status === "success") {
         setTotal(data.data.total);
-        setPageCount(data.data.pageCount);
+        setPageCount(Math.ceil(data.data.total / perpage)); // 計算總頁數
       }
+      return data;
     } catch (e) {
       console.log(e);
     }
-  };
-
-  // 點擊上/下一頁時去資料庫撈資料
-  const handlePageChange = () => {
-    const params = {
-      page,
-      perpage,
-    };
-    getClasses(params);
   };
 
   // 初次渲染時取得食譜列表資料
@@ -104,13 +100,50 @@ const ClassList = () => {
     getClasses();
   }, []);
 
+  // 當資料有變動時，更新頁碼
+  useEffect(() => {
+    setPageCount(Math.ceil(total / perpage));
+  }, [total, perpage]);
+
   useEffect(() => {
     const params = {
-      page,
-      perpage,
+      page, //頁數
+      perpage, //每頁各幾個
+      sortBy, //排序
+      categoryId,
     };
     getClasses(params);
-  }, [page, perpage]);
+    if (page > pageCount) {
+      setPage(Math.max(1, pageCount)); // 確保頁數不小於1
+    }
+  }, [page, perpage, sortBy, categoryId]);
+
+  useEffect(() => {
+    const checkPageRange = () => {
+      if (page > pageCount) {
+        setPage(Math.max(1, pageCount));
+      }
+    };
+
+    checkPageRange();
+  }, [pageCount, page]);
+
+  // 從子組件接收排序條件
+  const handleSortChange = (newSortBy) => {
+    setSortBy(newSortBy);
+    // 充新獲得資料
+  };
+
+  const handleCategoryChange = async (categoryId) => {
+    setCategoryId(categoryId);
+    // 這裡直接調用 getClasses，傳遞新的 categoryId
+    setPage(1);
+    const newParams = { page: 1, perpage, sortBy, categoryId };
+    const data = await getClasses(newParams); // 假设这是调用API的函数
+    setClassesData(data.data.classesRawSql);
+    setTotal(data.total);
+    setPageCount(Math.ceil(data.total / perpage));
+  };
 
   // 切換到Grid模式
   const showGrid = () => {
@@ -129,7 +162,7 @@ const ClassList = () => {
       <Header />
       <Breadcrumbs />
       <div style={subContainerStyle}>
-        <ClassClassifacion />
+        <ClassClassifacion categoryChange={handleCategoryChange} />
         <div className={ContentSetting.DisplaySetting}>
           <div style={{ height: "100%" }} className={ContentSetting.MobileNone}>
             <ClassSidebar />
@@ -142,6 +175,7 @@ const ClassList = () => {
               activeButton={activeButton}
               perpage={perpage}
               setPerpage={setPerpage}
+              onSortChange={handleSortChange}
             />
             <div className={CardStyle.WebCardContainer}>
               <div style={cardWidth}>
