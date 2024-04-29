@@ -167,7 +167,11 @@ const ClassList = () => {
                 </div>
               </div>
             )}
-            <Pagination />
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={(event, value) => setPage(value)}
+            />
             <img
               src="/images/pages-m.png"
               className={CardStyle.paginationListMarginMobile}

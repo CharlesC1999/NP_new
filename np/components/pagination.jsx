@@ -2,13 +2,21 @@ import React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-export default function PaginationRounded() {
+export default function PaginationRounded({ count, page, onChange }) {
   return (
-    <Stack spacing={2}>
+    <Stack
+      spacing={2}
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+    >
       <Pagination
-        count={10} //之後根據比數改寫，目前先寫死
-        // variant="outlined"
+        count={count} //之後根據比數改寫，目前先寫死
+        page={page}
+        onChange={onChange}
         shape="rounded"
+        showFirstButton
+        showLastButton
         sx={{
           "& .MuiPaginationItem-root": {
             bgcolor: "#F7F8F5 !important",
