@@ -28,7 +28,7 @@ export default async function (sequelize) {
       },
       Upload_date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {

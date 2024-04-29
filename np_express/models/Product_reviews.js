@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
 
-export default function (sequelize) {
-  const ProductReview = sequelize.define(
-    'ProductReview', // 类名称，通常首字母大写
+export default async function (sequelize) {
+  return sequelize.define(
+    'Product_review', // 类名称，通常首字母大写
     {
       id: {
         type: DataTypes.INTEGER,
@@ -13,18 +13,10 @@ export default function (sequelize) {
       product_id: {
         type: DataTypes.INTEGER,
         allowNull: true, // 允许 NULL，表示评论可能不关联具体的产品
-        references: {
-          model: 'Product', // 这里应该是模型的名称，而不是表名
-          key: 'id',
-        },
       },
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: true, // 允许 NULL，表示评论可能不关联具体的用户
-        references: {
-          model: 'User', // 这里应该是模型的名称，而不是表名
-          key: 'id',
-        },
       },
       comment: {
         type: DataTypes.TEXT('medium'),
@@ -45,12 +37,4 @@ export default function (sequelize) {
       underscored: true, // 使用蛇形命名规则
     }
   )
-
-  // 设置模型之间的关联
-  ProductReview.belongsTo(sequelize.models.Product, {
-    foreignKey: 'product_id',
-  })
-  ProductReview.belongsTo(sequelize.models.User, { foreignKey: 'user_id' })
-
-  return ProductReview
 }
