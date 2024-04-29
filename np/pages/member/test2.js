@@ -60,7 +60,7 @@ export default function List() {
           return (
             <li key={v.Order_ID}>
               
-                {v.Order_ID}/{v.Member_ID}
+                {v.Order_ID}/{v.Member_ID}/{v.Order_date}/{v.Status}/{v.Shipping_address}
               
             </li>
           );

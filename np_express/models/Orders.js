@@ -18,10 +18,7 @@ export default async function (sequelize) {
         type: DataTypes.DATE, // 正確的資料類型應該是 DATE
         allowNull: false,
       },
-      Amount: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+
       Status: {
         type: DataTypes.ENUM(
           '訂單處理中',
