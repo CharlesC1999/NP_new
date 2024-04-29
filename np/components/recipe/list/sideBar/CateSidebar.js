@@ -38,16 +38,10 @@ function CateSidebar({ setRecipeCategory, handleConditionsChange }) {
       >
         <div className={`d-flex ${styles.sideBox}`}>
           <div className={styles.sideImg}>
-            {/* 原本是a */}
-            <div>
-              <img src="/index-images/category-1.png" alt />
-            </div>
+            <img src="/index-images/category-1.png" alt />
           </div>
           <div className={styles.sideText}>
-            {/* 原本是a */}
-            <div>
-              <h6 className={styles.left}>全部</h6>
-            </div>
+            <h6 className={styles.left}>全部</h6>
             <h6 className={styles.right}>3</h6>
           </div>
         </div>
@@ -63,16 +57,10 @@ function CateSidebar({ setRecipeCategory, handleConditionsChange }) {
           >
             <div className={`d-flex ${styles.sideBox}`}>
               <div className={styles.sideImg}>
-                {/* 原本是a */}
-                <div>
-                  <img src="/index-images/category-1.png" alt />
-                </div>
+                <img src="/index-images/category-1.png" alt />
               </div>
               <div className={styles.sideText}>
-                {/* 原本是a */}
-                <div>
-                  <h6 className={styles.left}>{v.Recipe_cate_name}</h6>
-                </div>
+                <h6 className={styles.left}>{v.Recipe_cate_name}</h6>
                 <h6 className={styles.right}>3</h6>
               </div>
             </div>
