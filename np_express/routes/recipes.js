@@ -54,7 +54,7 @@ router.get('/', async function (req, res) {
   `
   console.log('sql語法：--------------' + sqlCate)
 
-  const sqlCountCate = `SELECT COUNT(*) AS countCate FROM recipe`
+  const sqlCountCate = `SELECT COUNT(*) AS countCate FROM recipe  ${where}`
 
   // 食譜join分類表查詢結果
   const [recipesRawSql] = await db.query(sqlCate)
