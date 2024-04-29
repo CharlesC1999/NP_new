@@ -63,14 +63,14 @@ router.get('/', async function (req, res) {
   `
 
   // 查詢總筆數的sql語法
-  const sqlCountCate = `SELECT COUNT(*) AS countCate FROM recipe  ${where}`
+  const sqlCountAll = `SELECT COUNT(*) AS countCate FROM recipe  ${where}`
 
   // 食譜join分類表查詢結果
   const [recipesRawSql] = await db.query(sqlCate)
   // 食譜join分類表總筆數(分頁用)
-  const [countCateRawSql] = await db.query(sqlCountCate)
+  const [countAllRawSql] = await db.query(sqlCountAll)
   // 回傳總筆數
-  const total = countCateRawSql[0].countCate
+  const total = countAllRawSql[0].countCate
   // 計算分頁所需的頁數
   const pageCount = Math.ceil(total / Number(perpage)) || 0
 
