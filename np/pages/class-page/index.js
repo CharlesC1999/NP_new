@@ -69,7 +69,7 @@ const ClassList = () => {
   const [categoryId, setCategoryId] = useState(null);
 
   //串上後端取得資料
-  const getClasses = async (params = {}) => {
+  const getClasses = async (params) => {
     // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
     const searchParams = new URLSearchParams(params);
     const url = `http://localhost:3005/api/classes/?${searchParams.toString()}`;
@@ -79,20 +79,23 @@ const ClassList = () => {
       const data = await res.json();
 
       // 為了要確保資料是陣列，所以檢查後再設定
-      if (Array.isArray(data.data.classesRawSql)) {
-        setClassesData(data.data.classesRawSql);
-      } else {
-        console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
+      if (data && data.status === "success") {
+        setClassesData(data.data.classesRawSql); // 更新課程數據
+        setTotal(data.data.total); // 更新總數
+        setPageCount(Math.ceil(data.data.total / perpage)); // 更新頁數
       }
-
-      if (data.status === "success") {
-        setTotal(data.data.total);
-        setPageCount(Math.ceil(data.data.total / perpage)); // 計算總頁數
-      }
-      return data;
+      return data; // 返回數據
     } catch (e) {
-      console.log(e);
+      console.error("Failed to fetch classes:", e);
+      return {};
     }
+  };
+
+  const handleCategoryChange = async (categoryId) => {
+    setCategoryId(categoryId);
+    // 這裡直接調用 getClasses，傳遞新的 categoryId
+    setPage(1);
+    await getClasses({ page: 1, perpage, sortBy, categoryId });
   };
 
   // 初次渲染時取得食譜列表資料
@@ -119,30 +122,15 @@ const ClassList = () => {
   }, [page, perpage, sortBy, categoryId]);
 
   useEffect(() => {
-    const checkPageRange = () => {
-      if (page > pageCount) {
-        setPage(Math.max(1, pageCount));
-      }
-    };
-
-    checkPageRange();
+    if (page > pageCount && pageCount > 0) {
+      setPage(pageCount);
+    }
   }, [pageCount, page]);
 
   // 從子組件接收排序條件
   const handleSortChange = (newSortBy) => {
     setSortBy(newSortBy);
     // 充新獲得資料
-  };
-
-  const handleCategoryChange = async (categoryId) => {
-    setCategoryId(categoryId);
-    // 這裡直接調用 getClasses，傳遞新的 categoryId
-    setPage(1);
-    const newParams = { page: 1, perpage, sortBy, categoryId };
-    const data = await getClasses(newParams); // 假设这是调用API的函数
-    setClassesData(data.data.classesRawSql);
-    setTotal(data.total);
-    setPageCount(Math.ceil(data.total / perpage));
   };
 
   // 切換到Grid模式
