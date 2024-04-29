@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RecipeFilter.module.css";
 
-const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
-  const [defaultValue, setDefaultValue] = useState(6);
+const ClassFilter = ({
+  onShowGrid,
+  onShowList,
+  activeButton,
+  perpage,
+  setPerpage,
+  total,
+}) => {
+  // const [perpage, setPerpage] = useState(6);
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
 
   // 對應 toggleIconState
-  const isUpDisabled = defaultValue >= 12;
-  const isDownDisabled = defaultValue <= 4;
+  const isUpDisabled = perpage >= 12;
+  const isDownDisabled = perpage <= 4;
 
   // 增加或減少項目數量
   function handleIncrease() {
-    if (defaultValue < 12) {
-      setDefaultValue((prev) => prev + 1);
+    if (perpage < 12) {
+      setPerpage((prev) => prev + 1);
     }
   }
 
   function handleDecrease() {
-    if (defaultValue > 4) {
-      setDefaultValue((prev) => prev - 1);
+    if (perpage > 4) {
+      setPerpage((prev) => prev - 1);
     }
   }
 
@@ -62,7 +69,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
     <div className={styles.widthMax}>
       <section className={styles.productCountContainer}>
         <header className={styles.productCountHeader}>
-          <p className={styles.totalProducts}>總共： # 項商品</p>
+          <p className={styles.totalProducts}>總共： {total} 項食譜</p>
           <div className={styles.productCountControls}>
             <button className={styles.celanderMobile}>
               <svg
@@ -86,7 +93,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
             </button>
             <div className={styles.itemsPerPage}>
               <span className={styles.itemsPerPageValue} id="itemsPerPage">
-                {defaultValue}
+                {perpage}
               </span>
               <div className={styles.numberIncreaseDecrease}>
                 <button

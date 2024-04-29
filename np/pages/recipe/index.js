@@ -22,7 +22,7 @@ export default function RecipeList() {
 
   // 分頁用
   const [page, setPage] = useState(1);
-  const [perpage, setPerpage] = useState(5);
+  const [perpage, setPerpage] = useState(6);
 
   // 總共幾筆資料、總頁數
   const [total, setTotal] = useState(0);
@@ -91,7 +91,7 @@ export default function RecipeList() {
   //每次食譜分類改變時重新取得食譜列表資料，並且重設回第一頁
   useEffect(() => {
     handleConditionsChange();
-  }, [recipeCategory]);
+  }, [recipeCategory, perpage]);
 
   return (
     <>
@@ -112,7 +112,7 @@ export default function RecipeList() {
           {/* 食譜卡片 (list排列) */}
           <div className={`${styles["cards-list"]} d-flex flex-column`}>
             <div className="d-none d-xxl-block">
-              <Filter page={page} setPage={setPage} />
+              <Filter perpage={perpage} setPerpage={setPerpage} total={total} />
             </div>
             <div className={`${styles["list-layout"]} col`}>
               <section
