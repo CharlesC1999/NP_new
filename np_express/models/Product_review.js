@@ -12,11 +12,11 @@ export default async function (sequelize) {
       },
       product_id: {
         type: DataTypes.INTEGER,
-        allowNull: true, // 允许 NULL，表示评论可能不关联具体的产品
+        allowNull: false,
       },
       user_id: {
         type: DataTypes.INTEGER,
-        allowNull: true, // 允许 NULL，表示评论可能不关联具体的用户
+        allowNull: true,
       },
       comment: {
         type: DataTypes.TEXT('medium'),
@@ -27,14 +27,14 @@ export default async function (sequelize) {
         allowNull: true,
       },
       created_at: {
-        type: DataTypes.DATEONLY, // 使用 DATEONLY 因为只存储日期部分
+        type: DataTypes.DATEONLY,
         allowNull: true,
       },
     },
     {
-      tableName: 'product_reviews', // 直接提供数据表名称
-      timestamps: false, // 不使用自动的 createdAt 和 updatedAt
-      underscored: true, // 使用蛇形命名规则
+      tableName: 'product_review',
+      timestamps: false,
+      underscored: true,
     }
   )
 }
