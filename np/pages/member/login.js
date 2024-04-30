@@ -111,17 +111,28 @@ const Login = () => {
   };
 
   useEffect(() => {
-    showGoogleLogin((data) => {
+    showGoogleLogin(login, (data) => {
       setUserData(data);
+      login(data);
       console.log(data);
       if (data.status === "success") {
+        Swal.fire({
+          title: "登入成功",
+          // text: "That thing is still around?",
+          icon: "success",
+          // 按鈕綠色
+          confirmButtonColor: "#50bf8b",
+        });
         router.push("/");
+      } else if (data.status === "error") {
+        console.error("Google 登入錯誤:", data.error);
       }
+
       // Perform any necessary navigation here
     });
   }, []);
 
-  const handleGoogleButtonClick = async () => {
+  const handleGoogleButtonClick = () => {
     handleGoogleLogin();
     // google-login-firebase export handleGoogleLogin
   };

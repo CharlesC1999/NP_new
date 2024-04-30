@@ -1,4 +1,5 @@
 import { initializeApp, getApps } from "firebase/app";
+// import { useAuth } from "@/contexts/AuthContext";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -21,7 +22,7 @@ export const handleGoogleLogin = async () => {
   signInWithRedirect(auth, provider);
 };
 
-export const showGoogleLogin = (callback) => {
+export const showGoogleLogin = (login, callback) => {
   const auth = getAuth();
   let loginStatus = { success: false, data: null, error: null };
 
