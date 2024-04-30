@@ -14,6 +14,9 @@ import Filter from "@/components/recipe/list/filter/RecipeFilter";
 import styles from "@/styles/recipe/recipe-list.module.scss";
 
 export default function RecipeList() {
+  // 給TopBarList裡面分類下拉式清單用的
+  const [categoriesDropdown, setCategoriesDropdown] = useState([]);
+
   // ----------------------篩選條件 start ------------------------
   // 食譜分類
   const [recipeCategory, setRecipeCategory] = useState("");
@@ -106,7 +109,12 @@ export default function RecipeList() {
       <Breadcrumbs />
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
-        <TopBarList />
+        <TopBarList
+          setOrderby={setOrderby}
+          total={total}
+          categoriesDropdown={categoriesDropdown}
+          setRecipeCategory={setRecipeCategory}
+        />
         {/* <TopBarGrid /> */}
 
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
@@ -115,6 +123,7 @@ export default function RecipeList() {
               setRecipeCategory={setRecipeCategory}
               handleConditionsChange={handleConditionsChange}
               recipeCategory={recipeCategory}
+              setCategoriesDropdown={setCategoriesDropdown}
             />
             <SideBarRecipe />
           </div>
