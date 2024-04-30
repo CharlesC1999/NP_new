@@ -52,8 +52,9 @@ export default async function (sequelize) {
         allowNull: false,
       },
       valid: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.TINYINT(2),
         allowNull: false,
+        defaultValue: 1,
       },
       User_image: {
         type: DataTypes.STRING,
