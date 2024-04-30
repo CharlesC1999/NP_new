@@ -1,5 +1,4 @@
 import React from "react";
-
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
@@ -9,7 +8,7 @@ import HeroSlider from "@/components/index/HeroSlider";
 import Card2 from "@/components/index/card2";
 import Card3 from "@/components/index/Card3Categories";
 import Card4Hot from "@/components/index/Card4Hot";
-import Card5className from "@/components/index/Card5class";
+import Card5class from "@/components/index/Card5class";
 import Card6Recipe from "@/components/index/Card6Recipe";
 import Footer from "@/components/Footer";
 
@@ -18,8 +17,8 @@ export default function Index() {
     <>
       <HeaderComponent />
       <HeroSlider />
-      <div className={`container ${styles.wrapper} ${styles.nutripollP}`}>
-        <div className={` container ${styles.titleP}`}>
+      <div className={` ${styles.wrapper} ${styles.nutripollP}`}>
+        <div className={`${styles.titleP}`}>
           <h1 className={`${styles.titleNutripoll}`}>營養大選 Nutripolls</h1>
           <h6>精挑細選 賣自己想吃的好食物</h6>
           <br />
@@ -39,7 +38,9 @@ export default function Index() {
         </div>
       </div>
 
-      <div className={`container ${styles.wrapper} ${styles.NutripollCard1}`}>
+      <div
+        className={` ${styles.wrapper} ${styles.NutripollCard1}`}
+      >
         <div className={`d-flex ${styles.card1Rwd}`}>
           <div className={styles.card1Img}>
             <img src="/index-images/Herosection02.png" alt />
@@ -60,7 +61,7 @@ export default function Index() {
         </div>
       </div>
 
-      <div className={`container ${styles.wrapper}`}>
+      <div className={` ${styles.wrapper}`}>
         <div className={styles.Nutripollcard2}>
           <Card2 />
           <Card2 />
@@ -71,7 +72,7 @@ export default function Index() {
         </div>
       </div>
 
-      <div className={`container ${styles.wrapper} ${styles.CategoryRwd}`}>
+      <div className={` ${styles.wrapper} ${styles.CategoryRwd}`}>
         <div className={`d-flex justify-content-between pb-5`}>
           <h4 className={`${styles.MeAuto}`}>商品分類</h4>
           <div className={`d-flex`}>
@@ -95,8 +96,8 @@ export default function Index() {
         </div>
       </div>
 
-      <div className={`container ${styles.wrapper}`}>
-        <div className={`d-flex justify-content-between`}>
+      <div className={` ${styles.wrapper}`}>
+        <div className={`d-flex justify-content-between ps-3 pe-3`}>
           <h4 className={`${styles.MeAuto}`}>熱銷商品</h4>
           <a className={`${styles.TitleRwd}`} href="">
             <h5 className={`${styles.MeAuto}`}>
@@ -120,7 +121,7 @@ export default function Index() {
         </div>
       </div>
 
-      <div className={`container ${styles.wrapper} ${styles.FlexRow}`}>
+      <div className={` ${styles.wrapper} ${styles.FlexRow}`}>
         <div className={`${styles.card5Main}`}>
           <div
             className={`${styles.card5Title} d-flex justify-content-between`}
@@ -132,13 +133,13 @@ export default function Index() {
               </h5>
             </a>
           </div>
-          <div className={`Nutripollcard5`}>
-            <Card5className />
-            <Card5className />
+          <div className={`${styles.Nutripollcard5}`}>
+            <Card5class />
+            <Card5class />
           </div>
         </div>
         <div className={`card6Main`}>
-          <div className={`d-flex justify-content-between`}>
+          <div className={`d-flex justify-content-between ${styles.card6Title}`}>
             <h4 className={`${styles.MeAuto}`}>精選食譜</h4>
             <a className={`${styles.TitleRwd}`} href="">
               <h5 className={`${styles.MeAuto}`}>
@@ -146,7 +147,7 @@ export default function Index() {
               </h5>
             </a>
           </div>
-          <div className={`${styles.Nutripollcard6}`}>
+          <div className={`d-flex ${styles.Nutripollcard6}`}>
             <Card6Recipe />
             <Card6Recipe />
             <Card6Recipe />

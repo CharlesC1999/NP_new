@@ -1,8 +1,6 @@
 import express from 'express'
 const router = express.Router()
 
-import { getIdParam } from '##/db-helpers/db-tool.js'
-
 // 引入 Sequelize 配置和模型
 import sequelize from '##/configs/db.js'
 const { Member } = sequelize.models

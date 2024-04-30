@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router"; // 路由
 import DetailStyles from "@/styles/class_styles/classDetail.module.css";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -13,6 +14,9 @@ const ClassDetailPage = () => {
     alignItems: "stretch",
     justifyContent: "center",
   };
+
+  const router = useRouter();
+  const { id } = router.query;
 
   return (
     <div style={containerStyle}>

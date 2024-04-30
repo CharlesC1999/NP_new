@@ -56,6 +56,87 @@ const ClassList = () => {
 
   const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid
   const [activeButton, setActiveButton] = useState("grid"); // 選擇哪一個是被選擇的狀態
+  const [page, setPage] = useState(1); //預設分頁1
+  const [perpage, setPerpage] = useState(6); //預設顯示6筆
+  //  最後得到的資料
+  const [total, setTotal] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  //食譜資料庫data
+  const [classesData, setClassesData] = useState([]);
+  // 用於儲存排序
+  const [sortBy, setSortBy] = useState("");
+  // 用於選擇分類
+  const [categoryId, setCategoryId] = useState(null);
+
+  //串上後端取得資料
+  const getClasses = async (params) => {
+    // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
+    const searchParams = new URLSearchParams(params);
+    const url = `http://localhost:3005/api/classes/?${searchParams.toString()}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      // 為了要確保資料是陣列，所以檢查後再設定
+      if (data && data.status === "success") {
+        setClassesData(data.data.classesRawSql); // 更新課程數據
+        setTotal(data.data.total); // 更新總數
+        setPageCount(Math.ceil(data.data.total / perpage)); // 更新頁數
+      }
+      return data; // 返回數據
+    } catch (e) {
+      console.error("Failed to fetch classes:", e);
+      return {};
+    }
+  };
+
+  const handleCategoryChange = async (categoryId) => {
+    console.log("Category changing to:", categoryId);
+    setCategoryId(categoryId);
+    // 這裡直接調用 getClasses，傳遞新的 categoryId
+    setPage(1);
+    const newParams = { page: 1, perpage, sortBy, categoryId };
+    const data = await getClasses(newParams);
+    console.log("Data received on category change:", data);
+    if (data && data.status === "success") {
+      setTotal(data.data.total);
+    }
+  };
+
+  useEffect(() => {
+    setPageCount(Math.ceil(total / perpage));
+  }, [total, perpage]);
+
+  // 初次渲染時取得食譜列表資料
+  useEffect(() => {
+    getClasses();
+  }, []);
+
+  useEffect(() => {
+    const params = {
+      page, //頁數
+      perpage, //每頁各幾個
+      sortBy, //排序
+      categoryId,
+    };
+    getClasses(params);
+    if (page > pageCount) {
+      setPage(Math.max(1, pageCount)); // 確保頁數不小於1
+    }
+  }, [page, perpage, sortBy, categoryId]);
+
+  useEffect(() => {
+    if (page > pageCount && pageCount > 0) {
+      setPage(pageCount);
+    }
+  }, [pageCount, page]);
+
+  // 從子組件接收排序條件
+  const handleSortChange = (newSortBy) => {
+    setSortBy(newSortBy);
+    // 充新獲得資料
+  };
 
   // 切換到Grid模式
   const showGrid = () => {
@@ -74,7 +155,7 @@ const ClassList = () => {
       <Header />
       <Breadcrumbs />
       <div style={subContainerStyle}>
-        <ClassClassifacion />
+        <ClassClassifacion categoryChange={handleCategoryChange} />
         <div className={ContentSetting.DisplaySetting}>
           <div style={{ height: "100%" }} className={ContentSetting.MobileNone}>
             <ClassSidebar />
@@ -85,15 +166,13 @@ const ClassList = () => {
               onShowGrid={showGrid}
               onShowList={showList}
               activeButton={activeButton}
+              perpage={perpage}
+              setPerpage={setPerpage}
+              onSortChange={handleSortChange}
             />
             <div className={CardStyle.WebCardContainer}>
               <div style={cardWidth}>
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
+                <ClassCard classesData={classesData} />
               </div>
             </div>
             {displayGrid ? (
@@ -121,7 +200,11 @@ const ClassList = () => {
                 </div>
               </div>
             )}
-            <Pagination />
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={(event, value) => setPage(value)}
+            />
             <img
               src="/images/pages-m.png"
               className={CardStyle.paginationListMarginMobile}
