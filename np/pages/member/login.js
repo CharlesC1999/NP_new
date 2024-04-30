@@ -57,10 +57,15 @@ const Login = () => {
   // 開眼
   const [showPassword, setShowPassword] = useState(false);
   // google login
-  if (!getApps().length) {
-    initializeApp(firebaseConfig);
-  }
-  const auth = getAuth();
+  // if (!getApps().length) {
+  //   initializeApp(firebaseConfig);
+  // }
+  useEffect(() => {
+    if (!getApps().length) {
+      initializeApp(firebaseConfig);
+    }
+  }, []);
+  // const auth = getAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -121,9 +126,15 @@ const Login = () => {
   // Google登入
   const handleGoogleLogin = () => {
     try {
+      const auth = getAuth();
+
       const provider = new GoogleAuthProvider();
       provider.addScope("https://www.googleapis.com/auth/userinfo.email");
-      signInWithRedirect(auth, provider);
+      // signInWithRedirect(auth, provider);
+      signInWithPopup(auth, provider).then(async (result) => {
+        const user = result.user;
+        console.log(user);
+      });
     } catch (error) {
       console.error("登入失敗:", error);
     }
@@ -132,8 +143,18 @@ const Login = () => {
   useEffect(() => {
     // 检查重定向结果
     const checkGoogleLogin = async () => {
+      // const auth = getAuth();
+
+      // const result = await getRedirectResult(auth);
+
+      // console.log(result);
+
+      return;
       try {
+        const auth = getAuth();
+
         const result = await getRedirectResult(auth);
+
         if (result) {
           if (result.credential && result.credential.accessToken) {
             const gToken = result.credential.accessToken; // Google 令牌
