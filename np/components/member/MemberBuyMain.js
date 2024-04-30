@@ -54,7 +54,7 @@ import CatBuy from "./CatBuy";
 const MemberBuyMain = () => {
   const [activeCategory, setActiveCategory] = useState("全部");
   // const handleCommentClick = () => {
-  //   // 这里可以定义当评论按钮被点击时执行的逻辑
+  //   // 这里可以定义当评论按钮被点击时执行的逻辑 
   //   console.log("评论按钮被点击了");
   // };
   return (
