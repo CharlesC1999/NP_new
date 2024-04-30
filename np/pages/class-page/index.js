@@ -92,21 +92,26 @@ const ClassList = () => {
   };
 
   const handleCategoryChange = async (categoryId) => {
+    console.log("Category changing to:", categoryId);
     setCategoryId(categoryId);
     // 這裡直接調用 getClasses，傳遞新的 categoryId
     setPage(1);
-    await getClasses({ page: 1, perpage, sortBy, categoryId });
+    const newParams = { page: 1, perpage, sortBy, categoryId };
+    const data = await getClasses(newParams);
+    console.log("Data received on category change:", data);
+    if (data && data.status === "success") {
+      setTotal(data.data.total);
+    }
   };
+
+  useEffect(() => {
+    setPageCount(Math.ceil(total / perpage));
+  }, [total, perpage]);
 
   // 初次渲染時取得食譜列表資料
   useEffect(() => {
     getClasses();
   }, []);
-
-  // 當資料有變動時，更新頁碼
-  useEffect(() => {
-    setPageCount(Math.ceil(total / perpage));
-  }, [total, perpage]);
 
   useEffect(() => {
     const params = {

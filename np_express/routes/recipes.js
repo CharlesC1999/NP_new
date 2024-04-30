@@ -63,7 +63,40 @@ router.get('/', async function (req, res) {
   `
 
   // 查詢總筆數的sql語法
-  const sqlCountAll = `SELECT COUNT(*) AS countCate FROM recipe  ${where}`
+  const sqlCountAll = `SELECT COUNT(*) AS countCate FROM recipe ${where}`
+
+  // 食譜各個類別的筆數，用來顯示在sideBar
+  // ---------------------------start----------------------
+  // 主食
+  const sqlStaple = `SELECT COUNT(*) AS countStaple FROM recipe WHERE recipe_category__i_d = 1`
+  const [stapleCount] = await db.query(sqlStaple)
+  const finalStapleCount = stapleCount[0].countStaple
+  // 醬料
+  const sqlSauce = `SELECT COUNT(*) AS countSauce FROM recipe WHERE recipe_category__i_d = 2`
+  const [sauceCount] = await db.query(sqlSauce)
+  const finalSauceCount = sauceCount[0].countSauce
+
+  //湯品
+  const sqlSoup = `SELECT COUNT(*) AS countSoup FROM recipe WHERE recipe_category__i_d = 3`
+  const [soupCount] = await db.query(sqlSoup)
+  const finalSoupCount = soupCount[0].countSoup
+
+  //飲品
+  const sqlDrink = `SELECT COUNT(*) AS countDrink FROM recipe WHERE recipe_category__i_d = 4`
+  const [drinkCount] = await db.query(sqlDrink)
+  const finalDrinkCount = drinkCount[0].countDrink
+
+  //點心
+  const sqlSnack = `SELECT COUNT(*) AS countSnack FROM recipe WHERE recipe_category__i_d = 5`
+  const [snackCount] = await db.query(sqlSnack)
+  const finalSnackCount = snackCount[0].countSnack
+
+  //沙拉
+  const sqlSalad = `SELECT COUNT(*) AS countSalad FROM recipe WHERE recipe_category__i_d = 6`
+  const [saladCount] = await db.query(sqlSalad)
+  const finalSaladCount = saladCount[0].countSalad
+
+  // ---------------------------end----------------------
 
   // 食譜join分類表查詢結果
   const [recipesRawSql] = await db.query(sqlCate)
@@ -82,7 +115,18 @@ router.get('/', async function (req, res) {
   // 標準回傳JSON
   return res.json({
     status: 'success',
-    data: { recipesCategories, recipesRawSql, total, pageCount },
+    data: {
+      recipesCategories,
+      recipesRawSql,
+      total,
+      pageCount,
+      finalStapleCount,
+      finalSauceCount,
+      finalSoupCount,
+      finalDrinkCount,
+      finalSnackCount,
+      finalSaladCount,
+    },
   })
 })
 
