@@ -1,25 +1,39 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RecipeFilter.module.css";
 
-const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
-  const [defaultValue, setDefaultValue] = useState(6);
+const ClassFilter = ({
+  onShowGrid,
+  onShowList,
+  activeButton,
+  perpage,
+  setPerpage,
+  total,
+  setOrderby,
+}) => {
+  // const [perpage, setPerpage] = useState(6);
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
 
+  // 排序的選項 (單純map用)
+  const sortByOptions = [
+    { name: "食譜id升序", order: "asc" },
+    { name: "食譜id降序", order: "desc" },
+  ];
+
   // 對應 toggleIconState
-  const isUpDisabled = defaultValue >= 12;
-  const isDownDisabled = defaultValue <= 4;
+  const isUpDisabled = perpage >= 12;
+  const isDownDisabled = perpage <= 4;
 
   // 增加或減少項目數量
   function handleIncrease() {
-    if (defaultValue < 12) {
-      setDefaultValue((prev) => prev + 1);
+    if (perpage < 12) {
+      setPerpage((prev) => prev + 1);
     }
   }
 
   function handleDecrease() {
-    if (defaultValue > 4) {
-      setDefaultValue((prev) => prev - 1);
+    if (perpage > 4) {
+      setPerpage((prev) => prev - 1);
     }
   }
 
@@ -62,7 +76,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
     <div className={styles.widthMax}>
       <section className={styles.productCountContainer}>
         <header className={styles.productCountHeader}>
-          <p className={styles.totalProducts}>總共： # 項商品</p>
+          <p className={styles.totalProducts}>總共： {total} 項食譜</p>
           <div className={styles.productCountControls}>
             <button className={styles.celanderMobile}>
               <svg
@@ -86,7 +100,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
             </button>
             <div className={styles.itemsPerPage}>
               <span className={styles.itemsPerPageValue} id="itemsPerPage">
-                {defaultValue}
+                {perpage}
               </span>
               <div className={styles.numberIncreaseDecrease}>
                 <button
@@ -138,7 +152,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
             >
               <span className={styles.sortByLabel}>依 :</span>
               <span className={styles.sortByValue} id="sortByValue">
-                {sortByValue || "Class ID"}
+                {sortByValue || "食譜id升序"}
                 {/* 確認這裡沒有錯誤地回落到 "Select" */}
               </span>
               <svg
@@ -153,22 +167,26 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
                   d="M4 18h4c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1M3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1m1 6h10c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1"
                 />
               </svg>
-              <span className={styles.sortOrder}>排序</span>
+              {/* <span className={styles.sortOrder}>排序</span> */}
 
               <div className={styles.sortByOptions}>
-                {["Class ID", "Class Name", "Price", "Date Added"].map(
-                  (option, index) => (
-                    <div
-                      key={index}
-                      className={styles.sortByOption}
-                      onClick={(event) => handleOptionClick(option, event)}
-                      data-value={option}
-                    >
-                      {option}
-                    </div>
-                  )
-                )}
+                {sortByOptions.map((option, index) => (
+                  <div
+                    key={index}
+                    className={styles.sortByOption}
+                    onClick={(event) => {
+                      setSortByValue(option.name);
+                      setOrderby({ sort: "recipe__i_d", order: option.order });
+                      // handleOptionClick(option, event);
+                    }}
+                    data-value={option}
+                  >
+                    {option.name}
+                  </div>
+                ))}
               </div>
+
+              {/* ------------------------------------------------------- */}
 
               <div className={styles.sortByOptionList}>
                 <div

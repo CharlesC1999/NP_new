@@ -343,35 +343,5 @@
     "Class_end_date": "2024-02-27 12:00:00",
     "Class_category_ID": "4",
     "valid": "1"
-  },
-  {
-    "Class_ID": "24",
-    "Class_name": "1263",
-    "Class_description": "123123",
-    "C_price": "11110",
-    "C_discount_price": "0",
-    "F_Speaker_ID": "2",
-    "Class_person_limit": "11",
-    "Start_date": "2024-02-07",
-    "End_date": "2024-02-08",
-    "Class_date": "2024-02-23 13:06:00",
-    "Class_end_date": "2024-02-24 13:06:00",
-    "Class_category_ID": "2",
-    "valid": "1"
-  },
-  {
-    "Class_ID": "25",
-    "Class_name": "666666666",
-    "Class_description": "123456",
-    "C_price": "2000",
-    "C_discount_price": "0",
-    "F_Speaker_ID": "7",
-    "Class_person_limit": "20",
-    "Start_date": "2024-02-21",
-    "End_date": "2024-03-09",
-    "Class_date": "2024-03-15 17:24:00",
-    "Class_end_date": "2024-03-15 21:24:00",
-    "Class_category_ID": "2",
-    "valid": "1"
   }
 ]
