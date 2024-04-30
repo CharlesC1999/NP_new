@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 
 export default async function (sequelize) {
   return sequelize.define(
-    'Order',
+    'Orders',
     {
       Order_ID: {
         type: DataTypes.INTEGER,
@@ -36,8 +36,8 @@ export default async function (sequelize) {
       },
     },
     {
-      tableName: 'Order', // 不需要引號
-      timestamps: true, // 根據需要保留或刪除
+      tableName: 'orders', // 不需要引號
+      timestamps: false, // 根據需要保留或刪除
       paranoid: false, // 軟性刪除
     }
   )

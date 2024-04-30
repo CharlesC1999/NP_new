@@ -106,31 +106,41 @@ router.get('/', async function (req, res) {
 
   // 計算頁數
   // const pageCount = Math.ceil(total / Number(perpage)) || 0
+  //抓狀態
 
   return res.json({
     status: 'success',
     data: {
       total,
-
       orders: rows,
     },
   })
 })
 
-// 標準回傳JSON
-//   return res.json({ status: 'success', data: {} })
-// })
-
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
-// router.get('/:id', async function (req, res) {
-//   // 轉為數字
-//   const id = getIdParam(req)
+router.get('/:status', async function (req, res) {
+  // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
+  const ordersStatus = req.params.status
 
-//   const product = await My_Product.findByPk(id, {
-//     raw: true, // 只需要資料表中資料
-//   })
+  const sqlOrders = `SELECT orders.order_id, member_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
+  FROM orders
+  JOIN order_item ON orders.Order_ID = order_item.Order_ID
+  Join product on order_item.product_id = product.ID
+  JOIN product_image ON order_item.Product_ID = product_image.F_product_id
+  WHERE orders.Status = "${ordersStatus}"
+  GROUP BY orders.order_id
+  order by orders.order_id;`
 
-//   return res.json({ status: 'success', data: { product } })
-// })
+  // WHERE Status= '${ordersStatus}'
+  const [rows, fields] = await db.query(sqlOrders)
+
+  return res.json({
+    status: 'success',
+    data: {
+      orders: rows,
+    },
+  })
+  //return res.json({ status: 'success', data: { status } })
+})
 
 export default router
