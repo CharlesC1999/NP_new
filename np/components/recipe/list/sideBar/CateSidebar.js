@@ -8,6 +8,27 @@ function CateSidebar({
 }) {
   //食譜類別state初始值
   const [categories, setCategories] = useState([]);
+  // 新的食譜類別 (有擴充qty的，上面那個不知道為啥一直無法設定qty)
+  const [newCategories, setNewCategories] = useState([]);
+
+  // 各類別食譜總數  ------------------------------start---------------------------------------
+  // 所有類別
+  const [allCategories, setAllCategories] = useState("");
+  // 主食
+  const [staple, setStaple] = useState("");
+  // 醬料
+  const [sauce, setSauce] = useState("");
+
+  // 集合各類食譜的數量
+  const [allRecipes, setAllRecipes] = useState([
+    {
+      id: 1,
+      qty: 0,
+    },
+    { id: 2, qty: 0 },
+  ]);
+
+  // 各類別食譜總數  ------------------------------end---------------------------------------
 
   //取得食譜分類名稱
   const getCategories = async () => {
@@ -16,6 +37,17 @@ function CateSidebar({
     try {
       const res = await fetch(url);
       const data = await res.json();
+
+      // 設定各類別食譜總數  ------------------------------start---------------------------------------
+      // 全部類別
+      setAllCategories(data.data.total);
+      // 主食
+      setStaple(data.data.finalStapleCount);
+      // 醬料
+      setSauce(data.data.finalSauceCount);
+
+      // 設定各類別食譜總數  ------------------------------end---------------------------------------
+
       //檢查得到的資料是array才設定給state (供map使用)
       if (Array.isArray(data.data.recipesCategories)) {
         setCategories(data.data.recipesCategories);
@@ -30,6 +62,38 @@ function CateSidebar({
   useEffect(() => {
     getCategories();
   }, []);
+
+  // 當各類食譜的數量有變動時重新設定給集合的食譜總數
+  useEffect(() => {
+    setAllRecipes([
+      { id: 1, qty: staple },
+      { id: 2, qty: sauce },
+      { id: 3, qty: 0 },
+      { id: 4, qty: 0 },
+      { id: 5, qty: 0 },
+      { id: 6, qty: 0 },
+    ]);
+  }, [staple, sauce]);
+
+  // 當集合的食譜總數有變動時設定給最初的食譜陣列物件 (sql查詢得到的結果)，用意在於擴充qty給sideBar顯示
+  useEffect(() => {
+    const newCategoriesAry = categories.map((v, i) => {
+      // 找出集合各類食譜中id跟sql查詢得到的recipe_cate_id相同的物件
+      const found = allRecipes.find((v1) => {
+        return v1.id === v.Recipe_cate_ID;
+      });
+      // 如果有找到對應id的物件，就把qty給最一開始sql查詢到的物件，否則就給原本的物件
+      if (found) {
+        return { ...v, qty: found.qty };
+      } else {
+        return { ...v };
+      }
+    });
+    console.log("-------------------" + JSON.stringify(newCategories));
+    // 設定給sql查詢到的物件
+    setNewCategories(newCategoriesAry);
+    setCategories(newCategories);
+  }, [allRecipes]);
 
   return (
     <>
@@ -51,12 +115,12 @@ function CateSidebar({
           </div>
           <div className={styles.sideText}>
             <h6 className={styles.left}>全部</h6>
-            <h6 className={styles.right}>3</h6>
+            <h6 className={styles.right}>{allCategories}</h6>
           </div>
         </div>
       </div>
 
-      {categories.map((v, i) => {
+      {newCategories.map((v, i) => {
         return (
           <div
             onClick={() => {
@@ -78,7 +142,7 @@ function CateSidebar({
               </div>
               <div className={styles.sideText}>
                 <h6 className={styles.left}>{v.Recipe_cate_name}</h6>
-                <h6 className={styles.right}>3</h6>
+                <h6 className={styles.right}>{v.qty}</h6>
               </div>
             </div>
           </div>
