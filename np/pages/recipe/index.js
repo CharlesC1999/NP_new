@@ -107,7 +107,8 @@ export default function RecipeList() {
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
         <TopBarList />
-        <TopBarGrid />
+        {/* <TopBarGrid /> */}
+
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
           <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
             <SideBarTop
