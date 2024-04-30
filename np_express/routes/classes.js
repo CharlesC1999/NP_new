@@ -8,26 +8,44 @@ import { getIdParam } from '#db-helpers/db-tool.js'
 import sequelize from '#configs/db.js'
 // 一般sql
 import db from '#configs/mysql.js'
-const { Class, Class_images, Speaker } = sequelize.models
+const { Class, Class_images, Speaker, Class_categories } = sequelize.models
 
 router.get('/', async function (req, res) {
   // 預設分頁顯示第一頁，每頁6筆資料
-  const { page = 1, perpage = 6 } = req.query
+  const { page = 1, perpage = 6, sortBy = 'class__i_d', categoryId } = req.query
 
   const perpageNow = Number(perpage) || 6
   const pageNow = Number(page) || 1
   const limit = perpageNow
   const offset = (pageNow - 1) * perpageNow
+  const sortOrder = sortBy || 'class__i_d'
+  let whereClause = 'WHERE ci.sort_order = 0'
+  if (
+    categoryId &&
+    categoryId !== 'null' &&
+    categoryId !== 'undefined' &&
+    categoryId.trim() !== ''
+  ) {
+    whereClause += ` AND c.class_category__i_d = ${db.escape(categoryId)}`
+  }
 
   const sqlCate = `
-  SELECT c.*, ci.image__u_r_l, s.speaker_name
-  FROM class AS c
-  JOIN class_image AS ci ON c.class__i_d = ci.f__class__i_d
-  JOIN speaker AS s ON c.f__speaker__i_d = s.speaker_id
-  WHERE ci.sort_order = 0
-  LIMIT ${limit} OFFSET ${offset}
+    SELECT c.*, ci.image__u_r_l, s.speaker_name
+    FROM class AS c
+    JOIN class_image AS ci ON c.class__i_d = ci.f__class__i_d
+    JOIN speaker AS s ON c.f__speaker__i_d = s.speaker_id
+    JOIN class_categories AS cc ON c.class_category__i_d = cc.class_cate__i_d
+    ${whereClause}
+    ORDER BY ${sortOrder}
+    LIMIT ${limit} OFFSET ${offset}
   `
-  const sqlCountCate = `SELECT COUNT(*) AS countCate FROM class`
+  const sqlCountCate = `
+    SELECT COUNT(*) AS countCate
+    FROM class AS c
+    JOIN class_image AS ci ON c.class__i_d = ci.f__class__i_d
+    JOIN class_categories AS cc ON c.class_category__i_d = cc.class_cate__i_d
+    ${whereClause}
+  `
 
   const [classesRawSql] = await db.query(sqlCate)
   const [countCateRawSql] = await db.query(sqlCountCate)

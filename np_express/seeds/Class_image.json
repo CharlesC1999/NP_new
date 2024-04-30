@@ -178,7 +178,7 @@
   {
     "Image_ID": "23",
     "F_Class_ID": "13",
-    "Image_URL": "8_sxVeYmWVRr.png",
+    "Image_URL": "8_sxVeYmWVRr.jpg",
     "Description": "",
     "Sort_order": "0",
     "Upload_date": "1901-01-01 12:00:00"
@@ -186,7 +186,7 @@
   {
     "Image_ID": "24",
     "F_Class_ID": "14",
-    "Image_URL": "7_pnfoDoWrUa.png",
+    "Image_URL": "7_pnfoDoWrUa.jpg",
     "Description": "",
     "Sort_order": "0",
     "Upload_date": "1901-01-01 12:00:00"
@@ -510,29 +510,5 @@
     "Description": "",
     "Sort_order": "3",
     "Upload_date": "1901-01-01 12:00:00"
-  },
-  {
-    "Image_ID": "65",
-    "F_Class_ID": "24",
-    "Image_URL": "17070232180.png",
-    "Description": "",
-    "Sort_order": "0",
-    "Upload_date": "2024-02-04 13:06:00"
-  },
-  {
-    "Image_ID": "66",
-    "F_Class_ID": "25",
-    "Image_URL": "17071143900.png",
-    "Description": "",
-    "Sort_order": "0",
-    "Upload_date": "2024-02-05 14:26:00"
-  },
-  {
-    "Image_ID": "67",
-    "F_Class_ID": "25",
-    "Image_URL": "17071143901.png",
-    "Description": "",
-    "Sort_order": "1",
-    "Upload_date": "2024-02-05 14:26:00"
   }
 ]
