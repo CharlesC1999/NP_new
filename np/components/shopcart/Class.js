@@ -1,45 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ClassStyles from "./class.module.css";
 import Check from "@/components/checkbox-custom/CheckBoxCustom";
+// 加上context鉤子
+import {useCart} from "@/hooks/use-cart"
 
 const Class = () => {
-  const classIndex = [
-    { id: 0, count: 1, name: "肉桂捲初級班", price: 1500 },
-    { id: 1, count: 1, name: "cake初級班", price: 1200 },
-    { id: 2, count: 1, name: "肉捲初級班", price: 1000 },
-  ];
-  const [classData, classProductsData] = useState(classIndex);
+ 
+  const {items, increaseItem, decreaseItem, removeItem } = useCart()
+  const { totalItems, totalPrice } = useCart()
 
-  // const [quantity,setQuantity] = useState(0)
-  const increase = (id) => {
-    // setQuantity(quantity + 1)
-    const addProducts = classData.map((v, i) => {
-      if (v.id === id) return { ...v, count: v.count + 1 };
-      else return v;
-    });
-
-    classProductsData(addProducts);
-  };
-
-  const decrease = (id) => {
-    // if(quantity>0){
-    //   setQuantity(quantity - 1)
-    // }
-    const reduceProducts = classData.map((v, i) => {
-      if (v.id === id && v.count > 0) return { ...v, count: v.count - 1 };
-      else return v;
-    });
-
-    classProductsData(reduceProducts);
-  };
-
-  const remove = (id) => {
-    const removeProduct = classData.filter((v, i) => {
-      return v.id !== id;
-    });
-
-    classProductsData(removeProduct);
-  };
 
   return (
     <>
@@ -58,13 +27,9 @@ const Class = () => {
             className="col d-flex flex-direction-row"
             style={{ width: 100, minWidth: 77 }}
           >
-            {/* <input
-              className="mt-1 ms-3 me-2"
-              type="checkbox"
-              defaultValue=""
-              id=""
-            /> */}
-            <Check />
+            
+            <div className="pt-2"><Check/></div>
+            
             <label className={`mt-1 m-1 ${ClassStyles.fc} `} htmlFor="">
               全選
             </label>
@@ -94,19 +59,14 @@ const Class = () => {
         </div>
 
         {/*  */}
-        {classData.map((element) => {
+        {items.map((element) => {
           return (
             <div className="row" key={element.id}>
               <div
                 className="col d-flex align-items-center justify-content-start ps-3"
                 style={{ width: 100, minWidth: 77 }}
               >
-                {/* <input
-                  className="mt-2 ms-3"
-                  type="checkbox"
-                  defaultValue=""
-                  id=""
-                /> */}
+               
                 <Check />
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
@@ -119,7 +79,7 @@ const Class = () => {
               </div>
               <div
                 className="col-3  align-self-center pt-3 "
-                style={{ paddingLeft: "100px" }}
+                style={{ paddingLeft: "50px" }}
               >
                 <h4 className={ClassStyles.fc}>{element.name}</h4>
                 <p style={{ fontSize: "20px" }}>2024/04/05</p>
@@ -131,20 +91,15 @@ const Class = () => {
                 <span
                   className={`${ClassStyles.plus}`}
                   onClick={() => {
-                    const nextCount = element.count - 1;
-                    if (nextCount === 0) {
-                      remove(element.id);
-                    } else {
-                      decrease(element.id);
-                    }
+                    decreaseItem(element.id)
                   }}
                 >
                   -
                 </span>
-                <span>{element.count} </span>
+                <span>{element.qty} </span>
                 <span
                   onClick={() => {
-                    increase(element.id);
+                    increaseItem(element.id)
                   }}
                   className={`${ClassStyles.plus}`}
                 >
@@ -156,7 +111,7 @@ const Class = () => {
                 {element.price}
               </div>
               <div className="col align-self-center text-center">
-                {element.price * element.count}
+                {element.price * element.qty}
               </div>
               <div
                 className="col d-flex align-items-center justify-content-center"
@@ -166,10 +121,7 @@ const Class = () => {
                   src="/images/Delete.jpg"
                   className={`${ClassStyles.plus}`}
                   onClick={() => {
-                    const nextData = classData.filter((v, i) => {
-                      return v.id !== element.id;
-                    });
-                    classProductsData(nextData);
+                    removeItem(element.id)
                   }}
                 />
               </div>
@@ -191,7 +143,7 @@ const Class = () => {
           </div>
         </div>
         {/*  */}
-        {classData.map((element) => {
+        {items.map((element) => {
           return (
             <div className="row" key={element.id}>
               {/* 叉叉 */}
@@ -212,10 +164,7 @@ const Class = () => {
                       className={`${ClassStyles.plus}`}
                       alt=""
                       onClick={() => {
-                        const nextData = classData.filter((v, i) => {
-                          return v.id !== element.id;
-                        });
-                        classProductsData(nextData);
+                       removeItem(element.id)
                       }}
                     />
                   </div>
@@ -241,21 +190,16 @@ const Class = () => {
                       <span
                         className={`${ClassStyles.plus} ${ClassStyles.fc}`}
                         onClick={() => {
-                          const nextCount = element.count - 1;
-                          if (nextCount === 0) {
-                            remove(element.id);
-                          } else {
-                            decrease(element.id);
-                          }
+                         decreaseItem(element.id)
                         }}
                       >
                         -
                       </span>
-                      <span>{element.count}</span>
+                      <span>{element.qty}</span>
                       <span
                         className={`${ClassStyles.plus} ${ClassStyles.fc}`}
                         onClick={() => {
-                          increase(element.id);
+                          increaseItem(element.id)
                         }}
                       >
                         +
@@ -268,7 +212,7 @@ const Class = () => {
                       價格{" "}
                     </span>
                     <span className={ClassStyles.fb}>
-                      {element.count * element.price}
+                      {element.qty * element.price}
                     </span>
                   </div>
                 </div>
@@ -323,11 +267,7 @@ const Class = () => {
             className={`${ClassStyles.fc} col`}
             style={{ marginLeft: "-100px" }}
           >
-            {/* 计算总价 */}$
-            {classData.reduce(
-              (total, product) => total + product.count * product.price,
-              0
-            )}
+            {totalPrice}
           </div>
         </div>
       </main>

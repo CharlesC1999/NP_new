@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
+
 //  全域樣式
 import "@/styles/globals.css";
 //  Datepicker
@@ -16,6 +17,7 @@ import "@/styles/loader.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
 // Router
 import Router from "next/router";
+import { CartProvider } from "@/hooks/use-cart";
 
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
@@ -23,9 +25,11 @@ export default function App({ Component, pageProps }) {
   return (
     <AuthProvider>
       <LoaderProvider CustomLoader={OrangeLoader}>
+      <CartProvider>
         <ManageRouteChanges>
           {getLayout(<Component {...pageProps} />)}
         </ManageRouteChanges>
+        </CartProvider>
       </LoaderProvider>
     </AuthProvider>
   );
