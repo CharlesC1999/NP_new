@@ -39,7 +39,13 @@ router.get('/', async function (req, res) {
     ORDER BY ${sortOrder}
     LIMIT ${limit} OFFSET ${offset}
   `
-  const sqlCountCate = `SELECT COUNT(*) AS countCate FROM class`
+  const sqlCountCate = `
+    SELECT COUNT(*) AS countCate
+    FROM class AS c
+    JOIN class_image AS ci ON c.class__i_d = ci.f__class__i_d
+    JOIN class_categories AS cc ON c.class_category__i_d = cc.class_cate__i_d
+    ${whereClause}
+  `
 
   const [classesRawSql] = await db.query(sqlCate)
   const [countCateRawSql] = await db.query(sqlCountCate)
