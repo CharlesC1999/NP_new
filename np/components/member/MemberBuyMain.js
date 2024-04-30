@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BuyCard from "./MemberBuyCard";
+import MemberBuyCard from "./MemberBuyCard";
 import styles from "./MemberBuymain.module.css";
 
 import CatBuy from "./CatBuy";
@@ -105,7 +105,7 @@ const MemberBuyMain = () => {
             </div>
           </div>
           {/* BuyCard  */}
-          <BuyCard activeCategory={activeCategory}/>
+          <MemberBuyCard activeCategory={activeCategory}/>
           {/* <div className={styles.buyCard}>
             <div className={styles.buyCardContent}>
               <div className={styles.bccolumn}>

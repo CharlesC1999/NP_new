@@ -3,7 +3,7 @@ import React from "react";
 import styles from "@/components/member/MemberBuyCard.module.scss";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-export default function BuyCard({activeCategory}) {
+export default function MemberBuyCard({activeCategory}) {
   const [orders, setOrders] = useState([]);
 
   // 與伺服器要求獲取資料的async函式

@@ -15,12 +15,21 @@ import Footer from "@/components/Footer";
 // 導入路徑配置
 import routes from "@/contexts/routes";
 // Google登入
-import firebase from "@/utils/firebase-config";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { initializeApp, getApps } from "firebase/app";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { firebaseConfig } from "@/hooks/firebase-config";
 // 讀取畫面
 import { useLoader } from "@/hooks/use-loader";
 // sweetAlert
 import Swal from "sweetalert2";
+import { result } from "lodash";
 
 const Login = () => {
   // 導入讀取鉤子
@@ -48,6 +57,10 @@ const Login = () => {
   const [loginBlocked, setLoginBlocked] = useState(false);
   // 開眼
   const [showPassword, setShowPassword] = useState(false);
+  // google login
+  if (!getApps().length) {
+    initializeApp(firebaseConfig);
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -105,28 +118,48 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  // Google登入
-  const handleGoogleLogin = async () => {
-    const auth = getAuth();
+  const handleGoogleLogin = async (callback) => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        //成功
-        const token = result.credential.accessToken; // Google 令牌
-        const userData = {
-          name: result.user.displayName,
-          email: result.user.email,
-          photoURL: result.user.photoURL,
-        };
-        console.log("登入成功", result.user);
-        // 使用 AuthContext 的 login 方法更新應用狀態
-        login(token, userData);
-      })
-      .catch((error) => {
-        // Error
-        console.error("Google 登入失败:", error.message);
-      });
+    const auth = getAuth();
+
+    // 重新導向
+    signInWithRedirect(auth, provider);
   };
+
+  useEffect(() => {
+    const shoeGoogleLogin = (callback) => {
+      const auth = getAuth();
+
+      // Result from Redirect auth flow.
+      getRedirectResult(auth)
+        .then((result) => {
+          if (result) {
+            // This gives you a Google Access Token. You can use it to access Google APIs.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+
+            // The signed-in user info.
+            const user = result.user;
+            console.log(token);
+            console.log(user);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      // Listening for auth state changes.
+      onAuthStateChanged(auth, (user) => {
+        // if (user) {
+        //   console.log("user", user);
+        // callback the user data
+        // callback(user.providerData[0]);
+        // }
+      });
+    };
+    shoeGoogleLogin();
+  }, []);
+  // ---------------------------------------------------
 
   // 連結用router導
   const goSignUp = () => {
