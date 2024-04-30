@@ -15,18 +15,21 @@ import styles from "@/styles/recipe/recipe-list.module.scss";
 
 export default function RecipeList() {
   // ----------------------篩選條件 start ------------------------
-  // 1. 食譜分類
+  // 食譜分類
   const [recipeCategory, setRecipeCategory] = useState("");
 
   // ----------------------篩選條件 end --------------------------
 
   // 分頁用
   const [page, setPage] = useState(1);
-  const [perpage, setPerpage] = useState(5);
+  const [perpage, setPerpage] = useState(6);
 
   // 總共幾筆資料、總頁數
   const [total, setTotal] = useState(0);
   const [pageCount, setPageCount] = useState(0);
+
+  // 排序(前面為排序欄位，後面參數asc為從小到大，desc為從大到小排序)
+  const [orderby, setOrderby] = useState({ sort: "recipe__i_d", order: "asc" });
 
   //食譜資料庫data
   const [recipesData, setRecipesData] = useState([]);
@@ -59,13 +62,15 @@ export default function RecipeList() {
     }
   };
 
-  // 篩選用
+  // 執行篩選條件
   const handleConditionsChange = () => {
     const params = {
       // 每次篩選會返回第一頁
       page: 1,
       perpage,
       recipe_category__i_d: recipeCategory,
+      order: orderby.order,
+      sort: orderby.sort,
     };
     // 每次篩選會返回第一頁
     setPage(1);
@@ -84,19 +89,16 @@ export default function RecipeList() {
       page,
       perpage,
       recipe_category__i_d: recipeCategory,
+      order: orderby.order,
+      sort: orderby.sort,
     };
     getRecipes(params);
   }, [page]);
 
-  //每次condition改變時重新取得食譜列表資料
+  //每次食譜分類改變時重新取得食譜列表資料，並且重設回第一頁
   useEffect(() => {
-    const params = {
-      page,
-      perpage,
-      recipe_category__i_d: recipeCategory,
-    };
-    getRecipes(params);
-  }, [recipeCategory]);
+    handleConditionsChange();
+  }, [recipeCategory, perpage, orderby]);
 
   return (
     <>
@@ -111,13 +113,19 @@ export default function RecipeList() {
             <SideBarTop
               setRecipeCategory={setRecipeCategory}
               handleConditionsChange={handleConditionsChange}
+              recipeCategory={recipeCategory}
             />
             <SideBarRecipe />
           </div>
           {/* 食譜卡片 (list排列) */}
           <div className={`${styles["cards-list"]} d-flex flex-column`}>
             <div className="d-none d-xxl-block">
-              <Filter />
+              <Filter
+                perpage={perpage}
+                setPerpage={setPerpage}
+                total={total}
+                setOrderby={setOrderby}
+              />
             </div>
             <div className={`${styles["list-layout"]} col`}>
               <section

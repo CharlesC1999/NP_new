@@ -5,6 +5,7 @@ import styles from "@/components/recipe/list/sideBar/SideBarCategories.module.sc
 export default function SideBarTop({
   setRecipeCategory,
   handleConditionsChange,
+  recipeCategory,
 }) {
   return (
     <>
@@ -16,6 +17,7 @@ export default function SideBarTop({
         <CateSidebar
           setRecipeCategory={setRecipeCategory}
           handleConditionsChange={handleConditionsChange}
+          recipeCategory={recipeCategory}
         />
       </div>
     </>
