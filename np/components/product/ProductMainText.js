@@ -8,16 +8,14 @@ import toast, { Toaster } from "react-hot-toast";
 const notify = () => toast("已加入收藏 💚");
 const notifyBtn = () => toast("已加入購物車 🛒");
 
-function ProductMainText() {
+function ProductMainText({ name, price, description, discount_price }) {
   return (
     <>
       <div className={`${style["product-text"]} d-flex flex-column`}>
-        <div className={`${style["h3"]} mb-3`}>台灣無刺虱目魚肚X5片</div>
-        <p className={`${style["p"]} my-2`}>
-          以純海水放養的虱目魚，無土味且營養價值高。產地位於紅樹林溼地，水中含豐富有機質及浮游生物，提供充分的天然養份。生態養殖虱目魚活動力高，因而肉質極富彈性，肉色偏粉紅，是老饕心中的夢幻滋味。
-        </p>
-        <div className={`${style["d-price"]}`}>$100</div>
-        <div className={`${style["price"]}`}>$320</div>
+        <div className={`${style["h3"]} mb-3`}>{name}</div>
+        <p className={`${style["p"]} my-2`}>{description}</p>
+        <div className={`${style["d-price"]}`}>{discount_price}</div>
+        <div className={`${style["price"]}`}>${price}</div>
         <div
           className={`${style["star-row"]} d-flex flex-row my-2 align-items-center justify-content-between`}
         >

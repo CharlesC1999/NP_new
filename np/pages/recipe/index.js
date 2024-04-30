@@ -14,6 +14,9 @@ import Filter from "@/components/recipe/list/filter/RecipeFilter";
 import styles from "@/styles/recipe/recipe-list.module.scss";
 
 export default function RecipeList() {
+  // 給TopBarList裡面分類下拉式清單用的
+  const [categoriesDropdown, setCategoriesDropdown] = useState([]);
+
   // ----------------------篩選條件 start ------------------------
   // 食譜分類
   const [recipeCategory, setRecipeCategory] = useState("");
@@ -106,14 +109,21 @@ export default function RecipeList() {
       <Breadcrumbs />
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
-        <TopBarList />
-        <TopBarGrid />
+        <TopBarList
+          setOrderby={setOrderby}
+          total={total}
+          categoriesDropdown={categoriesDropdown}
+          setRecipeCategory={setRecipeCategory}
+        />
+        {/* <TopBarGrid /> */}
+
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
           <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
             <SideBarTop
               setRecipeCategory={setRecipeCategory}
               handleConditionsChange={handleConditionsChange}
               recipeCategory={recipeCategory}
+              setCategoriesDropdown={setCategoriesDropdown}
             />
             <SideBarRecipe />
           </div>
@@ -134,7 +144,8 @@ export default function RecipeList() {
                 <RecipeCardsList recipesData={recipesData} />
               </section>
             </div>
-            <div className="d-flex gap-3 justify-content-center mt-4 align-items-center">
+            {/* 分頁用 */}
+            <div className="d-none d-xxl-flex gap-3 justify-content-center mt-4 align-items-center">
               <button
                 onClick={() => {
                   const newPageNow = page - 1 > 1 ? page - 1 : 1;

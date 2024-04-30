@@ -6,6 +6,7 @@ export default function SideBarTop({
   setRecipeCategory,
   handleConditionsChange,
   recipeCategory,
+  setCategoriesDropdown,
 }) {
   return (
     <>
@@ -18,6 +19,7 @@ export default function SideBarTop({
           setRecipeCategory={setRecipeCategory}
           handleConditionsChange={handleConditionsChange}
           recipeCategory={recipeCategory}
+          setCategoriesDropdown={setCategoriesDropdown}
         />
       </div>
     </>
