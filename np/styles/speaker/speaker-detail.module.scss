@@ -165,7 +165,8 @@
   }
   .lectureGroup{
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+    gap: 50px;
     align-self: stretch;
     @media (max-width: 375px) {
       width: 375px;
@@ -173,9 +174,3 @@
       align-self: auto;
     }
   }
-    // 手機版時隱藏最後兩張相關課程的卡片
-    @media(max-width:375px){
-      .lectureGroup > :nth-last-child(-n+2){
-        display: none;
-      }
-    }

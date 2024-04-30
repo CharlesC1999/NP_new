@@ -32,14 +32,16 @@
       justify-content: center;
       gap: 12px;
       align-self: stretch;
-      align-items: flex-end;
+      align-items: center;
       @media (max-width: 375px) {
         padding: 15px 10px;
       }
       & h5 {
         color: var(--gray01, #747e85);
-        /* H5 */
-        /* font-family: Inter; */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
         font-size: 20px;
         /* font-style: normal; */
         font-weight: 600;
@@ -78,6 +80,7 @@
       background: var(--green05, #def9ec);
       color: var(--green02);
       text-decoration: none;
+      align-self:flex-end ;
       /* font-family: Inter; */
       font-size: 16px;
       font-weight: 700;

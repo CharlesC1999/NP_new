@@ -27,7 +27,6 @@ import LectureCardVertical from "@/components/speaker/speaker-detail/LectureCard
 
 export default function SpeakerDetail() {
   // 物件狀態的初始值，通常需把每個屬性的初始值寫出
-  // 初次渲染會使用初始值
   const [speaker, setSpeaker] = useState({
     speaker_id: "",
     speaker_name: "",
@@ -38,9 +37,17 @@ export default function SpeakerDetail() {
     speaker_image: "",
     valid: 1,
   });
+  // 所有講師的資料
   const [speakers, setSpeakers] = useState([]);
   // 新增一個狀態來存儲過濾後的講師數據
-  const [filteredSpeakers, setFilteredSpeakers] = useState([]);  
+  const [filteredSpeakers, setFilteredSpeakers] = useState([]);
+  //新增一個狀態儲存講師開設的課程資訊
+  const [relatedClass, setRelatedClass] = useState([{
+    "class__i_d": "",
+    "class_name": "",
+    "class_description": "",
+    "image__u_r_l": ""
+}]);
   // 宣告出 router 物件，可以取得兩個值
   // 1. router.query，是一個物件，其中有動態路由的參數值pid
   // 2. router.isReady，是一個布林值，代表本頁面元件已完成水合作用，可以得到pid值
@@ -63,6 +70,7 @@ export default function SpeakerDetail() {
       }
       if (data.status === "success") {
         setSpeakers(data.data.speakers);
+        setRelatedClass(data.data.ClassData);
       }
     } catch (e) {
       console.log(e);
@@ -73,10 +81,12 @@ export default function SpeakerDetail() {
   useEffect(() => {
     const id = Number(router.query.sid);
     let filterSpeakers;
-    id <speakers.length-4 ? filterSpeakers = speakers.slice(id, id + 5):filterSpeakers = speakers.slice(speakers.length-5, speakers.length)
-    console.log(filterSpeakers)
-    setFilteredSpeakers(filterSpeakers)
-  }, [speakers,router.query.sid]);
+    id < speakers.length - 4
+      ? (filterSpeakers = speakers.slice(id, id + 5))
+      : (filterSpeakers = speakers.slice(speakers.length - 5, speakers.length));
+    console.log(filterSpeakers);
+    setFilteredSpeakers(filterSpeakers);
+  }, [speakers, router.query.sid]);
   // 頁面初次渲染後向伺服器要求資料
   // 監聽router.isReady，true 或是sid有變動時，都會重新向伺服器取得資料
   useEffect(() => {
@@ -84,7 +94,7 @@ export default function SpeakerDetail() {
     if (router.isReady) {
       getSpeakers(router.query.sid);
     }
-  }, [router.isReady,router.query.sid]);
+  }, [router.isReady, router.query.sid]);
 
   return (
     <>
@@ -96,7 +106,15 @@ export default function SpeakerDetail() {
           <div className={styles.divider}></div>
           <div className={styles.speakerCardListGroup}>
             {filteredSpeakers.map((v) => {
-              return (<SpeakerCardHorizontal key={v.speaker_id} id={v.speaker_id} name={v.speaker_name} description={v.speaker_description} image={v.speaker_image } />)
+              return (
+                <SpeakerCardHorizontal
+                  key={v.speaker_id}
+                  id={v.speaker_id}
+                  name={v.speaker_name}
+                  description={v.speaker_description}
+                  image={v.speaker_image}
+                />
+              );
             })}
           </div>
         </div>
@@ -125,11 +143,17 @@ export default function SpeakerDetail() {
           <div className={styles.upcomingLectures}>
             <p className={styles.title}>近期課程</p>
             <div className={styles.lectureGroup}>
-              <LectureCardVertical />
-              <LectureCardVertical />
-              <LectureCardVertical />
-              <LectureCardVertical />
-              {/*   <= 375px 要隱藏最後兩張卡片*/}
+              {relatedClass.map((v) => {
+                return (
+                  <LectureCardVertical
+                    key={v.class__i_d}
+                    name={v.class_name}
+                    description={v.class_description}
+                    image={v.image__u_r_l}
+                    classID={v.class__i_d}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
