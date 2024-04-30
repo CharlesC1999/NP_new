@@ -18,6 +18,14 @@ function CateSidebar({
   const [staple, setStaple] = useState("");
   // 醬料
   const [sauce, setSauce] = useState("");
+  // 湯品
+  const [soup, setSoup] = useState("");
+  // 飲品
+  const [drink, setDrink] = useState("");
+  // 點心
+  const [snack, setSnack] = useState("");
+  // 沙拉
+  const [salad, setSalad] = useState("");
 
   // 集合各類食譜的數量
   const [allRecipes, setAllRecipes] = useState([
@@ -26,6 +34,10 @@ function CateSidebar({
       qty: 0,
     },
     { id: 2, qty: 0 },
+    { id: 3, qty: 0 },
+    { id: 4, qty: 0 },
+    { id: 5, qty: 0 },
+    { id: 6, qty: 0 },
   ]);
 
   // 各類別食譜總數  ------------------------------end---------------------------------------
@@ -45,6 +57,14 @@ function CateSidebar({
       setStaple(data.data.finalStapleCount);
       // 醬料
       setSauce(data.data.finalSauceCount);
+      // 湯品
+      setSoup(data.data.finalSoupCount);
+      // 飲品
+      setDrink(data.data.finalDrinkCount);
+      // 點心
+      setSnack(data.data.finalSnackCount);
+      // 沙拉
+      setSalad(data.data.finalSaladCount);
 
       // 設定各類別食譜總數  ------------------------------end---------------------------------------
 
@@ -68,12 +88,12 @@ function CateSidebar({
     setAllRecipes([
       { id: 1, qty: staple },
       { id: 2, qty: sauce },
-      { id: 3, qty: 0 },
-      { id: 4, qty: 0 },
-      { id: 5, qty: 0 },
-      { id: 6, qty: 0 },
+      { id: 3, qty: soup },
+      { id: 4, qty: drink },
+      { id: 5, qty: snack },
+      { id: 6, qty: salad },
     ]);
-  }, [staple, sauce]);
+  }, [staple, sauce, soup, drink, snack, salad]);
 
   // 當集合的食譜總數有變動時設定給最初的食譜陣列物件 (sql查詢得到的結果)，用意在於擴充qty給sideBar顯示
   useEffect(() => {

@@ -76,6 +76,26 @@ router.get('/', async function (req, res) {
   const [sauceCount] = await db.query(sqlSauce)
   const finalSauceCount = sauceCount[0].countSauce
 
+  //湯品
+  const sqlSoup = `SELECT COUNT(*) AS countSoup FROM recipe WHERE recipe_category__i_d = 3`
+  const [soupCount] = await db.query(sqlSoup)
+  const finalSoupCount = soupCount[0].countSoup
+
+  //飲品
+  const sqlDrink = `SELECT COUNT(*) AS countDrink FROM recipe WHERE recipe_category__i_d = 4`
+  const [drinkCount] = await db.query(sqlDrink)
+  const finalDrinkCount = drinkCount[0].countDrink
+
+  //點心
+  const sqlSnack = `SELECT COUNT(*) AS countSnack FROM recipe WHERE recipe_category__i_d = 5`
+  const [snackCount] = await db.query(sqlSnack)
+  const finalSnackCount = snackCount[0].countSnack
+
+  //沙拉
+  const sqlSalad = `SELECT COUNT(*) AS countSalad FROM recipe WHERE recipe_category__i_d = 6`
+  const [saladCount] = await db.query(sqlSalad)
+  const finalSaladCount = saladCount[0].countSalad
+
   // ---------------------------end----------------------
 
   // 食譜join分類表查詢結果
@@ -102,6 +122,10 @@ router.get('/', async function (req, res) {
       pageCount,
       finalStapleCount,
       finalSauceCount,
+      finalSoupCount,
+      finalDrinkCount,
+      finalSnackCount,
+      finalSaladCount,
     },
   })
 })
