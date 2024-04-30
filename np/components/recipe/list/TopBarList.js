@@ -1,15 +1,20 @@
-import React from "react";
+import { useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./TopBarList.module.scss";
 
 export default function TopBarList() {
+  const selectBoxRef = useRef(null);
   return (
     <>
       <div
         className={`${styles["top-bar"]} row d-flex d-xxl-none justify-content-between`}
       >
+        {/* 排序 */}
         <div
           className={`col-4 ${styles["btn-sort"]} d-flex align-items-center`}
+          onClick={() => {
+            selectBoxRef.current.classList.toggle("d-none");
+          }}
         >
           <p className={`${styles["sort"]} text-center`}>排序</p>
           <div>
@@ -27,6 +32,7 @@ export default function TopBarList() {
             </svg>
           </div>
         </div>
+        {/* 分類 */}
         <div
           className={`col-5 ${styles["btn-filter"]} d-flex align-items-center`}
         >
@@ -44,6 +50,7 @@ export default function TopBarList() {
             />
           </svg>
         </div>
+        {/* switch button */}
         <div className={`col-auto ${styles["switch-card-qty"]} d-flex`}>
           <div className={styles["switch-grid"]}>
             <svg
@@ -78,6 +85,16 @@ export default function TopBarList() {
                 fill="#50BF8B"
               />
             </svg>
+          </div>
+        </div>
+        {/* 排序下拉式選單 */}
+        <div className="row position-relative">
+          <div
+            className={` position-absolute py-2 px-0 ${styles["select-box"]}`}
+            ref={selectBoxRef}
+          >
+            <p className="text-center m-0">按id升序</p>
+            <p className="text-center m-0">按id降序</p>
           </div>
         </div>
       </div>

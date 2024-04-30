@@ -107,7 +107,8 @@ export default function RecipeList() {
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
         <TopBarList />
-        <TopBarGrid />
+        {/* <TopBarGrid /> */}
+
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
           <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
             <SideBarTop
@@ -134,7 +135,8 @@ export default function RecipeList() {
                 <RecipeCardsList recipesData={recipesData} />
               </section>
             </div>
-            <div className="d-flex gap-3 justify-content-center mt-4 align-items-center">
+            {/* 分頁用 */}
+            <div className="d-none d-xxl-flex gap-3 justify-content-center mt-4 align-items-center">
               <button
                 onClick={() => {
                   const newPageNow = page - 1 > 1 ? page - 1 : 1;
