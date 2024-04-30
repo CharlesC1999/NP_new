@@ -134,7 +134,8 @@ export default function RecipeList() {
                 <RecipeCardsList recipesData={recipesData} />
               </section>
             </div>
-            <div className="d-flex gap-3 justify-content-center mt-4 align-items-center">
+            {/* 分頁用 */}
+            <div className="d-none d-xxl-flex gap-3 justify-content-center mt-4 align-items-center">
               <button
                 onClick={() => {
                   const newPageNow = page - 1 > 1 ? page - 1 : 1;

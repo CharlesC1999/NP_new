@@ -67,7 +67,7 @@ export default function RecipeCardsList({ recipesData }) {
                   className={`${styles["card-content-bottom"]} d-flex flex-column flex-xxl-row align-items-xxl-end justify-content-xxl-between`}
                 >
                   <div
-                    className={`${styles["bottom-left"]} d-flex justify-content-between gap-xxl-5`}
+                    className={`${styles["bottom-left"]} d-flex gap-4 gap-xxl-5`}
                   >
                     <div
                       className={`${styles["published-date"]} d-flex align-items-center`}
