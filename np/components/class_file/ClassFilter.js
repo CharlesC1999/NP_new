@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styles from "./classFilter.module.css";
 
-const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
-  const [defaultValue, setDefaultValue] = useState(6);
+const ClassFilter = ({
+  onShowGrid,
+  onShowList,
+  activeButton,
+  perpage,
+  setPerpage,
+  onSortChange, //用於更改排序方式
+}) => {
+  const [defaultValue, setDefaultValue] = useState(6); //先前預設
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
+
+  const sortOptions = {
+    class__i_d: "課程序號",
+    class_name: "課程名稱",
+    c_price: "課程價格",
+    class_date: "課程日期",
+  }; //映射用
 
   // 對應 toggleIconState
   const isUpDisabled = defaultValue >= 12;
@@ -12,14 +26,14 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
 
   // 增加或減少項目數量
   function handleIncrease() {
-    if (defaultValue < 12) {
-      setDefaultValue((prev) => prev + 1);
+    if (perpage < 12) {
+      setPerpage(perpage + 1);
     }
   }
 
   function handleDecrease() {
-    if (defaultValue > 4) {
-      setDefaultValue((prev) => prev - 1);
+    if (perpage > 4) {
+      setPerpage(perpage - 1);
     }
   }
 
@@ -33,6 +47,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
     event.stopPropagation();
     setSortByValue(value);
     setSortByOpen(false);
+    onSortChange(value);
   }
 
   useEffect(() => {
@@ -86,7 +101,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
             </button>
             <div className={styles.itemsPerPage}>
               <span className={styles.itemsPerPageValue} id="itemsPerPage">
-                {defaultValue}
+                {perpage}
               </span>
               <div className={styles.numberIncreaseDecrease}>
                 <button
@@ -138,7 +153,7 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
             >
               <span className={styles.sortByLabel}>依 :</span>
               <span className={styles.sortByValue} id="sortByValue">
-                {sortByValue || "Class ID"}
+                {sortOptions[sortByValue] || "課程序號"}
                 {/* 確認這裡沒有錯誤地回落到 "Select" */}
               </span>
               <svg
@@ -156,36 +171,35 @@ const ClassFilter = ({ onShowGrid, onShowList, activeButton }) => {
               <span className={styles.sortOrder}>排序</span>
 
               <div className={styles.sortByOptions}>
-                {["Class ID", "Class Name", "Price", "Date Added"].map(
-                  (option, index) => (
-                    <div
-                      key={index}
-                      className={styles.sortByOption}
-                      onClick={(event) => handleOptionClick(option, event)}
-                      data-value={option}
-                    >
-                      {option}
-                    </div>
-                  )
-                )}
+                {[
+                  { key: "class__i_d", label: "課程序號" },
+                  { key: "class_name", label: "課程名稱" },
+                  { key: "c_price", label: "課程價格" },
+                  { key: "class_date", label: "課程日期" },
+                ].map((option, index) => (
+                  <div
+                    key={index}
+                    className={styles.sortByOption}
+                    onClick={(event) => handleOptionClick(option.key, event)}
+                    data-value={option.key}
+                  >
+                    {option.label}
+                  </div>
+                ))}
               </div>
 
               <div className={styles.sortByOptionList}>
-                <div
-                  className={styles.sortByOption}
-                  data-value="Class ID"
-                  onClick={() => console.log("Option was clicked!")}
-                >
-                  Class ID
+                <div className={styles.sortByOption} data-value="class__i_d">
+                  課程序號
                 </div>
-                <div className={styles.sortByOption} data-value="Product Name">
-                  Product Name
+                <div className={styles.sortByOption} data-value="class_name">
+                  產品名稱
                 </div>
-                <div className={styles.sortByOption} data-value="Price">
-                  Price
+                <div className={styles.sortByOption} data-value="c_price">
+                  價錢
                 </div>
-                <div className={styles.sortByOption} data-value="Date Added">
-                  Date Added
+                <div className={styles.sortByOption} data-value="class_date">
+                  課程時間
                 </div>
               </div>
             </div>
