@@ -113,6 +113,7 @@ export default function RecipeList() {
             <SideBarTop
               setRecipeCategory={setRecipeCategory}
               handleConditionsChange={handleConditionsChange}
+              recipeCategory={recipeCategory}
             />
             <SideBarRecipe />
           </div>
