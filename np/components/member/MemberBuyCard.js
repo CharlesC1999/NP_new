@@ -3,12 +3,12 @@ import React from "react";
 import styles from "@/components/member/MemberBuyCard.module.scss";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-export default function BuyCard() {
+export default function BuyCard({activeCategory}) {
   const [orders, setOrders] = useState([]);
 
   // 與伺服器要求獲取資料的async函式
-  const getOrders = async () => {
-    const url = 'http://localhost:3005/api/ordertest2';
+  const getOrders = async (cat='') => {
+    const url = 'http://localhost:3005/api/ordertest2/'+cat;
 
     // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
     try {
@@ -33,8 +33,8 @@ export default function BuyCard() {
   // 樣式2: didMount階段只執行一次
   useEffect(() => {
     // 頁面初次渲染之後伺服器要求資料
-    getOrders();
-  }, []);
+    getOrders(activeCategory==='全部'?'':activeCategory);
+  }, [activeCategory]);
 
 
 
@@ -110,15 +110,22 @@ export default function BuyCard() {
           </div>
         </div>
       </div> */}
-{orders.map((v, i) => {
+{orders.filter(v=>v.member_id===57).map((v, i) => {
+  //到時候把57改成當前會員ID(很像不能這樣寫QQ)
+  //if(v.member_id===57)
           return (
-      <div className={`${styles.buyCard} my-0 my-sm-4`}>
+      <div className={`${styles.buyCard} my-0 my-sm-4`} key={v.Order_ID }>
         <div
           className={`${styles.buyCardContent} d-flex flex-row justify-content-between align-items-center`}
         >
           <div className={`${styles.bccolumn}`}>
-            <div className={styles.objectFit} />
-            <img src={v.image_url} alt="" />
+            <div className={styles.objectFit} >
+            <img  className="object-fit-cover"
+              
+              src={`/images/products/${v.image_url}`}
+              alt=""
+            />
+            </div>
           </div>
           <div
             className={`${styles.buyItem} d-flex flex-row justify-content-between`}
@@ -154,87 +161,9 @@ export default function BuyCard() {
         </div>
       </div>
        );
-      })}
-      <div className={`${styles.buyCard} my-0 my-sm-4`}>
-        <div
-          className={`${styles.buyCardContent} d-flex flex-row justify-content-between align-items-center`}
-        >
-          <div className={`${styles.bccolumn}`}>
-            <div className={styles.objectFit} />
-          </div>
-          <div
-            className={`${styles.buyItem} d-flex flex-row justify-content-between`}
-          >
-            <div className={styles.buyItemMain}>
-              <div className={styles.biContent}>新鮮 蔬菜 </div>
-              <div className={styles.biNumber}>商品規格數量..... </div>
-              <div className={styles.biState}>狀態 : 待收貨</div>
-            </div>
-            <div
-              className={`${styles.biMb} d-flex flex-column justify-content-between`}
-            >
-              <div className={`${styles.biMoney} d-flex justify-content-end`}>
-                訂單金額: $200
-              </div>
-              <div className={`d-flex flex-row justify-content-end`}>
-                <a
-                  href
-                  className={`${styles.buyCardBtn}  btn  btn d-flex justify-content-center`}
-                >
-                  <span className={`d-none d-sm-flex`}>查看詳情</span>
-                  <span className={`d-flex d-sm-none`}>查看</span>
-                </a>
-                <a
-                  href
-                  className={`${styles.buyCardBtn} btn d-flex justify-content-center ms-3`}
-                >
-                  評論
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={`${styles.buyCard} my-0 my-sm-4`}>
-        <div
-          className={`${styles.buyCardContent} d-flex flex-row justify-content-between align-items-center`}
-        >
-          <div className={`${styles.bccolumn}`}>
-            <div className={styles.objectFit} />
-          </div>
-          <div
-            className={`${styles.buyItem} d-flex flex-row justify-content-between`}
-          >
-            <div className={styles.buyItemMain}>
-              <div className={styles.biContent}>新鮮 蔬菜 </div>
-              <div className={styles.biNumber}>商品規格數量..... </div>
-              <div className={styles.biState}>狀態 : 待收貨</div>
-            </div>
-            <div
-              className={`${styles.biMb} d-flex flex-column justify-content-between`}
-            >
-              <div className={`${styles.biMoney} d-flex justify-content-end`}>
-                訂單金額: $200
-              </div>
-              <div className={`d-flex flex-row justify-content-end`}>
-                <a
-                  href
-                  className={`${styles.buyCardBtn}  btn  btn d-flex justify-content-center`}
-                >
-                  <span className={`d-none d-sm-flex`}>查看詳情</span>
-                  <span className={`d-flex d-sm-none`}>查看</span>
-                </a>
-                <a
-                  href
-                  className={`${styles.buyCardBtn} btn d-flex justify-content-center ms-3`}
-                >
-                  評論
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      }
+      )}
+      
     </>
   );
 }

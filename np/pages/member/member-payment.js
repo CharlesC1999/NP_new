@@ -1,5 +1,5 @@
 // import React from "react";
-import styles3 from "./shopStyle3.module.css";
+import styles3 from "../../styles/member-styles/shopStyle3.module.css";
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
@@ -62,28 +62,28 @@ const ShopCart3 = () => {
             <div className={`${styles3.fc} col text-center`}>優惠價</div>
             <div className={`${styles3.fc} col text-center`}>數量</div>
             <div className={`${styles3.fc} col text-center`}>小計</div>
-            <div className={`${styles3.fc} col text-center`}>庫存</div>
+           
           </div>
           <div className="row py-2">
             <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
             <div className={`${styles3.fb} col text-center pt-2`}>2</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>有</div>
+            
           </div>
           <div className="row py-2">
             <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
             <div className={`${styles3.fb} col text-center pt-2`}>2</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>有</div>
+           
           </div>
           <div className="row py-2">
             <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
             <div className={`${styles3.fb} col text-center pt-2`}>2</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>有</div>
+            
           </div>
         </section>
         {/* 商品欄位 */}
