@@ -12,6 +12,7 @@ import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import CardStyle from "@/styles/class_styles/CardStyle.module.css";
 import Pagination from "@/components/pagination";
+import PaginationM from "@/components/paginationM";
 import Footer from "@/components/Footer";
 
 const ClassList = () => {
@@ -184,40 +185,42 @@ const ClassList = () => {
                 ))}
               </div>
             </div>
+
             {displayGrid ? (
               <div className={CardStyle.MobileCardContainer}>
-                <ClassCardMobileList />
-                <ClassCardMobileList />
-                <ClassCardMobileList />
-                <ClassCardMobileList />
-                <ClassCardMobileList />
-                <ClassCardMobileList />
+                <div className={CardStyle.GridCardSet}>
+                  <ClassCardMobileGrid />
+                  <ClassCardMobileGrid />
+                </div>
+                <div className={CardStyle.GridCardSet}>
+                  <ClassCardMobileGrid />
+                  <ClassCardMobileGrid />
+                </div>
+                <div className={CardStyle.GridCardSet}>
+                  <ClassCardMobileGrid />
+                  <ClassCardMobileGrid />
+                </div>
               </div>
             ) : (
               <div className={CardStyle.MobileCardContainer}>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
+                {classesData.map((classData, index) => (
+                  <ClassCardMobileList
+                    classesData={classData}
+                    key={index}
+                    Index={index}
+                  />
+                ))}
               </div>
             )}
+
             <Pagination
               count={pageCount}
               page={page}
               onChange={(event, value) => setPage(value)}
             />
-            <img
-              src="/images/pages-m.png"
-              className={CardStyle.paginationListMarginMobile}
-            />
+            <div className={CardStyle.paginationListMarginMobile}>
+              <PaginationM total={total} perpage={perpage} />
+            </div>
           </div>
         </div>
       </div>
