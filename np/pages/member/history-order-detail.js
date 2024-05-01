@@ -10,14 +10,25 @@ const HistoryOrderDetail = () => {
   // 物件狀態的初始值，通常需要把每個屬性的初始值寫出
   // !!注意!! 初次render(渲染)會使用初始值
   // !!注意!! 在應用程式執行過程中，務必要保持狀態維持同樣的資料類型
-  const [orderDetail, setOrderDetail] = useState({
-    // id: '',
-    // picture: '',
-    // stock: 0,
-    // name: '',
-    // price: 0,
-    // tags: '',
-  })
+  const [orderDetail, setOrderDetail] = useState([]
+    // Order_ID: 0,
+    //     Member_ID: 0,
+    //     Order_date: '',
+    //     Status: '',
+    //     Shipping_address: '',
+    //     Order_Item_ID: 0,
+    //     Product_ID: 0,
+    //     Quantity: 0,
+    //     id: 0,
+    //     category_id: 0,
+    //     name: '',
+    //     description: '',
+    //     price: 0,
+    //     stock_quantity: 0,
+    //     F_coupon_id: 0,
+    //     upload_date: '',
+    //     valid: 0
+)
 
     // 宣告出router物件，在其中可以得到兩個有用值
   // router.query，是一個物件，其中有動態路由的參數值pid
@@ -33,12 +44,12 @@ const HistoryOrderDetail = () => {
       const res = await fetch(url)
       // 解析json格式資料成js的資料
       const data = await res.json()
-      console.log(data)
+      console.log(data.data.orders)
 
       // 為了要確保資料是物件，所以檢查後再設定
       if (typeof data === 'object' && data !== null) {
         // 設定到狀態中
-        setOrderDetail(data)
+        setOrderDetail(data.data.orders)
       } else {
         console.log('伺服器回傳資料類型錯誤，無法設定到狀態中')
       }
@@ -80,27 +91,27 @@ const HistoryOrderDetail = () => {
             <div className={`${styles3.fc} col text-center`}>小計</div>
            
           </div>
+          {orderDetail.map((v, i) => {
+            return(
           <div className="row py-2">
+            <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
+            <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
+            <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
+            <div className={`${styles3.fb} col text-center pt-2`}>{v.price * v.Quantity}</div>
+            
+          </div>
+            )
+       }
+      )}
+        
+         
+          {/* <div className="row py-2">
             <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
             <div className={`${styles3.fb} col text-center pt-2`}>2</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
             
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>2</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
-           
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>2</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
-            
-          </div>
+          </div> */}
         </section>
         {/* 商品欄位 */}
         <section className={`${styles3.section} ${styles3.ProductBorder} mt-4`}>
