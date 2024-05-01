@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/styles/Product/products.module.scss";
 
 export default function ProductSection01({ description }) {
+  // console.log(description);
   return (
     <>
       <div className={`${style["detail-list"]}flex-column`}>

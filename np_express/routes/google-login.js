@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router()
 
 import sequelize from '#configs/db.js'
-const { User } = sequelize.models
+const { Google_member } = sequelize.models
 
 import jsonwebtoken from 'jsonwebtoken'
 // 存取`.env`設定檔案使用
@@ -14,6 +14,7 @@ const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET
 router.post('/', async function (req, res, next) {
   // providerData =  req.body
   console.log(JSON.stringify(req.body))
+  // 印出傳來的資料
 
   // 檢查從react來的資料
   if (!req.body.providerId || !req.body.uid) {
@@ -21,6 +22,7 @@ router.post('/', async function (req, res, next) {
   }
 
   const { displayName, email, uid, photoURL } = req.body
+  console.log(req.body)
   const google_uid = uid
 
   // 以下流程:
@@ -29,11 +31,14 @@ router.post('/', async function (req, res, next) {
   // 2-2. 不存在 -> 建立一個新會員資料(無帳號與密碼)，只有google來的資料 -> 執行登入工作
 
   // 1. 先查詢資料庫是否有同google_uid的資料
-  const total = await User.count({
+  const total = await Google_member.count({
     where: {
       google_uid,
     },
   })
+  console.log(total)
+
+  // 2. 執行登入工作
 
   // 要加到access token中回傳給前端的資料
   // 存取令牌(access token)只需要id和username就足夠，其它資料可以再向資料庫查詢
@@ -46,7 +51,7 @@ router.post('/', async function (req, res, next) {
 
   if (total) {
     // 2-1. 有存在 -> 從資料庫查詢會員資料
-    const dbUser = await User.findOne({
+    const dbUser = await Google_member.findOne({
       where: {
         google_uid,
       },
@@ -63,14 +68,14 @@ router.post('/', async function (req, res, next) {
   } else {
     // 2-2. 不存在 -> 建立一個新會員資料(無帳號與密碼)，只有google來的資料 -> 執行登入工作
     const user = {
-      name: displayName,
+      displayName: displayName,
       email: email,
-      google_uid,
-      photo_url: photoURL,
+      google_uid: google_uid,
+      photoURL: photoURL,
     }
 
     // 新增會員資料
-    const newUser = await User.create(user)
+    const newUser = await Google_member.create(user)
 
     // 回傳給前端的資料
     returnUser = {
@@ -83,7 +88,7 @@ router.post('/', async function (req, res, next) {
 
   // 產生存取令牌(access token)，其中包含會員資料
   const accessToken = jsonwebtoken.sign(returnUser, accessTokenSecret, {
-    expiresIn: '3d',
+    expiresIn: '12h',
   })
 
   // 使用httpOnly cookie來讓瀏覽器端儲存access token

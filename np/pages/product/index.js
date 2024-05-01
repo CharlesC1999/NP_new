@@ -49,44 +49,26 @@ export default function Product() {
   };
 
   const [products, setProducts] = useState([]);
-  // const getProducts = async () => {
-  //   const url = "http://localhost:3005/api/my-products";
-  //   // fetch預設是使用GET，不需要加method設定
-  //   try {
-  //     const res = await fetch(url);
-  //     // 解析json格式資料成js的資料
-  //     const data = await res.json();
-  //     console.log(data);
 
-  //     //確保資料陣列，所以檢查後再設定
-  //     if (Array.isArray(data.data.products)) {
-  //       setProducts(data.data.products);
-  //     } else {
-  //       console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
-  //     }
-
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
   const getProducts = async () => {
     const url = "http://localhost:3005/api/products";
 
-    //try{}catch{}回傳成功與失敗結果
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
-      // 判斷是否為陣列並設置product
-      if (Array.isArray(data.data.products)) {
-        setProducts(data.data.products);
+      console.log(data); // 日志输出以便调试和验证数据结构
+
+      // 确保数据结构与后端匹配，且检查数据状态
+      if (data.status === "success" && Array.isArray(data.data)) {
+        setProducts(data.data); // 假设 data.data 直接是产品数组
       } else {
-        console.log("回傳的資料型態必須是陣列");
+        console.log("回傳的資料型態必須是陣列且请求状态为 'success'");
       }
     } catch (e) {
-      console.log(e);
+      console.error("请求产品数据失败:", e);
     }
   };
+
   //樣式2出事渲染執行一次
   useEffect(() => {
     //初次渲染時執行此函式
@@ -137,10 +119,12 @@ export default function Product() {
                   {/* You can style this <a> tag as needed */}
                   <ProductCard02
                     id={item.id}
+                    img={item.image_urls}
                     category_id={item.category_id}
                     name={item.product_name}
                     description={item.product_description}
                     price={item.product_price}
+                    average_rating={item.average_rating}
                   />
                 </Link>
               </div>
