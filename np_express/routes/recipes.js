@@ -135,11 +135,17 @@ router.get('/:recipeId', async function (req, res) {
   // 轉為數字
   const recipeId = req.params.recipeId
 
-  const recipe = await Recipe.findByPk(recipeId, {
-    raw: true, // 只需要資料表中資料
-  })
+  // 食譜join分類表
+  const sqlRecipe = `
+    SELECT r.*, rcs.Recipe_cate_Name 
+    FROM recipe AS r JOIN recipe_categories AS rcs 
+    ON r.recipe_category__i_d = rcs.recipe_cate__i_d 
+    WHERE recipe__i_d = ${recipeId}`
 
-  return res.json({ status: 'success', data: { recipe } })
+  const [recipe] = await db.query(sqlRecipe)
+  const finalRecipe = recipe[0]
+
+  return res.json({ status: 'success', data: { finalRecipe } })
 })
 
 export default router

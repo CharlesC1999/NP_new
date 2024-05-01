@@ -28,7 +28,7 @@ export default function DetailTop({ recipe }) {
           <div className={`${styles["pic"]} w-100 `}>
             <img
               className="object-fit-cover w-100 h-100"
-              src={`/images/recipe/list/${recipe.Image_URL}`}
+              src={`/images/recipe/list/${recipe.image__u_r_l}`}
               alt=""
             />
           </div>
@@ -41,14 +41,14 @@ export default function DetailTop({ recipe }) {
                 <p
                   className={`${styles["title"]} ${styles["figma-h3"]} mb-0 text-center text-xxl-start`}
                 >
-                  {recipe.Title_R_name}
+                  {recipe.title__r_name}
                 </p>
                 <div
                   className={`${styles["left-bottom"]} d-flex justify-content-center justify-content-xxl-start`}
                 >
                   <p className={styles["figma-p"]}>
-                    分類：{recipe.Recipe_category_ID} /{" "}
-                    {recipe.Publish_date.split("T")[0]}
+                    分類：{recipe.Recipe_cate_Name} /{" "}
+                    {recipe.publish_date.split(" ")[0]}
                   </p>
                 </div>
               </div>

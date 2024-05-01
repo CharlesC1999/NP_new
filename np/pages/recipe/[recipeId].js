@@ -18,12 +18,12 @@ export default function RecipeDetail() {
 
   //設定食譜初始值
   const [recipe, setRecipe] = useState({
-    Recipe_ID: 0,
-    Title_R_name: "",
-    Image_URL: "",
-    Content: "",
-    Publish_date: "",
-    Recipe_category_ID: 0,
+    recipe__i_d: 0,
+    title__r_name: "",
+    image__u_r_l: "",
+    content: "",
+    publish_date: "",
+    recipe_category__i_d: 0,
     recipe_valid: 0,
   });
 
@@ -39,10 +39,12 @@ export default function RecipeDetail() {
       const url = `http://localhost:3005/api/recipes/${rid}`;
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
 
-      if (typeof data.data.recipe === "object" && data.data.recipe !== null) {
-        setRecipe(data.data.recipe);
+      if (
+        typeof data.data.finalRecipe === "object" &&
+        data.data.finalRecipe !== null
+      ) {
+        setRecipe(data.data.finalRecipe);
       } else {
         console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
       }
