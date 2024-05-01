@@ -150,6 +150,8 @@ const ClassList = () => {
     setActiveButton("list");
   };
 
+  console.log(total, "im here");
+
   return (
     <div style={containerStyle}>
       <Header />
@@ -169,6 +171,7 @@ const ClassList = () => {
               perpage={perpage}
               setPerpage={setPerpage}
               onSortChange={handleSortChange}
+              total={total}
             />
             <div className={CardStyle.WebCardContainer}>
               <div style={cardWidth}>

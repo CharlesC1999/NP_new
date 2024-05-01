@@ -68,8 +68,9 @@ const Login = () => {
         password,
       });
       if (response.status === 200) {
-        login(response.data.token);
+        login(response.data.token, response.data.userData);
         // 使用Context的login方法
+        console.log("userdata", response.data.userData);
         console.log("登入成功!");
         Swal.fire({
           title: "登入成功",
