@@ -152,7 +152,7 @@ const ClassList = () => {
   };
 
   console.log(total, "im here");
-
+  console.log(page, "nowPage");
   return (
     <div style={containerStyle}>
       <Header />
@@ -212,14 +212,19 @@ const ClassList = () => {
                 ))}
               </div>
             )}
-
-            <Pagination
-              count={pageCount}
-              page={page}
-              onChange={(event, value) => setPage(value)}
-            />
+            <div className={CardStyle.paginationWeb}>
+              <Pagination
+                count={pageCount}
+                page={page}
+                onChange={(event, value) => setPage(value)}
+              />
+            </div>
             <div className={CardStyle.paginationListMarginMobile}>
-              <PaginationM total={total} perpage={perpage} />
+              <PaginationM
+                total={total}
+                perpage={perpage}
+                onChange={(event, value) => setPage(value)}
+              />
             </div>
           </div>
         </div>
