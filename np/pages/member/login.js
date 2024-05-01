@@ -15,15 +15,10 @@ import Footer from "@/components/Footer";
 // 導入路徑配置
 import routes from "@/contexts/routes";
 // Google登入
-import { initializeApp, getApps } from "firebase/app";
 import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
-} from "firebase/auth";
-import { firebaseConfig } from "@/hooks/firebase-config";
+  handleGoogleLogin,
+  showGoogleLogin,
+} from "@/hooks/google-login-firebase";
 // 讀取畫面
 import { useLoader } from "@/hooks/use-loader";
 // sweetAlert
@@ -57,15 +52,7 @@ const Login = () => {
   // 開眼
   const [showPassword, setShowPassword] = useState(false);
   // google login
-  // if (!getApps().length) {
-  //   initializeApp(firebaseConfig);
-  // }
-  useEffect(() => {
-    if (!getApps().length) {
-      initializeApp(firebaseConfig);
-    }
-  }, []);
-  // const auth = getAuth();
+  const [userData, setUserData] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -81,8 +68,9 @@ const Login = () => {
         password,
       });
       if (response.status === 200) {
-        login(response.data.token);
+        login(response.data.token, response.data.userData);
         // 使用Context的login方法
+        console.log("userdata", response.data.userData);
         console.log("登入成功!");
         Swal.fire({
           title: "登入成功",
@@ -123,62 +111,33 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  // Google登入
-  const handleGoogleLogin = () => {
-    try {
-      const auth = getAuth();
-
-      const provider = new GoogleAuthProvider();
-      provider.addScope("https://www.googleapis.com/auth/userinfo.email");
-      // signInWithRedirect(auth, provider);
-      signInWithPopup(auth, provider).then(async (result) => {
-        const user = result.user;
-        console.log(user);
-      });
-    } catch (error) {
-      console.error("登入失敗:", error);
-    }
-  };
-
   useEffect(() => {
-    // 检查重定向结果
-    const checkGoogleLogin = async () => {
-      // const auth = getAuth();
-
-      // const result = await getRedirectResult(auth);
-
-      // console.log(result);
-
-      return;
-      try {
-        const auth = getAuth();
-
-        const result = await getRedirectResult(auth);
-
-        if (result) {
-          if (result.credential && result.credential.accessToken) {
-            const gToken = result.credential.accessToken; // Google 令牌
-            const userData = {
-              name: result.user.displayName,
-              email: result.user.email,
-              photoURL: result.user.photoURL,
-            };
-            await axios.post("/api/google-login", { gToken });
-            console.log("登入成功", result.user);
-            login(gToken, userData);
-          } else {
-            console.log("未获得有效的访问令牌");
-          }
-        } else {
-          console.log("未检测到重定向结果");
-        }
-      } catch (error) {
-        console.error("重定向结果失败:", error);
+    showGoogleLogin(login, (data) => {
+      setUserData(data);
+      login(data);
+      console.log(data);
+      if (data.status === "success") {
+        Swal.fire({
+          title: "登入成功",
+          // text: "That thing is still around?",
+          icon: "success",
+          // 按鈕綠色
+          confirmButtonColor: "#50bf8b",
+        });
+        router.push("/");
+      } else if (data.status === "error") {
+        console.error("Google 登入錯誤:", data.error);
       }
-    };
 
-    checkGoogleLogin();
+      // Perform any necessary navigation here
+    });
   }, []);
+
+  const handleGoogleButtonClick = () => {
+    handleGoogleLogin();
+    // google-login-firebase export handleGoogleLogin
+  };
+  // ---------------------------------------------------
 
   // 連結用router導
   const goSignUp = () => {
@@ -262,7 +221,7 @@ const Login = () => {
               className={`${LoginStyle.iconGroup} mt-2 d-flex justify-content-center`}
             >
               <button
-                onClick={handleGoogleLogin}
+                onClick={handleGoogleButtonClick}
                 className={LoginStyle.socialMediaButton}
               >
                 <svg

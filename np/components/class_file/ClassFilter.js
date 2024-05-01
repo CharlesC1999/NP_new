@@ -8,6 +8,7 @@ const ClassFilter = ({
   perpage,
   setPerpage,
   onSortChange, //用於更改排序方式
+  total,
 }) => {
   const [defaultValue, setDefaultValue] = useState(6); //先前預設
   const [sortByOpen, setSortByOpen] = useState(false);
@@ -77,7 +78,7 @@ const ClassFilter = ({
     <div className={styles.widthMax}>
       <section className={styles.productCountContainer}>
         <header className={styles.productCountHeader}>
-          <p className={styles.totalProducts}>總共： # 項商品</p>
+          <p className={styles.totalProducts}>總共：{total} 項商品</p>
           <div className={styles.productCountControls}>
             <button className={styles.celanderMobile}>
               <svg

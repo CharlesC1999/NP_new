@@ -806,8 +806,8 @@ border-radius: 5px;
 
 }
 .couponBtn:hover{
-color: #2ECC71;
-background-color: var(--green05);
+color: var(--green05);
+background-color: #50bf8b;
 }
 /* 滑鼠壓下去的時候按鈕效果 */
 .couponBtn:active {
