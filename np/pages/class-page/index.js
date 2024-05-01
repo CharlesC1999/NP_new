@@ -13,7 +13,6 @@ import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import CardStyle from "@/styles/class_styles/CardStyle.module.css";
 import Pagination from "@/components/pagination";
 import Footer from "@/components/Footer";
-import Index from "..";
 
 const ClassList = () => {
   // 先導入讀取鉤子
@@ -62,7 +61,7 @@ const ClassList = () => {
   //  最後得到的資料
   const [total, setTotal] = useState(0);
   const [pageCount, setPageCount] = useState(0);
-  //食譜資料庫data
+  // 課程資料庫data
   const [classesData, setClassesData] = useState([]);
   // 用於儲存排序
   const [sortBy, setSortBy] = useState("");

@@ -3,7 +3,7 @@ import styles from "./ClassCardWeb.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import Router, { useRouter } from "next/router";
 
-export default function ClassCard({ classesData, index }) {
+export default function ClassCard({ classesData }) {
   // 初始化每個課程的愛心狀態為 false
   const [heartActive, setHeartActive] = useState(false);
 
@@ -27,7 +27,7 @@ export default function ClassCard({ classesData, index }) {
     // 方法二
     Router.push({
       pathname: "/class-page/class-detail",
-      query: { id: class__i_d },
+      query: { class__i_d: class__i_d },
     });
   };
 
