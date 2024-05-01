@@ -2,11 +2,7 @@ import React from "react";
 import CateSidebar from "./CateSidebar";
 import styles from "@/components/recipe/list/sideBar/SideBarCategories.module.scss";
 
-export default function SideBarTop({
-  setRecipeCategory,
-  handleConditionsChange,
-  recipeCategory,
-}) {
+export default function SideBarTop({ setRecipeCategory, recipeCategory }) {
   return (
     <>
       <div className={`${styles.sideBarBox}`}>
