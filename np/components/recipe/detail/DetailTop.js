@@ -97,7 +97,7 @@ export default function DetailTop({ recipe }) {
                   <p
                     className={`${styles["figma-p"]} ${styles["caption"]} text-center`}
                   >
-                    3人份
+                    {recipe.servings}人份
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
@@ -118,7 +118,7 @@ export default function DetailTop({ recipe }) {
                     <GiKnifeFork className={styles["tableware"]} />
                   </div>
                   <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
-                    8樣食材
+                    {recipe.ingredients}樣食材
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
@@ -139,7 +139,7 @@ export default function DetailTop({ recipe }) {
                     <LuAlarmClock className={styles["clock"]} />
                   </div>
                   <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
-                    30分鐘
+                    {recipe.cooking__time}分鐘
                   </p>
                 </div>
               </div>
