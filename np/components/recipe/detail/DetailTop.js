@@ -101,7 +101,7 @@ export default function DetailTop({ recipe }) {
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
-                  <div>
+                  <div className="text-center">
                     {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={36}
@@ -118,7 +118,7 @@ export default function DetailTop({ recipe }) {
                     <GiKnifeFork className={styles["tableware"]} />
                   </div>
                   <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
-                    {recipe.ingredients}樣食材
+                    {recipe.ingredients__count}樣食材
                   </p>
                 </div>
                 <div className={styles["small-card"]}>

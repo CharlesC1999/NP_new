@@ -25,6 +25,7 @@ export default function RecipeDetail() {
     publish_date: "",
     recipe_category__i_d: 0,
     recipe_valid: 0,
+    ingredients: "",
     steps: "",
   });
 
@@ -76,7 +77,7 @@ export default function RecipeDetail() {
           </div>
           {/* 主要內容 */}
           <div className={`col styles["main-content"]`}>
-            <DetailIngredients />
+            <DetailIngredients recipe={recipe} />
             <DetailSteps recipe={recipe} />
             <DetailRelatedProducts />
           </div>
