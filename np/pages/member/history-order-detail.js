@@ -7,42 +7,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 
-const ShopCart3 = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedText, setSelectedText] = useState("所有分類");
-  const dropdownRef = useRef(null);
-
-  let hasMargin = true;
-  let isMobile = false;
-
-  const menuItems = [
-    { id: 1, name: "所有分類", href: "#", className: styles.selectionLink },
-    { id: 2, name: "商品列表", href: "#", className: styles.selectionLink },
-    { id: 3, name: "食譜精選", href: "#", className: styles.selectionLink },
-    { id: 4, name: "精選課程", href: "#", className: styles.selectionLink },
-    { id: 5, name: "講師陣容", href: "#", className: styles.selectionLink },
-  ];
-
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
-  const handleItemClick = (name) => {
-    setSelectedText(name);
-    setIsOpen(false); // 关闭下拉菜单
-  };
-
-  // 点击外部关闭下拉菜单
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+const HistoryOrderDetail = () => {
+  
   return (
     <>
       <Header />
@@ -139,13 +105,7 @@ const ShopCart3 = () => {
       <div className={`${styles3.mobile}  ${styles3.container2} container`}>
         {/*  */}
 
-        <nav className={`pt-3 ${styles3.nav}`}>
-          <div className={`${styles3.cir} ${styles3.circle1}`}></div>
-          <div className={`${styles3.line} `} />
-          <div className={`${styles3.cir} ${styles3.circle2}`}></div>
-          <div className={`${styles3.line}`} />
-          <div className={`${styles3.cir} ${styles3.circle3}`} />
-        </nav>
+       
         {/* 課程欄位 */}
         <section
           className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
@@ -156,11 +116,9 @@ const ShopCart3 = () => {
           </div>
           <div className="row py-2 mt-1">
             <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
-            <div className={`${styles3.fb} row ps-4`} style={{ fontSize: 12 }}>
-              課程時間:2024/04/05
-            </div>
+           
             <div className="row mt-4">
-              <div className="col-3 border ms-2">有庫存</div>
+              
               <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
             </div>
           </div>
@@ -169,11 +127,9 @@ const ShopCart3 = () => {
             style={{ borderTop: "1px solid #78cea6" }}
           >
             <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
-            <div className={`${styles3.fb} row ps-4`} style={{ fontSize: 12 }}>
-              課程時間:2024/04/05
-            </div>
+           
             <div className="row mt-4">
-              <div className="col-3 border ms-2">有庫存</div>
+              
               <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
             </div>
           </div>
@@ -182,11 +138,9 @@ const ShopCart3 = () => {
             style={{ borderTop: "1px solid #78cea6" }}
           >
             <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
-            <div className={`${styles3.fb} row ps-4 `} style={{ fontSize: 12 }}>
-              {/* 課程時間:2024/04/05 */}
-            </div>
+            
             <div className="row mt-4">
-              <div className="col-3 border ms-2">有庫存</div>
+              
               <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
             </div>
           </div>
@@ -252,12 +206,7 @@ const ShopCart3 = () => {
             <div className={`${styles3.fb} col mt-1`}>取貨地址</div>
             <div className={`${styles3.fb} col mt-1`}>台北市xxxxxxxxx</div>
           </div>
-          <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
-            <div className="col d-flex align-items-center">
-              <input type="checkbox" className="me-2" />
-              <span>我同意此購買資訊</span>
-            </div>
-          </div>
+         
         </section>
         {/* 折價券、付款 */}
         <div
@@ -276,17 +225,7 @@ const ShopCart3 = () => {
             >
               <h3 className={`${styles3.h3} fw-bold pt-1`}>返回上頁</h3>
             </a>
-            <button
-              className={`${styles3.button} ms-4 mt-1`}
-              type="submit"
-              style={{
-                backgroundColor: "#78cea6",
-                color: "#ffffff",
-                border: "1px solid #78cea6",
-              }}
-            >
-              <h3 className={`${styles3.h3} fw-bold pt-1`}>送出訂單</h3>
-            </button>
+           
           </div>
           {/* </form> */}
           {/* </div> */}
@@ -298,4 +237,4 @@ const ShopCart3 = () => {
     </>
   );
 };
-export default ShopCart3;
+export default HistoryOrderDetail;
