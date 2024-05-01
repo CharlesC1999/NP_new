@@ -15,16 +15,10 @@ import Footer from "@/components/Footer";
 // 導入路徑配置
 import routes from "@/contexts/routes";
 // Google登入
-import { initializeApp, getApps } from "firebase/app";
 import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { firebaseConfig } from "@/hooks/firebase-config";
+  handleGoogleLogin,
+  showGoogleLogin,
+} from "@/hooks/google-login-firebase";
 // 讀取畫面
 import { useLoader } from "@/hooks/use-loader";
 // sweetAlert
@@ -58,9 +52,7 @@ const Login = () => {
   // 開眼
   const [showPassword, setShowPassword] = useState(false);
   // google login
-  if (!getApps().length) {
-    initializeApp(firebaseConfig);
-  }
+  const [userData, setUserData] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -118,47 +110,32 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleGoogleLogin = async (callback) => {
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-
-    // 重新導向
-    signInWithRedirect(auth, provider);
-  };
-
   useEffect(() => {
-    const shoeGoogleLogin = (callback) => {
-      const auth = getAuth();
-
-      // Result from Redirect auth flow.
-      getRedirectResult(auth)
-        .then((result) => {
-          if (result) {
-            // This gives you a Google Access Token. You can use it to access Google APIs.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-
-            // The signed-in user info.
-            const user = result.user;
-            console.log(token);
-            console.log(user);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
+    showGoogleLogin(login, (data) => {
+      setUserData(data);
+      login(data);
+      console.log(data);
+      if (data.status === "success") {
+        Swal.fire({
+          title: "登入成功",
+          // text: "That thing is still around?",
+          icon: "success",
+          // 按鈕綠色
+          confirmButtonColor: "#50bf8b",
         });
+        router.push("/");
+      } else if (data.status === "error") {
+        console.error("Google 登入錯誤:", data.error);
+      }
 
-      // Listening for auth state changes.
-      onAuthStateChanged(auth, (user) => {
-        // if (user) {
-        //   console.log("user", user);
-        // callback the user data
-        // callback(user.providerData[0]);
-        // }
-      });
-    };
-    shoeGoogleLogin();
+      // Perform any necessary navigation here
+    });
   }, []);
+
+  const handleGoogleButtonClick = () => {
+    handleGoogleLogin();
+    // google-login-firebase export handleGoogleLogin
+  };
   // ---------------------------------------------------
 
   // 連結用router導
@@ -243,7 +220,7 @@ const Login = () => {
               className={`${LoginStyle.iconGroup} mt-2 d-flex justify-content-center`}
             >
               <button
-                onClick={handleGoogleLogin}
+                onClick={handleGoogleButtonClick}
                 className={LoginStyle.socialMediaButton}
               >
                 <svg

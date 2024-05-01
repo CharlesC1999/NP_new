@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 //style
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -24,32 +24,49 @@ export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("product");
   const [product, setProduct] = useState({
     id: 0,
-    category_id: "",
+    category_id: 0,
     product_name: "",
     product_description: "",
     product_price: 0,
-    discount_price: "",
-    product_stock: 0,
-    coupon_id: 0,
+    discount_price: null,
     upload_date: "",
-    valid: true,
+    average_rating: 0,
+    review_comments: [],
+    image_urls: [],
+    sort_orders: [],
   });
 
+  //解析ReviewDetails字串
+  function parseReviewDetails(details) {
+    return details.split(",").map((detail) => {
+      const parts = detail.split("|");
+      return {
+        comment: parts[0],
+        rating: parseInt(parts[1], 10),
+        reviewerId: parseInt(parts[2], 10),
+        createdAt: parts[3],
+      };
+    });
+  }
+
+  //取得後端網址資料
   const getProduct = async (productId) => {
-    console.log("Product ID:", productId);
     try {
       const url = `http://localhost:3005/api/products/${productId}`;
       const res = await fetch(url);
-      console.log(url);
       const data = await res.json();
-      console.log(data);
-      if (typeof data === "object" && data !== null) {
-        setProduct(data.data.product);
-        // console.log(product);
+
+      if (data && data.status === "success" && data.data) {
+        const formattedProduct = {
+          ...data.data,
+          review_comments: parseReviewDetails(data.data.review_details),
+          image_urls: data.data.image_urls.split(","),
+          sort_orders: data.data.sort_orders.split(",").map(Number),
+        };
+        setProduct(formattedProduct);
       }
     } catch (e) {
-      console.log(e);
-      // console.log(typeof data);
+      console.error("Error fetching product:", e);
     }
   };
 
@@ -62,8 +79,19 @@ export default function ProductDetail() {
       getProduct(router.query.productId);
     }
   }, [router.isReady]);
-  // console.log(product);
+  //比對mainPic的變更
+  // const ProductMainPic = React.memo(function ProductMainPic({
+  //   image_urls,
+  //   sort_orders,
+  // }) {
+  //   return <div>{/* 渲染图片逻辑 */}</div>;
+  // });
 
+  if (!product || product.id === undefined) {
+    console.log(product);
+    return <div>Loading...</div>; // 或其他加载指示器
+  }
+  console.log(product);
   return (
     <>
       <HeaderComponent />
@@ -94,7 +122,7 @@ export default function ProductDetail() {
               <div
                 className={`${style["main-product"]} d-flex flex-sm-row flex-column justify-content-center`}
               >
-                <ProductMainPic />
+                <ProductMainPic image_urls={product.image_urls} />
                 <ProductMainText
                   key={product.id}
                   id={product.id}
@@ -102,6 +130,9 @@ export default function ProductDetail() {
                   description={product.product_description}
                   price={product.product_price}
                   discount_price={product.discount_price}
+                  upload_date={product.upload_date}
+                  average_rating={product.average_rating}
+                  review_comments={product.review_comments}
                 />
               </div>
               <div className={`${style["section2"]} my-3 m-sm-2`}>
@@ -125,7 +156,11 @@ export default function ProductDetail() {
                       description={product.product_description}
                     />
                   )}
-                  {activeTab === "review" && <ProductSection02 />}
+                  {activeTab === "review" && (
+                    <ProductSection02
+                      review_comments={product.review_comments}
+                    />
+                  )}
                 </div>
               </div>
             </div>

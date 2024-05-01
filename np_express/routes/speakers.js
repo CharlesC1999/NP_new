@@ -70,10 +70,10 @@ router.get('/:id', async function (req, res) {
 
   // 取得該名講師課程資訊（將 class 與 class_image 資料表關聯，圖片有多張時取第一張）
   const ClassDataSql = `SELECT class.class__i_d,class.class_name,class.class_description,class_image.image__u_r_l
-FROM class_image
-JOIN class ON class.class__i_d= class_image.f__class__i_d
-WHERE f__speaker__i_d =${id} GROUP BY 
-    class.class__i_d`
+  FROM class_image
+  JOIN class ON class.class__i_d= class_image.f__class__i_d
+  WHERE f__speaker__i_d =${id} GROUP BY 
+  class.class__i_d`
   const [ClassData] = await db.query(ClassDataSql)
   const speaker = await Speaker.findByPk(id, {
     raw: true, //只需要資料表中資料

@@ -2,10 +2,26 @@ import React, { useState } from "react";
 import styles from "./classDetailContent.module.css";
 import MArticle from "./MClassDetailContentArticleWeb";
 import WArticle from "./WClassDetailContentArticleWeb";
+import { toArray } from "lodash";
 
-const ClassDetail = () => {
+const ClassDetail = ({ classData }) => {
   // 用來管理哪個標籤頁是激活的狀態
   const [activeTab, setActiveTab] = useState("info");
+
+  // 我不知道為甚麼他就是不讓我直接拿資料
+  // classData[0] = cID
+  // classData[1] = name
+  // classData[2] = description
+  // classData[3] = price
+  // classData[4] = dprirce
+  // classData[6] = limit person
+  // classData[9] = class time start
+  // classData[10] = class time end
+  console.log(classData, "there");
+  // classData = toArray(classData);
+  // console.log(classData, "t2");
+  // classData = toArray(classData[0]);
+  // console.log(classData, "t3");
 
   return (
     <div className={styles.articleContainer}>
@@ -18,7 +34,7 @@ const ClassDetail = () => {
           />
         </div>
         <div className={styles.classInformations}>
-          <p className={styles.className}>探索松露的秘密</p>
+          <p className={styles.className}>{classData.Class_name}</p>
           <div className={styles.classMobileSelectGroup}>
             <button
               className={
@@ -48,11 +64,13 @@ const ClassDetail = () => {
             >
               <div className={styles.classInfor}>
                 <div className={styles.inforTitle}>上課時間：</div>
-                <div className={styles.inforDetail}>2024/05/26</div>
+                <div className={styles.inforDetail}>
+                  {classData.Class_end_date}
+                </div>
               </div>
               <div className={styles.classInfor}>
                 <div className={styles.inforTitle}>課程價格：</div>
-                <div className={styles.inforDetail}>$2500</div>
+                <div className={styles.inforDetail}>${classData.C_price}</div>
               </div>
               <div className={styles.classInfor}>
                 <div className={styles.inforTitle}>優惠活動：</div>
@@ -64,7 +82,9 @@ const ClassDetail = () => {
               </div>
               <div className={styles.classInfor}>
                 <div className={styles.inforTitle}>報名人數：</div>
-                <div className={styles.inforDetail}>10 / 24</div>
+                <div className={styles.inforDetail}>
+                  10 / {classData.Class_person_limit}
+                </div>
               </div>
             </div>
           )}
