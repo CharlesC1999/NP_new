@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
 import styles from "./CateSidebar.module.css";
+import { useCategories } from "@/hooks/recipe/use-categories";
 
-function CateSidebar({
-  setRecipeCategory,
-  handleConditionsChange,
-  recipeCategory,
-  setCategoriesDropdown,
-}) {
+function CateSidebar({ setRecipeCategory, recipeCategory }) {
+  // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
+  const { setNewCategories, newCategories } = useCategories();
   //食譜類別state初始值
   const [categories, setCategories] = useState([]);
-  // 新的食譜類別 (有擴充qty的，上面那個不知道為啥一直無法設定qty)
-  const [newCategories, setNewCategories] = useState([]);
 
   // 各類別食譜總數  ------------------------------start---------------------------------------
   // 所有類別
@@ -112,7 +108,7 @@ function CateSidebar({
     // 設定給sql查詢到的物件
     setNewCategories(newCategoriesAry);
     //給TopBarList用的食譜分類
-    setCategoriesDropdown(newCategoriesAry);
+    // setCategoriesDropdown(newCategoriesAry);
     setCategories(newCategories);
   }, [allRecipes]);
 

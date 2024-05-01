@@ -11,6 +11,7 @@ import DetailRelatedProducts from "@/components/recipe/detail/DetailRelatedProdu
 import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipe";
 import Footer from "@/components/footer";
 import styles from "@/styles/recipe/recipe-detail.module.scss";
+import { CategoriesProvider } from "@/hooks/recipe/use-categories";
 
 export default function RecipeDetail() {
   const router = useRouter();
@@ -58,7 +59,7 @@ export default function RecipeDetail() {
   }, [router.isReady]);
 
   return (
-    <>
+    <CategoriesProvider>
       <Header />
       <Breadcrumbs />
       <div className={`${styles["wrapper"]} mx-auto`}>
@@ -82,6 +83,6 @@ export default function RecipeDetail() {
         </div>
       </div>
       <Footer />
-    </>
+    </CategoriesProvider>
   );
 }

@@ -12,11 +12,9 @@ import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";
 import Footer from "@/components/footer";
 import Filter from "@/components/recipe/list/filter/RecipeFilter";
 import styles from "@/styles/recipe/recipe-list.module.scss";
+import { CategoriesProvider } from "@/hooks/recipe/use-categories";
 
 export default function RecipeList() {
-  // 給TopBarList裡面分類下拉式清單用的
-  const [categoriesDropdown, setCategoriesDropdown] = useState([]);
-
   // ----------------------篩選條件 start ------------------------
   // 食譜分類
   const [recipeCategory, setRecipeCategory] = useState("");
@@ -42,12 +40,10 @@ export default function RecipeList() {
     // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
     const searchParams = new URLSearchParams(params);
     const url = `http://localhost:3005/api/recipes/?${searchParams.toString()}`;
-    console.log("url: " + url);
 
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data.data.recipesRawSql);
 
       // 為了要確保資料是陣列，所以檢查後再設定
       if (Array.isArray(data.data.recipesRawSql)) {
@@ -104,7 +100,7 @@ export default function RecipeList() {
   }, [recipeCategory, perpage, orderby]);
 
   return (
-    <>
+    <CategoriesProvider>
       <Header />
       <Breadcrumbs />
       <div className={styles.wrapper}>
@@ -112,7 +108,6 @@ export default function RecipeList() {
         <TopBarList
           setOrderby={setOrderby}
           total={total}
-          categoriesDropdown={categoriesDropdown}
           setRecipeCategory={setRecipeCategory}
         />
         {/* <TopBarGrid /> */}
@@ -123,7 +118,6 @@ export default function RecipeList() {
               setRecipeCategory={setRecipeCategory}
               handleConditionsChange={handleConditionsChange}
               recipeCategory={recipeCategory}
-              setCategoriesDropdown={setCategoriesDropdown}
             />
             <SideBarRecipe />
           </div>
@@ -207,6 +201,6 @@ export default function RecipeList() {
         </div>
       </div>
       <Footer />
-    </>
+    </CategoriesProvider>
   );
 }
