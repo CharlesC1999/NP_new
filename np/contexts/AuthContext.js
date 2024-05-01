@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // 确保已经导入 axios
 import { useRouter } from "next/router"; // 导入 useRouter 以便在需要时进行路由跳转
-
+import axiosInstance from '@/services/axios-instance'
+import { getFavs } from '@/services/user'
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -10,6 +11,44 @@ export const AuthProvider = ({ children }) => {
     token: null,
     isLoggedIn: false,
   });
+
+  //     // 我的最愛清單使用
+  // const [favorites, setFavorites] = useState([])
+
+  // // 得到我的最愛
+  // const handleGetFavorites = async () => {
+  //   const res = await getFavs()
+  //   //console.log(res.data)
+  //   if (res.data.status === 'success') {
+  //     setFavorites(res.data.data.favorites)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if (auth.isAuth) {
+  //     // 成功登入後要執行一次向伺服器取得我的最愛清單
+  //     handleGetFavorites()
+  //   } else {
+  //     // 登出時要設回空陣列
+  //     setFavorites([])
+  //   }
+  // }, [auth])
+  const [favorRecipe, setFavorRecipe] = useState([]);
+  const [recipeData, setRecipeData] = useState([]);
+  const fetchFavorites = async () => {
+    try {
+      const { favorRecipe, recipeFavorData } = await getFavs();
+      setFavorRecipe(favorRecipe);
+      setRecipeData(recipeFavorData);
+    } catch (error) {
+      console.error('Failed to fetch favorites:', error);
+    }
+  };
+ 
+  useEffect(() => {
+      // 成功登入後要執行一次向伺服器取得我的最愛清單
+      fetchFavorites()
+  }, [favorRecipe])
 
   const router = useRouter();
 
@@ -66,7 +105,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout ,favorRecipe,setFavorRecipe,recipeData}}>
       {children}
     </AuthContext.Provider>
   );
