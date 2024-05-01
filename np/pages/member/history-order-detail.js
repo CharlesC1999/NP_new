@@ -1,13 +1,63 @@
 // import React from "react";
 import styles3 from "../../styles/member-styles/shopStyle3.module.css";
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
-import styles from "@/components/header.module.scss";
-import stylesFooter from "../../components/footer.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import { useRouter } from 'next/router'
 
 const HistoryOrderDetail = () => {
+  // 物件狀態的初始值，通常需要把每個屬性的初始值寫出
+  // !!注意!! 初次render(渲染)會使用初始值
+  // !!注意!! 在應用程式執行過程中，務必要保持狀態維持同樣的資料類型
+  const [orderDetail, setOrderDetail] = useState({
+    // id: '',
+    // picture: '',
+    // stock: 0,
+    // name: '',
+    // price: 0,
+    // tags: '',
+  })
+
+    // 宣告出router物件，在其中可以得到兩個有用值
+  // router.query，是一個物件，其中有動態路由的參數值pid
+  // router.isReady，是一個布林值，代表本頁面元件已完成水合作用，可以得到pid值
+  const router = useRouter()
+
+  // 與伺服器要求獲取資料的async函式
+  const getOrderDetail = async (order_id) => {
+    const url = `http://localhost:3005/api/history-order-detail/${order_id}`
+    // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
+    try {
+      // fetch預設是使用GET，不需要加method設定
+      const res = await fetch(url)
+      // 解析json格式資料成js的資料
+      const data = await res.json()
+      console.log(data)
+
+      // 為了要確保資料是物件，所以檢查後再設定
+      if (typeof data === 'object' && data !== null) {
+        // 設定到狀態中
+        setOrderDetail(data)
+      } else {
+        console.log('伺服器回傳資料類型錯誤，無法設定到狀態中')
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+// 樣式2: 頁面初次渲染之後伺服器要求資料
+  // 需要監聽router.isReady，當它為true時，才能得到pid
+  useEffect(() => {
+    console.log('isReady', router.isReady, 'query', router.query)
+    // 確保能得從router.query到pid後，再向伺服器要求對應資料
+    if (router.isReady) {
+      getOrderDetail(router.query.order_id)
+    }
+    // eslint-disable-next-line
+  }, [router.isReady])
+  // eslint會作多餘的檢查，不需要加router.query在相依陣列中
+
   
   return (
     <>

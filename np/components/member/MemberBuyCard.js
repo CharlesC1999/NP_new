@@ -142,13 +142,13 @@ export default function MemberBuyCard({activeCategory}) {
                 訂單金額: {v.total}
               </div>
               <div className={`d-flex flex-row justify-content-end`}>
-                <a
-                  href
+                <Link
+                  href={`/member/history-order-detail?order_id=${v.order_id}`}
                   className={`${styles.buyCardBtn}  btn  btn d-flex justify-content-center`}
                 >
                   <span className={`d-none d-sm-flex`}>查看詳情</span>
                   <span className={`d-flex d-sm-none`}>查看</span>
-                </a>
+                </Link>
                 <a
                   href
                   className={`${styles.buyCardBtn} btn d-flex justify-content-center ms-3`}
