@@ -17,9 +17,22 @@ router.post('/', async (req, res) => {
       const token = jwt.sign(
         { id: user.id, Account: user.Account },
         'your-secret-key',
-        { expiresIn: '25m' }
+        { expiresIn: '1h' }
       )
-      res.status(200).json({ token })
+      res.status(200).json({
+        token,
+        userData: {
+          id: user.id,
+          name: user.User_name,
+          username: user.Account,
+          // email: user.Email,
+          // phone: user.Phone,
+          // gender: user.Gender,
+          // birthday: user.date_of_birth,
+          // address: user.User_image,
+          // 其他的到登入頁面抓，不然存放太危險???
+        },
+      })
     } else {
       res.status(401).json({ message: 'Authentication failed' })
     }

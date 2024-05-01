@@ -61,7 +61,7 @@ const ClassList = () => {
   //  最後得到的資料
   const [total, setTotal] = useState(0);
   const [pageCount, setPageCount] = useState(0);
-  //食譜資料庫data
+  // 課程資料庫data
   const [classesData, setClassesData] = useState([]);
   // 用於儲存排序
   const [sortBy, setSortBy] = useState("");
@@ -150,6 +150,8 @@ const ClassList = () => {
     setActiveButton("list");
   };
 
+  console.log(total, "im here");
+
   return (
     <div style={containerStyle}>
       <Header />
@@ -169,10 +171,17 @@ const ClassList = () => {
               perpage={perpage}
               setPerpage={setPerpage}
               onSortChange={handleSortChange}
+              total={total}
             />
             <div className={CardStyle.WebCardContainer}>
               <div style={cardWidth}>
-                <ClassCard classesData={classesData} />
+                {classesData.map((classData, index) => (
+                  <ClassCard
+                    classesData={classData}
+                    key={index}
+                    Index={index}
+                  />
+                ))}
               </div>
             </div>
             {displayGrid ? (
