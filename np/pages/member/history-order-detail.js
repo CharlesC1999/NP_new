@@ -1,48 +1,75 @@
 // import React from "react";
 import styles3 from "../../styles/member-styles/shopStyle3.module.css";
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
-import styles from "@/components/header.module.scss";
-import stylesFooter from "../../components/footer.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import { useRouter } from 'next/router'
 
-const ShopCart3 = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedText, setSelectedText] = useState("所有分類");
-  const dropdownRef = useRef(null);
+const HistoryOrderDetail = () => {
+  // 物件狀態的初始值，通常需要把每個屬性的初始值寫出
+  // !!注意!! 初次render(渲染)會使用初始值
+  // !!注意!! 在應用程式執行過程中，務必要保持狀態維持同樣的資料類型
+  const [orderDetail, setOrderDetail] = useState([]
+    // Order_ID: 0,
+    //     Member_ID: 0,
+    //     Order_date: '',
+    //     Status: '',
+    //     Shipping_address: '',
+    //     Order_Item_ID: 0,
+    //     Product_ID: 0,
+    //     Quantity: 0,
+    //     id: 0,
+    //     category_id: 0,
+    //     name: '',
+    //     description: '',
+    //     price: 0,
+    //     stock_quantity: 0,
+    //     F_coupon_id: 0,
+    //     upload_date: '',
+    //     valid: 0
+)
 
-  let hasMargin = true;
-  let isMobile = false;
+    // 宣告出router物件，在其中可以得到兩個有用值
+  // router.query，是一個物件，其中有動態路由的參數值pid
+  // router.isReady，是一個布林值，代表本頁面元件已完成水合作用，可以得到pid值
+  const router = useRouter()
 
-  const menuItems = [
-    { id: 1, name: "所有分類", href: "#", className: styles.selectionLink },
-    { id: 2, name: "商品列表", href: "#", className: styles.selectionLink },
-    { id: 3, name: "食譜精選", href: "#", className: styles.selectionLink },
-    { id: 4, name: "精選課程", href: "#", className: styles.selectionLink },
-    { id: 5, name: "講師陣容", href: "#", className: styles.selectionLink },
-  ];
+  // 與伺服器要求獲取資料的async函式
+  const getOrderDetail = async (order_id) => {
+    const url = `http://localhost:3005/api/history-order-detail/${order_id}`
+    // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
+    try {
+      // fetch預設是使用GET，不需要加method設定
+      const res = await fetch(url)
+      // 解析json格式資料成js的資料
+      const data = await res.json()
+      console.log(data.data.orders)
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
-  const handleItemClick = (name) => {
-    setSelectedText(name);
-    setIsOpen(false); // 关闭下拉菜单
-  };
-
-  // 点击外部关闭下拉菜单
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
+      // 為了要確保資料是物件，所以檢查後再設定
+      if (typeof data === 'object' && data !== null) {
+        // 設定到狀態中
+        setOrderDetail(data.data.orders)
+      } else {
+        console.log('伺服器回傳資料類型錯誤，無法設定到狀態中')
       }
-    };
+    } catch (e) {
+      console.log(e)
+    }
+  }
+// 樣式2: 頁面初次渲染之後伺服器要求資料
+  // 需要監聽router.isReady，當它為true時，才能得到pid
+  useEffect(() => {
+    console.log('isReady', router.isReady, 'query', router.query)
+    // 確保能得從router.query到pid後，再向伺服器要求對應資料
+    if (router.isReady) {
+      getOrderDetail(router.query.order_id)
+    }
+    // eslint-disable-next-line
+  }, [router.isReady])
+  // eslint會作多餘的檢查，不需要加router.query在相依陣列中
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  
   return (
     <>
       <Header />
@@ -64,27 +91,27 @@ const ShopCart3 = () => {
             <div className={`${styles3.fc} col text-center`}>小計</div>
            
           </div>
+          {orderDetail.map((v, i) => {
+            return(
           <div className="row py-2">
+            <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
+            <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
+            <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
+            <div className={`${styles3.fb} col text-center pt-2`}>{v.price * v.Quantity}</div>
+            
+          </div>
+            )
+       }
+      )}
+        
+         
+          {/* <div className="row py-2">
             <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
             <div className={`${styles3.fb} col text-center pt-2`}>2</div>
             <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
             
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>2</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
-           
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>2</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
-            
-          </div>
+          </div> */}
         </section>
         {/* 商品欄位 */}
         <section className={`${styles3.section} ${styles3.ProductBorder} mt-4`}>
@@ -139,13 +166,7 @@ const ShopCart3 = () => {
       <div className={`${styles3.mobile}  ${styles3.container2} container`}>
         {/*  */}
 
-        <nav className={`pt-3 ${styles3.nav}`}>
-          <div className={`${styles3.cir} ${styles3.circle1}`}></div>
-          <div className={`${styles3.line} `} />
-          <div className={`${styles3.cir} ${styles3.circle2}`}></div>
-          <div className={`${styles3.line}`} />
-          <div className={`${styles3.cir} ${styles3.circle3}`} />
-        </nav>
+       
         {/* 課程欄位 */}
         <section
           className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
@@ -156,11 +177,9 @@ const ShopCart3 = () => {
           </div>
           <div className="row py-2 mt-1">
             <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
-            <div className={`${styles3.fb} row ps-4`} style={{ fontSize: 12 }}>
-              課程時間:2024/04/05
-            </div>
+           
             <div className="row mt-4">
-              <div className="col-3 border ms-2">有庫存</div>
+              
               <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
             </div>
           </div>
@@ -169,11 +188,9 @@ const ShopCart3 = () => {
             style={{ borderTop: "1px solid #78cea6" }}
           >
             <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
-            <div className={`${styles3.fb} row ps-4`} style={{ fontSize: 12 }}>
-              課程時間:2024/04/05
-            </div>
+           
             <div className="row mt-4">
-              <div className="col-3 border ms-2">有庫存</div>
+              
               <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
             </div>
           </div>
@@ -182,11 +199,9 @@ const ShopCart3 = () => {
             style={{ borderTop: "1px solid #78cea6" }}
           >
             <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
-            <div className={`${styles3.fb} row ps-4 `} style={{ fontSize: 12 }}>
-              {/* 課程時間:2024/04/05 */}
-            </div>
+            
             <div className="row mt-4">
-              <div className="col-3 border ms-2">有庫存</div>
+              
               <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
             </div>
           </div>
@@ -252,12 +267,7 @@ const ShopCart3 = () => {
             <div className={`${styles3.fb} col mt-1`}>取貨地址</div>
             <div className={`${styles3.fb} col mt-1`}>台北市xxxxxxxxx</div>
           </div>
-          <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
-            <div className="col d-flex align-items-center">
-              <input type="checkbox" className="me-2" />
-              <span>我同意此購買資訊</span>
-            </div>
-          </div>
+         
         </section>
         {/* 折價券、付款 */}
         <div
@@ -276,17 +286,7 @@ const ShopCart3 = () => {
             >
               <h3 className={`${styles3.h3} fw-bold pt-1`}>返回上頁</h3>
             </a>
-            <button
-              className={`${styles3.button} ms-4 mt-1`}
-              type="submit"
-              style={{
-                backgroundColor: "#78cea6",
-                color: "#ffffff",
-                border: "1px solid #78cea6",
-              }}
-            >
-              <h3 className={`${styles3.h3} fw-bold pt-1`}>送出訂單</h3>
-            </button>
+           
           </div>
           {/* </form> */}
           {/* </div> */}
@@ -298,4 +298,4 @@ const ShopCart3 = () => {
     </>
   );
 };
-export default ShopCart3;
+export default HistoryOrderDetail;
