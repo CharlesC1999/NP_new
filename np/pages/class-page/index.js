@@ -13,6 +13,7 @@ import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import CardStyle from "@/styles/class_styles/CardStyle.module.css";
 import Pagination from "@/components/pagination";
 import Footer from "@/components/Footer";
+import Index from "..";
 
 const ClassList = () => {
   // 先導入讀取鉤子
@@ -172,7 +173,13 @@ const ClassList = () => {
             />
             <div className={CardStyle.WebCardContainer}>
               <div style={cardWidth}>
-                <ClassCard classesData={classesData} />
+                {classesData.map((classData, index) => (
+                  <ClassCard
+                    classesData={classData}
+                    key={index}
+                    Index={index}
+                  />
+                ))}
               </div>
             </div>
             {displayGrid ? (
