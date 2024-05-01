@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import styles from "./classDetailContent.module.css";
 import MArticle from "./MClassDetailContentArticleWeb";
 import WArticle from "./WClassDetailContentArticleWeb";
-import { Route } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const ClassDetail = ({ classData }) => {
   // 用來管理哪個標籤頁是激活的狀態
@@ -15,7 +15,15 @@ const ClassDetail = ({ classData }) => {
 
   console.log(classData.speaker_id, "gos");
   const goSpeakerD = () => {
-    router.push(`/speaker/speaker-detail?sid=?${classData.speaker_id}`);
+    router.push(`/speaker/speaker-detail?sid=${classData.speaker_id}`);
+  };
+
+  const notify = (isActive) => {
+    if (isActive) {
+      toast("成功加入收藏");
+    } else {
+      toast("成功移除收藏");
+    }
   };
 
   return (
@@ -107,7 +115,7 @@ const ClassDetail = ({ classData }) => {
               </svg>
               <p className={styles.linkText}>立刻報名</p>
             </a>
-            <a className={styles.linkBtn} href="#">
+            <a className={styles.linkBtn} onClick={notify}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20px"
@@ -130,9 +138,7 @@ const ClassDetail = ({ classData }) => {
         <div className={styles.speakerInfor}>
           <div className={styles.speakerNameSet}>
             <p className={styles.speakerName}>{classData.speaker_name}</p>
-            <p className={styles.speakerSubName}>
-              {classData.speaker_experience}
-            </p>
+            <p className={styles.speakerSubName}>{classData.speaker_title}</p>
           </div>
           <div className={styles.speakerBackgroundInfor}>
             {classData.speaker_description}
@@ -164,6 +170,7 @@ const ClassDetail = ({ classData }) => {
         <WArticle />
         {/* basically, it only need one set */}
       </section>
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 };

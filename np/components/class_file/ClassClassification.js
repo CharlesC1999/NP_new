@@ -27,9 +27,14 @@ const ClassClassifacion = ({ categoryChange }) => {
   };
 
   const handleCuisineClick = (index) => {
-    setActiveIndex(index);
-    const selectedCuisineId = cuisines[index].id;
-    categoryChange(selectedCuisineId);
+    if (index === activeIndex) {
+      setActiveIndex(null); // 解除選取
+      categoryChange(null); // 可以設定為 null 或者其他表示 "未選取" 的值
+    } else {
+      setActiveIndex(index);
+      const selectedCuisineId = cuisines[index].id;
+      categoryChange(selectedCuisineId);
+    }
   };
 
   return (
