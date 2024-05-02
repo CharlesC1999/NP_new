@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ClassDatetimePicker from "@/components/class_file/ClassDateTimePicker";
 import styles from "./classFilter.module.css";
+import { RxReload } from "react-icons/rx";
 
 const MobileDateTimePicker = ({ onClose, getStartDate, getEndDate }) => {
   const [classDateStart, setClassDateStart] = useState("");
@@ -175,7 +176,15 @@ const ClassFilter = ({
     }
   }, [classDateEnd]);
 
-  console.log(finalStart, finalEnd, "mo");
+  const reset = () => {
+    // reset
+    setClassDateStart("");
+    setClassDateEnd("");
+
+    // reset classList
+    finalStart("");
+    finalEnd("");
+  };
 
   return (
     <div className={styles.widthMax}>
@@ -183,29 +192,31 @@ const ClassFilter = ({
         <header className={styles.productCountHeader}>
           <p className={styles.totalProducts}>總共：{total} 項商品</p>
           <div className={styles.productCountControls}>
-            <button
-              className={styles.celanderMobile}
-              onClick={() => setShowFullScreen(!showFullScreen)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                viewBox="0 0 24 24"
+            {classDateStart == "" && (
+              <button
+                className={styles.celanderMobile}
+                onClick={() => setShowFullScreen(!showFullScreen)}
               >
-                <g
-                  fill="none"
-                  stroke="#78CEA6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 24 24"
                 >
-                  <path d="M8 2v4m8-4v4" />
-                  <rect width={18} height={18} x={3} y={4} rx={2} />
-                  <path d="M3 10h18" />
-                </g>
-              </svg>
-            </button>
+                  <g
+                    fill="none"
+                    stroke="#78CEA6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                  >
+                    <path d="M8 2v4m8-4v4" />
+                    <rect width={18} height={18} x={3} y={4} rx={2} />
+                    <path d="M3 10h18" />
+                  </g>
+                </svg>
+              </button>
+            )}
             {showFullScreen && (
               <MobileDateTimePicker
                 onClose={() => setShowFullScreen(false)}
@@ -213,6 +224,16 @@ const ClassFilter = ({
                 getEndDate={handleEndDate}
               />
             )}
+            {classDateStart !== "" && (
+              <button
+                // 這裡添加您需要的額外按鈕的 className 和其他屬性
+                className={styles.renewButton}
+                onClick={reset}
+              >
+                <RxReload size={22} />
+              </button>
+            )}
+
             <div className={styles.itemsPerPage}>
               <span className={styles.itemsPerPageValue} id="itemsPerPage">
                 {perpage}
