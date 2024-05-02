@@ -30,7 +30,7 @@ import CatBuy from "./CatBuy";
 //               <div className={styles.biState}>狀態 : 待收貨</div>
 //             </div>
 //             <div className={styles.biMb}>
-//               <div className={styles.biMoney}>訂單金額: $200</div>
+//               <div classNam.e={styles.biMoney}>訂單金額: $200</div>
 //               <a href className={`${styles.buyCardBtn} btn`}>
 //                 查看詳情
 //               </a>

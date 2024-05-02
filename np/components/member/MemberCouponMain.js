@@ -16,7 +16,7 @@ import Cat from "./Cat"
 const [coupons, setCoupons] = useState([])
 
 const getCoupons = async () => {
-  const url = 'http://localhost:3005/api/my-products'
+  const url = 'http://localhost:3005/api/coupons'
 
   // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
   try {
@@ -30,6 +30,7 @@ const getCoupons = async () => {
     if (Array.isArray(data.data.coupons)) {
       // 設定到狀態中
       setCoupons(data.data.coupons)
+      // console.log('abc');
     } else {
       console.log('伺服器回傳資料類型錯誤，無法設定到狀態中')
     }
@@ -72,25 +73,46 @@ useEffect(() => {
 </div>
 <div className={styles.coupmain}>
   {/* 可以用的 */}
+  {coupons.filter(v=>v.Member_ID===41).map((v, i) => {
+    const discountAmount = parseFloat(v.Discount_amount);
+ let displayText;
+// 检查 discountAmount 是否是有效的数字
+if (!isNaN(discountAmount)) {
+  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+  if (discountAmount < 1) {
+    const discountPercent = discountAmount * 10;
+    displayText = `${discountPercent}折`;
+  } else {
+    displayText = `$${discountAmount}`;
+  }
+} else {
+  // 如果 discountAmount 不是有效的数字，直接使用原始值
+  displayText = v.Discount_amount;
+}
+
+
+    return (
   <div className={styles.couponCard}>
     <div className={styles.couponImg} >
-    <span className={styles.cspan} >85折</span>
+    <span className={styles.cspan} >{displayText}</span>
    
-  <span className={styles.cspan2}>效期:2024/12/31</span>
-  <span className={styles.cspan2}>~2025/12/31</span>
+  <span className={styles.cspan2}>效期:{v.Valid_start_date}</span>
+  <span className={styles.cspan2}>~{v.Valid_end_date}</span>
     </div>
     <div className={styles.couponContent }>
       <div className={styles.couponDetails}>
-        <div className={styles.lowbuy}>低消$100</div>
+        <div className={styles.lowbuy}>低消${v.minimum_spend}</div>
         
-        <div className={styles.couponDate}>二月過年檔期小優惠你這個敗家子還買舵手手</div>
+        <div className={styles.couponDate}>{v.C_name}</div>
       </div>
       <div className={styles.couponButton}>
         <button className={`${styles.couponBtn} btn`}>立即使用</button>
       </div>
     </div>
   </div>
-
+);
+}
+)}
   {/* 原本的 */}
   <div className={styles.couponCard}>
     <div className={styles.couponImg} >
