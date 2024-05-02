@@ -3,7 +3,7 @@ import styles from "./CateSidebar.module.css";
 import { useCategories } from "@/hooks/recipe/use-categories";
 import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 
-function CateSidebar() {
+function CateSidebar({ detailPage = "" }) {
   // 用來設定食譜類別的context
   const { recipeCategory, handleCategoryChange } = useCategoryForSQL();
   // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
@@ -126,9 +126,14 @@ function CateSidebar() {
       >
         <div
           className={`d-flex ${styles.sideBox}`}
-          style={{
-            border: recipeCategory === "" ? "var(--green03) solid 2px" : "",
-          }}
+          style={
+            detailPage
+              ? {}
+              : {
+                  border:
+                    recipeCategory === "" ? "var(--green03) solid 2px" : "",
+                }
+          }
         >
           <div className={styles.sideImg}>
             <img src="/index-images/category-1.png" alt />
@@ -150,12 +155,17 @@ function CateSidebar() {
           >
             <div
               className={`d-flex ${styles.sideBox}`}
-              style={{
-                border:
-                  recipeCategory === v.Recipe_cate_ID
-                    ? "var(--green03) solid 2px"
-                    : "",
-              }}
+              style={
+                // 如果是detailPage就不要border
+                detailPage
+                  ? {}
+                  : {
+                      border:
+                        recipeCategory === v.Recipe_cate_ID
+                          ? "var(--green03) solid 2px"
+                          : "",
+                    }
+              }
             >
               <div className={styles.sideImg}>
                 <img src="/index-images/category-1.png" alt="分類icon" />

@@ -67,7 +67,8 @@ export default function RecipeDetail() {
         <div className={`row ${styles["main"]} d-flex`}>
           {/* 側邊欄 */}
           <div className="col-3 d-none d-xxl-block">
-            <SideBarTop />
+            {/* 用來判斷顯示在sideBar上的資訊是list的還是detail的 */}
+            <SideBarTop detailPage={"detailPage"} />
           </div>
           {/* 主要內容 */}
           <div className={`col styles["main-content"]`}>
