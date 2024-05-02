@@ -153,6 +153,7 @@ const ClassList = () => {
   console.log(total, "im here");
 
   return (
+
     <div style={containerStyle}>
       <Header />
       <Breadcrumbs />

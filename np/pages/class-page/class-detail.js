@@ -66,7 +66,6 @@ const ClassDetailPage = () => {
   }, [router.isReady, router.query.class__i_d]);
 
   console.log(classDetail, "here");
-
   return (
     <div style={containerStyle}>
       <Header />
