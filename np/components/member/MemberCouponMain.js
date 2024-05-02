@@ -89,7 +89,8 @@ if (!isNaN(discountAmount)) {
   // 如果 discountAmount 不是有效的数字，直接使用原始值
   displayText = v.Discount_amount;
 }
-
+// 确定按钮是否可用
+const isButtonDisabled = v.C_status !== '可使用';
 
     return (
   <div className={styles.couponCard}>
@@ -106,7 +107,13 @@ if (!isNaN(discountAmount)) {
         <div className={styles.couponDate}>{v.C_name}</div>
       </div>
       <div className={styles.couponButton}>
-        <button className={`${styles.couponBtn} btn`}>立即使用</button>
+
+        {/* 使用条件渲染控制按钮及其文本的显示 */}
+        {isButtonDisabled ? (
+            <button className={`${styles.couponBtn} btn`} disabled></button>
+          ) : (
+            <button className={`${styles.couponBtn} btn`}>立即使用</button>
+          )}
       </div>
     </div>
   </div>
@@ -114,7 +121,7 @@ if (!isNaN(discountAmount)) {
 }
 )}
   {/* 原本的 */}
-  <div className={styles.couponCard}>
+  {/* <div className={styles.couponCard}>
     <div className={styles.couponImg} >
       
     </div>
@@ -127,7 +134,7 @@ if (!isNaN(discountAmount)) {
         <button className={`${styles.couponBtn} btn`}>立即使用</button>
       </div>
     </div>
-  </div>
+  </div> */}
 
  
 </div>
