@@ -1,8 +1,26 @@
-import React from "react";
+import { useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./RecommendedRecipe.module.scss";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 export default function RecommendedRecipe() {
+  // 放在slider，用來設定偏移，左或右
+  const sliderRef = useRef();
+
+  // 向左移動的距離
+  const [moveLeft, setMoveLeft] = useState(0);
+  // 向右移動的距離
+  const [moveRight, setMoveRight] = useState("");
+
+  const handleMoveLeft = () => {
+    const newMove = moveLeft + 366;
+    setMoveLeft(newMove);
+    sliderRef.current.style.right = moveLeft + "px";
+    if (moveLeft === 0) {
+      setMoveLeft(0);
+    }
+  };
+
   return (
     <>
       <div
@@ -10,7 +28,26 @@ export default function RecommendedRecipe() {
       >
         其他推薦食譜
       </div>
-      <div className={`row ${styles["recipe-cards"]} justify-content-between`}>
+      <div
+        ref={sliderRef}
+        className={`row ${styles["recipe-cards"]} justify-content-between position-relative start-0`}
+      >
+        <a
+          onClick={() => {
+            handleMoveLeft();
+          }}
+          href="javascript:void(0)"
+          className={`position-absolute top-0 bottom-0 pe-0 text-dark d-flex justify-content-center align-items-center  ${styles["prev-btn"]} ${styles["slide-btn"]}`}
+        >
+          <FaChevronLeft style={{ fontSize: "24px", color: "white" }} />
+        </a>
+        <a
+          href="javascript:void(0)"
+          className={`position-absolute top-0 bottom-0 ps-0 d-flex justify-content-center align-items-center text-dark ${styles["next-btn"]} ${styles["slide-btn"]}`}
+        >
+          <FaChevronRight style={{ fontSize: "24px", color: "white" }} />
+        </a>
+        {/* 食譜卡片 */}
         <div
           className={`col-6 col-xxl-3 ${styles["recipe-card"]} d-flex flex-column`}
         >
@@ -25,7 +62,7 @@ export default function RecommendedRecipe() {
             className={`${styles["card-content"]} d-flex flex-column align-items-center`}
           >
             <p className={`${styles["recipe-name"]} ${styles["figma-h5"]}`}>
-              法式經典油封鴨腿
+              法式經典油封鴨腿1
             </p>
             <p
               className={`${styles["recipe-description"]} ${styles["truncate"]}`}
@@ -35,6 +72,7 @@ export default function RecommendedRecipe() {
             </p>
           </div>
         </div>
+        {/* 食譜卡片 */}
         <div
           className={`col-6 col-xxl-3 ${styles["recipe-card"]} d-flex flex-column`}
         >
@@ -49,7 +87,7 @@ export default function RecommendedRecipe() {
             className={`${styles["card-content"]} d-flex flex-column align-items-center`}
           >
             <p className={`${styles["recipe-name"]} ${styles["figma-h5"]}`}>
-              法式經典油封鴨腿
+              法式經典油封鴨腿2
             </p>
             <p
               className={`${styles["recipe-description"]} ${styles["truncate"]}`}
@@ -58,6 +96,7 @@ export default function RecommendedRecipe() {
             </p>
           </div>
         </div>
+        {/* 食譜卡片 */}
         <div
           className={`col-4 col-xxl-3 d-none d-xxl-inline-flex ${styles["recipe-card"]} d-flex flex-column`}
           // className={`col-6 col-xxl-3 ${styles['recipe-card']} d-flex flex-column`}
@@ -73,7 +112,7 @@ export default function RecommendedRecipe() {
             className={`${styles["card-content"]} d-flex flex-column align-items-center`}
           >
             <p className={`${styles["recipe-name"]} ${styles["figma-h5"]}`}>
-              法式經典油封鴨腿
+              法式經典油封鴨腿3
             </p>
             <p
               className={`${styles["recipe-description"]} ${styles["truncate"]}`}
@@ -82,6 +121,7 @@ export default function RecommendedRecipe() {
             </p>
           </div>
         </div>
+        {/* 食譜卡片 */}
         <div
           className={`col-4 col-xxl-3 d-none d-xxl-inline-flex ${styles["recipe-card"]} d-flex flex-column`}
           // className={`col-6 col-xxl-3 ${styles['recipe-card']} d-flex flex-column`}
@@ -97,7 +137,7 @@ export default function RecommendedRecipe() {
             className={`${styles["card-content"]} d-flex flex-column align-items-center`}
           >
             <p className={`${styles["recipe-name"]} ${styles["figma-h5"]}`}>
-              法式經典油封鴨腿
+              法式經典油封鴨腿4
             </p>
             <p
               className={`${styles["recipe-description"]} ${styles["truncate"]}`}
@@ -107,6 +147,7 @@ export default function RecommendedRecipe() {
           </div>
         </div>
       </div>
+      {/* pagination */}
       <div className="row">
         <div
           className={`${styles["pagination"]} d-flex gap-2 justify-content-center`}

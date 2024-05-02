@@ -146,7 +146,7 @@ export default function RecipeList() {
                 }}
                 type="button"
                 className={`btn ${styles["prev"]} ${
-                  page - 1 >= 1 ? "" : "disabled"
+                  page - 1 >= 1 ? "" : styles["disabled"]
                 }`}
               >
                 <FiChevronsLeft />
@@ -179,7 +179,7 @@ export default function RecipeList() {
                 }}
                 type="button"
                 className={`btn ${styles["next"]} ${
-                  page + 1 > pageCount ? "disabled" : ""
+                  page + 1 > pageCount ? styles["disabled"] : ""
                 }`}
               >
                 <FiChevronsRight />

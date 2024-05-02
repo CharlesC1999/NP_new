@@ -22,7 +22,9 @@
     .prev,
     .next {
       // background-color: rgb(233, 233, 233);
-      background-color: var(--gray02);
+      // background-color: var(--gray02);
+      background-color: #f7f8f5;
+      color: #747e85;
     }
     .current {
       background-color: var(--green02);
@@ -34,4 +36,10 @@
       padding: 0;
     }
   }
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.38;
+  border-color: none;
 }

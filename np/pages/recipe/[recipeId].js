@@ -77,7 +77,9 @@ export default function RecipeDetail() {
             <DetailRelatedProducts />
           </div>
         </div>
-        <div className={`${styles["recommended-recipe"]} d-flex flex-column`}>
+        <div
+          className={`${styles["recommended-recipe"]} d-flex flex-column position-relative overflow-hidden`}
+        >
           <DetailRecommendedRecipe />
         </div>
       </div>
