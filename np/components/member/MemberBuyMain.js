@@ -5,7 +5,6 @@ import styles from "./MemberBuymain.module.css";
 
 import CatBuy from "./CatBuy";
 
-
 // function BuyCard({ onCommentClick }) {
 //   // 添加 props 參數
 //   const [showReview, setShowReview] = useState(false);
@@ -53,17 +52,16 @@ import CatBuy from "./CatBuy";
 //   );
 // }
 const MemberBuyMain = () => {
-  
   const [activeCategory, setActiveCategory] = useState("全部");
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
   // const handleCommentClick = () => {
-  //   // 这里可以定义当评论按钮被点击时执行的逻辑 
+  //   // 这里可以定义当评论按钮被点击时执行的逻辑
   //   console.log("评论按钮被点击了");
   // };
-  
+
   return (
     <>
       <div
@@ -85,10 +83,13 @@ const MemberBuyMain = () => {
           <div
             className={`d-flex flex-column justify-content-center align-items-cente`}
           >
-           <CatBuy setActiveCategory={setActiveCategory} activeCategory={activeCategory} />
+            <CatBuy
+              setActiveCategory={setActiveCategory}
+              activeCategory={activeCategory}
+            />
             {/* 分類欄下面的搜尋框 */}
             <div className={styles.searchContainer}>
-            <input
+              <input
                 className={styles.searchBar}
                 type="text"
                 placeholder="Search for items..."
@@ -114,7 +115,11 @@ const MemberBuyMain = () => {
             </div>
           </div>
           {/* BuyCard  */}
-          <MemberBuyCard activeCategory={activeCategory} searchTerm={searchTerm} />
+          <MemberBuyCard
+            activeCategory={activeCategory}
+            searchTerm={searchTerm}
+          />
+          <MemberBuyCard activeCategory={activeCategory} />
           {/* <div className={styles.buyCard}>
             <div className={styles.buyCardContent}>
               <div className={styles.bccolumn}>
