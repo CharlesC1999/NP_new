@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Router, { useRouter } from "next/router";
 
 export default function ClassCard({ classesData }) {
+  console.log(classesData, "classDW");
   // 初始化每個課程的愛心狀態為 false
   const [heartActive, setHeartActive] = useState(false);
 
