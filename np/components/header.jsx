@@ -22,7 +22,7 @@ const HeaderComponent = () => {
   const [selectedText, setSelectedText] = useState("所有分類");
   const router = useRouter();
   const { auth, logout } = useAuth();
-
+// console.log(auth);
   let hasMargin = true;
   let isMobile = false;
 

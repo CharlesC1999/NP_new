@@ -1,17 +1,62 @@
-import React from "react";
+import { useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./TopBarList.module.scss";
+import { useCategories } from "@/hooks/recipe/use-categories";
 
-export default function TopBarList() {
+export default function TopBarList({
+  setOrderby = {},
+  total = 0,
+  setRecipeCategory = "",
+}) {
+  // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
+  const { setNewCategories, newCategories } = useCategories();
+
+  // 當點擊排序options時會收起整個selectBox
+  const selectBoxRef = useRef(null);
+  // 點擊排序options設定顯示目前是按照什麼排序 (asc or desc)
+  const sortRef = useRef(null);
+  // 當點擊分類options時會收起整個selectBox
+  const categoryBoxRef = useRef(null);
+  // 點擊分類options設定顯示目前是按照什麼排序 (asc or desc)
+  const categoryRef = useRef(null);
+
+  // 點擊排序下拉清單的選項時收起清單
+  const handlefoldSelectBox = (e) => {
+    selectBoxRef.current.classList.add(styles["click-hidden"]);
+    // 顯示目前點擊到的option文字
+    const sortText = e.target.textContent;
+    sortRef.current.textContent = sortText;
+  };
+
+  // 點擊分類下拉清單的選項時收起清單
+  const handlefoldCategoryBox = (e) => {
+    categoryBoxRef.current.classList.add(styles["click-hidden"]);
+    // 顯示目前點擊到的option文字
+    const sortText = e.target.textContent;
+    categoryRef.current.textContent = sortText;
+  };
+
+  // 排序的選項 (單純map用)
+  const sortByOptions = [
+    { name: "按id升序", order: "asc" },
+    { name: "按id降序", order: "desc" },
+  ];
+
   return (
     <>
       <div
         className={`${styles["top-bar"]} row d-flex d-xxl-none justify-content-between`}
       >
+        {/* 排序 */}
         <div
           className={`col-4 ${styles["btn-sort"]} d-flex align-items-center`}
+          onClick={() => {
+            selectBoxRef.current.classList.toggle(styles["click-hidden"]);
+          }}
         >
-          <p className={`${styles["sort"]} text-center`}>排序</p>
+          <p ref={sortRef} className={`${styles["sort"]} text-center`}>
+            排序
+          </p>
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -27,10 +72,16 @@ export default function TopBarList() {
             </svg>
           </div>
         </div>
+        {/* 分類 */}
         <div
           className={`col-5 ${styles["btn-filter"]} d-flex align-items-center`}
+          onClick={() => {
+            categoryBoxRef.current.classList.toggle(styles["click-hidden"]);
+          }}
         >
-          <p className={`${styles["category"]} text-center`}>分類(12)</p>
+          <p ref={categoryRef} className={`${styles["category"]} text-center`}>
+            全部 ({total})
+          </p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={18}
@@ -44,6 +95,8 @@ export default function TopBarList() {
             />
           </svg>
         </div>
+
+        {/* switch button */}
         <div className={`col-auto ${styles["switch-card-qty"]} d-flex`}>
           <div className={styles["switch-grid"]}>
             <svg
@@ -78,6 +131,61 @@ export default function TopBarList() {
                 fill="#50BF8B"
               />
             </svg>
+          </div>
+        </div>
+        {/* 所有下拉式選單 */}
+        <div
+          className={`row position-relative d-flex ${styles["all-dropdown"]}`}
+        >
+          {/* 排序下拉式選單 */}
+          <div
+            className={`col-4 d-flex flex-column gap-1 position-relative py-2 px-0 ${styles["select-box"]} ${styles["click-hidden"]}`}
+            ref={selectBoxRef}
+          >
+            {sortByOptions.map((v, i) => {
+              return (
+                <p
+                  key={i}
+                  onClick={(e) => {
+                    handlefoldSelectBox(e);
+                    setOrderby({ sort: "recipe__i_d", order: v.order });
+                  }}
+                  className="text-center m-0"
+                >
+                  {v.name}
+                </p>
+              );
+            })}
+          </div>
+          {/* 分類下拉式選單 */}
+          <div
+            className={` col-5 d-flex flex-column gap-1 position-relative py-2 px-0 ${styles["categories-box"]} ${styles["click-hidden"]}`}
+            ref={categoryBoxRef}
+          >
+            <p
+              onClick={(e) => {
+                handlefoldCategoryBox(e);
+                setRecipeCategory("");
+                // setOrderby({ sort: "recipe__i_d", order: v.order });
+              }}
+              className="text-center m-0"
+            >
+              全部 (50)
+            </p>
+            {newCategories.map((v, i) => {
+              return (
+                <p
+                  key={i}
+                  onClick={(e) => {
+                    handlefoldCategoryBox(e);
+                    setRecipeCategory(v.Recipe_cate_ID);
+                  }}
+                  className="text-center m-0"
+                >
+                  {v.Recipe_cate_name} ({v.qty})
+                </p>
+              );
+            })}
           </div>
         </div>
       </div>

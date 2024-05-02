@@ -1,17 +1,29 @@
 import React from "react";
+import Router, { useRouter } from "next/router";
 import styles from "./classCardMobileGrid.module.css";
 
-const ProductCardMobileList = () => {
+export default function ProductCardMobileGrid({ classesData }) {
+  console.log(classesData, "classDM");
+
+  const goClassDetail = (class__i_d) => {
+    // 方法一
+    // Router.push(`/class-page/class-detail/${class__i_d}`);
+    // 方法二
+    Router.push({
+      pathname: "/class-page/class-detail",
+      query: { class__i_d: class__i_d },
+    });
+  };
   return (
     <article className={styles.productCard}>
       <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a77577212d296ba1986c456e093d58e9a0d931127736f72d9307baa502fffcb?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
-        alt="松露菜飯 product image"
+        src={`/images/class-images/${classesData.image__u_r_l}`}
+        alt="product image"
         className={styles.productImage}
         loading="lazy"
       />
       <div className={styles.productDetails}>
-        <h3 className={styles.productName}>松露菜飯</h3>
+        <h3 className={styles.productName}>{classesData.class_name}</h3>
         <div className={styles.productDate}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,14 +54,23 @@ const ProductCardMobileList = () => {
               />
             </rect>
           </svg>
-          <time dateTime="2024-05-26">2024 5月26日</time>
+          <time>
+            {new Date(classesData.class_date).toLocaleDateString("zh-TW", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
+          </time>
         </div>
         <div className={styles.productPricing}>
-          <div className={styles.currentPrice}>$NT599</div>
-          <div className={styles.originalPrice}>$999</div>
+          <div className={styles.currentPrice}>$NT{classesData.c_price}</div>
+          <div className={styles.originalPrice}>${classesData.c_price}</div>
         </div>
         <div className={styles.productActions}>
-          <a href="#" className={styles.actionLink}>
+          <a
+            className={styles.actionLink}
+            onClick={() => goClassDetail(classesData.class__i_d)}
+          >
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/4cd0fa22651251ac90a3950b65de848025a94b63de491d78368103e6b2f1d098?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
               alt="Action icon"
@@ -69,6 +90,4 @@ const ProductCardMobileList = () => {
       </div>
     </article>
   );
-};
-
-export default ProductCardMobileList;
+}
