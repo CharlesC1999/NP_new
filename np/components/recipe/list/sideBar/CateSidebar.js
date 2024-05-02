@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import styles from "./CateSidebar.module.css";
 import { useCategories } from "@/hooks/recipe/use-categories";
 import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
+import { useRouter } from "next/router";
 
 function CateSidebar({ detailPage = "" }) {
+  // 點sideBar的分類時導回食譜list
+  const router = useRouter();
+
   // 用來設定食譜類別的context
   const { recipeCategory, handleCategoryChange } = useCategoryForSQL();
   // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
@@ -121,6 +125,7 @@ function CateSidebar({ detailPage = "" }) {
       <div
         onClick={() => {
           handleCategoryChange();
+          Boolean(detailPage) && router.push("/recipe");
         }}
         className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
       >
@@ -150,6 +155,7 @@ function CateSidebar({ detailPage = "" }) {
           <div
             onClick={() => {
               handleCategoryChange(v.Recipe_cate_ID);
+              Boolean(detailPage) && router.push("/recipe");
             }}
             className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
           >

@@ -13,7 +13,7 @@ export default function SideBar() {
             <div className={`${styles.line}`}></div>
           </div>
           {/* 食譜卡片 */}
-          // 羊肉燉湯
+          {/* 羊肉燉湯 */}
           <Link href={`/recipe/4`} className="text-decoration-none text-dark">
             <div className={`${styles["side-card"]} row d-flex`}>
               <div className="col-6">
