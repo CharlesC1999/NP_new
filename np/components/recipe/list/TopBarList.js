@@ -1,14 +1,16 @@
 import { useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./TopBarList.module.scss";
+import { useCategories } from "@/hooks/recipe/use-categories";
 
 export default function TopBarList({
   setOrderby = {},
   total = 0,
-  newCategories = [],
-  categoriesDropdown = [],
   setRecipeCategory = "",
 }) {
+  // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
+  const { setNewCategories, newCategories } = useCategories();
+
   // 當點擊排序options時會收起整個selectBox
   const selectBoxRef = useRef(null);
   // 點擊排序options設定顯示目前是按照什麼排序 (asc or desc)
@@ -163,13 +165,14 @@ export default function TopBarList({
             <p
               onClick={(e) => {
                 handlefoldCategoryBox(e);
+                setRecipeCategory("");
                 // setOrderby({ sort: "recipe__i_d", order: v.order });
               }}
               className="text-center m-0"
             >
               全部 (50)
             </p>
-            {categoriesDropdown.map((v, i) => {
+            {newCategories.map((v, i) => {
               return (
                 <p
                   key={i}

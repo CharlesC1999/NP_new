@@ -8,7 +8,15 @@ import toast, { Toaster } from "react-hot-toast";
 const notify = () => toast("已加入收藏 💚");
 const notifyBtn = () => toast("已加入購物車 🛒");
 
-function ProductMainText({ name, price, description, discount_price }) {
+function ProductMainText({
+  name,
+  price,
+  description,
+  discount_price,
+  review_comments,
+  average_rating,
+  upload_date,
+}) {
   return (
     <>
       <div className={`${style["product-text"]} d-flex flex-column`}>
@@ -24,8 +32,9 @@ function ProductMainText({ name, price, description, discount_price }) {
           >
             <div>
               <i className={`fa-solid fa-star`} />
+              {average_rating}
             </div>
-            <div className={`${style["star-text"]} ps-2 `}>(125則評論)</div>
+            <div className={`${style["star-text"]} ps-2 `}>(則評論)</div>
           </div>
           <a className={`${style["favorite-btn"]} ${style["icon-link"]} `}>
             <i

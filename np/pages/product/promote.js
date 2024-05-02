@@ -50,9 +50,11 @@ export default function Product() {
       >
         <div className={`${styles.sideBar} me-5`}>
           <ProductSidebarDiscount />
-          <ProductSidebarCate />
+          <ProductSidebarNew />
 
-          <ProductSidebarDetail />
+          {/* <ProductSidebarCate />
+
+          <ProductSidebarDetail /> */}
         </div>
         <div
           className={`${styles.productW} ms-sm-3 ms-0 d-flex justify-content-center flex-column`}

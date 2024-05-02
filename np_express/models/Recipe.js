@@ -33,6 +33,30 @@ export default async function (sequelize) {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      Servings: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      Ingredients_Count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      Cooking_Time: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      Ingredients: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      Portion: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      Steps: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
     },
     {
       tableName: 'recipe', //直接提供資料表名稱
