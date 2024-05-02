@@ -78,24 +78,25 @@ router.get('/:classId', async function (req, res) {
 })
 
 // GET - 單筆
-router.get('/:class__i_d', async function (req, res) {
+router.get('/full/:class__i_d', async function (req, res) {
   // 使用 getIdParam() 將查詢參數（原本是 string）轉為數字
-  const id = getIdParam(req)
+  const class__i_d = req.params.class__i_d
+  console.log(class__i_d)
 
   // 取得該名講師課程資訊（將 class 與 class_image 資料表關聯，圖片有多張時取第一張）
   const ClassDataSql = `
-  SELECT c.*, ci.image__u_r_l, s.speaker_name
-  FROM class AS c
-  JOIN class_image AS ci ON c.class__i_d = ci.f__class__i_d
-  JOIN speaker AS s ON c.f__speaker__i_d = s.speaker_id
-  JOIN class_categories AS cc ON c.class_category__i_d = cc.class_cate__i_d
-  LIMIT ${limit} OFFSET ${offset}
+    SELECT c.*, ci.*, s.*
+    FROM class AS c
+    JOIN class_image AS ci ON c.class__i_d = ci.f__class__i_d
+    JOIN speaker AS s ON c.f__speaker__i_d = s.speaker_id
+    WHERE c.class__i_d = ${class__i_d}
+    GROUP BY c.class__i_d
   `
-  const [ClassData] = await db.query(ClassDataSql)
-  const classDetail = await Class.findByPk(id, {
-    raw: true, //只需要資料表中資料
+  const [classAllDetail] = await db.query(ClassDataSql)
+  return res.json({
+    status: 'success1',
+    data: { classAllDetail },
   })
-  return res.json({ status: 'success', data: { speaker, speakers, ClassData } })
 })
 
 export default router

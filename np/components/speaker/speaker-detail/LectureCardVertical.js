@@ -11,7 +11,7 @@ function LectureCardVertical({name,description,image,classID }) {
     <p>
      {description}
     </p>
-    <Link href={`/class-page/detail?id=${classID}`} role="button" className={styles.btn}>
+    <Link href={`/class-page/class-detail?class__i_d=${classID}`} role="button" className={styles.btn}>
       {" "}
       了解詳情
     </Link>
