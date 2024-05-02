@@ -2,30 +2,32 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/styles/Product/products.module.scss";
 
-export default function ProductMainPic() {
-  const images = [
-    "/images/products/Rectangle48.png",
-    "/images/products/Rectangle49.png",
-    "/images/products/Rectangle48.png",
-    "/images/products/Rectangle51.png",
-  ];
+export default function ProductMainPic({ image_urls }) {
+  const defaultImage = "/index-images/noResultBG.png";
+  const basePath = "/index-images/p-image/"; // 基础路径
 
-  // 状态：当前显示的图片索引
+  // 填充 images 数组，确保至少有四个元素
+  const images = image_urls.map((url) => `${basePath}${url}`); // 为每个 URL 添加路径前缀
+  while (images.length < 4) {
+    images.push(defaultImage); // 如果不足四张图片，添加默认图片
+  }
+
+  // 目前顯示圖片的索引
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
-  // 处理点击“下一张”的函数
+  // 點擊下一張的函式
   const handleNext = () => {
     const newIndex = (currentImgIndex + 1) % images.length;
     setCurrentImgIndex(newIndex);
   };
 
-  // 处理点击“上一张”的函数
+  // 點擊上一張的函式
   const handlePrev = () => {
     const newIndex = (currentImgIndex - 1 + images.length) % images.length;
     setCurrentImgIndex(newIndex);
   };
 
-  // 处理点击缩略图的函数
+  // 點擊小圖的函式
   const handleSelectImage = (index) => {
     setCurrentImgIndex(index);
   };
@@ -35,8 +37,9 @@ export default function ProductMainPic() {
       <div className={`${style["product-pic"]} d-flex flex-column`}>
         <div className={`${style["p-img"]}`}>
           <img
+            src={images[currentImgIndex]}
             className={`${style["object-fit"]}`}
-            src={images[currentImgIndex]} // 当前图片来源于 images 数组
+            alt="Product Main"
           />
         </div>
         <ul

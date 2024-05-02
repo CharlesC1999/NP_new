@@ -48,6 +48,7 @@ router.get('/', async function (req, res) {
   `
 
   const [classesRawSql] = await db.query(sqlCate)
+  console.log(classesRawSql)
   const [countCateRawSql] = await db.query(sqlCountCate)
   const total = countCateRawSql[0].countCate
   const pageCount = Math.ceil(total / Number(perpage)) || 0
@@ -74,6 +75,28 @@ router.get('/:classId', async function (req, res) {
   })
 
   return res.json({ status: 'success', data: { classData } })
+})
+
+// GET - 單筆
+router.get('/full/:class__i_d', async function (req, res) {
+  // 使用 getIdParam() 將查詢參數（原本是 string）轉為數字
+  const class__i_d = req.params.class__i_d
+  console.log(class__i_d)
+
+  // 取得該名講師課程資訊（將 class 與 class_image 資料表關聯，圖片有多張時取第一張）
+  const ClassDataSql = `
+    SELECT c.*, ci.*, s.*
+    FROM class AS c
+    JOIN class_image AS ci ON c.class__i_d = ci.f__class__i_d
+    JOIN speaker AS s ON c.f__speaker__i_d = s.speaker_id
+    WHERE c.class__i_d = ${class__i_d}
+    GROUP BY c.class__i_d
+  `
+  const [classAllDetail] = await db.query(ClassDataSql)
+  return res.json({
+    status: 'success1',
+    data: { classAllDetail },
+  })
 })
 
 export default router
