@@ -1,18 +1,21 @@
 import React from "react";
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef} from 'react'
 import Link from 'next/link'
 import "bootstrap/dist/css/bootstrap.min.css"; 
 import styles from "./MemberCouponMain.module.css"
 import Cat from "./Cat"
-
+// import { useAuth } from "@/contexts/AuthContext";
 
 
 
 
 
  const MemberCouponMain =() => {
+  //新加的
+  // const { auth, logout } = useAuth();
+  // console.log(auth);
 
-  
+
 const [coupons, setCoupons] = useState([])
 
 const getCoupons = async () => {
@@ -47,6 +50,7 @@ useEffect(() => {
 
   return(
     <> 
+ 
   <div className={` ${styles.container1} ${styles.main} ` }>
   {/* 下面是側邊攔 */}
   
@@ -93,7 +97,7 @@ if (!isNaN(discountAmount)) {
 const isButtonDisabled = v.C_status !== '可使用';
 
     return (
-  <div className={styles.couponCard}>
+  <div className={styles.couponCard} key={v.Coupon_ID}>
     <div className={styles.couponImg} >
     <span className={styles.cspan} >{displayText}</span>
    
@@ -141,6 +145,7 @@ const isButtonDisabled = v.C_status !== '可使用';
 
   </div>
 </div>
+
 </>
 );
 
