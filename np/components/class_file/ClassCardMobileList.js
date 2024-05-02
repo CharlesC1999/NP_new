@@ -1,18 +1,19 @@
 import React from "react";
 import styles from "./classCardMobileList.module.css";
 
-const ProductCardMobileList = () => {
+export default function ProductCardMobileList({ classesData }) {
+  console.log(classesData, "classDM");
   return (
     <article className={styles.productCard}>
       <figure className={styles.productImageWrapper}>
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/78d6e95220ed902c7fc924d45f41800d751471165f7af4da41420c24df21d509?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
+          src={`/images/class-images/${classesData.image__u_r_l}`}
           alt="Product Image"
           className={styles.productImage}
         />
       </figure>
       <div className={styles.productDetails}>
-        <h3 className={styles.productName}>營養師手做年菜上桌</h3>
+        <h3 className={styles.productName}>{classesData.class_name}</h3>
         <div className={styles.productMeta}>
           <div className={styles.productDate}>
             <svg
@@ -44,7 +45,7 @@ const ProductCardMobileList = () => {
                 />
               </rect>
             </svg>
-            <time dateTime="2024-05-26">2024 5月26日</time>
+            <time dateTime="2024-05-26">{classesData.class_date}</time>
           </div>
           <div className={styles.productAuthor}>
             <svg
@@ -67,12 +68,12 @@ const ProductCardMobileList = () => {
               />
               <path fill="none" d="M0 0h36v36H0z" />
             </svg>
-            <span>Walt White</span>
+            <span>{classesData.speaker_name}</span>
           </div>
         </div>
         <div className={styles.productPricing}>
-          <span className={styles.currentPrice}>$NT599</span>
-          <span className={styles.originalPrice}>$999</span>
+          <span className={styles.currentPrice}>$NT{classesData.c_price}</span>
+          <span className={styles.originalPrice}>${classesData.c_price}</span>
         </div>
         <div className={styles.productActions}>
           <a href="#" className={styles.actionLink}>
@@ -93,6 +94,4 @@ const ProductCardMobileList = () => {
       </div>
     </article>
   );
-};
-
-export default ProductCardMobileList;
+}

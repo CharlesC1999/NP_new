@@ -44,11 +44,10 @@ export const AuthProvider = ({ children }) => {
       console.error('Failed to fetch favorites:', error);
     }
   };
- 
+  //TODO希望會員在會員中心增減收藏內容時（陣列內容改變），能同時更新recipeData，不需要手動 refresh
   useEffect(() => {
-      // 成功登入後要執行一次向伺服器取得我的最愛清單
-      fetchFavorites()
-  }, [favorRecipe])
+    fetchFavorites()
+  }, [])
 
   const router = useRouter();
 
