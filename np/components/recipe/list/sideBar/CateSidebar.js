@@ -5,7 +5,7 @@ import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 
 function CateSidebar() {
   // 用來設定食譜類別的context
-  const { recipeCategory, setRecipeCategory } = useCategoryForSQL();
+  const { recipeCategory, handleCategoryChange } = useCategoryForSQL();
   // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
   const { setNewCategories, newCategories } = useCategories();
   //食譜類別state初始值
@@ -120,7 +120,7 @@ function CateSidebar() {
       {/* 顯示所有類別的食譜 */}
       <div
         onClick={() => {
-          setRecipeCategory("");
+          handleCategoryChange();
         }}
         className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
       >
@@ -144,7 +144,7 @@ function CateSidebar() {
         return (
           <div
             onClick={() => {
-              setRecipeCategory(v.Recipe_cate_ID);
+              handleCategoryChange(v.Recipe_cate_ID);
             }}
             className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
           >

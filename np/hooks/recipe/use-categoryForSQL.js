@@ -6,9 +6,13 @@ export function CategoryForSQLProvider({ children }) {
   // 食譜分類，用在食譜列表頁跟細節頁的sideBar，點擊時設定state並當成params傳給後端做SQL查詢
   const [recipeCategory, setRecipeCategory] = useState("");
 
+  const handleCategoryChange = (category = "") => {
+    setRecipeCategory(category);
+  };
+
   return (
     <CategoryForSQLContext.Provider
-      value={{ recipeCategory, setRecipeCategory }}
+      value={{ recipeCategory, setRecipeCategory, handleCategoryChange }}
     >
       {children}
     </CategoryForSQLContext.Provider>
