@@ -1,0 +1,54 @@
+.speakerCardListLink{
+  text-decoration: none;
+  &:hover .speakerCardList .speakerImg img {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.speakerCardList{
+  display: flex;
+  flex-direction: row;
+  width: 248px;
+  justify-content: center;
+  gap: 10px;
+  & .speakerContent{
+    width: 148px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1 0 0;
+    align-self: stretch;
+    & h6 {
+      color: var(--gray01);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 100%; /* 16px */
+      margin-bottom: 0px;
+    }
+    & p {
+      color: var(--gray01);
+      font-size: 12px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      align-self: stretch;
+      overflow: hidden;
+    }
+  }
+}
+.speakerImg{
+  width: 90px;
+  height: 92px;
+  overflow: hidden;
+  background-color: #777;
+  border-radius: 5px;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: 0.4s ease-in-out;
+  }
+}
