@@ -19,10 +19,12 @@ import styles from "@/styles/recipe/recipe-list.module.scss";
 
 import { CategoriesProvider } from "@/hooks/recipe/use-categories";
 
+// 點sideBar設定state是該類別的ID，當作params來傳給後端做SQL查詢
+import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
+
 export default function RecipeList() {
   // ----------------------篩選條件 start ------------------------
-  // 食譜分類
-  const [recipeCategory, setRecipeCategory] = useState("");
+  const { recipeCategory, setRecipeCategory } = useCategoryForSQL();
 
   // ----------------------篩選條件 end --------------------------
 
@@ -110,20 +112,12 @@ export default function RecipeList() {
       <Breadcrumbs />
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
-        <TopBarList
-          setOrderby={setOrderby}
-          total={total}
-          setRecipeCategory={setRecipeCategory}
-        />
+        <TopBarList setOrderby={setOrderby} total={total} />
         {/* <TopBarGrid /> */}
 
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
           <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
-            <SideBarTop
-              setRecipeCategory={setRecipeCategory}
-              handleConditionsChange={handleConditionsChange}
-              recipeCategory={recipeCategory}
-            />
+            <SideBarTop />
             <SideBarRecipe />
           </div>
           {/* 食譜卡片 (list排列) */}

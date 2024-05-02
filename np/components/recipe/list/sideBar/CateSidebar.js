@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import styles from "./CateSidebar.module.css";
 import { useCategories } from "@/hooks/recipe/use-categories";
+import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 
-function CateSidebar({ setRecipeCategory = () => {}, recipeCategory = "" }) {
+function CateSidebar() {
+  // 用來設定食譜類別的context
+  const { recipeCategory, setRecipeCategory } = useCategoryForSQL();
   // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
   const { setNewCategories, newCategories } = useCategories();
   //食譜類別state初始值
