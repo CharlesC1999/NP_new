@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./CateSidebar.module.css";
 import { useCategories } from "@/hooks/recipe/use-categories";
 
-function CateSidebar({ setRecipeCategory, recipeCategory }) {
+function CateSidebar({ setRecipeCategory = () => {}, recipeCategory = "" }) {
   // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
   const { setNewCategories, newCategories } = useCategories();
   //食譜類別state初始值
@@ -155,7 +155,7 @@ function CateSidebar({ setRecipeCategory, recipeCategory }) {
               }}
             >
               <div className={styles.sideImg}>
-                <img src="/index-images/category-1.png" alt />
+                <img src="/index-images/category-1.png" alt="分類icon" />
               </div>
               <div className={styles.sideText}>
                 <h6 className={styles.left}>{v.Recipe_cate_name}</h6>

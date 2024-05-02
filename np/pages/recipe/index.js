@@ -3,15 +3,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
+// 側邊欄
 import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategories";
 import SideBarRecipe from "@/components/recipe/list/SideBarRecipe";
+// 手機板的篩選、排序
 import TopBarList from "@/components/recipe/list/TopBarList";
 import TopBarGrid from "@/components/recipe/list/TopBarGrid";
+// 食譜卡片
 import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";
 import Footer from "@/components/footer";
+// 電腦版的排序
 import Filter from "@/components/recipe/list/filter/RecipeFilter";
 import styles from "@/styles/recipe/recipe-list.module.scss";
+
 import { CategoriesProvider } from "@/hooks/recipe/use-categories";
 
 export default function RecipeList() {
