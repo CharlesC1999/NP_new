@@ -1,9 +1,49 @@
 import React from "react";
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import "bootstrap/dist/css/bootstrap.min.css"; 
 import styles from "./MemberCouponMain.module.css"
 import Cat from "./Cat"
 
+
+
+
+
+
  const MemberCouponMain =() => {
+
+  
+const [coupons, setCoupons] = useState([])
+
+const getCoupons = async () => {
+  const url = 'http://localhost:3005/api/my-products'
+
+  // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
+  try {
+    // fetch預設是使用GET，不需要加method設定
+    const res = await fetch(url)
+    // 解析json格式資料成js的資料
+    const data = await res.json()
+    console.log(data)
+
+    // 為了要確保資料是陣列，所以檢查後再設定
+    if (Array.isArray(data.data.coupons)) {
+      // 設定到狀態中
+      setCoupons(data.data.coupons)
+    } else {
+      console.log('伺服器回傳資料類型錯誤，無法設定到狀態中')
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+// 樣式2: didMount階段只執行一次
+useEffect(() => {
+  // 頁面初次渲染之後伺服器要求資料
+  getCoupons()
+}, [])
+
+
   return(
     <> 
   <div className={` ${styles.container1} ${styles.main} ` }>
