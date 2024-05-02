@@ -23,6 +23,7 @@ router.get('/', async function (req, res) {
   if (
     categoryId &&
     categoryId !== 'null' &&
+    categoryId !== '0' &&
     categoryId !== 'undefined' &&
     categoryId.trim() !== ''
   ) {

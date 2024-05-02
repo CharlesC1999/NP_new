@@ -68,6 +68,7 @@ const ClassList = () => {
   const [sortBy, setSortBy] = useState("");
   // 用於選擇分類
   const [categoryId, setCategoryId] = useState(null);
+  // 獲取到日期的資料
 
   //串上後端取得資料
   const getClasses = async (params) => {
@@ -97,7 +98,10 @@ const ClassList = () => {
     setCategoryId(categoryId);
     // 這裡直接調用 getClasses，傳遞新的 categoryId
     setPage(1);
-    const newParams = { page: 1, perpage, sortBy, categoryId };
+    const newParams =
+      categoryId === 0
+        ? { page: 1, perpage, sortBy }
+        : { page: 1, perpage, sortBy, categoryId };
     const data = await getClasses(newParams);
     console.log("Data received on category change:", data);
     if (data && data.status === "success") {
@@ -139,6 +143,8 @@ const ClassList = () => {
     // 充新獲得資料
   };
 
+  // 日期區間傳到後端
+
   // 切換到Grid模式
   const showGrid = () => {
     setDisplayGrid(true);
@@ -172,6 +178,8 @@ const ClassList = () => {
               perpage={perpage}
               setPerpage={setPerpage}
               onSortChange={handleSortChange}
+              onCategoryChange={handleCategoryChange} // 篩手機分類位置
+              categoryId={categoryId} // 篩手機分類位置
               total={total}
             />
             <div className={CardStyle.WebCardContainer}>
@@ -188,18 +196,23 @@ const ClassList = () => {
 
             {displayGrid ? (
               <div className={CardStyle.MobileCardContainer}>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
+                {classesData.map(
+                  (classData, index) =>
+                    index % 2 === 0 && ( // 每隔一個元素取數據
+                      <div className={CardStyle.GridCardSet} key={index}>
+                        <ClassCardMobileGrid
+                          classesData={classData} // 直接使用當前元素
+                          key={index}
+                        />
+                        {classesData[index + 1] && ( // 確保下一個元素存在
+                          <ClassCardMobileGrid
+                            classesData={classesData[index + 1]} // 正確訪問下一個元素
+                            key={index + 1}
+                          />
+                        )}
+                      </div>
+                    )
+                )}
               </div>
             ) : (
               <div className={CardStyle.MobileCardContainer}>
