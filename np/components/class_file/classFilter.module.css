@@ -199,9 +199,7 @@
   position: absolute;
   pointer-events: none; /* 避免在隱藏時可交互 */
   transform: translateY(-20px); /* 給出一點動畫效果 */
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   top: 100%;
   left: 0;
   width: 100%;
@@ -217,9 +215,7 @@
   position: absolute;
   pointer-events: none; /* 避免在隱藏時可交互 */
   transform: translateY(-20px); /* 給出一點動畫效果 */
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   top: 100%;
   left: 0;
   width: 100%;
@@ -261,14 +257,38 @@
 
 @media (max-width: 375px) {
   .classSelect {
+    width: 100px;
+    height: 37px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin-top: 4px;
   }
 
   .classSelectLabel {
     color: #636e72;
-    margin-top: 3px;
+    width: 100%;
+    overflow: hidden;
+    text-wrap: nowrap;
+    /* margin-top: 3px; */
+  }
+
+  .classSelectOption {
+    color: #636e72;
+    padding: 5px 10px;
+    background-color: #fff;
+  }
+
+  .classSelectOptions {
+    display: block;
+    width: 102px;
+    padding-block: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    /* box-shadow: 2px 5px rgba(0, 0, 0, 0.1); */
+    /* 偷懶 */
+    margin-top: 274px;
   }
 }
 /* class-selections-mobile-only */

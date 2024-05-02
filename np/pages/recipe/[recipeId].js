@@ -11,37 +11,36 @@ import DetailRelatedProducts from "@/components/recipe/detail/DetailRelatedProdu
 import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipe";
 import Footer from "@/components/footer";
 import styles from "@/styles/recipe/recipe-detail.module.scss";
+import { CategoriesProvider } from "@/hooks/recipe/use-categories";
 
 export default function RecipeDetail() {
   const router = useRouter();
 
   //設定食譜初始值
   const [recipe, setRecipe] = useState({
-    Recipe_ID: 0,
-    Title_R_name: "",
-    Image_URL: "",
-    Content: "",
-    Publish_date: "",
-    Recipe_category_ID: 0,
+    recipe__i_d: 0,
+    title__r_name: "",
+    image__u_r_l: "",
+    content: "",
+    publish_date: "",
+    recipe_category__i_d: 0,
     recipe_valid: 0,
+    ingredients: "",
+    steps: "",
   });
 
   //取得對應的食譜
   const getRecipe = async (rid) => {
-    // const recipe = recipes.filter((v, i) => {
-    //   return v.Recipe_ID === rid;
-    // });
-    // console.log(recipe);
-    // setRecipe(recipe[0]);
-
     try {
       const url = `http://localhost:3005/api/recipes/${rid}`;
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
 
-      if (typeof data.data.recipe === "object" && data.data.recipe !== null) {
-        setRecipe(data.data.recipe);
+      if (
+        typeof data.data.finalRecipe === "object" &&
+        data.data.finalRecipe !== null
+      ) {
+        setRecipe(data.data.finalRecipe);
       } else {
         console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
       }
@@ -58,7 +57,7 @@ export default function RecipeDetail() {
   }, [router.isReady]);
 
   return (
-    <>
+    <CategoriesProvider>
       <Header />
       <Breadcrumbs />
       <div className={`${styles["wrapper"]} mx-auto`}>
@@ -72,8 +71,8 @@ export default function RecipeDetail() {
           </div>
           {/* 主要內容 */}
           <div className={`col styles["main-content"]`}>
-            <DetailIngredients />
-            <DetailSteps />
+            <DetailIngredients recipe={recipe} />
+            <DetailSteps recipe={recipe} />
             <DetailRelatedProducts />
           </div>
         </div>
@@ -82,6 +81,6 @@ export default function RecipeDetail() {
         </div>
       </div>
       <Footer />
-    </>
+    </CategoriesProvider>
   );
 }
