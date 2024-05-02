@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // 讀取鉤子
 import { useLoader } from "@/hooks/use-loader";
+import moment from "moment-timezone";
 import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
 import Header from "@/components/Header";
 import ClassClassifacion from "@/components/class_file/ClassClassification";
@@ -69,11 +70,35 @@ const ClassList = () => {
   // 用於選擇分類
   const [categoryId, setCategoryId] = useState(null);
   // 獲取到日期的資料
+  const [finalStartDate, setFinalStartDate] = useState(null);
+  const [finalEndDate, setFinalEndDate] = useState(null);
+
+  const formatStartDate = moment(finalStartDate).format("YYYY-MM-DD HH:mm:ss");
+  const formatEndDate = moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss");
 
   //串上後端取得資料
+  useEffect(() => {
+    const params = {
+      page,
+      perpage,
+      sortBy,
+      categoryId,
+      startDate: finalStartDate
+        ? moment(finalStartDate).format("YYYY-MM-DD HH:mm:ss")
+        : undefined,
+      endDate: finalEndDate
+        ? moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss")
+        : undefined,
+    };
+    console.log(params); // 确认这些参数的值
+    getClasses(params);
+  }, [page, perpage, sortBy, categoryId, formatStartDate, formatEndDate]);
+
   const getClasses = async (params) => {
+    // console.log(params);
     // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
     const searchParams = new URLSearchParams(params);
+    // console.log(searchParams);
     const url = `http://localhost:3005/api/classes/?${searchParams.toString()}`;
 
     try {
@@ -124,6 +149,8 @@ const ClassList = () => {
       perpage, //每頁各幾個
       sortBy, //排序
       categoryId,
+      startDate: formatStartDate,
+      endDate: formatEndDate,
     };
     getClasses(params);
     if (page > pageCount) {
@@ -143,7 +170,16 @@ const ClassList = () => {
     // 充新獲得資料
   };
 
-  // 日期區間傳到後端
+  // 日期區間接收and傳到後端
+  const startDate = (date) => {
+    setFinalStartDate(date);
+  };
+
+  const endDate = (date) => {
+    setFinalEndDate(date);
+  };
+
+  console.log(finalStartDate, finalEndDate, "goal");
 
   // 切換到Grid模式
   const showGrid = () => {
@@ -167,7 +203,7 @@ const ClassList = () => {
         <ClassClassifacion categoryChange={handleCategoryChange} />
         <div className={ContentSetting.DisplaySetting}>
           <div style={{ height: "100%" }} className={ContentSetting.MobileNone}>
-            <ClassSidebar />
+            <ClassSidebar finalStart={startDate} finalEnd={endDate} />
           </div>
 
           <div className={CardStyle.SearchResultContainer}>

@@ -1,4 +1,5 @@
 import express from 'express'
+import moment from 'moment-timezone'
 const router = express.Router()
 
 // 檢查空物件, 轉換req.params為數字
@@ -12,7 +13,16 @@ const { Class, Class_images, Speaker, Class_categories } = sequelize.models
 
 router.get('/', async function (req, res) {
   // 預設分頁顯示第一頁，每頁6筆資料
-  const { page = 1, perpage = 6, sortBy = 'class__i_d', categoryId } = req.query
+  const {
+    page = 1,
+    perpage = 6,
+    sortBy = 'class__i_d',
+    categoryId,
+    startDate: formatStartDate,
+    endDate: formatEndDate,
+  } = req.query
+  console.log(req.query, 'gg')
+  console.log(categoryId, formatStartDate, formatEndDate)
 
   const perpageNow = Number(perpage) || 6
   const pageNow = Number(page) || 1
@@ -20,6 +30,7 @@ router.get('/', async function (req, res) {
   const offset = (pageNow - 1) * perpageNow
   const sortOrder = sortBy || 'class__i_d'
   let whereClause = 'WHERE ci.sort_order = 0'
+  // 分類篩選
   if (
     categoryId &&
     categoryId !== 'null' &&
@@ -29,6 +40,36 @@ router.get('/', async function (req, res) {
   ) {
     whereClause += ` AND c.class_category__i_d = ${db.escape(categoryId)}`
   }
+
+  // 日期篩選
+  const validStartDate = moment(
+    formatStartDate,
+    'YYYY-MM-DD HH:mm:ss',
+    true
+  ).isValid()
+    ? db.escape(moment(formatStartDate).format('YYYY-MM-DD HH:mm:ss'))
+    : null
+  const validEndDate = moment(
+    formatEndDate,
+    'YYYY-MM-DD HH:mm:ss',
+    true
+  ).isValid()
+    ? db.escape(moment(formatEndDate).format('YYYY-MM-DD HH:mm:ss'))
+    : null
+
+  if (validStartDate && validEndDate) {
+    whereClause += ` AND c.class_date >= ${validStartDate} AND c.class_date <= ${validEndDate}`
+  } else if (validStartDate) {
+    whereClause += ` AND c.class_date >= ${validStartDate}`
+  } else if (validEndDate) {
+    whereClause += ` AND c.class_date <= ${validEndDate}`
+  }
+
+  // if (formatStartDate === 'undefined') {
+  //   if (formatStartDate && formatEndDate) {
+  //     whereClause -= ` AND c.class_date >= ${db.escape(formatStartDate)} AND c.class_date <= ${db.escape(formatEndDate)}`
+  //   }
+  // }
 
   const sqlCate = `
     SELECT c.*, ci.image__u_r_l, s.speaker_name
@@ -40,6 +81,8 @@ router.get('/', async function (req, res) {
     ORDER BY ${sortOrder}
     LIMIT ${limit} OFFSET ${offset}
   `
+  console.log(sqlCate)
+
   const sqlCountCate = `
     SELECT COUNT(*) AS countCate
     FROM class AS c
@@ -49,7 +92,7 @@ router.get('/', async function (req, res) {
   `
 
   const [classesRawSql] = await db.query(sqlCate)
-  console.log(classesRawSql)
+  // console.log(classesRawSql)
   const [countCateRawSql] = await db.query(sqlCountCate)
   const total = countCateRawSql[0].countCate
   const pageCount = Math.ceil(total / Number(perpage)) || 0
