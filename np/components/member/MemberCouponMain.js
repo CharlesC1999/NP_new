@@ -21,18 +21,41 @@ import Cat from "./Cat"
       {/* 分類欄 */}
   <Cat/>
   {/* 分類欄下面的搜尋框 */}
-  <div className={styles.searchContainer}>
+  {/* <div className={styles.searchContainer}>
   <input className={styles.searchBar} type="text" placeholder="Search for items..." />
   <button type="submit" className={styles.searchButton}>
     <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
       <path fill="none" stroke="#747E85" strokelinecap="round" strokelinejoin="round" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314" />
     </svg>
   </button>
-</div>
+</div> */}
 </div>
 <div className={styles.coupmain}>
+  {/* 可以用的 */}
   <div className={styles.couponCard}>
-    <div className={styles.couponImg} />
+    <div className={styles.couponImg} >
+    <span className={styles.cspan} >85折</span>
+   
+  <span className={styles.cspan2}>效期:2024/12/31</span>
+  <span className={styles.cspan2}>~2025/12/31</span>
+    </div>
+    <div className={styles.couponContent }>
+      <div className={styles.couponDetails}>
+        <div className={styles.lowbuy}>低消$100</div>
+        
+        <div className={styles.couponDate}>二月過年檔期小優惠你這個敗家子還買舵手手</div>
+      </div>
+      <div className={styles.couponButton}>
+        <button className={`${styles.couponBtn} btn`}>立即使用</button>
+      </div>
+    </div>
+  </div>
+
+  {/* 原本的 */}
+  <div className={styles.couponCard}>
+    <div className={styles.couponImg} >
+      
+    </div>
     <div className={styles.couponContent }>
       <div className={styles.couponDetails}>
         <div className={styles.lowbuy}>低消$100</div>
@@ -43,42 +66,8 @@ import Cat from "./Cat"
       </div>
     </div>
   </div>
-  <div className={styles.couponCard}>
-    <div className={styles.couponImg} />
-    <div className={styles.couponContent }>
-      <div className={styles.couponDetails}>
-        <div className={styles.lowbuy}>低消$100</div>
-        <div className={styles.couponDate}>有效日期:2024/12/31</div>
-      </div>
-      <div className={styles.couponButton}>
-        <button className={`${styles.couponBtn} btn`}>立即使用</button>
-      </div>
-    </div>
-  </div>
-  <div className={styles.couponCard}>
-    <div className={styles.couponImg} />
-    <div className={styles.couponContent }>
-      <div className={styles.couponDetails}>
-        <div className={styles.lowbuy}>低消$100</div>
-        <div className={styles.couponDate}>有效日期:2024/12/31</div>
-      </div>
-      <div className={styles.couponButton}>
-        <button className={`${styles.couponBtn} btn`}>立即使用</button>
-      </div>
-    </div>
-  </div>
-  <div className={styles.couponCard}>
-    <div className={styles.couponImg} />
-    <div className={styles.couponContent }>
-      <div className={styles.couponDetails}>
-        <div className={styles.lowbuy}>低消$100</div>
-        <div className={styles.couponDate}>有效日期:2024/12/31</div>
-      </div>
-      <div className={styles.couponButton}>
-        <button className={`${styles.couponBtn} btn`}>立即使用</button>
-      </div>
-    </div>
-  </div>
+
+ 
 </div>
 
   </div>

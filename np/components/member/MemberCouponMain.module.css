@@ -750,16 +750,34 @@ border:var(--green05) 1px solid;
 .couponImg {
 width: 130px;
 height: 130px;
-background-color: #ccc;
+background-color: rgb(102, 142, 125);
+display: flex;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    flex-direction: column;
+    
+    font-weight: bolder;
 }
 @media (max-width:375px){
 .couponImg{
 width: 145px;
 height: 114px;
 margin: auto;
-}
-}
 
+}
+}
+.cspan{
+  color: #fefefe;
+  font-size: 30px;
+  flex-wrap: wrap;
+  border-bottom: #def9ec 1px solid;
+  
+}
+.cspan2{
+  color: #def9ec;
+  font-weight: 100;
+  font-size: small;
+}
 .couponContent {
 flex: 1;
 padding: 0 10px;
@@ -815,8 +833,8 @@ background-color: #50bf8b;
   color: #50bf8b !important;;
 }
 .lowbuy {
-color: #454545;
-font-size: 20px;
+color: #6b6767;
+font-size: 16px;
 font-weight: bold;
 }
 @media (max-width:375px) {
