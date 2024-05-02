@@ -34,7 +34,8 @@ const ClassDetailPage = () => {
       const { class__i_d } = router.query;
       console.log("Class ID:", class__i_d);
       if (class__i_d) {
-        fetch(`http://localhost:3005/api/classes/${class__i_d}`)
+        console.log(class__i_d);
+        fetch(`http://localhost:3005/api/classes/full/${class__i_d}`)
           .then((response) => {
             console.log("Fetch response:", response);
             if (!response.ok) {
@@ -44,8 +45,9 @@ const ClassDetailPage = () => {
           })
           .then((data) => {
             console.log("Fetched data:", data, "row data here");
-            if (data && data.status === "success" && data.data) {
-              setClassDetail(data.data.classData);
+            if (data && data.status === "success1" && data.data) {
+              setClassDetail(data.data.classAllDetail[0]);
+              console.log(data.data.classAllDetail, classDetail, "classD");
             } else {
               console.error("Data format incorrect or missing data:", data);
               throw new Error("Data format incorrect or missing data");
@@ -75,9 +77,7 @@ const ClassDetailPage = () => {
         </div>
         <ClassDetail
           classData={{
-            ...classDetail,
-            image__u_r_l: classDetail.Class_images?.image__u_r_l,
-            speaker_name: classDetail.Speaker?.speaker_name,
+            classDetail,
           }}
         />
       </div>

@@ -20,7 +20,7 @@ const Sidebar =() => {
         <div className={styles.lefta}><Link href="/member/member-buy" alt="">購買清單</Link></div>
         <div className={styles.lefta}><Link href="/member/member-coupon"alt="">優惠券</Link></div>
         <div className={styles.lefta}><Link href="/member/member-level" alt="">會員等級</Link></div>
-        <div className={styles.lefta}><Link href="" alt="">願望清單</Link></div>
+        <div className={styles.lefta}><Link href="/member/favor" alt="">願望清單</Link></div>
       </div>
     </div>
   </div>
