@@ -6,7 +6,7 @@ import { getIdParam } from '#db-helpers/db-tool.js'
 
 // 資料庫使用
 import sequelize from '#configs/db.js'
-const { Recipe } = sequelize.models
+// const { Recipe } = sequelize.models
 const { Recipe_Categories } = sequelize.models
 
 // 一般sql
@@ -141,11 +141,25 @@ router.get('/:recipeId', async function (req, res) {
     FROM recipe AS r JOIN recipe_categories AS rcs 
     ON r.recipe_category__i_d = rcs.recipe_cate__i_d 
     WHERE recipe__i_d = ${recipeId}`
-
+  // 回傳的是陣列，後面有一堆看不懂的東西，所以用陣列解構得到對應的資料
   const [recipe] = await db.query(sqlRecipe)
+  // 上面得到的資料還是陣列，要取出第一個值，所以用[0]
   const finalRecipe = recipe[0]
 
-  return res.json({ status: 'success', data: { finalRecipe } })
+  // 取出該食譜的類別ID，要用來得到此類別的所有食譜，放在食譜細節頁的推薦食譜中
+  const recipeCategoryId = finalRecipe.recipe_category__i_d
+  // 查詢該類別的所有食譜，但不包含自己
+  const sqlRecipeCategories = `
+  SELECT r.*, rcs.Recipe_cate_Name 
+  FROM recipe AS r JOIN recipe_categories AS rcs 
+  ON r.recipe_category__i_d = rcs.recipe_cate__i_d 
+  WHERE recipe_category__i_d = ${recipeCategoryId} && recipe__i_d != ${recipeId}`
+  const [recipeCategories] = await db.query(sqlRecipeCategories)
+
+  return res.json({
+    status: 'success',
+    data: { finalRecipe, recipeCategories },
+  })
 })
 
 export default router

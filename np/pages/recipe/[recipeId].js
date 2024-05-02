@@ -31,12 +31,6 @@ export default function RecipeDetail() {
 
   //取得對應的食譜
   const getRecipe = async (rid) => {
-    // const recipe = recipes.filter((v, i) => {
-    //   return v.Recipe_ID === rid;
-    // });
-    // console.log(recipe);
-    // setRecipe(recipe[0]);
-
     try {
       const url = `http://localhost:3005/api/recipes/${rid}`;
       const res = await fetch(url);
