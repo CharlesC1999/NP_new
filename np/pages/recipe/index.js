@@ -135,19 +135,7 @@ export default function RecipeList() {
               <section
                 className={`d-flex flex-column ${styles["main-content"]}`}
               >
-                {recipesData.map((v) => {
-                return (
-                  <RecipeCardsList
-                    key={v.recipe__i_d}
-                    id={v.recipe__i_d}
-                    image={v.image__u_r_l}
-                    title={v.Title_R_name}
-                    date={v.Publish_date}
-                    cate={v.Recipe_category_ID}
-                    content={v.Content}
-                  />
-                );
-              })}
+               < RecipeCardsList  recipesData = { recipesData }/>
               </section>
             </div>
             {/* 分頁用 */}
