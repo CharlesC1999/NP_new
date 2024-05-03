@@ -196,6 +196,7 @@ const ClassList = () => {
   console.log(total, "im here");
   console.log(page, "nowPage");
   return (
+
     <div style={containerStyle}>
       <Header />
       <Breadcrumbs />
@@ -216,6 +217,8 @@ const ClassList = () => {
               onSortChange={handleSortChange}
               onCategoryChange={handleCategoryChange} // 篩手機分類位置
               categoryId={categoryId} // 篩手機分類位置
+              finalStart={startDate} //手機日曆
+              finalEnd={endDate} //手機日曆
               total={total}
             />
             <div className={CardStyle.WebCardContainer}>

@@ -15,7 +15,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function Favor() {
-  const { favorRecipe, recipeData } = useAuth();
+  const { favorRecipe, recipeData,favorClass,classData:classesData } = useAuth();
   const [activeTab, setActiveTab] = useState("食譜");
   // 取得食譜收藏的資料
   // const [favorites, setFavorites] = useState({
@@ -66,9 +66,14 @@ export default function Favor() {
           {activeTab === "課程" && (
             <div className={styles.cards}>
               <div className={styles.classCard}>
-                <ClassCard />
-                <ClassCard />
-                <ClassCard />
+              {classesData.map((classData, index) => (
+                  <ClassCard
+                  classesData={classData}
+                  key={index}
+                  Index={index}
+                  id={classData.class__i_d}
+                  />
+                ))}
               </div>
               <div className={styles.classCardMobile}>
                 <ClassCardMobileList />

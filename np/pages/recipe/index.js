@@ -135,7 +135,7 @@ export default function RecipeList() {
               <section
                 className={`d-flex flex-column ${styles["main-content"]}`}
               >
-                <RecipeCardsList recipesData={recipesData} />
+               < RecipeCardsList  recipesData = { recipesData }/>
               </section>
             </div>
             {/* 分頁用 */}
