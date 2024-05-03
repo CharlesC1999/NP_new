@@ -118,7 +118,7 @@ export default function MemberBuyCard({activeCategory,searchTerm}) {
           </div>
         </div>
       </div> */}
-{orders.filter(v=>v.member_id===57).map((v, i) => {
+{orders.filter(v=>v.user_id===57).map((v, i) => {
   //到時候把57改成當前會員ID(很像不能這樣寫QQ)
   //if(v.member_id===57)
           return (

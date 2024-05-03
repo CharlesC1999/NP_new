@@ -890,3 +890,14 @@ padding: 23px 0;
     }
   }
 
+/* 0503 */
+/* -------- */
+.alertContainer{
+  width: 100px;
+  height: 100px;
+}
+.alertBtn{
+  background-color: #def9ec;
+  border: #50bf8b 1px solid;
+  color: #2ECC71;
+}

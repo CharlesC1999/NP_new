@@ -112,8 +112,14 @@ const HistoryOrderDetail = () => {
             <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
             
           </div> */}
+          
         </section>
         {/* 商品欄位 */}
+        
+        {orderDetail.map((v, i) => {
+          //怪怪的，要問老師
+          if(i===0)
+            return(   
         <section className={`${styles3.section} ${styles3.ProductBorder} mt-4`}>
           <div className={`${styles3.topBar} row`}>
             <div
@@ -132,18 +138,22 @@ const HistoryOrderDetail = () => {
           </div>
           <div className="row py-2">
             <div className={`${styles3.fb} pt-2 col-2`}>收件者</div>
-            <div className={`${styles3.fb} pt-2 col-2`}>王美華</div>
+            <div className={`${styles3.fb} pt-2 col-2`}>{v.user_name}</div>
           </div>
           <div className="row py-2">
             <div className={`${styles3.fb} pt-2 col-2`}>Email</div>
-            <div className={`${styles3.fb} pt-2 col-2`}>lsacas34@gmail.com</div>
+            <div className={`${styles3.fb} pt-2 col-2`}>{v.email}</div>
           </div>
           <div className="row py-2">
             <div className={`${styles3.fb} pt-2 col-2`}>取貨地址</div>
-            <div className="col-4 fb pt-2">台北市XXXXXXXXXXXX</div>
+            <div className="col-4 fb pt-2">台北市中正區重慶南路一段122號</div>
           </div>
           
         </section>
+)
+}
+)}
+        
         {/* 折價券、付款 */}
         <div
           className={`${styles3.pay2} d-flex justify-content-center py-4`}
@@ -167,7 +177,8 @@ const HistoryOrderDetail = () => {
         {/*  */}
 
        
-        {/* 課程欄位 */}
+        {/* 商品明細欄位 */}
+       
         <section
           className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
           style={{ width: 345, marginTop: 100 }}
@@ -175,37 +186,20 @@ const HistoryOrderDetail = () => {
           <div className={`${styles3.topBar} row`}>
             <div className={`${styles3.fc} col`}>購物明細</div>
           </div>
+          {orderDetail.map((v, i) => {
+            return(
+          <div>
           <div className="row py-2 mt-1">
-            <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
+            <div className={`${styles3.fc} row ps-4 `}>{v.name} X {v.Quantity}</div>
            
             <div className="row mt-4">
               
-              <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
+              <div className={`${styles3.fb} col fw-bold`}>{v.price}</div>
             </div>
           </div>
-          <div
-            className="row py-2 mt-1"
-            style={{ borderTop: "1px solid #78cea6" }}
-          >
-            <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
-           
-            <div className="row mt-4">
-              
-              <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
-            </div>
-          </div>
-          <div
-            className="row py-2 mt-1"
-            style={{ borderTop: "1px solid #78cea6" }}
-          >
-            <div className={`${styles3.fc} row ps-4 `}>肉桂捲初級班</div>
-            
-            <div className="row mt-4">
-              
-              <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
-            </div>
-          </div>
-          <div
+         
+         {/* 手機板折價金額，先給它註解 */}
+          {/* <div
             className="row py-2 pt-3"
             style={{ borderTop: "1px solid #78cea6" }}
           >
@@ -215,31 +209,31 @@ const HistoryOrderDetail = () => {
             >
               0 元
             </div>
-          </div>
+          </div> */}
+         
           <div
             className="row py-2 pt-3"
             style={{ borderTop: "1px solid #78cea6" }}
           >
-            <div className={`${styles3.fb} col`}>運費</div>
-            <div
-              className={`${styles3.fb} col text-center text-warning fw-bold`}
-            >
-              0 元
-            </div>
-          </div>
-          <div
-            className="row py-2 pt-3"
-            style={{ borderTop: "1px solid #78cea6" }}
-          >
-            <div className={`${styles3.fb} col`}>訂單總價</div>
+            <div className={`${styles3.fb} col`}>小計</div>
             <div
               className={`${styles3.fb} col text-center text-success fw-bold`}
             >
-              3600 元
+             {v.price * v.Quantity}
             </div>
           </div>
+          </div> 
+        )
+}
+)}
         </section>
-        {/* 商品欄位 */}
+
+
+        {/* 商品欄位手機板 */}
+        {orderDetail.map((v, i) => {
+          //怪怪的，要問老師
+          if(i===0)
+            return(   
         <section
           className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
           style={{ width: 345 }}
@@ -257,11 +251,11 @@ const HistoryOrderDetail = () => {
           </div>
           <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
             <div className={`${styles3.fb} col mt-1`}>收件者</div>
-            <div className={`${styles3.fb} col mt-1`}>王美華</div>
+            <div className={`${styles3.fb} col mt-1`}>{v.user_name}</div>
           </div>
           <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
             <div className={`${styles3.fb} col mt-1`}>Email</div>
-            <div className={`${styles3.fb} col mt-1`}>lucas34@gmail.com</div>
+            <div className={`${styles3.fb} col mt-1`}>{v.email}</div>
           </div>
           <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
             <div className={`${styles3.fb} col mt-1`}>取貨地址</div>
@@ -269,6 +263,10 @@ const HistoryOrderDetail = () => {
           </div>
          
         </section>
+)
+}
+)}
+        
         {/* 折價券、付款 */}
         <div
           className={`${styles3.pay2} d-flex justify-content-center py-4`}
