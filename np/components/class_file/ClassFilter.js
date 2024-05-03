@@ -8,11 +8,15 @@ const ClassFilter = ({
   perpage,
   setPerpage,
   onSortChange, //用於更改排序方式
+  onCategoryChange, //手機篩選分類
+  categoryId, //手機篩選分類
   total,
 }) => {
   const [defaultValue, setDefaultValue] = useState(6); //先前預設
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
+  const [categoryOpen, setCategoryOpen] = useState(false); // 分類的狀態
+  const [categoryValue, setCategoryValue] = useState("課程分類"); // 分類的狀態
 
   const sortOptions = {
     class__i_d: "課程序號",
@@ -20,6 +24,28 @@ const ClassFilter = ({
     c_price: "課程價格",
     class_date: "課程日期",
   }; //映射用
+
+  const categoryOptions = [
+    { key: 1, label: "台式料理" },
+    { key: 2, label: "中式料理" },
+    { key: 3, label: "西式料理" },
+    { key: 4, label: "異國料理" },
+    { key: 5, label: "健康養生 / 素食" },
+    { key: 6, label: "烘焙 / 點心" },
+    { key: 0, label: "全部分類" },
+  ]; // 新增的分類選項
+
+  function handleCategoryToggle() {
+    setCategoryOpen(!categoryOpen);
+  }
+
+  function handleCategorySelect(key, label) {
+    setCategoryValue(label);
+    setCategoryOpen(false);
+    onCategoryChange(key);
+    // 這裡可以添加一個函數來處理分類改變後的邏輯
+    console.log("Category selected:", label);
+  }
 
   // 對應 toggleIconState
   const isUpDisabled = defaultValue >= 12;
@@ -205,20 +231,32 @@ const ClassFilter = ({
               </div>
             </div>
             {/* only for mobile */}
-            <div className={styles.classSelect}>
-              <span className={styles.classSelectLabel}>分類(#)</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                viewBox="0 0 24 24"
-                className={styles.sortMobile}
-              >
-                <path
-                  fill="#8b96a5"
-                  d="M2.57 3h18.86l-6.93 9.817V21h-5v-8.183zm3.86 2l5.07 7.183V19h1v-6.817L17.57 5z"
-                />
-              </svg>
+            <div
+              className={
+                categoryOpen
+                  ? `${styles.classSelect} ${styles.open}`
+                  : styles.classSelect
+              }
+              onClick={handleCategoryToggle}
+            >
+              <span className={styles.classSelectLabel}>
+                {categoryValue || "課程分類"}
+              </span>
+              {categoryOpen && (
+                <div className={styles.classSelectOptions}>
+                  {categoryOptions.map((option) => (
+                    <div
+                      key={option.key}
+                      className={styles.classSelectOption}
+                      onClick={() =>
+                        handleCategorySelect(option.key, option.label)
+                      }
+                    >
+                      {option.label}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             {/* only for mobile */}
             <div className={styles.gridRowSelections}>

@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "@/components/product/sideBar/productSidebarDiscount.module.scss";
 import DiscountItem from "@/components/product/sideBar/DiscountItem";
-export default function ProductSidebarDiscount() {
+export default function ProductSidebarDiscount({ DisCountCategories }) {
   return (
     <>
       <div className={`${styles.sideBarBox}`}>

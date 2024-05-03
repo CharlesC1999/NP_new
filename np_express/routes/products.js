@@ -31,6 +31,10 @@ router.get('/', async function (req, res) {
 
     //offset 從第幾筆開始
     const offset = (pageNow - 1) * perpageNow
+
+    const conditions = []
+    conditions[0] = category_id ? `category_id = ${category_id}` : ''
+
     const categoryQuery = `
     SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId
     FROM product_categories
@@ -85,8 +89,8 @@ router.get('/', async function (req, res) {
         .json({ status: 'error', message: 'No products found.' })
     }
     const totalPages = Math.ceil(totalRecords / perpageNow)
-    console.log('Total pages:', totalPages)
-
+    console.log('pageNow:', pageNow)
+    // console.log(categories)
     // console.log('pageNow:', pageNow)
     res.json({
       status: 'success',
