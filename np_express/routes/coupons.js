@@ -58,7 +58,7 @@ router.get('/', async function (req, res) {
   const sqlCoupons = `SELECT * FROM coupons `
 
   // 最終組合的sql語法(計數用)
-  const sqlCount = `SELECT COUNT(*) AS count FROM orders ${where}`
+  const sqlCount = `SELECT COUNT(*) AS count FROM coupons ${where}`
 
   // 顯示sql語法
   console.log(sqlCoupons)
@@ -84,6 +84,24 @@ router.get('/', async function (req, res) {
       coupons: rows,
     },
   })
+})
+router.get('/:status', async function (req, res) {
+  // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
+  const couponsStatus = req.params.status
+
+  const sqlOrders = `SELECT * FROM coupons
+  WHERE coupons.C_status = "${couponsStatus}"`
+
+  // WHERE Status= '${ordersStatus}'
+  const [rows, fields] = await db.query(sqlOrders)
+
+  return res.json({
+    status: 'success',
+    data: {
+      coupons: rows,
+    },
+  })
+  //return res.json({ status: 'success', data: { status } })
 })
 
 export default router

@@ -17,9 +17,9 @@ import Cat from "./Cat"
 
 
 const [coupons, setCoupons] = useState([])
-
-const getCoupons = async () => {
-  const url = 'http://localhost:3005/api/coupons'
+const [activeCategory, setActiveCategory] = useState("全部");
+const getCoupons = async (cat='') => {
+  const url = 'http://localhost:3005/api/coupons'+cat;
 
   // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
   try {
@@ -44,8 +44,8 @@ const getCoupons = async () => {
 // 樣式2: didMount階段只執行一次
 useEffect(() => {
   // 頁面初次渲染之後伺服器要求資料
-  getCoupons()
-}, [])
+  getCoupons(activeCategory==='全部'?'':activeCategory)
+}, [activeCategory])
 
 
   return(
@@ -64,7 +64,7 @@ useEffect(() => {
     {/* 主內容的標題 */}
     <div>
       {/* 分類欄 */}
-  <Cat/>
+  <Cat  setActiveCategory={setActiveCategory} activeCategory={activeCategory}/>
   {/* 分類欄下面的搜尋框 */}
   {/* <div className={styles.searchContainer}>
   <input className={styles.searchBar} type="text" placeholder="Search for items..." />
@@ -78,7 +78,8 @@ useEffect(() => {
 <div className={styles.coupmain}>
   {/* 可以用的 */}
   {coupons.filter(v=>v.Member_ID===41).map((v, i) => {
-    const discountAmount = parseFloat(v.Discount_amount);
+    
+ const discountAmount = parseFloat(v.Discount_amount);
  let displayText;
 // 检查 discountAmount 是否是有效的数字
 if (!isNaN(discountAmount)) {
@@ -95,7 +96,7 @@ if (!isNaN(discountAmount)) {
 }
 // 确定按钮是否可用
 const isButtonDisabled = v.C_status !== '可使用';
-
+if (activeCategory === "全部" || v.C_status === activeCategory) {
     return (
   <div className={styles.couponCard} key={v.Coupon_ID}>
     <div className={styles.couponImg} >
@@ -116,12 +117,13 @@ const isButtonDisabled = v.C_status !== '可使用';
         {isButtonDisabled ? (
             <button className={`${styles.couponBtn} btn`} disabled></button>
           ) : (
-            <button className={`${styles.couponBtn} btn`}>立即使用</button>
+            <Link  href={`/product`} className={`${styles.couponBtn} btn`}>立即使用</Link>
           )}
       </div>
     </div>
   </div>
 );
+}
 }
 )}
   {/* 原本的 */}

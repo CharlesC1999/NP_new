@@ -729,7 +729,7 @@ flex-grow: 1;
 
 width: 400px;
 height: 126px;
-
+border: #def9ec 1px solid;
 overflow: hidden;
 display: flex;
 margin-right: 20px;
@@ -822,6 +822,14 @@ border: var(--green05);
 border-radius: 5px;
 
 
+}
+.couponBtn a{
+  text-decoration: none;
+  color: #50bf8b;
+}
+.couponBtn a:hover{
+  text-decoration: none;
+  color: white;
 }
 .couponBtn:hover{
 color: var(--green05);

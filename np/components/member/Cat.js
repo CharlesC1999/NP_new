@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Cat.module.css";
 
-function Cat() {
-  const [activeCategory, setActiveCategory] = useState(""); // 初始狀態為空字符串
+function Cat({activeCategory, setActiveCategory}) {
+   // 初始狀態為空字符串
+  // const [activeCategory, setActiveCategory] = useState(""); 
+ 
 
   useEffect(() => {
     // 在組件首次渲染時設置初始狀態為"全部"
-    setActiveCategory("全部");
+    // setActiveCategory("全部");
   }, []); // 空的依賴數組表示只在組件首次渲染時運行
 
   const handleCategoryClick = (category) => {
