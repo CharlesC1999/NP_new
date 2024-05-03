@@ -2,7 +2,10 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailSteps.module.scss";
 
-export default function DetailSteps() {
+export default function DetailSteps({ recipe }) {
+  // 把步驟拆開
+  const stepsAry = recipe.steps.split("T");
+
   return (
     <>
       <div
@@ -16,7 +19,10 @@ export default function DetailSteps() {
         <ol
           className={`${styles["steps"]} col-11 col-xxl-10 d-flex flex-column`}
         >
-          <li>
+          {stepsAry.map((v) => {
+            return <li>{v}</li>;
+          })}
+          {/* <li>
             準備一湯鍋加水約八分滿大火燒開放入排骨、米酒、味淋以及薑、蒜末，持續大火熬煮並撈除浮沫，再加入淘洗好的米，撒入胡椒粉。
           </li>
           <li>
@@ -30,7 +36,7 @@ export default function DetailSteps() {
           <li>
             洋蔥丁炒軟後倒入水煮蕃茄罐，Tabasco
             辣醬、黑胡椒等辛香料調好味，再將煮好的麵疙瘩放進來，悶煮2-5分鐘後即可裝盤上桌享用
-          </li>
+          </li> */}
         </ol>
       </div>
     </>

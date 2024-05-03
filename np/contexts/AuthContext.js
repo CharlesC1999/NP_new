@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // 确保已经导入 axios
 import { useRouter } from "next/router"; // 导入 useRouter 以便在需要时进行路由跳转
-import axiosInstance from '@/services/axios-instance'
-import { getFavs } from '@/services/user'
+import axiosInstance from "@/services/axios-instance";
+import { getFavs } from "@/services/user";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -12,43 +12,26 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn: false,
   });
 
-  //     // 我的最愛清單使用
-  // const [favorites, setFavorites] = useState([])
-
-  // // 得到我的最愛
-  // const handleGetFavorites = async () => {
-  //   const res = await getFavs()
-  //   //console.log(res.data)
-  //   if (res.data.status === 'success') {
-  //     setFavorites(res.data.data.favorites)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (auth.isAuth) {
-  //     // 成功登入後要執行一次向伺服器取得我的最愛清單
-  //     handleGetFavorites()
-  //   } else {
-  //     // 登出時要設回空陣列
-  //     setFavorites([])
-  //   }
-  // }, [auth])
   const [favorRecipe, setFavorRecipe] = useState([]);
   const [recipeData, setRecipeData] = useState([]);
+  const [favorClass, setFavorClass] = useState([]);
+  const [classData, setClassData] = useState([]);
   const fetchFavorites = async () => {
     try {
-      const { favorRecipe, recipeFavorData } = await getFavs();
+      const { favorRecipe, recipeFavorData, favorClass, classFavorData } =
+        await getFavs();
       setFavorRecipe(favorRecipe);
       setRecipeData(recipeFavorData);
+      setFavorClass(favorClass);
+      setClassData(classFavorData);
     } catch (error) {
-      console.error('Failed to fetch favorites:', error);
+      console.error("Failed to fetch favorites:", error);
     }
   };
- 
+  //TODO希望會員在會員中心增減收藏內容時（陣列內容改變），能同時更新recipeData，不需要手動 refresh
   useEffect(() => {
-      // 成功登入後要執行一次向伺服器取得我的最愛清單
-      fetchFavorites()
-  }, [favorRecipe])
+    fetchFavorites()
+  }, [])
 
   const router = useRouter();
 
@@ -106,7 +89,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout ,favorRecipe,setFavorRecipe,recipeData}}>
+    <AuthContext.Provider
+      value={{
+        auth,
+        login,
+        logout,
+        favorRecipe,
+        setFavorRecipe,
+        recipeData,
+        setRecipeData,
+        favorClass,
+        setFavorClass,
+        classData,
+        setClassData,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

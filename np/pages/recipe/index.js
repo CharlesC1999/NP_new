@@ -12,6 +12,7 @@ import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";
 import Footer from "@/components/footer";
 import Filter from "@/components/recipe/list/filter/RecipeFilter";
 import styles from "@/styles/recipe/recipe-list.module.scss";
+import { CategoriesProvider } from "@/hooks/recipe/use-categories";
 
 export default function RecipeList() {
   // ----------------------篩選條件 start ------------------------
@@ -39,12 +40,10 @@ export default function RecipeList() {
     // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
     const searchParams = new URLSearchParams(params);
     const url = `http://localhost:3005/api/recipes/?${searchParams.toString()}`;
-    console.log("url: " + url);
 
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data.data.recipesRawSql);
 
       // 為了要確保資料是陣列，所以檢查後再設定
       if (Array.isArray(data.data.recipesRawSql)) {
@@ -101,13 +100,18 @@ export default function RecipeList() {
   }, [recipeCategory, perpage, orderby]);
 
   return (
-    <>
+    <CategoriesProvider>
       <Header />
       <Breadcrumbs />
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
-        <TopBarList />
-        <TopBarGrid />
+        <TopBarList
+          setOrderby={setOrderby}
+          total={total}
+          setRecipeCategory={setRecipeCategory}
+        />
+        {/* <TopBarGrid /> */}
+
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
           <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
             <SideBarTop
@@ -131,10 +135,23 @@ export default function RecipeList() {
               <section
                 className={`d-flex flex-column ${styles["main-content"]}`}
               >
-                <RecipeCardsList recipesData={recipesData} />
+                {recipesData.map((v) => {
+                return (
+                  <RecipeCardsList
+                    key={v.recipe__i_d}
+                    id={v.recipe__i_d}
+                    image={v.image__u_r_l}
+                    title={v.Title_R_name}
+                    date={v.Publish_date}
+                    cate={v.Recipe_category_ID}
+                    content={v.Content}
+                  />
+                );
+              })}
               </section>
             </div>
-            <div className="d-flex gap-3 justify-content-center mt-4 align-items-center">
+            {/* 分頁用 */}
+            <div className="d-none d-xxl-flex gap-3 justify-content-center mt-4 align-items-center">
               <button
                 onClick={() => {
                   const newPageNow = page - 1 > 1 ? page - 1 : 1;
@@ -196,6 +213,6 @@ export default function RecipeList() {
         </div>
       </div>
       <Footer />
-    </>
+    </CategoriesProvider>
   );
 }

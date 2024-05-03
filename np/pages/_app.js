@@ -16,18 +16,25 @@ import "@/styles/loader.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
 // Router
 import Router from "next/router";
+// Head
+import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <AuthProvider>
-      <LoaderProvider CustomLoader={OrangeLoader}>
-        <ManageRouteChanges>
-          {getLayout(<Component {...pageProps} />)}
-        </ManageRouteChanges>
-      </LoaderProvider>
-    </AuthProvider>
+    <>
+      <Head>
+        <title>NutriPolls</title>
+      </Head>
+      <AuthProvider>
+        <LoaderProvider CustomLoader={OrangeLoader}>
+          <ManageRouteChanges>
+            {getLayout(<Component {...pageProps} />)}
+          </ManageRouteChanges>
+        </LoaderProvider>
+      </AuthProvider>
+    </>
   );
 }
 //暫時先擱置，右下角的那個光明會三角形
