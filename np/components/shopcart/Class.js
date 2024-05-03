@@ -1,14 +1,12 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ClassStyles from "./class.module.css";
-import Check from "@/components/checkbox-custom/CheckBoxCustom";
+// import Check from "@/components/checkbox-custom/CheckBoxCustom";
 // 加上context鉤子
-import {useCart} from "@/hooks/use-cart"
+import { useCart } from "@/hooks/use-cart";
 
 const Class = () => {
- 
-  const {items, increaseItem, decreaseItem, removeItem } = useCart()
-  const { totalItems, totalPrice } = useCart()
-
+  const { items, increaseItem, decreaseItem, removeItem } = useCart();
+  const { totalItems, totalPrice } = useCart();
 
   return (
     <>
@@ -27,9 +25,8 @@ const Class = () => {
             className="col d-flex flex-direction-row"
             style={{ width: 100, minWidth: 77 }}
           >
-            
-            <div className="pt-2"><Check/></div>
-            
+            <div className="pt-2">{/* <Check /> */}</div>
+
             <label className={`mt-1 m-1 ${ClassStyles.fc} `} htmlFor="">
               全選
             </label>
@@ -66,8 +63,7 @@ const Class = () => {
                 className="col d-flex align-items-center justify-content-start ps-3"
                 style={{ width: 100, minWidth: 77 }}
               >
-               
-                <Check />
+                {/* <Check /> */}
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 <img
@@ -91,7 +87,7 @@ const Class = () => {
                 <span
                   className={`${ClassStyles.plus}`}
                   onClick={() => {
-                    decreaseItem(element.id)
+                    decreaseItem(element.id);
                   }}
                 >
                   -
@@ -99,7 +95,7 @@ const Class = () => {
                 <span>{element.qty} </span>
                 <span
                   onClick={() => {
-                    increaseItem(element.id)
+                    increaseItem(element.id);
                   }}
                   className={`${ClassStyles.plus}`}
                 >
@@ -121,7 +117,7 @@ const Class = () => {
                   src="/images/Delete.jpg"
                   className={`${ClassStyles.plus}`}
                   onClick={() => {
-                    removeItem(element.id)
+                    removeItem(element.id);
                   }}
                 />
               </div>
@@ -164,7 +160,7 @@ const Class = () => {
                       className={`${ClassStyles.plus}`}
                       alt=""
                       onClick={() => {
-                       removeItem(element.id)
+                        removeItem(element.id);
                       }}
                     />
                   </div>
@@ -190,7 +186,7 @@ const Class = () => {
                       <span
                         className={`${ClassStyles.plus} ${ClassStyles.fc}`}
                         onClick={() => {
-                         decreaseItem(element.id)
+                          decreaseItem(element.id);
                         }}
                       >
                         -
@@ -199,7 +195,7 @@ const Class = () => {
                       <span
                         className={`${ClassStyles.plus} ${ClassStyles.fc}`}
                         onClick={() => {
-                          increaseItem(element.id)
+                          increaseItem(element.id);
                         }}
                       >
                         +

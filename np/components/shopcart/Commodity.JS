@@ -2,7 +2,7 @@
 import CommodityStyles from "./commodity.module.css";
 // 加上context鉤子
 import { useCart } from "@/hooks/use-cart";
-import Check from "@/components/checkbox-custom/CheckBoxCustom";
+// import Check from "@/components/checkbox-custom/CheckBoxCustom";
 
 // 綠色勾勾
 import { useState } from "react";
@@ -17,7 +17,7 @@ const Commodity = () => {
   //  勾勾
   const [checked, setChecked] = useState(false);
 
-  const [allChecked,setAllChecked] =useState(false)
+  const [allChecked, setAllChecked] = useState(false);
 
   console.log(productItems);
   return (
@@ -42,7 +42,7 @@ const Commodity = () => {
           >
             <div className="pt-2">
               {/* 綠色勾勾 */}
-              <div className={CheckBoxStyle["checkbox-wrapper"]}>
+              {/* <div className={CheckBoxStyle["checkbox-wrapper"]}>
                 <FaCheck
                   style={{ "font-size": "16px" }}
                   className={`${CheckBoxStyle["fa-check"]} ${
@@ -59,7 +59,7 @@ const Commodity = () => {
                     checked ? CheckBoxStyle.checked : ""
                   }`}
                 />
-              </div>
+              </div> */}
             </div>
 
             <label className={`${CommodityStyles.fc}  m-1 fw-bold`} htmlFor="">
@@ -120,7 +120,7 @@ const Commodity = () => {
                   }`}      
                   />
                 </div> */}
-                <Check/>
+                <Check />
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 <img
