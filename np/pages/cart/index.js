@@ -12,7 +12,7 @@ import Class from "@/components/shopcart/Class";
 import Commodity from "@/components/shopcart/Commodity";
 
 // 加上context鉤子
-import { useCart } from '@/hooks/use-cart'
+import { useCart } from "@/hooks/use-cart";
 
 // 綠色勾勾
 import Check from "@/components/checkbox-custom/CheckBoxCustom";
@@ -107,7 +107,7 @@ const ShopCart1 = () => {
   //   0
   // );
   // const combinedTotal = productDataTotal + classDataTotal;
-  const { totalItems, totalPrice } = useCart()
+  const { totalItems, totalPrice } = useCart();
 
   return (
     <>
@@ -131,7 +131,9 @@ const ShopCart1 = () => {
             className={`${shopStyles.pay} d-flex justify-content-between mt-3`}
             style={{ width: "500px" }}
           >
-            <p className={`${shopStyles.fs}  d-flex align-items-center`}>折價券</p>
+            <p className={`${shopStyles.fs}  d-flex align-items-center`}>
+              折價券
+            </p>
             <h5 className="">$0元</h5>
           </div>
           {/*  */}
@@ -139,9 +141,9 @@ const ShopCart1 = () => {
             className={`${shopStyles.pay} d-flex justify-content-between`}
             style={{ width: "500px" }}
           >
-            <div className=" d-flex" >
-              <div className="pt-1"> <Check/></div>
-             
+            <div className=" d-flex">
+              {/* <div className="pt-1"> <Check/></div> */}
+
               <label htmlFor="" className={`${shopStyles.fs} `}>
                 使用折價券{" "}
               </label>
@@ -167,14 +169,14 @@ const ShopCart1 = () => {
           </div>
           <div
             className={`${shopStyles.pay} d-flex justify-content-between`}
-            style={{ width: "500px"}}
+            style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>運費 :</p>
             <h5 className="ps-5">$0元</h5>
           </div>
           <div
             className={`${shopStyles.pay} d-flex justify-content-between `}
-            style={{ width: "500px"}}
+            style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>訂單合計:</p>
             <h5>{totalPrice} 元</h5>
