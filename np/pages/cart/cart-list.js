@@ -44,6 +44,22 @@ const ShopCart2 = () => {
     };
   }, []);
 
+  // --------------------------
+  const [inputText,setInputText]=useState('')
+  const [inputEmail,setInputEmail]=useState('')
+  const [inputNumber,setInputNumber]=useState('')
+
+  const [inputPackageName,setInputPackage]=useState('')
+  const [inputPackageNumber,setInputPackageNumber]=useState('')
+  const [inputAddress,setInputAddress]=useState('')
+
+  // 信用卡勾選
+  const [selectedPayment, setSelectedPayment] = useState('linePay');
+
+  const handlePaymentChange = (event) => {
+    setSelectedPayment(event.target.value);
+  };
+
   return (
     <>
       <Header />
@@ -85,9 +101,8 @@ const ShopCart2 = () => {
                 className={`${styles2.left} ${styles2["form-container"]} m-2`}
                 style={{ minWidth: "100%" }}
               >
-                {/* <myH4 className="myH4">顧客資訊</myH4> */}
-                {/* <div className={styles2.myH4}>顧客資訊</div> */}
-                {/* <div className={styles2.myH4}>顧客資訊</div>
+              
+                <div className={styles2.myH4}>顧客資訊</div>
                 <div className="mb-3">
                   <label htmlFor="name" className={`${styles2.label} mt-3`}>
                     姓名:
@@ -97,6 +112,8 @@ const ShopCart2 = () => {
                     className={`${styles2.input} form-control`}
                     id="formGroupExampleInput"
                     placeholder=""
+                    value={inputText}
+                    onChange={(event)=>{setInputText(event.target.value)}}
                   />
                 </div>
                 <div className="mb-3">
@@ -111,10 +128,12 @@ const ShopCart2 = () => {
                     className={`${styles2.input} form-control`}
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
+                    value={inputEmail}
+                    onChange={(event)=>{setInputEmail(event.target.value)}}
                   />
                 </div>
-                套bs5套件
-                <label htmlFor="phone" className={`${styles2.label}`}>
+                {/* 套bs5套件 */}
+                {/* <label htmlFor="phone" className={`${styles2.label}`}>
                   電話號碼:
                 </label>
                 <div className="input-group mb-3" style={{}}>
@@ -157,11 +176,27 @@ const ShopCart2 = () => {
                     className="form-control py-1"
                     aria-label="Text input with dropdown button"
                   />
+                </div> */}
+                <div className="mb-3">
+                  <label
+                    htmlFor="exampleInputEmail1"
+                    className={`${styles2.label} form-label`}
+                  >
+                    電話號碼
+                  </label>
+                  <input
+                    type="tel"
+                    className={`${styles2.input} form-control`}
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    value={inputNumber}
+                    onChange={(event)=>{setInputNumber(event.target.value)}}
+                  />
                 </div>
-                <div className="form-group form-check"> */}
-                {/* <input type="radio" id="rememberPhone" name="rememberPhone" value="rememberPhone">
-          儲存這個號碼 */}
-                {/* <input
+
+                <div className="form-group form-check">
+                  
+                  <input
                     className="form-check-input"
                     type="checkbox"
                     id="rememberPhone"
@@ -169,12 +204,10 @@ const ShopCart2 = () => {
                     aria-label="..."
                   />
                   <h5>儲存這個號碼</h5>
-                </div> */}
+                </div>
                 {/* 第二段 */}
-                {/* <myH4>訂單備註</myH4> */}
-                {/* <myH4 className="myH4">訂單備註</myH4> */}
-                {/* <div className={styles2.myH4}>訂單備註</div> */}
-                {/* <div className={styles2.myH4} style={{ marginTop: "15px" }}>
+                
+                <div className={styles2.myH4} style={{ marginTop: "30px" }}>
                   訂單備註
                 </div>
                 <div className="form-floating">
@@ -184,11 +217,22 @@ const ShopCart2 = () => {
                     id="floatingTextarea2"
                     style={{ height: 100 }}
                     defaultValue={""}
-                  /> */}
-                {/* </div> */}
+                  />
+                </div>
+                
+                
+              </aside>
+            </div>
+            {/* 右邊刷信用卡 */}
+            <div className="col-sm-6">
+              <aside
+                className={`${styles2.right} ${styles2["form-container"]} m-2`}
+                style={{ minWidth: "100%" }}
+              >
+                
                 {/* 第三段 */}
                 <div
-                  className={`${styles2.backage} d-flex justify-content-between mt-5`}
+                  className={`${styles2.backage} d-flex justify-content-between mt-1`}
                 >
                   <h5 style={{ fontSize: 24, color: "#4D785D" }}>
                     送貨資料
@@ -202,7 +246,7 @@ const ShopCart2 = () => {
                   </span>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="name" className={`${styles2.label} mt-3`}>
+                  <label htmlFor="name" className={`${styles2.label} mt-4`}>
                     收件人名稱:
                   </label>
                   <input
@@ -210,53 +254,28 @@ const ShopCart2 = () => {
                     className={`${styles2.input} form-control`}
                     id="formGroupExampleInput"
                     placeholder=""
+                    value={inputPackageName}
+                    onChange={(event)=>setInputPackage(event.target.value)}
                   />
                 </div>
-                {/* 套bs5套件 */}
-                <label htmlFor="phone" className={`${styles2.label}`}>
-                  電話號碼:
-                </label>
-                <div className="input-group mb-3" style={{}}>
-                  <div
-                    className={`${styles2.button} ${styles2.input} btn btn-outline-secondary dropdown-toggle py-1`}
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    style={{ width: "40%" }}
+                
+                <div className="mb-3">
+                  <label
+                    htmlFor="exampleInputEmail1"
+                    className={`${styles2.label} form-label`}
                   >
-                    TW +886
-                  </div>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Separated link
-                      </a>
-                    </li>
-                  </ul>
+                    電話號碼
+                  </label>
                   <input
-                    type="text"
-                    className="form-control py-1"
-                    aria-label="Text input with dropdown button"
+                    type="tel"
+                    className={`${styles2.input} form-control`}
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    value={inputPackageNumber}
+                    onChange={(event)=>{setInputPackageNumber(event.target.value)}}
                   />
                 </div>
+
                 <div className="form-group form-check">
                   {/* <input type="radio" id="rememberPhone" name="rememberPhone" value="rememberPhone">
           儲存這個號碼 */}
@@ -270,31 +289,12 @@ const ShopCart2 = () => {
                   <h5>儲存這個號碼</h5>
                 </div>
                 {/* 第四段 */}
-                {/* <myH4>送貨地址</myH4> */}
-                {/* <myH4 className="myH4">送貨地址</myH4> */}
-                {/* <div className={styles2.myH4}>送貨地址</div> */}
-                <div className={styles2.myH4} style={{ marginTop: "15px" }}>
+                
+                <div className={styles2.myH4} style={{ marginTop: "30px" }}>
                   送貨地址
                 </div>
                 <div className="row py-1">
-                  {/* <div className="col">
-                    <input
-                      type="text"
-                      className="form-control"
-                      // className={`form-control ${styles2.myH4}`}
-                      placeholder="城市/縣"
-                      aria-label="First name"
-                      style={{ height: "30px" }}
-                    />
-                  </div>
-                  <div className="col">
-                    <input
-                      type="text"
-                      className="form-control  bg-secondary-subtle"
-                      placeholder="地區"
-                      aria-label="Last name"
-                    />
-                  </div> */}
+                  
                 </div>
                 <div className="mb-3">
                   <input
@@ -303,6 +303,10 @@ const ShopCart2 = () => {
                     // className=""
                     id="formGroupExampleInput"
                     placeholder="地址"
+                    value={inputAddress}
+                    onChange={(event)=>{
+                      setInputAddress(event.target.value)
+                    }}
                   />
                 </div>
                 <div className="form-group form-check">
@@ -328,35 +332,11 @@ const ShopCart2 = () => {
                   />
                   <h5>設定為預設地址</h5>
                 </div>
-                {/* <div className="">
-                  <label
-                    htmlFor="name"
-                    className={`${styles2.label} mt-3 ps-2`}
-                  >
-                    希望到貨時間 / 選擇時段
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="formGroupExampleInput"
-                    placeholder="備註:"
-                  />
-                </div> */}
-              </aside>
-            </div>
-            {/* 右邊刷信用卡 */}
-            <div className="col-sm-6">
-              <aside
-                className={`${styles2.right} ${styles2["form-container"]} m-2`}
-                style={{ minWidth: "100%" }}
-              >
-                {/* <myH4>選擇付款方式</myH4> */}
-                {/* <myH4 className="myH4">選擇付款方式</myH4> */}
-                {/* <div className={styles2.myH4}>選擇付款方式</div> */}
-                <div className={styles2.myH4}>選擇付款方式</div>
+
+                <div className={styles2.myH4} style={{ marginTop: "30px" }}>選擇付款方式</div>
                 <label
                   htmlFor="name"
-                  className={`${styles2.label} mt-3`}
+                  className={`${styles2.label} mt-1`}
                   style={{ opacity: 0 }}
                 >
                   透明
@@ -367,9 +347,13 @@ const ShopCart2 = () => {
                   <div className="form-check mt-2 ms-3">
                     <input
                       className="form-check-input "
-                      type="checkbox"
+                      type="radio"
                       defaultValue=""
                       id="flexCheckDefault"
+                      value="linePay"
+                      name="linepay"
+                      checked={selectedPayment === "linePay"}
+                      onChange={handlePaymentChange}
                     />
                     <label
                       className={`${styles2.label} form-check-label ms-3`}
@@ -382,7 +366,7 @@ const ShopCart2 = () => {
                 {/* 刷卡 */}
                 <label
                   htmlFor="name"
-                  className={`${styles2.label} mt-3`}
+                  className={`${styles2.label} mt-1`}
                   style={{ opacity: 0 }}
                 >
                   透明
@@ -394,7 +378,11 @@ const ShopCart2 = () => {
                     <div className="form-check mt-2 ms-3">
                       <input
                         className="form-check-input "
-                        type="checkbox"
+                        type="radio"
+                        name="creditCard"
+                        value="creditCard"
+                        checked={selectedPayment === 'creditCard'}
+                        onChange={handlePaymentChange}
                         defaultValue=""
                         id="flexCheckDefault"
                       />
@@ -477,43 +465,9 @@ const ShopCart2 = () => {
             className={`${styles2.article} d-flex justify-content align-items-center flex-column mt-4 mb-4`}
             style={{ maxWidth: 1440 }}
           >
+            
             <div
-              className={`${styles2.pay1} d-flex flex-column  align-items-center py-3`}
-              style={{ width: 345, maxWidth: 1440 }}
-            >
-              <div className="form-group form-check mt-2">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="rememberPhone"
-                  defaultValue=""
-                  aria-label="..."
-                />
-                <h5> 儲存這個送貨地址</h5>
-              </div>
-              <div className="form-group form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="rememberPhone"
-                  defaultValue=""
-                  aria-label="..."
-                />
-                <h5>儲存這個送貨地址</h5>
-              </div>
-              <div className="form-group form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="rememberPhone"
-                  defaultValue=""
-                  aria-label="..."
-                />
-                <h5>儲存這個送貨地址</h5>
-              </div>
-            </div>
-            <div
-              className={`${styles2.pay2} d-flex justify-content-center py-4`}
+              className={`${styles2.pay2} d-flex justify-content-center pb-4`}
               style={{ width: "100%" }}
             >
               <a
