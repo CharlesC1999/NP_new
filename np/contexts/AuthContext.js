@@ -69,7 +69,8 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     if (auth.token) {
       localStorage.removeItem("token");
-      setAuth({ token: null, isLoggedIn: false });
+      localStorage.removeItem("userData");
+      setAuth({ token: null, isLoggedIn: false, userData: [] });
       try {
         await axios.delete("http://localhost:3005/api/auth/logout", {
           headers: {
