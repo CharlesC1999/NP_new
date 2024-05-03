@@ -287,7 +287,7 @@ const ShopCart3 = () => {
         </section>
         {/* 折價券、付款 */}
         <div
-          className={`${styles3.pay2} d-flex justify-content-center py-4`}
+          className={`${styles3.pay2} d-flex justify-content-center pb-4`}
           style={{ width: "100%" }}
         >
           <div
