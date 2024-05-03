@@ -1,5 +1,39 @@
 import React, { useEffect, useState } from "react";
+import ClassDatetimePicker from "@/components/class_file/ClassDateTimePicker";
 import styles from "./classFilter.module.css";
+import { RxReload } from "react-icons/rx";
+
+const MobileDateTimePicker = ({ onClose, getStartDate, getEndDate }) => {
+  const [classDateStart, setClassDateStart] = useState("");
+  const [classDateEnd, setClassDateEnd] = useState("");
+
+  const handleStartDate = (date) => {
+    setClassDateStart(date);
+    getStartDate(date); // 更新父元件的狀態
+  };
+  console.log(classDateStart, "delta");
+
+  const handleEndDate = (date) => {
+    setClassDateEnd(date);
+    getEndDate(date); // 更新父元件的狀態
+  };
+  console.log(classDateEnd, "ola");
+
+  return (
+    <div className={styles.fullMobileScreen} onClick={onClose}>
+      <div
+        className={styles.datePickerContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* 手機版的日期時間選擇器 */}
+        <ClassDatetimePicker
+          getStartDate={handleStartDate}
+          getEndDate={handleEndDate}
+        />
+      </div>
+    </div>
+  );
+};
 
 const ClassFilter = ({
   onShowGrid,
@@ -8,11 +42,20 @@ const ClassFilter = ({
   perpage,
   setPerpage,
   onSortChange, //用於更改排序方式
+  onCategoryChange, //手機篩選分類
+  categoryId, //手機篩選分類
   total,
+  finalStart,
+  finalEnd,
 }) => {
   const [defaultValue, setDefaultValue] = useState(6); //先前預設
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
+  const [categoryOpen, setCategoryOpen] = useState(false); // 分類的狀態
+  const [categoryValue, setCategoryValue] = useState("課程分類"); // 分類的狀態
+  const [showFullScreen, setShowFullScreen] = useState(false); //跳出彈出日期選擇
+  const [classDateStart, setClassDateStart] = useState("");
+  const [classDateEnd, setClassDateEnd] = useState("");
 
   const sortOptions = {
     class__i_d: "課程序號",
@@ -20,6 +63,28 @@ const ClassFilter = ({
     c_price: "課程價格",
     class_date: "課程日期",
   }; //映射用
+
+  const categoryOptions = [
+    { key: 1, label: "台式料理" },
+    { key: 2, label: "中式料理" },
+    { key: 3, label: "西式料理" },
+    { key: 4, label: "異國料理" },
+    { key: 5, label: "健康養生 / 素食" },
+    { key: 6, label: "烘焙 / 點心" },
+    { key: 0, label: "全部分類" },
+  ]; // 新增的分類選項
+
+  function handleCategoryToggle() {
+    setCategoryOpen(!categoryOpen);
+  }
+
+  function handleCategorySelect(key, label) {
+    setCategoryValue(label);
+    setCategoryOpen(false);
+    onCategoryChange(key);
+    // 這裡可以添加一個函數來處理分類改變後的邏輯
+    console.log("Category selected:", label);
+  }
 
   // 對應 toggleIconState
   const isUpDisabled = defaultValue >= 12;
@@ -58,15 +123,21 @@ const ClassFilter = ({
   // 點擊外部關閉排序選項
   useEffect(() => {
     function handleClickOutside(event) {
-      // 确认点击的元素是否属于 sortBy 区域内
-      if (sortByOpen && !event.target.closest(`.${styles.sortBy}`)) {
+      if (
+        sortByOpen &&
+        !event.target.closest(`.${styles.sortBy}`) &&
+        !event.target.closest(`.${styles.fullMobileScreen}`)
+      ) {
         setSortByOpen(false);
+      }
+      if (categoryOpen && !event.target.closest(`.${styles.classSelect}`)) {
+        setCategoryOpen(false);
       }
     }
 
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
-  }, [sortByOpen]);
+  }, [sortByOpen, categoryOpen]);
 
   // 按鈕遮罩
   const buttonStyle = (buttonType) => ({
@@ -74,32 +145,95 @@ const ClassFilter = ({
     cursor: activeButton === buttonType ? "default" : "pointer",
   });
 
+  // 日曆出來不准動
+  useEffect(() => {
+    if (showFullScreen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showFullScreen]);
+
+  const handleStartDate = (date) => {
+    setClassDateStart(date);
+    finalStart(date);
+  };
+
+  const handleEndDate = (date) => {
+    setClassDateEnd(date);
+    finalEnd(date);
+  };
+
+  useEffect(() => {
+    if (classDateStart) {
+      finalStart(classDateStart);
+    }
+  }, [classDateStart]);
+
+  useEffect(() => {
+    if (classDateEnd) {
+      finalEnd(classDateEnd);
+    }
+  }, [classDateEnd]);
+
+  const reset = () => {
+    // reset
+    setClassDateStart("");
+    setClassDateEnd("");
+
+    // reset classList
+    finalStart("");
+    finalEnd("");
+  };
+
   return (
     <div className={styles.widthMax}>
       <section className={styles.productCountContainer}>
         <header className={styles.productCountHeader}>
           <p className={styles.totalProducts}>總共：{total} 項商品</p>
           <div className={styles.productCountControls}>
-            <button className={styles.celanderMobile}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                viewBox="0 0 24 24"
+            {classDateStart == "" && (
+              <button
+                className={styles.celanderMobile}
+                onClick={() => setShowFullScreen(!showFullScreen)}
               >
-                <g
-                  fill="none"
-                  stroke="#78CEA6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 24 24"
                 >
-                  <path d="M8 2v4m8-4v4" />
-                  <rect width={18} height={18} x={3} y={4} rx={2} />
-                  <path d="M3 10h18" />
-                </g>
-              </svg>
-            </button>
+                  <g
+                    fill="none"
+                    stroke="#78CEA6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                  >
+                    <path d="M8 2v4m8-4v4" />
+                    <rect width={18} height={18} x={3} y={4} rx={2} />
+                    <path d="M3 10h18" />
+                  </g>
+                </svg>
+              </button>
+            )}
+            {showFullScreen && (
+              <MobileDateTimePicker
+                onClose={() => setShowFullScreen(false)}
+                getStartDate={handleStartDate}
+                getEndDate={handleEndDate}
+              />
+            )}
+            {classDateStart !== "" && (
+              <button
+                // 這裡添加您需要的額外按鈕的 className 和其他屬性
+                className={styles.renewButton}
+                onClick={reset}
+              >
+                <RxReload size={22} />
+              </button>
+            )}
+
             <div className={styles.itemsPerPage}>
               <span className={styles.itemsPerPageValue} id="itemsPerPage">
                 {perpage}
@@ -205,20 +339,32 @@ const ClassFilter = ({
               </div>
             </div>
             {/* only for mobile */}
-            <div className={styles.classSelect}>
-              <span className={styles.classSelectLabel}>分類(#)</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                viewBox="0 0 24 24"
-                className={styles.sortMobile}
-              >
-                <path
-                  fill="#8b96a5"
-                  d="M2.57 3h18.86l-6.93 9.817V21h-5v-8.183zm3.86 2l5.07 7.183V19h1v-6.817L17.57 5z"
-                />
-              </svg>
+            <div
+              className={
+                categoryOpen
+                  ? `${styles.classSelect} ${styles.open}`
+                  : styles.classSelect
+              }
+              onClick={handleCategoryToggle}
+            >
+              <span className={styles.classSelectLabel}>
+                {categoryValue || "課程分類"}
+              </span>
+              {categoryOpen && (
+                <div className={styles.classSelectOptions}>
+                  {categoryOptions.map((option) => (
+                    <div
+                      key={option.key}
+                      className={styles.classSelectOption}
+                      onClick={() =>
+                        handleCategorySelect(option.key, option.label)
+                      }
+                    >
+                      {option.label}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             {/* only for mobile */}
             <div className={styles.gridRowSelections}>

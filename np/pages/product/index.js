@@ -13,7 +13,8 @@ import ProductCardList from "@/components/product/ProductCardList";
 import ProductFilter from "@/components/product/ProductFilter";
 import Footer from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
-import Pagination from "@/components/pagination";
+import Pagination from "@/components/product/pagination";
+import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarDiscount";
 
 // import PaginationRounded from "@/components/pagination";
 //荃做版本sideBar
@@ -48,10 +49,46 @@ export default function Product() {
     setActiveButton("list");
   };
 
+  //分頁部分
+  const [page, setPage] = useState(1);
+  const [perpage, setPerpage] = useState(20);
+  const [pageCount, setPageCount] = useState(0);
+  const [total, setTotal] = useState(0);
+
   const [products, setProducts] = useState([]);
 
+  //分類係項sideBar
+  const [productCate, setProductCate] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [activeParentCategories, setActiveParentCategories] = useState(
+    new Set()
+  );
+
+  const normalCategories = productCate.filter(
+    (cate) => cate.parentId === null && cate.cateId !== 23 && cate.cateId !== 22
+  );
+
+  const discountCategories = productCate.filter(
+    (cate) => cate.parentId === 23 && cate.parentId === 22
+  );
+  console.log("discountCategories" + discountCategories);
+
+  const handleCategorySelect = (cateId) => {
+    const newActiveParentCategories = new Set(activeParentCategories);
+    if (newActiveParentCategories.has(cateId)) {
+      newActiveParentCategories.delete(cateId);
+    } else {
+      newActiveParentCategories.add(cateId);
+    }
+    setActiveParentCategories(newActiveParentCategories);
+    setSelectedCategory(cateId);
+  };
+  const filteredSubcategories = productCate.filter((cate) =>
+    activeParentCategories.has(cate.parentId)
+  );
+
   const getProducts = async () => {
-    const url = "http://localhost:3005/api/products";
+    const url = `http://localhost:3005/api/products?page=${page}&perpage=${perpage}&category_id=${selectedCategory}`;
 
     try {
       const res = await fetch(url);
@@ -59,10 +96,14 @@ export default function Product() {
       console.log(data); // 日志输出以便调试和验证数据结构
 
       // 确保数据结构与后端匹配，且检查数据状态
-      if (data.status === "success" && Array.isArray(data.data)) {
-        setProducts(data.data); // 假设 data.data 直接是产品数组
+      if (data.status === "success") {
+        setProducts(data.data.products); // 更新产品列表
+        setPageCount(Math.ceil(data.totalRecords / perpage));
+        setTotal(data.totalRecords);
+        setPage(data.currentPage);
+        setProductCate(data.data.categories); // 更新类别列表
       } else {
-        console.log("回傳的資料型態必須是陣列且请求状态为 'success'");
+        console.log("请求状态不是 'success'");
       }
     } catch (e) {
       console.error("请求产品数据失败:", e);
@@ -72,9 +113,10 @@ export default function Product() {
   //樣式2出事渲染執行一次
   useEffect(() => {
     //初次渲染時執行此函式
-    getProducts();
-  }, []);
-
+    getProducts(page);
+  }, [page, perpage]);
+  const TotalRow = total;
+  console.log(page);
   return (
     <>
       <HeaderComponent />
@@ -83,28 +125,34 @@ export default function Product() {
         className={`container d-flex justify-content-center ${styles.wrapper} ${styles.Top40}`}
       >
         <div className={`${styles.sideBar} me-5`}>
-          <ProductSidebarCate />
+          {/* <ProductSidebarCate /> */}
+          <ProductSidebarDiscount DisCountCategories={discountCategories} />
+          <ProductSidebarDetail
+            handleCategorySelect={handleCategorySelect}
+            productCate={normalCategories}
+            selectedCategory={selectedCategory}
+            filteredSubcategories={filteredSubcategories}
+          />
 
-          <ProductSidebarDetail />
-
-          <ProductSidebarNew />
+          {/* <ProductSidebarNew /> */}
         </div>
         <div
           className={`${styles.productW} ms-sm-3 ms-0 d-flex justify-content-center flex-column`}
         >
           <div className="mainDiscount">
             <div className={`${styles.DiscountTitleMain}`}>
-              <h4 className={`${styles.DiscountTitle}`}>限時特惠商品</h4>
+              {/* <h4 className={`${styles.DiscountTitle}`}>限時特惠商品</h4> */}
             </div>
             <div className={`${styles.DiscountBoxMain}`}>
-              <div className={`${styles.DiscountBox}`}>
+              {/* <div className={`${styles.DiscountBox}`}>
                 <img src="/index-images/Herosection02.png" alt="" />
-              </div>
+              </div> */}
               <div className={`pt-sm-4 pt-0`}>
                 <ProductFilter
                   onShowGrid={showGrid}
                   onShowList={showList}
                   activeButton={activeButton}
+                  TotalRow={TotalRow}
                 />
               </div>
             </div>
@@ -114,7 +162,10 @@ export default function Product() {
           >
             {products.map((item) => (
               <div key={item.id}>
-                <Link href={`/product/${item.id}`}>
+                <Link
+                  href={`/product/${item.id}`}
+                  className="text-decoration-none"
+                >
                   {" "}
                   {/* You can style this <a> tag as needed */}
                   <ProductCard02
@@ -131,7 +182,14 @@ export default function Product() {
             ))}
           </div>
           <div className="justify-content-center d-flex">
-            <Pagination />
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={(event, value) => {
+                setPage(value);
+                getProducts(value);
+              }}
+            />
           </div>
         </div>
       </div>

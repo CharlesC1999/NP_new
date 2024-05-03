@@ -1,8 +1,19 @@
 import React from "react";
+import Router, { useRouter } from "next/router";
 import styles from "./classCardMobileList.module.css";
 
 export default function ProductCardMobileList({ classesData }) {
   console.log(classesData, "classDM");
+
+  const goClassDetail = (class__i_d) => {
+    // 方法一
+    // Router.push(`/class-page/class-detail/${class__i_d}`);
+    // 方法二
+    Router.push({
+      pathname: "/class-page/class-detail",
+      query: { class__i_d: class__i_d },
+    });
+  };
   return (
     <article className={styles.productCard}>
       <figure className={styles.productImageWrapper}>
@@ -45,7 +56,13 @@ export default function ProductCardMobileList({ classesData }) {
                 />
               </rect>
             </svg>
-            <time dateTime="2024-05-26">{classesData.class_date}</time>
+            <time>
+              {new Date(classesData.class_date).toLocaleDateString("zh-TW", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })}
+            </time>
           </div>
           <div className={styles.productAuthor}>
             <svg
@@ -76,7 +93,10 @@ export default function ProductCardMobileList({ classesData }) {
           <span className={styles.originalPrice}>${classesData.c_price}</span>
         </div>
         <div className={styles.productActions}>
-          <a href="#" className={styles.actionLink}>
+          <a
+            className={styles.actionLink}
+            onClick={() => goClassDetail(classesData.class__i_d)}
+          >
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/4cd0fa22651251ac90a3950b65de848025a94b63de491d78368103e6b2f1d098?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
               alt="Action 1"

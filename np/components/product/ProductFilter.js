@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../class_file/classFilter.module.css";
 
-const ProductFilter = ({ onShowGrid, onShowList, activeButton }) => {
+const ProductFilter = ({ onShowGrid, onShowList, activeButton, TotalRow }) => {
   const [defaultValue, setDefaultValue] = useState(6);
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
@@ -62,7 +62,7 @@ const ProductFilter = ({ onShowGrid, onShowList, activeButton }) => {
     <div className={styles.widthMax}>
       <section className={styles.productCountContainer}>
         <header className={styles.productCountHeader}>
-          <p className={styles.totalProducts}>總共： # 項商品</p>
+          <p className={styles.totalProducts}>總共： {TotalRow} 項商品</p>
           <div className={styles.productCountControls}>
             <div className={styles.itemsPerPage}>
               <span className={styles.itemsPerPageValue} id="itemsPerPage">
