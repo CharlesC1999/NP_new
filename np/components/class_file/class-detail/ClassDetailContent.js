@@ -4,7 +4,7 @@ import styles from "./classDetailContent.module.css";
 import MArticle from "./MClassDetailContentArticleWeb";
 import WArticle from "./WClassDetailContentArticleWeb";
 import toast, { Toaster } from "react-hot-toast";
-
+import FavIconClass from "@/components/favor/FavIconClass";
 const ClassDetail = ({ classData }) => {
   // 用來管理哪個標籤頁是激活的狀態
   const [activeTab, setActiveTab] = useState("info");
@@ -115,7 +115,7 @@ const ClassDetail = ({ classData }) => {
               </svg>
               <p className={styles.linkText}>立刻報名</p>
             </a>
-            <a className={styles.linkBtn} onClick={notify}>
+            {/* <a className={styles.linkBtn} onClick={notify}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20px"
@@ -125,7 +125,8 @@ const ClassDetail = ({ classData }) => {
                 <path fill="white" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z" />
               </svg>
               <p className={styles.linkText}>加入收藏</p>
-            </a>
+            </a> */}
+            <FavIconClass id={classData.class__i_d} />
           </div>
         </div>
       </section>

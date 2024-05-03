@@ -6,7 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailTop.module.scss";
 import toast, { Toaster } from "react-hot-toast";
-
+import FavIconRecipe from "@/components/favor/FavIconRecipe";
 export default function DetailTop({ recipe }) {
   //收藏與否
   const [saved, setSaved] = useState(false);
@@ -67,11 +67,12 @@ export default function DetailTop({ recipe }) {
                     }}
                   >
                     {/* {saved ? <SavedHeart /> : <UnsavedHeart />} */}
-                    <FaHeart
+                    {/* <FaHeart
                       className={`${styles["heart"]} ${
                         saved ? styles["saved"] : styles["unsaved"]
                       }`}
-                    />
+                    /> */}
+                    <FavIconRecipe id={recipe.Recipe_ID} />
                   </div>
                 </div>
                 <div className={styles["small-card"]}>
