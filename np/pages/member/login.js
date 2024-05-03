@@ -135,6 +135,7 @@ const Login = () => {
 
   const handleGoogleButtonClick = () => {
     handleGoogleLogin();
+    console.log("touch");
     // google-login-firebase export handleGoogleLogin
   };
   // ---------------------------------------------------

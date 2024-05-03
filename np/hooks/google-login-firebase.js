@@ -17,6 +17,7 @@ if (!getApps().length) {
 export const handleGoogleLogin = async () => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
+  console.log("go");
 
   // 重新導向
   signInWithRedirect(auth, provider);
@@ -60,7 +61,7 @@ export const showGoogleLogin = (login, callback) => {
             }
           );
           const data = await response.json();
-          console.log(data);
+          console.log(data, "here");
           // 處理後端回應
           // Call the callback function with the user data
           callback(data);
