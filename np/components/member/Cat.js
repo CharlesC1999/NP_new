@@ -22,30 +22,38 @@ function Cat({activeCategory, setActiveCategory}) {
         <div
           className={styles.ccat}
           style={{ color: activeCategory === "全部" ? "var(--green02)" : "inherit" }}
-          onClick={() => handleCategoryClick("全部")}
+          onClick={(e) => {
+           e.preventDefault(); // 阻止默認行為
+            handleCategoryClick("全部")}}
         >
-          <a href="#">全部</a>
+          <a href="">全部</a>
         </div>
         <div
           className={styles.ccat}
           style={{ color: activeCategory === "可使用" ? "var(--green02)" : "inherit" }}
-          onClick={() => handleCategoryClick("可使用")}
+          onClick={(e) => {
+            e.preventDefault(); // 阻止默認行為
+            handleCategoryClick("可使用")}}
         >
-          <a href="#">可使用</a>
+          <a href="">可使用</a>
         </div>
         <div
           className={styles.ccat}
           style={{ color: activeCategory === "已使用" ? "var(--green02)" : "inherit" }}
-          onClick={() => handleCategoryClick("已使用")}
+          onClick={(e) => {
+            e.preventDefault(); // 阻止默認行為
+            handleCategoryClick("已使用")}}
         >
-          <a href="#">已使用</a>
+          <a href="">已使用</a>
         </div>
         <div
           className={styles.ccat}
           style={{ color: activeCategory === "已失效" ? "var(--green02)" : "inherit" }}
-          onClick={() => handleCategoryClick("已失效")}
+          onClick={(e) => {
+            e.preventDefault(); // 阻止默認行為
+            handleCategoryClick("已失效")}}
         >
-          <a href="#">已失效</a>
+          <a href="">已失效</a>
         </div>
       </div>
     </>
