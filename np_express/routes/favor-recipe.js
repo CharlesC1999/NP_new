@@ -6,14 +6,12 @@ import { getIdParam } from '#db-helpers/db-tool.js'
 
 import authenticate from '#middlewares/authenticate.js'
 import sequelize from '#configs/db.js'
-const { Favor_recipe,Recipe} = sequelize.models
+const { Favor_recipe} = sequelize.models
 import db from '#configs/mysql.js'
 
-
+// 取得會員頁所需渲染的食譜資料
 // 獲得某會員id的有加入到我的最愛清單中的食譜id們
 // 此路由只有登入會員能使用
-// 用於列表頁
-// 用於會員中心收藏頁
 router.get('/',  async (req, res) => {
   const rids = await Favor_recipe.findAll({
     attributes: ['rid'],
@@ -27,11 +25,7 @@ router.get('/',  async (req, res) => {
   const favorRecipe = rids.map((v) => v.rid)
 
   // 取得會員頁所需食譜資料
-  // uid 為變數，根據會員 id 返回查詢結果
-//   SELECT recipe.*,favor_recipe.uid
-// FROM recipe
-// JOIN favor_recipe ON recipe.recipe__i_d = favor_recipe.rid 
-// WHERE uid =1
+  // uid 為變數，根據會員 id 返回查詢結果，先用 uid =1 來測試
   const recipeDataSql = `SELECT recipe.*,favor_recipe.uid
   FROM recipe
   JOIN favor_recipe ON recipe.recipe__i_d = favor_recipe.rid 

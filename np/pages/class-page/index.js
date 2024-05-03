@@ -154,6 +154,7 @@ const ClassList = () => {
   console.log(total, "im here");
   console.log(page, "nowPage");
   return (
+
     <div style={containerStyle}>
       <Header />
       <Breadcrumbs />
