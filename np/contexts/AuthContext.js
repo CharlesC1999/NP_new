@@ -10,37 +10,20 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     token: null,
     isLoggedIn: false,
-    userData: [],
   });
 
-  //     // 我的最愛清單使用
-  // const [favorites, setFavorites] = useState([])
-
-  // // 得到我的最愛
-  // const handleGetFavorites = async () => {
-  //   const res = await getFavs()
-  //   //console.log(res.data)
-  //   if (res.data.status === 'success') {
-  //     setFavorites(res.data.data.favorites)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (auth.isAuth) {
-  //     // 成功登入後要執行一次向伺服器取得我的最愛清單
-  //     handleGetFavorites()
-  //   } else {
-  //     // 登出時要設回空陣列
-  //     setFavorites([])
-  //   }
-  // }, [auth])
   const [favorRecipe, setFavorRecipe] = useState([]);
   const [recipeData, setRecipeData] = useState([]);
+  const [favorClass, setFavorClass] = useState([]);
+  const [classData, setClassData] = useState([]);
   const fetchFavorites = async () => {
     try {
-      const { favorRecipe, recipeFavorData } = await getFavs();
+      const { favorRecipe, recipeFavorData, favorClass, classFavorData } =
+        await getFavs();
       setFavorRecipe(favorRecipe);
       setRecipeData(recipeFavorData);
+      setFavorClass(favorClass);
+      setClassData(classFavorData);
     } catch (error) {
       console.error("Failed to fetch favorites:", error);
     }
@@ -108,7 +91,19 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ auth, login, logout, favorRecipe, setFavorRecipe, recipeData }}
+      value={{
+        auth,
+        login,
+        logout,
+        favorRecipe,
+        setFavorRecipe,
+        recipeData,
+        setRecipeData,
+        favorClass,
+        setFavorClass,
+        classData,
+        setClassData,
+      }}
     >
       {children}
     </AuthContext.Provider>
