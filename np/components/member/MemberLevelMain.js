@@ -75,12 +75,13 @@ const calculateLevel = (total) => {
     <div className={styles.membership}>
         <div className={styles.membershipDetails}>
         
-        {memberLevel.filter(v=>v.User_ID===34).map((v, i) => {
+        {memberLevel.filter(v=>v.User_ID===98).map((v, i) => {
          
  // 計算下一個等級
- const nextLevel = Math.min(parseInt(calculateLevel(v.total).split(".")[1]) + 1, 5);
+ const nextLevel = parseInt(calculateLevel(v.total).split(".")[1]) + 1;
+ console.log(nextLevel);
  let next;
- if (nextLevel===5){
+ if (nextLevel===6 ){
   next="已達最大等級";
  }else{
   next="LV." + nextLevel
