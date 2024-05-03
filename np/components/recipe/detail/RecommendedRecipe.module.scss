@@ -46,24 +46,11 @@
   }
 }
 .recipe-cards {
+  right: 0;
   @media screen and (max-width: 376px) {
     margin-inline: 0;
   }
-  .slide-btn {
-    transition: 0.6s;
-    opacity: 0.3;
-    width: 40px;
-    background-color: var(--green02);
-    &:hover {
-      opacity: 1;
-    }
-    &.prev-btn {
-      left: 3px;
-    }
-    &.next-btn {
-      right: 8px;
-    }
-  }
+
   .recipe-card {
     gap: 11px;
     .card-pic {

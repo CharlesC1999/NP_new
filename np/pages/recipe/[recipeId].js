@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/components/header";
@@ -12,6 +12,9 @@ import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecip
 import Footer from "@/components/footer";
 import styles from "@/styles/recipe/recipe-detail.module.scss";
 import { CategoriesProvider } from "@/hooks/recipe/use-categories";
+
+// 推薦食譜的左右按鈕
+import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 
 export default function RecipeDetail() {
   const router = useRouter();
@@ -49,6 +52,24 @@ export default function RecipeDetail() {
     }
   };
 
+  // 放在slider，用來設定偏移，左或右
+  const sliderRef = useRef();
+
+  // 向左移動的距離
+  const [sliderMove, setSliderMove] = useState("");
+
+  const handleMoveLeft = () => {
+    setSliderMove(Number(sliderMove) + 366);
+  };
+
+  const handleMoveRight = () => {
+    setSliderMove(Number(sliderMove) - 366);
+  };
+
+  useEffect(() => {
+    sliderRef.current.style.right = sliderMove + "px";
+  }, [sliderMove]);
+
   //初次渲染頁面時執行取得對應食譜的function
   useEffect(() => {
     if (router.isReady) {
@@ -80,7 +101,33 @@ export default function RecipeDetail() {
         <div
           className={`${styles["recommended-recipe"]} d-flex flex-column position-relative overflow-hidden`}
         >
-          <DetailRecommendedRecipe />
+          <a
+            onClick={() => {
+              handleMoveLeft();
+            }}
+            href="javascript:void(0)"
+            className={`position-absolute top-0 bottom-0 pe-0 text-dark d-flex justify-content-center align-items-center  ${styles["prev-btn"]} ${styles["slide-btn"]}`}
+          >
+            <FaChevronCircleLeft
+              style={{ fontSize: "30px", color: "var(--green02)" }}
+            />
+          </a>
+          <a
+            onClick={() => {
+              handleMoveRight();
+            }}
+            href="javascript:void(0)"
+            className={`${
+              !sliderMove ? styles["disabled-btn"] : ""
+            } position-absolute top-0 bottom-0 ps-0 d-flex justify-content-center align-items-center text-dark ${
+              styles["next-btn"]
+            } ${styles["slide-btn"]}`}
+          >
+            <FaChevronCircleRight
+              style={{ fontSize: "30px", color: "var(--green02)" }}
+            />
+          </a>
+          <DetailRecommendedRecipe sliderRef={sliderRef} />
         </div>
       </div>
       <Footer />
