@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // 确保已经导入 axios
 import { useRouter } from "next/router"; // 导入 useRouter 以便在需要时进行路由跳转
-import axiosInstance from '@/services/axios-instance'
-import { getFavs } from '@/services/user'
+import axiosInstance from "@/services/axios-instance";
+import { getFavs } from "@/services/user";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     token: null,
     isLoggedIn: false,
+    userData: [],
   });
 
   //     // 我的最愛清單使用
@@ -41,13 +42,13 @@ export const AuthProvider = ({ children }) => {
       setFavorRecipe(favorRecipe);
       setRecipeData(recipeFavorData);
     } catch (error) {
-      console.error('Failed to fetch favorites:', error);
+      console.error("Failed to fetch favorites:", error);
     }
   };
   //TODO希望會員在會員中心增減收藏內容時（陣列內容改變），能同時更新recipeData，不需要手動 refresh
   useEffect(() => {
-    fetchFavorites()
-  }, [])
+    fetchFavorites();
+  }, []);
 
   const router = useRouter();
 
@@ -68,6 +69,7 @@ export const AuthProvider = ({ children }) => {
   const login = (token, userData = {}) => {
     setAuth({ token, isLoggedIn: true, userData });
     localStorage.setItem("token", token);
+    localStorage.setItem("userData", JSON.stringify(userData));
     console.log(token, userData);
     // 將token存儲在localStorage中以維持登入狀態
     // 用localStorage存儲會有安全性問題，因為localStorage是存儲在瀏覽器中，
@@ -105,7 +107,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout ,favorRecipe,setFavorRecipe,recipeData}}>
+    <AuthContext.Provider
+      value={{ auth, login, logout, favorRecipe, setFavorRecipe, recipeData }}
+    >
       {children}
     </AuthContext.Provider>
   );
