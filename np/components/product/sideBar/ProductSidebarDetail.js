@@ -1,7 +1,16 @@
 import React from "react";
 import styles from "@/components/product/sideBar/ProductSidebarDetail.module.scss";
 
-export default function ProductSidebarDetail() {
+export default function ProductSidebarDetail({
+  productCate,
+  selectedCategory,
+  handleCategorySelect,
+  filteredSubcategories,
+}) {
+  // const filteredSubcategories = productCate.filter(
+  //   (cate) => cate.parentId === selectedCategory
+  // );
+  console.log(productCate);
   return (
     <div>
       <div className={`${styles.sideBarBox}`}>
@@ -11,165 +20,54 @@ export default function ProductSidebarDetail() {
         <div className={`${styles.line}`}></div>
         <br />
         <h6>商品類別</h6>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" className={`label-checkbox d-flex flex-row`}>
-            新鮮蔬菜<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            海鮮類<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            調味料<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label htmlfor="veggies" class="label-checkbox">
-            乳製品<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            肉類<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            水果<span>(amount)</span>
-          </label>
-        </div>
+
+        {productCate
+          .filter((cate) => cate.parentId === null)
+          .map((category) => (
+            <div
+              key={category.cateId}
+              className="input-group d-flex flex-row mb-1"
+              onClick={() => handleCategorySelect(category.cateId)}
+            >
+              <input
+                type="checkbox"
+                id={`category-${category.cateId}`}
+                name={`category-${category.cateId}`}
+                className="me-2 checkbox"
+              />
+              <label
+                htmlFor={`category-${category.cateId}`}
+                className="label-checkbox d-flex flex-row"
+              >
+                {category.cateName}
+                <span>(amount)</span>
+              </label>
+            </div>
+          ))}
+
         <h6 className="mt-4">子類別</h6>
-        <div
-          className="input-grounp d-flex flex-row mb-1"
-          style={{ color: "#747E85" }}
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label
-            for="veggies"
-            class="label-checkbox"
-            style={{ color: "#747E85" }}
+        {filteredSubcategories.map((subCategory) => (
+          <div
+            key={subCategory.cateId}
+            className="input-group d-flex flex-row mb-1"
           >
-            肌肉<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          className="input-grounp d-flex flex-row mb-1"
-          style={{ color: "#747E85" }}
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            豬肉<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            牛肉<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <label htmlFor="veggies" className={`label-checkbox d-flex flex-row`}>
             <input
               type="checkbox"
-              id="veggies"
-              name="veggies"
-              className={`me-2 checkbox`}
+              id={`sub-category-${subCategory.cateId}`}
+              name={`sub-category-${subCategory.cateId}`}
+              className="me-2 checkbox"
             />
-            魚肉<span>(amount)</span>
-          </label>
-        </div>
-        <div
-          style={{ color: "#747E85" }}
-          className="input-grounp d-flex flex-row mb-1"
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            羊肉<span>(amount)</span>
-          </label>
-        </div>
+            <label
+              htmlFor={`sub-category-${subCategory.cateId}`}
+              className="label-checkbox"
+              style={{ color: "#747E85" }}
+            >
+              {subCategory.cateName}
+              <span>(amount)</span>
+            </label>
+          </div>
+        ))}
+
         <h6 className="mt-4 mb-3">價格</h6>
         <div className="input-grounp d-flex flex-row">
           <input

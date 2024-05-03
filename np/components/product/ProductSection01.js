@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
-import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 
 //styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/styles/Product/products.module.scss";
 
-export default function ProductSection01() {
+export default function ProductSection01({ description }) {
+  // console.log(description);
   return (
     <>
       <div className={`${style["detail-list"]}flex-column`}>
         <div className={`d-flex flex-column`}>
           <h5 className={`${style["h5"]}`}>商品簡介</h5>
-          <p className={`${style["detail-text"]}`}>
-            以純海水放養的虱目魚，無土味且營養價值高。產地位於紅樹林溼地，水中含豐富有機質及浮游生物，提供充分的天然養份。生態養殖虱目魚活動力高，因而肉質極富彈性，肉色偏粉紅，是老饕心中的夢幻滋味。
-          </p>
+          <p className={`${style["detail-text"]}`}>{description}</p>
         </div>
         <div className={`${style["big-truck-text-box"]} d-flex flex-column`}>
           <h5 className={`${style["h5"]}`}>配送說明</h5>
@@ -39,7 +37,7 @@ export default function ProductSection01() {
         <div className={`d-flex flex-column`}>
           <h5 className={`${style["h5"]}`}>注意事項</h5>
           <p className={`${style["truck-text"]}`}>
-            以純海水放養的虱目魚，無土味且營養價值高。產地位於紅樹林溼地，水中含豐富有機質及浮游生物，提供充分的天然養份。生態養殖虱目魚活動力高，因而肉質極富彈性，肉色偏粉紅，是老饕心中的夢幻滋味。
+            當您選購我們的產品時，可以看到每件商品上都標明了相關的認證標籤，如有機、無添加劑和非轉基因等，這些認證旨在增強您對我們產品的信任。我們承諾使用環保且安全的包裝材料，不僅保護環境，也確保食品安全，進一步強調我們對可持續發展的承諾。為了保持食材的新鮮度和營養價值，建議您在購買後盡快烹飪食用。這樣不僅能享受到最佳口味，也能最大程度地吸收食材中的營養成分。
           </p>
         </div>
       </div>

@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import styles from "./classClassification.module.css";
 
 const cuisines = [
-  "台式料理",
-  "中式料理",
-  "西式料理",
-  "異國料理",
-  "健康養生 / 素食",
-  "烘焙 / 點心",
+  { id: 1, name: "台式料理" },
+  { id: 2, name: "中式料理" },
+  { id: 3, name: "西式料理" },
+  { id: 4, name: "異國料理" },
+  { id: 5, name: "健康養生 / 素食" },
+  { id: 6, name: "烘焙 / 點心" },
 ];
 
-const ClassClassifacion = () => {
+const ClassClassifacion = ({ categoryChange }) => {
   const [visibleStartIndex, setVisibleStartIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
 
@@ -27,7 +27,14 @@ const ClassClassifacion = () => {
   };
 
   const handleCuisineClick = (index) => {
-    setActiveIndex(index);
+    if (index === activeIndex) {
+      setActiveIndex(null); // 解除選取
+      categoryChange(null); // 可以設定為 null 或者其他表示 "未選取" 的值
+    } else {
+      setActiveIndex(index);
+      const selectedCuisineId = cuisines[index].id;
+      categoryChange(selectedCuisineId);
+    }
   };
 
   return (
@@ -65,7 +72,7 @@ const ClassClassifacion = () => {
             }}
             onClick={() => handleCuisineClick(index)}
           >
-            {cuisine}
+            {cuisine.name}
           </button>
         ))}
       </div>

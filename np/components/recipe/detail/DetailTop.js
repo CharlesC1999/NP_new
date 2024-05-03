@@ -6,8 +6,9 @@ import { FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailTop.module.scss";
 import toast, { Toaster } from "react-hot-toast";
-
-export default function DetailTop() {
+import FavIconRecipe from "@/components/favor/FavIconRecipe";
+export default function DetailTop({ recipe }) {
+  //收藏與否
   const [saved, setSaved] = useState(false);
 
   const notify = () => {
@@ -24,10 +25,10 @@ export default function DetailTop() {
     <>
       <div className={`row ${styles["top"]}`}>
         <div className="col">
-          <div className={`${styles["pic"]} w-100 h-100`}>
+          <div className={`${styles["pic"]} w-100 `}>
             <img
               className="object-fit-cover w-100 h-100"
-              src="/images/recipe/detail/5c57291e6ab0e7566941547a0cb18048.jpg"
+              src={`/images/recipe/list/${recipe.image__u_r_l}`}
               alt=""
             />
           </div>
@@ -40,12 +41,15 @@ export default function DetailTop() {
                 <p
                   className={`${styles["title"]} ${styles["figma-h3"]} mb-0 text-center text-xxl-start`}
                 >
-                  綠咖哩牛肉
+                  {recipe.title__r_name}
                 </p>
                 <div
                   className={`${styles["left-bottom"]} d-flex justify-content-center justify-content-xxl-start`}
                 >
-                  <p className={styles["figma-p"]}>分類：主食 / 2023-10-08</p>
+                  <p className={styles["figma-p"]}>
+                    分類：{recipe.Recipe_cate_Name} /{" "}
+                    {recipe.publish_date.split(" ")[0]}
+                  </p>
                 </div>
               </div>
             </div>
@@ -63,11 +67,12 @@ export default function DetailTop() {
                     }}
                   >
                     {/* {saved ? <SavedHeart /> : <UnsavedHeart />} */}
-                    <FaHeart
+                    {/* <FaHeart
                       className={`${styles["heart"]} ${
                         saved ? styles["saved"] : styles["unsaved"]
                       }`}
-                    />
+                    /> */}
+                    <FavIconRecipe id={recipe.Recipe_ID} />
                   </div>
                 </div>
                 <div className={styles["small-card"]}>
@@ -93,11 +98,11 @@ export default function DetailTop() {
                   <p
                     className={`${styles["figma-p"]} ${styles["caption"]} text-center`}
                   >
-                    3人份
+                    {recipe.servings}人份
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
-                  <div>
+                  <div className="text-center">
                     {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={36}
@@ -114,7 +119,7 @@ export default function DetailTop() {
                     <GiKnifeFork className={styles["tableware"]} />
                   </div>
                   <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
-                    8樣食材
+                    {recipe.ingredients__count}樣食材
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
@@ -135,7 +140,7 @@ export default function DetailTop() {
                     <LuAlarmClock className={styles["clock"]} />
                   </div>
                   <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
-                    30分鐘
+                    {recipe.cooking__time}分鐘
                   </p>
                 </div>
               </div>

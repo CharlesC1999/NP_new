@@ -1,15 +1,11 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import BuyCard from '@/components/member/MemberBuyCard'
+import React from 'react'
+import Buycard from '@/components/member/Buycard'
 
-
-
-import SideBar from "@/components/member/Sidebar";
-
-
-export default function MemberBuy() {
-    return (
-      <>
-      <SideBar/>
-      </>
-    );
-  }
+export default function Test() {
+  return (
+    <>
+    <Buycard/>
+    </>
+  )
+}

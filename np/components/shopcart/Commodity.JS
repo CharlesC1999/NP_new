@@ -1,52 +1,25 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import CommodityStyles from "./commodity.module.css";
+// 加上context鉤子
+import { useCart } from "@/hooks/use-cart";
+import Check from "@/components/checkbox-custom/CheckBoxCustom";
+
+// 綠色勾勾
+import { useState } from "react";
+import { FaCheck } from "react-icons/fa6";
+import "bootstrap/dist/css/bootstrap.min.css";
+import CheckBoxStyle from "@/components/checkbox-custom/CheckBoxCustom.module.scss";
 
 const Commodity = () => {
-  const classIndex = [
-    { id: 0, count: 1, name: "肉桂捲初級班", price: 1500 },
-    { id: 1, count: 1, name: "cake初級班", price: 1200 },
-    { id: 2, count: 1, name: "肉捲初級班", price: 1000 },
-  ];
-  const [classData, classProductsData] = useState(classIndex);
+  const { productItems, increaseProduct, decreaseProduct, removeProduct } =
+    useCart();
+  const { totalProduct, totalProductPrice } = useCart();
+  //  勾勾
+  const [checked, setChecked] = useState(false);
 
-  const prodcts = [
-    { id: 0, count: 1, name: "肉桂捲", price: 1500 },
-    { id: 1, count: 1, name: "meet", price: 1200 },
-    { id: 2, count: 1, name: "肉捲", price: 1000 },
-  ];
-  const [productData, setProductsData] = useState(prodcts);
+  const [allChecked,setAllChecked] =useState(false)
 
-  // const [quantity,setQuantity] = useState(0)
-  const increase = (id) => {
-    // setQuantity(quantity + 1)
-    const addProducts = productData.map((v, i) => {
-      if (v.id === id) return { ...v, count: v.count + 1 };
-      else return v;
-    });
-
-    setProductsData(addProducts);
-  };
-
-  const decrease = (id) => {
-    // if(quantity>0){
-    //   setQuantity(quantity - 1)
-    // }
-    const reduceProducts = productData.map((v, i) => {
-      if (v.id === id && v.count > 0) return { ...v, count: v.count - 1 };
-      else return v;
-    });
-
-    setProductsData(reduceProducts);
-  };
-
-  const remove = (id) => {
-    const removeProduct = productData.filter((v, i) => {
-      return v.id !== id;
-    });
-
-    setProductsData(removeProduct);
-  };
-
+  console.log(productItems);
   return (
     <>
       {/* 商品欄位 桌機樣式 */}
@@ -67,12 +40,28 @@ const Commodity = () => {
             className="col d-flex flex-direction-row"
             style={{ width: 100, minWidth: 77 }}
           >
-            <input
-              className="mt-2 ms-3 me-2"
-              type="checkbox"
-              defaultValue=""
-              id=""
-            />
+            <div className="pt-2">
+              {/* 綠色勾勾 */}
+              <div className={CheckBoxStyle["checkbox-wrapper"]}>
+                <FaCheck
+                  style={{ "font-size": "16px" }}
+                  className={`${CheckBoxStyle["fa-check"]} ${
+                    checked ? "d-block" : "d-none"
+                  }`}
+                />
+                <input
+                  onChange={() => {
+                    setChecked(!checked);
+                  }}
+                  checked={checked}
+                  type="checkbox"
+                  className={`${CheckBoxStyle["test"]} ${
+                    checked ? CheckBoxStyle.checked : ""
+                  }`}
+                />
+              </div>
+            </div>
+
             <label className={`${CommodityStyles.fc}  m-1 fw-bold`} htmlFor="">
               {" "}
               全選{" "}
@@ -87,7 +76,7 @@ const Commodity = () => {
           <div
             className={`${CommodityStyles.fc} col text-center align-self-center fw-bold`}
           >
-            人數
+            數量
           </div>
           <div
             className={`${CommodityStyles.fc} col text-center align-self-center fw-bold`}
@@ -106,19 +95,32 @@ const Commodity = () => {
           </div>
         </div>
 
-        {productData.map((element) => {
+        {productItems.map((element, index) => {
           return (
             <div className="row" key={element.id}>
               <div
                 className="col d-flex align-items-center justify-content-start ps-3"
                 style={{ width: 100, minWidth: 77 }}
               >
-                <input
-                  className="mt-2 ms-3"
+                {/* <div className={CheckBoxStyle["checkbox-wrapper"]}>
+                  <FaCheck
+                    style={{ "font-size": "16px" }}
+                    className={`${CheckBoxStyle["fa-check"]} ${
+                      checked ? "d-block" : "d-none"
+                    }`}
+                  />
+                  <input
+                  onChange={() => {
+                    setChecked(!checked);
+                  }}
+                  checked={checked}
                   type="checkbox"
-                  defaultValue=""
-                  id=""
-                />
+                  className={`${CheckBoxStyle["test"]} ${
+                    checked ? CheckBoxStyle.checked : ""
+                  }`}      
+                  />
+                </div> */}
+                <Check/>
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 <img
@@ -128,7 +130,7 @@ const Commodity = () => {
                   style={{ minWidth: 75 }}
                 />
               </div>
-              <div className="col-3 align-self-center text-center">
+              <div className="col-3 align-self-center text-center px-4">
                 <h4 className={CommodityStyles.fc}>{element.name}</h4>
               </div>
               <div
@@ -138,21 +140,16 @@ const Commodity = () => {
                 {/* <div class="add d-flex align-items-center"> */}
                 <span
                   onClick={() => {
-                    const nextCount = element.count - 1;
-                    if (nextCount === 0) {
-                      remove(element.id);
-                    } else {
-                      decrease(element.id);
-                    }
+                    decreaseProduct(element.id);
                   }}
                   className={`${CommodityStyles.plus}`}
                 >
                   -
                 </span>
-                <span>{element.count}</span>
+                <span>{element.qty}</span>
                 <span
                   onClick={() => {
-                    increase(element.id);
+                    increaseProduct(element.id);
                   }}
                   className={`${CommodityStyles.plus}`}
                 >
@@ -164,7 +161,7 @@ const Commodity = () => {
                 {element.price}
               </div>
               <div className="col align-self-center text-center">
-                {element.price * element.count}
+                {element.qty * element.price}
               </div>
               <div
                 className="col d-flex align-items-center justify-content-center"
@@ -175,10 +172,7 @@ const Commodity = () => {
                   className={`${CommodityStyles.plus}`}
                   alt=""
                   onClick={() => {
-                    const nextData = productData.filter((v, i) => {
-                      return v.id !== element.id;
-                    });
-                    setProductsData(nextData);
+                    removeProduct(element.id);
                   }}
                 />
               </div>
@@ -200,7 +194,7 @@ const Commodity = () => {
           </div>
         </div>
 
-        {productData.map((element) => {
+        {productItems.map((element) => {
           return (
             <div className="row" key={element.id}>
               {/* 叉叉 */}
@@ -215,12 +209,12 @@ const Commodity = () => {
                     height: "100%",
                     weight: "121px",
                   }}
-                  onClick={() => {
-                    const nextData = productData.filter((v, i) => {
-                      return v.id !== element.id;
-                    });
-                    setProductsData(nextData);
-                  }}
+                  // onClick={() => {
+                  //   const nextData = productData.filter((v, i) => {
+                  //     return v.id !== element.id;
+                  //   });
+                  //   setProductsData(nextData);
+                  // }}
                 />
               </div>
               <div className="col-8 pb-3 pt-2">
@@ -231,10 +225,7 @@ const Commodity = () => {
                       src="/images/Frame 40118.png"
                       alt=""
                       onClick={() => {
-                        const nextData = productData.filter((v, i) => {
-                          return v.id !== element.id;
-                        });
-                        setProductsData(nextData);
+                        removeProduct(element.id);
                       }}
                       className={`${CommodityStyles.plus}`}
                     />
@@ -262,27 +253,22 @@ const Commodity = () => {
                   <div className="col d-flex flex-column align-items-center justify-content-between">
                     <span className={`${CommodityStyles.fc} text-center`}>
                       {" "}
-                      人數{" "}
+                      數量{" "}
                     </span>
                     <div className={`${CommodityStyles.add}`}>
                       <span
                         className={`${CommodityStyles.fc}`}
                         onClick={() => {
-                          const nextCount = element.count - 1;
-                          if (nextCount === 0) {
-                            remove(element.id);
-                          } else {
-                            decrease(element.id);
-                          }
+                          decreaseProduct(element.id);
                         }}
                       >
                         -
                       </span>
-                      <span>{element.count}</span>
+                      <span>{element.qty}</span>
                       <span
                         className={`${CommodityStyles.fc}`}
                         onClick={() => {
-                          increase(element.id);
+                          increaseProduct(element.id);
                         }}
                       >
                         +
@@ -294,7 +280,7 @@ const Commodity = () => {
                       價格
                     </span>
                     <span className={`${CommodityStyles.fb}`}>
-                      {element.count * element.price}
+                      {element.qty * element.price}
                     </span>
                   </div>
                   {/* <div
@@ -350,16 +336,17 @@ const Commodity = () => {
           className="row py-2"
           style={{ border: "1px solid #d9d9d9", borderTop: 0 }}
         >
-          <div className={`${CommodityStyles.fb} col`}>課程結帳金額 :</div>
+          <div className={`${CommodityStyles.fb} col`}>產品結帳金額 :</div>
           <div
             className={`${CommodityStyles.fc} col`}
             style={{ marginLeft: "-100px" }}
           >
-            $
-            {productData.reduce(
+            {totalProductPrice}
+            {/* $ */}
+            {/* {productData.reduce(
               (total, product) => total + product.count * product.price,
               0
-            )}
+            )} */}
           </div>
         </div>
         {/* </footer> */}

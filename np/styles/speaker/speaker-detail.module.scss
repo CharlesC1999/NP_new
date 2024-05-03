@@ -24,7 +24,7 @@
     justify-content: center;
     padding: 30px 25px;
     gap: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     background: rgba(255, 255, 255, 0.14);
     /* box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.13); */
     @media (max-width: 375px) {
@@ -81,14 +81,14 @@
       }
     }
     & .profileImg{
-      width: 380px;
-      height: 488px;
+      width: 410px;
+      height: 470px;
       @media (max-width: 375px) {
         width: 325px;
         height: 300px;
       }
       & img {
-        border-radius: 10px;
+        border-radius: 5px;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -140,29 +140,6 @@
         width: 100%;
         align-self: stretch;
       }
-      & .profileSection{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        align-self: stretch;
-        & h4 {
-          color: var(--black);
-          font-size: 24px;
-          font-weight: 600;
-          @media (max-width: 375px) {
-            font-size: 16px;
-          }
-        }
-        & p {
-          color: var(--black);
-          font-size: 20px;
-          line-height: 150%;
-          @media (max-width: 375px) {
-            font-size: 16px;
-          }
-        }
-      }
     }
   }
   .upcomingLectures{
@@ -188,7 +165,8 @@
   }
   .lectureGroup{
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+    gap: 50px;
     align-self: stretch;
     @media (max-width: 375px) {
       width: 375px;

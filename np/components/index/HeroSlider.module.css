@@ -16,7 +16,7 @@
 .Hero{
     max-width: 1920px;
     margin: auto;
-    padding: 36px 0px;
+    padding-bottom: 36px;
     gap: 404px;
   }
   

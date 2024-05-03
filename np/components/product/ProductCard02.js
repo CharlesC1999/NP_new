@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import style from "@/components/product/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-//fontAwsome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 // {
 //   "id": "171",
 //   "category_id": "19",
@@ -18,14 +15,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //   "valid": "1"
 // }
 
-export default function ProductCard02({ id, name, price }) {
+export default function ProductCard02({
+  id,
+  name,
+  price,
+  img,
+  average_rating,
+}) {
   return (
     <>
       <li key={id} className="list-unstyled">
         <div className={`${style["productCard"]} my-4`}>
-          <div className={``}>
+          <div className={`${style["CardImg"]}`}>
             <img
-              src="/index-images/egg.png"
+              src={`/index-images/p-image/${img}`}
               alt="商品圖片"
               className={`${style["object-fit"]}`}
             />
@@ -36,7 +39,10 @@ export default function ProductCard02({ id, name, price }) {
               className={`${style["stars-row"]}  d-flex flex-row justify-content-between  mb-3`}
             >
               <div className={`${style["star"]}`}>
-                ★<span className={`${style["score"]} px-3`}>(4.2)</span>
+                ★
+                <span className={`${style["score"]} px-3`}>
+                  ({average_rating})
+                </span>
               </div>
               <button
                 className={`${style["favorite-btn"]} pe-1 pe-sm-2 d-flex justify-content-center align-items-center`}

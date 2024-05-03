@@ -58,3 +58,6 @@ WHERE (name LIKE '%e%')
     AND price <= 10000
 ORDER BY price ASC;
 -- LIMIT 10 OFFSET 0;
+
+
+

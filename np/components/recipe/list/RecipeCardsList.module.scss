@@ -55,6 +55,10 @@
     gap: 0px;
   }
   .card-pic {
+    height: 250px;
+    @media screen and (max-width: 376px) {
+      height: 100px;
+    }
     img {
       border-radius: 5px;
     }
@@ -64,6 +68,12 @@
   }
   .recipe-title {
     color: var(--black);
+    @media screen and (max-width: 376px) {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 1;
+    }
   }
   .heart {
     width: 25px;

@@ -121,11 +121,24 @@
     font-family: Inter, sans-serif;
     color:#747e85;
   }
+
+  .myAccount a {
+    /* 在這裡添加你想要的樣式 */
+    
+    text-decoration: none; /* 移除下劃線 */
+    /* 其他樣式，如字體大小、字體家族等 */
+    color: #747e85;
+  }
   
   .lefta {
     font-family: Inter, sans-serif;
     margin-top: 37px;
     text-align: center;
+    color: #747e85;
+  }
+
+  .lefta a{
+    text-decoration: none;
     color: #747e85;
   }
   

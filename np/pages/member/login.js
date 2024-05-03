@@ -15,12 +15,15 @@ import Footer from "@/components/Footer";
 // 導入路徑配置
 import routes from "@/contexts/routes";
 // Google登入
-import firebase from "@/utils/firebase-config";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  handleGoogleLogin,
+  showGoogleLogin,
+} from "@/hooks/google-login-firebase";
 // 讀取畫面
 import { useLoader } from "@/hooks/use-loader";
-// Link
-import Link from "next/link";
+// sweetAlert
+import Swal from "sweetalert2";
+import { result } from "lodash";
 
 const Login = () => {
   // 導入讀取鉤子
@@ -48,6 +51,8 @@ const Login = () => {
   const [loginBlocked, setLoginBlocked] = useState(false);
   // 開眼
   const [showPassword, setShowPassword] = useState(false);
+  // google login
+  const [userData, setUserData] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -56,38 +61,46 @@ const Login = () => {
       setError("錯誤次數過多，請15分鐘後再次嘗試");
       return;
     }
-
+    setLoading(true); // 開始加載畫面
     try {
-      setLoading(true); // 開始加載畫面
       const response = await axios.post("http://localhost:3005/api/login", {
         username,
         password,
       });
       if (response.status === 200) {
-        login(response.data.token);
+        login(response.data.token, response.data.userData);
         // 使用Context的login方法
+        console.log("userdata", response.data.userData);
         console.log("登入成功!");
+        Swal.fire({
+          title: "登入成功",
+          // text: "That thing is still around?",
+          icon: "success",
+          // 按鈕綠色
+          confirmButtonColor: "#50bf8b",
+        });
         setLoading(false);
         router.push("/");
         // 用useRouter跳轉
         // 登入成功後，可能需要重定向或其他操作
+      } else {
+        throw new Error("登入失敗");
       }
     } catch (error) {
+      setLoading(false);
       if (error.response && error.response.status === 401) {
         console.error("登入失敗", error.response.data.message);
         setAttempts((prevAttempts) => prevAttempts + 1);
         if (attempts >= 5) {
           setLoginBlocked(true);
-          setLoading(false);
           setError("錯誤次數過多，請15分鐘後再次嘗試");
           setTimeout(() => setLoginBlocked(false), 15 * 60 * 1000);
           setTimeout(() => setAttempts(0), 15 * 60 * 1000);
         } else {
         }
-        setLoading(false);
+
         setError("帳號或密碼錯誤，請重新嘗試");
       } else {
-        setLoading(false);
         setError("登入時發生錯誤，請稍後再試");
       }
       // 處理錯誤情況（例如顯示錯誤消息）
@@ -98,28 +111,34 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  // Google登入
-  const handleGoogleLogin = async () => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        //成功
-        const token = result.credential.accessToken; // Google 令牌
-        const userData = {
-          name: result.user.displayName,
-          email: result.user.email,
-          photoURL: result.user.photoURL,
-        };
-        console.log("登入成功", result.user);
-        // 使用 AuthContext 的 login 方法更新應用狀態
-        login(token, userData);
-      })
-      .catch((error) => {
-        // Error
-        console.error("Google 登入失败:", error.message);
-      });
+  useEffect(() => {
+    showGoogleLogin(login, (data) => {
+      setUserData(data);
+      login(data);
+      console.log(data);
+      if (data.status === "success") {
+        Swal.fire({
+          title: "登入成功",
+          // text: "That thing is still around?",
+          icon: "success",
+          // 按鈕綠色
+          confirmButtonColor: "#50bf8b",
+        });
+        router.push("/");
+      } else if (data.status === "error") {
+        console.error("Google 登入錯誤:", data.error);
+      }
+
+      // Perform any necessary navigation here
+    });
+  }, []);
+
+  const handleGoogleButtonClick = () => {
+    handleGoogleLogin();
+    console.log("touch");
+    // google-login-firebase export handleGoogleLogin
   };
+  // ---------------------------------------------------
 
   // 連結用router導
   const goSignUp = () => {
@@ -203,7 +222,7 @@ const Login = () => {
               className={`${LoginStyle.iconGroup} mt-2 d-flex justify-content-center`}
             >
               <button
-                onClick={handleGoogleLogin}
+                onClick={handleGoogleButtonClick}
                 className={LoginStyle.socialMediaButton}
               >
                 <svg

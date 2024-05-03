@@ -28,13 +28,15 @@
   }
   & .speakerGroup {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px;
     justify-content: space-between;
-    align-items: flex-start;
-    align-self: stretch;
+    // align-items: flex-start;
+    // align-self: stretch;
     margin-bottom: 30px;
     @media (max-width: 375px) {
       /* 使用 wrap 之後換行的間隔用 speaker 卡片的 margin-bottom 打開 */
-      flex-wrap: wrap;
+      row-gap: 15px;
       margin-bottom: 0px;
     }
   }
