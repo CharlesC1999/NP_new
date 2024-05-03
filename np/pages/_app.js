@@ -35,12 +35,12 @@ export default function App({ Component, pageProps }) {
       </Head>
       <AuthProvider>
         <LoaderProvider CustomLoader={OrangeLoader}>
-        <CategoryForSQLProvider>
-          <CartProvider>
-            <ManageRouteChanges>
-              {getLayout(<Component {...pageProps} />)}
-            </ManageRouteChanges>
-          </CartProvider>
+          <CategoryForSQLProvider>
+            <CartProvider>
+              <ManageRouteChanges>
+                {getLayout(<Component {...pageProps} />)}
+              </ManageRouteChanges>
+            </CartProvider>
           </CategoryForSQLProvider>
         </LoaderProvider>
       </AuthProvider>
