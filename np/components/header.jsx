@@ -9,6 +9,94 @@ import routes from "@/contexts/routes"; // 導入路徑配置
 import { IoLogOutOutline } from "react-icons/io5";
 // sweetAlert
 import Swal from "sweetalert2";
+//react icon
+import { AiOutlineHome } from "react-icons/ai";
+import { RiDiscountPercentLine } from "react-icons/ri";
+import { FaListUl } from "react-icons/fa";
+import { LuChefHat, LuClipboardEdit } from "react-icons/lu";
+import { GrGroup } from "react-icons/gr";
+import { IoMdBusiness } from "react-icons/io";
+
+const MobileSideBar = ({ onClose }) => {
+  const router = useRouter();
+  const goClassList = () => router.push(routes.classList);
+  const goProductList = () => router.push(routes.productList);
+  const goRecipeList = () => router.push(routes.recipeList);
+  const goSpeekerList = () => router.push(routes.speakerList);
+  const doLogin = () => router.push(routes.login);
+  const doSignUp = () => router.push(routes.signUp);
+  const goHome = () => router.push(routes.home);
+
+  return (
+    <div className={styles.fullMobileScreen} onClick={onClose}>
+      <div
+        className={styles.sideBarContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <section className={styles.memberContainer}>
+          <div className={styles.memberSet}>
+            <div className={styles.memberImg}>
+              <img src="" alt="" />
+            </div>
+            <div className={styles.memberButtonContainer}>
+              <button onClick={doLogin} className={styles.memberButton}>
+                登入
+              </button>
+              |
+              <button onClick={doSignUp} className={styles.memberButton}>
+                註冊
+              </button>
+            </div>
+          </div>
+        </section>
+        <section className={styles.optionContainer}>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goHome}>
+              <AiOutlineHome size={24} />
+              首頁
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn}>
+              <RiDiscountPercentLine size={24} />
+              優惠活動
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goProductList}>
+              <FaListUl size={24} />
+              商品列表
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goRecipeList}>
+              <LuChefHat size={24} />
+              食譜精選
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goClassList}>
+              <LuClipboardEdit size={24} />
+              精選課程
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goSpeekerList}>
+              <GrGroup size={24} />
+              講師陣容
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn}>
+              <IoMdBusiness size={24} />
+              關於我們
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};
 
 const HeaderComponent = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -20,6 +108,7 @@ const HeaderComponent = () => {
   const recipeDropdownRef = useRef(null); // 食譜下拉列表的參考
   const calssDropdownRef = useRef(null); // 課程下拉列表的參考
   const [selectedText, setSelectedText] = useState("所有分類");
+  const [showFullScreen, setShowFullScreen] = useState(false); // sidebar
   const router = useRouter();
   const { auth, logout } = useAuth();
 
@@ -194,6 +283,15 @@ const HeaderComponent = () => {
     });
   };
 
+  // sidebar出來不准動
+  useEffect(() => {
+    if (showFullScreen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showFullScreen]);
+
   // 使用配置的路由導航
   const goMemberDashboard = () => router.push(routes.dashboard);
   const goFavor = () => router.push(routes.favor);
@@ -210,7 +308,13 @@ const HeaderComponent = () => {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.logoWrapper}>
-            <button className={styles.mobileMenu}>
+            <button
+              className={styles.mobileMenu}
+              onClick={() => {
+                // console.log("Button clicked");
+                setShowFullScreen(!showFullScreen);
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="30px"
@@ -226,7 +330,9 @@ const HeaderComponent = () => {
                 </g>
               </svg>
             </button>
-
+            {showFullScreen && (
+              <MobileSideBar onClose={() => setShowFullScreen(false)} />
+            )}
             <a onClick={goIndex}>
               <img
                 src="/images/np_logo.png"
