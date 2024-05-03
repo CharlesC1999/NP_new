@@ -13,12 +13,23 @@
   display: flex;
   height: 23px;
   margin-bottom: 0px;
-  flex-direction: column;
-  justify-content: center;
-  align-self: stretch;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
   font-size: 20px;
   font-weight: 700;
   color: var(--gray01);
+  gap: 8px;
+}
+
+.renewButton {
+  border: none;
+  background: none;
+  padding: 0;
+  margin-bottom: 3px;
+}
+.renewButton:hover {
+  color: #75ae8e;
 }
 
 .onlyBorderBottom {

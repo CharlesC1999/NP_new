@@ -5,10 +5,12 @@ export default function ProductSidebarDetail({
   productCate,
   selectedCategory,
   handleCategorySelect,
+  filteredSubcategories,
 }) {
-  const filteredSubcategories = productCate.filter(
-    (cate) => cate.parentId === selectedCategory
-  );
+  // const filteredSubcategories = productCate.filter(
+  //   (cate) => cate.parentId === selectedCategory
+  // );
+  console.log(productCate);
   return (
     <div>
       <div className={`${styles.sideBarBox}`}>

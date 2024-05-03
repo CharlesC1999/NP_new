@@ -14,6 +14,7 @@ import ProductFilter from "@/components/product/ProductFilter";
 import Footer from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
 import Pagination from "@/components/product/pagination";
+import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarDiscount";
 
 // import PaginationRounded from "@/components/pagination";
 //荃做版本sideBar
@@ -56,15 +57,38 @@ export default function Product() {
 
   const [products, setProducts] = useState([]);
 
+  //分類係項sideBar
   const [productCate, setProductCate] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [activeParentCategories, setActiveParentCategories] = useState(
+    new Set()
+  );
+
+  const normalCategories = productCate.filter(
+    (cate) => cate.parentId === null && cate.cateId !== 23 && cate.cateId !== 22
+  );
+
+  const discountCategories = productCate.filter(
+    (cate) => cate.parentId === 23 && cate.parentId === 22
+  );
+  console.log("discountCategories" + discountCategories);
 
   const handleCategorySelect = (cateId) => {
+    const newActiveParentCategories = new Set(activeParentCategories);
+    if (newActiveParentCategories.has(cateId)) {
+      newActiveParentCategories.delete(cateId);
+    } else {
+      newActiveParentCategories.add(cateId);
+    }
+    setActiveParentCategories(newActiveParentCategories);
     setSelectedCategory(cateId);
   };
+  const filteredSubcategories = productCate.filter((cate) =>
+    activeParentCategories.has(cate.parentId)
+  );
 
-  const getProducts = async (page = 1) => {
-    const url = `http://localhost:3005/api/products?page=${page}&perpage=${perpage}category_id=${selectedCategory}`;
+  const getProducts = async () => {
+    const url = `http://localhost:3005/api/products?page=${page}&perpage=${perpage}&category_id=${selectedCategory}`;
 
     try {
       const res = await fetch(url);
@@ -92,6 +116,7 @@ export default function Product() {
     getProducts(page);
   }, [page, perpage]);
   const TotalRow = total;
+  console.log(page);
   return (
     <>
       <HeaderComponent />
@@ -101,14 +126,15 @@ export default function Product() {
       >
         <div className={`${styles.sideBar} me-5`}>
           {/* <ProductSidebarCate /> */}
-
+          <ProductSidebarDiscount DisCountCategories={discountCategories} />
           <ProductSidebarDetail
             handleCategorySelect={handleCategorySelect}
-            productCate={productCate}
+            productCate={normalCategories}
             selectedCategory={selectedCategory}
+            filteredSubcategories={filteredSubcategories}
           />
 
-          <ProductSidebarNew />
+          {/* <ProductSidebarNew /> */}
         </div>
         <div
           className={`${styles.productW} ms-sm-3 ms-0 d-flex justify-content-center flex-column`}
@@ -136,7 +162,10 @@ export default function Product() {
           >
             {products.map((item) => (
               <div key={item.id}>
-                <Link href={`/product/${item.id}`}>
+                <Link
+                  href={`/product/${item.id}`}
+                  className="text-decoration-none"
+                >
                   {" "}
                   {/* You can style this <a> tag as needed */}
                   <ProductCard02
