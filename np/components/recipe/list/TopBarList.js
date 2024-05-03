@@ -2,12 +2,11 @@ import { useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./TopBarList.module.scss";
 import { useCategories } from "@/hooks/recipe/use-categories";
+import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 
-export default function TopBarList({
-  setOrderby = {},
-  total = 0,
-  setRecipeCategory = "",
-}) {
+export default function TopBarList({ setOrderby = {}, total = 0 }) {
+  // 手機板TopBarList的類別被點擊時設定state給SQL做查詢
+  const { setRecipeCategory } = useCategoryForSQL();
   // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
   const { setNewCategories, newCategories } = useCategories();
 

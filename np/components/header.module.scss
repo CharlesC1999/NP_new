@@ -4,6 +4,89 @@
 a:visited {
   color: initial;
 } */
+.fullMobileScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  & .sideBarContainer {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 227px;
+    // height: 75vh;
+    background: #f9f9f9;
+
+    & .memberContainer {
+      width: 100%;
+      height: 104px;
+      padding-block: 14px;
+      padding-inline: 12px;
+      background: #eff2f4;
+      & .memberSet {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        & .memberImg {
+          width: 45px;
+          height: 45px;
+          margin-left: 6px;
+          border-radius: 50%;
+          background: #cacaca;
+        }
+        & .memberButtonContainer {
+          display: flex;
+          flex-direction: row;
+          justify-content: left;
+          align-items: center;
+          & .memberButton {
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            background: none;
+          }
+        }
+      }
+    }
+    & .optionContainer {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      padding: 0px 13px 4px 13px;
+      & .optionBlock {
+        // border-bottom: #454545 1px solid;
+        padding-left: 6px;
+        padding-block: 10px;
+        font-weight: 700;
+        font-size: 18px;
+        & .optionBtn {
+          color: #454545;
+          border: none;
+          background: none;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 14px;
+          padding-inline: 0px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 376px) {
+  .fullMobileScreen {
+    display: none;
+  }
+}
+
 .container {
   background-color: var(--white, #fefefe);
   display: flex;
@@ -188,6 +271,7 @@ a:visited {
     outline: none;
     border: none;
     padding: 0;
+    margin-top: 4px;
   }
 }
 

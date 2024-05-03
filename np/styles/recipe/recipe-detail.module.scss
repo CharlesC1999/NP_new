@@ -19,5 +19,24 @@
     @media screen and (max-width: 376px) {
       padding: 0 0 20px 0;
     }
+    .slide-btn {
+      z-index: 5;
+      transition: 0.6s;
+      opacity: 0.3;
+      width: 40px;
+      &:hover {
+        opacity: 1;
+      }
+      &.prev-btn {
+        left: 0px;
+      }
+      &.next-btn {
+        right: 3px;
+      }
+    }
+    .disabled-btn {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 }
