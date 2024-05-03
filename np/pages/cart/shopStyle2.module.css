@@ -65,8 +65,8 @@
   margin-bottom: 20px;
 }
 .input {
-  height: 35px;
-  font-size: 20px;
+  height: 40px;
+  font-size: 24px;
 }
 
 .label {
@@ -76,7 +76,7 @@
 }
 
 .pay2 {
-  border-top: 1px solid #d9d9d9;
+  /* border-top: 1px solid #d9d9d9; */
 
   .button {
     margin: 5px;
@@ -103,7 +103,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    padding-top: 36px;
+    padding-top: 48px;
   }
 
   .cir {
@@ -179,10 +179,12 @@
   }
   .prompt {
     margin-top: 100px;
+    width: 1440px;
     /* width: 70vw; */
   }
   .mgt1 {
     margin-top: 80px;
+    min-width: 1200px;
   }
   .pay1 {
     padding-left: 150px;
@@ -208,7 +210,7 @@
   }
 
   .article {
-    border: 1px solid #d9d9d9;
+    /* border: 1px solid #d9d9d9; */
   }
 }
 
