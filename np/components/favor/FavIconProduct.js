@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { addRecipeFav, removeRecipeFav } from "@/services/user";
+import { addProductFav, removeProductFav } from "@/services/user";
 import toast from "react-hot-toast";
 
 // 愛心圖示(svg)
@@ -13,59 +13,59 @@ const Heart = ({ size = 30, color = "red" }) => (
 </svg>
 );
 
-export default function FavIconRecipe({ id }) {
+export default function FavIconProduct({ id }) {
   // 由context取得auth-判斷是否能執行add或remove用，favorites決定愛心圖案用
-  const { favorRecipe, setFavorRecipe, recipeData, setRecipeData,auth } = useAuth();
+  const { favorProduct, setFavorProduct, productData, setProductData,auth } = useAuth();
 
-  // 讓會員收藏頁取消愛心時能即時移除卡片，更動愛心時也要即時更動 recipeData 的內容
-  const updateRecipeData = (newFavorRecipe) => {
-    // 過濾 recipeData，只保留 newFavorRecipe 中的 ID 對應的食譜
-    const filteredRecipeData = recipeData.filter((recipe) =>
-      newFavorRecipe.includes(recipe.recipe__i_d)
+  // 讓會員收藏頁取消愛心時能即時移除卡片，更動愛心時也要即時更動 productData 的內容
+  const updateProductData = (newFavorProduct) => {
+    // 過濾 productData，只保留 newFavorProduct 中的 ID 對應的商品
+    const filteredProductData = productData.filter((product) =>
+      newFavorProduct.includes(product.id)
     );
-    setRecipeData(filteredRecipeData);
+    setProductData(filteredProductData);
   };
 
-  const handleTriggerFav = (rid) => {
-    let newFavorRecipe;
-    if (favorRecipe.includes(rid)) {
-      // 移除 rid
-      newFavorRecipe = favorRecipe.filter((v) => v !== rid);
+  const handleTriggerFav = (pid) => {
+    let newFavorProduct;
+    if (favorProduct.includes(pid)) {
+      // 移除 pid
+      newFavorProduct = favorProduct.filter((v) => v !== pid);
     } else {
-      // 添加 rid
-      newFavorRecipe = [...favorRecipe, rid];
+      // 添加 pid
+      newFavorProduct = [...favorProduct, pid];
     }
 
-    // 更新喜好食譜 ID 陣列
-    setFavorRecipe(newFavorRecipe);
-    // 更新食譜資料
-    updateRecipeData(newFavorRecipe);
+    // 更新喜好商品 ID 陣列
+    setFavorProduct(newFavorProduct);
+    // 更新商品資料
+    updateProductData(newFavorProduct);
   };
 
-  const handleAddFav = async (rid) => {
-    const res = await addRecipeFav(rid);
+  const handleAddFav = async (pid) => {
+    const res = await addProductFav(pid);
 
     if (res.data.status === "success") {
       // 伺服器成功後，更新context中favorites的狀態，頁面上的圖示才會對應更動
-      handleTriggerFav(rid);
-      toast.success(`已將食譜 id=${rid} 加入收藏!`);
+      handleTriggerFav(pid);
+      toast.success(`已將商品 id=${pid} 加入收藏!`);
     }
   };
 
-  const handleRemoveFav = async (rid) => {
-    const res = await removeRecipeFav(rid);
+  const handleRemoveFav = async (pid) => {
+    const res = await removeProductFav(pid);
 
     if (res.data.status === "success") {
       // 伺服器成功後，更新context中favorites的狀態，頁面上的圖示才會對應更動
-      handleTriggerFav(rid);
-      toast.success(`已將食譜 id=${rid} 移除收藏!`);
+      handleTriggerFav(pid);
+      toast.success(`已將商品 id=${pid} 移除收藏!`);
     }
   };
 
   return (
     <>
       {/* 由favorites狀態決定呈現實心or空心愛愛圖示 */}
-      {favorRecipe.includes(id) ? (
+      {favorProduct.includes(id) ? (
         <button
           style={{ padding: 0, border: "none", background: "none" }}
           onClick={() => {
