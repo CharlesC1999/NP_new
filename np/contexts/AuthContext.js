@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
         // After successfully logging out on the server
         // localStorage.removeItem("token");
         // setAuth({ token: null, isLoggedIn: false });
-        router.push("/login"); // Redirect to login page or home
+        router.push("/"); // Redirect to login page or home
       } catch (error) {
         console.error("Logout failed:", error);
         // Optionally handle errors, e.g., display an error message
