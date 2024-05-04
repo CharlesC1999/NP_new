@@ -18,9 +18,39 @@ const HistoryOrderDetail = () => {
   // !!注意!! 初次render(渲染)會使用初始值
   // !!注意!! 在應用程式執行過程中，務必要保持狀態維持同樣的資料類型
   const [orderDetail, setOrderDetail] = useState([])
+ const [coupons, setCoupons] = useState([])
 
+ const couponid = orderDetail.length > 0 ? orderDetail[0].coupon_ID : null;
+console.log(couponid);
+const couponIdExists = coupons.some(item => item.Coupon_ID === parseInt(couponid));
+ console.log(couponIdExists);
+ let useCoupon;
+ if(couponIdExists){
+  let coupon = coupons.find(item => item.Coupon_ID ===parseInt(couponid));
+  let couponName = coupon.C_name;
+ let couponDiscount = coupon.Discount_amount;
+ 
+ const discountAmount = parseFloat(couponDiscount);
+ let displayText;
+// 检查 discountAmount 是否是有效的数字
+if (!isNaN(discountAmount)) {
+  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+  if (discountAmount < 1) {
+    const discountPercent = discountAmount * 10;
+    displayText = `${discountPercent}折`;
+  } else {
+    displayText = `$${discountAmount}`;
+  }
+} else {
+  // 如果 discountAmount 不是有效的数字，直接使用原始值
+  displayText = v.Discount_amount;
+}
+useCoupon= couponName + "/" + displayText;
+ }else{
+  useCoupon = "未使用優惠券";
+ }
   console.log(orderDetail);
-
+  console.log(coupons);
   const totaltotal = orderDetail.reduce((total, order) => {
     return total + (order.price * order.Quantity);
   }, 0);
@@ -41,6 +71,7 @@ const HistoryOrderDetail = () => {
   // 與伺服器要求獲取資料的async函式
   const getOrderDetail = async (order_id) => {
     const url = `http://localhost:3005/api/history-order-detail/${order_id}`
+
     // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
     try {
       // fetch預設是使用GET，不需要加method設定
@@ -60,6 +91,28 @@ const HistoryOrderDetail = () => {
       console.log(e)
     }
   }
+  const getCoupons = async () => {
+    const url = `http://localhost:3005/api/coupons`
+
+    // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
+    try {
+      // fetch預設是使用GET，不需要加method設定
+      const res = await fetch(url)
+      // 解析json格式資料成js的資料
+      const data = await res.json()
+      console.log(data.data.coupons)
+
+      // 為了要確保資料是物件，所以檢查後再設定
+      if (typeof data === 'object' && data !== null) {
+        // 設定到狀態中
+        setCoupons(data.data.coupons)
+      } else {
+        console.log('伺服器回傳資料類型錯誤，無法設定到狀態中')
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
   // 樣式2: 頁面初次渲染之後伺服器要求資料
   // 需要監聽router.isReady，當它為true時，才能得到pid
   useEffect(() => {
@@ -67,6 +120,7 @@ const HistoryOrderDetail = () => {
     // 確保能得從router.query到pid後，再向伺服器要求對應資料
     if (router.isReady) {
       getOrderDetail(router.query.order_id)
+      getCoupons()
     }
     // eslint-disable-next-line
   }, [router.isReady])
@@ -91,7 +145,7 @@ const HistoryOrderDetail = () => {
             </section>
             <section className={`${styles3.ProductBorder} ${styles3.section}`}>
               <div className={`${styles3.topBar} row py-3`}>
-           
+
                 <div className={`${styles3.fc} col text-center`}>商品明細</div>
                 <div className={`${styles3.fc} col text-center`}>優惠價</div>
                 <div className={`${styles3.fc} col text-center`}>數量</div>
@@ -102,27 +156,33 @@ const HistoryOrderDetail = () => {
 
                 return (
                   <div className="row py-2">
-                   
+
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.price * v.Quantity}</div>
 
                   </div>
-                  
+
                 )
               }
               )}
-              
+
 
 
             </section>
             {/*總價 */}
-            <div className={`${styles3.totalPrice} row`}>
-              <div className={`${styles3.orderEnd} `}>
-                優惠券: 未使用優惠券 
 
-              </div>
+            <div className={`${styles3.totalPrice} row`}>
+              
+
+               
+                  <div className={`${styles3.orderEnd} `}>
+                    優惠券: {useCoupon}
+
+                  </div>
+                
+             
               <div className={`${styles3.orderEnd} `}>
                 總價: {totaltotal} 元
               </div>
@@ -211,7 +271,7 @@ const HistoryOrderDetail = () => {
                       </div>
                     </div>
 
-                  
+
 
                     <div
                       className="row py-2 pt-3"
@@ -230,14 +290,14 @@ const HistoryOrderDetail = () => {
               }
               )}
               <div className={`${styles3.totalPrice} row`}>
-              <div className={`${styles3.orderEnd} `}>
-                優惠券: 未使用優惠券 
+                <div className={`${styles3.orderEnd} `}>
+                  優惠券: 未使用優惠券
 
+                </div>
+                <div className={`${styles3.orderEnd} `}>
+                  總價: {totaltotal} 元
+                </div>
               </div>
-              <div className={`${styles3.orderEnd} `}>
-                總價: {totaltotal} 元
-              </div>
-            </div>
             </section>
 
 
