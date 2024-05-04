@@ -2,7 +2,11 @@ import React, { useState } from "react";
 //style
 import style from "@/components/product/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-import FavIconProduct from "../favor/FavIconProduct";
+import Link from "next/link";
+import { useCart } from "@/hooks/use-cart";
+
+// import Link from "../../pages/cart";
+
 // {
 //   "id": "171",
 //   "category_id": "19",
@@ -15,37 +19,35 @@ import FavIconProduct from "../favor/FavIconProduct";
 //   "valid": "1"
 // }
 
-export default function ProductCard02({
-  id,
-  name,
-  price,
-  img,
-  average_rating,
-}) {
+export default function ProductCard02({ product ,id, name, price }) {
+  const {addProduct} =useCart()
   return (
     <>
+            <Link href="../../cart">連至 購物車</Link>
+
       <li key={id} className="list-unstyled">
         <div className={`${style["productCard"]} my-4`}>
-          <div className={`${style["CardImg"]}`}>
+          <div className={``}>
             <img
-              src={`/index-images/p-image/${img}`}
+              src="/index-images/egg.png"
               alt="商品圖片"
               className={`${style["object-fit"]}`}
             />
           </div>
-
           <div className={`${style["product-info"]}`}>
             <h6 className={`${style["product-name"]} my-2`}>{name}</h6>
             <div
               className={`${style["stars-row"]}  d-flex flex-row justify-content-between  mb-3`}
             >
               <div className={`${style["star"]}`}>
-                ★
-                <span className={`${style["score"]} px-3`}>
-                  ({average_rating})
-                </span>
+                ★<span className={`${style["score"]} px-3`}>(4.2)</span>
               </div>
-              <FavIconProduct id={id} />
+              <button
+                className={`${style["favorite-btn"]} pe-1 pe-sm-2 d-flex justify-content-center align-items-center`}
+                style={{ border: "none" }}
+              >
+                <i className={`fa-regular fa-heart`} />
+              </button>
             </div>
             <div
               className={`${style["product-price"]} d-flex flex-row justify-content-between align-items-center`}
@@ -56,14 +58,21 @@ export default function ProductCard02({
               >
                 <div className={`${style["original-price"]} px-3`}>{price}</div>
                 <div
-                  type="submit"
+                  typt="submit"
                   className={`${style["btn"]} btn justify-content-center align-centent-center d-flex`}
-                >
+                  onClick={()=>{
+                    addProduct(product)
+                    console.log(product);
+
+                  }}
+               >
                   <i
                     className={`fa-solid fa-cart-shopping`}
                     style={{ color: "#3BB77E" }}
                   ></i>
+                 
                 </div>
+              
               </div>
             </div>
           </div>

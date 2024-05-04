@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/member-styles/favor.module.scss";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import HeaderComponent from "@/components/Header";
@@ -9,28 +9,21 @@ import ClassCard from "@/components/class_file/ClassCardWeb";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import ProductCard02 from "@/components/product/ProductCard02";
 import ProductCardList from "@/components/product/ProductCardList";
-import RecipeCardsListTest from "@/components/favor/RecipeCardsListTest";
+import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function Favor() {
-  const { favorRecipe, recipeData,favorClass,classData:classesData } = useAuth();
+  const {
+    favorRecipe,
+    recipeData,
+    favorClass,
+    classData: classesData,
+    productData,
+    auth
+  } = useAuth();
   const [activeTab, setActiveTab] = useState("食譜");
-  // 取得食譜收藏的資料
-  // const [favorites, setFavorites] = useState({
-  //   favorRecipe: [],
-  //   recipeData: [],
-  // });
-  // useEffect(() => {
-  //   getFavs()
-  //     .then((data) => {
-  //       setFavorites(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to load favorites:", error);
-  //     });
-  // }, []);
   return (
     <>
       <HeaderComponent />
@@ -44,41 +37,30 @@ export default function Favor() {
           {/* card-recipe 偉鈞 */}
           {activeTab === "食譜" && (
             <div className={styles.cards}>
-              {/* <RecipeCardsList />
-              <RecipeCardsList />
-              <RecipeCardsList /> */}
-              {recipeData.map((v) => {
-                return (
-                  <RecipeCardsListTest
-                    key={v.recipe__i_d}
-                    id={v.recipe__i_d}
-                    image={v.image__u_r_l}
-                    title={v.Title_R_name}
-                    date={v.Publish_date}
-                    cate={v.Recipe_category_ID}
-                    content={v.Content}
-                  />
-                );
-              })}
+              <RecipeCardsList recipesData={recipeData} />
             </div>
           )}
           {/* card-lecture 宥毓 */}
           {activeTab === "課程" && (
             <div className={styles.cards}>
               <div className={styles.classCard}>
-              {classesData.map((classData, index) => (
+                {classesData.map((classData, index) => (
                   <ClassCard
-                  classesData={classData}
-                  key={index}
-                  Index={index}
-                  id={classData.class__i_d}
+                    classesData={classData}
+                    key={index}
+                    Index={index}
+                    id={classData.class__i_d}
                   />
                 ))}
               </div>
               <div className={styles.classCardMobile}>
-                <ClassCardMobileList />
-                <ClassCardMobileList />
-                <ClassCardMobileList />
+                {classesData.map((classData, index) => (
+                  <ClassCardMobileList
+                    classesData={classData}
+                    key={index}
+                    Index={index}
+                  />
+                ))}
               </div>
             </div>
           )}
@@ -86,12 +68,35 @@ export default function Favor() {
           {activeTab === "商品" && (
             <>
               <div className={`${styles.productCard1}`}>
-                <ProductCard02 />
-                <ProductCard02 />
+                {productData.map((v) => {
+                  return (
+                    <ProductCard02
+                      key={v.id}
+                      id={v.id}
+                      img={v.image_urls}
+                      category_id={v.category_id}
+                      name={v.product_name}
+                      description={v.product_description}
+                      price={v.product_price}
+                      average_rating={v.average_rating}
+                    />
+                  );
+                })}
               </div>
               <div className={`${styles.productCardMobile}`}>
-                <ProductCardList />
-                <ProductCardList />
+                {productData.map((v) => {
+                  return (
+                    <ProductCardList
+                      key={v.id}
+                      img={v.image_urls}
+                      category_id={v.category_id}
+                      name={v.product_name}
+                      description={v.product_description}
+                      price={v.product_price}
+                      average_rating={v.average_rating}
+                    />
+                  );
+                })}
               </div>
             </>
           )}

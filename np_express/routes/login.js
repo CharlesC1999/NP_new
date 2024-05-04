@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
           // phone: user.Phone,
           // gender: user.Gender,
           // birthday: user.date_of_birth,
-          // address: user.User_image,
+          address: user.User_image,
           // 其他的到登入頁面抓，不然存放太危險???
         },
       })

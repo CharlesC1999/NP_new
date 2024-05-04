@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
 //  全域樣式
 import "@/styles/globals.css";
 //  Datepicker
@@ -16,8 +17,13 @@ import "@/styles/loader.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
 // Router
 import Router from "next/router";
+
 // Head
 import Head from "next/head";
+
+import { CartProvider } from "@/hooks/use-cart";
+// 給食譜列表跟細節頁的sideBar用的context
+import { CategoryForSQLProvider } from "@/hooks/recipe/use-categoryForSQL";
 
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
@@ -29,9 +35,13 @@ export default function App({ Component, pageProps }) {
       </Head>
       <AuthProvider>
         <LoaderProvider CustomLoader={OrangeLoader}>
-          <ManageRouteChanges>
-            {getLayout(<Component {...pageProps} />)}
-          </ManageRouteChanges>
+          <CategoryForSQLProvider>
+            <CartProvider>
+              <ManageRouteChanges>
+                {getLayout(<Component {...pageProps} />)}
+              </ManageRouteChanges>
+            </CartProvider>
+          </CategoryForSQLProvider>
         </LoaderProvider>
       </AuthProvider>
     </>
