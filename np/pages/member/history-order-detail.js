@@ -18,37 +18,37 @@ const HistoryOrderDetail = () => {
   // !!注意!! 初次render(渲染)會使用初始值
   // !!注意!! 在應用程式執行過程中，務必要保持狀態維持同樣的資料類型
   const [orderDetail, setOrderDetail] = useState([])
- const [coupons, setCoupons] = useState([])
+  const [coupons, setCoupons] = useState([])
 
- const couponid = orderDetail.length > 0 ? orderDetail[0].coupon_ID : null;
-console.log(couponid);
-const couponIdExists = coupons.some(item => item.Coupon_ID === parseInt(couponid));
- console.log(couponIdExists);
- let useCoupon;
- if(couponIdExists){
-  let coupon = coupons.find(item => item.Coupon_ID ===parseInt(couponid));
-  let couponName = coupon.C_name;
- let couponDiscount = coupon.Discount_amount;
- 
- const discountAmount = parseFloat(couponDiscount);
- let displayText;
-// 检查 discountAmount 是否是有效的数字
-if (!isNaN(discountAmount)) {
-  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
-  if (discountAmount < 1) {
-    const discountPercent = discountAmount * 10;
-    displayText = `${discountPercent}折`;
+  const couponid = orderDetail.length > 0 ? orderDetail[0].coupon_ID : null;
+  console.log(couponid);
+  const couponIdExists = coupons.some(item => item.Coupon_ID === parseInt(couponid));
+  console.log(couponIdExists);
+  let useCoupon;
+  if (couponIdExists) {
+    let coupon = coupons.find(item => item.Coupon_ID === parseInt(couponid));
+    let couponName = coupon.C_name;
+    let couponDiscount = coupon.Discount_amount;
+
+    const discountAmount = parseFloat(couponDiscount);
+    let displayText;
+    // 检查 discountAmount 是否是有效的数字
+    if (!isNaN(discountAmount)) {
+      // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+      if (discountAmount < 1) {
+        const discountPercent = discountAmount * 10;
+        displayText = `${discountPercent}折`;
+      } else {
+        displayText = `$${discountAmount}`;
+      }
+    } else {
+      // 如果 discountAmount 不是有效的数字，直接使用原始值
+      displayText = v.Discount_amount;
+    }
+    useCoupon = couponName + "/" + displayText;
   } else {
-    displayText = `$${discountAmount}`;
+    useCoupon = "未使用優惠券";
   }
-} else {
-  // 如果 discountAmount 不是有效的数字，直接使用原始值
-  displayText = v.Discount_amount;
-}
-useCoupon= couponName + "/" + displayText;
- }else{
-  useCoupon = "未使用優惠券";
- }
   console.log(orderDetail);
   console.log(coupons);
   const totaltotal = orderDetail.reduce((total, order) => {
@@ -174,15 +174,15 @@ useCoupon= couponName + "/" + displayText;
             {/*總價 */}
 
             <div className={`${styles3.totalPrice} row`}>
-              
 
-               
-                  <div className={`${styles3.orderEnd} `}>
-                    優惠券: {useCoupon}
 
-                  </div>
-                
-             
+
+              <div className={`${styles3.orderEnd} `}>
+                優惠券: {useCoupon}
+
+              </div>
+
+
               <div className={`${styles3.orderEnd} `}>
                 總價: {totaltotal} 元
               </div>
