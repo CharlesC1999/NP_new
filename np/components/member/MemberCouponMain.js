@@ -20,6 +20,9 @@ const [coupons, setCoupons] = useState([])
 const [activeCategory, setActiveCategory] = useState("全部");
 
 
+let userid = parseInt(localStorage.getItem('userid'))
+console.log(userid);
+
 const getCoupons = async (cat='') => {
   const url = 'http://localhost:3005/api/coupons'+cat;
 
@@ -79,7 +82,7 @@ useEffect(() => {
 </div>
 <div className={styles.coupmain}>
   {/* 可以用的 */}
-  {coupons.filter(v=>v.Member_ID===41).map((v, i) => {
+  {coupons.filter(v=>v.Member_ID===userid).map((v, i) => {
     
  const discountAmount = parseFloat(v.Discount_amount);
  let displayText;

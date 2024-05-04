@@ -53,8 +53,9 @@ console.log(memberLevel);
 // console.log(userIdExists);
 let nowlevel;
 let total;
-let userid=78;
 //判斷user是誰
+let userid=78;
+
 const userIdExists = memberLevel.some(item => item.User_ID === userid);
 if (userIdExists) {
   const user = memberLevel.find(item => item.User_ID === userid);
