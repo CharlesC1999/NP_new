@@ -46,6 +46,48 @@ const calculateLevel = (total) => {
       console.log(e)
     }
   }
+
+
+console.log(memberLevel);
+// const userIdExists = memberLevel.some(item => item.User_ID === 8);
+// console.log(userIdExists);
+let nowlevel;
+let total;
+let userid=78;
+//判斷user是誰
+const userIdExists = memberLevel.some(item => item.User_ID === userid);
+if (userIdExists) {
+  const user = memberLevel.find(item => item.User_ID === userid);
+   total = user.total;
+  console.log(total);
+  nowlevel=parseInt(calculateLevel(total).split(".")[1])
+} else {
+  nowlevel = 1
+  total=0
+  console.log(nowlevel);
+}
+const nextLevel = nowlevel + 1;
+ console.log(nextLevel);
+ let next;
+ if (nextLevel===6 ){
+  next="已達最大等級";
+ }else{
+  next="LV." + nextLevel
+ }
+
+ let needmoney;
+ if(total >= 15000){
+  needmoney = "已達最大等級"
+  }else if(nextLevel === 2){
+  needmoney=5000-total
+ }else if(nextLevel === 3){
+needmoney=8000-total
+ }else if(nextLevel ===4){
+  needmoney=10000-total
+ }else if(nextLevel===5){
+needmoney=15000-total
+ }
+console.log(needmoney);
   // 樣式2: didMount階段只執行一次
   useEffect(() => {
     // 頁面初次渲染之後伺服器要求資料
@@ -75,35 +117,11 @@ const calculateLevel = (total) => {
     <div className={styles.membership}>
         <div className={styles.membershipDetails}>
         
-        {memberLevel.filter(v=>v.User_ID===98).map((v, i) => {
-         
- // 計算下一個等級
- const nextLevel = parseInt(calculateLevel(v.total).split(".")[1]) + 1;
- console.log(nextLevel);
- let next;
- if (nextLevel===6 ){
-  next="已達最大等級";
- }else{
-  next="LV." + nextLevel
- }
-
- let needmoney;
- if(v.total >= 15000){
-  needmoney = "已達最大等級"
-  }else if(nextLevel === 2){
-  needmoney=5000-v.total
- }else if(nextLevel === 3){
-needmoney=8000-v.total
- }else if(nextLevel ===4){
-  needmoney=10000-v.total
- }else if(nextLevel===5){
-needmoney=15000-v.total
- }
- return (
-          <div key={v.User_ID}>
+       {/* 原本迴圈的地方起始點 */}
+          <div >
           <div className={styles.currentLevel}>當前會員等級</div>
           <div className={styles.currentLevelInfo}>當前會員等級:
-           <br/>  <h1> {calculateLevel(v.total)}</h1>
+           <br/>  <h1>LV.{nowlevel}</h1>
           </div>
           <div className={styles.nextLevelInfo}>下個等級:
           
@@ -113,9 +131,6 @@ needmoney=15000-v.total
            <h3>{needmoney}</h3>
           </div>
           </div>
-   );
-  })
-}
    
           <div className={styles.levelBenefits}>各等級所需條件和福利</div>
           <div className={styles.levelCards}>
