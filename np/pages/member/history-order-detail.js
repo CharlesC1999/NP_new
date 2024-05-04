@@ -5,32 +5,35 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import { useRouter } from 'next/router'
-
+import Link from "next/link";
+//抓取登入狀態
+import { useAuth } from "@/contexts/AuthContext";
 const HistoryOrderDetail = () => {
+
+  //抓取登入狀態
+  const { auth, logout } = useAuth();
+  //確認一下有沒有抓到
+  console.log(auth);
   // 物件狀態的初始值，通常需要把每個屬性的初始值寫出
   // !!注意!! 初次render(渲染)會使用初始值
   // !!注意!! 在應用程式執行過程中，務必要保持狀態維持同樣的資料類型
-  const [orderDetail, setOrderDetail] = useState([]
-    // Order_ID: 0,
-    //     Member_ID: 0,
-    //     Order_date: '',
-    //     Status: '',
-    //     Shipping_address: '',
-    //     Order_Item_ID: 0,
-    //     Product_ID: 0,
-    //     Quantity: 0,
-    //     id: 0,
-    //     category_id: 0,
-    //     name: '',
-    //     description: '',
-    //     price: 0,
-    //     stock_quantity: 0,
-    //     F_coupon_id: 0,
-    //     upload_date: '',
-    //     valid: 0
-)
+  const [orderDetail, setOrderDetail] = useState([])
 
-    // 宣告出router物件，在其中可以得到兩個有用值
+  console.log(orderDetail);
+
+  const totaltotal = orderDetail.reduce((total, order) => {
+    return total + (order.price * order.Quantity);
+  }, 0);
+
+  console.log(totaltotal); // 打印所有商品價格的總和
+
+
+
+
+
+
+
+  // 宣告出router物件，在其中可以得到兩個有用值
   // router.query，是一個物件，其中有動態路由的參數值pid
   // router.isReady，是一個布林值，代表本頁面元件已完成水合作用，可以得到pid值
   const router = useRouter()
@@ -57,7 +60,7 @@ const HistoryOrderDetail = () => {
       console.log(e)
     }
   }
-// 樣式2: 頁面初次渲染之後伺服器要求資料
+  // 樣式2: 頁面初次渲染之後伺服器要求資料
   // 需要監聽router.isReady，當它為true時，才能得到pid
   useEffect(() => {
     console.log('isReady', router.isReady, 'query', router.query)
@@ -69,228 +72,240 @@ const HistoryOrderDetail = () => {
   }, [router.isReady])
   // eslint會作多餘的檢查，不需要加router.query在相依陣列中
 
-  
+
   return (
     <>
       <Header />
-      {/*  */}
-      <div className={`${styles3.desktop}  ${styles3.container2}  container `}>
-       
-        {/* 課程欄位 */}
-        <section
-          className={`${styles3.section} ${styles3.mgt} mb-2 fw-bold `}
-          style={{ color: "#50bf8b" }}
-        >
-          購物明細
-        </section>
-        <section className={`${styles3.ProductBorder} ${styles3.section}`}>
-          <div className={`${styles3.topBar} row py-3`}>
-            <div className={`${styles3.fc} col text-center`}>商品明細</div>
-            <div className={`${styles3.fc} col text-center`}>優惠價</div>
-            <div className={`${styles3.fc} col text-center`}>數量</div>
-            <div className={`${styles3.fc} col text-center`}>小計</div>
-           
-          </div>
-          {orderDetail.map((v, i) => {
-            return(
-          <div className="row py-2">
-            <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>{v.price * v.Quantity}</div>
-            
-          </div>
-            )
-       }
-      )}
-        
-         
-          {/* <div className="row py-2">
-            <div className={`${styles3.fb} col text-center pt-2`}>肉桂捲</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$200</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>2</div>
-            <div className={`${styles3.fb} col text-center pt-2`}>NT$400</div>
-            
-          </div> */}
-          
-        </section>
-        {/* 商品欄位 */}
-        
-        {orderDetail.map((v, i) => {
-          //怪怪的，要問老師
-          if(i===0)
-            return(   
-        <section className={`${styles3.section} ${styles3.ProductBorder} mt-4`}>
-          <div className={`${styles3.topBar} row`}>
-            <div
-              className={`${styles3.section} ${styles3.mgt} mb-2 fw-bold pt-2`}
-            >
-              付款方式與運送方式
-            </div>
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} pt-2 col-2`}>配送方式</div>
-            <div className={`${styles3.fb} pt-2 col-2`}>宅配</div>
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} pt-2 col-2`}>付款方式</div>
-            <div className={`${styles3.fb} pt-2 col-2`}>刷卡</div>
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} pt-2 col-2`}>收件者</div>
-            <div className={`${styles3.fb} pt-2 col-2`}>{v.user_name}</div>
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} pt-2 col-2`}>Email</div>
-            <div className={`${styles3.fb} pt-2 col-2`}>{v.email}</div>
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} pt-2 col-2`}>取貨地址</div>
-            <div className="col-4 fb pt-2">台北市中正區重慶南路一段122號</div>
-          </div>
-          
-        </section>
-)
-}
-)}
-        
-        {/* 折價券、付款 */}
-        <div
-          className={`${styles3.pay2} d-flex justify-content-center py-4`}
-          style={{ width: "100%" }}
-        >
-          <a
-            href=""
-            className={`${styles3.keepbuy} ${styles3.a} d-flex justify-content-center align-items-center mt-1`}
-            type="submit"
-            style={{}}
-          >
-            <h3 className="fw-bold pt-1">返回上一頁</h3>
-          </a>
-         
-        </div>
-        {/* </form> */}
-        {/* </div> */}
-      </div>
-      {/* 手機size */}
-      <div className={`${styles3.mobile}  ${styles3.container2} container`}>
-        {/*  */}
 
-       
-        {/* 商品明細欄位 */}
-       
-        <section
-          className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
-          style={{ width: 345, marginTop: 100 }}
-        >
-          <div className={`${styles3.topBar} row`}>
-            <div className={`${styles3.fc} col`}>購物明細</div>
-          </div>
-          {orderDetail.map((v, i) => {
-            return(
-          <div>
-          <div className="row py-2 mt-1">
-            <div className={`${styles3.fc} row ps-4 `}>{v.name} X {v.Quantity}</div>
+      {/* 要抓登入狀態才能看到的區塊 */}
+      {auth.isLoggedIn ? (
+        <div className={styles3.out}>
+          <div className={`${styles3.desktop}  ${styles3.container2}  container `}>
+
+
+            <section
+              className={`${styles3.section} ${styles3.mgt} mb-2 fw-bold `}
+              style={{ color: "#50bf8b" }}
+            >
+              購物明細
+            </section>
+            <section className={`${styles3.ProductBorder} ${styles3.section}`}>
+              <div className={`${styles3.topBar} row py-3`}>
            
-            <div className="row mt-4">
+                <div className={`${styles3.fc} col text-center`}>商品明細</div>
+                <div className={`${styles3.fc} col text-center`}>優惠價</div>
+                <div className={`${styles3.fc} col text-center`}>數量</div>
+                <div className={`${styles3.fc} col text-center`}>小計</div>
+
+              </div>
+              {orderDetail.map((v, i) => {
+
+                return (
+                  <div className="row py-2">
+                   
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.price * v.Quantity}</div>
+
+                  </div>
+                  
+                )
+              }
+              )}
               
-              <div className={`${styles3.fb} col fw-bold`}>{v.price}</div>
-            </div>
-          </div>
-         
-         {/* 手機板折價金額，先給它註解 */}
-          {/* <div
-            className="row py-2 pt-3"
-            style={{ borderTop: "1px solid #78cea6" }}
-          >
-            <div className={`${styles3.fb} col`}>折價券折抵</div>
-            <div
-              className={`${styles3.fb} col text-center text-warning fw-bold`}
-            >
-              0 元
-            </div>
-          </div> */}
-         
-          <div
-            className="row py-2 pt-3"
-            style={{ borderTop: "1px solid #78cea6" }}
-          >
-            <div className={`${styles3.fb} col`}>小計</div>
-            <div
-              className={`${styles3.fb} col text-center text-success fw-bold`}
-            >
-             {v.price * v.Quantity}
-            </div>
-          </div>
-          </div> 
-        )
-}
-)}
-        </section>
 
 
-        {/* 商品欄位手機板 */}
-        {orderDetail.map((v, i) => {
-          //怪怪的，要問老師
-          if(i===0)
-            return(   
-        <section
-          className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
-          style={{ width: 345 }}
-        >
-          <div className={`${styles3.topBar} row`}>
-            <div className={`${styles3.fc} col`}>收件資訊</div>
-          </div>
-          <div className="row py-2">
-            <div className={`${styles3.fb} col mt-1`}>配送方式</div>
-            <div className={`${styles3.fb} col mt-1`}>宅配</div>
-          </div>
-          <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
-            <div className={`${styles3.fb} col mt-1`}>付款方式</div>
-            <div className={`${styles3.fb} col mt-1`}>刷卡</div>
-          </div>
-          <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
-            <div className={`${styles3.fb} col mt-1`}>收件者</div>
-            <div className={`${styles3.fb} col mt-1`}>{v.user_name}</div>
-          </div>
-          <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
-            <div className={`${styles3.fb} col mt-1`}>Email</div>
-            <div className={`${styles3.fb} col mt-1`}>{v.email}</div>
-          </div>
-          <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
-            <div className={`${styles3.fb} col mt-1`}>取貨地址</div>
-            <div className={`${styles3.fb} col mt-1`}>台北市xxxxxxxxx</div>
-          </div>
-         
-        </section>
-)
-}
-)}
-        
-        {/* 折價券、付款 */}
-        <div
-          className={`${styles3.pay2} d-flex justify-content-center py-4`}
-          style={{ width: "100%" }}
-        >
-          <div
-            className={`${styles3.pay2} d-flex justify-content-center py-4`}
-            style={{ width: "100%" }}
-          >
-            <a
-              href=""
-              className={`${styles3.keepbuy} d-flex justify-content-center align-items-center mt-1`}
-              type="submit"
-              style={{}}
+            </section>
+            {/*總價 */}
+            <div className={`${styles3.totalPrice} row`}>
+              <div className={`${styles3.orderEnd} `}>
+                優惠券: 未使用優惠券 
+
+              </div>
+              <div className={`${styles3.orderEnd} `}>
+                總價: {totaltotal} 元
+              </div>
+            </div>
+            {orderDetail.map((v, i) => {
+              //怪怪的，要問老師
+              if (i === 0)
+                return (
+                  <section className={`${styles3.section} ${styles3.ProductBorder} mt-4`}>
+                    <div className={`${styles3.topBar} row`}>
+                      <div
+                        className={`${styles3.section} ${styles3.mgt} mb-2 fw-bold pt-2`}
+                      >
+                        付款方式與運送方式
+                      </div>
+                    </div>
+                    <div className="row py-2">
+                      <div className={`${styles3.fb} pt-2 col-2`}>配送方式</div>
+                      <div className={`${styles3.fb} pt-2 col-2`}>宅配</div>
+                    </div>
+                    <div className="row py-2">
+                      <div className={`${styles3.fb} pt-2 col-2`}>付款方式</div>
+                      <div className={`${styles3.fb} pt-2 col-2`}>刷卡</div>
+                    </div>
+                    <div className="row py-2">
+                      <div className={`${styles3.fb} pt-2 col-2`}>收件者</div>
+                      <div className={`${styles3.fb} pt-2 col-2`}>{v.user_name}</div>
+                    </div>
+                    <div className="row py-2">
+                      <div className={`${styles3.fb} pt-2 col-2`}>Email</div>
+                      <div className={`${styles3.fb} pt-2 col-2`}>{v.email}</div>
+                    </div>
+                    <div className="row py-2">
+                      <div className={`${styles3.fb} pt-2 col-2`}>取貨地址</div>
+                      <div className="col-4 fb pt-2">台北市中正區重慶南路一段122號</div>
+                    </div>
+
+                  </section>
+                )
+            }
+            )}
+
+            {/* 折價券、付款 */}
+            <div
+              className={`${styles3.pay2} d-flex justify-content-center py-4`}
+              style={{ width: "100%" }}
             >
-              <h3 className={`${styles3.h3} fw-bold pt-1`}>返回上頁</h3>
-            </a>
-           
+              <a
+                href=""
+                className={`${styles3.keepbuy} ${styles3.a} d-flex justify-content-center align-items-center mt-1`}
+                type="submit"
+                style={{}}
+              >
+                <h3 className={`${styles3.back} fw-bold pt-1`}><Link href="/member/member-buy" alt="">返回上一頁</Link></h3>
+              </a>
+
+            </div>
+            {/* </form> */}
+            {/* </div> */}
           </div>
-          {/* </form> */}
-          {/* </div> */}
+
+          {/* 手機size */}
+
+          <div className={`${styles3.mobile}  ${styles3.container2} container`}>
+            {/*  */}
+
+
+            {/* 商品明細欄位 */}
+
+            <section
+              className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
+              style={{ width: 345, marginTop: 100 }}
+            >
+              <div className={`${styles3.topBar} row`}>
+                <div className={`${styles3.fc} col`}>購物明細</div>
+              </div>
+              {orderDetail.map((v, i) => {
+                return (
+                  <div>
+                    <div className="row py-2 mt-1">
+                      <div className={`${styles3.fc} row ps-4 `}>{v.name} X {v.Quantity}</div>
+
+                      <div className="row mt-4">
+
+                        <div className={`${styles3.fb} col fw-bold`}>{v.price}</div>
+                      </div>
+                    </div>
+
+                  
+
+                    <div
+                      className="row py-2 pt-3"
+                      style={{ borderTop: "1px solid #78cea6" }}
+                    >
+                      <div className={`${styles3.fb} col`}>小計</div>
+                      <div
+                        className={`${styles3.fb} col text-center text-success fw-bold`}
+                      >
+                        {v.price * v.Quantity}
+                      </div>
+                    </div>
+                  </div>
+
+                )
+              }
+              )}
+              <div className={`${styles3.totalPrice} row`}>
+              <div className={`${styles3.orderEnd} `}>
+                優惠券: 未使用優惠券 
+
+              </div>
+              <div className={`${styles3.orderEnd} `}>
+                總價: {totaltotal} 元
+              </div>
+            </div>
+            </section>
+
+
+            {/* 商品欄位手機板 */}
+            {orderDetail.map((v, i) => {
+              //怪怪的，要問老師
+              if (i === 0)
+                return (
+                  <section
+                    className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
+                    style={{ width: 345 }}
+                  >
+                    <div className={`${styles3.topBar} row`}>
+                      <div className={`${styles3.fc} col`}>收件資訊</div>
+                    </div>
+                    <div className="row py-2">
+                      <div className={`${styles3.fb} col mt-1`}>配送方式</div>
+                      <div className={`${styles3.fb} col mt-1`}>宅配</div>
+                    </div>
+                    <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
+                      <div className={`${styles3.fb} col mt-1`}>付款方式</div>
+                      <div className={`${styles3.fb} col mt-1`}>刷卡</div>
+                    </div>
+                    <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
+                      <div className={`${styles3.fb} col mt-1`}>收件者</div>
+                      <div className={`${styles3.fb} col mt-1`}>{v.user_name}</div>
+                    </div>
+                    <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
+                      <div className={`${styles3.fb} col mt-1`}>Email</div>
+                      <div className={`${styles3.fb} col mt-1`}>{v.email}</div>
+                    </div>
+                    <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
+                      <div className={`${styles3.fb} col mt-1`}>取貨地址</div>
+                      <div className={`${styles3.fb} col mt-1`}>台北市xxxxxxxxx</div>
+                    </div>
+
+                  </section>
+                )
+            }
+            )}
+
+            {/* 折價券、付款 */}
+            <div
+              className={`${styles3.pay2} d-flex justify-content-center py-4`}
+              style={{ width: "100%" }}
+            >
+              <div
+                className={`${styles3.pay2} d-flex justify-content-center py-4`}
+                style={{ width: "100%" }}
+              >
+                <a
+                  href=""
+                  className={`${styles3.keepbuy} d-flex justify-content-center align-items-center mt-1`}
+                  type="submit"
+                  style={{}}
+                >
+                  <h3 className={`${styles3.back} fw-bold pt-1`}><Link href="/member/member-buy" alt="">返回上頁</Link></h3>
+                </a>
+
+              </div>
+              {/* </form> */}
+              {/* </div> */}
+            </div>
+          </div>
         </div>
-      </div>
-      {/*  */}
+      ) : (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)}
+
+
 
       <Footer />
     </>

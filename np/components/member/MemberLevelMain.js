@@ -7,6 +7,8 @@ import styles from "./MemberLevelMain.module.css"
   
  const MemberLevelMain =() => {
   const [memberLevel, setMemberLevel] = useState([])
+  
+
 //計算等級
 const calculateLevel = (total) => {
   if (total >= 1 && total <= 4999) {
@@ -54,8 +56,8 @@ console.log(memberLevel);
 let nowlevel;
 let total;
 //判斷user是誰
-let userid=78;
-
+let userid = parseInt(localStorage.getItem('userid'))
+console.log(userid);
 const userIdExists = memberLevel.some(item => item.User_ID === userid);
 if (userIdExists) {
   const user = memberLevel.find(item => item.User_ID === userid);
