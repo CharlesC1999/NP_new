@@ -3,37 +3,43 @@ const router = express.Router()
 
 // 檢查空物件, 轉換req.params為數字
 import { getIdParam } from '#db-helpers/db-tool.js'
-
-import authenticate from '#middlewares/authenticate.js'
+import authenticateToken from '#middlewares/authenticateToken.js'
 import sequelize from '#configs/db.js'
 const { Favor_product} = sequelize.models
-
+import db from '#configs/mysql.js'    
 
 // 取得會員頁所需食譜資料
 // 獲得某會員id的有加入到我的最愛清單中的食譜id們
 // 此路由只有登入會員能使用
 // 用於列表頁
 // 用於會員中心收藏頁
-router.get('/',  async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
+  const userID = req.user.id
   const pids = await Favor_product.findAll({
     attributes: ['pid'],
     where: {
-      uid: 1
+      uid: req.user.id
     },
     raw: true, //只需要資料
   })
 
+  // 取得渲染收藏頁的商品資料
+  const productDataSql = `SELECT product.*,favor_product.uid
+  FROM product
+  JOIN favor_product ON product.id = favor_product.pid
+  WHERE uid = ${userID}`
+  const [productFavorData] = await db.query(productDataSql)
   // 將結果中的pid取出變為一個純資料的陣列
   const favorProduct = pids.map((v) => v.pid)
   
 
-  res.json({ status: 'success', data: { favorProduct } })
+  res.json({ status: 'success', data: { favorProduct,productFavorData } })
 })
 
 // 會員加入收藏
-router.put('/:id', async (req, res, next) => {
+router.put('/:id',authenticateToken, async (req, res, next) => {
   const pid = getIdParam(req)
-  const uid = 1
+  const uid = req.user.id
 
   const existFav = await Favor_product.findOne({ where: { pid, uid } })
   if (existFav) {
@@ -55,9 +61,9 @@ router.put('/:id', async (req, res, next) => {
   return res.json({ status: 'success', data: null })
 })
 // 會員移除收藏
-router.delete('/:id',  async (req, res, next) => {
+router.delete('/:id',authenticateToken,  async (req, res, next) => {
   const pid = getIdParam(req)
-  const uid = 1
+  const uid = req.user.id
 
   const affectedRows = await Favor_product.destroy({
     where: {

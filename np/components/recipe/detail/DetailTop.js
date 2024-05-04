@@ -8,19 +8,6 @@ import styles from "./DetailTop.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 import FavIconRecipe from "@/components/favor/FavIconRecipe";
 export default function DetailTop({ recipe }) {
-  //收藏與否
-  const [saved, setSaved] = useState(false);
-
-  const notify = () => {
-    if (saved) {
-      setSaved(false);
-      return toast("成功移除收藏");
-    } else {
-      setSaved(true);
-      return toast("成功加入收藏");
-    }
-  };
-
   return (
     <>
       <div className={`row ${styles["top"]}`}>
@@ -59,21 +46,15 @@ export default function DetailTop({ recipe }) {
                 className={`${styles["info-right"]} d-flex justify-content-center justify-content-xxl-start`}
               >
                 <div className={`${styles["small-card"]} ms-xl-auto`}>
-                  <div
+                  {/* <div
                     title="點擊加入收藏"
                     className="h-100"
                     onClick={() => {
                       notify();
                     }}
-                  >
-                    {/* {saved ? <SavedHeart /> : <UnsavedHeart />} */}
-                    {/* <FaHeart
-                      className={`${styles["heart"]} ${
-                        saved ? styles["saved"] : styles["unsaved"]
-                      }`}
-                    /> */}
-                    <FavIconRecipe id={recipe.Recipe_ID} />
-                  </div>
+                  > */}
+                    <FavIconRecipe id={recipe.recipe__i_d} />
+                  {/* </div> */}
                 </div>
                 <div className={styles["small-card"]}>
                   <div>

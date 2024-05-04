@@ -4,20 +4,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./RecipeCardsList.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
+import FavIconRecipe from "@/components/favor/FavIconRecipe";
 
 export default function RecipeCardsList({ recipesData }) {
   //收藏與否的state
-  const [saved, setSaved] = useState(false);
+  // const [saved, setSaved] = useState(false);
 
-  const notify = () => {
-    if (saved) {
-      setSaved(false);
-      return toast("成功移除收藏");
-    } else {
-      setSaved(true);
-      return toast("成功加入收藏");
-    }
-  };
+  // const notify = () => {
+  //   if (saved) {
+  //     setSaved(false);
+  //     return toast("成功移除收藏");
+  //   } else {
+  //     setSaved(true);
+  //     return toast("成功加入收藏");
+  //   }
+  // };
 
   return (
     <>
@@ -46,17 +47,7 @@ export default function RecipeCardsList({ recipesData }) {
                   >
                     {v.title__r_name}
                   </div>
-                  <div>
-                    <FaHeart
-                      onClick={(e) => {
-                        e.preventDefault();
-                        notify();
-                      }}
-                      className={`${styles["heart"]} ${
-                        saved ? styles["saved"] : styles["unsaved"]
-                      }`}
-                    />
-                  </div>
+                        <FavIconRecipe id={v.recipe__i_d} />
                 </div>
                 <div
                   className={`${styles["card-content-middle"]} d-none d-xxl-block col-xxl-9 mb-auto`}
