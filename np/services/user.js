@@ -6,21 +6,28 @@ export const getFavs = async () => {
     // 使用 axiosInstance 發送 GET 請求
     const responseRecipe = await axiosInstance.get("/favor-recipe");
     const responseClass = await axiosInstance.get("/favor-class");
+    const responseProduct = await axiosInstance.get("/favor-product");
     // 從回應中解構出需要的 data 部分，並重新命名
     const { data: dataRecipe } = responseRecipe;
     const { data: dataClass } = responseClass;
+    const { data: dataProduct } = responseProduct;
     // 確認 API 回應的 status 為 "success"
     if (dataRecipe.status !== "success") {
-      throw new Error("API returned an error: " + dataRecipe.message);
+      throw new Error("Recipe API returned an error: " + dataRecipe.message);
     }
     if (dataClass.status !== "success") {
-      throw new Error("API returned an error: " + dataClass.message);
+      throw new Error("Class API returned an error: " + dataClass.message);
+    }
+    if (dataProduct.status !== "success") {
+      throw new Error("Product API returned an error: " + dataRecipe.message);
     }
     return {
       favorRecipe: dataRecipe.data.favorRecipe,
       recipeFavorData: dataRecipe.data.recipeFavorData,
       favorClass: dataClass.data.favorClass,
       classFavorData: dataClass.data.classFavorData,
+      favorProduct: dataProduct.data.favorProduct,
+      productFavorData: dataProduct.data.productFavorData,
     };
   } catch (error) {
     console.error("Error fetching favorites:", error);
@@ -43,4 +50,13 @@ export const addClassFav = async (cid) => {
 //移除課程id在該會員的我的最愛清單中
 export const removeClassFav = async (cid) => {
   return await axiosInstance.delete(`/favor-class/${cid}`);
+};
+
+//新增商品id在該會員的我的最愛清單中
+export const addProductFav = async (pid) => {
+  return await axiosInstance.put(`/favor-product/${pid}`);
+};
+//移除商品id在該會員的我的最愛清單中
+export const removeProductFav = async (pid) => {
+  return await axiosInstance.delete(`/favor-product/${pid}`);
 };
