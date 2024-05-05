@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useLoader } from "@/hooks/use-loader";
 import moment from "moment-timezone";
 import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
+import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
 import Header from "@/components/Header";
 import ClassClassifacion from "@/components/class_file/ClassClassification";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -196,9 +197,10 @@ const ClassList = () => {
   console.log(total, "im here");
   console.log(page, "nowPage");
   return (
-
-    <div style={containerStyle}>
-      <Header />
+    <div style={containerStyle} className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <Header />
+      </div>
       <Breadcrumbs />
       <div style={subContainerStyle}>
         <ClassClassifacion categoryChange={handleCategoryChange} />
