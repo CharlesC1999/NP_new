@@ -6,6 +6,8 @@ import Breadcrumbs from "@/components/Breadcrumbs.jsx";
 // 側邊欄
 import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategories";
 import SideBarRecipe from "@/components/recipe/list/SideBarRecipe";
+// 手機板的分頁
+import PaginationM from "@/components/paginationM";
 // 手機板的篩選、排序
 import TopBarList from "@/components/recipe/list/TopBarList";
 import TopBarGrid from "@/components/recipe/list/TopBarGrid";
@@ -134,10 +136,10 @@ export default function RecipeList() {
               <section
                 className={`d-flex flex-column ${styles["main-content"]}`}
               >
-               < RecipeCardsList  recipesData = { recipesData }/>
+                <RecipeCardsList recipesData={recipesData} />
               </section>
             </div>
-            {/* 分頁用 */}
+            {/* 電腦版分頁用 */}
             <div className="d-none d-xxl-flex gap-3 justify-content-center mt-4 align-items-center">
               <button
                 onClick={() => {
@@ -184,6 +186,10 @@ export default function RecipeList() {
               >
                 <FiChevronsRight />
               </button>
+            </div>
+            {/* 手機板分頁用 */}
+            <div className="d-block d-xxl-none mt-4">
+              <PaginationM total={total} perpage={"6"} recipeSetPage={setPage}/>
             </div>
           </div>
           {/* 食譜卡片 (grid排列) */}

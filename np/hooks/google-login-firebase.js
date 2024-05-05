@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "firebase/app";
-// import { useAuth } from "@/contexts/AuthContext";
+// import getAuth from "@/contexts/AuthContext";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -17,7 +17,7 @@ if (!getApps().length) {
 export const handleGoogleLogin = async () => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  console.log("go");
+  // console.log("go");
 
   // 重新導向
   signInWithRedirect(auth, provider);
@@ -62,6 +62,11 @@ export const showGoogleLogin = (login, callback) => {
           );
           const data = await response.json();
           console.log(data, "here");
+          localStorage.setItem("token", data.data.token);
+          localStorage.setItem("userData", JSON.stringify(data.data.user));
+          console.log(data.data.token);
+          console.log(JSON.stringify(data.data.user));
+          // 將用戶資料儲存為 JSON 字串
           // 處理後端回應
           // Call the callback function with the user data
           callback(data);
