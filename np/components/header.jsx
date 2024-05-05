@@ -188,7 +188,9 @@ const MobileSideBar = ({ onClose }) => {
 };
 
 const HeaderComponent = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false); //搜尋下拉是否開啟
+  const [selectedText, setSelectedText] = useState("所有分類"); //預設搜尋顯示結果文字
+  const [searchInput, setSearchInput] = useState(""); //搜尋欄位預設輸入
   const [isProductOpen, setIsProductOpen] = useState(false);
   const [isRecipeOpen, setIsRecipeOpen] = useState(false);
   const [isClassOpen, setIsClassOpen] = useState(false);
@@ -196,7 +198,6 @@ const HeaderComponent = () => {
   const productDropdownRef = useRef(null); // 產品下拉列表的參考
   const recipeDropdownRef = useRef(null); // 食譜下拉列表的參考
   const calssDropdownRef = useRef(null); // 課程下拉列表的參考
-  const [selectedText, setSelectedText] = useState("所有分類");
   const [showFullScreen, setShowFullScreen] = useState(false); // sidebar
   const [animation, setAnimation] = useState(""); //sidebar slideout
   const router = useRouter();
@@ -244,7 +245,7 @@ const HeaderComponent = () => {
     { id: 6, name: "烘焙/點心", href: "#", className: styles.selectionLink },
   ];
   // -----------------------開關控制區--------------------------------
-  // 開關控制
+  // 搜尋開關控制
   const toggleDropdown = () => setIsSearchOpen(!isSearchOpen);
 
   // 開關控制
@@ -268,7 +269,7 @@ const HeaderComponent = () => {
 
   // -----------------------點擊選項和區域外關閉控制區-----------------
   const handleItemClick = (name) => {
-    setSelectedText(name);
+    setSelectedText(name); //點選項
     setIsSearchOpen(false); // 點選項關閉下拉
   };
 
@@ -285,6 +286,18 @@ const HeaderComponent = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    console.log("搜索:", searchInput, "在:", selectedText);
+    // 執行搜索邏輯
+
+    // 導向到結果頁面或更新組件顯示結果
+  };
 
   const handleProductClick = () => {
     setIsProductOpen(false); // 點選項關閉下拉
@@ -486,11 +499,17 @@ const HeaderComponent = () => {
                 type="text"
                 className={styles.searchBarInput}
                 placeholder="Search for items..."
+                value={searchInput}
+                onChange={handleInputChange}
               />
             </div>
 
             {/* <!-- 搜索按鈕 --> */}
-            <button type="submit" className={styles.searchBarButton}>
+            <button
+              type="submit"
+              className={styles.searchBarButton}
+              onClick={handleSearch}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -543,6 +562,7 @@ const HeaderComponent = () => {
             ) : (
               <a onClick={doLogin} className={styles.pageLink}>
                 {/* <!-- 手機圖示svg --> */}
+                {/* 這應該是搜索 */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30px"
