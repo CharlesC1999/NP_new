@@ -49,6 +49,7 @@
   right: 0;
   @media screen and (max-width: 376px) {
     margin-inline: 0;
+    overflow: auto;
   }
 
   .recipe-card {

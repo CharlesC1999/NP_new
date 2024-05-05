@@ -135,7 +135,7 @@ export default function RecipeDetail() {
           </div>
         </div>
         <div
-          className={`${styles["recommended-recipe"]} d-flex flex-column position-relative overflow-hidden`}
+          className={`${styles["recommended-recipe"]} d-flex flex-column position-relative`}
         >
           <a
             onClick={() => {
@@ -144,7 +144,7 @@ export default function RecipeDetail() {
             href="javascript:void(0)"
             className={`${!sliderMove ? styles["disabled-btn"] : ""} ${
               recommendedRecipesLength <= 4 ? "d-none" : ""
-            }  position-absolute top-0 bottom-0 pe-0 text-dark d-flex justify-content-center align-items-center  ${
+            } d-none d-xxl-flex position-absolute top-0 bottom-0 pe-0 text-dark d-flex justify-content-center align-items-center  ${
               styles["prev-btn"]
             } ${styles["slide-btn"]}`}
           >
@@ -161,7 +161,7 @@ export default function RecipeDetail() {
               lastRecipeOffset == sliderMove ? styles["disabled-btn"] : ""
             } ${
               recommendedRecipesLength <= 4 ? "d-none" : ""
-            } position-absolute top-0 bottom-0 ps-0 d-flex justify-content-center align-items-center text-dark ${
+            } d-none d-xxl-flex position-absolute top-0 bottom-0 ps-0 d-flex justify-content-center align-items-center text-dark ${
               styles["next-btn"]
             } ${styles["slide-btn"]}`}
           >

@@ -125,9 +125,16 @@
           }
         }
         .product-description {
+          @media screen and (max-width: 376px) {
+            width: 101px;
+          }
           .product-name {
             @media screen and (max-width: 376px) {
               font-size: 16px;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              -webkit-line-clamp: 1;
             }
           }
           .portion-and-price {
