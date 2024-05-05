@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 const router = express.Router()
 import sequelize from '##/configs/db.js'
 const { Member } = sequelize.models
+import 'dotenv/config.js'
 
 router.post('/', async (req, res) => {
   const { username, password } = req.body
@@ -16,7 +17,7 @@ router.post('/', async (req, res) => {
     if (user && bcrypt.compareSync(password, user.Password)) {
       const token = jwt.sign(
         { id: user.id, Account: user.Account },
-        'your-secret-key',
+        process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: '1h' }
       )
       res.status(200).json({
