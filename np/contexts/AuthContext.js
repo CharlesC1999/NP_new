@@ -52,11 +52,7 @@ export const AuthProvider = ({ children }) => {
       setFavorClass([])
       setFavorProduct([]);
     }
-  }, [auth]);
-  
-  useEffect(() => {
-    fetchFavorites();
-  },[action])
+  }, [auth,action]);
 
   const router = useRouter()
 
@@ -121,17 +117,11 @@ export const AuthProvider = ({ children }) => {
         logout,
         googleLogin,
         favorRecipe,
-        setFavorRecipe,
         recipeData,
-        setRecipeData,
         favorClass,
-        setFavorClass,
         classData,
-        setClassData,
         favorProduct,
-        setFavorProduct,
         productData,
-        setProductData,
         action,
         setAction
       }}
