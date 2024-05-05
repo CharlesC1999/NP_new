@@ -19,13 +19,48 @@ import { IoMdBusiness } from "react-icons/io";
 
 const MobileSideBar = ({ onClose }) => {
   const router = useRouter();
+  const { auth, logout } = useAuth();
+  const [userData, setUserData] = useState("");
+
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
   const goRecipeList = () => router.push(routes.recipeList);
   const goSpeekerList = () => router.push(routes.speakerList);
   const doLogin = () => router.push(routes.login);
   const doSignUp = () => router.push(routes.signUp);
+  const goDashboard = () => router.push(routes.dashboard);
   const goHome = () => router.push(routes.home);
+
+  useEffect(() => {
+    // 組件渲染後立即執行的effect，檢查LocalStorage中是否有資料
+    const userImage = localStorage.getItem("userData");
+    if (userImage) {
+      // 如果LocalStorage中有資料，則將其轉換為JavaScript物件並存入state中
+      setUserData(JSON.parse(userImage));
+    }
+  }, []);
+
+  const logoutButton = () => {
+    Swal.fire({
+      title: "確定要登出嗎？",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#c14d3c",
+      cancelButtonColor: "#50bf8b",
+      confirmButtonText: "登出",
+      cancelButtonText: "取消",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+        goHome();
+        Swal.fire({
+          title: "已登出",
+          icon: "success",
+          confirmButtonColor: "#50bf8b",
+        });
+      }
+    });
+  };
 
   return (
     <div className={styles.fullMobileScreen} onClick={onClose}>
@@ -36,16 +71,46 @@ const MobileSideBar = ({ onClose }) => {
         <section className={styles.memberContainer}>
           <div className={styles.memberSet}>
             <div className={styles.memberImg}>
-              <img src="" alt="" />
+              {auth.isLoggedIn ? (
+                <img
+                  src={
+                    userData && userData.address
+                      ? userData.address.startsWith("https")
+                        ? userData.address
+                        : `/images/member-image/${userData.address}`
+                      : ""
+                  }
+                  alt="UserImg"
+                />
+              ) : (
+                <img src="" alt="" />
+              )}
             </div>
+            {auth.isLoggedIn ? (
+              <div className={styles.memberName}>{userData.name} 歡迎！</div>
+            ) : (
+              <div></div>
+            )}
             <div className={styles.memberButtonContainer}>
-              <button onClick={doLogin} className={styles.memberButton}>
-                登入
-              </button>
+              {auth.isLoggedIn ? (
+                <button onClick={logoutButton} className={styles.memberButton}>
+                  登出
+                </button>
+              ) : (
+                <button onClick={doLogin} className={styles.memberButton}>
+                  登入
+                </button>
+              )}
               |
-              <button onClick={doSignUp} className={styles.memberButton}>
-                註冊
-              </button>
+              {auth.isLoggedIn ? (
+                <button onClick={goDashboard} className={styles.memberButton}>
+                  會員中心
+                </button>
+              ) : (
+                <button onClick={doSignUp} className={styles.memberButton}>
+                  註冊
+                </button>
+              )}
             </div>
           </div>
         </section>
