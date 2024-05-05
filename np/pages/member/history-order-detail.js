@@ -6,6 +6,7 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 import { useRouter } from 'next/router'
 import Link from "next/link";
+import { TotalProvider } from '@/contexts/total'
 //抓取登入狀態
 import { useAuth } from "@/contexts/AuthContext";
 const HistoryOrderDetail = () => {
@@ -22,14 +23,14 @@ const HistoryOrderDetail = () => {
 
   const couponid = orderDetail.length > 0 ? orderDetail[0].coupon_ID : null;
   console.log(couponid);
-  const couponIdExists = coupons.some(item => item.Coupon_ID === parseInt(couponid));
+  const couponIdExists = coupons.some(item => item.Coupon_ID === couponid);
   console.log(couponIdExists);
   let useCoupon;
   if (couponIdExists) {
-    let coupon = coupons.find(item => item.Coupon_ID === parseInt(couponid));
+    let coupon = coupons.find(item => item.Coupon_ID === couponid);
     let couponName = coupon.C_name;
     let couponDiscount = coupon.Discount_amount;
-
+    console.log(couponDiscount);
     const discountAmount = parseFloat(couponDiscount);
     let displayText;
     // 检查 discountAmount 是否是有效的数字
@@ -39,7 +40,7 @@ const HistoryOrderDetail = () => {
         const discountPercent = discountAmount * 10;
         displayText = `${discountPercent}折`;
       } else {
-        displayText = `$${discountAmount}`;
+        displayText = `折$${discountAmount}`;
       }
     } else {
       // 如果 discountAmount 不是有效的数字，直接使用原始值
@@ -51,12 +52,32 @@ const HistoryOrderDetail = () => {
   }
   console.log(orderDetail);
   console.log(coupons);
-  const totaltotal = orderDetail.reduce((total, order) => {
+  // const totaltotal = orderDetail.reduce((total, order) => {
+  //   return total + (order.price * order.Quantity);
+  // }, 0);
+
+  // console.log(totaltotal); // 打印所有商品價格的總和
+  let totaltotal = orderDetail.reduce((total, order) => {
     return total + (order.price * order.Quantity);
   }, 0);
 
-  console.log(totaltotal); // 打印所有商品價格的總和
+  if (couponIdExists) {
+    // 如果有適用的優惠券，計算折扣後的總價
+    let coupon = coupons.find(item => item.Coupon_ID === couponid);
+    let couponDiscount = parseFloat(coupon.Discount_amount);
 
+    if (!isNaN(couponDiscount)) {
+      if (couponDiscount > 0) {
+        // 現金折扣
+        totaltotal -= couponDiscount;
+      } else {
+        // 折扣率
+        totaltotal *= (1 + couponDiscount);
+      }
+    }
+  }
+
+  console.log(totaltotal);
 
 
 
@@ -129,6 +150,7 @@ const HistoryOrderDetail = () => {
 
   return (
     <>
+     <TotalProvider total={totaltotal}>
       <Header />
 
       {/* 要抓登入狀態才能看到的區塊 */}
@@ -184,7 +206,7 @@ const HistoryOrderDetail = () => {
 
 
               <div className={`${styles3.orderEnd} `}>
-                總價: {totaltotal} 元
+                合計: {totaltotal} 元
               </div>
             </div>
             {orderDetail.map((v, i) => {
@@ -368,6 +390,7 @@ const HistoryOrderDetail = () => {
 
 
       <Footer />
+      </TotalProvider>
     </>
   );
 };
