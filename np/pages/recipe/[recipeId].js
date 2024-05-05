@@ -99,6 +99,13 @@ export default function RecipeDetail() {
     sliderRef.current.style.right = sliderMove + "px";
   }, [sliderMove]);
 
+  // 當URL改變時執行取得對應食譜
+  useEffect(() => {
+    if (router.isReady) {
+      getRecipe(router.query.recipeId);
+    }
+  }, [router.query.recipeId]);
+
   //初次渲染頁面時執行取得對應食譜的function
   useEffect(() => {
     if (router.isReady) {
