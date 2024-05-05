@@ -3,6 +3,7 @@ import axios from "axios"; // 确保已经导入 axios
 import { useRouter } from "next/router"; // 导入 useRouter 以便在需要时进行路由跳转
 import axiosInstance from "@/services/axios-instance";
 import { getFavs } from "@/services/user";
+
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -16,25 +17,39 @@ export const AuthProvider = ({ children }) => {
   const [recipeData, setRecipeData] = useState([]);
   const [favorClass, setFavorClass] = useState([]);
   const [classData, setClassData] = useState([]);
+  const [favorProduct,setFavorProduct] = useState([])
+  const [productData,setProductData] = useState([])
   const fetchFavorites = async () => {
     try {
-      const { favorRecipe, recipeFavorData, favorClass, classFavorData } =
-        await getFavs();
+      const {
+        favorRecipe,
+        recipeFavorData,
+        favorClass,
+        classFavorData,
+        favorProduct,
+        productFavorData,
+      } = await getFavs();
       setFavorRecipe(favorRecipe);
       setRecipeData(recipeFavorData);
       setFavorClass(favorClass);
       setClassData(classFavorData);
+      setFavorProduct(favorProduct);
+      setProductData(productFavorData);
     } catch (error) {
       console.error("Failed to fetch favorites:", error);
     }
   };
-  //TODO希望會員在會員中心增減收藏內容時（陣列內容改變），能同時更新recipeData，不需要手動 refresh
   useEffect(() => {
-    fetchFavorites();
-  }, []);
+    if(auth.isLoggedIn){
+      fetchFavorites();
+    } else {
+      setClassData([]);
+      setFavorProduct([]);
+      setProductData([]);
+    }
+  }, [auth]);
 
-  const router = useRouter();
-
+  const router = useRouter()
   useEffect(() => {
     // 組件掛載後，從localStorage中讀取token並更新狀態
     const token = localStorage.getItem("token");
@@ -53,7 +68,18 @@ export const AuthProvider = ({ children }) => {
     setAuth({ token, isLoggedIn: true, userData });
     localStorage.setItem("token", token);
     localStorage.setItem("userData", JSON.stringify(userData));
-    console.log(token, userData);
+    console.log(token, JSON.stringify(userData));
+    // 將token存儲在localStorage中以維持登入狀態
+    // 用localStorage存儲會有安全性問題，因為localStorage是存儲在瀏覽器中，
+    // 任何人都可以訪問localStorage，所以可以用cookie來存儲token
+  };
+
+  const googleLogin = (token) => {
+    setAuth({ token, isLoggedIn: true });
+    console.log(token);
+    localStorage.setItem("token", token.token);
+    localStorage.setItem("userData", JSON.stringify(token.user));
+    // console.log(token, JSON.stringify(userData));
     // 將token存儲在localStorage中以維持登入狀態
     // 用localStorage存儲會有安全性問題，因為localStorage是存儲在瀏覽器中，
     // 任何人都可以訪問localStorage，所以可以用cookie來存儲token
@@ -80,7 +106,7 @@ export const AuthProvider = ({ children }) => {
         // After successfully logging out on the server
         // localStorage.removeItem("token");
         // setAuth({ token: null, isLoggedIn: false });
-        router.push("/login"); // Redirect to login page or home
+        router.push("/"); // Redirect to login page or home
       } catch (error) {
         console.error("Logout failed:", error);
         // Optionally handle errors, e.g., display an error message
@@ -96,6 +122,7 @@ export const AuthProvider = ({ children }) => {
         auth,
         login,
         logout,
+        googleLogin,
         favorRecipe,
         setFavorRecipe,
         recipeData,
@@ -104,6 +131,10 @@ export const AuthProvider = ({ children }) => {
         setFavorClass,
         classData,
         setClassData,
+        favorProduct,
+        setFavorProduct,
+        productData,
+        setProductData
       }}
     >
       {children}

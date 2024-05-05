@@ -1,11 +1,13 @@
 import { useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./RecommendedRecipe.module.scss";
+import { useRouter } from "next/router";
 
 export default function RecommendedRecipe({
   sliderRef,
   recommendedRecipes = [],
 }) {
+  const router = useRouter();
   return (
     <>
       <div
@@ -21,6 +23,9 @@ export default function RecommendedRecipe({
           return (
             // 食譜卡片
             <div
+              onClick={() => {
+                router.push(`/recipe/${v.recipe__i_d}`);
+              }}
               className={`col-6 col-xxl-3 ${styles["recipe-card"]} d-flex flex-column`}
             >
               <div className={`${styles["card-pic"]} w-100`}>
