@@ -18,9 +18,11 @@ import { GrGroup } from "react-icons/gr";
 import { IoMdBusiness } from "react-icons/io";
 
 const MobileSideBar = ({ onClose }) => {
+  const sidebarRef = useRef(null);
   const router = useRouter();
   const { auth, logout } = useAuth();
   const [userData, setUserData] = useState("");
+  const [isActive, setIsActive] = useState(true); // 控制動畫的狀態
 
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
@@ -39,6 +41,28 @@ const MobileSideBar = ({ onClose }) => {
       setUserData(JSON.parse(userImage));
     }
   }, []);
+
+  // 關閉sidebar
+  const handleClose = () => {
+    if (sidebarRef.current) {
+      // 先添加动画类
+      sidebarRef.current.classList.add(styles.slideOut);
+
+      // 监听动画结束后再执行 onClose，以确保动画流畅
+      const handleAnimationEnd = () => {
+        onClose(); // 动画完成后执行 onClose
+        // 移除监听器，避免重复触发
+        sidebarRef.current.removeEventListener(
+          "animationend",
+          handleAnimationEnd
+        );
+      };
+
+      sidebarRef.current.addEventListener("animationend", handleAnimationEnd);
+    } else {
+      onClose(); // 如果参考不存在或动画未能正确设置，直接关闭
+    }
+  };
 
   const logoutButton = () => {
     Swal.fire({
@@ -63,7 +87,7 @@ const MobileSideBar = ({ onClose }) => {
   };
 
   return (
-    <div className={styles.fullMobileScreen} onClick={onClose}>
+    <div className={styles.fullMobileScreen} onClick={handleClose}>
       <div
         className={styles.sideBarContainer}
         onClick={(e) => e.stopPropagation()}
@@ -174,6 +198,7 @@ const HeaderComponent = () => {
   const calssDropdownRef = useRef(null); // 課程下拉列表的參考
   const [selectedText, setSelectedText] = useState("所有分類");
   const [showFullScreen, setShowFullScreen] = useState(false); // sidebar
+  const [animation, setAnimation] = useState(""); //sidebar slideout
   const router = useRouter();
   const { auth, logout } = useAuth();
 
