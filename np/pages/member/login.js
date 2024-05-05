@@ -41,7 +41,7 @@ const Login = () => {
   // style
 
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -114,7 +114,8 @@ const Login = () => {
   useEffect(() => {
     showGoogleLogin(login, (data) => {
       setUserData(data);
-      login(data);
+      googleLogin(data.data);
+      // login();
       console.log(data);
       if (data.status === "success") {
         Swal.fire({

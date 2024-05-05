@@ -74,7 +74,7 @@ export default function DetailRelatedProducts() {
                 className={`${styles["related-products-middle"]} d-flex flex-column flex-xxl-row justify-content-between`}
               >
                 <div
-                  className={`col-12 col-xxl-7 ${styles["middle-left"]} d-flex align-items-center`}
+                  className={`col-12 col-xxl-8 ${styles["middle-left"]} d-flex align-items-center`}
                 >
                   <CheckBoxCustom />
                   <div className={styles["product-pic"]}>

@@ -99,6 +99,13 @@ export default function RecipeDetail() {
     sliderRef.current.style.right = sliderMove + "px";
   }, [sliderMove]);
 
+  // 當URL改變時執行取得對應食譜
+  useEffect(() => {
+    if (router.isReady) {
+      getRecipe(router.query.recipeId);
+    }
+  }, [router.query.recipeId]);
+
   //初次渲染頁面時執行取得對應食譜的function
   useEffect(() => {
     if (router.isReady) {
@@ -128,7 +135,7 @@ export default function RecipeDetail() {
           </div>
         </div>
         <div
-          className={`${styles["recommended-recipe"]} d-flex flex-column position-relative overflow-hidden`}
+          className={`${styles["recommended-recipe"]} d-flex flex-column position-relative`}
         >
           <a
             onClick={() => {
@@ -137,7 +144,7 @@ export default function RecipeDetail() {
             href="javascript:void(0)"
             className={`${!sliderMove ? styles["disabled-btn"] : ""} ${
               recommendedRecipesLength <= 4 ? "d-none" : ""
-            }  position-absolute top-0 bottom-0 pe-0 text-dark d-flex justify-content-center align-items-center  ${
+            } d-none d-xxl-flex position-absolute top-0 bottom-0 pe-0 text-dark d-flex justify-content-center align-items-center  ${
               styles["prev-btn"]
             } ${styles["slide-btn"]}`}
           >
@@ -154,7 +161,7 @@ export default function RecipeDetail() {
               lastRecipeOffset == sliderMove ? styles["disabled-btn"] : ""
             } ${
               recommendedRecipesLength <= 4 ? "d-none" : ""
-            } position-absolute top-0 bottom-0 ps-0 d-flex justify-content-center align-items-center text-dark ${
+            } d-none d-xxl-flex position-absolute top-0 bottom-0 ps-0 d-flex justify-content-center align-items-center text-dark ${
               styles["next-btn"]
             } ${styles["slide-btn"]}`}
           >

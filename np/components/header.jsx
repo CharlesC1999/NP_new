@@ -21,6 +21,7 @@ const MobileSideBar = ({ onClose }) => {
   const router = useRouter();
   const { auth, logout } = useAuth();
   const [userData, setUserData] = useState("");
+
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
   const goRecipeList = () => router.push(routes.recipeList);
@@ -72,7 +73,13 @@ const MobileSideBar = ({ onClose }) => {
             <div className={styles.memberImg}>
               {auth.isLoggedIn ? (
                 <img
-                  src={`/images/member-image/${userData.address}`}
+                  src={
+                    userData && userData.address
+                      ? userData.address.startsWith("https")
+                        ? userData.address
+                        : `/images/member-image/${userData.address}`
+                      : ""
+                  }
                   alt="UserImg"
                 />
               ) : (
