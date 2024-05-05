@@ -61,47 +61,95 @@ const ShopCart2 = () => {
     setSelectedPayment(event.target.value);
   };
 
-  // 這邊設定localstorage inputName
+  // localstorage  總額呈現，商品總額
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+
+  useEffect(() => {
+    // 从 localStorage 获取名为 'itemsCard666' 的值
+    const storedItems = localStorage.getItem("itemsCard666");
+    if (storedItems) {
+      const items = JSON.parse(storedItems); // 解析字符串为数组对象
+      // 计算所有物品的价格总和和总数量
+      let total = 0;
+      let quantity = 0;
+      items.forEach((item) => {
+        total += item.price * item.qty || 0;
+        quantity += item.qty || 0;
+      });
+      setTotalPrice(total); // 设置总价状态
+      setTotalQuantity(quantity); // 设置总数量状态
+    }
+  }, []);
+
+  // 這邊設定localstorage 收件人名稱
   useEffect(() => {
     const inputNameData = window.localStorage.getItem("inputName1");
     if (inputNameData) {
-      setInputName(JSON.parse(inputNameData));
+      setInputPackage(JSON.parse(inputNameData));
     }
   }, []);
   //setItem
   useEffect(() => {
-    if (inputName) {
-      window.localStorage.setItem("inputName1", JSON.stringify(inputName));
+    if (inputPackageName) {
+      window.localStorage.setItem(
+        "inputName1",
+        JSON.stringify(inputPackageName)
+      );
     }
-  }, [inputName]);
+  }, [inputPackageName]);
 
-  //localstorage  inputEmail 電子信箱
-  useEffect(() => {
-    const inputEmailData = window.localStorage.getItem("inputEmail1");
-    if (inputEmailData) {
-      setInputEmail(JSON.parse(inputEmailData));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (inputEmail) {
-      window.localStorage.setItem("inputEmail1", JSON.stringify(inputEmail));
-    }
-  }, [inputEmail]);
-
-  // localstorage  inputNumber 電話
+  // localstorage  inputNumber 收件人電話
   useEffect(() => {
     const inputNumberData = window.localStorage.getItem("inputNumber1");
-    if (inputEmailData) {
-      setInputEmail(JSON.parse(inputEmailData));
+    if (inputNumberData) {
+      setInputPackageNumber(JSON.parse(inputNumberData));
     }
   }, []);
 
   useEffect(() => {
-    if (inputEmail) {
-      window.localStorage.setItem("inputEmail1", JSON.stringify(inputEmail));
+    if (inputPackageNumber) {
+      window.localStorage.setItem(
+        "inputNumber",
+        JSON.stringify(inputPackageNumber)
+      );
     }
-  }, [inputEmail]);
+  }, [inputPackageNumber]);
+
+  //
+  //localstorage  inputaddress 收件人地址
+  useEffect(() => {
+    const inputAddressData = window.localStorage.getItem("inputAddress1");
+    if (inputAddressData) {
+      setInputAddress(JSON.parse(inputAddressData));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (inputAddress) {
+      window.localStorage.setItem(
+        "inputAddress1",
+        JSON.stringify(inputAddress)
+      );
+    }
+  }, [inputAddress]);
+
+  //localstorage  selectedPayment  付款方式
+  useEffect(() => {
+    const selectPaymentData = window.localStorage.getItem("paymentMethod");
+    if (selectPaymentData) {
+      setSelectedPayment(JSON.parse(selectPaymentData));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedPayment) {
+      window.localStorage.setItem(
+        "paymentMethod",
+        JSON.stringify(selectedPayment)
+      );
+    }
+  }, [selectedPayment]);
 
   return (
     <>
@@ -126,10 +174,11 @@ const ShopCart2 = () => {
           {/* 價格提示欄位 */}
           <div className={styles2.prompt}>
             <h4 className={`${styles2.h4} `}>
-              訂單總計 : <span style={{ color: "#f0b559" }}>NT$2000 </span>
+              訂單總計 :{" "}
+              <span style={{ color: "#f0b559" }}>NT${totalPrice}</span>
             </h4>
             <h5 className={styles2.h5}>
-              購物車:(2件)
+              購物車:({totalQuantity}件)
               <img
                 src="/images/arrow-down.png"
                 alt=""
@@ -520,23 +569,25 @@ const ShopCart2 = () => {
               style={{ width: "100%" }}
             >
               <a
-                href=""
+                href="http://localhost:3000/cart"
                 className={`${styles2.keepbuy} d-flex justify-content-center align-items-center mt-1 fs-3`}
                 type="submit"
               >
                 <h3 className={`${styles2.h3} fw-bold pt-1`}>繼續購物</h3>
               </a>
-              <button
-                className={` ${styles2.butt1} ms-4 mt-1`}
-                type="submit"
+              <a
+                href="http://localhost:3000/cart/payment-info"
+                className={` ${styles2.butt1} ms-4 mt-1 d-flex justify-content-center align-items-center`}
+                // type="submit"
                 style={{
                   backgroundColor: "#78cea6",
                   color: "#ffffff",
                   border: "1px solid #78cea6",
+                  textDecoration: "none",
                 }}
               >
                 <h3 className={`${styles2.h3} fw-bold pt-1`}>前往結帳</h3>
-              </button>
+              </a>
             </div>
           </article>
         </form>

@@ -252,7 +252,7 @@ const ShopCart1 = () => {
           >
             <p className={`${shopStyles.fs} `}>訂單合計:</p>
             {discountAmount ? (
-              <h5> {totalPrice - discountAmount}元 </h5>
+              <h5> ${totalPrice - discountAmount}元 </h5>
             ) : (
               <h5> {totalPrice}元</h5>
             )}
