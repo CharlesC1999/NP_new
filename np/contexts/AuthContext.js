@@ -18,7 +18,9 @@ export const AuthProvider = ({ children }) => {
   const [favorClass, setFavorClass] = useState([]);
   const [classData, setClassData] = useState([]);
   const [favorProduct,setFavorProduct] = useState([])
-  const [productData,setProductData] = useState([])
+  const [productData, setProductData] = useState([])
+  // 用來抓取愛心按鈕的狀態
+  const [action, setAction] = useState(null);
   const fetchFavorites = async () => {
     try {
       const {
@@ -28,7 +30,7 @@ export const AuthProvider = ({ children }) => {
         classFavorData,
         favorProduct,
         productFavorData,
-      } = await getFavs();
+      } = await getFavs();  
       setFavorRecipe(favorRecipe);
       setRecipeData(recipeFavorData);
       setFavorClass(favorClass);
@@ -43,25 +45,20 @@ export const AuthProvider = ({ children }) => {
     if(auth.isLoggedIn){
       fetchFavorites();
     } else {
-      setClassData([]);
-      setFavorProduct([]);
       setProductData([]);
+      setClassData([]);
+      setRecipeData([])
+      setFavorRecipe([]);
+      setFavorClass([])
+      setFavorProduct([]);
     }
   }, [auth]);
+  
+  useEffect(() => {
+    fetchFavorites();
+  },[action])
 
   const router = useRouter()
-  useEffect(() => {
-    // 組件掛載後，從localStorage中讀取token並更新狀態
-    const token = localStorage.getItem("token");
-    if (token) {
-      setAuth({
-        token: token,
-        // login讀取將token讀進來
-        isLoggedIn: true,
-        // 判定為登入狀態，頁面轉換時不會丟失token
-      });
-    }
-  }, []);
 
   // 登入
   const login = (token, userData = {}) => {
@@ -122,7 +119,9 @@ export const AuthProvider = ({ children }) => {
         favorProduct,
         setFavorProduct,
         productData,
-        setProductData
+        setProductData,
+        action,
+        setAction
       }}
     >
       {children}

@@ -15,7 +15,7 @@ const Heart = ({ size = 30, color = "red" }) => (
 
 export default function FavIconRecipe({ id }) {
   // 由context取得auth-判斷是否能執行add或remove用，favorites決定愛心圖案用
-  const { favorRecipe, setFavorRecipe, recipeData, setRecipeData,auth } = useAuth();
+  const { favorRecipe, setFavorRecipe, recipeData, setRecipeData,auth,setAction } = useAuth();
 
   // 讓會員收藏頁取消愛心時能即時移除卡片，更動愛心時也要即時更動 recipeData 的內容
   const updateRecipeData = (newFavorRecipe) => {
@@ -73,8 +73,9 @@ export default function FavIconRecipe({ id }) {
             if (!auth.isLoggedIn) {
               return toast.error('會員才能使用!')
             }
-
+            
             handleRemoveFav(id);
+            setAction(Date.now())
           }}
         >
           <Heart />
@@ -89,6 +90,7 @@ export default function FavIconRecipe({ id }) {
             }
 
             handleAddFav(id);
+            setAction(Date.now())
           }}
         >
           <Heart color="white" />

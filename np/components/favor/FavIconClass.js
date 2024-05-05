@@ -17,40 +17,40 @@ const Heart = ({ size = 30, color = "red" }) => (
 // 接收 ClassCardWeb 卡片中傳來的課程 id 值
 export default function FavIconClass({ id }) {
   // 由context取得auth-判斷是否能執行add或remove用
-  const { favorClass, setFavorClass, classData, setClassData,auth } = useAuth();
-
+  const { favorClass, setFavorClass, classData, setClassData,auth,setAction } = useAuth();
+  console.log(favorClass)
   // 讓會員收藏頁取消愛心時能即時移除卡片，更動愛心時也要即時更動 ClassData 的內容
-  const updateClassData = (newFavorClass) => {
-    // 過濾 ClassData，只保留 newFavorClass 中的 ID 對應的食譜
-    // filter 過濾時不能用 class ，是保留字，改成用 v
-    const filteredClassData = classData.filter((v) =>
-      newFavorClass.includes(v.class__i_d)
-    );
-    setClassData(filteredClassData);
-  };
+  // const updateClassData = (newFavorClass) => {
+  //   // 過濾 ClassData，只保留 newFavorClass 中的 ID 對應的食譜
+  //   // filter 過濾時不能用 class ，是保留字，改成用 v
+  //   const filteredClassData = classData.filter((v) =>
+  //     newFavorClass.includes(v.class__i_d)
+  //   );
+  //   setClassData(filteredClassData);
+  // };
 
-  const handleTriggerFav = (cid) => {
-    let newFavorClass;
-    if (favorClass.includes(cid)) {
-      // 移除 cid
-      newFavorClass = favorClass.filter((v) => v !== cid);
-    } else {
-      // 添加 cid
-      newFavorClass = [...favorClass, cid];
-    }
+  // const handleTriggerFav = (cid) => {
+  //   let newFavorClass;
+  //   if (favorClass.includes(cid)) {
+  //     // 移除 cid
+  //     newFavorClass = favorClass.filter((v) => v !== cid);
+  //   } else {
+  //     // 添加 cid
+  //     newFavorClass = [...favorClass, cid];
+  //   }
 
-    // 更新喜好食譜 ID 陣列
-    setFavorClass(newFavorClass);
-    // 更新食譜資料
-    updateClassData(newFavorClass);
-  };
+  //   // 更新喜好食譜 ID 陣列
+  //   setFavorClass(newFavorClass);
+  //   // 更新食譜資料
+  //   updateClassData(newFavorClass);
+  // };
 
   const handleAddFav = async (cid) => {
     const res = await addClassFav(cid);
 
     if (res.data.status === "success") {
       // 伺服器成功後，更新context中favorites的狀態，頁面上的圖示才會對應更動
-      handleTriggerFav(cid);
+      // handleTriggerFav(cid);
       toast.success(`已將課程 id=${cid} 加入收藏!`);
     }
   };
@@ -60,7 +60,7 @@ export default function FavIconClass({ id }) {
 
     if (res.data.status === "success") {
       // 伺服器成功後，更新context中favorites的狀態，頁面上的圖示才會對應更動
-      handleTriggerFav(cid);
+      // handleTriggerFav(cid);
       toast.success(`已將課程 id=${cid} 移除收藏!`);
     }
   };
@@ -81,7 +81,8 @@ export default function FavIconClass({ id }) {
             if (!auth.isLoggedIn) {
               return toast.error('會員才能使用!')
               }
-              handleRemoveFav(id);
+            handleRemoveFav(id);
+            setAction(Date.now())
             }}
           >
             <svg
@@ -105,6 +106,7 @@ export default function FavIconClass({ id }) {
                 return toast.error('會員才能使用!')
               }
               handleAddFav(id);
+              setAction(Date.now())
             }}
             className={styles.linkBtn}
           >
@@ -131,6 +133,7 @@ export default function FavIconClass({ id }) {
               }
 
               handleRemoveFav(id);
+              setAction(Date.now())
             }}
           >
             <Heart />
@@ -145,6 +148,7 @@ export default function FavIconClass({ id }) {
               }
 
               handleAddFav(id);
+              setAction(Date.now())
             }}
           >
             <Heart color="white" />
