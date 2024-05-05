@@ -4,6 +4,7 @@ import redisClient from '../redisClient.js'
 const authenticateToken = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader?.split(' ')[1];
+  // console.log(token)
   if (!token) {
     return res.json({
       status: 'error',
@@ -12,7 +13,7 @@ const authenticateToken = async (req, res, next) => {
   }
   try {
     const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    console.log(user.id)
+    // console.log(user.id)
     // 附加到 req 上讓後續路由可以使用
     req.user = user;
     next();
