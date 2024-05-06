@@ -48,7 +48,7 @@ const MemberPageMain = () => {
           {/* 資料顯示區 */}
           <div className="mt-5 d-flex ">
             <div className={styles.form1}>
-              <div className={`${styles.box} row mb-3 align-items-start`}>
+              <div className={`${styles.box} row mb-3 gap-3`}>
                 <label
                   htmlFor="name"
                   className={`col-form-label text-end col-3 ${styles.lb}`}
@@ -64,7 +64,7 @@ const MemberPageMain = () => {
                   />
                 </div>
               </div>
-              <div className={`${styles.box} row mb-3 align-items-start`}>
+              <div className={`${styles.box} row mb-3  gap-3`}>
                 <label
                   htmlFor="email"
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
@@ -80,7 +80,7 @@ const MemberPageMain = () => {
                   />
                 </div>
               </div>
-              <div className={`${styles.box} row mb-3 align-items-start`}>
+              <div className={`${styles.box} row mb-3 gap-3`}>
                 <label
                   htmlFor="phone"
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
@@ -96,7 +96,7 @@ const MemberPageMain = () => {
                   />
                 </div>
               </div>
-              <div className={`${styles.box} row mb-3 align-items-start`}>
+              <div className={`${styles.box} row mb-3 gap-3`}>
                 <label
                   htmlFor="address"
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
@@ -112,7 +112,7 @@ const MemberPageMain = () => {
                   />
                 </div>
               </div>
-              <div className={`${styles.box} row mb-3 align-items-start`}>
+              <div className={`${styles.box} row mb-3 gap-3`}>
                 <label
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
                 >
@@ -169,7 +169,7 @@ const MemberPageMain = () => {
                   </div>
                 </div>
               </div>
-              <div className={`${styles.box} row mb-3 align-items-start`}>
+              <div className={`${styles.box} row mb-3 gap-3`}>
                 <label
                   htmlFor="birthday"
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
@@ -177,23 +177,24 @@ const MemberPageMain = () => {
                   生日 :
                 </label>
                 <div className="col">
+                  <input type="date" className="form-control" />
+                </div>
+                {/* // ! 生日這邊input的type改成date */}
+                {/* <div className="col">
                   <select className="form-select" id="year">
                     <option selected>年份</option>
-                    {/* 这里可以根据需求填充选项 */}
                   </select>
                 </div>
                 <div className="col">
                   <select className="form-select" id="month">
                     <option selected>月份</option>
-                    {/* 这里可以根据需求填充选项 */}
                   </select>
                 </div>
                 <div className="col">
                   <select className="form-select" id="day">
                     <option selected>日期</option>
-                    {/* 这里可以根据需求填充选项 */}
                   </select>
-                </div>
+                </div> */}
               </div>
               {/* // !修改密碼放在另外一頁 */}
               {/* <div className={`${styles.box} row mb-3 align-items-start`}>
@@ -216,7 +217,7 @@ const MemberPageMain = () => {
             </div>
             <div className={styles.mainRight}>
               <div className={styles.userImageBig}>
-                {/* <img src="" alt="" /> */}
+                {/* <img src="" alt="" className=""/> */}
               </div>
               <div className={`${styles.btnCenter} row mb-3 align-items-start`}>
                 <label htmlFor="fileUpload" className={`btn ${styles.btn2} `}>
