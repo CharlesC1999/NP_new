@@ -79,7 +79,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
         //到時候把57改成當前會員ID(很像不能這樣寫QQ)
         //if(v.member_id===57)
         return (
-          <div className={`${styles.buyCard} my-0 my-sm-4`} key={v.order_id}>
+          <div className={`${styles.buyCard} my-0 my-sm-4`} key={v.Order_ID}>
             <div
               className={`${styles.buyCardContent} d-flex flex-row justify-content-between align-items-center`}
             >

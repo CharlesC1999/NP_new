@@ -68,14 +68,19 @@ router.get('/', async function (req, res) {
   // join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
   // join product on order_commodity_item.Product_ID = product.id
   // group by user_id;`
-  const sqlLevel = `SELECT User_ID, sum(price* Quantity) as total
-  FROM member
-  join orders on member.id = orders.User_ID
-  join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  join product on order_commodity_item.Product_ID = product.id
-  where orders.Status = '已完成'
-  group by user_id;`
-
+  // const sqlLevel = `SELECT User_ID, sum(price* Quantity) as total
+  // FROM member
+  // join orders on member.id = orders.User_ID
+  // join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
+  // join product on order_commodity_item.Product_ID = product.id
+  // where orders.Status = '已完成'
+  // group by user_id;`
+  // const sqlLevel = `SELECT total_price, user_id, status
+  // FROM orders ;`
+  const sqlLevel = `SELECT user_ID, status, SUM(total_price) AS total_price_sum
+  FROM orders
+  WHERE status = '已完成'
+  GROUP BY user_ID, status; ;`
   // 最終組合的sql語法(計數用)
   const sqlCount = `SELECT COUNT(*) AS count FROM member_level ${where}`
 

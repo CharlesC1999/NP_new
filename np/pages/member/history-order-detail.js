@@ -64,7 +64,7 @@ const HistoryOrderDetail = () => {
   //   return total + (order.price * order.Quantity);
   // }, 0);
 
-  //拿出總價
+  //拿出總價 //取出狀態裡的某個東西
   let totalPrice;
   orderDetail.forEach((v, i) => {
     totalPrice = v.total_price
@@ -189,7 +189,7 @@ const HistoryOrderDetail = () => {
               {orderDetail.filter(v => v.itemType === 1).map((v, i) => {
 
                 return (
-                  <div className="row py-2">
+                  <div className="row py-2" key={v.Order_Item_ID}>
 
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
@@ -226,7 +226,7 @@ const HistoryOrderDetail = () => {
 
                 return (
 
-                  <div className="row py-2">
+                  <div className="row py-2" key={v.Order_Item_ID}>
 
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.Class_name}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.C_price}</div>
@@ -254,9 +254,9 @@ const HistoryOrderDetail = () => {
 
               </div>
               <div className={`${styles3.orderEnd} `}>
-                  運費: 0元
+                運費: 0元
 
-                </div>
+              </div>
 
               <div className={`${styles3.orderEnd} `}>
                 合計: {totalPrice} 元
@@ -266,7 +266,7 @@ const HistoryOrderDetail = () => {
               //怪怪的，要問老師
               if (i === 0)
                 return (
-                  <section className={`${styles3.section} ${styles3.ProductBorder} mt-4`}>
+                  <section className={`${styles3.section} ${styles3.ProductBorder} mt-4`} key={i}>
                     <div className={`${styles3.topBar} row`}>
                       <div
                         className={`${styles3.section} ${styles3.mgt} mb-2 fw-bold pt-2`}
@@ -332,11 +332,12 @@ const HistoryOrderDetail = () => {
               style={{ width: 345, marginTop: 100 }}
             >
               <div className={`${styles3.topBar} row`}>
-                <div className={`${styles3.fc} col`}>購買明細</div>
+                <div className={`${styles3.fc} col`}>商品購買明細</div>
               </div>
-              {orderDetail.map((v, i) => {
+              {orderDetail.filter(v => v.itemType === 1).map((v, i) => {
+
                 return (
-                  <div>
+                  <div key={v.Order_Item_ID}>
                     <div className="row py-2 mt-1">
                       <div className={`${styles3.fc} row ps-4 `}>{v.name} X {v.Quantity}</div>
 
@@ -352,11 +353,52 @@ const HistoryOrderDetail = () => {
                       className="row py-2 pt-3"
                       style={{ borderTop: "1px solid #78cea6" }}
                     >
-                      <div className={`${styles3.fb} col`}>小計</div>
+                      <div className={`${styles3.fb} col`}>小計 </div>
                       <div
                         className={`${styles3.fb} col text-center text-success fw-bold`}
                       >
                         {v.price * v.Quantity}
+                      </div>
+                    </div>
+                  </div>
+
+                )
+              }
+              )}
+
+            </section>
+
+            <section
+              className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
+              style={{ width: 345, marginTop: 100 }}
+            >
+              <div className={`${styles3.topBar} row`}>
+                <div className={`${styles3.fc} col`}>課程購買明細</div>
+              </div>
+              {orderDetail.filter(v => v.itemType === 2).map((v, i) => {
+
+                return (
+                  <div key={v.Order_Item_ID}>
+                    <div className="row py-2 mt-1">
+                      <div className={`${styles3.fc} row ps-4 `}>{v.Class_name} X {v.Quantity}</div>
+
+                      <div className="row mt-4">
+
+                        <div className={`${styles3.fb} col fw-bold`}>{v.C_price}</div>
+                      </div>
+                    </div>
+
+
+
+                    <div
+                      className="row py-2 pt-3"
+                      style={{ borderTop: "1px solid #78cea6" }}
+                    >
+                      <div className={`${styles3.fb} col`}>小計 </div>
+                      <div
+                        className={`${styles3.fb} col text-center text-success fw-bold`}
+                      >
+                        {v.C_price * v.Quantity}
                       </div>
                     </div>
                   </div>
@@ -379,13 +421,13 @@ const HistoryOrderDetail = () => {
               </div>
             </section>
 
-
             {/* 商品欄位手機板 */}
             {orderDetail.map((v, i) => {
               //怪怪的，要問老師
               if (i === 0)
                 return (
                   <section
+                    key={v.i}
                     className={`${styles3.ProductBorder} ${styles3.section} mt-5`}
                     style={{ width: 345 }}
                   >

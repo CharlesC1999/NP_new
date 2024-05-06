@@ -53,17 +53,41 @@ const calculateLevel = (total) => {
 console.log(memberLevel);
 // const userIdExists = memberLevel.some(item => item.User_ID === 8);
 // console.log(userIdExists);
-let nowlevel;
-let total;
+// let nowlevel;
+// let total;
 //判斷user是誰
 let userid = parseInt(localStorage.getItem('userid'))
 console.log(userid);
-const userIdExists = memberLevel.some(item => item.User_ID === userid);
+// const userIdExists = memberLevel.some(item => item.User_ID === userid);
+// if (userIdExists) {
+//   const user = memberLevel.find(item => item.User_ID === userid);
+//    total = user.total;
+//   console.log(total);
+//   nowlevel=parseInt(calculateLevel(total).split(".")[1])
+// } else {
+//   nowlevel = 1
+//   total=0
+//   console.log(nowlevel);
+// }
+// const nextLevel = nowlevel + 1;
+//  console.log(nextLevel);
+//  let next;
+//  if (nextLevel===6 ){
+//   next="已達最大等級";
+//  }else{
+//   next="LV." + nextLevel
+//  }
+let nowlevel;
+let total;
+const userIdExists = memberLevel.some(item => item.user_ID === userid);
+console.log(userIdExists);
 if (userIdExists) {
-  const user = memberLevel.find(item => item.User_ID === userid);
-   total = user.total;
+  const user = memberLevel.find(item => item.user_ID === userid);
+  console.log(user);
+   total = user.total_price_sum;
   console.log(total);
   nowlevel=parseInt(calculateLevel(total).split(".")[1])
+  console.log(nowlevel);
 } else {
   nowlevel = 1
   total=0
@@ -77,6 +101,8 @@ const nextLevel = nowlevel + 1;
  }else{
   next="LV." + nextLevel
  }
+console.log(next);
+
 
  let needmoney;
  if(total >= 15000){
@@ -124,14 +150,20 @@ console.log(needmoney);
           <div >
           <div className={styles.currentLevel}>當前會員等級</div>
           <div className={styles.currentLevelInfo}>當前會員等級:
-           <br/>  <h1>LV.{nowlevel}</h1>
+           <br/>  <h1>
+            LV.{nowlevel}
+            </h1>
           </div>
           <div className={styles.nextLevelInfo}>下個等級:
           
-            <h1>{next}</h1>
+            <h1>
+              {next}
+              </h1>
           </div>
           <div className={styles.upgradeAmountInfo}>升級所需金額:
-           <h3>{needmoney}</h3>
+           <h3>
+            {needmoney}
+            </h3>
           </div>
           </div>
    
