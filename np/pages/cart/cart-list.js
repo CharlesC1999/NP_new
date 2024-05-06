@@ -56,8 +56,8 @@ const ShopCart2 = () => {
   const [inputAddress, setInputAddress] = useState("");
 
   // 信用卡勾選
-  const payOptions = ["line pay", "credit card"];
-  const [selectedPayment, setSelectedPayment] = useState("linePay");
+  const payOptions = ["Line Pay", "credit card"];
+  const [selectedPayment, setSelectedPayment] = useState("Line Pay");
 
   const handlePaymentChange = (event) => {
     setSelectedPayment(event.target.value);

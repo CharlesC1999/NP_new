@@ -13,6 +13,7 @@ import toast, { Toast, Toaster } from "react-hot-toast";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { useCart } from "@/hooks/use-cart";
+import axios from "axios";
 
 const ShopCart3 = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +52,8 @@ const ShopCart3 = () => {
     };
   }, []);
 
+  // -----------------------------
+
   // 去抓存取在localStorage的資料
   // 抓商品資料
   const [items, setItems] = useState([]);
@@ -66,13 +69,13 @@ const ShopCart3 = () => {
   // 去抓存取在localStorage的資料
   // 抓課程資料
 
-  const [items2, setItems2] = useState([]);
+  const [classItems, setClassItems] = useState([]);
 
   useEffect(() => {
     // 从 localStorage 获取名为 'itemsCard666' 的值
     const storedItems = localStorage.getItem("itemsProduct");
     if (storedItems) {
-      setItems2(JSON.parse(storedItems)); // 解析字符串并设置状态
+      setClassItems(JSON.parse(storedItems)); // 解析字符串并设置状态
     }
   }, []);
 
@@ -88,9 +91,20 @@ const ShopCart3 = () => {
     }
   }, []);
 
-  // 去抓存取在localStorage的資料
+  // 去抓存全域鉤子的資料
   // 設定總額
   const { totalItems, totalPrice } = useCart();
+
+  // 去抓localStorage付款方式的資料
+  const [payMethod, setPayMethod] = useState("");
+
+  useEffect(() => {
+    const storedPayMethod = localStorage.getItem("paymentMethod");
+    if (storedPayMethod) {
+      const cleanPayMethod = storedPayMethod.replace(/^"|"$/g, "");
+      setPayMethod(cleanPayMethod);
+    }
+  }, []);
 
   // 去抓存取在localStorage的資料
   // 抓取收件者姓名
@@ -135,13 +149,6 @@ const ShopCart3 = () => {
   // 點擊後彈出line支付 視窗、他點擊後會彈出視窗
   const MySwal = withReactContent(Swal);
 
-  const notify = (productName) => {
-    MySwal.fire({
-      title: "成功加入",
-      text: productName + "已成功加入購物車!",
-      icon: "success",
-    });
-  };
   const handlePaymentConfirmation = () => {
     MySwal.fire({
       // title: "",
@@ -151,25 +158,44 @@ const ShopCart3 = () => {
       confirmButtonText: "是",
       cancelButtonText: "否",
       reverseButtons: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("已確認", "您選擇了使用 Line Pay 付款。", "success");
-        // 這裡新增使用 Line Pay 付款的代碼
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire("已取消", "您取消了支付操作。", "error");
-        // 這裡新增取消付款的處理程式碼
-      }
     });
   };
+
+  // ---------------
 
   // 處理表單提交事件
   const handleSubmit = async (event) => {
     // 阻擋表單預設行為
     event.preventDefault();
     const formData = {
-      // name: name,
-      // email: email,
-      // 其他数据
+      // 商品
+      items: items.map((item) => ({
+        name: item.name,
+        quantity: item.qty,
+        pricePerItem: item.price,
+        totalPrice: item.price * item.qty,
+      })),
+      // 課程
+      classItems: classItems.map((item) => ({
+        name: item.name,
+        quantity: item.qty,
+        pricePerItem: item.price,
+        totalPrice: item.price * item.qty,
+      })),
+      // 合計
+      totalPrice: totalPrice,
+      // 優惠券
+      discountPrice: coupon.disPrice || 0,
+      // 最終價格
+      finalPrice: totalPrice - coupon.disPrice || 0,
+      // 收件人
+      receiverName: receiverName,
+      // 手機
+      phoneNumber: phoneNumber,
+      // 地址
+      receiverAddress: receiverAddress,
+      // 付款方式
+      paymentMethod: payMethod,
     };
 
     // 发送数据到服务器
@@ -221,10 +247,10 @@ const ShopCart3 = () => {
           <section className={`${styles3.ProductBorder} ${styles3.section}`}>
             <div className={`${styles3.topBar} row py-3`}>
               <div className={`${styles3.fc} col text-center`}>商品明細</div>
-              <div className={`${styles3.fc} col text-center`}>優惠價</div>
+              <div className={`${styles3.fc} col text-center`}>單價</div>
               <div className={`${styles3.fc} col text-center`}>數量</div>
               <div className={`${styles3.fc} col text-center`}>小計</div>
-              <div className={`${styles3.fc} col text-center`}>庫存</div>
+              {/* <div className={`${styles3.fc} col text-center`}>庫存</div> */}
             </div>
 
             {items.map((item, index) => (
@@ -245,16 +271,16 @@ const ShopCart3 = () => {
                 <div
                   className={`${styles3.fb} col d-flex align-items-center justify-content-center`}
                 >
-                  NT${item.price}
+                  NT${item.price * item.qty}
                 </div>
-                <div
+                {/* <div
                   className={`${styles3.fb} col d-flex align-items-center justify-content-center`}
                 >
                   NT${item.price * item.qty}
-                </div>
+                </div> */}
               </div>
             ))}
-            {items2.map((item, index) => (
+            {classItems.map((item, index) => (
               <div key={index} className="row py-2">
                 <div className={`${styles3.fb} col text-center pt-2`}>
                   {item.name}
@@ -274,34 +300,53 @@ const ShopCart3 = () => {
                 >
                   NT${item.price * item.qty}
                 </div>
-                <div
+                {/* <div
                   className={`${styles3.fb} col d-flex align-items-center justify-content-center`}
                 >
                   有
-                </div>
+                </div> */}
               </div>
             ))}
             <div
               className="row py-2 pt-3"
-              style={{ borderTop: "2px solid #50bf8b" }}
+              style={{ borderTop: "1px solid #50bf8b" }}
             >
-              <div className={`${styles3.fc} col text-center`}>優惠券折抵</div>
+              <div className={`${styles3.fc} col text-center`}>合計</div>
               <div className={`${styles3.fc} col text-center`}></div>
               <div className={`${styles3.fc} col text-center`}></div>
-              <div className={`${styles3.fc} col text-center`}>-</div>
               <div className={`${styles3.fc} col text-center`}>
+                NT$ {totalPrice}
+              </div>
+              {/* <div className={`${styles3.fc} col text-center`}>
+                NT$ {totalPrice}
+              </div> */}
+            </div>
+            <div className="row py-2 pt-3 pb-3">
+              <div className={`${styles3.fc} col text-center`}>優惠券折抵</div>
+              {/* <div className={`${styles3.fc} col text-center`}></div> */}
+              <div className={`${styles3.fc} col text-center`}></div>
+              <div
+                className={`${styles3.fc} col text-center `}
+                style={{ fontSize: "25PX" }}
+              >
+                -
+              </div>
+              <div
+                className={`${styles3.fc} col d-flex align-items-center justify-content-center`}
+                // style={{ paddingRight: "40PX" }}
+              >
                 NT${coupon.disPrice}
               </div>
             </div>
 
             <div
               className="row py-2 pt-3"
-              // style={{ borderTop: "1px solid #50bf8b" }}
+              style={{ borderTop: "1px solid #50bf8b" }}
             >
               <div className={`${styles3.fc} col text-center`}>訂單總額</div>
               <div className={`${styles3.fc} col text-center`}></div>
               <div className={`${styles3.fc} col text-center`}></div>
-              <div className={`${styles3.fc} col text-center`}></div>
+              {/* <div className={`${styles3.fc} col text-center`}></div> */}
               <div className={`${styles3.fc} col text-center`}>
                 NT$ {totalPrice - coupon.disPrice}
               </div>
@@ -325,7 +370,7 @@ const ShopCart3 = () => {
             </div>
             <div className="row py-2">
               <div className={`${styles3.fb} pt-2 col-2`}>付款方式</div>
-              <div className={`${styles3.fb} pt-2 col-2`}>LinePay</div>
+              <div className={`${styles3.fb} pt-2 col-2`}>{payMethod}</div>
             </div>
             <div className="row py-2">
               <div className={`${styles3.fb} pt-2 col-2`}>收件者</div>
@@ -355,7 +400,7 @@ const ShopCart3 = () => {
             <a
               href="http://localhost:3000/cart/cart-list"
               className={`${styles3.keepbuy} ${styles3.a} d-flex justify-content-center align-items-center mt-1`}
-              type="submit"
+              // type="submit"
               style={{}}
             >
               <h3 className="fw-bold pt-1">返回上一頁</h3>
@@ -416,7 +461,7 @@ const ShopCart3 = () => {
                 </div>
               </div>
             ))}
-            {items2.map((item, index) => (
+            {classItems.map((item, index) => (
               <div key={index} className="row py-2 mt-1">
                 <div className={`${styles3.fc} row ps-4`}>{item.name}</div>
                 <div
@@ -468,33 +513,34 @@ const ShopCart3 = () => {
               className="row py-2 pt-3"
               style={{ borderTop: "1px solid #78cea6" }}
             >
-              <div className={`${styles3.fb} col`}>折價券折抵</div>
+              <div className={`${styles3.fb} col`}>合計</div>
               <div
                 className={`${styles3.fb} col text-center text-warning fw-bold`}
               >
-                0 元
+                {totalPrice} 元
               </div>
             </div>
             <div
               className="row py-2 pt-3"
               style={{ borderTop: "1px solid #78cea6" }}
             >
-              <div className={`${styles3.fb} col`}>運費</div>
+              <div className={`${styles3.fb} col`}>優惠券折抵</div>
               <div
-                className={`${styles3.fb} col text-center text-warning fw-bold`}
+                className={`${styles3.fb} col text-center text-warning fw-bold `}
+                style={{ paddingLeft: "70px" }}
               >
-                0 元
+                - {coupon.disPrice}元
               </div>
             </div>
             <div
               className="row py-2 pt-3"
               style={{ borderTop: "1px solid #78cea6" }}
             >
-              <div className={`${styles3.fb} col`}>訂單總價</div>
+              <div className={`${styles3.fb} col`}>訂單總額</div>
               <div
                 className={`${styles3.fb} col text-center text-success fw-bold`}
               >
-                3600 元
+                {totalPrice - coupon.disPrice} 元
               </div>
             </div>
           </section>
@@ -560,7 +606,7 @@ const ShopCart3 = () => {
               <a
                 href=""
                 className={`${styles3.keepbuy} d-flex justify-content-center align-items-center mt-1`}
-                type="submit"
+                // type="submit"
                 style={{}}
               >
                 <h3 className={`${styles3.h3} fw-bold pt-1`}>返回上頁</h3>
