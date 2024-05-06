@@ -308,17 +308,74 @@ const ShopCart1 = () => {
         {/* 商品欄位 */}
         <Commodity />
         {/* 折價券、付款 */}
+        <div
+          className=" mt-5  d-flex justify-content-center align-items-center"
+          style={{
+            border: "1px solid #d9d9d9",
+            width: "350px",
+            height: "50px",
+          }}
+        >
+          {/* <div className="col py-2"> */}
+          <div
+            className={`${shopStyles.fb}  ps-3 pb-2 col py-2 `}
+            style={{
+              marginLeft: "40px",
+            }}
+          >
+            使用折價券 :
+          </div>
+          {/* <div className="row"> */}
+          {/* 使用折價券 */}
+          {/* <div className="pay d-flex justify-content" style={{ width: "100%" }}> */}
+          {/* <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="checkboxNoLabel"
+                    defaultValue=""
+                    aria-label="..."
+                  />
+                  <label className="me-2" style={{ fontSize: "16px" }}>
+                    使用折價券{" "}
+                  </label>
+                </div> */}
+          <select
+            className="form-select form-select-sm me-4"
+            // aria-label="Small select example "
+            style={{ width: "130px" }}
+            value={coupon ? coupon.id : ""}
+            onChange={handleDiscount}
+          >
+            <option value="">使用優惠券</option>
+            {data.map((v) => {
+              return (
+                <option key={v.id} value={v.id}>
+                  {v.name}
+                </option>
+              );
+            })}
+          </select>
+          {/* </div> */}
+          {/* </div> */}
+          {/* </div> */}
+        </div>
+
         <article
           className={`${shopStyles.send} ${shopStyles.article} d-flex justify-content-center align-items-center py-2 `}
         >
           <div className="row">
             <div className="col d-flex justify-content-center align-items-center flex-column ">
               <span className={`${shopStyles.fs} ${shopStyles.fb} `}>
-                結帳金額:
+                訂單合計:
               </span>
               <span className={`${shopStyles.fc} fs-4 pe-3`}>
                 {/* {combinedTotal} */}
-                {totalPrice}
+                {discountAmount ? (
+                  <h5> ${totalPrice - discountAmount}元 </h5>
+                ) : (
+                  <h5> {totalPrice}元</h5>
+                )}
                 {/* {finalPrice ? ()} */}
               </span>
             </div>

@@ -93,12 +93,9 @@ const ShopCart2 = () => {
   }, []);
   //setItem
   useEffect(() => {
-    if (inputPackageName) {
-      window.localStorage.setItem(
-        "inputName1",
-        JSON.stringify(inputPackageName)
-      );
-    }
+    // if (inputPackageName) {
+    window.localStorage.setItem("inputName1", JSON.stringify(inputPackageName));
+    // }
   }, [inputPackageName]);
 
   // localstorage  inputNumber 收件人電話
@@ -110,12 +107,12 @@ const ShopCart2 = () => {
   }, []);
 
   useEffect(() => {
-    if (inputPackageNumber) {
-      window.localStorage.setItem(
-        "inputNumber",
-        JSON.stringify(inputPackageNumber)
-      );
-    }
+    // if (inputPackageNumber) {
+    window.localStorage.setItem(
+      "inputNumber",
+      JSON.stringify(inputPackageNumber)
+    );
+    // }
   }, [inputPackageNumber]);
 
   //
@@ -128,12 +125,9 @@ const ShopCart2 = () => {
   }, []);
 
   useEffect(() => {
-    if (inputAddress) {
-      window.localStorage.setItem(
-        "inputAddress1",
-        JSON.stringify(inputAddress)
-      );
-    }
+    // if (inputAddress) {
+    window.localStorage.setItem("inputAddress1", JSON.stringify(inputAddress));
+    // }
   }, [inputAddress]);
 
   //localstorage  selectedPayment  付款方式
@@ -153,6 +147,22 @@ const ShopCart2 = () => {
     }
   }, [selectedPayment]);
 
+  // 這邊是一鍵填入 的按鈕
+  // 一鍵填入按鈕的事件處理函數
+  const fillForm = () => {
+    setInputName("哈利");
+    setInputEmail("ron@test.com");
+    setInputNumber("1234567890");
+    setInputPackage("榮恩");
+    setInputPackageNumber("1234578");
+    setInputAddress("台北市信義區市府路1號");
+    setSelectedPayment("line pay"); // 這裡假設你想將付款方式預設選擇為 line pay
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // 阻止表单的默认提交行为
+    // 在这里处理表单提交逻辑，例如发送数据到服务器
+  };
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>
@@ -161,7 +171,7 @@ const ShopCart2 = () => {
 
       {/*  */}
       <div className={`${styles2.frame} container`}>
-        <form action="" method="POST">
+        <form action="" method="POST" onSubmit={handleSubmit}>
           <nav className={` ${styles2.nav}`}>
             <div className={`${styles2.cir} ${styles2.circle1}`}>
               {/* <span>1</span> */}
@@ -467,6 +477,17 @@ const ShopCart2 = () => {
                     );
                   })}
                 </div>
+                <button
+                  onClick={fillForm}
+                  className={`${styles2.keepbuy} d-flex justify-content-center align-items-center mt-1 fs-5`}
+                  style={{
+                    width: "100px", // 設定按鈕的寬度為100像素
+                    height: "50px", // 設定按鈕的高度為50像素
+                    fontSize: "20px", // 設定按鈕的字型大小為20像素
+                  }}
+                >
+                  一鍵填入
+                </button>
                 {/* 刷卡 */}
                 {/* <label
                   htmlFor="name"

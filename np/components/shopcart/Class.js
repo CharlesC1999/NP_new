@@ -216,14 +216,14 @@ const Class = () => {
             </div>
           );
         })}
-        <div className="row" style={{ border: "1px solid #d9d9d9" }}>
+        {/* <div className="row" style={{ border: "1px solid #d9d9d9" }}>
           <div className="col py-2">
             <div className={`${ClassStyles.fb} row ps-3 pb-2`}>
               {" "}
               折價券代碼、折價券 :{" "}
             </div>
             <div className="row">
-              {/* 使用折價券 */}
+              使用折價券
               <div
                 className="pay d-flex justify-content"
                 style={{ width: "100%" }}
@@ -253,8 +253,8 @@ const Class = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           className="row py-2"
           style={{ border: "1px solid #d9d9d9", borderTop: 0 }}
         >
@@ -265,7 +265,7 @@ const Class = () => {
           >
             {totalPrice}
           </div>
-        </div>
+        </div> */}
       </main>
     </>
   );
