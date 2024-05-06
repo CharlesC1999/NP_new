@@ -17,17 +17,17 @@ router.post('/findAll', async (req, res) => {
     const [products, classes, recipes] = await Promise.all([
       Product.findAll({
         where: {
-          name: { [sequelize.Op.like]: `%${searchText}%` },
+          product_name: { [Op.like]: `%${searchText}%` },
         },
       }),
       Class.findAll({
         where: {
-          name: { [sequelize.Op.like]: `%${searchText}%` },
+          Class_name: { [Op.like]: `%${searchText}%` },
         },
       }),
       Recipe.findAll({
         where: {
-          name: { [sequelize.Op.like]: `%${searchText}%` },
+          Title_R_name: { [Op.like]: `%${searchText}%` },
         },
       }),
     ])
