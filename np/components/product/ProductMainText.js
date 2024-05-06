@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import style from "@/styles/Product/products.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import toast, { Toaster } from "react-hot-toast";
+import FavIconProduct from "../favor/FavIconProduct";
 
-const notify = () => toast("已加入收藏 💚");
 const notifyBtn = () => toast("已加入購物車 🛒");
 
 function ProductMainText({
+  id,
   name,
   price,
   description,
@@ -16,7 +17,10 @@ function ProductMainText({
   review_comments,
   average_rating,
   upload_date,
+  handleReviewCount,
 }) {
+  const reviewCount = review_comments.length;
+
   return (
     <>
       <div className={`${style["product-text"]} d-flex flex-column`}>
@@ -34,14 +38,11 @@ function ProductMainText({
               <i className={`fa-solid fa-star`} />
               {average_rating}
             </div>
-            <div className={`${style["star-text"]} ps-2 `}>(則評論)</div>
+            <div className={`${style["star-text"]} ps-2 `}>
+              ({reviewCount}則評論)
+            </div>
           </div>
-          <a className={`${style["favorite-btn"]} ${style["icon-link"]} `}>
-            <i
-              className={`${style["heart123"]}  fa-solid fa-heart`}
-              onClick={notify}
-            ></i>
-          </a>
+         <FavIconProduct id={id}/>
         </div>
         <input
           className={`${style["amount"]} ps-4 my-2`}

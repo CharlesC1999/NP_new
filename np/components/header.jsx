@@ -9,9 +9,188 @@ import routes from "@/contexts/routes"; // 導入路徑配置
 import { IoLogOutOutline } from "react-icons/io5";
 // sweetAlert
 import Swal from "sweetalert2";
+//react icon
+import { AiOutlineHome } from "react-icons/ai";
+import { RiDiscountPercentLine } from "react-icons/ri";
+import { FaListUl } from "react-icons/fa";
+import { LuChefHat, LuClipboardEdit } from "react-icons/lu";
+import { GrGroup } from "react-icons/gr";
+import { IoMdBusiness } from "react-icons/io";
+
+const MobileSideBar = ({ onClose }) => {
+  const sidebarRef = useRef(null);
+  const router = useRouter();
+  const { auth, logout } = useAuth();
+  const [userData, setUserData] = useState("");
+  const [isActive, setIsActive] = useState(true); // 控制動畫的狀態
+
+  const goClassList = () => router.push(routes.classList);
+  const goProductList = () => router.push(routes.productList);
+  const goRecipeList = () => router.push(routes.recipeList);
+  const goSpeekerList = () => router.push(routes.speakerList);
+  const doLogin = () => router.push(routes.login);
+  const doSignUp = () => router.push(routes.signUp);
+  const goDashboard = () => router.push(routes.dashboard);
+  const goHome = () => router.push(routes.home);
+
+  useEffect(() => {
+    // 組件渲染後立即執行的effect，檢查LocalStorage中是否有資料
+    const userImage = localStorage.getItem("userData");
+    if (userImage) {
+      // 如果LocalStorage中有資料，則將其轉換為JavaScript物件並存入state中
+      setUserData(JSON.parse(userImage));
+    }
+  }, []);
+
+  // 關閉sidebar
+  const handleClose = () => {
+    if (sidebarRef.current) {
+      // 先添加动画类
+      sidebarRef.current.classList.add(styles.slideOut);
+
+      // 监听动画结束后再执行 onClose，以确保动画流畅
+      const handleAnimationEnd = () => {
+        onClose(); // 动画完成后执行 onClose
+        // 移除监听器，避免重复触发
+        sidebarRef.current.removeEventListener(
+          "animationend",
+          handleAnimationEnd
+        );
+      };
+
+      sidebarRef.current.addEventListener("animationend", handleAnimationEnd);
+    } else {
+      onClose(); // 如果参考不存在或动画未能正确设置，直接关闭
+    }
+  };
+
+  const logoutButton = () => {
+    Swal.fire({
+      title: "確定要登出嗎？",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#c14d3c",
+      cancelButtonColor: "#50bf8b",
+      confirmButtonText: "登出",
+      cancelButtonText: "取消",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+        goHome();
+        Swal.fire({
+          title: "已登出",
+          icon: "success",
+          confirmButtonColor: "#50bf8b",
+        });
+      }
+    });
+  };
+
+  return (
+    <div className={styles.fullMobileScreen} onClick={handleClose}>
+      <div
+        className={styles.sideBarContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <section className={styles.memberContainer}>
+          <div className={styles.memberSet}>
+            <div className={styles.memberImg}>
+              {auth.isLoggedIn ? (
+                <img
+                  src={
+                    userData && userData.address
+                      ? userData.address.startsWith("https")
+                        ? userData.address
+                        : `/images/member-image/${userData.address}`
+                      : ""
+                  }
+                  alt="UserImg"
+                />
+              ) : (
+                <img src="" alt="" />
+              )}
+            </div>
+            {auth.isLoggedIn ? (
+              <div className={styles.memberName}>{userData.name} 歡迎！</div>
+            ) : (
+              <div></div>
+            )}
+            <div className={styles.memberButtonContainer}>
+              {auth.isLoggedIn ? (
+                <button onClick={logoutButton} className={styles.memberButton}>
+                  登出
+                </button>
+              ) : (
+                <button onClick={doLogin} className={styles.memberButton}>
+                  登入
+                </button>
+              )}
+              |
+              {auth.isLoggedIn ? (
+                <button onClick={goDashboard} className={styles.memberButton}>
+                  會員中心
+                </button>
+              ) : (
+                <button onClick={doSignUp} className={styles.memberButton}>
+                  註冊
+                </button>
+              )}
+            </div>
+          </div>
+        </section>
+        <section className={styles.optionContainer}>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goHome}>
+              <AiOutlineHome size={24} />
+              首頁
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn}>
+              <RiDiscountPercentLine size={24} />
+              優惠活動
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goProductList}>
+              <FaListUl size={24} />
+              商品列表
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goRecipeList}>
+              <LuChefHat size={24} />
+              食譜精選
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goClassList}>
+              <LuClipboardEdit size={24} />
+              精選課程
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn} onClick={goSpeekerList}>
+              <GrGroup size={24} />
+              講師陣容
+            </button>
+          </div>
+          <div className={styles.optionBlock}>
+            <button className={styles.optionBtn}>
+              <IoMdBusiness size={24} />
+              關於我們
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};
 
 const HeaderComponent = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false); //搜尋下拉是否開啟
+  const [selectedText, setSelectedText] = useState("所有分類"); //預設搜尋顯示結果文字
+  const [searchInput, setSearchInput] = useState(""); //搜尋欄位預設輸入
   const [isProductOpen, setIsProductOpen] = useState(false);
   const [isRecipeOpen, setIsRecipeOpen] = useState(false);
   const [isClassOpen, setIsClassOpen] = useState(false);
@@ -19,7 +198,8 @@ const HeaderComponent = () => {
   const productDropdownRef = useRef(null); // 產品下拉列表的參考
   const recipeDropdownRef = useRef(null); // 食譜下拉列表的參考
   const calssDropdownRef = useRef(null); // 課程下拉列表的參考
-  const [selectedText, setSelectedText] = useState("所有分類");
+  const [showFullScreen, setShowFullScreen] = useState(false); // sidebar
+  const [animation, setAnimation] = useState(""); //sidebar slideout
   const router = useRouter();
   const { auth, logout } = useAuth();
 
@@ -65,7 +245,7 @@ const HeaderComponent = () => {
     { id: 6, name: "烘焙/點心", href: "#", className: styles.selectionLink },
   ];
   // -----------------------開關控制區--------------------------------
-  // 開關控制
+  // 搜尋開關控制
   const toggleDropdown = () => setIsSearchOpen(!isSearchOpen);
 
   // 開關控制
@@ -89,7 +269,7 @@ const HeaderComponent = () => {
 
   // -----------------------點擊選項和區域外關閉控制區-----------------
   const handleItemClick = (name) => {
-    setSelectedText(name);
+    setSelectedText(name); //點選項
     setIsSearchOpen(false); // 點選項關閉下拉
   };
 
@@ -106,6 +286,18 @@ const HeaderComponent = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    console.log("搜索:", searchInput, "在:", selectedText);
+    // 執行搜索邏輯
+
+    // 導向到結果頁面或更新組件顯示結果
+  };
 
   const handleProductClick = () => {
     setIsProductOpen(false); // 點選項關閉下拉
@@ -194,6 +386,15 @@ const HeaderComponent = () => {
     });
   };
 
+  // sidebar出來不准動
+  useEffect(() => {
+    if (showFullScreen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showFullScreen]);
+
   // 使用配置的路由導航
   const goMemberDashboard = () => router.push(routes.dashboard);
   const goFavor = () => router.push(routes.favor);
@@ -210,7 +411,13 @@ const HeaderComponent = () => {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.logoWrapper}>
-            <button className={styles.mobileMenu}>
+            <button
+              className={styles.mobileMenu}
+              onClick={() => {
+                // console.log("Button clicked");
+                setShowFullScreen(!showFullScreen);
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="30px"
@@ -226,7 +433,9 @@ const HeaderComponent = () => {
                 </g>
               </svg>
             </button>
-
+            {showFullScreen && (
+              <MobileSideBar onClose={() => setShowFullScreen(false)} />
+            )}
             <a onClick={goIndex}>
               <img
                 src="/images/np_logo.png"
@@ -290,11 +499,17 @@ const HeaderComponent = () => {
                 type="text"
                 className={styles.searchBarInput}
                 placeholder="Search for items..."
+                value={searchInput}
+                onChange={handleInputChange}
               />
             </div>
 
             {/* <!-- 搜索按鈕 --> */}
-            <button type="submit" className={styles.searchBarButton}>
+            <button
+              type="submit"
+              className={styles.searchBarButton}
+              onClick={handleSearch}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -347,6 +562,7 @@ const HeaderComponent = () => {
             ) : (
               <a onClick={doLogin} className={styles.pageLink}>
                 {/* <!-- 手機圖示svg --> */}
+                {/* 這應該是搜索 */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30px"

@@ -3,20 +3,30 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs.jsx";
+// 側邊欄
 import SideBarTop from "@/components/recipe/list/sideBar/SideBarCategories";
 import SideBarRecipe from "@/components/recipe/list/SideBarRecipe";
+// 手機板的分頁
+import PaginationM from "@/components/paginationM";
+// 手機板的篩選、排序
 import TopBarList from "@/components/recipe/list/TopBarList";
 import TopBarGrid from "@/components/recipe/list/TopBarGrid";
+// 食譜卡片
 import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";
 import Footer from "@/components/footer";
+// 電腦版的排序
 import Filter from "@/components/recipe/list/filter/RecipeFilter";
 import styles from "@/styles/recipe/recipe-list.module.scss";
 
+import { CategoriesProvider } from "@/hooks/recipe/use-categories";
+
+// 點sideBar設定state是該類別的ID，當作params來傳給後端做SQL查詢
+import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
+
 export default function RecipeList() {
   // ----------------------篩選條件 start ------------------------
-  // 食譜分類
-  const [recipeCategory, setRecipeCategory] = useState("");
+  const { recipeCategory, setRecipeCategory } = useCategoryForSQL();
 
   // ----------------------篩選條件 end --------------------------
 
@@ -39,12 +49,10 @@ export default function RecipeList() {
     // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
     const searchParams = new URLSearchParams(params);
     const url = `http://localhost:3005/api/recipes/?${searchParams.toString()}`;
-    console.log("url: " + url);
 
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data.data.recipesRawSql);
 
       // 為了要確保資料是陣列，所以檢查後再設定
       if (Array.isArray(data.data.recipesRawSql)) {
@@ -101,20 +109,17 @@ export default function RecipeList() {
   }, [recipeCategory, perpage, orderby]);
 
   return (
-    <>
+    <CategoriesProvider>
       <Header />
       <Breadcrumbs />
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
-        <TopBarList />
-        <TopBarGrid />
+        <TopBarList setOrderby={setOrderby} total={total} />
+        {/* <TopBarGrid /> */}
+
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
           <div className={`d-none d-xxl-block col-3 ${styles["side-bar"]}`}>
-            <SideBarTop
-              setRecipeCategory={setRecipeCategory}
-              handleConditionsChange={handleConditionsChange}
-              recipeCategory={recipeCategory}
-            />
+            <SideBarTop />
             <SideBarRecipe />
           </div>
           {/* 食譜卡片 (list排列) */}
@@ -134,7 +139,8 @@ export default function RecipeList() {
                 <RecipeCardsList recipesData={recipesData} />
               </section>
             </div>
-            <div className="d-flex gap-3 justify-content-center mt-4 align-items-center">
+            {/* 電腦版分頁用 */}
+            <div className="d-none d-xxl-flex gap-3 justify-content-center mt-4 align-items-center">
               <button
                 onClick={() => {
                   const newPageNow = page - 1 > 1 ? page - 1 : 1;
@@ -142,7 +148,7 @@ export default function RecipeList() {
                 }}
                 type="button"
                 className={`btn ${styles["prev"]} ${
-                  page - 1 >= 1 ? "" : "disabled"
+                  page - 1 >= 1 ? "" : styles["disabled"]
                 }`}
               >
                 <FiChevronsLeft />
@@ -175,11 +181,15 @@ export default function RecipeList() {
                 }}
                 type="button"
                 className={`btn ${styles["next"]} ${
-                  page + 1 > pageCount ? "disabled" : ""
+                  page + 1 > pageCount ? styles["disabled"] : ""
                 }`}
               >
                 <FiChevronsRight />
               </button>
+            </div>
+            {/* 手機板分頁用 */}
+            <div className="d-block d-xxl-none mt-4">
+              <PaginationM total={total} perpage={"6"} recipeSetPage={setPage}/>
             </div>
           </div>
           {/* 食譜卡片 (grid排列) */}
@@ -196,6 +206,6 @@ export default function RecipeList() {
         </div>
       </div>
       <Footer />
-    </>
+    </CategoriesProvider>
   );
 }

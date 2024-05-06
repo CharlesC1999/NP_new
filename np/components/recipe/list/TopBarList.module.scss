@@ -43,6 +43,8 @@
 .top-bar {
   margin: 15px 0px;
   .btn-sort {
+    position: relative;
+    z-index: 2;
     border-radius: 5px;
     border: 1px solid var(--gray03);
     .sort {
@@ -71,6 +73,46 @@
     .switch-row {
       padding: 5px;
       background: var(--gray03);
+    }
+  }
+  .all-dropdown {
+    gap: 12px;
+    .select-box {
+      background-color: #fff;
+      width: 115px;
+      top: -5px;
+      border-left: 1px solid var(--gray03);
+      border-right: 1px solid var(--gray03);
+      border-bottom: 1px solid var(--gray03);
+      height: fit-content;
+
+      p {
+        font-size: 13px;
+        &:active {
+          background-color: #ccc;
+        }
+      }
+    }
+
+    .categories-box {
+      width: 144px;
+      top: -5px;
+      border-left: 1px solid var(--gray03);
+      border-right: 1px solid var(--gray03);
+      border-bottom: 1px solid var(--gray03);
+      p {
+        font-size: 13px;
+        &:active {
+          background-color: #ccc;
+        }
+      }
+    }
+
+    .click-hidden {
+      opacity: 0;
+      max-height: 0px;
+      overflow: hidden;
+      pointer-events: none;
     }
   }
 }

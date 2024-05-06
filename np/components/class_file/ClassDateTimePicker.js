@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import ButtonStyles from "./DateTimePickerButtonStyles.module.css";
 
-function CustomDatePicker() {
+function CustomDatePicker({ getStartDate, getEndDate }) {
   const [date, setDate] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
@@ -20,7 +20,19 @@ function CustomDatePicker() {
 
   const handleDateRangeChange = (update) => {
     setDateRange(update);
+    if (update[0]) getStartDate(update[0]);
+    if (update[1]) getEndDate(update[1]);
   };
+
+  // console.log(dateRange);
+  const dateValues = Object.values(dateRange);
+  console.log(dateValues[0]);
+  console.log(dateValues[1]);
+  // getStartDate = dateValues[0];
+  // getEndDate = dateValues[1];
+  // console.log(getStartDate);
+  // console.log(getEndDate);
+  // console.log(getDateRange);
 
   let datePickerComponent;
   switch (pickerView) {

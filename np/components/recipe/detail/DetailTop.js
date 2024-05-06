@@ -6,21 +6,8 @@ import { FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailTop.module.scss";
 import toast, { Toaster } from "react-hot-toast";
-
+import FavIconRecipe from "@/components/favor/FavIconRecipe";
 export default function DetailTop({ recipe }) {
-  //收藏與否
-  const [saved, setSaved] = useState(false);
-
-  const notify = () => {
-    if (saved) {
-      setSaved(false);
-      return toast("成功移除收藏");
-    } else {
-      setSaved(true);
-      return toast("成功加入收藏");
-    }
-  };
-
   return (
     <>
       <div className={`row ${styles["top"]}`}>
@@ -28,7 +15,7 @@ export default function DetailTop({ recipe }) {
           <div className={`${styles["pic"]} w-100 `}>
             <img
               className="object-fit-cover w-100 h-100"
-              src={`/images/recipe/list/${recipe.Image_URL}`}
+              src={`/images/recipe/list/${recipe.image__u_r_l}`}
               alt=""
             />
           </div>
@@ -41,14 +28,14 @@ export default function DetailTop({ recipe }) {
                 <p
                   className={`${styles["title"]} ${styles["figma-h3"]} mb-0 text-center text-xxl-start`}
                 >
-                  {recipe.Title_R_name}
+                  {recipe.title__r_name}
                 </p>
                 <div
                   className={`${styles["left-bottom"]} d-flex justify-content-center justify-content-xxl-start`}
                 >
                   <p className={styles["figma-p"]}>
-                    分類：{recipe.Recipe_category_ID} /{" "}
-                    {recipe.Publish_date.split("T")[0]}
+                    分類：{recipe.Recipe_cate_Name} /{" "}
+                    {recipe.publish_date.split(" ")[0]}
                   </p>
                 </div>
               </div>
@@ -59,20 +46,15 @@ export default function DetailTop({ recipe }) {
                 className={`${styles["info-right"]} d-flex justify-content-center justify-content-xxl-start`}
               >
                 <div className={`${styles["small-card"]} ms-xl-auto`}>
-                  <div
+                  {/* <div
                     title="點擊加入收藏"
                     className="h-100"
                     onClick={() => {
                       notify();
                     }}
-                  >
-                    {/* {saved ? <SavedHeart /> : <UnsavedHeart />} */}
-                    <FaHeart
-                      className={`${styles["heart"]} ${
-                        saved ? styles["saved"] : styles["unsaved"]
-                      }`}
-                    />
-                  </div>
+                  > */}
+                    <FavIconRecipe id={recipe.recipe__i_d} />
+                  {/* </div> */}
                 </div>
                 <div className={styles["small-card"]}>
                   <div>
@@ -97,11 +79,11 @@ export default function DetailTop({ recipe }) {
                   <p
                     className={`${styles["figma-p"]} ${styles["caption"]} text-center`}
                   >
-                    3人份
+                    {recipe.servings}人份
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
-                  <div>
+                  <div className="text-center">
                     {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={36}
@@ -118,7 +100,7 @@ export default function DetailTop({ recipe }) {
                     <GiKnifeFork className={styles["tableware"]} />
                   </div>
                   <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
-                    8樣食材
+                    {recipe.ingredients__count}樣食材
                   </p>
                 </div>
                 <div className={styles["small-card"]}>
@@ -139,7 +121,7 @@ export default function DetailTop({ recipe }) {
                     <LuAlarmClock className={styles["clock"]} />
                   </div>
                   <p className={`${styles["figma-p"]} ${styles["caption"]}`}>
-                    30分鐘
+                    {recipe.cooking__time}分鐘
                   </p>
                 </div>
               </div>

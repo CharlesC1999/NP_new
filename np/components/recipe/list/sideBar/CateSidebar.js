@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import styles from "./CateSidebar.module.css";
+import { useCategories } from "@/hooks/recipe/use-categories";
+import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
+import { useRouter } from "next/router";
 
-function CateSidebar({
-  setRecipeCategory,
-  handleConditionsChange,
-  recipeCategory,
-}) {
+function CateSidebar({ detailPage = "" }) {
+  // 點sideBar的分類時導回食譜list
+  const router = useRouter();
+
+  // 用來設定食譜類別的context
+  const { recipeCategory, handleCategoryChange } = useCategoryForSQL();
+  // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
+  const { setNewCategories, newCategories } = useCategories();
   //食譜類別state初始值
   const [categories, setCategories] = useState([]);
-  // 新的食譜類別 (有擴充qty的，上面那個不知道為啥一直無法設定qty)
-  const [newCategories, setNewCategories] = useState([]);
 
   // 各類別食譜總數  ------------------------------start---------------------------------------
   // 所有類別
@@ -39,7 +43,6 @@ function CateSidebar({
     { id: 5, qty: 0 },
     { id: 6, qty: 0 },
   ]);
-
   // 各類別食譜總數  ------------------------------end---------------------------------------
 
   //取得食譜分類名稱
@@ -65,7 +68,6 @@ function CateSidebar({
       setSnack(data.data.finalSnackCount);
       // 沙拉
       setSalad(data.data.finalSaladCount);
-
       // 設定各類別食譜總數  ------------------------------end---------------------------------------
 
       //檢查得到的資料是array才設定給state (供map使用)
@@ -109,9 +111,11 @@ function CateSidebar({
         return { ...v };
       }
     });
-    console.log("-------------------" + JSON.stringify(newCategories));
+
     // 設定給sql查詢到的物件
     setNewCategories(newCategoriesAry);
+    //給TopBarList用的食譜分類
+    // setCategoriesDropdown(newCategoriesAry);
     setCategories(newCategories);
   }, [allRecipes]);
 
@@ -120,15 +124,21 @@ function CateSidebar({
       {/* 顯示所有類別的食譜 */}
       <div
         onClick={() => {
-          setRecipeCategory("");
+          handleCategoryChange();
+          Boolean(detailPage) && router.push("/recipe");
         }}
         className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
       >
         <div
           className={`d-flex ${styles.sideBox}`}
-          style={{
-            border: recipeCategory === "" ? "var(--green03) solid 2px" : "",
-          }}
+          style={
+            detailPage
+              ? {}
+              : {
+                  border:
+                    recipeCategory === "" ? "var(--green03) solid 2px" : "",
+                }
+          }
         >
           <div className={styles.sideImg}>
             <img src="/index-images/category-1.png" alt />
@@ -144,21 +154,27 @@ function CateSidebar({
         return (
           <div
             onClick={() => {
-              setRecipeCategory(v.Recipe_cate_ID);
+              handleCategoryChange(v.Recipe_cate_ID);
+              Boolean(detailPage) && router.push("/recipe");
             }}
             className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
           >
             <div
               className={`d-flex ${styles.sideBox}`}
-              style={{
-                border:
-                  recipeCategory === v.Recipe_cate_ID
-                    ? "var(--green03) solid 2px"
-                    : "",
-              }}
+              style={
+                // 如果是detailPage就不要border
+                detailPage
+                  ? {}
+                  : {
+                      border:
+                        recipeCategory === v.Recipe_cate_ID
+                          ? "var(--green03) solid 2px"
+                          : "",
+                    }
+              }
             >
               <div className={styles.sideImg}>
-                <img src="/index-images/category-1.png" alt />
+                <img src="/index-images/category-1.png" alt="分類icon" />
               </div>
               <div className={styles.sideText}>
                 <h6 className={styles.left}>{v.Recipe_cate_name}</h6>

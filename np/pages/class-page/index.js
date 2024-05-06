@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 // 讀取鉤子
 import { useLoader } from "@/hooks/use-loader";
+import moment from "moment-timezone";
 import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
+import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
 import Header from "@/components/Header";
 import ClassClassifacion from "@/components/class_file/ClassClassification";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -68,11 +70,36 @@ const ClassList = () => {
   const [sortBy, setSortBy] = useState("");
   // 用於選擇分類
   const [categoryId, setCategoryId] = useState(null);
+  // 獲取到日期的資料
+  const [finalStartDate, setFinalStartDate] = useState(null);
+  const [finalEndDate, setFinalEndDate] = useState(null);
+
+  const formatStartDate = moment(finalStartDate).format("YYYY-MM-DD HH:mm:ss");
+  const formatEndDate = moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss");
 
   //串上後端取得資料
+  useEffect(() => {
+    const params = {
+      page,
+      perpage,
+      sortBy,
+      categoryId,
+      startDate: finalStartDate
+        ? moment(finalStartDate).format("YYYY-MM-DD HH:mm:ss")
+        : undefined,
+      endDate: finalEndDate
+        ? moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss")
+        : undefined,
+    };
+    console.log(params); // 确认这些参数的值
+    getClasses(params);
+  }, [page, perpage, sortBy, categoryId, formatStartDate, formatEndDate]);
+
   const getClasses = async (params) => {
+    // console.log(params);
     // !!!params必須是物件!!! 再利用.toString()轉成網址的get參數(網址參數?後面的部分)
     const searchParams = new URLSearchParams(params);
+    // console.log(searchParams);
     const url = `http://localhost:3005/api/classes/?${searchParams.toString()}`;
 
     try {
@@ -97,7 +124,10 @@ const ClassList = () => {
     setCategoryId(categoryId);
     // 這裡直接調用 getClasses，傳遞新的 categoryId
     setPage(1);
-    const newParams = { page: 1, perpage, sortBy, categoryId };
+    const newParams =
+      categoryId === 0
+        ? { page: 1, perpage, sortBy }
+        : { page: 1, perpage, sortBy, categoryId };
     const data = await getClasses(newParams);
     console.log("Data received on category change:", data);
     if (data && data.status === "success") {
@@ -120,6 +150,8 @@ const ClassList = () => {
       perpage, //每頁各幾個
       sortBy, //排序
       categoryId,
+      startDate: formatStartDate,
+      endDate: formatEndDate,
     };
     getClasses(params);
     if (page > pageCount) {
@@ -139,6 +171,17 @@ const ClassList = () => {
     // 充新獲得資料
   };
 
+  // 日期區間接收and傳到後端
+  const startDate = (date) => {
+    setFinalStartDate(date);
+  };
+
+  const endDate = (date) => {
+    setFinalEndDate(date);
+  };
+
+  console.log(finalStartDate, finalEndDate, "goal");
+
   // 切換到Grid模式
   const showGrid = () => {
     setDisplayGrid(true);
@@ -154,14 +197,16 @@ const ClassList = () => {
   console.log(total, "im here");
   console.log(page, "nowPage");
   return (
-    <div style={containerStyle}>
-      <Header />
+    <div style={containerStyle} className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <Header />
+      </div>
       <Breadcrumbs />
       <div style={subContainerStyle}>
         <ClassClassifacion categoryChange={handleCategoryChange} />
         <div className={ContentSetting.DisplaySetting}>
           <div style={{ height: "100%" }} className={ContentSetting.MobileNone}>
-            <ClassSidebar />
+            <ClassSidebar finalStart={startDate} finalEnd={endDate} />
           </div>
 
           <div className={CardStyle.SearchResultContainer}>
@@ -172,6 +217,10 @@ const ClassList = () => {
               perpage={perpage}
               setPerpage={setPerpage}
               onSortChange={handleSortChange}
+              onCategoryChange={handleCategoryChange} // 篩手機分類位置
+              categoryId={categoryId} // 篩手機分類位置
+              finalStart={startDate} //手機日曆
+              finalEnd={endDate} //手機日曆
               total={total}
             />
             <div className={CardStyle.WebCardContainer}>
@@ -188,18 +237,23 @@ const ClassList = () => {
 
             {displayGrid ? (
               <div className={CardStyle.MobileCardContainer}>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
-                <div className={CardStyle.GridCardSet}>
-                  <ClassCardMobileGrid />
-                  <ClassCardMobileGrid />
-                </div>
+                {classesData.map(
+                  (classData, index) =>
+                    index % 2 === 0 && ( // 每隔一個元素取數據
+                      <div className={CardStyle.GridCardSet} key={index}>
+                        <ClassCardMobileGrid
+                          classesData={classData} // 直接使用當前元素
+                          key={index}
+                        />
+                        {classesData[index + 1] && ( // 確保下一個元素存在
+                          <ClassCardMobileGrid
+                            classesData={classesData[index + 1]} // 正確訪問下一個元素
+                            key={index + 1}
+                          />
+                        )}
+                      </div>
+                    )
+                )}
               </div>
             ) : (
               <div className={CardStyle.MobileCardContainer}>
