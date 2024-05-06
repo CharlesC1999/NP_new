@@ -48,26 +48,26 @@ router.post('/findProduct', async (req, res) => {
   console.log('bonP')
 
   try {
-    // 從請求體中獲取搜尋條件，例如 'searchText'
     const { searchText } = req.body
-    // 使用 Sequelize 模型進行搜尋，這裡假設 'name' 是要搜尋的欄位
+
+    // 執行產品查詢
     const products = await Product.findAll({
       where: {
         product_name: {
-          [Op.like]: `%${searchText}%`, // 使用 LIKE 查詢匹配名稱
+          [Op.like]: `%${searchText}%`,
         },
       },
     })
 
-    // 檢查是否找到商品
-    if (products.length > 0) {
-      res.json(products) // 返回查找到的商品數據
-    } else {
-      res.status(404).send('No products found') // 沒有找到商品時返回 404
-    }
+    // 返回結果，其中 classes 和 recipes 為空陣列
+    res.json({
+      products,
+      classes: [], // 故意回傳空陣列
+      recipes: [], // 故意回傳空陣列
+    })
   } catch (error) {
     console.error('Error searching products:', error)
-    res.status(500).send('Error searching for products') // 處理任何可能的錯誤
+    res.status(500).send('Error searching for products')
   }
 })
 
@@ -75,26 +75,26 @@ router.post('/findClass', async (req, res) => {
   console.log('bonC')
 
   try {
-    // 從請求體中獲取搜尋條件，例如 'searchText'
     const { searchText } = req.body
-    // 使用 Sequelize 模型進行搜尋，這裡假設 'name' 是要搜尋的欄位
+
+    // 執行產品查詢
     const classes = await Class.findAll({
       where: {
         Class_name: {
-          [Op.like]: `%${searchText}%`, // 使用 LIKE 查詢匹配名稱
+          [Op.like]: `%${searchText}%`,
         },
       },
     })
 
-    // 檢查是否找到商品
-    if (classes.length > 0) {
-      res.json(classes) // 返回查找到的商品數據
-    } else {
-      res.status(404).send('No classes found') // 沒有找到商品時返回 404
-    }
+    // 返回結果，其中 classes 和 recipes 為空陣列
+    res.json({
+      products: [],
+      classes, // 故意回傳空陣列
+      recipes: [], // 故意回傳空陣列
+    })
   } catch (error) {
     console.error('Error searching products:', error)
-    res.status(500).send('Error searching for products') // 處理任何可能的錯誤
+    res.status(500).send('Error searching for products')
   }
 })
 
@@ -102,26 +102,26 @@ router.post('/findRecipe', async (req, res) => {
   console.log('bonR')
 
   try {
-    // 從請求體中獲取搜尋條件，例如 'searchText'
     const { searchText } = req.body
-    // 使用 Sequelize 模型進行搜尋，這裡假設 'name' 是要搜尋的欄位
+
+    // 執行產品查詢
     const recipes = await Recipe.findAll({
       where: {
         Title_R_name: {
-          [Op.like]: `%${searchText}%`, // 使用 LIKE 查詢匹配名稱
+          [Op.like]: `%${searchText}%`,
         },
       },
     })
 
-    // 檢查是否找到商品
-    if (recipes.length > 0) {
-      res.json(recipes) // 返回查找到的商品數據
-    } else {
-      res.status(404).send('No recipes found') // 沒有找到商品時返回 404
-    }
+    // 返回結果，其中 classes 和 recipes 為空陣列
+    res.json({
+      products: [], // 故意回傳空陣列
+      classes: [], // 故意回傳空陣列
+      recipes,
+    })
   } catch (error) {
     console.error('Error searching products:', error)
-    res.status(500).send('Error searching for products') // 處理任何可能的錯誤
+    res.status(500).send('Error searching for products')
   }
 })
 
