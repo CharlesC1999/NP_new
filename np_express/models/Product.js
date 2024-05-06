@@ -12,7 +12,7 @@ export default async function (sequelize) {
       },
       category_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       product_name: {
         type: DataTypes.STRING(20),
@@ -52,8 +52,8 @@ export default async function (sequelize) {
       timestamps: true, // 使用時間戳
       paranoid: false, // 軟性刪除
       underscored: true, // 所有自動建立欄位，使用snake_case命名
-      createdAt: 'created_at', // 建立的時間戳
-      updatedAt: 'updated_at', // 更新的時間戳
+      // createdAt: 'created_at', // 建立的時間戳
+      // updatedAt: 'updated_at', // 更新的時間戳
     }
   )
 

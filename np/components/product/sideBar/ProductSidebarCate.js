@@ -1,8 +1,15 @@
 import React from "react";
+import { useRouter } from "next/router";
 import CateSidebar from "@/components/product/CateSidebar";
 import styles from "@/components/product/sideBar/SideBarCategory.module.css";
 
-export default function ProductSidebarCate() {
+export default function ProductSidebarCate({ normalCategories }) {
+  const router = useRouter();
+
+  const handleCategoryClick = (cateId) => {
+    router.push(`/product/?categoryFromDetail=${cateId}`);
+  };
+
   return (
     <>
       <div className={`${styles.sideBarBox}`}>
@@ -10,11 +17,15 @@ export default function ProductSidebarCate() {
           <h5>分類</h5>
         </div>
         <div className={`${styles.line}`}></div>
-        <CateSidebar />
-        <CateSidebar />
-        <CateSidebar />
-        <CateSidebar />
-        <CateSidebar />
+        {normalCategories.map((category) => {
+          return (
+            <CateSidebar
+              key={category.cateId}
+              cateName={category.cateName}
+              onClick={() => handleCategoryClick(category.cateId)}
+            />
+          );
+        })}
       </div>
     </>
   );
