@@ -2,6 +2,7 @@ import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import shopStyles from "./shopStyle1.module.css";
 import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
+import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 // 購物車用到的主鍵
@@ -181,8 +182,11 @@ const ShopCart1 = () => {
   // c;
 
   return (
-    <>
-      <Header />
+    <div className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <Header />
+      </div>
+
       {/* 桌電size */}
       <div
         className={`container ${shopStyles.container2} ${shopStyles.desktop}`}
@@ -332,7 +336,7 @@ const ShopCart1 = () => {
         {/* </div> */}
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 export default ShopCart1;

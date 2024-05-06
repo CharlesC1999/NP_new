@@ -5,6 +5,8 @@ import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
+import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
+
 import Footer from "../../components/footer";
 
 const ShopCart4 = () => {
@@ -44,8 +46,10 @@ const ShopCart4 = () => {
     };
   }, []);
   return (
-    <>
-      <Header />
+    <div className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <Header />
+      </div>
       <div className={styles4.middle}>
         <img src="/images/Frame 40128.png" alt="" />
         <h3 className="mt-4 fw-bold">訂單完成</h3>
@@ -65,7 +69,7 @@ const ShopCart4 = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 export default ShopCart4;

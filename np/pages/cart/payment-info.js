@@ -5,6 +5,8 @@ import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
+import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
+
 import Footer from "../../components/footer";
 
 const ShopCart3 = () => {
@@ -110,8 +112,10 @@ const ShopCart3 = () => {
   }, []);
 
   return (
-    <>
-      <Header />
+    <div className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <Header />
+      </div>
       {/*  */}
       <div className={`${styles3.desktop}  ${styles3.container2}  container `}>
         <nav className={`pt-5 ${styles3.nav}`}>
@@ -462,7 +466,7 @@ const ShopCart3 = () => {
       {/*  */}
 
       <Footer />
-    </>
+    </div>
   );
 };
 export default ShopCart3;

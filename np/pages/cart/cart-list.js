@@ -5,6 +5,8 @@ import React, { useState, useEffect, useRef, Fragment } from "react";
 import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import Header from "../../components/header";
+import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
+
 import Footer from "../../components/footer";
 
 const ShopCart2 = () => {
@@ -152,8 +154,11 @@ const ShopCart2 = () => {
   }, [selectedPayment]);
 
   return (
-    <>
-      <Header />
+    <div className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <Header />
+      </div>
+
       {/*  */}
       <div className={`${styles2.frame} container`}>
         <form action="" method="POST">
@@ -594,7 +599,7 @@ const ShopCart2 = () => {
       </div>
       {/*  */}
       <Footer />
-    </>
+    </div>
   );
 };
 export default ShopCart2;
