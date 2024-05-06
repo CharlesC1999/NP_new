@@ -10,7 +10,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
 
   const [orders, setOrders] = useState([]);
   const [showReview, setShowReview] = useState(false);
-  const [coupons, setCoupons] = useState([]);
+ 
 
   console.log(orders);
 
@@ -42,9 +42,13 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
         console.log(filteredOrders);
         // 如果存在搜索关键字，则进行过滤
         if (searchTerm) {
-          filteredOrders = filteredOrders.filter(order => order.name.includes(searchTerm));
+          filteredOrders = filteredOrders.filter(order => {
+            const title = order.name || order.Class_name;
+            return title.includes(searchTerm);
+          });
         }
         setOrders(filteredOrders);
+        console.log(searchTerm);
       } else {
         console.log('伺服器回傳資料類型錯誤，無法設定到狀態中');
       }
@@ -55,34 +59,13 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
   };
 
   //資料表3優惠券
-  const getCoupons = async () => {
-    const url = `http://localhost:3005/api/coupons`
-
-    // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
-    try {
-      // fetch預設是使用GET，不需要加method設定
-      const res = await fetch(url)
-      // 解析json格式資料成js的資料
-      const data = await res.json()
-      console.log(data.data.coupons)
-
-      // 為了要確保資料是物件，所以檢查後再設定
-      if (typeof data === 'object' && data !== null) {
-        // 設定到狀態中
-        setCoupons(data.data.coupons)
-      } else {
-        console.log('伺服器回傳資料類型錯誤，無法設定到狀態中')
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
+ 
   // 樣式2: didMount階段只執行一次
   useEffect(() => {
     // 頁面初次渲染之後伺服器要求資料
     getOrders(activeCategory === '全部' ? '' : activeCategory);
-
-    getCoupons()
+    
+    
   }, [activeCategory, searchTerm]);
 
 
@@ -92,7 +75,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
     <>
 
       {orders.filter(v => v.User_ID === userid).map((v, i) => {
-
+          const title = v.name || v.Class_name;
         //到時候把57改成當前會員ID(很像不能這樣寫QQ)
         //if(v.member_id===57)
         return (
@@ -126,7 +109,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
                 className={`${styles.buyItem} d-flex flex-row justify-content-between`}
               >
                 <div className={styles.buyItemMain}>
-                  <div className={styles.biContent}>{v.name || v.Class_name}...</div>
+                  <div className={styles.biContent}>{title}...</div>
                   <div className={styles.biNumber}>{v.Order_date} </div>
                   <div className={styles.biState}>狀態 : {v.Status}</div>
                 </div>

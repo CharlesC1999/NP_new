@@ -64,7 +64,8 @@ router.get('/', async function (req, res) {
   AND order_item.itemType = 1
   LEFT JOIN  class ON order_item.thing_ID =class.Class_ID
   AND order_item.itemType = 2
-  GROUP BY orders.order_Id  ;
+  
+  GROUP BY orders.order_Id ;
 `
 
   // 最終組合的sql語法(計數用)
