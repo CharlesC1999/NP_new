@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useLoader } from "@/hooks/use-loader";
 import moment from "moment-timezone";
 import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
-import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
+import HeaderSetting from "@/styles/headerSetting.module.scss";
 import Header from "@/components/Header";
 import ClassClassifacion from "@/components/class_file/ClassClassification";
 import Breadcrumbs from "@/components/Breadcrumbs";
