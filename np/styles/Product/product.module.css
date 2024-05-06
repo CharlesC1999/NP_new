@@ -5,7 +5,8 @@
 
 .container {
   background-color: var(--white, #fefefe);
-  /* display: flex; */
+  display: flex;
+  justify-content: center;
   /* 容器頂部開始垂直排列，而不是水平排列 */
   /* flex-direction: column; */
 
@@ -20,11 +21,12 @@
 @media (max-width: 375px) {
   /*排版*/
   .container {
-    padding: 0 10px;
+    padding: 0px;
+    margin: 0px;
   }
 
   .wrapper {
-    width: 100%;
+    width: 365px;
   }
 }
 
@@ -32,7 +34,7 @@
 /* side-bar總width */
 .sideBar {
   width: 250px;
-  margin-right: 40px;
+  margin-right: 100px;
 }
 
 .sideTitle {
@@ -70,7 +72,7 @@
 .DiscountBox {
   background-color: #b3b3b3;
   width: auto;
-  height: 420px;
+  /* height: 420px; */
 
   & img {
     width: 100%;
@@ -79,6 +81,11 @@
   }
 }
 
+.ProductFilter {
+  position: absolute;
+  top: -20px;
+  width: 1000px;
+}
 /* side-bar 以及 上方優惠商品文字及圖片 (不顯示) RWD*/
 @media (max-width: 375px) {
   .Top40 {
@@ -97,20 +104,35 @@
   .List {
     display: block !important;
   }
+  .ProductFilter {
+    position: relative;
+    top: 0px;
+    width: 345px;
+  }
 }
 
 /*product card1 商品卡片*/
 /* 商品總width 框架 */
 .productW {
   /* border: #454545 solid 1px; */
-  width: 915px;
+  width: 1000px;
+  position: relative;
+  justify-content: start;
+  flex-direction: column;
+  display: flex;
 }
 
 .productCard1 {
-  width: 915px;
-  row-gap: 30px;
+  align-content: flex-start;
+  position: relative;
+  top: 70px;
+  width: 1000px;
+  row-gap: 0px;
+  gap: 10px 20px;
   flex-wrap: wrap;
-  padding-bottom: 30px;
+  padding-inline: 30px;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .List {
@@ -119,8 +141,15 @@
 
 @media (width: 375px) {
   .productCard1 {
+    align-content: flex-start;
+    position: relative;
+    top: 0px;
     width: 346px;
+    row-gap: 0px;
+    gap: 0px 10px;
     flex-wrap: wrap;
-    padding-bottom: 30px;
+    padding-inline: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 50px;
   }
 }

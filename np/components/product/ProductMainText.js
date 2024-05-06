@@ -17,7 +17,10 @@ function ProductMainText({
   review_comments,
   average_rating,
   upload_date,
+  handleReviewCount,
 }) {
+  const reviewCount = review_comments.length;
+
   return (
     <>
       <div className={`${style["product-text"]} d-flex flex-column`}>
@@ -35,7 +38,9 @@ function ProductMainText({
               <i className={`fa-solid fa-star`} />
               {average_rating}
             </div>
-            <div className={`${style["star-text"]} ps-2 `}>(則評論)</div>
+            <div className={`${style["star-text"]} ps-2 `}>
+              ({reviewCount}則評論)
+            </div>
           </div>
          <FavIconProduct id={id}/>
         </div>
