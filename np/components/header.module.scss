@@ -1,3 +1,22 @@
+// -------------------動畫
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%); /* 假設您的側邊欄是從左側滑入 */
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-300px);
+  }
+}
+// -------------------動畫
 /* * {
   margin: 0;
 }
@@ -15,7 +34,11 @@ a:visited {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  & .slideOut {
+    animation: slideOut 1s ease-out;
+  }
   & .sideBarContainer {
+    animation: slideIn 0.29s ease-out;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -490,4 +513,14 @@ a:visited {
     line-height: 24px;
     text-align: start;
   }
+}
+
+// .sidebarSlideIn {
+//   animation: slideIn 0.5s ease-out;
+//   width: 227px; /* 設定側邊欄的寬度 */
+//   position: fixed; /* 或其他適合您佈局的定位方式 */
+//   z-index: 1000; /* 確保側邊欄在頁面上其他元素之上 */
+// }
+.slideOut {
+  animation: slideOut 0.5s ease-out forwards;
 }

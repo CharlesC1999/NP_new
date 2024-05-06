@@ -11,10 +11,10 @@ import "@fortawesome/fontawesome-free/css/all.css";
 function SearchResult() {
   const [activeTab, setActiveTab] = useState("食譜");
   return (
-    <>
+    <div className={styles.wrapper}>
       <HeaderComponent />
       <Breadcrumbs />
-      <div className={`${styles.container}`}>
+      <div className={`${styles.content} ${styles.container}`}>
         <SearchFilterTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === "食譜" && (
           <div className={styles.cards}>
@@ -55,7 +55,7 @@ function SearchResult() {
         )}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
