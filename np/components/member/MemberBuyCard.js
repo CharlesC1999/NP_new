@@ -46,17 +46,20 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
       userOrders1.forEach(order1 => {
         const matchingOrder = userOrders2.find(order2 => order2.order_id === order1.order_id);
         if (matchingOrder) {
-          const total = parseInt(order1.total) + (matchingOrder.C_price * matchingOrder.C_quantity);
+          const total1 = parseInt(order1.total) || 0;
+          const total2 = matchingOrder.C_price * matchingOrder.C_quantity || 0;
+          const total = total1 + total2;
           mergedOrders.push({ ...order1, ...matchingOrder, total });
         } else {
-          mergedOrders.push({ ...order1, total: parseInt(order1.total) });
+          const total = parseInt(order1.total) || 0;
+          mergedOrders.push({ ...order1, total });
         }
       });
       userOrders2.forEach(order2 => {
         const matchingOrder = userOrders1.find(order1 => order1.order_id === order2.order_id);
         if (!matchingOrder) {
-          const total = order2.C_price * order2.C_quantity + parseInt(order2.total);
-          mergedOrders.push({ ...order2, total });
+          const total = (order2.C_price || 0) * (order2.C_quantity || 0) + (parseInt(order2.total) || 0);
+      mergedOrders.push({ ...order2, total });
         }
       });
       setMergedOrders(mergedOrders);
@@ -67,18 +70,18 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
 
   console.log(mergedOrders);
 
-  let totalTotalTotal = mergedOrders.reduce((total, order) => total + parseInt(order.total), 0);
-console.log(totalTotalTotal);
+//   let totalTotalTotal = mergedOrders.reduce((total, order) => total + parseInt(order.total), 0);
+// console.log(totalTotalTotal);
 
-let totaltotaltotal=0;
-const total = order_s.length > 0 ? order_s[0].total : null;
-totaltotaltotal+= parseInt(total )
-console.log(totaltotaltotal);
+// let totaltotaltotal=0;
+// const total = order_s.length > 0 ? order_s[0].total : null;
+// totaltotaltotal+= parseInt(total )
+// console.log(totaltotaltotal);
 
 // 加上課程的錢錢
-const classtotal = order_s2.length > 0 ? order_s2[0].class_tatol : null;
-totaltotaltotal+= parseInt(classtotal )
-console.log(totaltotaltotal);
+// const classtotal = order_s2.length > 0 ? order_s2[0].class_tatol : null;
+// totaltotaltotal+= parseInt(classtotal )
+// console.log(totaltotaltotal);
 
 
 
