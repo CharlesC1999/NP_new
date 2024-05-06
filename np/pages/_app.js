@@ -20,6 +20,8 @@ import Router from "next/router";
 
 // Head
 import Head from "next/head";
+//
+import { CategoryProvider } from "@/hooks/ClassProp";
 
 import { CartProvider } from "@/hooks/use-cart";
 // 給食譜列表跟細節頁的sideBar用的context
@@ -37,9 +39,11 @@ export default function App({ Component, pageProps }) {
         <LoaderProvider CustomLoader={OrangeLoader}>
           <CategoryForSQLProvider>
             <CartProvider>
-              <ManageRouteChanges>
-                {getLayout(<Component {...pageProps} />)}
-              </ManageRouteChanges>
+              <CategoryProvider>
+                <ManageRouteChanges>
+                  {getLayout(<Component {...pageProps} />)}
+                </ManageRouteChanges>
+              </CategoryProvider>
             </CartProvider>
           </CategoryForSQLProvider>
         </LoaderProvider>
