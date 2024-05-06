@@ -88,8 +88,8 @@ router.post('/findClass', async (req, res) => {
 
     // 返回結果，其中 classes 和 recipes 為空陣列
     res.json({
-      products: [],
-      classes, // 故意回傳空陣列
+      products: [], // 故意回傳空陣列
+      classes,
       recipes: [], // 故意回傳空陣列
     })
   } catch (error) {
