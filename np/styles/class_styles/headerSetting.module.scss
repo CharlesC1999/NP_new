@@ -1,0 +1,20 @@
+.mobileAdjust {
+  margin-top: 0px;
+}
+
+.headerSetting {
+  width: 100%; /* 確保 header 寬度為 100% */
+  top: 0; /* 頂端對齊 */
+  left: 0; /* 左側對齊 */
+  z-index: 1000; /* 確保 header 在最上層 */
+}
+
+/* 當螢幕寬度小於 375px 時使用 fixed 定位 */
+@media (max-width: 375px) {
+  .headerSetting {
+    position: fixed;
+  }
+  .mobileAdjust {
+    margin-top: 62px;
+  }
+}
