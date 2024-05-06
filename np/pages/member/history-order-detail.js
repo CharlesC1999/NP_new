@@ -158,18 +158,18 @@ const HistoryOrderDetail = () => {
         <div className={styles3.out}>
           <div className={`${styles3.desktop}  ${styles3.container2}  container `}>
 
-
+             {/* 欄位一顯示商品 */}
             <section
               className={`${styles3.section} ${styles3.mgt} mb-2 fw-bold `}
               style={{ color: "#50bf8b" }}
             >
-              購物明細
+              購買明細
             </section>
             <section className={`${styles3.ProductBorder} ${styles3.section}`}>
               <div className={`${styles3.topBar} row py-3`}>
 
-                <div className={`${styles3.fc} col text-center`}>商品明細</div>
-                <div className={`${styles3.fc} col text-center`}>優惠價</div>
+                <div className={`${styles3.fc} col text-center`}>名稱</div>
+                <div className={`${styles3.fc} col text-center`}>價格</div>
                 <div className={`${styles3.fc} col text-center`}>數量</div>
                 <div className={`${styles3.fc} col text-center`}>小計</div>
 
@@ -193,6 +193,42 @@ const HistoryOrderDetail = () => {
 
 
             </section>
+            {/* 欄位二顯示課程 */}
+            <section
+              className={`${styles3.section} ${styles3.mgt} mb-2 fw-bold `}
+              style={{ color: "#50bf8b" }}
+            >
+              購買明細
+            </section>
+            <section className={`${styles3.ProductBorder} ${styles3.section}`}>
+              <div className={`${styles3.topBar} row py-3`}>
+
+                <div className={`${styles3.fc} col text-center`}>名稱</div>
+                <div className={`${styles3.fc} col text-center`}>價格</div>
+                <div className={`${styles3.fc} col text-center`}>數量</div>
+                <div className={`${styles3.fc} col text-center`}>小計</div>
+
+              </div>
+              {orderDetail.map((v, i) => {
+
+                return (
+                  <div className="row py-2">
+
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.price * v.Quantity}</div>
+
+                  </div>
+
+                )
+              }
+              )}
+
+
+
+            </section>
+            
             {/*總價 */}
 
             <div className={`${styles3.totalPrice} row`}>
@@ -279,7 +315,7 @@ const HistoryOrderDetail = () => {
               style={{ width: 345, marginTop: 100 }}
             >
               <div className={`${styles3.topBar} row`}>
-                <div className={`${styles3.fc} col`}>購物明細</div>
+                <div className={`${styles3.fc} col`}>購買明細</div>
               </div>
               {orderDetail.map((v, i) => {
                 return (
