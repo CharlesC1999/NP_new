@@ -294,18 +294,30 @@ const HeaderComponent = () => {
   const handleSearch = async (event) => {
     event.preventDefault();
     console.log("搜索:", searchInput, "在:", selectedText);
+    // 重新映射
+    const routerNameMapping = {
+      所有分類: "findAll",
+      商品列表: "findProduct",
+      食譜精選: "findRecipe",
+      精選課程: "findClass",
+    };
+    // 端點對應設置
+    const endpoint = routerNameMapping[selectedText];
     // 執行搜索邏輯
     try {
-      const response = await fetch("http://localhost:3005/api/search", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          searchText: searchInput,
-          category: selectedText,
-        }),
-      });
+      const response = await fetch(
+        `http://localhost:3005/api/search/${endpoint}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            searchText: searchInput,
+            category: selectedText,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
