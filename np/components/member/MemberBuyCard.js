@@ -39,6 +39,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
         // 設定到狀態中
         // setOrders(data.data.orders);
         let filteredOrders = data.data.orders;
+        console.log(filteredOrders);
         // 如果存在搜索关键字，则进行过滤
         if (searchTerm) {
           filteredOrders = filteredOrders.filter(order => order.name.includes(searchTerm));
@@ -106,7 +107,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
                     src={`/images/products/${v.image_url}`}
                     alt=""
                   />} */}
-                  {v.image_url ? (
+                  {v.name ? (
                     <img
                       className="object-fit-cover"
                       src={`/images/products/${v.image_url}`}

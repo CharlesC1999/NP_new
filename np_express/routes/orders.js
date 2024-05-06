@@ -106,7 +106,7 @@ router.get('/:status', async function (req, res) {
   JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
   LEFT JOIN  product ON order_item.thing_ID =product.id 
   AND order_item.itemType = 1
-  LEFT JOIN product_image ON order_item.thing_ID =product_image.id
+  LEFT JOIN product_image ON order_item.thing_ID =product_image.F_product_id
   AND order_item.itemType = 1
   LEFT JOIN  class ON order_item.thing_ID =class.Class_ID
   AND order_item.itemType = 2
