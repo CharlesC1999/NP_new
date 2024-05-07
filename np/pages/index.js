@@ -123,7 +123,7 @@ export default function Index() {
       <div className={` ${styles.wrapper}`}>
         <div className={`d-flex justify-content-between ps-3 pe-3`}>
           <h4 className={`${styles.MeAuto}`}>熱銷商品</h4>
-          <a className={`${styles.TitleRwd}`} href="">
+          <a className={`${styles.TitleRwd}`} href="/product">
             <h5 className={`${styles.MeAuto}`}>
               更多<i className="fa-solid fa-chevron-right"></i>
             </h5>
@@ -151,7 +151,7 @@ export default function Index() {
             className={`${styles.card5Title} d-flex justify-content-between`}
           >
             <h4 className={`${styles.MeAuto}`}>熱門課程</h4>
-            <a className={`${styles.TitleRwd}`} href="">
+            <a className={`${styles.TitleRwd}`} href="/class-page">
               <h5 className={`${styles.MeAuto}`}>
                 更多<i className="fa-solid fa-chevron-right"></i>
               </h5>
@@ -181,7 +181,7 @@ export default function Index() {
             className={`d-flex justify-content-between ${styles.card6Title}`}
           >
             <h4 className={`${styles.MeAuto}`}>精選食譜</h4>
-            <a className={`${styles.TitleRwd}`} href="">
+            <a className={`${styles.TitleRwd}`} href="/recipe">
               <h5 className={`${styles.MeAuto}`}>
                 更多<i className="fa-solid fa-chevron-right"></i>
               </h5>
