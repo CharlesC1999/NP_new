@@ -6,7 +6,7 @@ import { getIdParam } from '#db-helpers/db-tool.js'
 
 // 資料庫使用
 import sequelize from '#configs/db.js'
-const { Orders } = sequelize.models
+const { Coupons } = sequelize.models
 
 // 一般sql
 import db from '#configs/mysql.js'
@@ -15,9 +15,9 @@ import db from '#configs/mysql.js'
 // my-products?brand_ids=1,2&name_like=pixel&price_gte=10000&price_lte=15000&sort=price&order=asc&page=1&perpage=2
 router.get('/', async function (req, res) {
   const {
-    order_ids = '', // string, 對應 brand_id 欄位,  `brand_id IN (brand_ids)`
+    coupon_ids = '', // string, 對應 brand_id 欄位,  `brand_id IN (brand_ids)`
   } = req.query
-  console.log(order_ids)
+  console.log(coupon_ids)
 
   // 測試用
   // console.log(
@@ -35,7 +35,7 @@ router.get('/', async function (req, res) {
   const conditions = []
 
   // 品牌，brand_ids 使用 `brand_id IN (1,2,3)`
-  conditions[1] = order_ids ? `Order_ ID (${order_ids})` : ''
+  conditions[1] = coupon_ids ? `Coupon_ ID (${coupon_ids})` : ''
 
   // 去除空字串
   const conditionsValues = conditions.filter((v) => v)
@@ -54,16 +54,17 @@ router.get('/', async function (req, res) {
   // page=1 offset=0; page=2 offset= perpage * 1; ...
   // const offset = (pageNow - 1) * perpageNow
 
-  // 最終組合的sql語法
-  const sqlOrders = `SELECT * FROM orders `
+  //   最終組合的sql語法
+  const sqlCoupons = `SELECT * FROM coupons `
+
   // 最終組合的sql語法(計數用)
-  const sqlCount = `SELECT COUNT(*) AS count FROM orders ${where}`
+  const sqlCount = `SELECT COUNT(*) AS count FROM coupons ${where}`
 
   // 顯示sql語法
-  console.log(sqlOrders)
+  console.log(sqlCoupons)
   console.log(sqlCount)
 
-  const [rows, fields] = await db.query(sqlOrders)
+  const [rows, fields] = await db.query(sqlCoupons)
 
   console.log(rows)
 
@@ -74,31 +75,33 @@ router.get('/', async function (req, res) {
 
   // 計算頁數
   // const pageCount = Math.ceil(total / Number(perpage)) || 0
+  //抓狀態
 
   return res.json({
     status: 'success',
     data: {
       total,
-
-      orders: rows,
+      coupons: rows,
     },
   })
 })
+router.get('/:status', async function (req, res) {
+  // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
+  const couponsStatus = req.params.status
 
-// 標準回傳JSON
-//   return res.json({ status: 'success', data: {} })
-// })
+  const sqlOrders = `SELECT * FROM coupons
+  WHERE coupons.C_status = "${couponsStatus}"`
 
-// GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
-// router.get('/:id', async function (req, res) {
-//   // 轉為數字
-//   const id = getIdParam(req)
+  // WHERE Status= '${ordersStatus}'
+  const [rows, fields] = await db.query(sqlOrders)
 
-//   const product = await My_Product.findByPk(id, {
-//     raw: true, // 只需要資料表中資料
-//   })
-
-//   return res.json({ status: 'success', data: { product } })
-// })
+  return res.json({
+    status: 'success',
+    data: {
+      coupons: rows,
+    },
+  })
+  //return res.json({ status: 'success', data: { status } })
+})
 
 export default router

@@ -33,10 +33,10 @@ function CatBuy({activeCategory, setActiveCategory}) {
         <div className={styles.ccat}>
           <a
             href=""
-            style={{ color: activeCategory === "訂單處理中" ? "var(--green02)" : "inherit" }}
+            style={{ color: activeCategory === "處理中" ? "var(--green02)" : "inherit" }}
             onClick={(e) => {
               e.preventDefault(); // 阻止默認行為
-              handleCategoryClick("訂單處理中"); // 處理點擊事件
+              handleCategoryClick("處理中"); // 處理點擊事件
             }}
           >
             訂單處理中
@@ -69,10 +69,10 @@ function CatBuy({activeCategory, setActiveCategory}) {
         <div className={styles.ccat}>
           <a
             href=""
-            style={{ color: activeCategory === "已取消" ? "var(--green02)" : "inherit" }}
+            style={{ color: activeCategory === "取消" ? "var(--green02)" : "inherit" }}
             onClick={(e) => {
               e.preventDefault(); // 阻止默認行為
-              handleCategoryClick("已取消"); // 處理點擊事件
+              handleCategoryClick("取消"); // 處理點擊事件
             }}
           >
             取消
