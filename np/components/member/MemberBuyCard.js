@@ -58,7 +58,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
     }
   };
 
-  //資料表3優惠券
+  
  
   // 樣式2: didMount階段只執行一次
   useEffect(() => {
