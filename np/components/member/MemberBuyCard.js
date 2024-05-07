@@ -18,7 +18,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
   let userid = parseInt(localStorage.getItem('userid'))
   console.log(userid);
 
-
+// let userid = 1
  
 
   // 資料表1商品訂單
