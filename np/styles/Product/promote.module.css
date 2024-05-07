@@ -103,11 +103,12 @@
 /* 商品總width 框架 */
 .productW {
   /* border: #454545 solid 1px; */
-  width: 915px;
+  width: 1000px;
 }
 
 .productCard1 {
-  width: 915px;
+  width: 1000px;
+  padding-inline: 20px;
   row-gap: 30px;
   flex-wrap: wrap;
   padding-bottom: 30px;

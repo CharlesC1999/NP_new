@@ -5,63 +5,20 @@ import styles from "./MemberBuymain.module.css";
 
 import CatBuy from "./CatBuy";
 
-// function BuyCard({ onCommentClick }) {
-//   // 添加 props 參數
-//   const [showReview, setShowReview] = useState(false);
-//   const handleClick = () => {
-//     setShowReview(!showReview);
-//     if (onCommentClick) {
-//       onCommentClick(); // 调用从父组件传递下来的函数
-//     }
-//   };
 
-//   return (
-//     <div className={styles.buyCard}>
-//       <div className={styles.buyCardContent}>
-//         <div className={styles.bccolumn}>
-//           <div className={styles.bcimg} />
-//         </div>
-//         <div className={styles.bccolumn2}>
-//           <div className={styles.buyItem}>
-//             <div className={styles.buyItemMain}>
-//               <div className={styles.biContent}>新鮮 蔬菜 </div>
-//               <div className={styles.biNumber}>商品規格數量..... </div>
-//               <div className={styles.biState}>狀態 : 待收貨</div>
-//             </div>
-//             <div className={styles.biMb}>
-//               <div className={styles.biMoney}>訂單金額: $200</div>
-//               <a href className={`${styles.buyCardBtn} btn`}>
-//                 查看詳情
-//               </a>
-//               <button
-//                 onClick={() => setShowReview(!showReview)} // 切換 showReview 狀態
-//                 className={`${styles.buyCardBtn} btn d-flex justify-content-center`}
-//               >
-//                 評論
-//               </button>
-//               {showReview && (
-//                 <div className={`review-container mt-3`}>
-//                   {/* 評論容器的內容 */}
-//                 </div>
-//               )}
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
+
 const MemberBuyMain = () => {
-  const [activeCategory, setActiveCategory] = useState("全部");
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState("全部");
+  
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
   // const handleCommentClick = () => {
-  //   // 这里可以定义当评论按钮被点击时执行的逻辑
+  //   // 这里可以定义当评论按钮被点击时执行的逻辑 
   //   console.log("评论按钮被点击了");
   // };
-
+  
   return (
     <>
       <div
@@ -83,13 +40,10 @@ const MemberBuyMain = () => {
           <div
             className={`d-flex flex-column justify-content-center align-items-cente`}
           >
-            <CatBuy
-              setActiveCategory={setActiveCategory}
-              activeCategory={activeCategory}
-            />
+           <CatBuy setActiveCategory={setActiveCategory} activeCategory={activeCategory} />
             {/* 分類欄下面的搜尋框 */}
             <div className={styles.searchContainer}>
-              <input
+            <input
                 className={styles.searchBar}
                 type="text"
                 placeholder="Search for items..."
@@ -115,11 +69,7 @@ const MemberBuyMain = () => {
             </div>
           </div>
           {/* BuyCard  */}
-          <MemberBuyCard
-            activeCategory={activeCategory}
-            searchTerm={searchTerm}
-          />
-          <MemberBuyCard activeCategory={activeCategory} />
+          <MemberBuyCard activeCategory={activeCategory} searchTerm={searchTerm} />
           {/* <div className={styles.buyCard}>
             <div className={styles.buyCardContent}>
               <div className={styles.bccolumn}>

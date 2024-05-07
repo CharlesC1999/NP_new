@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    :root {
+
+      --font-size: 20px;
+      --gray01: #747e85;
+      --green03: #78CEA6;
+      --green04: #9CB4AC;
+      --black: #454545;
+      --green02: #50bf8b;
+      --green05: #DEF9EC;
+      --black80:#636E72;
+    }
+
+   /* 分類欄 */
+   .couponcat {
+      border-bottom: var(--green05) 1px solid;
+      display: flex;
+      max-width: 900px;
+      gap: 19px;
+      font-size: 20px;
+      color: var(--Black-80, #636e72);
+      font-weight: 500;
+      white-space: nowrap;
+      line-height: 150%;
+      justify-content: space-between;
+      padding: 0 80px;
+    }
+
+    @media (max-width: 991px) {
+      .couponcat {
+        flex-wrap: wrap;
+        white-space: initial;
+        padding: 0 20px;
+      }
+    }
+    @media (max-width: 375px) {
+      .couponcat {
+        flex-wrap: wrap;
+        white-space: initial;
+        padding: 0 20px;
+        font-size: 12px;
+        margin: 20px 0 20px 0;
+        border-bottom: none;
+      }
+    }
+    
+
+    .ccathover a{
+      color: var(--green02);
+      font-family: Inter, sans-serif;
+      text-decoration: none;
+    }
+   
+    @media (max-width:375px) {
+      .ccathover a{
+        color: var(--Black-80);
+        
+       
+      }
+    }
+    .ccat a{
+      font-family: Inter, sans-serif;
+      color: var(--Black-80);
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="couponcat">
+    <div class="ccathover"><a href="">全部</a></div>
+    <div class="ccat"><a href="">可使用</a></div>
+    <div class="ccat"> <a href="">已使用</a></div>
+    <div class="ccat"><a href="">已失效</a></div>
+  </div>
+</body>
+
+</html>

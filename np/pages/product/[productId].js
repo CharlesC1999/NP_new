@@ -35,7 +35,10 @@ export default function ProductDetail() {
     image_urls: [],
     sort_orders: [],
   });
-
+  //產品數量顯示
+  const [categoryCounts, setCategoryCounts] = useState({});
+  //條件用
+  const [productCate, setProductCate] = useState([]);
   //解析ReviewDetails字串
   function parseReviewDetails(details) {
     return details.split(",").map((detail) => {
@@ -48,7 +51,9 @@ export default function ProductDetail() {
       };
     });
   }
-
+  const normalCategories = productCate.filter(
+    (cate) => cate.parentId === null && cate.cateId !== 23 && cate.cateId !== 22
+  );
   //取得後端網址資料
   const getProduct = async (productId) => {
     try {
@@ -63,13 +68,14 @@ export default function ProductDetail() {
           image_urls: data.data.image_urls.split(","),
           sort_orders: data.data.sort_orders.split(",").map(Number),
         };
+        setProductCate(data.categories);
+        setCategoryCounts(data.categoryCounts);
         setProduct(formattedProduct);
       }
     } catch (e) {
       console.error("Error fetching product:", e);
     }
   };
-
   //動態路由需要router來確定是否收到值 1.isReady是布林值 2.query是回傳的id值
   const router = useRouter();
   useEffect(() => {
@@ -79,19 +85,12 @@ export default function ProductDetail() {
       getProduct(router.query.productId);
     }
   }, [router.isReady]);
-  //比對mainPic的變更
-  // const ProductMainPic = React.memo(function ProductMainPic({
-  //   image_urls,
-  //   sort_orders,
-  // }) {
-  //   return <div>{/* 渲染图片逻辑 */}</div>;
-  // });
 
   if (!product || product.id === undefined) {
     console.log(product);
     return <div>Loading...</div>; // 或其他加载指示器
   }
-  console.log(product);
+
   return (
     <>
       <HeaderComponent />
@@ -107,7 +106,7 @@ export default function ProductDetail() {
               className={`${style["left-side"]} d-flex flex-column d-none d-sm-flex`}
             >
               <div className={`side-bar01`}>
-                <ProductSidebarCate />
+                <ProductSidebarCate normalCategories={normalCategories} />
               </div>
               {/* <div className={`side-bar02`}>
                 <ProductSidebarDetail />

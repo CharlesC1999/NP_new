@@ -1,0 +1,197 @@
+
+    
+
+    .membership {
+        display: flex;
+        width: 788px;
+        flex-direction: column;
+        line-height: 120%;
+    }
+
+@media (max-width:375px) {
+  .membership{
+    width: auto;
+    padding: 20px 0;
+    margin: 0 15px;
+  }
+}
+
+
+
+
+
+
+    .membershipDetails {
+        background-color: var(--Black-0, #fff);
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        font-size: 15px;
+        color: var(--Black-80, #636e72);
+        font-weight: 500;
+        padding: 0 0px 35px;
+    }
+
+    @media (max-width: 991px) {
+        .membershipDetails {
+            max-width: 100%;
+        }
+    }
+
+    .currentLevel {
+        width: 100%;
+        font: 400 20px Inter, sans-serif;
+    }
+
+    @media (max-width: 375px) {
+        .currentLevel {
+            max-width: 100%;
+            font-size: 16px;
+        }
+    }
+
+    .currentLevelInfo {
+        font-family: Inter, sans-serif;
+        align-self: start;
+        margin-top: 20px;
+    }
+   @media (max-width:375px) {
+    .currentLevelInfo {
+      font-size: var(--font-size-m);
+    }
+   }
+    .nextLevelInfo {
+        font-family: Inter, sans-serif;
+        align-self: start;
+        margin-top: 16px;
+    }
+    @media (max-width:375px) {
+      .nextLevelInfo{
+        font-size: var(--font-size-m);
+      }
+    }
+
+    .upgradeAmountInfo {
+        font-family: Inter, sans-serif;
+        align-self: start;
+        margin-top: 16px;
+    }
+    @media (max-width:375px) {
+      .upgradeAmountInfo{
+        font-size: var(--font-size-m);
+      }
+    }
+    .levelBenefits {
+        border-bottom: 1px solid var(--gray02);
+        padding: 3px 0;
+        font: 16px Inter, sans-serif;
+        margin-top: 52px;
+    }
+
+    @media (max-width: 991px) {
+        .levelBenefits {
+            max-width: 100%;
+            margin-top: 40px;
+            white-space: initial;
+        }
+    }
+
+    .levelCards {
+        justify-content: space-between;
+        display: flex;
+        margin-top: 37px;
+        gap: 0px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 375px) {
+        .levelCards {
+            display: block;
+            flex-wrap: wrap;
+            
+        }
+    }
+
+    .levelCard {
+        align-self: end;
+        display: flex;
+        margin-top: 90px;
+        flex-direction: column;
+        white-space: nowrap;
+        padding: 10px 0;
+    }
+
+
+    @media (max-width: 375px) {
+        .levelCard {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: row;
+
+            
+        }
+    }
+    @media (max-width:375px) {
+        .mNo{
+            display: none;
+        }
+    }
+
+    .levelTitle {
+        font-family: Inter, sans-serif;
+    }
+   @media (max-width:375px) {
+    .levelTitle{
+      font-size: 16px;
+    }
+   }
+    .levelDescription {
+        font-family: Inter, sans-serif;
+        margin-top: 10px;
+    }
+
+    .levelPerks {
+        font-family: Inter, sans-serif;
+        margin-top: 10px;
+    }
+
+    .levelIcon  {
+        max-width: 1024px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+    @media (max-width:375px) {
+        .levelIcon {
+          display: flex;
+        }
+    }
+
+    .levelImage {
+        aspect-ratio: 1;
+        object-fit: auto;
+        object-position: center;
+        width: 80px;
+        border-radius: 50%;
+    }
+
+    .upgradeRules {
+      color: var(--Black-80);
+        border-bottom: 1px solid var(--gray02);
+        padding: 3px 0;
+        font: 14px Inter, sans-serif;
+        margin-top: 37px;
+    }
+
+    @media (max-width: 991px) {
+        .upgradeRules {
+            max-width: 100%;
+            white-space: initial;
+        }
+    }
+    @media (max-width:375px) {
+        .levelContent{
+            margin-left: 34px;
+        }
+    }

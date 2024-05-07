@@ -2,7 +2,10 @@ import React from "react";
 
 import styles from "@/components/product/sideBar/productSidebarDiscount.module.scss";
 import DiscountItem from "@/components/product/sideBar/DiscountItem";
-export default function ProductSidebarDiscount({ DisCountCategories }) {
+export default function ProductSidebarDiscount({
+  DisCountCategories,
+  handleCategoryClick,
+}) {
   return (
     <>
       <div className={`${styles.sideBarBox}`}>
@@ -10,11 +13,14 @@ export default function ProductSidebarDiscount({ DisCountCategories }) {
           <h5>優惠活動</h5>
         </div>
         <div className={`${styles.line}`}></div>
-        <DiscountItem />
-        <DiscountItem />
-        <DiscountItem />
-        <DiscountItem />
-        <DiscountItem />
+        {DisCountCategories.map((category) => (
+          <div
+            key={category.cateId}
+            onClick={() => handleCategoryClick(category.cateId)}
+          >
+            <DiscountItem category_name={category.cateName} />
+          </div>
+        ))}
       </div>
     </>
   );
