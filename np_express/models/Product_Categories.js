@@ -14,6 +14,10 @@ export default async function (sequelize) {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
+      cate_png: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+      },
       description: {
         type: DataTypes.TEXT,
         allowNull: true, // 允许 NULL

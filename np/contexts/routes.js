@@ -8,6 +8,7 @@ const routes = {
   classList: "/class-page",
   speakerList: "/speaker",
   productList: "/product",
+  productPromote: "/product/promote",
   recipeList: "/recipe",
 };
 //   路徑有錯或者未放入，請各自放入
