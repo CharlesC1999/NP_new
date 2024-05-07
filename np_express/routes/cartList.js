@@ -1,42 +1,49 @@
 import express from 'express'
 const router = express.Router()
+// sequelize db
+import sequelize from '#configs/db.js'
+// 一般sql
+import db from '#configs/mysql.js'
+
+const { Orders } = sequelize.models
+
+import { v4 as uuidv4 } from 'uuid'
 
 router.post('/', (req, res, next) => {
   console.log(req.body)
-
-  // const {
-  //   inputText,
-  //   inputEmail,
-  //   inputNumber,
-  //   inputPackageName,
-  //   inputPackageNumber,
-  //   inputAddress,
-  //   selectedPayment,
-  // } = req.body
-  // if (
-  //   !inputText ||
-  //   !inputEmail ||
-  //   !inputNumber ||
-  //   !inputPackageName ||
-  //   !inputPackageNumber ||
-  //   !inputAddress ||
-  //   !selectedPayment
-  // ) {
-  //   return res.status(400).json({ status: 'error', message: '缺少必要资料' })
-  // }
-  // // const allData=
-  // const orderDetails = {
-  //   inputText,
-  //   inputEmail,
-  //   inputNumber,
-  //   inputPackageName,
-  //   inputPackageNumber,
-  //   inputAddress,
-  //   selectedPayment,
-  // }
-
-  res.json({ status: 'success' })
+  const ordeData = req.body
+  const orderId = res.json({ status: 'success' })
 })
+// const {
+//   inputText,
+//   inputEmail,
+//   inputNumber,
+//   inputPackageName,
+//   inputPackageNumber,
+//   inputAddress,
+//   selectedPayment,
+// } = req.body
+// if (
+//   !inputText ||
+//   !inputEmail ||
+//   !inputNumber ||
+//   !inputPackageName ||
+//   !inputPackageNumber ||
+//   !inputAddress ||
+//   !selectedPayment
+// ) {
+//   return res.status(400).json({ status: 'error', message: '缺少必要资料' })
+// }
+// // const allData=
+// const orderDetails = {
+//   inputText,
+//   inputEmail,
+//   inputNumber,
+//   inputPackageName,
+//   inputPackageNumber,
+//   inputAddress,
+//   selectedPayment,
+// }
 
 // 第2支路由傳到前端別的頁面
 router.get('/cart/payment-info', (req, res) => {
