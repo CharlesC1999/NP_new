@@ -8,11 +8,24 @@ import Footer from "@/components/footer";
 import ClassCard from "@/components/search/ClassCardWeb";
 import ProductCard from "@/components/search/ProductCard02";
 import RecipeCardsList from "@/components/search/RecipeCardsList";
+import PaginationRounded from "@/components/pagination";
 import "@fortawesome/fontawesome-free/css/all.css";
 function SearchResult() {
   const { results } = useSearchResults();
   console.log(results);
   const [activeTab, setActiveTab] = useState("食譜");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(12);
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = results.products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   // --------------------------------------------
   console.log(results.classes);
   return (
@@ -71,16 +84,23 @@ function SearchResult() {
 
         {activeTab === "商品" && (
           <div className={styles.productCard1}>
-            {results.products && results.products.length > 0 ? (
-              <div className={styles.gridCards}>
-                {results.products.map((productData, index) => (
-                  <ProductCard
-                    className={styles.doCenter}
-                    productsData={productData}
-                    key={index}
-                    Index={index}
-                  />
-                ))}
+            {currentProducts && currentProducts.length > 0 ? (
+              <div style={{ width: "100%" }} className={styles.pagination}>
+                <div className={styles.gridCards}>
+                  {currentProducts.map((productData, index) => (
+                    <ProductCard
+                      className={styles.doCenter}
+                      productsData={productData}
+                      key={index}
+                      Index={index}
+                    />
+                  ))}
+                </div>
+                <PaginationRounded
+                  count={Math.ceil(results.products.length / itemsPerPage)}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                />
               </div>
             ) : (
               <div className={styles.noResult}>
