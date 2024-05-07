@@ -75,6 +75,9 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("userid", userData.id); 
     console.log( userData);
     console.log(userData.id);
+    //0507發現衝突的地方
+    // localStorage.setItem("userData", JSON.stringify(userData));
+    // console.log(token, JSON.stringify(userData));
     // 將token存儲在localStorage中以維持登入狀態
     // 用localStorage存儲會有安全性問題，因為localStorage是存儲在瀏覽器中，
     // 任何人都可以訪問localStorage，所以可以用cookie來存儲token
