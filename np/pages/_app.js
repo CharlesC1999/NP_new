@@ -17,6 +17,8 @@ import "@/styles/loader.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
 // Router
 import Router from "next/router";
+// Search Result
+import { SearchResultsProvider } from "@/contexts/searchContext";
 
 // Head
 import Head from "next/head";
@@ -38,15 +40,17 @@ export default function App({ Component, pageProps }) {
       <AuthProvider>
         <LoaderProvider CustomLoader={OrangeLoader}>
           <SearchResultsProvider>
-            <CategoryForSQLProvider>
-              <CartProvider>
-                <CategoryProvider>
-                  <ManageRouteChanges>
-                    {getLayout(<Component {...pageProps} />)}
-                  </ManageRouteChanges>
-                </CategoryProvider>
-              </CartProvider>
-            </CategoryForSQLProvider>
+            <SearchResultsProvider>
+              <CategoryForSQLProvider>
+                <CartProvider>
+                  <CategoryProvider>
+                    <ManageRouteChanges>
+                      {getLayout(<Component {...pageProps} />)}
+                    </ManageRouteChanges>
+                  </CategoryProvider>
+                </CartProvider>
+              </CategoryForSQLProvider>
+            </SearchResultsProvider>
           </SearchResultsProvider>
         </LoaderProvider>
       </AuthProvider>
