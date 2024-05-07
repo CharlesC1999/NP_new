@@ -1,0 +1,52 @@
+[
+  {
+    "id": 10001,
+    "order_id": 1001,
+    "product_id": 101,
+    "class_id": null,
+    "quantity": 2,
+    "unit_price": 199.99,
+    "total_price": 399.98,
+    "product_type": "Electronics"
+  },
+  {
+    "id": 10002,
+    "order_id": 1001,
+    "product_id": null,
+    "class_id": 501,
+    "quantity": 1,
+    "unit_price": 299.99,
+    "total_price": 299.99,
+    "product_type": "Course"
+  },
+  {
+    "id": 10003,
+    "order_id": 1002,
+    "product_id": 102,
+    "class_id": null,
+    "quantity": 3,
+    "unit_price": 50.0,
+    "total_price": 150.0,
+    "product_type": "Apparel"
+  },
+  {
+    "id": 10004,
+    "order_id": 1003,
+    "product_id": 103,
+    "class_id": null,
+    "quantity": 1,
+    "unit_price": 999.99,
+    "total_price": 999.99,
+    "product_type": "Electronics"
+  },
+  {
+    "id": 10005,
+    "order_id": 1003,
+    "product_id": null,
+    "class_id": 502,
+    "quantity": 2,
+    "unit_price": 450.0,
+    "total_price": 900.0,
+    "product_type": "Course"
+  }
+]

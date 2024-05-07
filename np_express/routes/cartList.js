@@ -11,8 +11,9 @@ import { v4 as uuidv4 } from 'uuid'
 
 router.post('/', (req, res, next) => {
   console.log(req.body)
-  const ordeData = req.body
-  const orderId = res.json({ status: 'success' })
+  // const ordeData = req.body
+  // const orderId = res.json({ status: 'success' })
+  res.json({ status: 'success' })
 })
 // const {
 //   inputText,
