@@ -204,7 +204,7 @@ const HeaderComponent = () => {
   // const [animation, setAnimation] = useState(""); //sidebar slideout
   const router = useRouter();
   const { auth, logout } = useAuth();
-
+// console.log(auth);
   let hasMargin = true;
   let isMobile = false;
 

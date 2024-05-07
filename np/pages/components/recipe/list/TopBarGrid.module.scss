@@ -1,0 +1,76 @@
+/* typography */
+.figma-h3 {
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120.313%;
+}
+
+.figma-h4 {
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
+.figma-h5 {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+}
+
+.figma-h6 {
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 125%; /* 20px */
+  letter-spacing: 0.96px;
+}
+
+.figma-p {
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120.313%;
+}
+
+.top-bar {
+  margin: 15px 0px;
+  .btn-sort {
+    border-radius: 5px;
+    border: 1px solid var(--gray03);
+    .sort {
+      flex: 1 0 25px;
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+  }
+  .btn-filter {
+    border-radius: 5px;
+    border: 1px solid var(--gray03);
+    .category {
+      flex: 1 0 45px;
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+  }
+  .switch-card-qty {
+    border-radius: 5px;
+    border: 1px solid var(--gray03);
+    padding: 0;
+    .switch-grid {
+      padding: 5px;
+      border-right: 1px solid var(--gray03);
+      background: var(--gray03);
+    }
+    .switch-row {
+      padding: 5px;
+    }
+  }
+}
