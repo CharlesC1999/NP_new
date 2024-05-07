@@ -60,7 +60,6 @@ function ProductMainText({
           ></i>
         </button>
       </div>
-      <Toaster />
     </>
   );
 }

@@ -6,7 +6,7 @@ const HeroSlider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [autoSlide, setAutoSlide] = useState(null);
 
-  const sliders = ["Herosection01.png", "Herosection02.png"];
+  const sliders = ["1.png", "2.png","3.png","4.png","5.png","6.png"];
   const slideCount = sliders.length;
 
   useEffect(() => {
@@ -32,19 +32,19 @@ const HeroSlider = () => {
       setSlideIndex((prevIndex) => (prevIndex + 1) % slideCount);
     };
 
-    const handleSliderHover = () => {
-      if (autoSlide) {
-        clearInterval(autoSlide);
-      }
-    };
+    // const handleSliderHover = () => {
+    //   if (autoSlide) {
+    //     clearInterval(autoSlide);
+    //   }
+    // };
 
-    const handleSliderLeave = () => {
-      setAutoSlide(setInterval(handleGoNextSlide, 3000));
-    };
+    // const handleSliderLeave = () => {
+    //   setAutoSlide(setInterval(handleGoNextSlide, 3000));
+    // };
 
     handleSlideGo();
 
-    setAutoSlide(setInterval(handleGoNextSlide, 3000));
+    setAutoSlide(setInterval(handleGoNextSlide, 8000));
 
     window.addEventListener("resize", handleSlideGo);
     return () => {
@@ -65,15 +65,15 @@ const HeroSlider = () => {
         </ul>
         <ul className={`list-unstyled ${styles.pages} position-absolute d-flex justify-content-center w-100`} id="pages">
           {Array.from({ length: slideCount }, (_, index) => (
-            <li key={index} onMouseEnter={() => setSlideIndex(index)} className={slideIndex === index ? "current" : ""}></li>
+            <li key={index} onClick={() => setSlideIndex(index)} className={slideIndex === index ? `${styles.current}` : ""}></li>
           ))}
         </ul>
-        {/* <a className={`${styles.slideBtn} position-absolute slide-prev`} role="button" href="#" id="slidePrev" onClick={() => setSlideIndex((prevIndex) => (prevIndex === 0 ? slideCount - 1 : prevIndex - 1))}>
+        <a className={`${styles.slideBtnLeft} ${styles.slideBtn} position-absolute slide-prev`} role="button"  id="slidePrev" onClick={() => setSlideIndex((prevIndex) => (prevIndex === 0 ? slideCount - 1 : prevIndex - 1))}>
           <i className="fa-solid fa-chevron-left"></i>
         </a>
-        <a className={`${styles.slideBtn} position-absolute slide-next`} role="button" href="#" id="slideNext" onClick={() => setSlideIndex((prevIndex) => (prevIndex + 1) % slideCount)}>
+        <a className={`${styles.slideBtnRight} ${styles.slideBtn} position-absolute slide-next`} role="button"  id="slideNext" onClick={() => setSlideIndex((prevIndex) => (prevIndex + 1) % slideCount)}>
           <i className="fa-solid fa-chevron-right"></i>
-        </a> */}
+        </a>
       </div>
     </div>
   );
