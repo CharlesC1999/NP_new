@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import SearchFilterTabs from "@/components/index/SearchFilterTabs";
 import Footer from "@/components/footer";
 import ClassCard from "@/components/search/ClassCardWeb";
-import ProductCard from "@/components/product/ProductCard";
+import ProductCard from "@/components/search/ProductCard02";
 import RecipeCardsList from "@/components/search/RecipeCardsList";
 import "@fortawesome/fontawesome-free/css/all.css";
 function SearchResult() {
@@ -70,8 +70,27 @@ function SearchResult() {
         )}
 
         {activeTab === "商品" && (
-          <div className={`${styles.productCard1}`}>
-            <ProductCard />
+          <div className={styles.productCard1}>
+            {results.products && results.products.length > 0 ? (
+              <div className={styles.gridCards}>
+                {results.products.map((productData, index) => (
+                  <ProductCard
+                    className={styles.doCenter}
+                    productsData={productData}
+                    key={index}
+                    Index={index}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.noResult}>
+                <h3>找不到您搜尋的 " " </h3>
+                <h5>請重新搜尋</h5>
+                <div className={styles.noResultImg}>
+                  <img src="/index-images/noResult.png" alt="" />
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
