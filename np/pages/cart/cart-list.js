@@ -1,10 +1,12 @@
 // import React from "react";
 import styles2 from "./shopStyle2.module.css";
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import Header from "../../components/header";
+import HeaderSetting from "@/styles/headerSetting.module.scss";
+
 import Footer from "../../components/footer";
 
 const ShopCart2 = () => {
@@ -45,27 +47,131 @@ const ShopCart2 = () => {
   }, []);
 
   // --------------------------
-  const [inputText,setInputText]=useState('')
-  const [inputEmail,setInputEmail]=useState('')
-  const [inputNumber,setInputNumber]=useState('')
+  const [inputName, setInputName] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputNumber, setInputNumber] = useState("");
 
-  const [inputPackageName,setInputPackage]=useState('')
-  const [inputPackageNumber,setInputPackageNumber]=useState('')
-  const [inputAddress,setInputAddress]=useState('')
+  const [inputPackageName, setInputPackage] = useState("");
+  const [inputPackageNumber, setInputPackageNumber] = useState("");
+  const [inputAddress, setInputAddress] = useState("");
 
   // 信用卡勾選
-  const [selectedPayment, setSelectedPayment] = useState('linePay');
+  const payOptions = ["Line Pay", "credit card"];
+  const [selectedPayment, setSelectedPayment] = useState("Line Pay");
 
   const handlePaymentChange = (event) => {
     setSelectedPayment(event.target.value);
   };
 
+  // localstorage  總額呈現，商品總額
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+
+  useEffect(() => {
+    // 从 localStorage 获取名为 'itemsCard666' 的值
+    const storedItems = localStorage.getItem("itemsCard666");
+    if (storedItems) {
+      const items = JSON.parse(storedItems); // 解析字符串为数组对象
+      // 计算所有物品的价格总和和总数量
+      let total = 0;
+      let quantity = 0;
+      items.forEach((item) => {
+        total += item.price * item.qty || 0;
+        quantity += item.qty || 0;
+      });
+      setTotalPrice(total); // 设置总价状态
+      setTotalQuantity(quantity); // 设置总数量状态
+    }
+  }, []);
+
+  // 這邊設定localstorage 收件人名稱
+  useEffect(() => {
+    const inputNameData = window.localStorage.getItem("inputName1");
+    if (inputNameData) {
+      setInputPackage(JSON.parse(inputNameData));
+    }
+  }, []);
+  //setItem
+  useEffect(() => {
+    // if (inputPackageName) {
+    window.localStorage.setItem("inputName1", JSON.stringify(inputPackageName));
+    // }
+  }, [inputPackageName]);
+
+  // localstorage  inputNumber 收件人電話
+  useEffect(() => {
+    const inputNumberData = window.localStorage.getItem("inputNumber1");
+    if (inputNumberData) {
+      setInputPackageNumber(JSON.parse(inputNumberData));
+    }
+  }, []);
+
+  useEffect(() => {
+    // if (inputPackageNumber) {
+    window.localStorage.setItem(
+      "inputNumber",
+      JSON.stringify(inputPackageNumber)
+    );
+    // }
+  }, [inputPackageNumber]);
+
+  //
+  //localstorage  inputaddress 收件人地址
+  useEffect(() => {
+    const inputAddressData = window.localStorage.getItem("inputAddress1");
+    if (inputAddressData) {
+      setInputAddress(JSON.parse(inputAddressData));
+    }
+  }, []);
+
+  useEffect(() => {
+    // if (inputAddress) {
+    window.localStorage.setItem("inputAddress1", JSON.stringify(inputAddress));
+    // }
+  }, [inputAddress]);
+
+  //localstorage  selectedPayment  付款方式
+  useEffect(() => {
+    const selectPaymentData = window.localStorage.getItem("paymentMethod");
+    if (selectPaymentData) {
+      setSelectedPayment(JSON.parse(selectPaymentData));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedPayment) {
+      window.localStorage.setItem(
+        "paymentMethod",
+        JSON.stringify(selectedPayment)
+      );
+    }
+  }, [selectedPayment]);
+
+  // 這邊是一鍵填入 的按鈕
+  // 一鍵填入按鈕的事件處理函數
+  const fillForm = () => {
+    setInputName("哈利");
+    setInputEmail("ron@test.com");
+    setInputNumber("1234567890");
+    setInputPackage("榮恩");
+    setInputPackageNumber("1234578");
+    setInputAddress("台北市信義區市府路1號");
+    setSelectedPayment("line pay"); // 這裡假設你想將付款方式預設選擇為 line pay
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // 阻止表单的默认提交行为
+    // 在这里处理表单提交逻辑，例如发送数据到服务器
+  };
   return (
-    <>
-      <Header />
+    <div className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <Header />
+      </div>
+
       {/*  */}
       <div className={`${styles2.frame} container`}>
-        <form action="" method="POST">
+        <form action="" method="POST" onSubmit={handleSubmit}>
           <nav className={` ${styles2.nav}`}>
             <div className={`${styles2.cir} ${styles2.circle1}`}>
               {/* <span>1</span> */}
@@ -83,10 +189,11 @@ const ShopCart2 = () => {
           {/* 價格提示欄位 */}
           <div className={styles2.prompt}>
             <h4 className={`${styles2.h4} `}>
-              訂單總計 : <span style={{ color: "#f0b559" }}>NT$2000 </span>
+              訂單總計 :{" "}
+              <span style={{ color: "#f0b559" }}>NT${totalPrice}</span>
             </h4>
             <h5 className={styles2.h5}>
-              購物車:(2件)
+              購物車:({totalQuantity}件)
               <img
                 src="/images/arrow-down.png"
                 alt=""
@@ -101,7 +208,6 @@ const ShopCart2 = () => {
                 className={`${styles2.left} ${styles2["form-container"]} m-2`}
                 style={{ minWidth: "100%" }}
               >
-              
                 <div className={styles2.myH4}>顧客資訊</div>
                 <div className="mb-3">
                   <label htmlFor="name" className={`${styles2.label} mt-3`}>
@@ -112,10 +218,13 @@ const ShopCart2 = () => {
                     className={`${styles2.input} form-control`}
                     id="formGroupExampleInput"
                     placeholder=""
-                    value={inputText}
-                    onChange={(event)=>{setInputText(event.target.value)}}
+                    value={inputName}
+                    onChange={(event) => {
+                      setInputName(event.target.value);
+                    }}
                   />
                 </div>
+                {inputName}
                 <div className="mb-3">
                   <label
                     htmlFor="exampleInputEmail1"
@@ -129,9 +238,12 @@ const ShopCart2 = () => {
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={inputEmail}
-                    onChange={(event)=>{setInputEmail(event.target.value)}}
+                    onChange={(event) => {
+                      setInputEmail(event.target.value);
+                    }}
                   />
                 </div>
+                {inputEmail}
                 {/* 套bs5套件 */}
                 {/* <label htmlFor="phone" className={`${styles2.label}`}>
                   電話號碼:
@@ -185,17 +297,19 @@ const ShopCart2 = () => {
                     電話號碼
                   </label>
                   <input
-                    type="tel"
+                    type="number"
                     className={`${styles2.input} form-control`}
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={inputNumber}
-                    onChange={(event)=>{setInputNumber(event.target.value)}}
+                    onChange={(event) => {
+                      setInputNumber(event.target.value);
+                    }}
                   />
+                  {inputNumber}
                 </div>
 
                 <div className="form-group form-check">
-                  
                   <input
                     className="form-check-input"
                     type="checkbox"
@@ -206,7 +320,7 @@ const ShopCart2 = () => {
                   <h5>儲存這個號碼</h5>
                 </div>
                 {/* 第二段 */}
-                
+
                 <div className={styles2.myH4} style={{ marginTop: "30px" }}>
                   訂單備註
                 </div>
@@ -219,8 +333,6 @@ const ShopCart2 = () => {
                     defaultValue={""}
                   />
                 </div>
-                
-                
               </aside>
             </div>
             {/* 右邊刷信用卡 */}
@@ -229,14 +341,13 @@ const ShopCart2 = () => {
                 className={`${styles2.right} ${styles2["form-container"]} m-2`}
                 style={{ minWidth: "100%" }}
               >
-                
                 {/* 第三段 */}
                 <div
                   className={`${styles2.backage} d-flex justify-content-between mt-1`}
                 >
                   <h5 style={{ fontSize: 24, color: "#4D785D" }}>
                     送貨資料
-                    <span style={{ fontSize: 10 }}>
+                    <span style={{ fontSize: 18 }}>
                       {" "}
                       (以選擇的送貨方式:宅配到府)
                     </span>
@@ -255,10 +366,11 @@ const ShopCart2 = () => {
                     id="formGroupExampleInput"
                     placeholder=""
                     value={inputPackageName}
-                    onChange={(event)=>setInputPackage(event.target.value)}
+                    onChange={(event) => setInputPackage(event.target.value)}
                   />
+                  {inputPackageName}
                 </div>
-                
+
                 <div className="mb-3">
                   <label
                     htmlFor="exampleInputEmail1"
@@ -267,18 +379,21 @@ const ShopCart2 = () => {
                     電話號碼
                   </label>
                   <input
-                    type="tel"
+                    type="number"
                     className={`${styles2.input} form-control`}
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={inputPackageNumber}
-                    onChange={(event)=>{setInputPackageNumber(event.target.value)}}
+                    onChange={(event) => {
+                      setInputPackageNumber(event.target.value);
+                    }}
                   />
+                  {inputPackageNumber}
                 </div>
 
                 <div className="form-group form-check">
                   {/* <input type="radio" id="rememberPhone" name="rememberPhone" value="rememberPhone">
-          儲存這個號碼 */}
+               儲存這個號碼 */}
                   <input
                     className="form-check-input"
                     type="checkbox"
@@ -289,13 +404,11 @@ const ShopCart2 = () => {
                   <h5>儲存這個號碼</h5>
                 </div>
                 {/* 第四段 */}
-                
+
                 <div className={styles2.myH4} style={{ marginTop: "30px" }}>
                   送貨地址
                 </div>
-                <div className="row py-1">
-                  
-                </div>
+                <div className="row py-1"></div>
                 <div className="mb-3">
                   <input
                     type="text"
@@ -304,10 +417,11 @@ const ShopCart2 = () => {
                     id="formGroupExampleInput"
                     placeholder="地址"
                     value={inputAddress}
-                    onChange={(event)=>{
-                      setInputAddress(event.target.value)
+                    onChange={(event) => {
+                      setInputAddress(event.target.value);
                     }}
                   />
+                  {inputAddress}
                 </div>
                 <div className="form-group form-check">
                   <input
@@ -333,56 +447,67 @@ const ShopCart2 = () => {
                   <h5>設定為預設地址</h5>
                 </div>
 
-                <div className={styles2.myH4} style={{ marginTop: "30px" }}>選擇付款方式</div>
-                <label
-                  htmlFor="name"
-                  className={`${styles2.label} mt-1`}
-                  style={{ opacity: 0 }}
-                >
-                  透明
-                </label>
-                <div
-                  className={`${styles2["line-pay"]} d-flex align-items-center`}
-                >
-                  <div className="form-check mt-2 ms-3">
-                    <input
-                      className="form-check-input "
-                      type="radio"
-                      defaultValue=""
-                      id="flexCheckDefault"
-                      value="linePay"
-                      name="linepay"
-                      checked={selectedPayment === "linePay"}
-                      onChange={handlePaymentChange}
-                    />
-                    <label
-                      className={`${styles2.label} form-check-label ms-3`}
-                      htmlFor="flexCheckDefault"
-                    >
-                      Line Pay
-                    </label>
-                  </div>
+                <div className={styles2.myH4} style={{ marginTop: "30px" }}>
+                  付款方式
                 </div>
+                <div
+                  className={`${styles2["line-pay"]} d-flex align-items-center mt-3`}
+                >
+                  {payOptions.map((v, i) => {
+                    return (
+                      <Fragment key={i}>
+                        {/* <div className="form-check mt-2 ms-3"> */}
+                        <input
+                          className="form-check-input ms-3"
+                          type="radio"
+                          id="flexCheckDefault"
+                          value={v}
+                          name="linepay"
+                          checked={v === selectedPayment}
+                          onChange={handlePaymentChange}
+                        />
+                        <label
+                          className={`${styles2.label} form-check-label ms-2 mt-2 `}
+                          htmlFor={`flexCheck${i}`}
+                        >
+                          {v}
+                        </label>
+                        {/* </div> */}
+                      </Fragment>
+                    );
+                  })}
+                </div>
+                <button
+                  onClick={fillForm}
+                  className={`${styles2.keepbuy} d-flex justify-content-center align-items-center mt-2 fs-5`}
+                  style={{
+                    width: "100px", // 設定按鈕的寬度為100像素
+                    height: "40px", // 設定按鈕的高度為50像素
+                    fontSize: "20px", // 設定按鈕的字型大小為20像素
+                  }}
+                >
+                  一鍵填入
+                </button>
                 {/* 刷卡 */}
-                <label
+                {/* <label
                   htmlFor="name"
                   className={`${styles2.label} mt-1`}
                   style={{ opacity: 0 }}
                 >
                   透明
-                </label>
-                <div className={`${styles2["credit-card"]}`}>
-                  <div
+                </label> */}
+                {/* <div className={`${styles2["credit-card"]}`}>
+                   <div
                     className={`${styles2["line-pay"]} d-flex align-items-center`}
-                  >
+                    >
                     <div className="form-check mt-2 ms-3">
                       <input
                         className="form-check-input "
                         type="radio"
                         name="creditCard"
                         value="creditCard"
-                        checked={selectedPayment === 'creditCard'}
-                        onChange={handlePaymentChange}
+                        checked={selectedPayment === "creditCard"}
+                        // onChange={handlePaymentChange}
                         defaultValue=""
                         id="flexCheckDefault"
                       />
@@ -393,9 +518,9 @@ const ShopCart2 = () => {
                         信用卡
                       </label>
                     </div>
-                  </div>
-                  {/*  */}
-                  <div
+                  </div> 
+                  
+                   <div
                     className={`${styles2["credit-card-item"]} pt-2 pb-1 ps-2`}
                   >
                     {" "}
@@ -406,10 +531,10 @@ const ShopCart2 = () => {
                     className={`${styles2["line-pay"]} ps-2`}
                     placeholder="卡號"
                     style={{ width: "100%" }}
-                  />
-                  {/* </div> */}
-                </div>
-                <div
+                  /> 
+                   </div> 
+                </div> */}
+                {/* <div
                   className={`${styles2["credit-card-item"]} pt-2 pb-1 ps-2`}
                 >
                   {" "}
@@ -420,9 +545,9 @@ const ShopCart2 = () => {
                   className={`${styles2["line-pay"]} ps-2`}
                   placeholder="卡號"
                   style={{ width: "100%" }}
-                />
+                /> 
                 {/* </div> */}
-                <div
+                {/* <div
                   className={`${styles2["credit-card-item"]} pt-2 pb-1 ps-2`}
                 >
                   {" "}
@@ -433,8 +558,8 @@ const ShopCart2 = () => {
                   className={`${styles2["line-pay"]} ps-2`}
                   placeholder="卡號"
                   style={{ width: "100%" }}
-                />
-                <div
+                /> */}
+                {/* <div
                   className={`${styles2["credit-card-item"]} pt-2 pb-1 ps-2`}
                 >
                   {" "}
@@ -445,8 +570,8 @@ const ShopCart2 = () => {
                   className={`${styles2["line-pay"]} ps-2`}
                   placeholder="卡號"
                   style={{ width: "100%" }}
-                />
-                <div className="form-group form-check mt-4">
+                /> */}
+                {/* <div className="form-group form-check mt-4">
                   <input
                     className="form-check-input"
                     type="checkbox"
@@ -455,8 +580,8 @@ const ShopCart2 = () => {
                     aria-label="..."
                   />
                   <h5>同意記住信用卡資訊</h5>
-                </div>
-                <h5 className="ps-4">本金流服務................</h5>
+                </div> */}
+                {/* <h5 className="ps-4 mt-4">本金流服務................</h5> */}
               </aside>
             </div>
           </div>
@@ -465,36 +590,37 @@ const ShopCart2 = () => {
             className={`${styles2.article} d-flex justify-content align-items-center flex-column mt-4 mb-4`}
             style={{ maxWidth: 1440 }}
           >
-            
             <div
               className={`${styles2.pay2} d-flex justify-content-center pb-4`}
               style={{ width: "100%" }}
             >
               <a
-                href=""
+                href="http://localhost:3000/cart"
                 className={`${styles2.keepbuy} d-flex justify-content-center align-items-center mt-1 fs-3`}
                 type="submit"
               >
                 <h3 className={`${styles2.h3} fw-bold pt-1`}>繼續購物</h3>
               </a>
-              <button
-                className={` ${styles2.butt1} ms-4 mt-1`}
-                type="submit"
+              <a
+                href="http://localhost:3000/cart/payment-info"
+                className={` ${styles2.butt1} ms-4 mt-1 d-flex justify-content-center align-items-center`}
+                // type="submit"
                 style={{
                   backgroundColor: "#78cea6",
                   color: "#ffffff",
                   border: "1px solid #78cea6",
+                  textDecoration: "none",
                 }}
               >
                 <h3 className={`${styles2.h3} fw-bold pt-1`}>前往結帳</h3>
-              </button>
+              </a>
             </div>
           </article>
         </form>
       </div>
       {/*  */}
       <Footer />
-    </>
+    </div>
   );
 };
 export default ShopCart2;

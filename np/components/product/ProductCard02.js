@@ -2,7 +2,11 @@ import React, { useState } from "react";
 //style
 import style from "@/components/product/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import FavIconProduct from "@/components/favor/FavIconProduct";
+
+// import FavIconProduct from "../favor/FavIconProduct";
+
 
 export default function ProductCard02({
   id,
