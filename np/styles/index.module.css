@@ -218,6 +218,13 @@
     justify-content: center;
     gap: 10px;
     align-self: stretch;
+    & h1 {
+      font-size: 28px;
+      margin-bottom: 0;
+  }
+  & h6 {
+    font-size: 18px;
+  }
   }
 
   .nutripollP {
@@ -225,10 +232,13 @@
     padding: 0px 20px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 25px;
     align-self: stretch;
   }
-
+  .textNutripoll {
+    & h5 {
+      font-size: 18px;
+    }
+  }
   .textNutripollh4 span {
     margin-top: 100px;
   }
@@ -241,7 +251,7 @@
   .btn1 {
     width: 170px;
     height: 45px;
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
@@ -342,7 +352,8 @@
   flex-wrap: wrap;
   @media(max-width: 375px){
     gap:0px;
-    padding-inline: 10px;
+    row-gap:10px;
+    padding:20px 10px;
   }
 }
 
@@ -372,6 +383,9 @@
   .CategoryRwd {
     display: none;
   }
+  .MeAuto {
+    font-size:20px;
+  }
 }
 
 /* <!-- Nutripoll-card4 熱銷商品 框架--> */
@@ -382,7 +396,7 @@
   gap: 35px;
   flex-wrap: wrap;
   @media(max-width:375px){
-gap:0px;
+gap:10px;
   }
 }
 
@@ -435,5 +449,13 @@ Nutripoll-card5 熱門課程 */
   }
   .card5Main {
     width: auto;
+  }
+  .card6Title{
+    padding-inline: 15px;
+  }
+  .Nutripollcard6 {
+    flex-direction: column;
+    padding: 35px 10px 0px 10px;
+    gap: 20px;
   }
 }
