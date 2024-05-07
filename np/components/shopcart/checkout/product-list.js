@@ -2,7 +2,7 @@ import React from 'react';
 import products from '@/data/Product.json';
 import styles from './checkout.module.css';
 import { useCart } from '@/hooks/use-cart';
-import toast, { Toast, Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 
