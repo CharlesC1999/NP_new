@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router"; // 路由
 import DetailStyles from "@/styles/class_styles/classDetail.module.css";
-import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
+import HeaderSetting from "@/styles/headerSetting.module.scss";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ClassSidebar from "@/components/class_file/ClassSidebarDetailVersion";
