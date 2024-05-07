@@ -184,7 +184,9 @@ const ShopCart3 = () => {
       })),
       // 合計
       totalPrice: totalPrice,
-      // 優惠券
+      // 優惠券id
+      couponId: coupon.id || 0,
+      // 優惠券扣掉價格
       discountPrice: coupon.disPrice || 0,
       // 最終價格
       finalPrice: totalPrice - coupon.disPrice || 0,

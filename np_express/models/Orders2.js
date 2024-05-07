@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 
 export default async function (sequelize) {
   return sequelize.define(
-    'Orders',
+    'Orders2',
     {
       id: {
         type: DataTypes.STRING(255),
@@ -19,15 +19,17 @@ export default async function (sequelize) {
         allowNull: false,
       },
       payment_method: {
-        type: DataTypes.STRING(255),
-        defaultValue: null,
-        comment: 'line pay, 信用卡, ATM',
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       order_date: {
         type: DataTypes.DATE,
         allowNull: false,
       },
-
+      order_status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       recipient_name: {
         type: DataTypes.STRING(255),
         allowNull: false,
@@ -56,36 +58,9 @@ export default async function (sequelize) {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
-      // 這邊是linepay 所需欄位
-      order_status: {
-        type: DataTypes.STRING(255),
-        defaultValue: null,
-        comment: 'pending, paid, fail, cancel, error',
-      },
-      transaction_id: {
-        type: DataTypes.STRING(255),
-        defaultValue: null,
-      },
-      order_info: {
-        type: DataTypes.TEXT,
-        comment: 'send to line pay',
-      },
-      reservation: {
-        type: DataTypes.TEXT,
-        comment: 'get from line pay',
-      },
-      confirm: {
-        type: DataTypes.TEXT,
-        comment: 'confirm from line pay',
-      },
-      return_code: {
-        type: DataTypes.STRING(255),
-        defaultValue: null,
-      },
     },
     {
-      tableName: 'orders',
+      tableName: 'orders2',
       timestamps: true, // 如果你想要 Sequelize 自动处理 createdAt 和 updatedAt
       paranoid: true, // 如果你想要启用软删除功能
       underscored: true, // 使用蛇形命名法 (snake_case) 对于数据库字段名
