@@ -55,38 +55,18 @@ router.get('/', async function (req, res) {
   // const offset = (pageNow - 1) * perpageNow
 
   // 最終組合的sql語法
-  // const sqlOrders = `SELECT * FROM orders `
-  //抓到全部的關聯
-  // const sqlOrders = `SELECT *
-  // FROM orders
-  // JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // JOIN product_image ON order_item.Product_ID = product_image.F_product_id;`
-  //只有圖片跟ID
-  // const sqlOrders = `SELECT orders.order_id, MAX(image_url) AS image_url
-  // FROM orders
-  // LEFT JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // LEFT JOIN product_image ON order_item.Product_ID = product_image.F_product_id
-  // GROUP BY orders.order_id;`
-  // 包含總價的
-  // const sqlOrders = `SELECT *, sum(Quantity*price)
-  // FROM orders
-  // JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // Join product on order_item.product_id = product.ID
-  // group by orders.Order_ID`
-  //剩下orderid跟總價
-  // const sqlOrders = `SELECT orders.Order_ID, sum(Quantity*price)
-  // FROM orders
-  // JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // Join product on order_item.product_id = product.ID
-  // group by orders.Order_ID`
-
-  //這是包含圖片的跟一大堆的還有總價重新命名的
-  const sqlOrders = `SELECT orders.order_id,user_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
+  const sqlOrders = `SELECT *
   FROM orders
-  JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  Join product on order_commodity_item.product_id = product.ID
-  JOIN product_image ON order_commodity_item.Product_ID = product_image.F_product_id
-  GROUP BY orders.order_id;`
+  JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
+  LEFT JOIN  product ON order_item.thing_ID =product.id 
+  AND order_item.itemType = 1
+  LEFT JOIN product_image ON order_item.thing_ID =product_image.F_product_id
+  AND order_item.itemType = 1
+  LEFT JOIN  class ON order_item.thing_ID =class.Class_ID
+  AND order_item.itemType = 2
+  
+  GROUP BY orders.order_Id ;
+`
 
   // 最終組合的sql語法(計數用)
   const sqlCount = `SELECT COUNT(*) AS count FROM orders ${where}`
@@ -122,22 +102,17 @@ router.get('/:status', async function (req, res) {
   // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
   const ordersStatus = req.params.status
 
-  // const sqlOrders = `SELECT orders.order_id, member_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
-  // FROM orders
-  // JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // Join product on order_item.product_id = product.ID
-  // JOIN product_image ON order_item.Product_ID = product_image.F_product_id
-  // WHERE orders.Status = "${ordersStatus}"
-  // GROUP BY orders.order_id
-  // order by orders.order_id;`
-  const sqlOrders = `SELECT orders.order_id,user_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
+  const sqlOrders = `SELECT *
   FROM orders
-  JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  Join product on order_commodity_item.product_id = product.ID
-  
-  JOIN product_image ON order_commodity_item.Product_ID = product_image.F_product_id
+  JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
+  LEFT JOIN  product ON order_item.thing_ID =product.id 
+  AND order_item.itemType = 1
+  LEFT JOIN product_image ON order_item.thing_ID =product_image.F_product_id
+  AND order_item.itemType = 1
+  LEFT JOIN  class ON order_item.thing_ID =class.Class_ID
+  AND order_item.itemType = 2
   WHERE orders.status = "${ordersStatus}"
-  GROUP BY orders.order_id;`
+  GROUP BY orders.order_Id;`
 
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders)

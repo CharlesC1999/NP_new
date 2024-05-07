@@ -81,12 +81,11 @@ router.get('/', async function (req, res) {
   // group by orders.Order_ID`
 
   //這是包含圖片的跟一大堆的還有總價重新命名的
-  const sqlOrders = `SELECT orders.order_id,user_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
-  FROM orders
-  JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  Join product on order_commodity_item.product_id = product.ID
-  JOIN product_image ON order_commodity_item.Product_ID = product_image.F_product_id
-  GROUP BY orders.order_id;`
+  const sqlOrders = `SELECT orders.order_id, orders.user_id,O_coupon_ID, Order_date, class_name,status,C_price , C_quantity, sum(C_price * C_quantity) as class_tatol
+  FROM orders 
+  join  order_class_item on orders.order_id = order_class_item.Order_id
+  join class on order_class_item.Class_ID = class.Class_ID
+  group by orders.order_id;`
 
   // 最終組合的sql語法(計數用)
   const sqlCount = `SELECT COUNT(*) AS count FROM orders ${where}`
@@ -112,7 +111,7 @@ router.get('/', async function (req, res) {
     status: 'success',
     data: {
       total,
-      orders: rows,
+      orders2: rows,
     },
   })
 })
@@ -130,14 +129,12 @@ router.get('/:status', async function (req, res) {
   // WHERE orders.Status = "${ordersStatus}"
   // GROUP BY orders.order_id
   // order by orders.order_id;`
-  const sqlOrders = `SELECT orders.order_id,user_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
+  const sqlOrders = `SELECT * , sum(C_price* C_quantity) as class_total
   FROM orders
-  JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  Join product on order_commodity_item.product_id = product.ID
-  
-  JOIN product_image ON order_commodity_item.Product_ID = product_image.F_product_id
-  WHERE orders.status = "${ordersStatus}"
-  GROUP BY orders.order_id;`
+  JOIN order_class_item on orders.Order_ID = order_class_item.Order_ID
+  Join class on order_class_item.class_ID = class.Class_ID
+  where orders.status = "${ordersStatus}"
+  group by orders.order_Id;`
 
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders)
