@@ -1,7 +1,7 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import styles from "./classCardMobileList.module.css";
-
+import FavIconClass from "../favor/FavIconClass";
 export default function ProductCardMobileList({ classesData }) {
   console.log(classesData, "classDM");
 
@@ -110,6 +110,7 @@ export default function ProductCardMobileList({ classesData }) {
               className={styles.actionIcon}
             />
           </a>
+          <FavIconClass id={classesData.class__i_d}/>
         </div>
       </div>
     </article>
