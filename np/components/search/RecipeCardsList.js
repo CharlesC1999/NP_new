@@ -18,7 +18,7 @@ export default function RecipeCardsList({ recipesData, Index }) {
     6: "沙拉",
   };
 
-  const endpoint = cateIDNameMapping[recipesData.Recipe_category_ID];
+  const endpoint = cateIDNameMapping[recipesData.recipe_category__i_d];
 
   return (
     <div key={Index}>
@@ -26,7 +26,7 @@ export default function RecipeCardsList({ recipesData, Index }) {
         <div className={`col-4 ${styles["card-pic"]}`}>
           <img
             className="w-100 h-100 object-fit-cover"
-            src={`/images/recipe/list/${recipesData.Image_URL}`}
+            src={`/images/recipe/list/${recipesData.image__u_r_l}`}
             alt=""
           />
         </div>
@@ -37,14 +37,14 @@ export default function RecipeCardsList({ recipesData, Index }) {
             className={`${styles["card-content-top"]} d-flex justify-content-between`}
           >
             <div className={`${styles["recipe-title"]} ${styles["figma-h5"]}`}>
-              {recipesData.Title_R_name}
+              {recipesData.title__r_name}
             </div>
-            <FavIconRecipe id={recipesData.Recipe_ID} />
+            <FavIconRecipe id={recipesData.recipe__i_d} />
           </div>
           <div
             className={`${styles["card-content-middle"]} d-none d-xxl-block col-xxl-9 mb-auto`}
           >
-            {recipesData.Content}
+            {recipesData.content}
           </div>
           <div
             className={`${styles["card-content-bottom"]} d-flex flex-column flex-xxl-row align-items-xxl-end justify-content-xxl-between`}
@@ -70,7 +70,7 @@ export default function RecipeCardsList({ recipesData, Index }) {
                   />
                 </svg>
                 <p className={`${styles["figma-p"]} ${styles["date"]}`}>
-                  {recipesData.Publish_date}
+                  {recipesData.publish_date}
                 </p>
               </div>
               <div
@@ -80,7 +80,7 @@ export default function RecipeCardsList({ recipesData, Index }) {
               </div>
             </div>
             <Link
-              href={`/recipe/${recipesData.Recipe_ID}`}
+              href={`/recipe/${recipesData.recipe__i_d}`}
               className="link-underline link-underline-opacity-0"
             >
               <button

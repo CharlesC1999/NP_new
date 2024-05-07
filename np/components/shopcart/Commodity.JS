@@ -295,44 +295,8 @@ const Commodity = () => {
           );
         })}
         {/* <footer> */}
-        <div className="row" style={{ border: "1px solid #d9d9d9" }}>
-          <div className="col py-2">
-            <div className={`${CommodityStyles.fb} row ps-3 pb-2`}>
-              折價券代碼、折價券 :
-            </div>
-            <div className="row">
-              {/* 使用折價券 */}
-              <div
-                className="pay d-flex justify-content"
-                style={{ width: "100%" }}
-              >
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id="checkboxNoLabel"
-                    defaultValue=""
-                    aria-label="..."
-                  />
-                  <label className="me-2" style={{ fontSize: "16px" }}>
-                    使用折價券{" "}
-                  </label>
-                </div>
-                <select
-                  className="form-select form-select-sm me-5"
-                  aria-label="Small select example "
-                  style={{ width: 100 }}
-                >
-                  <option selected="">使用優惠券</option>
-                  <option value={1}>One</option>
-                  <option value={2}>Two</option>
-                  <option value={3}>Three</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
+
+        {/* <div
           className="row py-2"
           style={{ border: "1px solid #d9d9d9", borderTop: 0 }}
         >
@@ -341,14 +305,14 @@ const Commodity = () => {
             className={`${CommodityStyles.fc} col`}
             style={{ marginLeft: "-100px" }}
           >
-            {totalProductPrice}
-            {/* $ */}
-            {/* {productData.reduce(
+            {totalProductPrice} */}
+        {/* $ */}
+        {/* {productData.reduce(
               (total, product) => total + product.count * product.price,
               0
             )} */}
-          </div>
-        </div>
+        {/* </div>
+        </div> */}
         {/* </footer> */}
       </main>
     </>

@@ -41,3 +41,9 @@
     }
   }
 }
+.paginationM{
+  display:none;
+  @media(max-width:375px){
+    display: block;
+  }
+}

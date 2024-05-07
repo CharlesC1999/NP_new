@@ -2,7 +2,12 @@ import React, { useState } from "react";
 //style
 import style from "@/components/product/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-import FavIconProduct from "../favor/FavIconProduct";
+
+import FavIconProduct from "@/components/favor/FavIconProduct";
+
+// import FavIconProduct from "../favor/FavIconProduct";
+
+
 export default function ProductCard02({
   id,
   name,
@@ -17,7 +22,7 @@ export default function ProductCard02({
         <div className={`${style["productCard"]} my-4`}>
           <div className={`${style["CardImg"]}`}>
             <img
-              src={`/index-images/p-image/${img}`}
+              src={`/images/products/${img}`}
               alt="商品圖片"
               className={`${style["object-fit"]}`}
             />

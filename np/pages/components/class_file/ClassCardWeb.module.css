@@ -1,0 +1,194 @@
+/* image part */
+.cardContainer {
+  box-sizing: border-box;
+  width: 100%;
+  /* max-width: 990px; */
+  gap: 40px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 15px 30px 15px 15px;
+  align-self: stretch;
+  border-radius: 5px;
+  border-right: 1px solid var(--gray02, #d9e1e6);
+  border-bottom: 1px solid var(--gray02, #d9e1e6);
+}
+
+.imageWrapper {
+  width: 270px;
+  height: 179px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.classImg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+/* image part */
+
+.truffledRiceContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: space-between;
+  margin: auto 0;
+  padding: 2px 0;
+  width: 100%;
+  /* max-width: 637px; */
+  gap: 32.5px;
+}
+
+.truffledRiceHeader {
+  /* color: var(--gray03, #454545); */
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 120%;
+  white-space: nowrap;
+}
+
+.truffledRiceTitle {
+  font-weight: 700;
+  margin: 0;
+}
+
+.truffledRiceDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.truffledRiceDescription {
+  display: -webkit-box;
+  width: 100%;
+  width: 480px;
+  text-wrap: wrap;
+  margin: 0;
+  /* font style */
+  /* color: var(--gray03, #454545); */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 135%;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truffledRicePricing {
+  width: 100%;
+  width: 140px;
+  display: flex;
+  justify-content: space-around;
+  vertical-align: bottom;
+}
+
+.truffledRicePrice {
+  margin: 0;
+  /* font style */
+  color: var(--green-01, var(--green02, #50bf8b));
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120.313%;
+}
+.truffledRiceOriginalPrice {
+  margin: 8px 0 0 0;
+  color: var(--gray01, #919da6);
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.313%;
+  text-decoration-line: line-through;
+}
+
+/* third part */
+.truffledRiceMeta {
+  color: var(--gray01, #747e85);
+  display: flex;
+  flex: 1;
+  font-size: 12px;
+  font-weight: 500;
+  gap: 20px;
+  justify-content: space-between;
+  line-height: 120%;
+  margin: auto 0 auto 0;
+}
+
+.classInfromations {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.classSubInformation {
+  align-items: center;
+  background-color: #fff;
+  display: flex;
+  margin-top: 16px;
+  gap: 2px;
+  justify-content: center;
+}
+
+.classSubInformation {
+  align-items: center;
+  background-color: #fff;
+  display: flex;
+  margin-top: 16px;
+  gap: 2px;
+  justify-content: center;
+}
+
+.truffledRiceActions {
+  color: #fff;
+  display: flex;
+  font-weight: 600;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+.linksButtons {
+  background-color: var(--green02, #50bf8b);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 4px;
+  padding: 6px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.linksButtonsIcon {
+  margin-top: 1px;
+}
+.linkButtonText {
+  margin-top: 3px;
+}
+
+.infromationIcons {
+  margin-bottom: 2px;
+}
+/* third-part */
+
+.heartIcon {
+  cursor: pointer;
+  fill: var(--gray01, #747e85);
+  transition: fill 0.3s ease;
+}
+
+.heartIcon.active {
+  fill: #ff4d4d;
+}
+
+/* 資料串接影響 */
+.forDataUnderLine {
+  text-decoration: none;
+}

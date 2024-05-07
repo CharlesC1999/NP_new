@@ -1,0 +1,127 @@
+.productCard {
+  width: 345px;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(217, 225, 230, 1);
+  background-color: #fff;
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+}
+
+.productImageWrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.productImage {
+  aspect-ratio: 0.95;
+  object-fit: cover;
+  width: 120px;
+}
+
+.productDetails {
+  width: 178px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: auto 0;
+}
+
+.productName {
+  margin: 0;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #454545;
+
+  letter-spacing: 0.96px;
+  font-size: 20px;
+  font-weight: 900;
+  /* over size adj */
+  white-space: nowrap; /* 確保文字不會換行 */
+  overflow: hidden; /* 隱藏超出容器的內容 */
+  display: block; /* 讓 h3 佔滿容器寬度 */
+  width: 100%; /* 設定寬度 */
+  text-overflow: ellipsis; /* 點點點 */
+}
+
+.productMeta {
+  display: flex;
+  margin-top: 4px;
+  gap: 7px;
+  font-size: 12px;
+  color: #747e85;
+  font-weight: 500;
+  line-height: 120%;
+  padding: 4px 5px 4px 0;
+}
+
+.productDate {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.calendarIcon {
+  width: 12px;
+}
+
+.productAuthor {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.authorIcon {
+  width: 12px;
+  fill: #747e85;
+}
+
+.productPricing {
+  display: flex;
+  margin-top: 8px;
+  gap: 6px;
+  font-weight: 600;
+  height: 24px;
+  white-space: nowrap;
+}
+
+.currentPrice {
+  color: #50bf8b;
+  letter-spacing: 0.96px;
+  margin-top: 1px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.originalPrice {
+  color: #919da6;
+  text-decoration: line-through;
+  margin-bottom: 0;
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.productActions {
+  display: flex;
+  margin-top: 10px;
+  gap: 16px;
+}
+
+.actionLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: #50bf8b;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.actionIcon {
+  width: 14px;
+  fill: #fff;
+}
