@@ -15,11 +15,19 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
   console.log(orders);
 
 
-  let userid = parseInt(localStorage.getItem('userid'))
-  console.log(userid);
+  // let userid = parseInt(localStorage.getItem('userid'))
+  // console.log(userid);
 
 // let userid = 1
  
+const [userid, setUserid] = useState(null);
+
+  useEffect(() => {
+    const userIdFromLocalStorage = localStorage.getItem("userid");
+    if (userIdFromLocalStorage) {
+      setUserid(parseInt(userIdFromLocalStorage));
+    }
+  }, []);
 
   // 資料表1商品訂單
   const getOrders = async (cat = '') => {
