@@ -2,7 +2,7 @@ import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import shopStyles from "./shopStyle1.module.css";
 import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
-import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
+import HeaderSetting from "@/styles/headerSetting.module.scss";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 // 購物車用到的主鍵
@@ -356,9 +356,6 @@ const ShopCart1 = () => {
               );
             })}
           </select>
-          {/* </div> */}
-          {/* </div> */}
-          {/* </div> */}
         </div>
 
         <article
