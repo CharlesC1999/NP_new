@@ -189,7 +189,11 @@ export default function RecipeList() {
             </div>
             {/* 手機板分頁用 */}
             <div className="d-block d-xxl-none mt-4">
-              <PaginationM total={total} perpage={"6"} recipeSetPage={setPage}/>
+              <PaginationM
+                total={total}
+                perpage={"6"}
+                recipeSetPage={setPage}
+              />
             </div>
           </div>
           {/* 食譜卡片 (grid排列) */}

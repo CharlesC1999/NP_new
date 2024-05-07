@@ -1,0 +1,113 @@
+/* <!-- Nutripoll-card4 熱銷商品 --> */
+.card4 {
+  width: 200px;
+  border: 1px solid var(--gray02);
+  border-radius: 5px;
+}
+
+.card4Img {
+  width: 200px;
+  height: 160px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.card4Link {
+  text-decoration: none;
+  &:hover .card4 {
+    box-shadow: 0px 0px 5px #ccc;
+  }
+}
+.card4Body {
+  height: 140px;
+  display: flex;
+  /* 垂直方向排列 */
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  align-self: stretch;
+  padding: 14px 20px;
+
+  & .card4Title {
+    color: var(--black);
+    font-size: 18px;
+    display: flex;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    align-self: stretch;
+    margin-bottom: 0px;
+  }
+}
+.card4Content {
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+.card4Text {
+  gap: 8px;
+  align-items: center;
+  & h6 {
+    font-size: 16px;
+    color: var(--green02);
+    margin-bottom: 0;
+  }
+  & p {
+    /* 橫線 */
+    text-decoration: line-through;
+    font-size: 14px;
+    color: var(--gray01);
+    margin-bottom: 0;
+  }
+}
+.heart {
+  color: var(--green02);
+  font-size: 20px;
+}
+.card4Btn {
+  justify-content: center;
+  align-items: center;
+  color: var(--green02);
+  border: 1px solid var(--green02);
+  border-radius: 5px;
+  padding: 7px 2px;
+  text-decoration: none;
+  font-size: 16px;
+  gap: 5px;
+  &:hover {
+    transition: 0.4s;
+    color: var(--white);
+    background-color: var(--green02);
+  }
+}
+
+/* <!-- Nutripoll-card4 熱銷商品(RWD) --> */
+
+@media (max-width: 375px) {
+  .card4 {
+    width: 170px;
+    border: 1px solid var(--gray02);
+    border-radius: 5px;
+  }
+
+  .card4Img {
+    width: 100%;
+    height: 170px;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .card4Text {
+    gap: 4px;
+  }
+  .card4Btn {
+    gap: 0px;
+  }
+}

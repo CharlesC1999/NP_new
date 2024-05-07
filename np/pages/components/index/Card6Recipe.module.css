@@ -1,0 +1,116 @@
+/* Nutripoll-card6 精選食譜 */
+.Card6RecipeLink{
+  &:hover .card6{
+    transform: translateY(-3px);
+    box-shadow: 0 0px 5px #ccc;
+    transition: 0.5s;
+  }
+}
+  .card6 {
+    width: 434px;
+    height:130px;
+    border: 1px solid var(--gray02);
+    /* flex-direction: column; */
+  }
+  
+  .card6Img {
+    width: 170px;
+    height: 130px;
+    display: flex;
+  
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    & a {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .card6Text {
+    display: flex;
+    flex-direction: column;
+    color: var(--black, #454545);
+    width: 236px;
+    height: auto;
+    margin-left: 10px;
+    justify-content: center;
+    & a {
+      color: var(--black, #454545);
+      & h5{
+        font-weight: 600;
+        font-size: 18px;
+      }
+    }
+  
+    & p {
+      color: var(--gray01);
+      font-size: 14px;
+      margin-bottom: 0px;
+      overflow: hidden;
+      /* 超出部分隐藏 */
+      text-overflow: ellipsis;
+      /* 超出部分省略 */
+      display: -webkit-box;
+      /* 這個屬性告訴瀏覽器將元素顯示為一個或多個內聯框 */
+      -webkit-box-orient: vertical;
+      /* 垂直方向排列 */
+      /* 當使用這個屬性時，可以結合其他屬性來控製文字的顯示方式 */
+      -webkit-line-clamp: 3;
+      /* 顯示的行數 */
+    }
+  }
+
+  @media (max-width: 375px) {
+    .NutripollCard6 {
+      padding: 35px 0px;
+    }
+    
+    .card6 {
+      width: 330px;
+      border: 0px solid var(--gray02);
+      margin-bottom: 20px;
+      box-shadow: 2px 2px 2px var(--gray02);
+    }
+    
+    .card6Img {
+      width: 109px;
+      display: flex;
+    
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .card6Text {
+      display: flex;
+      flex-direction: column;
+      color: var(--black, #454545);
+      width: 221px;
+      height: auto;
+      margin-left: 10px;
+      justify-content: center;
+  
+      
+    
+      & p {
+        overflow: hidden;
+        /* 超出部分隐藏 */
+        text-overflow: ellipsis;
+        /* 超出部分省略 */
+        display: -webkit-box;
+        /* 這個屬性告訴瀏覽器將元素顯示為一個或多個內聯框 */
+        -webkit-box-orient: vertical;
+        /* 垂直方向排列 */
+        /* 當使用這個屬性時，可以結合其他屬性來控製文字的顯示方式 */
+        -webkit-line-clamp: 3;
+        /* 顯示的行數 */
+      }
+    }
+  
+  }

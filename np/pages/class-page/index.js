@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 // 讀取鉤子
 import { useLoader } from "@/hooks/use-loader";
+import { useCategory } from "@/hooks/ClassProp";
 import moment from "moment-timezone";
 import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
-import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
+import HeaderSetting from "@/styles/headerSetting.module.scss";
 import Header from "@/components/Header";
 import ClassClassifacion from "@/components/class_file/ClassClassification";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -20,6 +21,7 @@ import Footer from "@/components/Footer";
 const ClassList = () => {
   // 先導入讀取鉤子
   const { setLoading } = useLoader();
+  const { categoryId, setCategoryId } = useCategory();
 
   const containerStyle = {
     display: "flex",
@@ -69,7 +71,7 @@ const ClassList = () => {
   // 用於儲存排序
   const [sortBy, setSortBy] = useState("");
   // 用於選擇分類
-  const [categoryId, setCategoryId] = useState(null);
+  // const [categoryId, setCategoryId] = useState(null);
   // 獲取到日期的資料
   const [finalStartDate, setFinalStartDate] = useState(null);
   const [finalEndDate, setFinalEndDate] = useState(null);
@@ -78,6 +80,7 @@ const ClassList = () => {
   const formatEndDate = moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss");
 
   //串上後端取得資料
+
   useEffect(() => {
     const params = {
       page,
@@ -119,21 +122,21 @@ const ClassList = () => {
     }
   };
 
-  const handleCategoryChange = async (categoryId) => {
-    console.log("Category changing to:", categoryId);
-    setCategoryId(categoryId);
-    // 這裡直接調用 getClasses，傳遞新的 categoryId
-    setPage(1);
-    const newParams =
-      categoryId === 0
-        ? { page: 1, perpage, sortBy }
-        : { page: 1, perpage, sortBy, categoryId };
-    const data = await getClasses(newParams);
-    console.log("Data received on category change:", data);
-    if (data && data.status === "success") {
-      setTotal(data.data.total);
-    }
-  };
+  // const handleCategoryChange = async (categoryId) => {
+  //   console.log("Category changing to:", categoryId);
+  //   setCategoryId(categoryId);
+  //   // 這裡直接調用 getClasses，傳遞新的 categoryId
+  //   setPage(1);
+  //   const newParams =
+  //     categoryId === 0
+  //       ? { page: 1, perpage, sortBy }
+  //       : { page: 1, perpage, sortBy, categoryId };
+  //   const data = await getClasses(newParams);
+  //   console.log("Data received on category change:", data);
+  //   if (data && data.status === "success") {
+  //     setTotal(data.data.total);
+  //   }
+  // };
 
   useEffect(() => {
     setPageCount(Math.ceil(total / perpage));
@@ -203,7 +206,7 @@ const ClassList = () => {
       </div>
       <Breadcrumbs />
       <div style={subContainerStyle}>
-        <ClassClassifacion categoryChange={handleCategoryChange} />
+        <ClassClassifacion categoryChange={setCategoryId} />
         <div className={ContentSetting.DisplaySetting}>
           <div style={{ height: "100%" }} className={ContentSetting.MobileNone}>
             <ClassSidebar finalStart={startDate} finalEnd={endDate} />
@@ -217,7 +220,7 @@ const ClassList = () => {
               perpage={perpage}
               setPerpage={setPerpage}
               onSortChange={handleSortChange}
-              onCategoryChange={handleCategoryChange} // 篩手機分類位置
+              onCategoryChange={setCategoryId} // 篩手機分類位置
               categoryId={categoryId} // 篩手機分類位置
               finalStart={startDate} //手機日曆
               finalEnd={endDate} //手機日曆
