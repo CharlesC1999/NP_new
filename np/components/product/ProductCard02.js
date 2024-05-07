@@ -42,7 +42,7 @@ export default function ProductCard02({
                 className={`${style["favorite-btn"]} pe-1 pe-sm-2 d-flex justify-content-center align-items-center`}
                 style={{ border: "none" }}
               >
-                <i className={`fa-regular fa-heart`} />
+                <FavIconProduct id={id} />
               </button>
             </div>
             <div

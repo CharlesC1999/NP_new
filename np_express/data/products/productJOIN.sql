@@ -91,3 +91,25 @@ WHERE
 LIMIT 100;
 
 
+SELECT 
+    p.product_name, 
+    p.product_price, 
+    p.category_id,
+    pImage.image_url
+FROM 
+    product AS p
+JOIN 
+    product_image AS pImage 
+ON 
+    p.id = pImage.product_id;
+
+
+SELECT * FROM `recipe`
+ORDER BY RAND()
+LIMIT 4;
+
+SELECT p.product_name, p.product_price, p.id , pImage.image_url
+       FROM product AS p
+       JOIN product_image AS pImage ON p.id = pImage.product_id
+       ORDER BY RAND()
+       LIMIT 5;
