@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
 import styles from "./CateSidebar.module.css";
 import { useCategories } from "@/hooks/recipe/use-categories";
+import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
+import { useRouter } from "next/router";
 
-function CateSidebar({ setRecipeCategory, recipeCategory }) {
+function CateSidebar({ detailPage = "" }) {
+  // 點sideBar的分類時導回食譜list
+  const router = useRouter();
+
+  // 用來設定食譜類別的context
+  const { recipeCategory, handleCategoryChange } = useCategoryForSQL();
   // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
   const { setNewCategories, newCategories } = useCategories();
   //食譜類別state初始值
@@ -117,15 +124,21 @@ function CateSidebar({ setRecipeCategory, recipeCategory }) {
       {/* 顯示所有類別的食譜 */}
       <div
         onClick={() => {
-          setRecipeCategory("");
+          handleCategoryChange();
+          Boolean(detailPage) && router.push("/recipe");
         }}
         className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
       >
         <div
           className={`d-flex ${styles.sideBox}`}
-          style={{
-            border: recipeCategory === "" ? "var(--green03) solid 2px" : "",
-          }}
+          style={
+            detailPage
+              ? {}
+              : {
+                  border:
+                    recipeCategory === "" ? "var(--green03) solid 2px" : "",
+                }
+          }
         >
           <div className={styles.sideImg}>
             <img src="/index-images/category-1.png" alt />
@@ -141,21 +154,27 @@ function CateSidebar({ setRecipeCategory, recipeCategory }) {
         return (
           <div
             onClick={() => {
-              setRecipeCategory(v.Recipe_cate_ID);
+              handleCategoryChange(v.Recipe_cate_ID);
+              Boolean(detailPage) && router.push("/recipe");
             }}
             className={`d-flex gap-3 flex-column mt-3 ${styles["pointer"]}`}
           >
             <div
               className={`d-flex ${styles.sideBox}`}
-              style={{
-                border:
-                  recipeCategory === v.Recipe_cate_ID
-                    ? "var(--green03) solid 2px"
-                    : "",
-              }}
+              style={
+                // 如果是detailPage就不要border
+                detailPage
+                  ? {}
+                  : {
+                      border:
+                        recipeCategory === v.Recipe_cate_ID
+                          ? "var(--green03) solid 2px"
+                          : "",
+                    }
+              }
             >
               <div className={styles.sideImg}>
-                <img src="/index-images/category-1.png" alt />
+                <img src="/index-images/category-1.png" alt="分類icon" />
               </div>
               <div className={styles.sideText}>
                 <h6 className={styles.left}>{v.Recipe_cate_name}</h6>

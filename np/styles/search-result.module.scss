@@ -1,33 +1,43 @@
-.container{
-    max-width: 1250px;
-    display: flex;
-    flex-direction: column;
-    margin-inline: auto;
-    padding: 60px 0px;
-    gap: 30px;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // 使容器至少與視窗一樣高
 }
-.cards{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.content {
+  width: 100%;
+  flex: 1; // 允許此區域彈性擴展以填滿多餘的空間
 }
-.productCard1{
-    display: flex;
-    justify-content: space-between;
-    
-    row-gap: 30px;
-    flex-wrap: wrap;
-    padding-bottom: 30px;
+
+.container {
+  max-width: 1250px;
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+  padding: 60px 0px;
+  gap: 30px;
 }
-.noResult{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-block: 50px;
-    gap: 30px;
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.noResultImg img{
-    width: 300px;
-    height: 300px;
+.productCard1 {
+  display: flex;
+  justify-content: space-between;
+
+  row-gap: 30px;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
+.noResult {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block: 50px;
+  gap: 30px;
+}
+.noResultImg img {
+  width: 300px;
+  height: 300px;
 }

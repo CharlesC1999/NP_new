@@ -49,6 +49,9 @@
   .pic {
     padding-top: 49px;
     height: 750px;
+    @media screen and (max-width: 376px) {
+      height: 280px;
+    }
     img {
       border-radius: 10px;
     }

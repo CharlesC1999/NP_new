@@ -1,9 +1,23 @@
 import React from "react";
+import { useRouter } from "next/router";
 import classSidebarStyles from "./classSidebarStyles.module.css";
 import DateTimePicker from "./ClassDateTimePicker";
 import ClassPriceRange from "./ClassPriceRange";
+import { useCategory } from "@/hooks/ClassProp";
 
 const classSidebar = () => {
+  const router = useRouter();
+  const { setCategoryId } = useCategory();
+
+  const handleCategoryChange = (categoryId) => {
+    return () => {
+      // 返回一個函數，這樣點擊時才會執行
+      setCategoryId(categoryId);
+      // 這裡也可以導航到相應的頁面，如果需要
+      router.push(`/class-page`);
+    };
+  };
+
   return (
     <div
       className={classSidebarStyles.sidebarContainer}
@@ -20,37 +34,37 @@ const classSidebar = () => {
         <div className={classSidebarStyles.buttonSetForDetailPage}>
           <a
             className={classSidebarStyles.buttonForDetailPage}
-            href="/class_page"
+            onClick={handleCategoryChange(2)}
           >
             中式餐點
           </a>
           <a
             className={classSidebarStyles.buttonForDetailPage}
-            href="/class_page"
+            onClick={handleCategoryChange(3)}
           >
             西式餐點
           </a>
           <a
             className={classSidebarStyles.buttonForDetailPage}
-            href="/class_page"
+            onClick={handleCategoryChange(4)}
           >
             日式餐點
           </a>
           <a
             className={classSidebarStyles.buttonForDetailPage}
-            href="/class_page"
+            onClick={handleCategoryChange(1)}
           >
             台味餐點
           </a>
           <a
             className={classSidebarStyles.buttonForDetailPage}
-            href="/class_page"
+            onClick={handleCategoryChange(5)}
           >
             健康養生
           </a>
           <a
             className={classSidebarStyles.buttonForDetailPage}
-            href="/class_page"
+            onClick={handleCategoryChange(6)}
           >
             烘焙點心
           </a>

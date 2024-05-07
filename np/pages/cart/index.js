@@ -4,13 +4,19 @@ import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-
+// 購物車用到的主鍵
 import Header from "@/components/Header";
 import Footer from "../../components/footer";
 import Navbar from "@/components/shopcart/Navbar";
 import Class from "@/components/shopcart/Class";
 import Commodity from "@/components/shopcart/Commodity";
-// 購物車用到的主鍵
+
+// 加上context鉤子
+import { useCart } from "@/hooks/use-cart";
+
+// 綠色勾勾
+import Check from "@/components/checkbox-custom/CheckBoxCustom";
+
 const ShopCart1 = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
@@ -48,59 +54,61 @@ const ShopCart1 = () => {
     };
   }, []);
 
-  const classIndex = [
-    { id: 0, count: 1, name: "肉桂捲初級班", price: 1500 },
-    { id: 1, count: 1, name: "cake初級班", price: 1200 },
-    { id: 2, count: 1, name: "肉捲初級班", price: 1000 },
-  ];
-  const [classData, classProductsData] = useState(classIndex);
+  // const classIndex = [
+  //   { id: 0, count: 1, name: "肉桂捲初級班", price: 1500 },
+  //   { id: 1, count: 1, name: "cake初級班", price: 1200 },
+  //   { id: 2, count: 1, name: "肉捲初級班", price: 1000 },
+  // ];
+  // const [classData, classProductsData] = useState(classIndex);
 
-  const prodcts = [
-    { id: 0, count: 1, name: "肉桂捲", price: 1500 },
-    { id: 1, count: 1, name: "meet", price: 1200 },
-    { id: 2, count: 1, name: "肉捲", price: 1000 },
-  ];
-  const [productData, setProductsData] = useState(prodcts);
+  // const prodcts = [
+  //   { id: 0, count: 1, name: "肉桂捲", price: 1500 },
+  //   { id: 1, count: 1, name: "meet", price: 1200 },
+  //   { id: 2, count: 1, name: "肉捲", price: 1000 },
+  // ];
+  // const [productData, setProductsData] = useState(prodcts);
   // const [quantity,setQuantity] = useState(0)
-  const increase = (id) => {
-    // setQuantity(quantity + 1)
-    const addProducts = classData.map((v, i) => {
-      if (v.id === id) return { ...v, count: v.count + 1 };
-      else return v;
-    });
+  // const increase = (id) => {
+  //   // setQuantity(quantity + 1)
+  //   const addProducts = classData.map((v, i) => {
+  //     if (v.id === id) return { ...v, count: v.count + 1 };
+  //     else return v;
+  //   });
 
-    classProductsData(addProducts);
-  };
+  //   classProductsData(addProducts);
+  // };
 
-  const decrease = (id) => {
-    // if(quantity>0){
-    //   setQuantity(quantity - 1)
-    // }
-    const reduceProducts = classData.map((v, i) => {
-      if (v.id === id && v.count > 0) return { ...v, count: v.count - 1 };
-      else return v;
-    });
+  // const decrease = (id) => {
+  //   // if(quantity>0){
+  //   //   setQuantity(quantity - 1)
+  //   // }
+  //   const reduceProducts = classData.map((v, i) => {
+  //     if (v.id === id && v.count > 0) return { ...v, count: v.count - 1 };
+  //     else return v;
+  //   });
 
-    classProductsData(reduceProducts);
-  };
+  //   classProductsData(reduceProducts);
+  // };
 
-  const remove = (id) => {
-    const removeProduct = classData.filter((v, i) => {
-      return v.id !== id;
-    });
+  // const remove = (id) => {
+  //   const removeProduct = classData.filter((v, i) => {
+  //     return v.id !== id;
+  //   });
 
-    classProductsData(removeProduct);
-  };
+  //   classProductsData(removeProduct);
+  // };
 
-  const productDataTotal = productData.reduce(
-    (total, product) => total + product.count * product.price,
-    0
-  );
-  const classDataTotal = classData.reduce(
-    (total, product) => total + product.count * product.price,
-    0
-  );
-  const combinedTotal = productDataTotal + classDataTotal;
+  // // const productDataTotal = productData.reduce(
+  // //   (total, product) => total + product.count * product.price,
+  // //   0
+  // // );
+  // const classDataTotal = classData.reduce(
+  //   (total, product) => total + product.count * product.price,
+  //   0
+  // );
+  // const combinedTotal = productDataTotal + classDataTotal;
+  const { totalItems, totalPrice } = useCart();
+
   return (
     <>
       <Header />
@@ -120,33 +128,30 @@ const ShopCart1 = () => {
           style={{ maxWidth: 1440 }}
         >
           <div
-            className={`${shopStyles.pay} d-flex justify-content-evenly mt-3`}
-            style={{ width: "100%" }}
+            className={`${shopStyles.pay} d-flex justify-content-between mt-3`}
+            style={{ width: "500px" }}
           >
-            <p className={`${shopStyles.fs} pe-3`}>折價券</p>
-            <h5 className="pt-2">$0元</h5>
+            <p className={`${shopStyles.fs}  d-flex align-items-center`}>
+              折價券
+            </p>
+            <h5 className="">$0元</h5>
           </div>
           {/*  */}
           <div
-            className={`${shopStyles.pay} d-flex justify-content-evenly`}
-            style={{ width: "100%" }}
+            className={`${shopStyles.pay} d-flex justify-content-between`}
+            style={{ width: "500px" }}
           >
-            <div className="form-check" style={{ marginLeft: 80 }}>
-              <input
-                className="form-check-input mt-2"
-                type="checkbox"
-                id="checkboxNoLabel"
-                defaultValue=""
-                aria-label="..."
-              />
-              <label htmlFor="" className={`${shopStyles.fs} pe-3`}>
+            <div className=" d-flex">
+              {/* <div className="pt-1"> <Check/></div> */}
+
+              <label htmlFor="" className={`${shopStyles.fs} `}>
                 使用折價券{" "}
               </label>
             </div>
             <select
-              className="form-select form-select-sm me-5"
+              className="form-select form-select-sm "
               aria-label="Small select example "
-              style={{ width: 100 }}
+              style={{ width: "150px" }}
             >
               <option selected="">使用優惠券</option>
               <option value={1}>One</option>
@@ -156,25 +161,25 @@ const ShopCart1 = () => {
           </div>
           {/*  */}
           <div
-            className={`${shopStyles.pay} d-flex justify-content-evenly mt-2 pt-2`}
-            style={{ width: "100%" }}
+            className={`${shopStyles.pay} d-flex justify-content-between mt-2 pt-2`}
+            style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>折扣金額:</p>
             <h5 className="pt-1">$0元</h5>
           </div>
           <div
-            className={`${shopStyles.pay} d-flex justify-content-evenly`}
-            style={{ width: "100%" }}
+            className={`${shopStyles.pay} d-flex justify-content-between`}
+            style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>運費 :</p>
             <h5 className="ps-5">$0元</h5>
           </div>
           <div
-            className={`${shopStyles.pay} d-flex justify-content-evenly ms-3`}
-            style={{ width: "100%" }}
+            className={`${shopStyles.pay} d-flex justify-content-between `}
+            style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>訂單合計:</p>
-            <h5>$2000元</h5>
+            <h5>{totalPrice} 元</h5>
           </div>
           <div
             className={`${shopStyles.pay2}  d-flex justify-content-center py-4`}
@@ -229,7 +234,8 @@ const ShopCart1 = () => {
                 結帳金額:
               </span>
               <span className={`${shopStyles.fc} fs-4 pe-3`}>
-                {combinedTotal}
+                {/* {combinedTotal} */}
+                {totalPrice}
               </span>
             </div>
             <div className="col">

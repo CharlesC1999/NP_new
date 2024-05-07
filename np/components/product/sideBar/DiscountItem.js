@@ -1,7 +1,7 @@
 import React from "react";
 import style from "@/components/product/sideBar/discountItem.module.scss";
 
-function DiscountItem() {
+function DiscountItem({ category_name }) {
   return (
     <>
       <div
@@ -12,7 +12,7 @@ function DiscountItem() {
           className={`${style.sideBox} d-flex align-items-center justify-content-between p-2`}
         >
           <div className={`${style.discountText} align-items-center`}>
-            優惠商品
+            {category_name}
           </div>
           <div className={`${style.amount} align-items-center`}>3</div>
         </div>
