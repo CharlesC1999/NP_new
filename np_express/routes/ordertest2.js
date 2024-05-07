@@ -81,13 +81,13 @@ router.get('/', async function (req, res) {
   // group by orders.Order_ID`
 
   //這是包含圖片的跟一大堆的還有總價重新命名的
-  const sqlOrders = `SELECT orders.order_id, member_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
+  const sqlOrders = `SELECT orders.order_id,user_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
   FROM orders
-  JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  Join product on order_item.product_id = product.ID
-  JOIN product_image ON order_item.Product_ID = product_image.F_product_id
-  GROUP BY orders.order_id
-  order by orders.order_id;`
+  JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
+  Join product on order_commodity_item.product_id = product.ID
+  JOIN product_image ON order_commodity_item.Product_ID = product_image.F_product_id
+  GROUP BY orders.order_id;`
+
   // 最終組合的sql語法(計數用)
   const sqlCount = `SELECT COUNT(*) AS count FROM orders ${where}`
 
@@ -122,14 +122,22 @@ router.get('/:status', async function (req, res) {
   // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
   const ordersStatus = req.params.status
 
-  const sqlOrders = `SELECT orders.order_id, member_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
+  // const sqlOrders = `SELECT orders.order_id, member_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
+  // FROM orders
+  // JOIN order_item ON orders.Order_ID = order_item.Order_ID
+  // Join product on order_item.product_id = product.ID
+  // JOIN product_image ON order_item.Product_ID = product_image.F_product_id
+  // WHERE orders.Status = "${ordersStatus}"
+  // GROUP BY orders.order_id
+  // order by orders.order_id;`
+  const sqlOrders = `SELECT orders.order_id,user_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
   FROM orders
-  JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  Join product on order_item.product_id = product.ID
-  JOIN product_image ON order_item.Product_ID = product_image.F_product_id
-  WHERE orders.Status = "${ordersStatus}"
-  GROUP BY orders.order_id
-  order by orders.order_id;`
+  JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
+  Join product on order_commodity_item.product_id = product.ID
+  
+  JOIN product_image ON order_commodity_item.Product_ID = product_image.F_product_id
+  WHERE orders.status = "${ordersStatus}"
+  GROUP BY orders.order_id;`
 
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders)

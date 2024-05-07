@@ -17,9 +17,13 @@ import "@/styles/loader.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
 // Router
 import Router from "next/router";
+// Search Result
+import { SearchResultsProvider } from "@/contexts/searchContext";
 
 // Head
 import Head from "next/head";
+//
+import { CategoryProvider } from "@/hooks/ClassProp";
 
 import { CartProvider } from "@/hooks/use-cart";
 // 給食譜列表跟細節頁的sideBar用的context
@@ -35,13 +39,19 @@ export default function App({ Component, pageProps }) {
       </Head>
       <AuthProvider>
         <LoaderProvider CustomLoader={OrangeLoader}>
-          <CategoryForSQLProvider>
-            <CartProvider>
-              <ManageRouteChanges>
-                {getLayout(<Component {...pageProps} />)}
-              </ManageRouteChanges>
-            </CartProvider>
-          </CategoryForSQLProvider>
+          <SearchResultsProvider>
+            <SearchResultsProvider>
+              <CategoryForSQLProvider>
+                <CartProvider>
+                  <CategoryProvider>
+                    <ManageRouteChanges>
+                      {getLayout(<Component {...pageProps} />)}
+                    </ManageRouteChanges>
+                  </CategoryProvider>
+                </CartProvider>
+              </CategoryForSQLProvider>
+            </SearchResultsProvider>
+          </SearchResultsProvider>
         </LoaderProvider>
       </AuthProvider>
     </>

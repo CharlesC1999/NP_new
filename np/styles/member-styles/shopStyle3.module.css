@@ -37,17 +37,7 @@
   border-radius: 5px;
 }
 
-/* article {
-        border: 1px solid #d9d9d9;
-        width: 1200px;
-        background-color: #fff2d9;
-        width: 70vw;
-      } */
 
-/* button {
-        height: 50px;
-        width: 100px;
-      } */
 
 .a {
   height: 50px;
@@ -161,7 +151,7 @@
     background: #78cea6;
   }
   .mgt {
-    margin-top: 100px;
+    margin-top: 10px;
     font-size: 24px;
     color: #547d63;
   }
@@ -278,6 +268,7 @@
       font-size: 20px;
     }
   }
+  
   .keepbuy {
     height: 50px;
     width: 100px;
@@ -303,15 +294,45 @@
 .span {
   font-size: 14px;
 }
-/* 都有 */
-/* .add {
-        border: 1px solid #50bf8b;
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        border-radius: 5px;
-      } */
-/* m */
-/* aside {
-        width: 350px;
-      } */
+
+
+.back a{
+ text-decoration: none;
+ color: #50bf8b;
+}
+.out{
+  width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+@media (max-width:375px) {
+  .out{
+    width: 100%;
+  }
+}
+.totalPrice{
+ 
+  width: 100%;
+ text-align: end;
+  padding: 0 100px;
+ margin-top: 50px !important;
+  
+ 
+}
+@media (max-width:375px) {
+  .totalPrice{
+   width: 345px;
+    display: flex;
+    justify-content: center; 
+    /* text-align: end; */
+    padding: 0 ;
+    border-top: #50bf8b 1px solid;
+  }
+}
+.orderEnd{
+  /* text-align: right; */
+  font-size: 20px;
+
+}

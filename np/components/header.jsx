@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSearchResults } from "@/contexts/searchContext";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
@@ -45,13 +46,13 @@ const MobileSideBar = ({ onClose }) => {
   // 關閉sidebar
   const handleClose = () => {
     if (sidebarRef.current) {
-      // 先添加动画类
+      // 添加動畫樣式
       sidebarRef.current.classList.add(styles.slideOut);
 
-      // 监听动画结束后再执行 onClose，以确保动画流畅
+      // 結束用onClose
       const handleAnimationEnd = () => {
-        onClose(); // 动画完成后执行 onClose
-        // 移除监听器，避免重复触发
+        onClose();
+        // 移除監聽
         sidebarRef.current.removeEventListener(
           "animationend",
           handleAnimationEnd
@@ -188,6 +189,7 @@ const MobileSideBar = ({ onClose }) => {
 };
 
 const HeaderComponent = () => {
+  const { setResults } = useSearchResults(); //搜尋鉤子
   const [isSearchOpen, setIsSearchOpen] = useState(false); //搜尋下拉是否開啟
   const [selectedText, setSelectedText] = useState("所有分類"); //預設搜尋顯示結果文字
   const [searchInput, setSearchInput] = useState(""); //搜尋欄位預設輸入
@@ -199,10 +201,10 @@ const HeaderComponent = () => {
   const recipeDropdownRef = useRef(null); // 食譜下拉列表的參考
   const calssDropdownRef = useRef(null); // 課程下拉列表的參考
   const [showFullScreen, setShowFullScreen] = useState(false); // sidebar
-  const [animation, setAnimation] = useState(""); //sidebar slideout
+  // const [animation, setAnimation] = useState(""); //sidebar slideout
   const router = useRouter();
   const { auth, logout } = useAuth();
-
+// console.log(auth);
   let hasMargin = true;
   let isMobile = false;
 
@@ -212,7 +214,7 @@ const HeaderComponent = () => {
     { id: 2, name: "商品列表", className: styles.selectionLink },
     { id: 3, name: "食譜精選", className: styles.selectionLink },
     { id: 4, name: "精選課程", className: styles.selectionLink },
-    { id: 5, name: "講師陣容", className: styles.selectionLink },
+    // { id: 5, name: "講師陣容", className: styles.selectionLink },
   ];
 
   // 食譜下拉選單
@@ -291,11 +293,49 @@ const HeaderComponent = () => {
     setSearchInput(event.target.value);
   };
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault();
     console.log("搜索:", searchInput, "在:", selectedText);
-    // 執行搜索邏輯
 
+    // 重新映射
+    const routerNameMapping = {
+      所有分類: "findAll",
+      商品列表: "findProduct",
+      食譜精選: "findRecipe",
+      精選課程: "findClass",
+    };
+    // 端點對應設置
+    const endpoint = routerNameMapping[selectedText];
+    // 執行搜索邏輯
+    try {
+      const response = await fetch(
+        `http://localhost:3005/api/search/${endpoint}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            searchText: searchInput,
+            category: selectedText,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const results = await response.json();
+      // 更新組件狀態以顯示搜索結果
+      console.log(results);
+      // 結果用鉤子傳遞
+      setResults(results);
+      // 導向到結果頁面並將搜索結果作為路由參數傳遞;
+      router.push("/search-result");
+    } catch (error) {
+      console.error("搜索請求失敗:", error);
+    }
     // 導向到結果頁面或更新組件顯示結果
   };
 
