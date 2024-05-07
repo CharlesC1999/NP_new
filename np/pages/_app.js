@@ -37,15 +37,17 @@ export default function App({ Component, pageProps }) {
       </Head>
       <AuthProvider>
         <LoaderProvider CustomLoader={OrangeLoader}>
-          <CategoryForSQLProvider>
-            <CartProvider>
-              <CategoryProvider>
-                <ManageRouteChanges>
-                  {getLayout(<Component {...pageProps} />)}
-                </ManageRouteChanges>
-              </CategoryProvider>
-            </CartProvider>
-          </CategoryForSQLProvider>
+          <SearchResultsProvider>
+            <CategoryForSQLProvider>
+              <CartProvider>
+                <CategoryProvider>
+                  <ManageRouteChanges>
+                    {getLayout(<Component {...pageProps} />)}
+                  </ManageRouteChanges>
+                </CategoryProvider>
+              </CartProvider>
+            </CategoryForSQLProvider>
+          </SearchResultsProvider>
         </LoaderProvider>
       </AuthProvider>
     </>
