@@ -87,18 +87,25 @@ router.post('/', async function (req, res, next) {
   }
 
   // 產生存取令牌(access token)，其中包含會員資料
-  const accessToken = jsonwebtoken.sign(returnUser, accessTokenSecret, {
+  const token = jsonwebtoken.sign(returnUser, accessTokenSecret, {
     expiresIn: '12h',
   })
 
   // 使用httpOnly cookie來讓瀏覽器端儲存access token
-  res.cookie('accessToken', accessToken, { httpOnly: true })
+  res.cookie('token', token, { httpOnly: false })
 
   // 傳送access token回應(react可以儲存在state中使用)
   return res.json({
     status: 'success',
     data: {
-      accessToken,
+      token,
+      user: {
+        // 新增的用戶資料部分
+        id: returnUser.id,
+        name: displayName,
+        // email: email, // 假設您希望在前端也使用email
+        address: photoURL,
+      },
     },
   })
 })

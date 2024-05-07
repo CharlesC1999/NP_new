@@ -46,11 +46,15 @@
   }
 }
 .recipe-cards {
+  right: 0;
   @media screen and (max-width: 376px) {
     margin-inline: 0;
+    overflow: auto;
   }
+
   .recipe-card {
     gap: 11px;
+    cursor: pointer;
     .card-pic {
       width: 403px;
       height: 280px;
@@ -84,6 +88,7 @@
     }
   }
 }
+
 .pagination {
   margin-top: 50px;
   @media screen and (max-width: 376px) {

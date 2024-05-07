@@ -6,8 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/components/product/productSection02.module.scss";
 
 export default function ProductSection02({ review_comments }) {
-  console.log(review_comments);
-
   return (
     <>
       <div className={`${style["p-comment"]}flex-column`}>

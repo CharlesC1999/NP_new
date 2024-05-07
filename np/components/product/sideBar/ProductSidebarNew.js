@@ -7,7 +7,7 @@ export default function ProductSidebarNew() {
     <>
       <div className={`${styles.sideBarBox}`}>
         <div className={`${styles.sideTitle}`}>
-          <h5>新品推薦</h5>
+          <h5>你可能喜歡</h5>
         </div>
         <div className={`${styles.line}`}></div>
         <Newsidebar />
