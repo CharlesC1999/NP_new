@@ -70,3 +70,41 @@
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
+
+.on {
+  color: gold;
+}
+
+.off {
+  color: gray;
+}
+
+.good-style {
+  color: red;
+}
+
+.star-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.faLeafOff {
+  color: var(--green05);
+  font-size: 1.3rem;
+}
+
+.faLeafOn {
+  color: var(--green02);
+  font-size: 1.3rem;
+}
+
+.clearFilter {
+  border: solid 1px var(--green02);
+  color: var(--green02);
+}
+.clearFilter:hover {
+  background-color: var(--green02);
+  color: var(--white);
+}

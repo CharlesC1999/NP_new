@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSearchResults } from "@/contexts/searchContext";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
@@ -18,9 +19,11 @@ import { GrGroup } from "react-icons/gr";
 import { IoMdBusiness } from "react-icons/io";
 
 const MobileSideBar = ({ onClose }) => {
+  const sidebarRef = useRef(null);
   const router = useRouter();
   const { auth, logout } = useAuth();
   const [userData, setUserData] = useState("");
+  const [isActive, setIsActive] = useState(true); // 控制動畫的狀態
 
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
@@ -39,6 +42,28 @@ const MobileSideBar = ({ onClose }) => {
       setUserData(JSON.parse(userImage));
     }
   }, []);
+
+  // 關閉sidebar
+  const handleClose = () => {
+    if (sidebarRef.current) {
+      // 添加動畫樣式
+      sidebarRef.current.classList.add(styles.slideOut);
+
+      // 結束用onClose
+      const handleAnimationEnd = () => {
+        onClose();
+        // 移除監聽
+        sidebarRef.current.removeEventListener(
+          "animationend",
+          handleAnimationEnd
+        );
+      };
+
+      sidebarRef.current.addEventListener("animationend", handleAnimationEnd);
+    } else {
+      onClose(); // 如果参考不存在或动画未能正确设置，直接关闭
+    }
+  };
 
   const logoutButton = () => {
     Swal.fire({
@@ -63,7 +88,7 @@ const MobileSideBar = ({ onClose }) => {
   };
 
   return (
-    <div className={styles.fullMobileScreen} onClick={onClose}>
+    <div className={styles.fullMobileScreen} onClick={handleClose}>
       <div
         className={styles.sideBarContainer}
         onClick={(e) => e.stopPropagation()}
@@ -164,7 +189,10 @@ const MobileSideBar = ({ onClose }) => {
 };
 
 const HeaderComponent = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { setResults } = useSearchResults(); //搜尋鉤子
+  const [isSearchOpen, setIsSearchOpen] = useState(false); //搜尋下拉是否開啟
+  const [selectedText, setSelectedText] = useState("所有分類"); //預設搜尋顯示結果文字
+  const [searchInput, setSearchInput] = useState(""); //搜尋欄位預設輸入
   const [isProductOpen, setIsProductOpen] = useState(false);
   const [isRecipeOpen, setIsRecipeOpen] = useState(false);
   const [isClassOpen, setIsClassOpen] = useState(false);
@@ -172,8 +200,8 @@ const HeaderComponent = () => {
   const productDropdownRef = useRef(null); // 產品下拉列表的參考
   const recipeDropdownRef = useRef(null); // 食譜下拉列表的參考
   const calssDropdownRef = useRef(null); // 課程下拉列表的參考
-  const [selectedText, setSelectedText] = useState("所有分類");
   const [showFullScreen, setShowFullScreen] = useState(false); // sidebar
+  // const [animation, setAnimation] = useState(""); //sidebar slideout
   const router = useRouter();
   const { auth, logout } = useAuth();
 
@@ -186,7 +214,7 @@ const HeaderComponent = () => {
     { id: 2, name: "商品列表", className: styles.selectionLink },
     { id: 3, name: "食譜精選", className: styles.selectionLink },
     { id: 4, name: "精選課程", className: styles.selectionLink },
-    { id: 5, name: "講師陣容", className: styles.selectionLink },
+    // { id: 5, name: "講師陣容", className: styles.selectionLink },
   ];
 
   // 食譜下拉選單
@@ -219,7 +247,7 @@ const HeaderComponent = () => {
     { id: 6, name: "烘焙/點心", href: "#", className: styles.selectionLink },
   ];
   // -----------------------開關控制區--------------------------------
-  // 開關控制
+  // 搜尋開關控制
   const toggleDropdown = () => setIsSearchOpen(!isSearchOpen);
 
   // 開關控制
@@ -243,7 +271,7 @@ const HeaderComponent = () => {
 
   // -----------------------點擊選項和區域外關閉控制區-----------------
   const handleItemClick = (name) => {
-    setSelectedText(name);
+    setSelectedText(name); //點選項
     setIsSearchOpen(false); // 點選項關閉下拉
   };
 
@@ -260,6 +288,56 @@ const HeaderComponent = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    console.log("搜索:", searchInput, "在:", selectedText);
+
+    // 重新映射
+    const routerNameMapping = {
+      所有分類: "findAll",
+      商品列表: "findProduct",
+      食譜精選: "findRecipe",
+      精選課程: "findClass",
+    };
+    // 端點對應設置
+    const endpoint = routerNameMapping[selectedText];
+    // 執行搜索邏輯
+    try {
+      const response = await fetch(
+        `http://localhost:3005/api/search/${endpoint}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            searchText: searchInput,
+            category: selectedText,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const results = await response.json();
+      // 更新組件狀態以顯示搜索結果
+      console.log(results);
+      // 結果用鉤子傳遞
+      setResults(results);
+      // 導向到結果頁面並將搜索結果作為路由參數傳遞;
+      router.push("/search-result");
+    } catch (error) {
+      console.error("搜索請求失敗:", error);
+    }
+    // 導向到結果頁面或更新組件顯示結果
+  };
 
   const handleProductClick = () => {
     setIsProductOpen(false); // 點選項關閉下拉
@@ -461,11 +539,17 @@ const HeaderComponent = () => {
                 type="text"
                 className={styles.searchBarInput}
                 placeholder="Search for items..."
+                value={searchInput}
+                onChange={handleInputChange}
               />
             </div>
 
             {/* <!-- 搜索按鈕 --> */}
-            <button type="submit" className={styles.searchBarButton}>
+            <button
+              type="submit"
+              className={styles.searchBarButton}
+              onClick={handleSearch}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -518,6 +602,7 @@ const HeaderComponent = () => {
             ) : (
               <a onClick={doLogin} className={styles.pageLink}>
                 {/* <!-- 手機圖示svg --> */}
+                {/* 這應該是搜索 */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30px"
