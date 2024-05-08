@@ -15,6 +15,7 @@ import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import CardStyle from "@/styles/class_styles/CardStyle.module.css";
 import Pagination from "@/components/pagination";
+import ToTheTop from "@/components/toTheTop";
 import PaginationM from "@/components/paginationM";
 import Footer from "@/components/Footer";
 
@@ -287,6 +288,7 @@ const ClassList = () => {
         </div>
       </div>
       <Footer />
+      <ToTheTop />
     </div>
   );
 };

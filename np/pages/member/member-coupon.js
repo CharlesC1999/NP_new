@@ -20,13 +20,16 @@ export default function MemberCoupon() {
       <Header/>
       <Breadcrumbs/>
       {/* 要抓登入狀態才能看到的區塊 */}
-      {auth.isLoggedIn ? (
+      {/* {auth.isLoggedIn ? ( */}
       <div className={` ${styles.container1} ${styles.main} ` }>
         <Sidebar/>
        <MemberCouponMain/>
        </div>
-      //  要抓登入狀態才能看到的區塊
-        ): (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)} 
+      
+
+
+      
+        {/* ): (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)}  */}
        <Footer/>
       </>
     );
