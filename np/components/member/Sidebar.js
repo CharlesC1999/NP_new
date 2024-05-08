@@ -55,8 +55,12 @@ const Sidebar = () => {
     <>
       <div className={styles.menu}>
         <div className={styles.menuTop}>
-          <div className={styles.userimage}>
-            <img src={`/images/member/${userData.User_image}`} alt="" />
+          <div className={`rounded-circle overflow-hidden ${styles.userimage}`}>
+            <img
+              className="w-100 h-100 object-fit-cover"
+              src={`/images/member/${userData.User_image}`}
+              alt=""
+            />
           </div>
           <div className={styles.menuTitle}>
             <div className={styles.accountleft}>帳號</div>
