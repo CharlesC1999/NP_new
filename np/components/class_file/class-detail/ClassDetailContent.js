@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 import styles from "./classDetailContent.module.css";
 import MArticle from "./MClassDetailContentArticleWeb";
 import WArticle from "./WClassDetailContentArticleWeb";
@@ -8,15 +9,44 @@ import FavIconClass from "@/components/favor/FavIconClass";
 const ClassDetail = ({ classData }) => {
   // 用來管理哪個標籤頁是激活的狀態
   const [activeTab, setActiveTab] = useState("info");
+  const [classImageTable, setClassImageTable] = useState([]);
   const router = useRouter();
 
   console.log(classData.classDetail, "there");
   classData = classData.classDetail;
 
-  console.log(classData.speaker_id, "gos");
+  // console.log(classData.speaker_id, "gos");
   const goSpeakerD = () => {
     router.push(`/speaker/speaker-detail?sid=${classData.speaker_id}`);
   };
+
+  useEffect(() => {
+    const fetchClassImagesData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3005/api/class-image-contents/full/${classData.class__i_d}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        const data = await response.json(); // 解析JSON數據
+        console.log("Class Images:", data.data);
+        setClassImageTable(data.data); // 更新狀態以存儲數據
+      } catch (error) {
+        console.error("Failed to fetch class images:", error);
+      }
+    };
+
+    fetchClassImagesData();
+  }, [classData.class__i_d]); // 依賴於 class__i_d，以確保在 class__i_d 變化時重新執行
+
+  console.log(classImageTable);
 
   const notify = (isActive) => {
     if (isActive) {
@@ -94,9 +124,10 @@ const ClassDetail = ({ classData }) => {
               className="class-images-and-contents-mobile"
               style={{ display: "block" }}
             >
-              <MArticle />
-              <MArticle />
-              <MArticle />
+              {classImageTable.map((image, index) => (
+                <MArticle key={index} image={image} />
+              ))}
+
               {/* basically, it only need one set */}
             </div>
           )}
@@ -166,9 +197,10 @@ const ClassDetail = ({ classData }) => {
         </div>
       </section>
       <section className={styles.classImagesAndContents}>
-        <WArticle />
-        <WArticle />
-        <WArticle />
+        {classImageTable.map((image, index) => (
+          <WArticle key={index} image={image} />
+        ))}
+
         {/* basically, it only need one set */}
       </section>
       <Toaster position="bottom-right" reverseOrder={false} />
