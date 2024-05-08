@@ -110,6 +110,10 @@
 .formCheck .formCheckInput {
   margin-right: 10px;
   /* 调整复选框和标签之间的间距 */
+  &:checked {
+    background-color: var(--green02);
+    border-color: var(--green02);
+  }
 }
 .formCheckLabel {
   padding-top: 2px;

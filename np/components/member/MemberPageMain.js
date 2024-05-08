@@ -1,8 +1,97 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./MemberPageMain.module.css";
 
 const MemberPageMain = () => {
+  // 利用ref點擊input file，以此成功觸發監聽onChange
+  const fileRef = useRef(null);
+  // 判斷是否有上傳檔案，若無則顯示原本的圖片
+  const [fileChanged, setFileChanged] = useState(false);
+  const handleClickFile = () => {
+    fileRef.current.click();
+  };
+
+  // 取得localStorage裡的token，用來發起req帶入headers
+  const [LStoken, setLStoken] = useState("");
+  const getTokenInLS = () => {
+    setLStoken(localStorage.getItem("token"));
+  };
+
+  // 初始值
+  const [userData, setUserData] = useState({
+    id: 0,
+    User_name: "",
+    Account: "",
+    Email: "",
+    Phone: "",
+    Address: "",
+    Gender: "",
+    date_of_birth: "",
+    User_image: "",
+  });
+
+  // 串接上後端並把token傳進headers用來解碼
+  // !!! 從localStorage取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
+  const getUser = async () => {
+    const url = "http://localhost:3005/api/member-profile/check";
+    const tokenforheaders = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${LStoken}`,
+      },
+    };
+    try {
+      const res = await fetch(url, tokenforheaders);
+      const data = await res.json();
+      setUserData(data.data.user);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // !!! 印出初始值後用來設定表單元素的state
+  // 用來打印出radio
+  const genderAry = [
+    { name: "男", key: "M" },
+    { name: "女", key: "F" },
+    { name: "其他", key: "Other" },
+  ];
+
+  // 多欄位共用的formChange
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+  // ??? ----------------------處理上傳圖片------------------------
+  // 代表選中的檔案(null代表沒選中檔案，或取消檔案選擇)
+  const [selectedFile, setSelectedFile] = useState(null);
+  // 預覽圖片的網址(呼叫URL.createObjectURL得到的網址)
+  const [previewURL, setPreviewURL] = useState("");
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      // 設定到選擇的檔案
+      setSelectedFile(file);
+      // 產生預覽圖片的網址
+      setPreviewURL(URL.createObjectURL(file));
+    } else {
+      // 設回預設值
+      setSelectedFile(null);
+      setPreviewURL("");
+    }
+  };
+
+  // 初次渲染時取得LS裡的token
+  useEffect(() => {
+    getTokenInLS();
+  }, []);
+
+  // 得到token後執行getUser()去後端解碼token並根據得到的user資料查詢資料庫並將資料設定給userData
+  useEffect(() => {
+    getUser();
+  }, [LStoken]);
+
   return (
     <>
       <div className={` ${styles.container1} ${styles.main} `}>
@@ -13,13 +102,13 @@ const MemberPageMain = () => {
           {/* 主內容的標題 */}
           <div className={styles.title}>
             <div className={styles.titleNow}>我的帳戶</div>
-            <div className={styles.title2}>我的帳戶</div>
+            {/* <div className={styles.title2}>我的帳戶</div> */}
           </div>
           {/* 主內容的標題 */}
           {/* 手機板大頭貼 */}
           <div className={styles.mUserimage}>
             <div className={styles.mUImage}>
-              <img src alt />
+              <img src="" alt="" />
               <div className={styles.camera}>
                 <label htmlFor="fileUpload" className={styles.uploadBtn}>
                   {" "}
@@ -61,6 +150,9 @@ const MemberPageMain = () => {
                     className="form-control"
                     id="name"
                     placeholder="請輸入姓名"
+                    name="User_name"
+                    value={userData.User_name}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -77,6 +169,9 @@ const MemberPageMain = () => {
                     className="form-control"
                     id="email"
                     placeholder="請輸入Email"
+                    name="Email"
+                    value={userData.Email}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -93,6 +188,9 @@ const MemberPageMain = () => {
                     className="form-control"
                     id="phone"
                     placeholder="請輸入手機號碼"
+                    name="Phone"
+                    value={userData.Phone}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -109,6 +207,9 @@ const MemberPageMain = () => {
                     className="form-control"
                     id="address"
                     placeholder="請輸入地址"
+                    name="Address"
+                    value={userData.Address}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -119,23 +220,32 @@ const MemberPageMain = () => {
                   性别 :
                 </label>
                 <div className={`${styles.checkAlignment} col`}>
-                  <div
-                    className={`${styles.formCheck} form-check form-check-inline `}
-                  >
-                    <input
-                      className={`${styles.formCheckInput} form-check-input`}
-                      type="radio"
-                      id="female"
-                      defaultValue="女"
-                    />
-                    <label
-                      className={`${styles.formCheckLabel} form-check-label`}
-                      htmlFor="female"
-                    >
-                      女
-                    </label>
-                  </div>
-                  <div
+                  {genderAry.map((v, i) => {
+                    return (
+                      <div
+                        className={`${styles.formCheck} form-check form-check-inline `}
+                      >
+                        <input
+                          className={`${styles.formCheckInput} form-check-input`}
+                          type="radio"
+                          value={v.key}
+                          name="Gender"
+                          id={v.key}
+                          checked={v.key === userData.Gender}
+                          onChange={handleChange}
+                        />
+                        <label
+                          htmlFor={v.key}
+                          className={`${styles.formCheckLabel} form-check-label`}
+                        >
+                          {v.name}
+                        </label>
+                      </div>
+                    );
+                  })}
+
+                  {/* // *** 利用map的方法打印出性別的radio */}
+                  {/* <div
                     className={`${styles.formCheck} form-check form-check-inline `}
                   >
                     <input
@@ -166,7 +276,7 @@ const MemberPageMain = () => {
                     >
                       其他
                     </label>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 gap-3`}>
@@ -177,7 +287,13 @@ const MemberPageMain = () => {
                   生日 :
                 </label>
                 <div className="col">
-                  <input type="date" className="form-control" />
+                  <input
+                    type="date"
+                    className="form-control"
+                    name="date_of_birth"
+                    value={userData.date_of_birth}
+                    onChange={handleChange}
+                  />
                 </div>
                 {/* // ! 生日這邊input的type改成date */}
                 {/* <div className="col">
@@ -216,17 +332,34 @@ const MemberPageMain = () => {
               </div>
             </div>
             <div className={styles.mainRight}>
-              <div className={styles.userImageBig}>
-                {/* <img src="" alt="" className=""/> */}
+              <div
+                className={`rounded-circle overflow-hidden ${styles.userImageBig}`}
+              >
+                <img
+                  src={
+                    fileChanged
+                      ? previewURL
+                      : `/images/member/${userData.User_image}`
+                  }
+                  alt=""
+                  className="w-100 h-100 object-fit-cover"
+                />
               </div>
               <div className={`${styles.btnCenter} row mb-3 align-items-start`}>
-                <label htmlFor="fileUpload" className={`btn ${styles.btn2} `}>
+                <label
+                  onClick={handleClickFile}
+                  className={`btn ${styles.btn2} `}
+                >
                   選擇圖片
                 </label>
                 <input
-                  id="fileUpload"
+                  ref={fileRef}
                   type="file"
                   className={styles.inputfile}
+                  onChange={(e) => {
+                    handleFileChange(e);
+                    setFileChanged(true);
+                  }}
                 />
               </div>
             </div>
