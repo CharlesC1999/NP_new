@@ -11,6 +11,7 @@ import Card4Hot from "@/components/index/Card4Hot";
 import Card5class from "@/components/index/Card5class";
 import Card6Recipe from "@/components/index/Card6Recipe";
 import Footer from "@/components/Footer";
+import ToTheTop from "@/components/toTheTop";
 import data from "@/data/index-brand-info.json";
 import { getHomePageInfo } from "@/services/user";
 
@@ -20,11 +21,8 @@ export default function Index() {
   const [recipe, setRecipe] = useState([]);
   const fetchHomeData = async () => {
     try {
-      const {
-        hotProduct,
-        hotClass,
-        recommendedRecipe
-      } = await getHomePageInfo();
+      const { hotProduct, hotClass, recommendedRecipe } =
+        await getHomePageInfo();
       setHotProduct(hotProduct);
       setHotClass(hotClass);
       setRecipe(recommendedRecipe);
@@ -123,7 +121,7 @@ export default function Index() {
       <div className={` ${styles.wrapper}`}>
         <div className={`d-flex justify-content-between ps-3 pe-3`}>
           <h4 className={`${styles.MeAuto}`}>熱銷商品</h4>
-          <a className={`${styles.TitleRwd}`} href="">
+          <a className={`${styles.TitleRwd}`} href="/product">
             <h5 className={`${styles.MeAuto}`}>
               更多<i className="fa-solid fa-chevron-right"></i>
             </h5>
@@ -151,7 +149,7 @@ export default function Index() {
             className={`${styles.card5Title} d-flex justify-content-between`}
           >
             <h4 className={`${styles.MeAuto}`}>熱門課程</h4>
-            <a className={`${styles.TitleRwd}`} href="">
+            <a className={`${styles.TitleRwd}`} href="/class-page">
               <h5 className={`${styles.MeAuto}`}>
                 更多<i className="fa-solid fa-chevron-right"></i>
               </h5>
@@ -181,7 +179,7 @@ export default function Index() {
             className={`d-flex justify-content-between ${styles.card6Title}`}
           >
             <h4 className={`${styles.MeAuto}`}>精選食譜</h4>
-            <a className={`${styles.TitleRwd}`} href="">
+            <a className={`${styles.TitleRwd}`} href="/recipe">
               <h5 className={`${styles.MeAuto}`}>
                 更多<i className="fa-solid fa-chevron-right"></i>
               </h5>
@@ -204,6 +202,7 @@ export default function Index() {
       </div>
 
       <Footer />
+      <ToTheTop />
     </>
   );
 }

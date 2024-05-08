@@ -139,7 +139,7 @@ export default function ProductSidebarDetail({
               return (
                 <div
                   key={score}
-                  className="d-flex flex-row me-3"
+                  className="d-flex flex-row me-4"
                   onClick={() => handleStartRating(score)}
                   onMouseEnter={() => handleStartHoverRating(score)}
                   onMouseLeave={() => handleStartHoverRating(0)}

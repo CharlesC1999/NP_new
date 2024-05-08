@@ -1,25 +1,30 @@
 import React from "react";
 import styles from "@/styles/Product/Newsidebar.module.css";
+import { useRouter } from "next/router";
 
-function Newsidebar() {
-  return(
+function Newsidebar({ id, name, price, img }) {
+  const router = useRouter();
+  const handleCategoryClick = (cateId) => () => {
+    router.push(`/product/${cateId}`);
+  };
+  return (
     <>
-    <div className={`d-flex ${styles.hotBox}`}>
+      <div
+        className={`d-flex ${styles.hotBox}`}
+        onClick={handleCategoryClick(id)} // 注意这里传递的是返回的函数
+      >
         <div className={styles.hotImg}>
-            <a href=""><img src="/index-images/thumbnail-4.png" alt /></a>
+          <img src={`/index-images/p-image/${img}`} alt={name} />
         </div>
         <div className={styles.hotText}>
-            <a href="">
-                <h6 className={styles.hotTitle}>芒果汁</h6>
-            </a>
-            <h6 className>$ 99</h6>
+          <a href="">
+            <h6 className={styles.hotTitle}>{name}</h6>
+          </a>
+          <h6 className>${price}</h6>
         </div>
-    </div>
-
+      </div>
     </>
-  )
+  );
 }
 
-export default Newsidebar
-
-
+export default Newsidebar;

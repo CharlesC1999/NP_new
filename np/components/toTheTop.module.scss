@@ -1,0 +1,33 @@
+.backToTop {
+  position: fixed;
+  bottom: 14px;
+  right: 10px;
+  width: 120px;
+  height: 120px;
+  padding: 5px 5px;
+  //   color: #f5f5f5;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 1;
+  transition: transform 0.2s;
+  overflow: hidden;
+}
+
+@media (max-width: 375px) {
+  .backToTop {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.backToTop:hover {
+  //   opacity: 1;
+  transform: rotate(12deg);
+}
+
+.backToTopImg {
+  width: 100%;
+  object-fit: contain;
+}

@@ -204,7 +204,7 @@ router.get('/', async function (req, res) {
       perpage = 20,
       price_gte = 50,
       price_lte = 100,
-      sort = 'category_id',
+      sort = 'id',
       order = 'asc',
       category_id = '',
       discount_id,
@@ -247,6 +247,16 @@ router.get('/', async function (req, res) {
       ratingclause = `HAVING ROUND(AVG(pReview.rating), 1) = ${rating}`
     }
     console.log(rating)
+    const mayLikeProducts = await sequelize.query(
+      `SELECT p.product_name, p.product_price, p.id , pImage.image_url
+      FROM product AS p
+      JOIN product_image AS pImage ON p.id = pImage.product_id
+      ORDER BY RAND()
+      LIMIT 5;`,
+      {
+        type: sequelize.QueryTypes.SELECT,
+      }
+    )
     const productQuery = `
     SELECT 
       p.id, 
@@ -314,6 +324,7 @@ router.get('/', async function (req, res) {
         totalPages: totalPages,
         currentPage: pageNow,
         categoryCounts: categoryCounts,
+        mayLikeProducts: mayLikeProducts,
       },
     })
   } catch (error) {
@@ -329,13 +340,32 @@ router.get('/', async function (req, res) {
 
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
 router.get('/:pid', async function (req, res) {
-  const pid = parseInt(req.params.pid) // 將id轉成數字
+  const productId = parseInt(req.params.pid) // 將id轉成數字
 
   try {
     // 执行分类查询
-    const categories = await sequelize.query(
-      `SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId FROM product_categories`,
+    const recipes = await sequelize.query(
+      `SELECT * FROM recipe
+    ORDER BY RAND()
+    LIMIT 4`,
       { type: sequelize.QueryTypes.SELECT }
+    )
+
+    const categories = await sequelize.query(
+      `SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId, cate_png AS catePng FROM product_categories`,
+      { type: sequelize.QueryTypes.SELECT }
+    )
+    const mayLikeProducts = await sequelize.query(
+      `SELECT p.product_name,p.id, p.product_price, pImage.image_url
+       FROM product AS p
+       JOIN product_image AS pImage ON p.id = pImage.product_id
+       WHERE p.category_id = (SELECT category_id FROM product WHERE id = :productId)
+         AND p.id <> :productId
+       LIMIT 5;`,
+      {
+        replacements: { productId: productId },
+        type: sequelize.QueryTypes.SELECT,
+      }
     )
     const categoryCounts = await fetchCategoryCounts()
     //執行資料庫搜尋 query
@@ -365,7 +395,7 @@ router.get('/:pid', async function (req, res) {
     `,
 
       {
-        replacements: { productId: pid }, // Ensure using safe parameter passing
+        replacements: { productId: productId }, // Ensure using safe parameter passing
         type: sequelize.QueryTypes.SELECT,
       }
     )
@@ -375,12 +405,15 @@ router.get('/:pid', async function (req, res) {
         .status(404)
         .json({ status: 'error', message: 'Product not found.' })
     }
-
+    console.log(recipes)
+    console.log(mayLikeProducts)
     return res.json({
       status: 'success',
-      data: results,
+      data: results, // 注意：确保只发送单个产品详情
+      mayLikeProducts,
       categories,
-      categoryCounts,
+      categoryCounts: await fetchCategoryCounts(),
+      recipes,
     })
   } catch (error) {
     console.error('Error fetching product:', error)
@@ -389,71 +422,5 @@ router.get('/:pid', async function (req, res) {
       .json({ status: 'error', message: 'Internal server error.' })
   }
 })
-// router.get('/:pid', async function (req, res) {
-//   const pid = parseInt(req.params.pid) // 将id转成数字
-//   try {
-//     // 执行分类查询
-//     const categories = await sequelize.query(
-//       `SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId FROM product_categories`,
-//       { type: sequelize.QueryTypes.SELECT }
-//     )
-
-//     // 获取类别计数
-//     const categoryCounts = await fetchCategoryCounts()
-//     console.log(categoryCounts)
-//     console.log(categories)
-//     // 执行产品详细信息查询
-//     const [results] = await sequelize.query(
-//       `
-//       SELECT
-//         p.id,
-//         p.product_name,
-//         p.category_id,
-//         p.product_price,
-//         p.product_stock,
-//         p.product_description,
-//         p.valid,
-//         p.upload_date,
-//         ROUND(AVG(pReview.rating), 1) AS average_rating,
-//         GROUP_CONCAT(CONCAT_WS('|', pReview.comment, pReview.rating, pReview.user_id, DATE_FORMAT(pReview.created_at, '%Y-%m-%d %T'))) AS review_details,
-//         GROUP_CONCAT(pImg.image_url ORDER BY pImg.sort_order) AS image_urls,
-//         GROUP_CONCAT(pImg.sort_order ORDER BY pImg.sort_order) AS sort_orders
-//       FROM
-//         product AS p
-//         LEFT JOIN product_review AS pReview ON p.id = pReview.product_id
-//         LEFT JOIN product_image AS pImg ON p.id = pImg.product_id
-//       WHERE
-//         p.id = :productId
-//       GROUP BY
-//         p.id;
-//       `,
-//       {
-//         replacements: { productId: pid },
-//         type: sequelize.QueryTypes.SELECT,
-//       }
-//     )
-
-//     if (results.length === 0) {
-//       return res
-//         .status(404)
-//         .json({ status: 'error', message: 'Product not found.' })
-//     }
-
-//     // 向前端发送数据
-//     return res.json({
-//       status: 'success',
-//       data: {
-//         productDetails: results[0], // 假设我们只关心第一条匹配的记录
-//         categories,
-//         categoryCounts,
-//       },
-//     })
-//   } catch (error) {
-//     console.error('Error fetching product:', error)
-//     return res
-//       .status(500)
-//       .json({ status: 'error', message: 'Internal server error.' })
-//   }
-// })
 
 export default router

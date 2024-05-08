@@ -1,7 +1,7 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import styles from "./classCardMobileList.module.css";
-
+import FavIconClass from "../favor/FavIconClass";
 export default function ProductCardMobileList({ classesData }) {
   console.log(classesData, "classDM");
 
@@ -87,6 +87,7 @@ export default function ProductCardMobileList({ classesData }) {
             </svg>
             <span>{classesData.speaker_name}</span>
           </div>
+          <FavIconClass id={classesData.class__i_d} />
         </div>
         <div className={styles.productPricing}>
           <span className={styles.currentPrice}>$NT{classesData.c_price}</span>

@@ -443,6 +443,7 @@ const HeaderComponent = () => {
   const goCart = () => router.push(routes.cartList);
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
+  const goProductPromote = () => router.push(routes.productPromote);
   const goRecipeList = () => router.push(routes.recipeList);
   const goSpeekerList = () => router.push(routes.speakerList);
 
@@ -772,7 +773,7 @@ const HeaderComponent = () => {
       <nav className={styles.nav}>
         <ul className={styles.navList}>
           <li className={styles.navItemPromotion}>
-            <a href="#" className={styles.pageLink}>
+            <a onClick={goProductPromote} className={styles.pageLink}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="21"

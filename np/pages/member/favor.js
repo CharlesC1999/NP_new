@@ -88,6 +88,7 @@ export default function Favor() {
                   return (
                     <ProductCardList
                       key={v.id}
+                      id={v.id}
                       img={v.image_urls}
                       category_id={v.category_id}
                       name={v.product_name}
