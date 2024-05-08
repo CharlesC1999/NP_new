@@ -11,6 +11,7 @@ import Card4Hot from "@/components/index/Card4Hot";
 import Card5class from "@/components/index/Card5class";
 import Card6Recipe from "@/components/index/Card6Recipe";
 import Footer from "@/components/Footer";
+import ToTheTop from "@/components/toTheTop";
 import data from "@/data/index-brand-info.json";
 import { getHomePageInfo } from "@/services/user";
 
@@ -20,11 +21,8 @@ export default function Index() {
   const [recipe, setRecipe] = useState([]);
   const fetchHomeData = async () => {
     try {
-      const {
-        hotProduct,
-        hotClass,
-        recommendedRecipe
-      } = await getHomePageInfo();
+      const { hotProduct, hotClass, recommendedRecipe } =
+        await getHomePageInfo();
       setHotProduct(hotProduct);
       setHotClass(hotClass);
       setRecipe(recommendedRecipe);
@@ -204,6 +202,7 @@ export default function Index() {
       </div>
 
       <Footer />
+      <ToTheTop />
     </>
   );
 }
