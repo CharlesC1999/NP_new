@@ -138,7 +138,7 @@ export default function Index() {
                 name={v.product_name}
                 price={v.product_price}
                 d_price={v.discount_price}
-                image={v.image_url}
+                image={v.image_urls}
               />
             );
           })}

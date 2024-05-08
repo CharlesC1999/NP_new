@@ -52,14 +52,14 @@
   gap: 8px;
   align-items: center;
   & h6 {
-    font-size: 14px;
+    font-size: 18px;
     color: var(--green02);
     margin-bottom: 0;
   }
   & p {
     /* 橫線 */
     text-decoration: line-through;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--gray01);
     margin-bottom: 0;
   }
@@ -106,6 +106,13 @@
   }
   .card4Text {
     gap: 4px;
+    & h6 {
+      font-size: 14px;
+    }
+    & p {
+      /* 橫線 */
+      font-size: 12px;
+    }
   }
   .card4Btn {
     gap: 0px;

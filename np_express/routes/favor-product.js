@@ -24,9 +24,10 @@ router.get('/', authenticateToken, async (req, res) => {
   })
 
   // 取得渲染收藏頁的商品資料
-  const productDataSql = `SELECT product.*,favor_product.uid
+  const productDataSql = `SELECT product.*,product_image.image_url AS image_urls,favor_product.uid
   FROM product
   JOIN favor_product ON product.id = favor_product.pid
+  JOIN product_image ON product.id = product_image.product_id
   WHERE uid = ${userID}`
   const [productFavorData] = await db.query(productDataSql)
   // 將結果中的pid取出變為一個純資料的陣列
