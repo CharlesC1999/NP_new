@@ -191,10 +191,10 @@ const HistoryOrderDetail = () => {
                 return (
                   <div className="row py-2" key={v.Order_Item_ID}>
 
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_name}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.price * v.Quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price * v.Quantity}</div>
 
                   </div>
 
@@ -228,10 +228,10 @@ const HistoryOrderDetail = () => {
 
                   <div className="row py-2" key={v.Order_Item_ID}>
 
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.Class_name}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.C_price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.class_name}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.C_price * v.Quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price * v.Quantity}</div>
 
                   </div>
                 )
@@ -339,7 +339,7 @@ const HistoryOrderDetail = () => {
                 return (
                   <div key={v.Order_Item_ID}>
                     <div className="row py-2 mt-1">
-                      <div className={`${styles3.fc} row ps-4 `}>{v.name} X {v.Quantity}</div>
+                      <div className={`${styles3.fc} row ps-4 `}>{v.product_name} X {v.Quantity}</div>
 
                       <div className="row mt-4">
 
@@ -380,7 +380,7 @@ const HistoryOrderDetail = () => {
                 return (
                   <div key={v.Order_Item_ID}>
                     <div className="row py-2 mt-1">
-                      <div className={`${styles3.fc} row ps-4 `}>{v.Class_name} X {v.Quantity}</div>
+                      <div className={`${styles3.fc} row ps-4 `}>{v.class_name} X {v.Quantity}</div>
 
                       <div className="row mt-4">
 

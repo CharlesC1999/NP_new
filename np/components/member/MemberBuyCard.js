@@ -51,7 +51,7 @@ const [userid, setUserid] = useState(null);
         // 如果存在搜索关键字，则进行过滤
         if (searchTerm) {
           filteredOrders = filteredOrders.filter(order => {
-            const title = order.name || order.Class_name;
+            const title = order.product_name || order.class_name;
             return title.includes(searchTerm);
           });
         }
@@ -83,7 +83,7 @@ const [userid, setUserid] = useState(null);
     <>
 
       {orders.filter(v => v.User_ID === userid).map((v, i) => {
-          const title = v.name || v.Class_name;
+          const title = v.product_name || v.class_name;
         //到時候把57改成當前會員ID(很像不能這樣寫QQ)
         //if(v.member_id===57)
         return (
@@ -98,7 +98,7 @@ const [userid, setUserid] = useState(null);
                     src={`/images/products/${v.image_url}`}
                     alt=""
                   />} */}
-                  {v.name ? (
+                  {v.product_name ? (
                     <img
                       className="object-fit-cover"
                       src={`/images/products/${v.image_url}`}
