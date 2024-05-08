@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // 确保已经导入 axios
 import { useRouter } from "next/router"; // 导入 useRouter 以便在需要时进行路由跳转
-import axiosInstance from "@/services/axios-instance";
+import axiosInstance from "@/services/axios-instanceFav";
 import { getFavs } from "@/services/user";
 
 const AuthContext = createContext(null);
@@ -17,8 +17,10 @@ export const AuthProvider = ({ children }) => {
   const [recipeData, setRecipeData] = useState([]);
   const [favorClass, setFavorClass] = useState([]);
   const [classData, setClassData] = useState([]);
-  const [favorProduct,setFavorProduct] = useState([])
-  const [productData,setProductData] = useState([])
+  const [favorProduct, setFavorProduct] = useState([]);
+  const [productData, setProductData] = useState([]);
+  // 用來抓取愛心按鈕的狀態
+  const [action, setAction] = useState(null);
   const fetchFavorites = async () => {
     try {
       const {
@@ -40,33 +42,33 @@ export const AuthProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    if(auth.isLoggedIn){
+    if (auth.isLoggedIn) {
       fetchFavorites();
     } else {
-      setClassData([]);
-      setFavorProduct([]);
       setProductData([]);
+      setClassData([]);
+      setRecipeData([]);
+      setFavorRecipe([]);
+      setFavorClass([]);
+      setFavorProduct([]);
     }
-  }, [auth]);
+  }, [auth, action]);
 
-  const router = useRouter()
-  useEffect(() => {
-    // 組件掛載後，從localStorage中讀取token並更新狀態
-    const token = localStorage.getItem("token");
-    if (token) {
-      setAuth({
-        token: token,
-        // login讀取將token讀進來
-        isLoggedIn: true,
-        // 判定為登入狀態，頁面轉換時不會丟失token
-      });
-    }
-  }, []);
+  const router = useRouter();
 
   // 登入
   const login = (token, userData = {}) => {
     setAuth({ token, isLoggedIn: true, userData });
+    // localStorage.setItem("token", token);
+    
+    // console.log(token, userData);
+
     localStorage.setItem("token", token);
+
+    localStorage.setItem("userid", userData.id); 
+    console.log( userData);
+    console.log(userData.id);
+
     localStorage.setItem("userData", JSON.stringify(userData));
     console.log(token, JSON.stringify(userData));
     // 將token存儲在localStorage中以維持登入狀態
@@ -80,6 +82,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("token", token.token);
     localStorage.setItem("userData", JSON.stringify(token.user));
     // console.log(token, JSON.stringify(userData));
+
     // 將token存儲在localStorage中以維持登入狀態
     // 用localStorage存儲會有安全性問題，因為localStorage是存儲在瀏覽器中，
     // 任何人都可以訪問localStorage，所以可以用cookie來存儲token
@@ -124,17 +127,13 @@ export const AuthProvider = ({ children }) => {
         logout,
         googleLogin,
         favorRecipe,
-        setFavorRecipe,
         recipeData,
-        setRecipeData,
         favorClass,
-        setFavorClass,
         classData,
-        setClassData,
         favorProduct,
-        setFavorProduct,
         productData,
-        setProductData
+        action,
+        setAction,
       }}
     >
       {children}

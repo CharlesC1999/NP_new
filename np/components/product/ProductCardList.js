@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "@/styles/Product/ProductCardList.module.css";
-
+import FavIconProduct from "../favor/FavIconProduct";
 function ProductCardList({
     id,
     name,
@@ -23,7 +23,7 @@ function ProductCardList({
                         <p>({average_rating})</p>
                     </div>
                     <div className>
-                        <button className={styles.iconButton} type="button"><i className={`fa-sharp fa-regular fa-heart ${styles.heartColor}`} /></button>
+                          <FavIconProduct id={id} />
                     </div>
                 </div>
                 <div className={`${styles.card1Text} d-flex justify-content-between`}>
