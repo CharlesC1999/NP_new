@@ -78,7 +78,8 @@ export const getHomePageInfo = async () => {
     return {
       hotProduct: dataHomePage.data.hotProduct,
       hotClass: dataHomePage.data.hotClass,
-      recommendedRecipe:dataHomePage.data.recommendedRecipe
+      recommendedRecipe: dataHomePage.data.recommendedRecipe,
+      productCate:dataHomePage.data.productCate
     };
   } catch (error) {
     console.error("Error fetching favorites:", error);
