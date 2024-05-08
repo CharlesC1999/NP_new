@@ -901,3 +901,20 @@ padding: 23px 0;
   border: #50bf8b 1px solid;
   color: #2ECC71;
 }
+.cpbox{
+  width: 100%;
+  border: #50bf8b 1px solid;
+}
+.cantGet{
+  color: red;
+}
+.gift{
+  margin: 10px 0;
+  font-weight: bold;
+  background-color: #def9ec;
+  color: #50bf8b;
+}
+.gift:hover{
+  background-color: #def9ec;
+  color: #50bf8b;
+}

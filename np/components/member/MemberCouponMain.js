@@ -78,6 +78,7 @@ useEffect(() => {
       <div className={styles.title2}>我的帳戶</div>
     </div>
     {/* 主內容的標題 */}
+    <Link  href={`/member/coupons-box`} className={`${styles.gift} btn`}>禮物箱</Link>
     <div>
       {/* 分類欄 */}
   <Cat  setActiveCategory={setActiveCategory} activeCategory={activeCategory}/>
@@ -112,7 +113,7 @@ if (!isNaN(discountAmount)) {
 }
 // 确定按钮是否可用
 const isButtonDisabled = v.C_status !== '可使用';
-if (activeCategory === "全部" || v.C_status === activeCategory) {
+if ((activeCategory === "全部" || v.C_status === activeCategory) && (activeCategory !== "全部" || v.C_status !== "已發送") && (activeCategory === "全部" || v.C_status !== "已發送")) {
     return (
   <div className={styles.couponCard} key={v.Coupon_ID}>
     <div className={styles.couponImg} >
