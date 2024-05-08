@@ -5,7 +5,17 @@ import styles from "./MemberPageMain2.module.css";
 const MemberPageMain2 = ({
   checkGender = "",
   birthAry = [],
-  userData = {},
+  userData = {
+    id: 0,
+    User_name: "",
+    Account: "",
+    Email: "",
+    Phone: "",
+    Address: "",
+    Gender: "",
+    date_of_birth: "",
+    User_image: null,
+  },
 }) => {
   return (
     <>
@@ -144,7 +154,7 @@ const MemberPageMain2 = ({
               {/* // ! 會員基本資料無須選擇圖片，修改資料才需要 */}
               <div className={styles.userImageBig}>
                 <img
-                  src="/images/member-image/1000288185.jpg"
+                  src={`/images/member/${userData.User_image}`}
                   alt=""
                   className="w-100 h-100 object-fit-cover"
                 />

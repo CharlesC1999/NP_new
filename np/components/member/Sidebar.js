@@ -3,12 +3,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Sidebar.module.css";
 import Link from "next/link";
 
-const Sidebar = ({ userData = {} }) => {
+const Sidebar = ({ userData = { User_image: null } }) => {
   return (
     <>
       <div className={styles.menu}>
         <div className={styles.menuTop}>
-          <div className={styles.userimage} />
+          <div className={styles.userimage}>
+            <img src={`/images/member/${userData.User_image}`} alt="" />
+          </div>
           <div className={styles.menuTitle}>
             <div className={styles.accountleft}>帳號</div>
             <div className={styles.nameleft}>{userData.Account}</div>

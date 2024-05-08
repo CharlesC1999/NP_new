@@ -62,6 +62,8 @@ export default async function (sequelize) {
       },
       User_image: {
         type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'default-member-avatar.png',
       },
     },
     {
