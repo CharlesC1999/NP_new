@@ -1,12 +1,13 @@
 // import React from "react";
-import styles3 from "../../styles/member-styles/shopStyle3.module.css";
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
+import styles3 from "../../styles/member-styles/shopStyle3.module.css";
+
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import { useRouter } from 'next/router'
 import Link from "next/link";
-import { TotalProvider } from '@/contexts/total'
+
 //抓取登入狀態
 import { useAuth } from "@/contexts/AuthContext";
 const HistoryOrderDetail = () => {
@@ -146,6 +147,13 @@ const HistoryOrderDetail = () => {
       console.log(e)
     }
   }
+
+
+
+
+
+
+  
   // 樣式2: 頁面初次渲染之後伺服器要求資料
   // 需要監聽router.isReady，當它為true時，才能得到pid
   useEffect(() => {
@@ -164,12 +172,14 @@ const HistoryOrderDetail = () => {
     <>
 
       <Header />
-
+      
       {/* 要抓登入狀態才能看到的區塊 */}
       {/* {auth.isLoggedIn ? ( */}
+     
         <div className={styles3.out}>
+        <button className={`${styles3.cancel} btn`}>取消訂單</button>
           <div className={`${styles3.desktop}  ${styles3.container2}  container `}>
-
+            
             {/* 欄位一顯示商品 */}
             <section
               className={`${styles3.section} ${styles3.mgt} mb-2 fw-bold `}
@@ -343,7 +353,7 @@ const HistoryOrderDetail = () => {
 
                       <div className="row mt-4">
 
-                        <div className={`${styles3.fb} col fw-bold`}>{v.price}</div>
+                        <div className={`${styles3.fb} col fw-bold`}>{v.product_price}</div>
                       </div>
                     </div>
 
@@ -357,7 +367,7 @@ const HistoryOrderDetail = () => {
                       <div
                         className={`${styles3.fb} col text-center text-success fw-bold`}
                       >
-                        {v.price * v.Quantity}
+                       {v.product_price * v.Quantity}
                       </div>
                     </div>
                   </div>
