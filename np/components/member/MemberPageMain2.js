@@ -1,67 +1,12 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./MemberPageMain2.module.css";
-import { useAuth } from "@/contexts/AuthContext";
 
-const MemberPageMain2 = () => {
-  // 判斷性別
-  const [checkGender, setCheckGender] = useState("");
-  // 設定生日
-  const [birthAry, setBirthAry] = useState([]);
-
-  // 取得token後發req時帶入headers並解碼回傳token存的使用者資料
-  const { auth } = useAuth();
-  const [userData, setUserData] = useState({
-    id: 0,
-    User_name: "",
-    Account: "",
-    Email: "",
-    Phone: "",
-    Address: "",
-    Gender: "",
-    date_of_birth: "",
-    User_image: null,
-  });
-
-  // 串接上後端並把token傳進headers用來解碼
-  const getUser = async () => {
-    const url = "http://localhost:3005/api/member-profile/check";
-    try {
-      const res = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-        },
-      });
-      const data = await res.json();
-      setUserData(data.data.user);
-      console.log("useData: ------------------------ ", data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  // 初次渲染時取得登入的使用者資料
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  // 解碼token完設定給userData後判斷性別以用來顯示在頁面上，因為資料庫是存value，(M跟F)，不直觀
-  useEffect(() => {
-    // 判斷性別
-    if (userData.Gender === "M") {
-      setCheckGender("男");
-    } else if (userData.Gender === "F") {
-      setCheckGender("女");
-    } else {
-      setCheckGender("其他");
-    }
-
-    // 設定生日
-    setBirthAry(userData.date_of_birth.split("-"));
-    console.log("birth------------------", birthAry);
-  }, [userData]);
-
+const MemberPageMain2 = ({
+  checkGender = "",
+  birthAry = [],
+  userData = {},
+}) => {
   return (
     <>
       <div className={` ${styles.container1} ${styles.main} `}>

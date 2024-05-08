@@ -3,15 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Sidebar.module.css";
 import Link from "next/link";
 
-const Sidebar = () => {
-  // 設定會員資料初始值
-  const [user, setUser] = useState({});
-
-  // 取得會員資料
-  const getUser = () => {
-    const url = `http://localhost:3005/api/member-profile/${test}`;
-  };
-
+const Sidebar = ({ userData = {} }) => {
   return (
     <>
       <div className={styles.menu}>
@@ -19,7 +11,7 @@ const Sidebar = () => {
           <div className={styles.userimage} />
           <div className={styles.menuTitle}>
             <div className={styles.accountleft}>帳號</div>
-            <div className={styles.nameleft}>會員名稱</div>
+            <div className={styles.nameleft}>{userData.Account}</div>
           </div>
         </div>
         <div className={styles.menu1}>
