@@ -2,6 +2,7 @@ import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import shopStyles from "./shopStyle1.module.css";
 import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
+import HeaderSetting from "@/styles/headerSetting.module.scss";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 // 購物車用到的主鍵
@@ -109,9 +110,83 @@ const ShopCart1 = () => {
   // const combinedTotal = productDataTotal + classDataTotal;
   const { totalItems, totalPrice } = useCart();
 
+  // 設定可控元件使用優惠券
+  // const CouponOptions = ["滿千折扣50元", "全館折扣20元", "不使用優惠券"];
+
+  const data = [
+    {
+      id: 1,
+      name: "滿千折扣10元",
+      disPrice: 10,
+    },
+    {
+      id: 2,
+      name: "全館折扣50元",
+      disPrice: 50,
+    },
+    {
+      id: 3,
+      name: "不使用優惠券",
+      disPrice: 0,
+    },
+  ];
+  const [coupon, setCoupon] = useState(data.name);
+  console.log(coupon);
+
+  // const [discount, setDiscount] = useState(0);
+
+  const handleDiscount = (e) => {
+    const selectedID = parseInt(e.target.value); // Make sure to parse the ID to a number
+    const selectedCoupon = data.find((coupon) => coupon.id === selectedID); // Use find, not filter
+    setCoupon(selectedCoupon); // Update the coupon state with the selected coupon object
+  };
+  // const finalPrice= if()
+
+  const [finalPrice, setFinalPrice] = useState(totalPrice);
+  const discountAmount = coupon ? coupon.disPrice : 0;
+  console.log(finalPrice);
+  useEffect(() => {
+    if (finalPrice !== false) {
+      // 如果 finalPrice 不是 false，计算最终价格
+      const discountAmount = coupon ? coupon.disPrice : 0;
+      const calculatedFinalPrice = totalPrice - discountAmount;
+      // 获取当前优惠券的折扣金额
+
+      setFinalPrice(
+        isNaN(calculatedFinalPrice) ? totalPrice : calculatedFinalPrice
+      );
+      console.log(totalPrice, finalPrice, "gdesgsd");
+      // 计算并更新最终价格
+    }
+  }, [coupon, totalPrice, finalPrice]);
+
+  // 這裡儲存localstorage  優惠券
+  // const [coupon, setCoupon] = useState(data.name);
+  useEffect(() => {
+    const couponData = window.localStorage.getItem("coupon666");
+    if (couponData) {
+      setCoupon(JSON.parse(couponData));
+    }
+  }, []);
+  //setItem
+  useEffect(() => {
+    if (coupon) {
+      window.localStorage.setItem("coupon666", JSON.stringify(coupon));
+    }
+  }, [coupon]);
+
+  // console.log(finalPrice);
+
+  // 存到LOCALSTORAGE
+  // const [discountAmount,setDiscountAmount]=useState([])
+  // c;
+
   return (
-    <>
-      <Header />
+    <div className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <Header />
+      </div>
+
       {/* 桌電size */}
       <div
         className={`container ${shopStyles.container2} ${shopStyles.desktop}`}
@@ -131,16 +206,6 @@ const ShopCart1 = () => {
             className={`${shopStyles.pay} d-flex justify-content-between mt-3`}
             style={{ width: "500px" }}
           >
-            <p className={`${shopStyles.fs}  d-flex align-items-center`}>
-              折價券
-            </p>
-            <h5 className="">$0元</h5>
-          </div>
-          {/*  */}
-          <div
-            className={`${shopStyles.pay} d-flex justify-content-between`}
-            style={{ width: "500px" }}
-          >
             <div className=" d-flex">
               {/* <div className="pt-1"> <Check/></div> */}
 
@@ -150,22 +215,33 @@ const ShopCart1 = () => {
             </div>
             <select
               className="form-select form-select-sm "
-              aria-label="Small select example "
+              // aria-label="Small select example "
               style={{ width: "150px" }}
+              value={coupon ? coupon.id : ""}
+              onChange={handleDiscount}
             >
-              <option selected="">使用優惠券</option>
-              <option value={1}>One</option>
-              <option value={2}>Two</option>
-              <option value={3}>Three</option>
+              <option value="">使用優惠券</option>
+              {data.map((v) => {
+                return (
+                  <option key={v.id} value={v.id}>
+                    {v.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
           {/*  */}
+          {/* <div>{coupon}</div> */}
           <div
             className={`${shopStyles.pay} d-flex justify-content-between mt-2 pt-2`}
             style={{ width: "500px" }}
           >
+            {/* 折扣 */}
             <p className={`${shopStyles.fs} `}>折扣金額:</p>
-            <h5 className="pt-1">$0元</h5>
+            <h5 className="pt-1">
+              ${/* {} */}
+              {coupon ? coupon.disPrice : 0}元
+            </h5>
           </div>
           <div
             className={`${shopStyles.pay} d-flex justify-content-between`}
@@ -179,34 +255,41 @@ const ShopCart1 = () => {
             style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>訂單合計:</p>
-            <h5>{totalPrice} 元</h5>
+            {discountAmount ? (
+              <h5> ${totalPrice - discountAmount}元 </h5>
+            ) : (
+              <h5> {totalPrice}元</h5>
+            )}
+
+            {/* <h5> {discountAmount}元 </h5> */}
+
+            {/* <h5>${finalPrice !== false ? finalPrice : totalPrice}</h5> */}
           </div>
           <div
             className={`${shopStyles.pay2}  d-flex justify-content-center py-4`}
             style={{ width: "100%", borderTop: "1px solid #d9d9d9" }}
           >
-            {/* <button  >
-    繼續購物
-  </button> */}
             <a
-              href=""
+              href="http://localhost:3000"
               className={`${shopStyles.keepbuy} d-flex justify-content-center align-items-center`}
               type="submit"
               style={{}}
             >
               <h3 className="fw-bold pt-1">繼續購物</h3>
             </a>
-            <button
-              className={`ms-4 ${shopStyles.button}`}
-              type="submit"
+            <a
+              href="http://localhost:3000/cart/cart-list"
+              className={`ms-4 ${shopStyles.button} d-flex justify-content-center align-items-center`}
+              // type="submit"
               style={{
                 backgroundColor: "#78cea6",
                 color: "#ffffff",
                 border: "1px solid #78cea6",
+                textDecoration: "none",
               }}
             >
               <h3 className="fw-bold pt-1">送出</h3>
-            </button>
+            </a>
           </div>
         </article>
         {/* </form> */}
@@ -225,17 +308,72 @@ const ShopCart1 = () => {
         {/* 商品欄位 */}
         <Commodity />
         {/* 折價券、付款 */}
+        <div
+          className=" mt-5  d-flex justify-content-center align-items-center"
+          style={{
+            border: "1px solid #d9d9d9",
+            width: "350px",
+            height: "50px",
+          }}
+        >
+          {/* <div className="col py-2"> */}
+          <div
+            className={`${shopStyles.fb}  ps-3 pb-2 col py-2 `}
+            style={{
+              marginLeft: "40px",
+            }}
+          >
+            使用折價券 :
+          </div>
+          {/* <div className="row"> */}
+          {/* 使用折價券 */}
+          {/* <div className="pay d-flex justify-content" style={{ width: "100%" }}> */}
+          {/* <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="checkboxNoLabel"
+                    defaultValue=""
+                    aria-label="..."
+                  />
+                  <label className="me-2" style={{ fontSize: "16px" }}>
+                    使用折價券{" "}
+                  </label>
+                </div> */}
+          <select
+            className="form-select form-select-sm me-4"
+            // aria-label="Small select example "
+            style={{ width: "130px" }}
+            value={coupon ? coupon.id : ""}
+            onChange={handleDiscount}
+          >
+            <option value="">使用優惠券</option>
+            {data.map((v) => {
+              return (
+                <option key={v.id} value={v.id}>
+                  {v.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
         <article
           className={`${shopStyles.send} ${shopStyles.article} d-flex justify-content-center align-items-center py-2 `}
         >
           <div className="row">
             <div className="col d-flex justify-content-center align-items-center flex-column ">
               <span className={`${shopStyles.fs} ${shopStyles.fb} `}>
-                結帳金額:
+                訂單合計:
               </span>
               <span className={`${shopStyles.fc} fs-4 pe-3`}>
                 {/* {combinedTotal} */}
-                {totalPrice}
+                {discountAmount ? (
+                  <h5> ${totalPrice - discountAmount}元 </h5>
+                ) : (
+                  <h5> {totalPrice}元</h5>
+                )}
+                {/* {finalPrice ? ()} */}
               </span>
             </div>
             <div className="col">
@@ -252,7 +390,7 @@ const ShopCart1 = () => {
         {/* </div> */}
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 export default ShopCart1;

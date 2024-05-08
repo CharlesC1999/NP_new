@@ -14,14 +14,21 @@ import ProductSection02 from "@/components/product/ProductSection02";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductMayLike from "@/components/product/ProductMayLike";
 //推薦食譜component
-import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipe";
+import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipeProduct";
 //sidebar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
 import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
 import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDetail";
 
+// //useContext
+// import { useProductCategories } from "@/hooks/use-product-cate";
+
 export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("product");
+
+  // const { selectedCategories, setSelectedCategories, handleCategoryChange } =
+  //   useProductCategories();
+
   const [product, setProduct] = useState({
     id: 0,
     category_id: 0,
@@ -35,6 +42,10 @@ export default function ProductDetail() {
     image_urls: [],
     sort_orders: [],
   });
+
+  const [mayLikeProducts, setMayLikeProducts] = useState([]);
+
+  const [recipes, setRecipes] = useState([]);
   //產品數量顯示
   const [categoryCounts, setCategoryCounts] = useState({});
   //條件用
@@ -54,8 +65,11 @@ export default function ProductDetail() {
   const normalCategories = productCate.filter(
     (cate) => cate.parentId === null && cate.cateId !== 23 && cate.cateId !== 22
   );
+
   //取得後端網址資料
   const getProduct = async (productId) => {
+    const url = `http://localhost:3005/api/products/${productId}`;
+    console.log(url);
     try {
       const url = `http://localhost:3005/api/products/${productId}`;
       const res = await fetch(url);
@@ -71,6 +85,8 @@ export default function ProductDetail() {
         setProductCate(data.categories);
         setCategoryCounts(data.categoryCounts);
         setProduct(formattedProduct);
+        setMayLikeProducts(data.mayLikeProducts);
+        setRecipes(data.recipes);
       }
     } catch (e) {
       console.error("Error fetching product:", e);
@@ -84,13 +100,8 @@ export default function ProductDetail() {
       // 確保能得從router.query到pid後，再向伺服器要求對應資料
       getProduct(router.query.productId);
     }
-  }, [router.isReady]);
-
-  if (!product || product.id === undefined) {
-    console.log(product);
-    return <div>Loading...</div>; // 或其他加载指示器
-  }
-
+  }, [router.isReady, router.query.productId]);
+  console.log(mayLikeProducts);
   return (
     <>
       <HeaderComponent />
@@ -112,7 +123,7 @@ export default function ProductDetail() {
                 <ProductSidebarDetail />
               </div> */}
               <div className={`side-bar03`}>
-                <ProductSidebarNew />
+                <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
               </div>
             </div>
             <div
@@ -143,7 +154,7 @@ export default function ProductDetail() {
                     商品簡介
                   </button>
                   <button
-                    className={`${style["com-btn"]} d-flex align-items-center justify-content-center com-btn btn btn-outline-success`}
+                    className={`${style["com-btn"]} d-flex align-items-center justify-content-center com-btn btn`}
                     onClick={() => setActiveTab("review")} // 设置点击事件更新状态
                   >
                     評論
@@ -165,14 +176,14 @@ export default function ProductDetail() {
             </div>
           </div>
           <div
-            className={`${style["section3"]} d-flex flex-column justify-content-center`}
+            className={`${style["section3"]} d-flex flex-column justify-content-center m-4`}
           >
-            <ProductMayLike />
+            {/* <ProductMayLike /> */}
           </div>
           <div
-            className={`${style["recommended-recipe"]} d-flex flex-column my-4`}
+            className={`${style["recommended-recipe"]} d-flex flex-column m-5`}
           >
-            <DetailRecommendedRecipe />
+            <DetailRecommendedRecipe recipes={recipes} />
           </div>
         </div>
       </main>

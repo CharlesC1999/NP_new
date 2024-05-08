@@ -29,6 +29,8 @@ import { CartProvider } from "@/hooks/use-cart";
 // 給食譜列表跟細節頁的sideBar用的context
 import { CategoryForSQLProvider } from "@/hooks/recipe/use-categoryForSQL";
 
+import { ProductCateProvider } from "@/hooks/use-product-cate";
+
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 

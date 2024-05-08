@@ -17,6 +17,9 @@ export default function PaginationMUI({ count, page, onChange }) {
         shape="rounded"
         sx={{
           pt: 5,
+          "@media (max-width: 375px)": {
+            display: 'none'
+          },
           "& .MuiPaginationItem-root": {
             bgcolor: "#F7F8F5 !important",
             color: "#747E85 !important",

@@ -1,9 +1,9 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { addProductFav, removeProductFav } from "@/services/user";
-import toast from "react-hot-toast";
+import toast,{Toaster} from "react-hot-toast";
 
 // 愛心圖示(svg)
-const Heart = ({ size = 30, color = "#db1212" }) => (
+const Heart = ({ size = 20, color = "#db1212" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 38 38"
@@ -72,6 +72,7 @@ export default function FavIconProduct({ id }) {
           <Heart color="white" />
         </button>
       )}
+      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 }

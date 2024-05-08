@@ -32,6 +32,8 @@ import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDet
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "@/styles/Product/product.module.css";
 
+//useContext
+import { useProductCategories } from "@/hooks/use-product-cate";
 //Data json
 // import items from "@/data/product/productItems.json";
 
@@ -49,18 +51,14 @@ export default function Product() {
     setActiveButton("list");
   };
 
-  const router = useRouter();
-  const { categoryFromDetail } = router.query;
-  console.log(categoryFromDetail);
-  // const handleCategoryClick = (categoryId) => {
-  //   setSelectdiscountCate(categoryId);
-  // };
   const resetFilters = () => {
     setPriceRange({ min: "", max: "" });
     setRating(0);
     setHoverRating(0);
     setSelectedCategories([]);
   };
+  const [mayLikeProducts, setMayLikeProducts] = useState([]);
+
   //產品數量顯示
   const [categoryCounts, setCategoryCounts] = useState({});
   //分頁部分
@@ -88,7 +86,10 @@ export default function Product() {
     setRating(0);
   };
 
-  const [orderby, setOrderby] = useState({ sort: "id", order: "asc" });
+  const [orderby, setOrderby] = useState({
+    sort: "product_price",
+    order: "asc",
+  });
 
   // const [selectdiscountCate, setSelectdiscountCate] = useState(0);
 
@@ -101,6 +102,16 @@ export default function Product() {
   );
   //布林值
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  //useContext
+  // const { selectedCategories, setSelectedCategories, handleCategoryChange } =
+  //   useProductCategories();
+  // console.log(selectedCategories);
+  // // 當分類選擇變化時，更新分類
+  // const handleCategorySelectContext = (category_id) => {
+  //   setSelectedCategories([...selectedCategories, category_id]);
+  // };
+
   //互動用selectedCategory
   //UI點擊服類
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -124,8 +135,9 @@ export default function Product() {
     setSelectedCategory(cateId);
   };
 
-  const childCategoryIds = [8, 9, 10, 11, 12, 13, 21]; // 子类别 ID 列表
-  const parentCategoryIds = [1, 2, 3, 4, 5, 6, 7]; // 父类别 ID 列表
+  // 子类别,父类别 ID 列表
+  const childCategoryIds = [8, 9, 10, 11, 12, 13, 21];
+  const parentCategoryIds = [1, 2, 3, 4, 5, 6, 7]; //
   const parentChildMap = {
     // 父类别和子类别的映射
     1: [],
@@ -200,28 +212,55 @@ export default function Product() {
   };
   //------------detailSideBar--End-------//
 
+  const changePage = (event, value) => {
+    console.log("Changing page to:", value);
+    setPage(value);
+  };
+
+  const router = useRouter();
+  const { categoryFromDetail } = router.query;
+  // console.log(categoryFromDetail);
+
   const [queryParams, setQueryParams] = useState({
     page: 1,
     perpage,
     price_gte: priceRange.min || "",
     price_lte: priceRange.max || "",
-    category_id: "",
+    category_id: categoryFromDetail || "",
     rating: "",
+    order: orderby.order,
+    sort: orderby.sort,
   });
-  // 追踪 categoryFromDetail 和 rating 的变化，并更新 queryParams
+
   useEffect(() => {
     setQueryParams((prev) => ({
       ...prev,
-      category_id: categoryFromDetail || selectedCategories.join(","),
-      rating: rating > 0 ? rating : "", // 只有在评分大于0时才设置评分参数
+      price_gte: priceRange.min || "",
+      price_lte: priceRange.max || "",
+      rating: rating > 0 ? rating : "",
+      page: page,
+      category_id: selectedCategories.join(","),
+      order: orderby.order,
+      sort: orderby.sort,
     }));
-  }, [categoryFromDetail, selectedCategories, rating]);
+  }, [rating, page, priceRange, selectedCategories, orderby]);
+
+  useEffect(() => {
+    if (router.isReady) {
+      console.log("isReady", router.isReady, "query", router.query);
+      setQueryParams((prev) => ({
+        ...prev,
+        category_id: categoryFromDetail ? categoryFromDetail : "",
+      }));
+    }
+  }, [router.isReady]);
 
   // 请求产品数据
   useEffect(() => {
     const getProducts = async () => {
       const searchParams = new URLSearchParams(queryParams).toString();
       const url = `http://localhost:3005/api/products?${searchParams}`;
+      console.log(url);
       try {
         const res = await fetch(url);
         const data = await res.json();
@@ -231,6 +270,7 @@ export default function Product() {
           setTotal(data.data.totalRecords);
           setProductCate(data.data.categories);
           setCategoryCounts(data.data.categoryCounts);
+          setMayLikeProducts(data.data.mayLikeProducts);
         } else {
           console.log("请求状态不是 'success'");
         }
@@ -242,29 +282,7 @@ export default function Product() {
     getProducts();
   }, [queryParams]); // queryParams 作为 useEffect 的依赖
 
-  // 建立一個對象來追踪每個類別的選中狀態
-  useEffect(() => {
-    const selectedIds = selectedCategories; // 如果 selectedCategories 已经是 ID 数组，则不需要进一步处理
-
-    if (selectedIds.length > 0) {
-      setQueryParams((prevParams) => ({
-        ...prevParams,
-        category_id: selectedIds.join(","),
-      }));
-    }
-  }, [selectedCategories]);
-
-  // 用于在相关依赖变化时重置页面
-  useEffect(() => {
-    setQueryParams((prev) => ({ ...prev, page: 1 }));
-  }, [selectedCategories, categoryFromDetail, rating, priceRange]);
-
   const [reviewCount, setReviewCount] = useState(0);
-  // 如果要手动设置页面回到第一页，可以直接更新 queryParams 状态或创建一个函数来处理它
-  const resetPage = () => {
-    setQueryParams((prev) => ({ ...prev, page: 1 }));
-  };
-
   const TotalRow = total;
   return (
     <>
@@ -300,7 +318,7 @@ export default function Product() {
             categoryCounts={categoryCounts}
           />
 
-          {/* <ProductSidebarNew /> */}
+          <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
         </div>
         <div className={`${styles.productW}`}>
           <div className="mainDiscount">
@@ -317,6 +335,7 @@ export default function Product() {
                 onShowList={showList}
                 activeButton={activeButton}
                 TotalRow={TotalRow}
+                setOrderby={setOrderby}
               />
             </div>
             {/* </div> */}
@@ -349,7 +368,7 @@ export default function Product() {
             <Pagination
               count={pageCount}
               page={page}
-              onChange={(event, value) => setPage(value)}
+              onChange={changePage} // 使用新的 changePage 函数
             />
           </div>
         </div>

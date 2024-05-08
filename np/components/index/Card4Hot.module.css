@@ -52,14 +52,14 @@
   gap: 8px;
   align-items: center;
   & h6 {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--green02);
     margin-bottom: 0;
   }
   & p {
     /* 橫線 */
     text-decoration: line-through;
-    font-size: 14px;
+    font-size: 12px;
     color: var(--gray01);
     margin-bottom: 0;
   }
@@ -89,7 +89,7 @@
 
 @media (max-width: 375px) {
   .card4 {
-    width: 170px;
+    width: 166px;
     border: 1px solid var(--gray02);
     border-radius: 5px;
   }

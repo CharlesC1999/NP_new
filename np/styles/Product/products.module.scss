@@ -483,3 +483,13 @@
     }
   }
 }
+
+.recommended-recipe {
+  width: 1300px;
+}
+
+@media (width: 375px) {
+  .recommended-recipe {
+    width: 360px;
+  }
+}

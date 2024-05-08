@@ -25,8 +25,8 @@ function MemberLevelMain2(){
         </div>
         <div className={styles.levelContent}>
           <div className={styles.levelTitle}>等級1</div>
-          <div className={styles.levelDescription}>條件</div>
-          <div className={styles.levelPerks}>福利</div>
+          <div className={styles.levelDescription}>消費1~2000元</div>
+          <div className={styles.levelPerks}>每個月發送1張優惠券</div>
         </div>
       </div>
       <div className={styles.levelCard}>

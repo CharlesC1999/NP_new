@@ -1,12 +1,4 @@
 /* hero */
-.page {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid var(--green03);
-    margin-inline: 4px;
-    cursor: pointer;
-  }
   
   /* 選中狀態下的樣式 */
   .selectedPage {
@@ -14,24 +6,25 @@
   }
 
 .Hero{
-    max-width: 1920px;
+    max-width: 1440px;
     margin: auto;
     padding-bottom: 36px;
     gap: 404px;
   }
   
   .slider{
-    height: 905px;
+    height: 800px;
     background: #000;
     overflow: hidden;
   }
   
   .slideImage{
     left: 0px;
-    transition: .4s;
+    transition: .6s;
   
     & li {
-      height: 905px;
+      width: 1440px;
+      height: 800px;
       flex: 1 0 0;
   
       & img {
@@ -47,39 +40,45 @@
     margin-bottom: 0;
   
     & li {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 1px solid var(--green03);
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.15)
       ;
       margin-inline: 4px;
-
+      cursor:pointer;
     }
   }
-  
-  /* .slideBtn{
-    top: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    opacity: .5;
-  
-    &:hover {
-      opacity: 1;
-      background: rgba(0, 0, 0, .5);
-    }
-  
-    & i {
-      color: #fff;
-    }
-  } */
-  
+  .slideBtn{
+      top: 0;
+      bottom: 0;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      opacity: .5;
+    
+      &:hover {
+        opacity: 1;
+      }
+      & i {
+        color: #fff;
+        font-size:32px;
+      }
+  }
+  .slideBtnLeft{
+    left:20px;
+  }
+  .slideBtnRight{
+    right: 20px;
+  }
+ .pages .current{
+  width: 32px;
+    background: rgba(56, 142, 101, 0.7);
+ }
   /*Hero (RWD)*/
   @media (max-width: 375px) {
-  
-    
   .Hero {
     width: auto;
   }
@@ -89,7 +88,9 @@
     background: #000;
     overflow: hidden;
   }
-
+  .pages{
+    bottom: 0.4rem;
+    margin-bottom: 0;}
   .slideImage {
     left: 0px;
     transition: .4s;
@@ -105,22 +106,16 @@
       }
     }
   }
-
-  .pages {
-    bottom: 0.8rem;
-    margin-bottom: 0;
-
-    & li {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: 1px solid var(--green03);
-      ;
-      margin-inline: 4px;
-
-      &.current {
-        background: var(--green03);
-      }
+  .slideBtn{
+    & i {
+      color: #fff;
+      font-size: 20px;
     }
-  }
+}
+.slideBtnLeft{
+  left:8px;
+}
+.slideBtnRight{
+  right: 8px;
+}
 }
