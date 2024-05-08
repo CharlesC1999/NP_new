@@ -6,6 +6,13 @@
   width: 209px;
   height: auto;
   margin: 10px;
+  overflow: hidden; /* 隐藏超过容器的内容 */
+  display: -webkit-box; /* 将对象作为弹性伸缩盒子模型显示 */
+  -webkit-line-clamp: 2; /* 限制在两行 */
+  -webkit-box-orient: vertical; /* 设置或检索伸缩盒对象的子元素的排列方式 */
+  text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) */
+  line-height: 1.2em; /* 设置行间距 */
+  height: 2.4em; /* 2行的高度 */
 
   & h5 {
     padding-bottom: 15px;
@@ -34,8 +41,7 @@
 
 & .hotBox {
   width: 198px;
-  height: 91px;
-  margin-top: 10px;
+  margin-block: 10px;
 }
 
 & .hotImg {
@@ -51,7 +57,7 @@
 }
 
 .hotText {
-  width: auto;
+  width: 125px;
   height: auto;
   margin-block: auto;
   & a {
@@ -64,6 +70,6 @@
   }
 
   & .hotTitle {
-    color: var(--green02);
+    color: var(--green03);
   }
 }

@@ -1566,5 +1566,19 @@
     "Last_login": "1967-01-03 00:00:00",
     "valid": "1",
     "User_image": ""
+  },
+  {
+    "id": "117",
+    "User_name": "小小小童",
+    "Account": "tung3333",
+    "Password": "$2a$10$miOOrAobWmpuh.rKXS4NFuJKj4RKYyK2VV0jqNOR6vGKnRQ3zAlb6",
+    "Email": "tung@test.com",
+    "Phone": "0982773410",
+    "Gender": "F",
+    "date_of_birth": "1969-05-08",
+    "Create_date": "2024-05-08 00:57:11",
+    "Last_login": "2024-05-08 00:57:11",
+    "valid": "1",
+    "User_image": ""
   }
 ]

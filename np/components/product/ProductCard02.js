@@ -5,9 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import FavIconProduct from "@/components/favor/FavIconProduct";
 
-// import FavIconProduct from "../favor/FavIconProduct";
-
-
 export default function ProductCard02({
   id,
   name,
@@ -27,7 +24,6 @@ export default function ProductCard02({
               className={`${style["object-fit"]}`}
             />
           </div>
-
           <div className={`${style["product-info"]}`}>
             <h6 className={`${style["product-name"]} my-2`}>{name}</h6>
             <div
@@ -39,7 +35,12 @@ export default function ProductCard02({
                   ({average_rating})
                 </span>
               </div>
-              <FavIconProduct id={id} />
+              <button
+                className={`${style["favorite-btn"]} pe-1 pe-sm-2 d-flex justify-content-center align-items-center`}
+                style={{ border: "none" }}
+              >
+                <FavIconProduct id={id} />
+              </button>
             </div>
             <div
               className={`${style["product-price"]} d-flex flex-row justify-content-between align-items-center`}
@@ -47,6 +48,20 @@ export default function ProductCard02({
               <div
                 className={`${style["product-price"]} d-flex flex-row justify-content-between align-items-center`}
               >
+                <div
+                  className={`${style["price-buy"]} d-flex flex-row align-items-center justify-content-between`}
+                >
+                  {disPrice !== null ? (
+                    <>
+                      <div className={`${style["price"]}`}>{disPrice}</div>
+                      <div className={`${style["original-price"]} px-3`}>
+                        {price}
+                      </div>
+                    </>
+                  ) : (
+                    <div className={`${style["price"]}`}>{price}</div>
+                  )}
+                </div>
                 <div
                   type="submit"
                   className={`${style["btn"]} btn justify-content-center align-centent-center d-flex`}

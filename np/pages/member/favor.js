@@ -19,6 +19,7 @@ export default function Favor() {
     favorRecipe,
     recipeData,
     favorClass,
+    favorProduct,
     classData: classesData,
     productData,
     auth
@@ -78,6 +79,7 @@ export default function Favor() {
                       name={v.product_name}
                       description={v.product_description}
                       price={v.product_price}
+                      disPrice={v.discount_price}
                       average_rating={v.average_rating}
                     />
                   );

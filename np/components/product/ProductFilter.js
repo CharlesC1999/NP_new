@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styles from "../class_file/classFilter.module.css";
 
-const ProductFilter = ({ onShowGrid, onShowList, activeButton, TotalRow }) => {
+const ProductFilter = ({
+  onShowGrid,
+  onShowList,
+  activeButton,
+  TotalRow,
+  setOrderby,
+}) => {
   const [defaultValue, setDefaultValue] = useState(6);
   const [sortByOpen, setSortByOpen] = useState(false);
   const [sortByValue, setSortByValue] = useState("");
-
-  // 對應 toggleIconState
-  const isUpDisabled = defaultValue >= 12;
-  const isDownDisabled = defaultValue <= 4;
-
-  // 增加或減少項目數量
-  function handleIncrease() {
-    if (defaultValue < 12) {
-      setDefaultValue((prev) => prev + 1);
-    }
-  }
-
-  function handleDecrease() {
-    if (defaultValue > 4) {
-      setDefaultValue((prev) => prev - 1);
-    }
-  }
+  const sortByOptions = [
+    { name: "最新上架", order: "asc", sort: "upload_date" },
+    { name: "價錢低 > 高", order: "asc", sort: "product_price" },
+    { name: "價錢高 > 低", order: "desc", sort: "product_price" },
+  ];
 
   // 處理排序選項
   function handleSortByToggle() {
@@ -64,7 +58,7 @@ const ProductFilter = ({ onShowGrid, onShowList, activeButton, TotalRow }) => {
         <header className={styles.productCountHeader}>
           <p className={styles.totalProducts}>總共： {TotalRow} 項商品</p>
           <div className={styles.productCountControls}>
-            <div className={styles.itemsPerPage}>
+            {/* <div className={styles.itemsPerPage}>
               <span className={styles.itemsPerPageValue} id="itemsPerPage">
                 {defaultValue}
               </span>
@@ -108,7 +102,7 @@ const ProductFilter = ({ onShowGrid, onShowList, activeButton, TotalRow }) => {
                   </svg>
                 </button>
               </div>
-            </div>
+            </div> */}
             <div
               className={
                 sortByOpen ? `${styles.sortBy} ${styles.open}` : styles.sortBy
@@ -116,9 +110,9 @@ const ProductFilter = ({ onShowGrid, onShowList, activeButton, TotalRow }) => {
               onClick={handleSortByToggle}
               id="sortBy"
             >
-              <span className={styles.sortByLabel}>依 :</span>
+              <span className={styles.sortByLabel}>排序 :</span>
               <span className={styles.sortByValue} id="sortByValue">
-                {sortByValue || "Class ID"}
+                {sortByValue || "價錢"}
                 {/* 確認這裡沒有錯誤地回落到 "Select" */}
               </span>
               <svg
@@ -133,21 +127,22 @@ const ProductFilter = ({ onShowGrid, onShowList, activeButton, TotalRow }) => {
                   d="M4 18h4c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1M3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1m1 6h10c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1"
                 />
               </svg>
-              <span className={styles.sortOrder}>排序</span>
+              {/* <span className={styles.sortOrder}>排序</span> */}
 
               <div className={styles.sortByOptions}>
-                {["Class ID", "Product Name", "Price", "Date Added"].map(
-                  (option, index) => (
-                    <div
-                      key={index}
-                      className={styles.sortByOption}
-                      onClick={(event) => handleOptionClick(option, event)}
-                      data-value={option}
-                    >
-                      {option}
-                    </div>
-                  )
-                )}
+                {sortByOptions.map((option, index) => (
+                  <div
+                    key={index}
+                    className={styles.sortByOption}
+                    onClick={(event) => {
+                      setSortByValue(option.name);
+                      setOrderby({ sort: option.sort, order: option.order });
+                    }}
+                    data-value={option}
+                  >
+                    {option.name}
+                  </div>
+                ))}
               </div>
 
               <div className={styles.sortByOptionList}>
@@ -156,16 +151,10 @@ const ProductFilter = ({ onShowGrid, onShowList, activeButton, TotalRow }) => {
                   data-value="Class ID"
                   onClick={() => console.log("Option was clicked!")}
                 >
-                  Class ID
-                </div>
-                <div className={styles.sortByOption} data-value="Product Name">
-                  Product Name
+                  評分
                 </div>
                 <div className={styles.sortByOption} data-value="Price">
-                  Price
-                </div>
-                <div className={styles.sortByOption} data-value="Date Added">
-                  Date Added
+                  價錢
                 </div>
               </div>
             </div>

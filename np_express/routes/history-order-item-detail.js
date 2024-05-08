@@ -81,11 +81,11 @@ router.get('/', async function (req, res) {
   // group by orders.Order_ID`
 
   //這是包含圖片的跟一大堆的還有總價重新命名的
-  const sqlOrders = `SELECT orders.order_id,user_id, order_date, name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*price) AS total
+  const sqlOrders = `SELECT orders.order_id,user_id, order_date, product_name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*product_price) AS total
   FROM orders
   JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
   Join product on order_commodity_item.product_id = product.ID
-  JOIN product_image ON order_commodity_item.Product_ID = product_image.F_product_id
+  JOIN product_image ON order_commodity_item.Product_ID = product_image.product_id
   GROUP BY orders.order_id;`
 
   // 最終組合的sql語法(計數用)
@@ -131,7 +131,7 @@ router.get('/:orderid', async function (req, res) {
   FROM order_item
       LEFT JOIN product ON order_item.thing_ID = product.id
       AND order_item.itemType = 1
-      LEFT JOIN class ON order_item.thing_ID = class.Class_ID 
+      LEFT JOIN class ON order_item.thing_ID = class.class__i_d 
       AND order_item.itemType = 2
       LEFT JOIN orders ON order_item.Order_detail_ID = orders.Order_ID
   WHERE Order_detail_ID = ${orderid};`
