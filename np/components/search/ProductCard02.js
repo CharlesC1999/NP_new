@@ -28,7 +28,7 @@ export default function ProductCard02({ productsData, Index }) {
               <div className={`${style["star"]}`}>
                 ★
                 <span className={`${style["score"]} px-3`}>
-                  {/* ({average_rating}) */}
+                  ({productsData.average_rating})
                 </span>
               </div>
               <FavIconProduct id={productsData.id} />
