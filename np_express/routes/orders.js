@@ -65,7 +65,8 @@ router.get('/', async function (req, res) {
   LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
   AND order_item.itemType = 2
   
-  GROUP BY orders.order_Id ;
+  GROUP BY orders.order_Id
+  ORDER BY orders.Order_date DESC ;
 `
 
   // 最終組合的sql語法(計數用)
@@ -112,7 +113,8 @@ router.get('/:status', async function (req, res) {
   LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
   AND order_item.itemType = 2
   WHERE orders.status = "${ordersStatus}"
-  GROUP BY orders.order_Id;`
+  GROUP BY orders.order_Id
+  ORDER BY orders.Order_date DESC;`
 
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders)
