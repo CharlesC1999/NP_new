@@ -87,6 +87,7 @@ export default function ProductCardMobileList({ classesData }) {
             </svg>
             <span>{classesData.speaker_name}</span>
           </div>
+          <FavIconClass id={classesData.class__i_d} />
         </div>
         <div className={styles.productPricing}>
           <span className={styles.currentPrice}>$NT{classesData.c_price}</span>
@@ -110,7 +111,6 @@ export default function ProductCardMobileList({ classesData }) {
               className={styles.actionIcon}
             />
           </a>
-          <FavIconClass id={classesData.class__i_d}/>
         </div>
       </div>
     </article>

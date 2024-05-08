@@ -81,8 +81,8 @@
 
 .productPricing {
   display: flex;
-  margin-top: 8px;
-  gap: 6px;
+  /* margin-top: 4px; */
+  gap: 15px;
   font-weight: 600;
   height: 24px;
   white-space: nowrap;
@@ -108,7 +108,7 @@
 .productActions {
   display: flex;
   margin-top: 10px;
-  gap: 16px;
+  gap: 18px;
 }
 
 .actionLink {
@@ -117,7 +117,7 @@
   justify-content: center;
   border-radius: 5px;
   background-color: #50bf8b;
-  padding: 8px 16px;
+  padding: 8px 20px;
   text-decoration: none;
   /* cursor: pointer; */
 }
