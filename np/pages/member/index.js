@@ -6,8 +6,6 @@ import Footer from "@/components/footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Sidebar from "@/components/member/Sidebar";
 import styles from "@/styles/member-styles/Container1.module.css";
-// !!! 用來取出token發起req時放到headers解密用
-import { useAuth } from "@/contexts/AuthContext";
 
 export default function MemberPage2() {
   // 判斷性別
@@ -15,8 +13,12 @@ export default function MemberPage2() {
   // 把生日切成陣列用來分別顯示年月份
   const [birthAry, setBirthAry] = useState([]);
 
-  // 取得token後發req時帶入headers並解碼回傳token存的使用者資料
-  const { auth } = useAuth();
+  // 取得localStorage裡的token，用來發起req帶入headers
+  const [LStoken, setLStoken] = useState("");
+  const getTokenInLS = () => {
+    setLStoken(localStorage.getItem("token"));
+  };
+
   const [userData, setUserData] = useState({
     id: 0,
     User_name: "",
@@ -30,16 +32,17 @@ export default function MemberPage2() {
   });
 
   // 串接上後端並把token傳進headers用來解碼
-  // !!! 從auth取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
+  // !!! 從localStorage取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
   const getUser = async () => {
     const url = "http://localhost:3005/api/member-profile/check";
+    const tokenforheaders = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${LStoken}`,
+      },
+    };
     try {
-      const res = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-        },
-      });
+      const res = await fetch(url, tokenforheaders);
       const data = await res.json();
       setUserData(data.data.user);
     } catch (e) {
@@ -47,10 +50,15 @@ export default function MemberPage2() {
     }
   };
 
-  // 初次渲染時取得登入的使用者資料
+  // 初次渲染時取得LS裡的token
+  useEffect(() => {
+    getTokenInLS();
+  }, []);
+
+  // 得到token後執行getUser()去後端解碼token並根據得到的user資料查詢資料庫並將資料設定給userData
   useEffect(() => {
     getUser();
-  }, []);
+  }, [LStoken]);
 
   // 解碼token完設定給userData後判斷性別以用來顯示在頁面上，因為資料庫是存value，(M跟F)，不直觀
   useEffect(() => {
@@ -72,7 +80,7 @@ export default function MemberPage2() {
       <Header />
       <Breadcrumbs />
       <div className={` ${styles.container1} ${styles.main} `}>
-        <Sidebar userData={userData} />
+        <Sidebar />
         <MemberPageMain2
           checkGender={checkGender}
           birthAry={birthAry}

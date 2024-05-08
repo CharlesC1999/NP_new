@@ -1,12 +1,26 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./MemberPageMain2.module.css";
+import { useRouter } from "next/router";
 
 const MemberPageMain2 = ({
   checkGender = "",
   birthAry = [],
-  userData = {},
+  userData = {
+    id: 0,
+    User_name: "",
+    Account: "",
+    Email: "",
+    Phone: "",
+    Address: "",
+    Gender: "",
+    date_of_birth: "",
+    User_image: null,
+  },
 }) => {
+  // 跳轉頁面至修改基本資料
+  const router = useRouter();
+
   return (
     <>
       <div className={` ${styles.container1} ${styles.main} `}>
@@ -22,8 +36,12 @@ const MemberPageMain2 = ({
           {/* 主內容的標題 */}
           {/* 手機板大頭貼 */}
           <div className={styles.mUserimage}>
-            <div className={styles.mUImage}>
-              <img src alt />
+            <div className={`rounded-circle  ${styles.mUImage}`}>
+              <img
+                src={`/images/member/${userData.User_image}`}
+                alt=""
+                className="w-100 h-100 object-fit-cover rounded-circle"
+              />
               <div className={styles.camera}>
                 <label htmlFor="fileUpload" className={styles.uploadBtn}>
                   {" "}
@@ -133,6 +151,9 @@ const MemberPageMain2 = ({
                 className={`${styles.btnCenter} ${styles.box} row mb-3 align-items-start `}
               >
                 <button
+                  onClick={() => {
+                    router.push("/member/member-page");
+                  }}
                   type="submit"
                   className={`${styles.btn1} ${styles.btnmargin} btn`}
                 >
@@ -144,7 +165,7 @@ const MemberPageMain2 = ({
               {/* // ! 會員基本資料無須選擇圖片，修改資料才需要 */}
               <div className={styles.userImageBig}>
                 <img
-                  src="/images/member-image/1000288185.jpg"
+                  src={`/images/member/${userData.User_image}`}
                   alt=""
                   className="w-100 h-100 object-fit-cover"
                 />

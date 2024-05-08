@@ -12,14 +12,24 @@ router.post('/findAll', async (req, res) => {
   try {
     // 從請求體中獲取搜尋條件
     const { searchText } = req.body
-
     // 並行執行所有查詢
     const sqlP = `
-    SELECT * FROM product JOIN product_categories ON product.category_id = product_categories.id JOIN product_image ON product.id = product_image.product_id WHERE product_name LIKE :searchText AND product_image.sort_order = 0
+    SELECT *, ROUND(AVG(product_review.rating), 1) AS average_rating FROM product 
+    JOIN product_categories ON product.category_id = product_categories.id 
+    JOIN product_image ON product.id = product_image.product_id 
+    JOIN product_review ON product.id = product_review.product_id 
+    WHERE product_name LIKE :searchText AND product_image.sort_order = 0 
+    GROUP BY product.id, product_categories.name, product_image.image_url
     `
-    const sqlC = `SELECT * FROM class JOIN class_categories ON class.class_category__i_d = class_categories.class_cate__i_d JOIN class_image ON class.class__i_d = class_image.f__class__i_d JOIN speaker ON class.f__speaker__i_d = speaker.speaker_id WHERE class_name LIKE :searchText AND class_image.sort_order = 0`
+    const sqlC = `SELECT * FROM class 
+    JOIN class_categories ON class.class_category__i_d = class_categories.class_cate__i_d 
+    JOIN class_image ON class.class__i_d = class_image.f__class__i_d 
+    JOIN speaker ON class.f__speaker__i_d = speaker.speaker_id 
+    WHERE class_name LIKE :searchText AND class_image.sort_order = 0`
 
-    const sqlR = `SELECT * FROM recipe JOIN recipe_categories ON recipe.recipe_category__i_d = recipe_categories.recipe_cate__i_d WHERE 	title__r_name LIKE :searchText`
+    const sqlR = `SELECT * FROM recipe 
+    JOIN recipe_categories ON recipe.recipe_category__i_d = recipe_categories.recipe_cate__i_d 
+    WHERE 	title__r_name LIKE :searchText`
 
     const products = await sequelize.query(sqlP, {
       replacements: { searchText: `%${searchText}%` },
