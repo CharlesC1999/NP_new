@@ -6,8 +6,27 @@ import styles from "./MemberLevelMain.module.css"
   
   
  const MemberLevelMain =() => {
+
   const [memberLevel, setMemberLevel] = useState([])
   
+  //判斷user是誰
+  // let userid = parseInt(localStorage.getItem('userid'))
+  // console.log(userid);
+ 
+  const [userid, setUserid] = useState(null);
+
+  useEffect(() => {
+    const userIdFromLocalStorage = localStorage.getItem("userid");
+    if (userIdFromLocalStorage) {
+      setUserid(parseInt(userIdFromLocalStorage));
+    }
+  }, []);
+
+//我先在這裡寫死人，因為只有這個葉他會有抓到undefined user而整個錯誤的問題???
+  // let userid = 1
+
+
+
 
 //計算等級
 const calculateLevel = (total) => {
@@ -55,9 +74,7 @@ console.log(memberLevel);
 // console.log(userIdExists);
 // let nowlevel;
 // let total;
-//判斷user是誰
-let userid = parseInt(localStorage.getItem('userid'))
-console.log(userid);
+
 // const userIdExists = memberLevel.some(item => item.User_ID === userid);
 // if (userIdExists) {
 //   const user = memberLevel.find(item => item.User_ID === userid);

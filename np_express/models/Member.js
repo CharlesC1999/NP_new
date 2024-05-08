@@ -35,6 +35,10 @@ export default async function (sequelize) {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      Address: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       Gender: {
         type: DataTypes.CHAR,
         allowNull: false,
