@@ -52,11 +52,18 @@
     border-bottom: 1px solid var(--gray02);
     border-left: 1px solid var(--gray02);
     .card-pic {
+      height: 164px;
       padding: 0;
     }
     .card-content {
       padding: 10px 15px;
       .card-content-top {
+        .recipe-title {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          -webkit-line-clamp: 1;
+        }
         .heart {
           svg {
             height: 100%;

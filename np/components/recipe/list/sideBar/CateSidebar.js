@@ -141,7 +141,7 @@ function CateSidebar({ detailPage = "" }) {
           }
         >
           <div className={styles.sideImg}>
-            <img src="/index-images/category-1.png" alt />
+            <img src="/images/recipe/list/sideBar/allCate.svg" alt />
           </div>
           <div className={styles.sideText}>
             <h6 className={styles.left}>全部</h6>
@@ -174,7 +174,10 @@ function CateSidebar({ detailPage = "" }) {
               }
             >
               <div className={styles.sideImg}>
-                <img src="/index-images/category-1.png" alt="分類icon" />
+                <img
+                  src={`/images/recipe/list/sideBar/${v.Recipe_cate_img}`}
+                  alt="分類icon"
+                />
               </div>
               <div className={styles.sideText}>
                 <h6 className={styles.left}>{v.Recipe_cate_name}</h6>

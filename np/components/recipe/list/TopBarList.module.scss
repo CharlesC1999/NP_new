@@ -69,10 +69,11 @@
     .switch-grid {
       padding: 5px;
       border-right: 1px solid var(--gray03);
+      cursor: pointer;
     }
     .switch-row {
       padding: 5px;
-      background: var(--gray03);
+      cursor: pointer;
     }
   }
   .all-dropdown {
