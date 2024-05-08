@@ -9,9 +9,24 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   // 初始化時從localStorage獲取token來設定登入狀態
   const [auth, setAuth] = useState({
+    // token: null,
+    // isLoggedIn: false,
     token: null,
     isLoggedIn: false,
+    userData: {},
   });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    if (token) {
+      setAuth({
+        token: token,
+        isLoggedIn: true,
+        userData: userData,
+      });
+    }
+  }, []);
 
   const [favorRecipe, setFavorRecipe] = useState([]);
   const [recipeData, setRecipeData] = useState([]);
@@ -60,13 +75,13 @@ export const AuthProvider = ({ children }) => {
   const login = (token, userData = {}) => {
     setAuth({ token, isLoggedIn: true, userData });
     // localStorage.setItem("token", token);
-    
+
     // console.log(token, userData);
 
     localStorage.setItem("token", token);
 
-    localStorage.setItem("userid", userData.id); 
-    console.log( userData);
+    localStorage.setItem("userid", userData.id);
+    console.log(userData);
     console.log(userData.id);
 
     localStorage.setItem("userData", JSON.stringify(userData));
