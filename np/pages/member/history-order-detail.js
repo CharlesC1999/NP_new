@@ -166,7 +166,7 @@ const HistoryOrderDetail = () => {
       <Header />
 
       {/* 要抓登入狀態才能看到的區塊 */}
-      {auth.isLoggedIn ? (
+      {/* {auth.isLoggedIn ? ( */}
         <div className={styles3.out}>
           <div className={`${styles3.desktop}  ${styles3.container2}  container `}>
 
@@ -191,10 +191,10 @@ const HistoryOrderDetail = () => {
                 return (
                   <div className="row py-2" key={v.Order_Item_ID}>
 
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.name}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_name}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.price * v.Quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price * v.Quantity}</div>
 
                   </div>
 
@@ -228,10 +228,10 @@ const HistoryOrderDetail = () => {
 
                   <div className="row py-2" key={v.Order_Item_ID}>
 
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.Class_name}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.C_price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.class_name}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.C_price * v.Quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price * v.Quantity}</div>
 
                   </div>
                 )
@@ -305,14 +305,14 @@ const HistoryOrderDetail = () => {
               className={`${styles3.pay2} d-flex justify-content-center py-4`}
               style={{ width: "100%" }}
             >
-              <a
+              <div
                 href=""
                 className={`${styles3.keepbuy} ${styles3.a} d-flex justify-content-center align-items-center mt-1`}
                 type="submit"
                 style={{}}
               >
-                <h3 className={`${styles3.back} fw-bold pt-1`}><Link href="/member/member-buy" alt="">返回上一頁</Link></h3>
-              </a>
+                <div className={`${styles3.back} fw-bold pt-1`}><Link href="/member/member-buy" alt="">返回上一頁</Link></div>
+              </div>
 
             </div>
             {/* </form> */}
@@ -339,7 +339,7 @@ const HistoryOrderDetail = () => {
                 return (
                   <div key={v.Order_Item_ID}>
                     <div className="row py-2 mt-1">
-                      <div className={`${styles3.fc} row ps-4 `}>{v.name} X {v.Quantity}</div>
+                      <div className={`${styles3.fc} row ps-4 `}>{v.product_name} X {v.Quantity}</div>
 
                       <div className="row mt-4">
 
@@ -380,7 +380,7 @@ const HistoryOrderDetail = () => {
                 return (
                   <div key={v.Order_Item_ID}>
                     <div className="row py-2 mt-1">
-                      <div className={`${styles3.fc} row ps-4 `}>{v.Class_name} X {v.Quantity}</div>
+                      <div className={`${styles3.fc} row ps-4 `}>{v.class_name} X {v.Quantity}</div>
 
                       <div className="row mt-4">
 
@@ -469,14 +469,14 @@ const HistoryOrderDetail = () => {
                 className={`${styles3.pay2} d-flex justify-content-center py-4`}
                 style={{ width: "100%" }}
               >
-                <a
+                <div
                   href=""
                   className={`${styles3.keepbuy} d-flex justify-content-center align-items-center mt-1`}
                   type="submit"
                   style={{}}
                 >
-                  <h3 className={`${styles3.back} fw-bold pt-1`}><Link href="/member/member-buy" alt="">返回上頁</Link></h3>
-                </a>
+                  <div className={`${styles3.back} fw-bold pt-1`}><Link href="/member/member-buy" alt="">返回上頁</Link></div>
+                </div>
 
               </div>
               {/* </form> */}
@@ -484,7 +484,7 @@ const HistoryOrderDetail = () => {
             </div>
           </div>
         </div>
-      ) : (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)}
+      {/* ) : (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)} */}
 
 
 
