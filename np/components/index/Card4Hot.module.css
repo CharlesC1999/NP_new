@@ -72,9 +72,8 @@
   justify-content: center;
   align-items: center;
   color: var(--green02);
-  border: 1px solid var(--green02);
   border-radius: 5px;
-  padding: 7px 2px;
+  padding: 7px 3px;
   text-decoration: none;
   font-size: 16px;
   gap: 5px;

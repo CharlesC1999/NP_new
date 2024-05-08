@@ -1,12 +1,12 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect }  from "react";
 import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
 import HeroSlider from "@/components/index/HeroSlider";
 import Card2 from "@/components/index/Card2";
-import Card3 from "@/components/index/Card3Categories";
+import Card3Categories from "@/components/index/Card3Categories";
 import Card4Hot from "@/components/index/Card4Hot";
 import Card5class from "@/components/index/Card5class";
 import Card6Recipe from "@/components/index/Card6Recipe";
@@ -19,13 +19,15 @@ export default function Index() {
   const [hotProduct, setHotProduct] = useState([]);
   const [hotClass, setHotClass] = useState([]);
   const [recipe, setRecipe] = useState([]);
+  const [productCate, setProductCate] = useState([]);
   const fetchHomeData = async () => {
     try {
-      const { hotProduct, hotClass, recommendedRecipe } =
+      const { hotProduct, hotClass, recommendedRecipe,productCate } =
         await getHomePageInfo();
       setHotProduct(hotProduct);
       setHotClass(hotClass);
       setRecipe(recommendedRecipe);
+      setProductCate(productCate)
     } catch (error) {
       console.error("Failed to fetch favorites:", error);
     }
@@ -98,23 +100,13 @@ export default function Index() {
       <div className={` ${styles.wrapper} ${styles.CategoryRwd}`}>
         <div className={`d-flex justify-content-between pb-5`}>
           <h4 className={`${styles.MeAuto}`}>商品分類</h4>
-          {/* <div className={`d-flex`}>
-            <button className={`btn btn-secondary ${styles.arrow}`}>
-              <i className="fa-solid fa-arrow-left"></i>
-            </button>
-            <button className={`btn btn-secondary ${styles.arrow}`}>
-              <i className="fa-solid fa-arrow-right"></i>
-            </button>
-          </div> */}
         </div>
         <div className={`${styles.Nutripollcard3}`}>
-          <Card3 />
-          <Card3 />
-          <Card3 />
-          <Card3 />
-          <Card3 />
-          <Card3 />
-          <Card3 />
+          {productCate.map((v) => {
+            return (
+              <Card3Categories key={v.id} name={v.name} id={v.id} />
+            )
+          })}
         </div>
       </div>
 

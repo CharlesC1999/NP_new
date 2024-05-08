@@ -18,12 +18,15 @@ GROUP BY product.product_name LIMIT 12`
   const [hotClass] = await db.query(hotClassSql)
   const recipeSql = `SELECT * FROM recipe WHERE recipe__i_d BETWEEN 19 AND 22`
   const [recommendedRecipe] = await db.query(recipeSql)
+  const productCateSql = `SELECT * FROM product_categories WHERE id BETWEEN 1 AND 7`
+  const [productCate] = await db.query(productCateSql)
   return res.json({
     status: 'success',
     data: {
       hotProduct,
       hotClass,
-      recommendedRecipe
+      recommendedRecipe,
+      productCate
     },
   })
 })
