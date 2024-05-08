@@ -135,8 +135,15 @@ const MemberPageMain2 = () => {
               </div>
             </div>
             <div className={styles.mainRight}>
-              <div className={styles.userImageBig}>{/* <img src alt /> */}</div>
-              <div className={`${styles.btnCenter} row mb-3 align-items-start`}>
+              {/* // ! 會員基本資料無須選擇圖片，修改資料才需要 */}
+              <div className={styles.userImageBig}>
+                <img
+                  src="/images/member-image/1000288185.jpg"
+                  alt=""
+                  className="w-100 h-100 object-fit-cover"
+                />
+              </div>
+              {/* <div className={`${styles.btnCenter} row mb-3 align-items-start`}>
                 <label htmlFor="fileUpload" className={`btn ${styles.btn2} `}>
                   選擇圖片
                 </label>
@@ -145,7 +152,7 @@ const MemberPageMain2 = () => {
                   type="file"
                   className={styles.inputfile}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

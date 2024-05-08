@@ -136,6 +136,7 @@
   background-color: #d9d9d9;
   border: var(--green03) 1px solid;
   border-radius: 50%;
+  overflow: hidden;
 }
 
 .btn2 {
