@@ -8,6 +8,19 @@ import { getIdParam } from '#db-helpers/db-tool.js'
 import sequelize from '#configs/db.js'
 const { Member } = sequelize.models
 
+// 檢查登入狀態用
+router.get('/check', authenticateToken, async (req, res) => {
+  // 查詢資料庫目前的資料
+  const user = await Member.findByPk(req.user.id, {
+    raw: true, // 只需要資料表中資料
+  })
+
+  // 不回傳密碼值
+  delete user.Password
+  return res.json({ status: 'success', data: { user } })
+})
+
+// TODO 先保留，目前暫時用不到，現在用上面的/check就能抓到登入狀態
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
 router.get('/:id', authenticateToken, async function (req, res) {
   // 轉為數字

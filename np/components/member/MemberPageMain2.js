@@ -1,8 +1,67 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./MemberPageMain2.module.css";
+import { useAuth } from "@/contexts/AuthContext";
 
 const MemberPageMain2 = () => {
+  // 判斷性別
+  const [checkGender, setCheckGender] = useState("");
+  // 設定生日
+  const [birthAry, setBirthAry] = useState([]);
+
+  // 取得token後發req時帶入headers並解碼回傳token存的使用者資料
+  const { auth } = useAuth();
+  const [userData, setUserData] = useState({
+    id: 0,
+    User_name: "",
+    Account: "",
+    Email: "",
+    Phone: "",
+    Address: "",
+    Gender: "",
+    date_of_birth: "",
+    User_image: null,
+  });
+
+  // 串接上後端並把token傳進headers用來解碼
+  const getUser = async () => {
+    const url = "http://localhost:3005/api/member-profile/check";
+    try {
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      });
+      const data = await res.json();
+      setUserData(data.data.user);
+      console.log("useData: ------------------------ ", data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // 初次渲染時取得登入的使用者資料
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  // 解碼token完設定給userData後判斷性別以用來顯示在頁面上，因為資料庫是存value，(M跟F)，不直觀
+  useEffect(() => {
+    // 判斷性別
+    if (userData.Gender === "M") {
+      setCheckGender("男");
+    } else if (userData.Gender === "F") {
+      setCheckGender("女");
+    } else {
+      setCheckGender("其他");
+    }
+
+    // 設定生日
+    setBirthAry(userData.date_of_birth.split("-"));
+    console.log("birth------------------", birthAry);
+  }, [userData]);
+
   return (
     <>
       <div className={` ${styles.container1} ${styles.main} `}>
@@ -13,7 +72,7 @@ const MemberPageMain2 = () => {
           {/* 主內容的標題 */}
           <div className={styles.title}>
             <div className={styles.titleNow}>我的帳戶</div>
-            <div className={styles.title2}>我的帳戶</div>
+            {/* <div className={styles.title2}>我的帳戶</div> */}
           </div>
           {/* 主內容的標題 */}
           {/* 手機板大頭貼 */}
@@ -56,7 +115,9 @@ const MemberPageMain2 = () => {
                   姓名 :
                 </label>
                 <div className="col">
-                  <span className={styles.userContent}>許宗力</span>
+                  <span className={styles.userContent}>
+                    {userData.User_name}
+                  </span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 align-items-start`}>
@@ -67,7 +128,7 @@ const MemberPageMain2 = () => {
                   Email :
                 </label>
                 <div className="col">
-                  <span className={styles.userContent}>sss@test.com</span>
+                  <span className={styles.userContent}>{userData.Email}</span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 align-items-start`}>
@@ -78,7 +139,7 @@ const MemberPageMain2 = () => {
                   手機號碼 :
                 </label>
                 <div className="col">
-                  <span className={styles.userContent}>0923656363</span>
+                  <span className={styles.userContent}>{userData.Phone}</span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 align-items-start`}>
@@ -89,7 +150,7 @@ const MemberPageMain2 = () => {
                   地址 :
                 </label>
                 <div className="col">
-                  <span className={styles.userContent}>台北市大安區</span>
+                  <span className={styles.userContent}>{userData.Address}</span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 align-items-start`}>
@@ -99,7 +160,7 @@ const MemberPageMain2 = () => {
                   性别 :
                 </label>
                 <div className={`${styles.checkAlignment} col`}>
-                  <span className={styles.userContent}>男</span>
+                  <span className={styles.userContent}>{checkGender}</span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 align-items-start`}>
@@ -110,9 +171,9 @@ const MemberPageMain2 = () => {
                   生日 :
                 </label>
                 <div className="col">
-                  <span className={styles.userContent}>年</span>
-                  <span className={styles.userContent}>月</span>
-                  <span className={styles.userContent}>日</span>
+                  <span className={styles.userContent}>{birthAry[0]} 年</span>
+                  <span className={styles.userContent}>{birthAry[1]} 月</span>
+                  <span className={styles.userContent}>{birthAry[2]} 日</span>
                 </div>
               </div>
               {/* // !密碼不該顯示在會員資料中 */}
