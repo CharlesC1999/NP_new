@@ -14,14 +14,21 @@ import ProductSection02 from "@/components/product/ProductSection02";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductMayLike from "@/components/product/ProductMayLike";
 //推薦食譜component
-import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipe";
+import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipeProduct";
 //sidebar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
 import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
 import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDetail";
 
+// //useContext
+// import { useProductCategories } from "@/hooks/use-product-cate";
+
 export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("product");
+
+  // const { selectedCategories, setSelectedCategories, handleCategoryChange } =
+  //   useProductCategories();
+
   const [product, setProduct] = useState({
     id: 0,
     category_id: 0,
@@ -36,6 +43,13 @@ export default function ProductDetail() {
     sort_orders: [],
   });
 
+  const [mayLikeProducts, setMayLikeProducts] = useState([]);
+
+  const [recipes, setRecipes] = useState([]);
+  //產品數量顯示
+  const [categoryCounts, setCategoryCounts] = useState({});
+  //條件用
+  const [productCate, setProductCate] = useState([]);
   //解析ReviewDetails字串
   function parseReviewDetails(details) {
     return details.split(",").map((detail) => {
@@ -48,9 +62,14 @@ export default function ProductDetail() {
       };
     });
   }
+  const normalCategories = productCate.filter(
+    (cate) => cate.parentId === null && cate.cateId !== 23 && cate.cateId !== 22
+  );
 
   //取得後端網址資料
   const getProduct = async (productId) => {
+    const url = `http://localhost:3005/api/products/${productId}`;
+    console.log(url);
     try {
       const url = `http://localhost:3005/api/products/${productId}`;
       const res = await fetch(url);
@@ -63,13 +82,16 @@ export default function ProductDetail() {
           image_urls: data.data.image_urls.split(","),
           sort_orders: data.data.sort_orders.split(",").map(Number),
         };
+        setProductCate(data.categories);
+        setCategoryCounts(data.categoryCounts);
         setProduct(formattedProduct);
+        setMayLikeProducts(data.mayLikeProducts);
+        setRecipes(data.recipes);
       }
     } catch (e) {
       console.error("Error fetching product:", e);
     }
   };
-
   //動態路由需要router來確定是否收到值 1.isReady是布林值 2.query是回傳的id值
   const router = useRouter();
   useEffect(() => {
@@ -78,20 +100,8 @@ export default function ProductDetail() {
       // 確保能得從router.query到pid後，再向伺服器要求對應資料
       getProduct(router.query.productId);
     }
-  }, [router.isReady]);
-  //比對mainPic的變更
-  // const ProductMainPic = React.memo(function ProductMainPic({
-  //   image_urls,
-  //   sort_orders,
-  // }) {
-  //   return <div>{/* 渲染图片逻辑 */}</div>;
-  // });
-
-  if (!product || product.id === undefined) {
-    console.log(product);
-    return <div>Loading...</div>; // 或其他加载指示器
-  }
-  console.log(product);
+  }, [router.isReady, router.query.productId]);
+  console.log(mayLikeProducts);
   return (
     <>
       <HeaderComponent />
@@ -107,13 +117,13 @@ export default function ProductDetail() {
               className={`${style["left-side"]} d-flex flex-column d-none d-sm-flex`}
             >
               <div className={`side-bar01`}>
-                <ProductSidebarCate />
+                <ProductSidebarCate normalCategories={normalCategories} />
               </div>
               {/* <div className={`side-bar02`}>
                 <ProductSidebarDetail />
               </div> */}
               <div className={`side-bar03`}>
-                <ProductSidebarNew />
+                <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
               </div>
             </div>
             <div
@@ -144,7 +154,7 @@ export default function ProductDetail() {
                     商品簡介
                   </button>
                   <button
-                    className={`${style["com-btn"]} d-flex align-items-center justify-content-center com-btn btn btn-outline-success`}
+                    className={`${style["com-btn"]} d-flex align-items-center justify-content-center com-btn btn`}
                     onClick={() => setActiveTab("review")} // 设置点击事件更新状态
                   >
                     評論
@@ -166,14 +176,14 @@ export default function ProductDetail() {
             </div>
           </div>
           <div
-            className={`${style["section3"]} d-flex flex-column justify-content-center`}
+            className={`${style["section3"]} d-flex flex-column justify-content-center m-4`}
           >
-            <ProductMayLike />
+            {/* <ProductMayLike /> */}
           </div>
           <div
-            className={`${style["recommended-recipe"]} d-flex flex-column my-4`}
+            className={`${style["recommended-recipe"]} d-flex flex-column m-5`}
           >
-            <DetailRecommendedRecipe />
+            <DetailRecommendedRecipe recipes={recipes} />
           </div>
         </div>
       </main>

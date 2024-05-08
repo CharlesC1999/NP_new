@@ -4,6 +4,7 @@
 .sideBox {
   border: var(--gray02) solid 1px;
   border-radius: 5px;
+  padding: 3px 5px;
   &:hover {
     border: var(--green03) solid 2px;
   }
@@ -21,8 +22,9 @@
 }
 
 & .sideText {
+  margin-left: 10px;
   display: flex;
-  width: 150px;
+  width: 140px;
   height: auto;
 
   & a {

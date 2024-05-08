@@ -12,22 +12,26 @@ import { useAuth } from "@/contexts/AuthContext";
 
 export default function MemberLevel() {
 
-   //抓取登入狀態
-   const { auth, logout } = useAuth();
-   //確認一下有沒有抓到
-   console.log(auth);
-    return (
-      <>
-      <Header/>
-      <Breadcrumbs/>
-      {auth.isLoggedIn ? (
-      <div className={` ${styles.container1} ${styles.main} ` }>
-       <Sidebar/>
-       <MemberLevelMain/>
-       </div>
-        //  要抓登入狀態才能看到的區塊
-      ): (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)} 
-       <Footer/>
-      </>
-    );
-  }
+  //抓取登入狀態
+  const { auth, logout } = useAuth();
+  //確認一下有沒有抓到
+  console.log(auth);
+  return (
+    <>
+      <Header />
+      <Breadcrumbs />
+
+      {/* {auth.isLoggedIn ? ( */}
+
+        <div className={` ${styles.container1} ${styles.main} `}>
+          <Sidebar />
+          <MemberLevelMain />
+        </div>
+
+{/* ): (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)}  */}
+      
+
+      <Footer />
+    </>
+  );
+}

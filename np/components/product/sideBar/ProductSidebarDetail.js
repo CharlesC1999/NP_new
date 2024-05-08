@@ -1,16 +1,22 @@
 import React from "react";
 import styles from "@/components/product/sideBar/ProductSidebarDetail.module.scss";
-
+import { FaLeaf } from "react-icons/fa";
 export default function ProductSidebarDetail({
   productCate,
-  selectedCategory,
   handleCategorySelect,
   filteredSubcategories,
+  handleKeyDown,
+  priceRange,
+  rating,
+  hoverRating,
+  handlePriceChange,
+  handleStartRating,
+  handleStartHoverRating,
+  handleCategoryCheckboxChange,
+  resetFilters,
+  selectedCategories,
+  categoryCounts,
 }) {
-  // const filteredSubcategories = productCate.filter(
-  //   (cate) => cate.parentId === selectedCategory
-  // );
-  console.log(productCate);
   return (
     <div>
       <div className={`${styles.sideBarBox}`}>
@@ -20,27 +26,36 @@ export default function ProductSidebarDetail({
         <div className={`${styles.line}`}></div>
         <br />
         <h6>商品類別</h6>
-
         {productCate
           .filter((cate) => cate.parentId === null)
           .map((category) => (
             <div
               key={category.cateId}
               className="input-group d-flex flex-row mb-1"
-              onClick={() => handleCategorySelect(category.cateId)}
             >
               <input
                 type="checkbox"
                 id={`category-${category.cateId}`}
                 name={`category-${category.cateId}`}
                 className="me-2 checkbox"
+                checked={selectedCategories.includes(category.cateId)}
+                onChange={() => {
+                  handleCategoryCheckboxChange(category.cateId);
+                  handleCategorySelect(category.cateId);
+                }}
               />
               <label
                 htmlFor={`category-${category.cateId}`}
                 className="label-checkbox d-flex flex-row"
               >
                 {category.cateName}
-                <span>(amount)</span>
+                <span>
+                  (
+                  {categoryCounts[
+                    `dis${category.cateName.replace(/\s+/g, "")}`
+                  ] || 0}
+                  )
+                </span>
               </label>
             </div>
           ))}
@@ -56,6 +71,11 @@ export default function ProductSidebarDetail({
               id={`sub-category-${subCategory.cateId}`}
               name={`sub-category-${subCategory.cateId}`}
               className="me-2 checkbox"
+              checked={selectedCategories.includes(subCategory.cateId)}
+              onChange={() => {
+                handleCategoryCheckboxChange(subCategory.cateId);
+                handleCategorySelect(subCategory.cateId);
+              }}
             />
             <label
               htmlFor={`sub-category-${subCategory.cateId}`}
@@ -72,93 +92,75 @@ export default function ProductSidebarDetail({
         <div className="input-grounp d-flex flex-row">
           <input
             type="number"
-            name=""
-            id=""
+            value={priceRange.min}
+            onChange={(e) => handlePriceChange(e.target.value, "min")}
             className="form-control me-3"
-            style={{ width: "70px", height: "25px" }}
+            style={{ width: "80px", height: "25px" }}
           />
           <span className="me-3" style={{ color: "#747E85" }}>
             ~
           </span>
           <input
             type="number"
-            name=""
-            id=""
+            value={priceRange.max}
+            onChange={(e) => handlePriceChange(e.target.value, "max")}
+            onKeyDown={(e) => handleKeyDown(e, "max")}
             className="form-control"
-            style={{ width: "70px", height: "25px" }}
+            style={{ width: "80px", height: "25px" }}
           />
         </div>
         <h6 className="mt-4 mb-3">評分</h6>
-        <div
-          className="input-grounp d-flex flex-row mb-1"
-          style={{ color: "#FFD783" }}
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            &#9733;&#9733;&#9733;&#9733;&#9733;
-          </label>
+        {/* {[5, 4, 3, 2, 1].map((stars) => (
+          <div
+            key={stars}
+            className="input-grounp d-flex flex-row mb-1"
+            style={{ color: "#FFD783" }}
+          >
+            <input
+              type="checkbox"
+              id={`rating-${stars}`}
+              name={`rating-${stars}`}
+              checked={ratings.has(stars)}
+              onChange={() => handleRatingChange(stars)}
+              className="me-2 checkbox"
+            />
+            <label htmlFor={`rating-${stars}`} className="label-checkbox">
+              {"★".repeat(stars)}
+            </label>
+          </div>
+        ))} */}
+        <div className="d-flex flex-row mb-4">
+          {Array(5)
+            .fill(1)
+            .map((v, i) => {
+              // 每個按鈕的分數，相當於索引+1
+              const score = i + 1;
+
+              return (
+                <div
+                  key={score}
+                  className="d-flex flex-row me-4"
+                  onClick={() => handleStartRating(score)}
+                  onMouseEnter={() => handleStartHoverRating(score)}
+                  onMouseLeave={() => handleStartHoverRating(0)}
+                >
+                  <FaLeaf
+                    className={
+                      score <= rating || score <= hoverRating
+                        ? styles.faLeafOn
+                        : styles.faLeafOff
+                    }
+                  />
+                </div>
+              );
+            })}
         </div>
-        <div
-          className="input-grounp d-flex flex-row mb-1"
-          style={{ color: "#FFD783" }}
+        <button
+          className={`${styles.clearFilter} btn my-3`}
+          onClick={resetFilters}
         >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            &#9733;&#9733;&#9733;&#9733;
-          </label>
-        </div>
-        <div
-          className="input-grounp d-flex flex-row mb-1"
-          style={{ color: "#FFD783" }}
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            &#9733;&#9733;&#9733;
-          </label>
-        </div>
-        <div
-          className="input-grounp d-flex flex-row mb-1"
-          style={{ color: "#FFD783" }}
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            &#9733;&#9733;
-          </label>
-        </div>
-        <div
-          className="input-grounp d-flex flex-row mb-1"
-          style={{ color: "#FFD783" }}
-        >
-          <input
-            type="checkbox"
-            id="veggies"
-            name="veggies"
-            className={`me-2 checkbox`}
-          />
-          <label for="veggies" class="label-checkbox">
-            &#9733;
-          </label>
-        </div>
+          清空條件
+        </button>
       </div>
     </div>
   );

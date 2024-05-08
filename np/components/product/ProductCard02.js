@@ -3,22 +3,16 @@ import React, { useState } from "react";
 import style from "@/components/product/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// {
-//   "id": "171",
-//   "category_id": "19",
-//   "name": "新生活鮮奶茶",
-//   "description": "◆50%生乳含量 ◆台灣在地魚池茶葉熬煮 ◆使用天然蔗糖 無任何奶粉、香精、人工添加物等等的多餘原料，市面上最天然的鮮奶茶，成分單純，市面上的鮮奶茶即使有標榜使用生乳，但是生乳的比例若非達到50%就稱為『乳飲品』而非『調味乳』。",
-//   "price": "95",
-//   "stock_quantity": "24",
-//   "F_coupon_id": "31",
-//   "upload_date": "2022-09-28 00:00:00",
-//   "valid": "1"
-// }
+import FavIconProduct from "@/components/favor/FavIconProduct";
+
+// import FavIconProduct from "../favor/FavIconProduct";
+
 
 export default function ProductCard02({
   id,
   name,
   price,
+  disPrice,
   img,
   average_rating,
 }) {
@@ -28,7 +22,7 @@ export default function ProductCard02({
         <div className={`${style["productCard"]} my-4`}>
           <div className={`${style["CardImg"]}`}>
             <img
-              src={`/index-images/p-image/${img}`}
+              src={`/images/products/${img}`}
               alt="商品圖片"
               className={`${style["object-fit"]}`}
             />
@@ -48,19 +42,31 @@ export default function ProductCard02({
                 className={`${style["favorite-btn"]} pe-1 pe-sm-2 d-flex justify-content-center align-items-center`}
                 style={{ border: "none" }}
               >
-                <i className={`fa-regular fa-heart`} />
+                <FavIconProduct id={id} />
               </button>
             </div>
             <div
               className={`${style["product-price"]} d-flex flex-row justify-content-between align-items-center`}
             >
-              <div className={`${style["price"]}`}>{price}</div>
               <div
-                className={`${style["price-buy"]} d-flex flex-row align-items-center`}
+                className={`${style["product-price"]} d-flex flex-row justify-content-between align-items-center`}
               >
-                <div className={`${style["original-price"]} px-3`}>{price}</div>
                 <div
-                  typt="submit"
+                  className={`${style["price-buy"]} d-flex flex-row align-items-center justify-content-between`}
+                >
+                  {disPrice !== null ? (
+                    <>
+                      <div className={`${style["price"]}`}>{disPrice}</div>
+                      <div className={`${style["original-price"]} px-3`}>
+                        {price}
+                      </div>
+                    </>
+                  ) : (
+                    <div className={`${style["price"]}`}>{price}</div>
+                  )}
+                </div>
+                <div
+                  type="submit"
                   className={`${style["btn"]} btn justify-content-center align-centent-center d-flex`}
                 >
                   <i

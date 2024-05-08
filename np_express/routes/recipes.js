@@ -156,9 +156,14 @@ router.get('/:recipeId', async function (req, res) {
   WHERE recipe_category__i_d = ${recipeCategoryId} && recipe__i_d != ${recipeId}`
   const [recipeCategories] = await db.query(sqlRecipeCategories)
 
+  // 計算該類別的所有食譜數量，不包含自己
+  const sqlRecipesCount = `SELECT COUNT(*) AS countRecipes FROM recipe WHERE recipe_category__i_d = ${recipeCategoryId} && recipe__i_d != ${recipeId}`
+  const [RecipesCount] = await db.query(sqlRecipesCount)
+  const finalRecipesCount = RecipesCount[0].countRecipes
+
   return res.json({
     status: 'success',
-    data: { finalRecipe, recipeCategories },
+    data: { finalRecipe, recipeCategories, finalRecipesCount },
   })
 })
 

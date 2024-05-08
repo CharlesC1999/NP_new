@@ -5,14 +5,34 @@ import { useState, useEffect } from "react";
 import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
 import HeroSlider from "@/components/index/HeroSlider";
-import Card2 from "@/components/index/card2";
+import Card2 from "@/components/index/Card2";
 import Card3 from "@/components/index/Card3Categories";
 import Card4Hot from "@/components/index/Card4Hot";
 import Card5class from "@/components/index/Card5class";
 import Card6Recipe from "@/components/index/Card6Recipe";
 import Footer from "@/components/Footer";
+import ToTheTop from "@/components/toTheTop";
+import data from "@/data/index-brand-info.json";
+import { getHomePageInfo } from "@/services/user";
 
 export default function Index() {
+  const [hotProduct, setHotProduct] = useState([]);
+  const [hotClass, setHotClass] = useState([]);
+  const [recipe, setRecipe] = useState([]);
+  const fetchHomeData = async () => {
+    try {
+      const { hotProduct, hotClass, recommendedRecipe } =
+        await getHomePageInfo();
+      setHotProduct(hotProduct);
+      setHotClass(hotClass);
+      setRecipe(recommendedRecipe);
+    } catch (error) {
+      console.error("Failed to fetch favorites:", error);
+    }
+  };
+  useEffect(() => {
+    fetchHomeData();
+  }, []);
   return (
     <>
       <HeaderComponent />
@@ -38,9 +58,7 @@ export default function Index() {
         </div>
       </div>
 
-      <div
-        className={` ${styles.wrapper} ${styles.NutripollCard1}`}
-      >
+      <div className={` ${styles.wrapper} ${styles.NutripollCard1}`}>
         <div className={`d-flex ${styles.card1Rwd}`}>
           <div className={styles.card1Img}>
             <img src="/index-images/Herosection02.png" alt />
@@ -63,29 +81,33 @@ export default function Index() {
 
       <div className={` ${styles.wrapper}`}>
         <div className={styles.Nutripollcard2}>
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
+          {data.map((v) => {
+            return (
+              <Card2
+                key={v.id}
+                title={v.title}
+                description={v.description}
+                link={v.link}
+                image={v.image}
+              />
+            );
+          })}
         </div>
       </div>
 
       <div className={` ${styles.wrapper} ${styles.CategoryRwd}`}>
         <div className={`d-flex justify-content-between pb-5`}>
           <h4 className={`${styles.MeAuto}`}>商品分類</h4>
-          <div className={`d-flex`}>
+          {/* <div className={`d-flex`}>
             <button className={`btn btn-secondary ${styles.arrow}`}>
               <i className="fa-solid fa-arrow-left"></i>
             </button>
             <button className={`btn btn-secondary ${styles.arrow}`}>
               <i className="fa-solid fa-arrow-right"></i>
             </button>
-          </div>
+          </div> */}
         </div>
         <div className={`${styles.Nutripollcard3}`}>
-          <Card3 />
           <Card3 />
           <Card3 />
           <Card3 />
@@ -99,25 +121,25 @@ export default function Index() {
       <div className={` ${styles.wrapper}`}>
         <div className={`d-flex justify-content-between ps-3 pe-3`}>
           <h4 className={`${styles.MeAuto}`}>熱銷商品</h4>
-          <a className={`${styles.TitleRwd}`} href="">
+          <a className={`${styles.TitleRwd}`} href="/product">
             <h5 className={`${styles.MeAuto}`}>
               更多<i className="fa-solid fa-chevron-right"></i>
             </h5>
           </a>
         </div>
         <div className={`${styles.Nutripollcard4}`}>
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
-          <Card4Hot />
+          {hotProduct.map((v) => {
+            return (
+              <Card4Hot
+                key={v.id}
+                id={v.id}
+                name={v.product_name}
+                price={v.product_price}
+                d_price={v.discount_price}
+                image={v.image_url}
+              />
+            );
+          })}
         </div>
       </div>
 
@@ -127,36 +149,60 @@ export default function Index() {
             className={`${styles.card5Title} d-flex justify-content-between`}
           >
             <h4 className={`${styles.MeAuto}`}>熱門課程</h4>
-            <a className={`${styles.TitleRwd}`} href="">
+            <a className={`${styles.TitleRwd}`} href="/class-page">
               <h5 className={`${styles.MeAuto}`}>
                 更多<i className="fa-solid fa-chevron-right"></i>
               </h5>
             </a>
           </div>
           <div className={`${styles.Nutripollcard5}`}>
-            <Card5class />
-            <Card5class />
+            {hotClass.map((v) => {
+              return (
+                <Card5class
+                  key={v.class__i_d}
+                  id={v.class__i_d}
+                  name={v.class_name}
+                  speaker_name={v.speaker_name}
+                  speaker_title={v.speaker_title}
+                  description={v.class_description}
+                  price={v.c_price}
+                  d_price={v.c_discount_price}
+                  date={v.class_date}
+                  image={v.image__u_r_l}
+                />
+              );
+            })}
           </div>
         </div>
         <div className={`card6Main`}>
-          <div className={`d-flex justify-content-between ${styles.card6Title}`}>
+          <div
+            className={`d-flex justify-content-between ${styles.card6Title}`}
+          >
             <h4 className={`${styles.MeAuto}`}>精選食譜</h4>
-            <a className={`${styles.TitleRwd}`} href="">
+            <a className={`${styles.TitleRwd}`} href="/recipe">
               <h5 className={`${styles.MeAuto}`}>
                 更多<i className="fa-solid fa-chevron-right"></i>
               </h5>
             </a>
           </div>
           <div className={`d-flex ${styles.Nutripollcard6}`}>
-            <Card6Recipe />
-            <Card6Recipe />
-            <Card6Recipe />
-            <Card6Recipe />
+            {recipe.map((v) => {
+              return (
+                <Card6Recipe
+                  key={v.recipe__i_d}
+                  title={v.title__r_name}
+                  content={v.content}
+                  image={v.image__u_r_l}
+                  id={v.recipe__i_d}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
 
       <Footer />
+      <ToTheTop />
     </>
   );
 }

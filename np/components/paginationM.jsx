@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import Styles from "./paginationM.module.scss";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-const PaginationComponent = ({ total, perpage, onChange }) => {
+const PaginationComponent = ({
+  total,
+  perpage,
+  onChange = () => {},
+  // 設定食譜頁碼
+  recipeSetPage = () => {},
+}) => {
   const [page, setPage] = useState(1);
   total = Math.ceil(total / perpage);
 
@@ -28,7 +34,10 @@ const PaginationComponent = ({ total, perpage, onChange }) => {
   return (
     <div className={Styles.paginationContainer}>
       <button
-        onClick={() => handleArrowChange(Math.max(1, page - 1))}
+        onClick={() => {
+          handleArrowChange(Math.max(1, page - 1));
+          recipeSetPage(Math.max(1, page - 1));
+        }}
         disabled={page === 1}
         className={Styles.paginationButton}
       >
@@ -36,7 +45,10 @@ const PaginationComponent = ({ total, perpage, onChange }) => {
       </button>
       <select
         value={page}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e);
+          recipeSetPage(e.target.value);
+        }}
         className={Styles.paginationBox}
       >
         {Array.from({ length: total }, (_, i) => (
@@ -44,7 +56,10 @@ const PaginationComponent = ({ total, perpage, onChange }) => {
         ))}
       </select>
       <button
-        onClick={() => handleArrowChange(Math.min(page + 1, total))}
+        onClick={() => {
+          handleArrowChange(Math.min(page + 1, total));
+          recipeSetPage(Math.min(page + 1, total));
+        }}
         disabled={page === total}
         className={Styles.paginationButton}
       >

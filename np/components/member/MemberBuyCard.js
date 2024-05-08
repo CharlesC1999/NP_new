@@ -15,11 +15,19 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
   console.log(orders);
 
 
-  let userid = parseInt(localStorage.getItem('userid'))
-  console.log(userid);
+  // let userid = parseInt(localStorage.getItem('userid'))
+  // console.log(userid);
 
-
+// let userid = 1
  
+const [userid, setUserid] = useState(null);
+
+  useEffect(() => {
+    const userIdFromLocalStorage = localStorage.getItem("userid");
+    if (userIdFromLocalStorage) {
+      setUserid(parseInt(userIdFromLocalStorage));
+    }
+  }, []);
 
   // 資料表1商品訂單
   const getOrders = async (cat = '') => {
@@ -43,7 +51,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
         // 如果存在搜索关键字，则进行过滤
         if (searchTerm) {
           filteredOrders = filteredOrders.filter(order => {
-            const title = order.name || order.Class_name;
+            const title = order.product_name || order.class_name;
             return title.includes(searchTerm);
           });
         }
@@ -58,7 +66,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
     }
   };
 
-  //資料表3優惠券
+  
  
   // 樣式2: didMount階段只執行一次
   useEffect(() => {
@@ -75,7 +83,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
     <>
 
       {orders.filter(v => v.User_ID === userid).map((v, i) => {
-          const title = v.name || v.Class_name;
+          const title = v.product_name || v.class_name;
         //到時候把57改成當前會員ID(很像不能這樣寫QQ)
         //if(v.member_id===57)
         return (
@@ -90,7 +98,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
                     src={`/images/products/${v.image_url}`}
                     alt=""
                   />} */}
-                  {v.name ? (
+                  {v.product_name ? (
                     <img
                       className="object-fit-cover"
                       src={`/images/products/${v.image_url}`}

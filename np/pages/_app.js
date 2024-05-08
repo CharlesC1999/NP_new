@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
 //  全域樣式
 import "@/styles/globals.css";
 //  Datepicker
@@ -16,18 +17,46 @@ import "@/styles/loader.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
 // Router
 import Router from "next/router";
+// Search Result
+import { SearchResultsProvider } from "@/contexts/searchContext";
+
+// Head
+import Head from "next/head";
+//
+import { CategoryProvider } from "@/hooks/ClassProp";
+
+import { CartProvider } from "@/hooks/use-cart";
+// 給食譜列表跟細節頁的sideBar用的context
+import { CategoryForSQLProvider } from "@/hooks/recipe/use-categoryForSQL";
+
+import { ProductCateProvider } from "@/hooks/use-product-cate";
 
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <AuthProvider>
-      <LoaderProvider CustomLoader={OrangeLoader}>
-        <ManageRouteChanges>
-          {getLayout(<Component {...pageProps} />)}
-        </ManageRouteChanges>
-      </LoaderProvider>
-    </AuthProvider>
+    <>
+      <Head>
+        <title>NutriPolls</title>
+      </Head>
+      <AuthProvider>
+        <LoaderProvider CustomLoader={OrangeLoader}>
+          <SearchResultsProvider>
+            <SearchResultsProvider>
+              <CategoryForSQLProvider>
+                <CartProvider>
+                  <CategoryProvider>
+                    <ManageRouteChanges>
+                      {getLayout(<Component {...pageProps} />)}
+                    </ManageRouteChanges>
+                  </CategoryProvider>
+                </CartProvider>
+              </CategoryForSQLProvider>
+            </SearchResultsProvider>
+          </SearchResultsProvider>
+        </LoaderProvider>
+      </AuthProvider>
+    </>
   );
 }
 //暫時先擱置，右下角的那個光明會三角形

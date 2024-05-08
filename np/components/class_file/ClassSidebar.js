@@ -10,6 +10,7 @@ const classSidebar = ({ finalStart, finalEnd }) => {
 
   const handleStartDate = (date) => {
     setClassDateStart(date);
+    finalStart(date);
   };
 
   console.log(classDateStart, "delta");
@@ -18,6 +19,7 @@ const classSidebar = ({ finalStart, finalEnd }) => {
 
   const handleEndDate = (date) => {
     setClassDateEnd(date);
+    finalEnd(date);
   };
 
   console.log(classDateEnd, "ola");
