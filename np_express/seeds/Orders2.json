@@ -10,8 +10,7 @@
     "shipping_address": "1234 Elm St, Springfield, IL",
     "contact_phone": "555-1234",
     "coupon_id": null,
-    "discount_amount": null,
-    "product_type": "Electronics"
+    "discount_amount": null
   },
   {
     "id": 1002,
@@ -24,8 +23,7 @@
     "shipping_address": "9876 Oak St, Metropolis, NY",
     "contact_phone": "555-5678",
     "coupon_id": 15,
-    "discount_amount": 20.0,
-    "product_type": "Apparel"
+    "discount_amount": 20.0
   },
   {
     "id": 1003,
@@ -38,7 +36,6 @@
     "shipping_address": "5432 Pine St, Gotham, NJ",
     "contact_phone": "555-9012",
     "coupon_id": 18,
-    "discount_amount": 100.0,
-    "product_type": "Course"
+    "discount_amount": 100.0
   }
 ]

@@ -52,10 +52,10 @@ export default async function (sequelize) {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: true,
       },
-      product_Type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      // product_Type: {
+      //   type: DataTypes.STRING,
+      //   allowNull: false,
+      // },
 
       // 這邊是linepay 所需欄位
       order_status: {

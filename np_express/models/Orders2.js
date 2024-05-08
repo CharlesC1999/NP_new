@@ -54,10 +54,10 @@ export default async function (sequelize) {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: true,
       },
-      product_Type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      // product_Type: {
+      //   type: DataTypes.STRING,
+      //   allowNull: false,
+      // },
     },
     {
       tableName: 'orders2',

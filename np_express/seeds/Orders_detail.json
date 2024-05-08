@@ -1,6 +1,6 @@
 [
   {
-    "id": 10001,
+    "id": 1,
     "order_id": 1001,
     "product_id": 101,
     "class_id": null,
@@ -10,7 +10,7 @@
     "product_type": "Electronics"
   },
   {
-    "id": 10002,
+    "id": 2,
     "order_id": 1001,
     "product_id": null,
     "class_id": 501,
@@ -20,7 +20,7 @@
     "product_type": "Course"
   },
   {
-    "id": 10003,
+    "id": 3,
     "order_id": 1002,
     "product_id": 102,
     "class_id": null,
@@ -30,7 +30,7 @@
     "product_type": "Apparel"
   },
   {
-    "id": 10004,
+    "id": 4,
     "order_id": 1003,
     "product_id": 103,
     "class_id": null,
@@ -40,7 +40,7 @@
     "product_type": "Electronics"
   },
   {
-    "id": 10005,
+    "id": 5,
     "order_id": 1003,
     "product_id": null,
     "class_id": 502,

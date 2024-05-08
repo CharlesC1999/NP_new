@@ -152,17 +152,31 @@ const ShopCart3 = () => {
   const handlePaymentConfirmation = () => {
     MySwal.fire({
       // title: "",
-      text: "您是否希望使用 Line Pay 進行支付？",
+      text: "確認付款？",
       icon: "success",
       showCancelButton: true,
       confirmButtonText: "是",
       cancelButtonText: "否",
       reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const toLinePay = fetch("http://localhost:3005/api/cartList/reserve", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(lineOrder),
+        });
+      }
     });
   };
 
   // ---------------
+  //  顯示訂單編號在ui測試用
+  const [lineOrder, setLineOrder] = useState("");
+  const [error, setError] = useState("");
 
+  console.log("lineOrder", lineOrder);
   // 處理表單提交事件
   const handleSubmit = async (event) => {
     // 阻擋表單預設行為
@@ -170,6 +184,7 @@ const ShopCart3 = () => {
     const formData = {
       // 商品
       items: items.map((item) => ({
+        id: item.id,
         name: item.name,
         quantity: item.qty,
         pricePerItem: item.price,
@@ -177,6 +192,7 @@ const ShopCart3 = () => {
       })),
       // 課程
       classItems: classItems.map((item) => ({
+        id: item.id,
         name: item.name,
         quantity: item.qty,
         pricePerItem: item.price,
@@ -211,10 +227,21 @@ const ShopCart3 = () => {
       });
       const responseData = await response.json();
       console.log("服务器返回:", responseData);
+
+      //
+      if (responseData.status === "success") {
+        setLineOrder(responseData.data.lineOrder);
+      } else {
+        throw new Error("Failed to fetch data");
+      }
     } catch (error) {
       console.error("提交表单错误:", error);
     }
   };
+
+  // 接收到後端資料的後續處理、顯示
+  // const [responseData, setResponseData] = useState(null);  // 用于存储后端数据的状态
+  // const [error, setError] = useState('');  // 用于存储错误信息的状态
 
   return (
     <form onSubmit={handleSubmit}>
@@ -394,6 +421,12 @@ const ShopCart3 = () => {
               </div>
             </div>
           </section>
+
+          {/*  */}
+          <p>Order ID: {lineOrder.id}</p>
+          <p>Currency: {lineOrder.currency}</p>
+          <p>Total Amount: {lineOrder.amount}</p>
+
           {/* 折價券、付款 */}
           <div
             className={`${styles3.pay2} d-flex justify-content-center py-4`}

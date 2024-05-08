@@ -11,12 +11,10 @@ export default async function (sequelize) {
         allowNull: false,
       },
       order_id: {
-        type: DataTypes.INTEGER(10),
+        type: DataTypes.STRING(255),
         allowNull: false,
-        // references: {
-        //   model: 'orders', // Assumes the table name for orders is 'orders'
-        //   key: 'Order_ID', // Assumes the primary key for orders is 'Order_ID'
-        // }
+        // primaryKey: true,
+        comment: 'UUID',
       },
       product_id: {
         type: DataTypes.INTEGER(10),
@@ -47,7 +45,8 @@ export default async function (sequelize) {
         allowNull: false,
       },
       product_type: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM,
+        values: ['product', 'class'],
         allowNull: false,
       },
     },
