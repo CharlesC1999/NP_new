@@ -3,7 +3,7 @@ const router = express.Router()
 // 檢查空物件, 轉換req.params為數字
 import { getIdParam } from '#db-helpers/db-tool.js'
 import sequelize from '#configs/db.js'
-const { Favor_class} = sequelize.models
+const { Favor_class } = sequelize.models
 import db from '#configs/mysql.js'
 import authenticateToken from '#middlewares/authenticateToken.js'
 
@@ -16,29 +16,28 @@ router.get('/', authenticateToken, async (req, res) => {
   const cids = await Favor_class.findAll({
     attributes: ['cid'],
     where: {
-      uid: +
+      uid: req.user.id,
     },
     raw: true, //只需要資料
-  
   })
   // 將結果中的cid取出變為一個純資料的陣列
   const favorClass = cids.map((v) => v.cid)
   // 取得會員頁所需課程資料(JOIN class 和 favor-class 資料表)
-    // uid 為變數，根據會員 id 返回查詢結果，先用 uid =1 來測試
-    const classDataSql = `SELECT class.*,favor_class.uid,class_image.image__u_r_l,speaker.speaker_name
+  // uid 為變數，根據會員 id 返回查詢結果，先用 uid =1 來測試
+  const classDataSql = `SELECT class.*,favor_class.uid,class_image.image__u_r_l,speaker.speaker_name
     FROM class
     JOIN class_image ON  class.class__i_d = class_image.f__class__i_d
     JOIN favor_class ON  class.class__i_d = favor_class.cid
     JOIN speaker ON class.f__speaker__i_d = speaker_id
     WHERE favor_class.uid = ${userID} AND class_image.sort_order = 0`
   const [classFavorData] = await db.query(classDataSql)
-  res.json({ status: 'success', data: { favorClass,classFavorData } })
+  res.json({ status: 'success', data: { favorClass, classFavorData } })
 })
 
 // 會員加入收藏
 router.put('/:id', authenticateToken, async (req, res, next) => {
   if (!req.user || !req.user.id) {
-    return res.status(400).send('User ID is required');
+    return res.status(400).send('User ID is required')
   }
   const cid = getIdParam(req)
   const uid = req.user.id
@@ -63,7 +62,7 @@ router.put('/:id', authenticateToken, async (req, res, next) => {
   return res.json({ status: 'success', data: null })
 })
 // 會員移除收藏
-router.delete('/:id',authenticateToken, async (req, res, next) => {
+router.delete('/:id', authenticateToken, async (req, res, next) => {
   const cid = getIdParam(req)
   const uid = req.user.id
 

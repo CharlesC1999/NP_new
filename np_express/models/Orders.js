@@ -61,7 +61,7 @@ export default async function (sequelize) {
         type: DataTypes.INTEGER(10),
         allowNull: false,
       },
-      status: {
+      order_status: {
         type: DataTypes.ENUM,
         values: ['處理中', '已完成', '取消', '已退款'],
         defaultValue: '處理中',
@@ -75,7 +75,7 @@ export default async function (sequelize) {
 
       // line的status
 
-      order_status: {
+      status: {
         type: DataTypes.STRING(255),
         defaultValue: null,
         comment: 'pending, paid, fail, cancel, error',

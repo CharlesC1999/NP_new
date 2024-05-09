@@ -72,7 +72,7 @@ router.post('/', async (req, res, next) => {
     const order = await Orders.create({
       order_id: orderId, // 使用生成的 UUID
       user_id: 1, // 這裡假設 user_id 是已知的
-      amount_total: finalPrice,
+      amount_total: totalPrice,
       payment_method: paymentMethod,
       order_date: new Date(),
       recipient_name: receiverName,
@@ -95,6 +95,7 @@ router.post('/', async (req, res, next) => {
     const productDetails = items.map((item) => ({
       order_detail_id: orderId,
       commodity_id: item.id,
+      thing_id: null,
       class_id: null,
       quantity: item.quantity,
       unit_price: item.pricePerItem,
@@ -104,6 +105,7 @@ router.post('/', async (req, res, next) => {
     const classDetails = classItems.map((item) => ({
       order_detail_id: orderId,
       commodity_id: null,
+      thing_id: null,
       class_id: item.id,
       quantity: item.quantity,
       unit_price: item.pricePerItem,
