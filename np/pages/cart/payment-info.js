@@ -55,7 +55,7 @@ const ShopCart3 = () => {
   // -----------------------------
 
   // 去抓存取在localStorage的資料
-  // 抓商品資料
+  // 抓課程資料
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -67,15 +67,15 @@ const ShopCart3 = () => {
   }, []);
 
   // 去抓存取在localStorage的資料
-  // 抓課程資料
+  // 抓商品資料
 
-  const [classItems, setClassItems] = useState([]);
+  const [productItems, setproductItems] = useState([]);
 
   useEffect(() => {
-    // 从 localStorage 获取名为 'itemsCard666' 的值
-    const storedItems = localStorage.getItem("itemsProduct");
+    // 从 localStorage 获取名为 'productItem666' 的值
+    const storedItems = localStorage.getItem("productItem666");
     if (storedItems) {
-      setClassItems(JSON.parse(storedItems)); // 解析字符串并设置状态
+      setproductItems(JSON.parse(storedItems)); // 解析字符串并设置状态
     }
   }, []);
 
@@ -93,7 +93,7 @@ const ShopCart3 = () => {
 
   // 去抓存全域鉤子的資料
   // 設定總額
-  const { totalItems, totalPrice } = useCart();
+  const { totalItems, totalPrice, totalProduct, totalProductPrice } = useCart();
 
   // 去抓localStorage付款方式的資料
   const [payMethod, setPayMethod] = useState("");
@@ -190,12 +190,16 @@ const ShopCart3 = () => {
   const [error, setError] = useState("");
 
   console.log("lineOrder", lineOrder);
+  const allPrice = totalPrice + totalProductPrice;
+  console.log(allPrice);
+  const finalPrice = allPrice - coupon.disPrice;
+  console.log(finalPrice);
   // 處理表單提交事件
   const handleSubmit = async (event) => {
     // 阻擋表單預設行為
     event.preventDefault();
     const formData = {
-      // 商品
+      //  課程
       items: items.map((item) => ({
         id: item.id,
         name: item.name,
@@ -203,22 +207,22 @@ const ShopCart3 = () => {
         pricePerItem: item.price,
         totalPrice: item.price * item.qty,
       })),
-      // 課程
-      classItems: classItems.map((item) => ({
+      // 商品
+      productItems: productItems.map((item) => ({
         id: item.id,
         name: item.name,
         quantity: item.qty,
         pricePerItem: item.price,
-        totalPrice: item.price * item.qty,
+        totalProductPrice: item.price * item.qty,
       })),
       // 合計
-      totalPrice: totalPrice,
+      totalPrice: totalPrice + totalProductPrice || 0,
       // 優惠券id
       couponId: coupon.id || 0,
       // 優惠券扣掉價格
       discountPrice: coupon.disPrice || 0,
       // 最終價格
-      finalPrice: totalPrice - coupon.disPrice || 0,
+      finalPrice: totalPrice + totalProductPrice - coupon.disPrice || 0,
       // 收件人
       receiverName: receiverName,
       // 手機
@@ -355,7 +359,7 @@ const ShopCart3 = () => {
                 </div> */}
               </div>
             ))}
-            {classItems.map((item, index) => (
+            {productItems.map((item, index) => (
               <div key={index} className="row py-2">
                 <div className={`${styles3.fb} col text-center pt-2`}>
                   {item.name}
@@ -390,7 +394,7 @@ const ShopCart3 = () => {
               <div className={`${styles3.fc} col text-center`}></div>
               <div className={`${styles3.fc} col text-center`}></div>
               <div className={`${styles3.fc} col text-center`}>
-                NT$ {totalPrice}
+                NT$ {allPrice}
               </div>
               {/* <div className={`${styles3.fc} col text-center`}>
                 NT$ {totalPrice}
@@ -423,7 +427,7 @@ const ShopCart3 = () => {
               <div className={`${styles3.fc} col text-center`}></div>
               {/* <div className={`${styles3.fc} col text-center`}></div> */}
               <div className={`${styles3.fc} col text-center`}>
-                NT$ {totalPrice - coupon.disPrice}
+                NT$ {finalPrice}
               </div>
             </div>
           </section>
@@ -542,7 +546,7 @@ const ShopCart3 = () => {
                 </div>
               </div>
             ))}
-            {classItems.map((item, index) => (
+            {productItems.map((item, index) => (
               <div key={index} className="row py-2 mt-1">
                 <div className={`${styles3.fc} row ps-4`}>{item.name}</div>
                 <div
@@ -573,7 +577,7 @@ const ShopCart3 = () => {
             </div>
           </div> */}
 
-            <div
+            {/* <div
               className="row py-2 mt-1"
               style={{ borderTop: "1px solid #78cea6" }}
             >
@@ -581,14 +585,14 @@ const ShopCart3 = () => {
               <div
                 className={`${styles3.fb} row ps-4 `}
                 style={{ fontSize: 12 }}
-              >
-                {/* 課程時間:2024/04/05 */}
-              </div>
+              > */}
+            {/* 課程時間:2024/04/05 */}
+            {/* </div>
               <div className="row mt-4">
                 <div className="col-3 border ms-2">有庫存</div>
                 <div className={`${styles3.fb} col fw-bold`}>$1200 x 1</div>
               </div>
-            </div>
+            </div> */}
 
             <div
               className="row py-2 pt-3"
@@ -598,7 +602,7 @@ const ShopCart3 = () => {
               <div
                 className={`${styles3.fb} col text-center text-warning fw-bold`}
               >
-                {totalPrice} 元
+                {allPrice} 元
               </div>
             </div>
             <div
@@ -621,7 +625,7 @@ const ShopCart3 = () => {
               <div
                 className={`${styles3.fb} col text-center text-success fw-bold`}
               >
-                {totalPrice - coupon.disPrice} 元
+                {finalPrice} 元
               </div>
             </div>
           </section>

@@ -35,7 +35,7 @@ router.post('/', async (req, res, next) => {
   try {
     const {
       items,
-      classItems,
+      productItems,
       totalPrice,
       couponId,
       discountPrice,
@@ -56,7 +56,7 @@ router.post('/', async (req, res, next) => {
     // 生成一个随机的包裹 ID
     const packageId = uuidv4()
 
-    const allProducts = [...items, ...classItems]
+    const allProducts = [...items, ...productItems]
     // 要傳送給line pay的訂單資訊
     const lineOrder = {
       id: orderId,
@@ -89,24 +89,14 @@ router.post('/', async (req, res, next) => {
       order_total_price: finalPrice,
       status: '已完成',
       transaction_id: transactionId,
-      order_info: orderInfo,
+      order_info: JSON.stringify(lineOrder),
       reservation: reservation,
       confirm: confirm,
       return_code: returnCode,
     })
 
     // 可以在這裡添加商品詳情的處理邏輯(若不行的話刪除試試)
-    const productDetails = items.map((item) => ({
-      order_detail_id: orderId,
-      commodity_id: item.id,
-      thing_id: null,
-      class_id: null,
-      quantity: item.quantity,
-      unit_price: item.pricePerItem,
-      total_price: item.totalPrice,
-      product_type: 'product',
-    }))
-    const classDetails = classItems.map((item) => ({
+    const classDetails = items.map((item) => ({
       order_detail_id: orderId,
       commodity_id: null,
       thing_id: null,
@@ -115,6 +105,16 @@ router.post('/', async (req, res, next) => {
       unit_price: item.pricePerItem,
       total_price: item.totalPrice,
       product_type: 'class',
+    }))
+    const productDetails = productItems.map((item) => ({
+      order_detail_id: orderId,
+      commodity_id: item.id,
+      thing_id: null,
+      class_id: null,
+      quantity: item.quantity,
+      unit_price: item.pricePerItem,
+      total_price: item.totalProductPrice,
+      product_type: 'product',
     }))
     console.log('Product Details:', productDetails, classDetails)
 

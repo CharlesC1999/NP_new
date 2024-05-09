@@ -109,6 +109,24 @@ export function CartProvider({ children }) {
   // 這邊是加上商品
   const [productItems, setProductItems] = useState([]);
 
+  console.log(productItems);
+  // 這邊存取localstorage
+  useEffect(() => {
+    const data = window.localStorage.getItem("productItem666");
+    if (data) {
+      setProductItems(JSON.parse(data));
+    }
+  }, []);
+  //setItem
+  useEffect(() => {
+    if (items.length > 0) {
+      window.localStorage.setItem(
+        "productItem666",
+        JSON.stringify(productItems)
+      );
+    }
+  }, [productItems]);
+
   // 刪除
   // console.log(items);
   // console.log(productItems);
@@ -176,27 +194,6 @@ export function CartProvider({ children }) {
     0
   );
 
-  //   useEffect(() => {
-  //     // 只在客户端执行
-  //     const storedItems = localStorage.getItem('cartItems');
-  //     const storedProductItems = localStorage.getItem('productItems');
-
-  //     if (storedItems) {
-  //         setItems(JSON.parse(storedItems));
-  //     }
-  //     if (storedProductItems) {
-  //         setProductItems(JSON.parse(storedProductItems));
-  //     }
-  //   }, []);
-
-  //   useEffect(() => {
-  //     // 只在客户端执行
-  //     localStorage.setItem('cartItems', JSON.stringify(items));
-  //     localStorage.setItem('productItems', JSON.stringify(productItems));
-  //   }, [items, productItems]);
-
-  //   console.log(localStorage.getItem('cartItems'));
-  // console.log(localStorage.getItem('productItems'));
   return (
     <CartContext.Provider
       // 使用value屬性提供資料給提供者階層以下的所有後代元件
