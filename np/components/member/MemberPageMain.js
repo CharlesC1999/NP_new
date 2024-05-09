@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./MemberPageMain.module.css";
+import { useRouter } from "next/router";
 
 const MemberPageMain = () => {
+  // 更新資料成功後跳轉至會員首頁
+  const router = useRouter();
   // 利用ref點擊input file，以此成功觸發監聽onChange
   const fileRef = useRef(null);
   // 判斷是否有上傳檔案，若無則顯示原本的圖片
@@ -26,7 +29,6 @@ const MemberPageMain = () => {
     Phone: "",
     Address: "",
     Gender: "",
-    date_of_birth: "",
     User_image: "",
   });
 
@@ -137,6 +139,30 @@ const MemberPageMain = () => {
       });
     }
     // 欄位檢查 ---END---
+
+    // ??? 最後檢查沒問題才送到伺服器
+    const formData = new FormData();
+    formData.append("User_name", userData.User_name);
+    formData.append("Email", userData.Email);
+    formData.append("Phone", userData.Phone);
+    formData.append("Address", userData.Address);
+    formData.append("Gender", userData.Gender);
+    // 用來放在fetch裡的兩個參數
+    const url = "http://localhost:3005/api/member-profile/update-profile";
+    const updateProfileObj = {
+      method: "put",
+      headers: {
+        Authorization: `Bearer ${LStoken}`,
+      },
+      body: formData,
+    };
+    const res = await fetch(url, updateProfileObj);
+    const data = await res.json();
+
+    alert(data.message);
+    if (data.status === "success") {
+      router.push("/member");
+    }
   };
 
   // 初次渲染時取得LS裡的token
@@ -194,7 +220,7 @@ const MemberPageMain = () => {
           {/* 資料顯示區 */}
           <div className="mt-5 d-flex ">
             <div className={styles.form1}>
-              <div className={`${styles.box} row mb-3 gap-3`}>
+              <div className={`${styles.box} row mb-3 `}>
                 <label
                   htmlFor="name"
                   className={`col-form-label text-end col-3 ${styles.lb}`}
@@ -212,11 +238,14 @@ const MemberPageMain = () => {
                     onChange={handleChange}
                   />
                 </div>
+                {/* // *** 錯誤訊息 */}
                 <div className="col-12 d-flex justify-content-center">
-                  <span className="error">帳號為必填</span>
+                  <span style={{ color: "red" }} className="error">
+                    {errors.User_name}
+                  </span>
                 </div>
               </div>
-              <div className={`${styles.box} row mb-3  gap-3`}>
+              <div className={`${styles.box} row mb-3  `}>
                 <label
                   htmlFor="email"
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
@@ -234,8 +263,14 @@ const MemberPageMain = () => {
                     onChange={handleChange}
                   />
                 </div>
+                {/* // *** 錯誤訊息 */}
+                <div className="col-12 d-flex justify-content-center">
+                  <span style={{ color: "red" }} className="error">
+                    {errors.Email}
+                  </span>
+                </div>
               </div>
-              <div className={`${styles.box} row mb-3 gap-3`}>
+              <div className={`${styles.box} row mb-3 `}>
                 <label
                   htmlFor="phone"
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
@@ -253,8 +288,14 @@ const MemberPageMain = () => {
                     onChange={handleChange}
                   />
                 </div>
+                {/* // *** 錯誤訊息 */}
+                <div className="col-12 d-flex justify-content-center">
+                  <span style={{ color: "red" }} className="error">
+                    {errors.Phone}
+                  </span>
+                </div>
               </div>
-              <div className={`${styles.box} row mb-3 gap-3`}>
+              <div className={`${styles.box} row mb-3 `}>
                 <label
                   htmlFor="address"
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
@@ -273,7 +314,7 @@ const MemberPageMain = () => {
                   />
                 </div>
               </div>
-              <div className={`${styles.box} row mb-3 gap-3`}>
+              <div className={`${styles.box} row mb-3 `}>
                 <label
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
                 >
@@ -339,7 +380,7 @@ const MemberPageMain = () => {
                   </div> */}
                 </div>
               </div>
-              <div className={`${styles.box} row mb-3 gap-3`}>
+              {/* <div className={`${styles.box} row mb-3 `}>
                 <label
                   htmlFor="birthday"
                   className={`col-form-label text-end  col-3 ${styles.lb}`}
@@ -355,23 +396,7 @@ const MemberPageMain = () => {
                     onChange={handleChange}
                   />
                 </div>
-                {/* // ! 生日這邊input的type改成date */}
-                {/* <div className="col">
-                  <select className="form-select" id="year">
-                    <option selected>年份</option>
-                  </select>
-                </div>
-                <div className="col">
-                  <select className="form-select" id="month">
-                    <option selected>月份</option>
-                  </select>
-                </div>
-                <div className="col">
-                  <select className="form-select" id="day">
-                    <option selected>日期</option>
-                  </select>
-                </div> */}
-              </div>
+              </div> */}
               {/* // !修改密碼放在另外一頁 */}
               {/* <div className={`${styles.box} row mb-3 align-items-start`}>
           <label htmlFor="password" className={`col-form-label  col-3 ${styles.lb }`}>密碼 :</label>
@@ -384,6 +409,7 @@ const MemberPageMain = () => {
                 className={`${styles.btnCenter} ${styles.box} row mb-3 align-items-start `}
               >
                 <button
+                  onClick={handleSubmit}
                   type="submit"
                   className={`${styles.btn1} ${styles.btnmargin} btn`}
                 >
