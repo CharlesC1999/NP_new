@@ -1,8 +1,26 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./PasswordResetMain.module.css";
+// 顯示密碼用的圖案
+import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 
 const PasswordResetMain = () => {
+  // 三顆眼睛
+  const [eyeOrigin, setEyeOrigin] = useState(false);
+  const [eyeNew, setEyeNew] = useState(false);
+  const [eyeCfm, setEyeCfm] = useState(false);
+
+  // 顯示密碼用的函式
+  const showOrigin = () => {
+    setEyeOrigin(!eyeOrigin);
+  };
+  const showNew = () => {
+    setEyeNew(!eyeNew);
+  };
+  const showCfm = () => {
+    setEyeCfm(!eyeCfm);
+  };
+
   // 狀態為物件，屬性對應到表單的欄位名稱
   const [password, setPassword] = useState({
     origin: "",
@@ -107,9 +125,9 @@ const PasswordResetMain = () => {
                 >
                   舊密碼 :
                 </label>
-                <div className="col">
+                <div className="col d-flex gap-3 align-items-center">
                   <input
-                    type="password"
+                    type={eyeOrigin ? "text" : "password"}
                     className="form-control"
                     id="origin"
                     name="origin"
@@ -117,6 +135,17 @@ const PasswordResetMain = () => {
                     value={password.origin}
                     onChange={handleChange}
                   />
+                  {eyeOrigin ? (
+                    <PiEyeBold
+                      style={{ cursor: "pointer" }}
+                      onClick={showOrigin}
+                    />
+                  ) : (
+                    <PiEyeClosedBold
+                      style={{ cursor: "pointer" }}
+                      onClick={showOrigin}
+                    />
+                  )}
                 </div>
                 {/* // 錯誤訊息 */}
                 <div className="col-12 d-flex justify-content-center">
@@ -132,9 +161,9 @@ const PasswordResetMain = () => {
                 >
                   新密碼 :
                 </label>
-                <div className="col">
+                <div className="col d-flex gap-3 align-items-center">
                   <input
-                    type="password"
+                    type={eyeNew ? "text" : "password"}
                     className="form-control"
                     id="password"
                     name="new"
@@ -142,6 +171,17 @@ const PasswordResetMain = () => {
                     value={password.new}
                     onChange={handleChange}
                   />
+                  {eyeNew ? (
+                    <PiEyeBold
+                      style={{ cursor: "pointer" }}
+                      onClick={showNew}
+                    />
+                  ) : (
+                    <PiEyeClosedBold
+                      style={{ cursor: "pointer" }}
+                      onClick={showNew}
+                    />
+                  )}
                 </div>
                 {/* // 錯誤訊息 */}
                 <div className="col-12 d-flex justify-content-center">
@@ -157,9 +197,9 @@ const PasswordResetMain = () => {
                 >
                   確認密碼 :
                 </label>
-                <div className="col">
+                <div className="col d-flex gap-3 align-items-center">
                   <input
-                    type="password"
+                    type={eyeCfm ? "text" : "password"}
                     className="form-control"
                     id="cfmedPassword"
                     placeholder="請再次輸入新密碼"
@@ -167,6 +207,17 @@ const PasswordResetMain = () => {
                     onChange={handleChange}
                     name="confirmPassword"
                   />
+                  {eyeCfm ? (
+                    <PiEyeBold
+                      style={{ cursor: "pointer" }}
+                      onClick={showCfm}
+                    />
+                  ) : (
+                    <PiEyeClosedBold
+                      style={{ cursor: "pointer" }}
+                      onClick={showCfm}
+                    />
+                  )}
                 </div>
                 {/* // 錯誤訊息 */}
                 <div className="col-12 d-flex justify-content-center">
