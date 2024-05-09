@@ -32,6 +32,8 @@ const LineLogin = new line_login({
   bot_prompt: 'normal',
 })
 
+console.log(LineLogin)
+
 // ------------ 以下為路由 ------------
 // 此api路由為產生登入網址，傳回前端後，要自己導向line網站進行登入
 router.get('/login', LineLogin.authJson())
@@ -54,12 +56,12 @@ router.get('/logout', async function (req, res, next) {
 
   // https://developers.line.biz/en/docs/line-login/managing-users/#logout
   // 登出時進行撤銷(revoke) access token
-  //   LineLogin.revoke_access_token(line_access_token)
+  LineLogin.revoke_access_token(line_access_token)
 
   //   // 清除cookie
-  //   res.clearCookie('accessToken', { httpOnly: true })
+  res.clearCookie('accessToken', { httpOnly: true })
   //   // 因登入過程中也用到session，也會產生 SESSION_ID，所以也要清除
-  //   res.clearCookie('SESSION_ID', { httpOnly: true })
+  res.clearCookie('SESSION_ID', { httpOnly: true })
 
   return res.json({ status: 'success', data: null })
 })
@@ -154,18 +156,21 @@ router.get(
       })
 
       // 使用httpOnly cookie來讓瀏覽器端儲存access token
-      res.cookie('accessToken', Token, { httpOnly: false })
+      req.session.token = Token
+      req.session.user = returnUser
 
       // 傳送access token回應(react可以儲存在state中使用)
       return res.json({
         status: 'success',
-        Token, // 直接返回 token
+        message: 'Logged in successfully',
+        Token,
+        returnUser, // 直接返回 token
       })
     },
     // 登入失敗的回調函式 Failure callback
     (req, res, next, error) => {
       console.log('line login fail')
-
+      //   console.log(res)
       return res.json({ status: 'error', message: { error } })
     }
   )
