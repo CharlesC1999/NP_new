@@ -43,23 +43,23 @@ router.get('/logout', async function (req, res, next) {
   }
 
   // 查詢
-  const sql = `SELECT * FROM line_member WHERE line_uid = ? LIMIT 1`
-  const dbUser = await sequelize.query(sql, {
-    replacements: [req.query.line_uid],
-    type: sequelize.QueryTypes.SELECT,
-    raw: true,
-  })[0]
+  const dbUser = await Line_member.findOne({
+    where: {
+      line_uid: req.query.line_uid,
+    },
+    raw: true, // 只需要資料表中資料
+  })
 
   const line_access_token = dbUser.line_access_token
 
   // https://developers.line.biz/en/docs/line-login/managing-users/#logout
   // 登出時進行撤銷(revoke) access token
-  //   LineLogin.revoke_access_token(line_access_token)
+  LineLogin.revoke_access_token(line_access_token)
 
-  //   // 清除cookie
-  //   res.clearCookie('accessToken', { httpOnly: true })
-  //   // 因登入過程中也用到session，也會產生 SESSION_ID，所以也要清除
-  //   res.clearCookie('SESSION_ID', { httpOnly: true })
+  // 清除cookie
+  res.clearCookie('accessToken', { httpOnly: true })
+  // 因登入過程中也用到session，也會產生 SESSION_ID，所以也要清除
+  res.clearCookie('SESSION_ID', { httpOnly: true })
 
   return res.json({ status: 'success', data: null })
 })
@@ -70,7 +70,7 @@ router.get(
   LineLogin.callback(
     // 登入成功的回調函式 Success callback
     async (req, res, next, token_response) => {
-      console.log('Received token response from LINE:', token_response)
+      console.log(token_response)
 
       // 以下流程:
       // 1. 先查詢資料庫是否有同line_uid的資料
@@ -80,13 +80,11 @@ router.get(
       const line_uid = token_response.id_token.sub
 
       // 1. 先查詢資料庫是否有同line_uid的資料
-      const countSql = `SELECT COUNT(*) AS count FROM line_member WHERE line_uid = ?`
-      const totalResult = await sequelize.query(countSql, {
-        replacements: [line_uid],
-        type: sequelize.QueryTypes.SELECT,
-        raw: true,
+      const total = await Line_member.count({
+        where: {
+          line_uid,
+        },
       })
-      const total = totalResult[0].count
 
       // 要加到access token中回傳給前端的資料
       // 存取令牌(access token)只需要id和username就足夠，其它資料可以再向資料庫查詢
@@ -97,14 +95,14 @@ router.get(
         line_uid: '',
       }
 
-      if (total > 0) {
+      if (total) {
         // 2-1. 有存在 -> 從資料庫查詢會員資料
-        const userSql = `SELECT * FROM line_member WHERE line_uid = ? LIMIT 1`
-        const dbUser = await sequelize.query(userSql, {
-          replacements: [line_uid],
-          type: sequelize.QueryTypes.SELECT,
-          raw: true,
-        })[0]
+        const dbUser = await Line_member.findOne({
+          where: {
+            line_uid,
+          },
+          raw: true, // 只需要資料表中資料
+        })
 
         // 回傳給前端的資料
         returnUser = {
@@ -126,22 +124,11 @@ router.get(
         // await insertOne('users', newUser)
 
         // 新增會員資料
-        const insertSql = `INSERT INTO line_member (name, email, line_uid, line_access_token, photo_url) VALUES (?, ?, ?, ?, ?) RETURNING *`
-        const newUser = await sequelize.query(insertSql, {
-          replacements: [
-            user.name,
-            user.email,
-            user.line_uid,
-            user.line_access_token,
-            user.photo_url,
-          ],
-          type: sequelize.QueryTypes.INSERT,
-          raw: true,
-        })[0]
+        const newUser = await Line_member.create(user)
 
         // 回傳給前端的資料
         returnUser = {
-          //   id: newUser.id,
+          id: newUser.id,
           username: '',
           google_uid: newUser.google_uid,
           line_uid,
@@ -149,17 +136,19 @@ router.get(
       }
 
       // 產生存取令牌(access token)，其中包含會員資料
-      const Token = jsonwebtoken.sign(returnUser, accessTokenSecret, {
-        expiresIn: '1d',
+      const accessToken = jsonwebtoken.sign(returnUser, accessTokenSecret, {
+        expiresIn: '3d',
       })
 
       // 使用httpOnly cookie來讓瀏覽器端儲存access token
-      res.cookie('accessToken', Token, { httpOnly: false })
+      res.cookie('accessToken', accessToken, { httpOnly: true })
 
       // 傳送access token回應(react可以儲存在state中使用)
       return res.json({
         status: 'success',
-        Token, // 直接返回 token
+        data: {
+          accessToken,
+        },
       })
     },
     // 登入失敗的回調函式 Failure callback
