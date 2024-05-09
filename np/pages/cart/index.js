@@ -111,25 +111,7 @@ const ShopCart1 = () => {
     }
   }, [coupon, totalPrice, totalProductPrice, finalPrice]);
   //
-  // const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
-  // const discountAmount = coupon ? coupon.disPrice : 0;
-  // useEffect(() => {
-  //   console.log("Coupon:", coupon);
-  //   console.log("Total Price:", totalPrice);
-  //   console.log("Total Product Price:", totalProductPrice);
-  //   // console.log("Discount Amount:", discountAmount);
 
-  //   const discountAmount = coupon ? coupon.disPrice : 0;
-  //   const calculatedFinalPrice =
-  //     totalPrice + totalProductPrice - discountAmount;
-  //   console.log(totalPrice + totalProductPrice);
-  //   console.log("Calculated Final Price:", calculatedFinalPrice);
-
-  //   setFinalPrice(calculatedFinalPrice > 0 ? calculatedFinalPrice : 0);
-  // }, [coupon, totalPrice, totalProductPrice]);
-
-  // 這裡儲存localstorage  優惠券
-  // const [coupon, setCoupon] = useState(data.name);
   useEffect(() => {
     const couponData = window.localStorage.getItem("coupon666");
     if (couponData) {
