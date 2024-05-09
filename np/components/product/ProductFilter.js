@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../class_file/classFilter.module.css";
+import styles from "@/components/product/FilterProduct.module.css";
 
 const ProductFilter = ({
   onShowGrid,

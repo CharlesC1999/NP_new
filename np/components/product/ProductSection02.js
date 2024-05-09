@@ -8,7 +8,7 @@ import style from "@/components/product/productSection02.module.scss";
 export default function ProductSection02({ review_comments }) {
   return (
     <>
-      <div className={`${style["p-comment"]}flex-column`}>
+      <div className={`${style["p-comment"]} flex-column `}>
         <div className={`d-flex flex-column`}>
           <h5 className={`${style["h5"]}`}>評論</h5>
           {review_comments.map((review, index) => {
@@ -17,7 +17,7 @@ export default function ProductSection02({ review_comments }) {
             return (
               <div key={index}>
                 <div className={`d-flex flex-row align-items-center mt-3`}>
-                  <div className={`${style["img"]} me-2`}>
+                  <div className={`${style["img"]} me-2 mb-2`}>
                     {/* <img src="/path/to/default-avatar.png" alt="User avatar" /> */}
                   </div>
                   <div className={`${style["user-name"]}`}>
