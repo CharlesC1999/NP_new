@@ -113,7 +113,11 @@ const MemberPageMain2 = ({
                   地址 :
                 </label>
                 <div className="col">
-                  <span className={styles.userContent}>{userData.Address}</span>
+                  <span className={styles.userContent}>
+                    {userData.Address === "null" || userData.Address === ""
+                      ? "尚未填寫"
+                      : userData.Address}
+                  </span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 align-items-start`}>

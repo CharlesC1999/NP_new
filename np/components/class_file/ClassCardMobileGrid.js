@@ -1,6 +1,7 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import styles from "./classCardMobileGrid.module.css";
+import FavIconClass from "../favor/FavIconClass";
 
 export default function ProductCardMobileGrid({ classesData }) {
   console.log(classesData, "classDM");
@@ -54,13 +55,14 @@ export default function ProductCardMobileGrid({ classesData }) {
               />
             </rect>
           </svg>
-          <time>
+          <time className={styles.productPricing}>
             {new Date(classesData.class_date).toLocaleDateString("zh-TW", {
               year: "numeric",
               month: "2-digit",
               day: "2-digit",
             })}
           </time>
+          <FavIconClass id={classesData.class__i_d} />
         </div>
         <div className={styles.productPricing}>
           <div className={styles.currentPrice}>$NT{classesData.c_price}</div>
