@@ -33,7 +33,7 @@ useEffect(() => {
   }
 }, []);
 
-
+console.log(userid);
 const getCoupons = async (cat='') => {
   const url = 'http://localhost:3005/api/coupons'+cat;
 
@@ -95,7 +95,7 @@ useEffect(() => {
 <div className={styles.coupmain}>
   {/* 可以用的 */}
   {coupons.filter(v=>v.member__i_d===userid).map((v, i) => {
-    
+    console.log(userid);
  const discountAmount = parseFloat(v.discount_amount);
  let displayText;
 // 检查 discountAmount 是否是有效的数字
