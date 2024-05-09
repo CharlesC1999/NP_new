@@ -15,11 +15,14 @@ export default function ProductSidebarNew({ mayLikeProducts }) {
         <div className={`${styles.sideTitle}`}>
           <h5>您可能喜歡</h5>
         </div>
-        <div className={`${styles.line}`}></div>
+        <div className={`${styles.line} mb-3`}></div>
         {mayLikeProducts.map((v) => {
-          console.log("Product ID:", v.id);
+          {
+            /* console.log("Product ID:", v.id); */
+          }
           return (
             <Newsidebar
+              key={v.id}
               id={v.id}
               name={v.product_name}
               price={v.product_price}

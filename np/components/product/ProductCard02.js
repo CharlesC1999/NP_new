@@ -59,7 +59,7 @@ export default function ProductCard02({
                       </div>
                     </>
                   ) : (
-                    <div className={`${style["price"]}`}>{price}</div>
+                    <div className={`${style["price"]}`}>$ {price}</div>
                   )}
                 </div>
                 <div

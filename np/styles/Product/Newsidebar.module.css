@@ -1,5 +1,5 @@
 .sideBar {
-  width: 250px;
+  width: 260px;
   margin-right: 40px;
 }
 .sideTitle {
@@ -29,6 +29,7 @@
 .sideBarBox {
   width: auto;
   height: auto;
+  padding-inline: 5px;
   margin-bottom: 66px;
   border: var(--gray02) solid 1px;
   border-radius: 5px;
@@ -40,8 +41,16 @@
 /* 熱門商品side-bar */
 
 & .hotBox {
-  width: 198px;
+  width: 205px;
   margin-block: 10px;
+  /* padding: 0px 10px; */
+  border-radius: 5px;
+  padding-inline: 3px;
+  padding-bottom: 5px;
+  &:hover {
+    /* border-bottom: var(--green05) solid 4px; */
+    box-shadow: 0px 8px 5px var(--gray03);
+  }
 }
 
 & .hotImg {
@@ -70,6 +79,11 @@
   }
 
   & .hotTitle {
+    color: var(--gray01);
+    font-size: 1rem;
+  }
+  & .hotPrice {
     color: var(--green03);
+    margin-top: 10px;
   }
 }
