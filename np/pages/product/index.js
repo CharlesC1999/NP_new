@@ -16,6 +16,8 @@ import Footer from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
 import Pagination from "@/components/product/pagination";
 import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarDiscount";
+import PaginationM from "@/components/paginationM";
+// import ProductCardList from "@/components/product/ProductCardList";
 
 // import PaginationRounded from "@/components/pagination";
 //荃做版本sideBar
@@ -229,29 +231,6 @@ export default function Product() {
   });
   console.log(queryParams);
 
-  // useEffect(() => {
-  //   setQueryParams((prev) => ({
-  //     ...prev,
-  //     price_gte: priceRange.min || "",
-  //     price_lte: priceRange.max || "",
-  //     rating: rating > 0 ? rating : "",
-  //     page: page,
-  //     category_id: newCategories.join(","),
-  //     order: orderby.order,
-  //     sort: orderby.sort,
-  //   }));
-  // }, [rating, page, priceRange, newCategories, orderby]);
-
-  // useEffect(() => {
-  //   if (router.isReady) {
-  //     console.log("isReady", router.isReady, "query", router.query);
-  //     setQueryParams((prev) => ({
-  //       ...prev,
-  //       category_id: categoryFromDetail ? categoryFromDetail : "",
-  //     }));
-  //   }
-  // }, [router.isReady]);
-
   useEffect(() => {
     setQueryParams((prev) => ({
       ...prev,
@@ -301,16 +280,11 @@ export default function Product() {
     <>
       <HeaderComponent />
       <Breadcrumbs />
-      <div className={styles.iconBG}>
+      <div className={`${styles.iconBG} d-flex justify-content-center`}>
         <div
           className={`container d-flex justify-content-center ${styles.wrapper} ${styles.Top40}`}
         >
           <div className={`${styles.sideBar}`}>
-            {/* <ProductSidebarCate /> */}
-            {/* <ProductSidebarDiscount
-            DisCountCategories={discountCategories}
-            handleCategoryClick={handleCategoryClick}
-          /> */}
             <ProductSidebarDetail
               onClick={handleResetRating}
               priceRange={priceRange}
@@ -331,28 +305,16 @@ export default function Product() {
               resetFilters={resetFilters}
               categoryCounts={categoryCounts}
             />
-
-            {/* <ProductSidebarNew mayLikeProducts={mayLikeProducts} /> */}
           </div>
-          <div className={`${styles.productW}`}>
-            <div className="mainDiscount">
-              {/* <div className={`${styles.DiscountTitleMain}`}>
-              <h4 className={`${styles.DiscountTitle}`}>限時特惠商品</h4>
-            </div> */}
-              {/* <div className={`${styles.DiscountBoxMain}`}> */}
-              {/* <div className={`${styles.DiscountBox}`}>
-                <img src="/index-images/Herosection02.png" alt="" />
-              </div> */}
-              <div className={`${styles.ProductFilter} pt-sm-4 pt-0`}>
-                <ProductFilter
-                  onShowGrid={showGrid}
-                  onShowList={showList}
-                  activeButton={activeButton}
-                  TotalRow={TotalRow}
-                  setOrderby={setOrderby}
-                />
-              </div>
-              {/* </div> */}
+          <div className={`${styles.productW} d-flex jstify-content-center`}>
+            <div className={`${styles.ProductFilter} pt-sm-4 pt-0`}>
+              <ProductFilter
+                onShowGrid={showGrid}
+                onShowList={showList}
+                activeButton={activeButton}
+                TotalRow={TotalRow}
+                setOrderby={setOrderby}
+              />
             </div>
             <div className={`d-flex ${styles.productCard1}`}>
               {products.length > 0 ? (
@@ -363,17 +325,30 @@ export default function Product() {
                       href={`/product/${item.id}`}
                       className="text-decoration-none"
                     >
-                      <ProductCard02
-                        className={`mx-sm-2 mx-0`}
-                        id={item.id}
-                        img={item.image_urls}
-                        category_id={item.category_id}
-                        name={item.product_name}
-                        description={item.product_description}
-                        price={item.product_price}
-                        disPrice={item.discount_price}
-                        average_rating={item.average_rating}
-                      />
+                      {displayGrid ? (
+                        <ProductCard02
+                          className={`mx-sm-2 mx-0`}
+                          id={item.id}
+                          img={item.image_urls}
+                          category_id={item.category_id}
+                          name={item.product_name}
+                          description={item.product_description}
+                          price={item.product_price}
+                          disPrice={item.discount_price}
+                          average_rating={item.average_rating}
+                        />
+                      ) : (
+                        <ProductCardList
+                          id={item.id}
+                          img={item.image_urls}
+                          category_id={item.category_id}
+                          name={item.product_name}
+                          description={item.product_description}
+                          price={item.product_price}
+                          disPrice={item.discount_price}
+                          average_rating={item.average_rating}
+                        />
+                      )}
                     </Link>
                   </div>
                 ))
@@ -391,12 +366,26 @@ export default function Product() {
                 </div>
               )}
             </div>
-            <div className="justify-content-center d-flex mt-5">
-              <Pagination
-                count={pageCount}
-                page={page}
-                onChange={changePage} // 使用新的 changePage 函数
-              />
+            <div className="d-flex justify-content-center mb-3">
+              <div
+                className={`${styles.pagination} justify-content-center d-sm-flex d-none mt-5`}
+              >
+                <Pagination
+                  count={pageCount}
+                  page={page}
+                  onChange={changePage} // 使用新的 changePage 函数
+                />
+              </div>
+              {/* 手機板分頁用 */}
+              <div
+                className={`${styles.paginationM} d-flex d-sm-none justifu-content-center`}
+              >
+                <PaginationM
+                  total={total}
+                  perpage={perpage}
+                  onChange={(event, value) => setPage(value)}
+                />
+              </div>
             </div>
           </div>
         </div>
