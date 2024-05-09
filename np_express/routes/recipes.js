@@ -14,7 +14,7 @@ import db from '#configs/mysql.js'
 
 // GET - 得到所有資料
 router.get('/', async function (req, res) {
-  // 改成用raw-sql加上join串食譜跟分類
+  // * 改成用raw-sql加上join串食譜跟分類
   // const recipes = await Recipe.findAll({ logging: console.log })
 
   // 從網址查詢字串解構的值

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import styles from "./FavorIconClass.module.css";
 
 // 愛心圖示(svg)
-const Heart = ({ size = 30, color = "#db1212" }) => (
+const Heart = ({ size = 24, color = "#db1212" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 38 38"

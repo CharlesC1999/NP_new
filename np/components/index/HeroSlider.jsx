@@ -6,7 +6,7 @@ const HeroSlider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [autoSlide, setAutoSlide] = useState(null);
 
-  const sliders = ["1.png", "2.png","3.png","4.png","5.png","6.png"];
+  const sliders = ["1.png", "2.png","3.png","4.png","6.png"];
   const slideCount = sliders.length;
 
   useEffect(() => {

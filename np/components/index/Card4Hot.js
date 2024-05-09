@@ -9,7 +9,7 @@ function Card4Hot({ id, name, price, d_price, image }) {
         <div className={`${styles["card4Img"]}`}>
           <a href={`/product/${id}`}>
             <img
-              src="/index-images/image1.png"
+              src={`/images/products/${image}`}
               className="{`${styles['card4ImgTop']}`}"
               alt="..."
             />
@@ -26,7 +26,7 @@ function Card4Hot({ id, name, price, d_price, image }) {
               <FavIconProduct id={id} />
             </div>
           </div>
-          <a className={`d-flex ${styles["card4Btn"]}`} type="button" href="">
+          <a className={`d-flex ${styles["card4Btn"]}`} type="button" href="#">
             <i className="fa-solid fa-cart-shopping"></i>&emsp;加入購物車
           </a>
         </div>

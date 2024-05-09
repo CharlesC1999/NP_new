@@ -20,8 +20,19 @@ const [coupons, setCoupons] = useState([])
 const [activeCategory, setActiveCategory] = useState("全部");
 
 
-let userid = parseInt(localStorage.getItem('userid'))
-console.log(userid);
+// let userid = parseInt(localStorage.getItem('userid'))
+// console.log(userid);
+
+
+const [userid, setUserid] = useState(null);
+
+useEffect(() => {
+  const userIdFromLocalStorage = localStorage.getItem("userid");
+  if (userIdFromLocalStorage) {
+    setUserid(parseInt(userIdFromLocalStorage));
+  }
+}, []);
+
 
 const getCoupons = async (cat='') => {
   const url = 'http://localhost:3005/api/coupons'+cat;

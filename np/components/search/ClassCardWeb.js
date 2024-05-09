@@ -43,7 +43,7 @@ export default function ClassCard({ classesData, Index }) {
       </div>
       <div className={styles.truffledRiceContainer}>
         <header className={styles.truffledRiceHeader}>
-          <p className={styles.truffledRiceTitle}>{classesData.Class_name}</p>
+          <p className={styles.truffledRiceTitle}>{classesData.class_name}</p>
           {/* <svg
             className={`${styles.heartIcon} ${
               heartActive ? styles.active : ""
@@ -58,17 +58,17 @@ export default function ClassCard({ classesData, Index }) {
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             }
           </svg> */}
-          <FavIconClass id={classesData.Class_ID} />
+          <FavIconClass id={classesData.class__i_d} />
         </header>
         <div className={styles.truffledRiceDetails}>
           <p className={styles.truffledRiceDescription}>
-            {classesData.Class_description}
+            {classesData.class_description}
           </p>
           <div className={styles.truffledRicePricing}>
-            <p className={styles.truffledRicePrice}>{classesData.C_price}</p>
+            <p className={styles.truffledRicePrice}>{classesData.c_price}</p>
             {/* 目前沒有折價的價錢 */}
             <p className={styles.truffledRiceOriginalPrice}>
-              {classesData.C_price}
+              {classesData.c_price}
             </p>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function ClassCard({ classesData, Index }) {
                 </g>
               </svg>
               <span className={styles.classSubInformationText}>
-                {classesData.Class_date}
+                {classesData.class_date}
               </span>
             </div>
             <div className={styles.classSubInformation}>
@@ -115,7 +115,7 @@ export default function ClassCard({ classesData, Index }) {
           <div className={styles.truffledRiceActions}>
             <a
               className={styles.linksButtons}
-              onMouseDown={() => goClassDetail(classesData.Class_ID)}
+              onMouseDown={() => goClassDetail(classesData.class__i_d)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

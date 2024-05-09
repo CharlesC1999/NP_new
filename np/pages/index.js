@@ -1,16 +1,17 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect }  from "react";
 import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
 import HeroSlider from "@/components/index/HeroSlider";
 import Card2 from "@/components/index/Card2";
-import Card3 from "@/components/index/Card3Categories";
+import Card3Categories from "@/components/index/Card3Categories";
 import Card4Hot from "@/components/index/Card4Hot";
 import Card5class from "@/components/index/Card5class";
 import Card6Recipe from "@/components/index/Card6Recipe";
 import Footer from "@/components/Footer";
+import ToTheTop from "@/components/toTheTop";
 import data from "@/data/index-brand-info.json";
 import { getHomePageInfo } from "@/services/user";
 
@@ -18,16 +19,15 @@ export default function Index() {
   const [hotProduct, setHotProduct] = useState([]);
   const [hotClass, setHotClass] = useState([]);
   const [recipe, setRecipe] = useState([]);
+  const [productCate, setProductCate] = useState([]);
   const fetchHomeData = async () => {
     try {
-      const {
-        hotProduct,
-        hotClass,
-        recommendedRecipe
-      } = await getHomePageInfo();
+      const { hotProduct, hotClass, recommendedRecipe,productCate } =
+        await getHomePageInfo();
       setHotProduct(hotProduct);
       setHotClass(hotClass);
       setRecipe(recommendedRecipe);
+      setProductCate(productCate)
     } catch (error) {
       console.error("Failed to fetch favorites:", error);
     }
@@ -100,30 +100,20 @@ export default function Index() {
       <div className={` ${styles.wrapper} ${styles.CategoryRwd}`}>
         <div className={`d-flex justify-content-between pb-5`}>
           <h4 className={`${styles.MeAuto}`}>商品分類</h4>
-          {/* <div className={`d-flex`}>
-            <button className={`btn btn-secondary ${styles.arrow}`}>
-              <i className="fa-solid fa-arrow-left"></i>
-            </button>
-            <button className={`btn btn-secondary ${styles.arrow}`}>
-              <i className="fa-solid fa-arrow-right"></i>
-            </button>
-          </div> */}
         </div>
         <div className={`${styles.Nutripollcard3}`}>
-          <Card3 />
-          <Card3 />
-          <Card3 />
-          <Card3 />
-          <Card3 />
-          <Card3 />
-          <Card3 />
+          {productCate.map((v) => {
+            return (
+              <Card3Categories key={v.id} name={v.name} id={v.id} />
+            )
+          })}
         </div>
       </div>
 
       <div className={` ${styles.wrapper}`}>
         <div className={`d-flex justify-content-between ps-3 pe-3`}>
           <h4 className={`${styles.MeAuto}`}>熱銷商品</h4>
-          <a className={`${styles.TitleRwd}`} href="">
+          <a className={`${styles.TitleRwd}`} href="/product">
             <h5 className={`${styles.MeAuto}`}>
               更多<i className="fa-solid fa-chevron-right"></i>
             </h5>
@@ -138,7 +128,7 @@ export default function Index() {
                 name={v.product_name}
                 price={v.product_price}
                 d_price={v.discount_price}
-                image={v.image_url}
+                image={v.image_urls}
               />
             );
           })}
@@ -151,7 +141,7 @@ export default function Index() {
             className={`${styles.card5Title} d-flex justify-content-between`}
           >
             <h4 className={`${styles.MeAuto}`}>熱門課程</h4>
-            <a className={`${styles.TitleRwd}`} href="">
+            <a className={`${styles.TitleRwd}`} href="/class-page">
               <h5 className={`${styles.MeAuto}`}>
                 更多<i className="fa-solid fa-chevron-right"></i>
               </h5>
@@ -181,7 +171,7 @@ export default function Index() {
             className={`d-flex justify-content-between ${styles.card6Title}`}
           >
             <h4 className={`${styles.MeAuto}`}>精選食譜</h4>
-            <a className={`${styles.TitleRwd}`} href="">
+            <a className={`${styles.TitleRwd}`} href="/recipe">
               <h5 className={`${styles.MeAuto}`}>
                 更多<i className="fa-solid fa-chevron-right"></i>
               </h5>
@@ -204,6 +194,7 @@ export default function Index() {
       </div>
 
       <Footer />
+      <ToTheTop />
     </>
   );
 }
