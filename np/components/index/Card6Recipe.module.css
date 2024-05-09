@@ -38,11 +38,13 @@
     height: auto;
     margin-left: 10px;
     justify-content: center;
+    gap:15px;
     & a {
       color: var(--black, #454545);
       & h5{
         font-weight: 600;
         font-size: 18px;
+        margin-bottom: 0;
       }
     }
   
@@ -70,9 +72,9 @@
     }
     
     .card6 {
-      width: 330px;
-      border: 0px solid var(--gray02);
-      box-shadow: 2px 2px 2px var(--gray02);
+      width: 345px;
+      border: none;
+      box-shadow: 1px 1px 1px var(--gray02);
     }
     
     .card6Img {
@@ -92,6 +94,7 @@
       color: var(--black, #454545);
       width: 221px;
       height: auto;
+      gap: 10px;
       margin-left: 10px;
       justify-content: center;
   

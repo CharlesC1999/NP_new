@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./card2.module.css";
 
-function Card2({title,description,link,image}) {
+function Card2({title,description,link,image,url}) {
   return(
     <>
         <div className={styles.card2Box}>
@@ -13,7 +13,7 @@ function Card2({title,description,link,image}) {
                 <div className={`${styles.card2h6}`}>
                     <p>{description}</p>
                 </div>
-                <a href="" className={`btn btn-outline-success ${styles.card2btn}`} type="button">
+                <a href={url} className={`btn btn-outline-success ${styles.card2btn}`} type="button">
                     {link} →
                 </a>
             </div>
