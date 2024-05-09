@@ -163,16 +163,15 @@ router.get('/reserve', async (req, res) => {
   // 從資料庫取得訂單資料
   const orderRecord = await Orders.findByPk(id, {
     raw: true, // 只需要資料表中資料
+    // order_info記錄要向line pay要求的訂單json
   })
-  console.log(orderRecord)
-  // const orderRecord = await findOne('orders', { order_id: orderId })
-
-  // order_info記錄要向line pay要求的訂單json
   const order = JSON.parse(orderRecord.order_info)
 
   //const order = cache.get(orderId)
   console.log(`獲得訂單資料，內容如下：`)
   console.log('-------order', order)
+  console.log(orderRecord)
+  // const orderRecord = await findOne('orders', { order_id: orderId })
 
   //
   try {
