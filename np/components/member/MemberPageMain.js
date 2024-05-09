@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./MemberPageMain.module.css";
 import { useRouter } from "next/router";
+// sweet alert
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const MemberPageMain = () => {
   // 更新資料成功後跳轉至會員首頁
@@ -147,6 +150,10 @@ const MemberPageMain = () => {
     formData.append("Phone", userData.Phone);
     formData.append("Address", userData.Address);
     formData.append("Gender", userData.Gender);
+    formData.append(
+      "User_image",
+      selectedFile ? selectedFile : userData.User_image
+    );
     // 用來放在fetch裡的兩個參數
     const url = "http://localhost:3005/api/member-profile/update-profile";
     const updateProfileObj = {
@@ -159,9 +166,20 @@ const MemberPageMain = () => {
     const res = await fetch(url, updateProfileObj);
     const data = await res.json();
 
-    alert(data.message);
+    // 顯示成功或失敗的訊息 (sweet alert)
     if (data.status === "success") {
+      await Swal.fire({
+        title: data.message,
+        text: "",
+        icon: "success",
+      });
       router.push("/member");
+    } else if (data.status === "error") {
+      Swal.fire({
+        icon: "error",
+        title: data.message,
+        text: "",
+      });
     }
   };
 

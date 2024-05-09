@@ -1,8 +1,27 @@
 import express from 'express'
 const router = express.Router()
-// 處理傳送表單資料用
+// 上傳檔案用使用multer
+import path from 'path'
 import multer from 'multer'
-const upload = multer()
+
+// multer的設定值 - START
+const storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    // 存放目錄
+    callback(
+      null,
+      'C:\\Users\\iii_student\\Documents\\NP_new\\np\\public\\images\\member'
+    )
+  },
+  filename: function (req, file, callback) {
+    // 經授權後，req.user帶有會員的id
+    const newFilename = req.user.id
+    // 新檔名由表單傳來的req.body.newFilename決定
+    callback(null, newFilename + path.extname(file.originalname))
+  },
+})
+const upload = multer({ storage: storage })
+// multer的設定值 - END
 
 // 中介軟體，存取隱私會員資料用
 import authenticateToken from '#middlewares/authenticateToken.js'
@@ -28,7 +47,7 @@ router.get('/check', authenticateToken, async (req, res) => {
 router.put(
   '/update-profile',
   authenticateToken,
-  upload.none(),
+  upload.single('User_image'),
   async function (req, res) {
     console.log('req.body:----------------------', req.body)
     const id = req.user.id
@@ -39,6 +58,18 @@ router.put(
     // 檢查從前端瀏覽器來的資料，哪些為必要(name, ...)
     if (!user.User_name || !user.Email || !user.Phone || !user.Gender) {
       return res.json({ status: 'error', message: '缺少必要資料' })
+    }
+
+    let finalUser
+    if (req.file) {
+      finalUser = {
+        ...user,
+        User_image: req.file.filename,
+      }
+    } else {
+      finalUser = {
+        ...user,
+      }
     }
 
     // 查詢資料庫目前的資料
@@ -57,6 +88,11 @@ router.put(
     if (checkeEmail && checkeEmail.id !== id) {
       return res.json({ status: 'error', message: '信箱已經被註冊' })
     }
+    //  檢查手機是否已重覆
+    const checkPhone = await Member.findOne({ where: { Phone: user.Phone } })
+    if (checkPhone && checkPhone.id !== id) {
+      return res.json({ status: 'error', message: '手機已經被註冊' })
+    }
 
     // TODO 暫時不讓使用者更新生日
     // 有些特殊欄位的值沒有時要略過更新，不然會造成資料庫錯誤
@@ -65,7 +101,7 @@ router.put(
     // }
 
     // 對資料庫執行update
-    const [affectedRows] = await Member.update(user, {
+    const [affectedRows] = await Member.update(finalUser, {
       where: {
         id,
       },
