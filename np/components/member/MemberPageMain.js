@@ -82,6 +82,63 @@ const MemberPageMain = () => {
     }
   };
 
+  // 錯誤訊息狀態
+  const [errors, setErrors] = useState({
+    User_name: "",
+    Email: "",
+    Phone: "",
+    Gender: "",
+  });
+
+  // 處理送出表單的行為
+  const handleSubmit = async (e) => {
+    // *** -------------------------- 表單檢查 START --------------------------------------
+    e.preventDefault();
+    // 建立一個新的錯誤物件
+    const newErrors = {
+      User_name: "",
+      Email: "",
+      Phone: "",
+      Gender: "",
+    };
+
+    // 檢查各欄位是否為必填
+    if (!userData.User_name) {
+      newErrors.User_name = "姓名為必填";
+    }
+
+    if (!userData.Email) {
+      newErrors.Email = "Email為必填";
+    }
+
+    if (!userData.Phone) {
+      newErrors.Phone = "手機為必填";
+    }
+
+    if (!userData.Gender) {
+      newErrors.Gender = "性別為必填";
+    }
+
+    // 呈現錯誤訊息
+    setErrors(newErrors);
+
+    // 如果檢查有發生錯誤時
+    // hasErrors相當於Object.values(newErrors).some((v) => v)
+    if (Object.values(newErrors).some((v) => v)) {
+      setErrors(newErrors); // 呈現錯誤訊息
+      return; // 跳出函式，不繼續往下
+    } else {
+      // 清空錯誤訊息
+      setErrors({
+        User_name: "",
+        Email: "",
+        Phone: "",
+        Gender: "",
+      });
+    }
+    // 欄位檢查 ---END---
+  };
+
   // 初次渲染時取得LS裡的token
   useEffect(() => {
     getTokenInLS();
@@ -154,6 +211,9 @@ const MemberPageMain = () => {
                     value={userData.User_name}
                     onChange={handleChange}
                   />
+                </div>
+                <div className="col-12 d-flex justify-content-center">
+                  <span className="error">帳號為必填</span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3  gap-3`}>
