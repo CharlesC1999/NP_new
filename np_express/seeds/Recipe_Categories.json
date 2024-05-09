@@ -3,36 +3,42 @@
     "Recipe_cate_ID": "1",
     "Recipe_cate_name": "主食",
     "R_Description": "主食食譜包括各種主食的製作方法，如米飯、麵食、麵包、粥等。這些食譜提供了不同地區、文化和口味的選擇，從營養均衡到風味豐富，滿足了人們對主食多樣性的追求。",
-    "valid": "1"
+    "valid": "1",
+    "Recipe_cate_img": "meat.svg"
   },
   {
     "Recipe_cate_ID": "2",
     "Recipe_cate_name": "醬料",
     "R_Description": "醬料食譜包括調味品和醬汁的製作方法，如番茄醬、香料醬、沙茶醬等。這些食譜不僅提供了為菜餚增添風味的方式，還能滿足不同料理風格和口味的需求。",
-    "valid": "1"
+    "valid": "1",
+    "Recipe_cate_img": "sauce.svg"
   },
   {
     "Recipe_cate_ID": "3",
     "Recipe_cate_name": "湯品",
     "R_Description": "湯品食譜包括各種湯的製作，如雞湯、蔬菜湯、海鮮湯等。湯品通常被視為溫暖、營養豐富的飲食選擇，這些食譜提供了多樣的湯底、材料和調味方式。",
-    "valid": "1"
+    "valid": "1",
+    "Recipe_cate_img": "soup.svg"
   },
   {
     "Recipe_cate_ID": "4",
     "Recipe_cate_name": "飲品",
     "R_Description": "飲品食譜涵蓋了各種飲料，包括果汁、奶昔、咖啡、茶飲等。這些飲品食譜展示了創意和新穎的混合方式，讓人們在自家製作的飲品中享受各種風味。",
-    "valid": "1"
+    "valid": "1",
+    "Recipe_cate_img": "drink.svg"
   },
   {
     "Recipe_cate_ID": "5",
     "Recipe_cate_name": "點心",
     "R_Description": "點心食譜提供了製作小吃和點心的方法，如餅乾、蛋糕、小甜點等。這些食譜適合作為下午茶點或在聚會中分享。",
-    "valid": "1"
+    "valid": "1",
+    "Recipe_cate_img": "cake.svg"
   },
   {
     "Recipe_cate_ID": "6",
     "Recipe_cate_name": "沙拉",
     "R_Description": "沙拉食譜包括各種色彩鮮艷、口感豐富的沙拉製作方法，如水果沙拉、蔬菜沙拉、穀物沙拉等。這些食譜強調了健康飲食的概念，同時提供了豐富的營養元素。",
-    "valid": "1"
+    "valid": "1",
+    "Recipe_cate_img": "salad.svg"
   }
 ]

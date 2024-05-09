@@ -9,7 +9,7 @@ function Card4Hot({ id, name, price, d_price, image }) {
         <div className={`${styles["card4Img"]}`}>
           <a href={`/product/${id}`}>
             <img
-              src="/index-images/image1.png"
+              src={`/images/products/${image}`}
               className="{`${styles['card4ImgTop']}`}"
               alt="..."
             />
