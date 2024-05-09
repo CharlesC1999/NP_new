@@ -120,7 +120,7 @@ const Commodity = () => {
                   }`}      
                   />
                 </div> */}
-                <Check />
+                {/* <Check /> */}
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 <img

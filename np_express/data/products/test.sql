@@ -346,3 +346,4 @@ SELECT COUNT(*) AS disGift FROM product WHERE category_id = 22;
 
 
 
+SELECT * FROM product WHERE category_id IN ()

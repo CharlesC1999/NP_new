@@ -13,7 +13,7 @@ function ProductCardList({
     <>
        <div className={`${styles.card1List} d-flex`}>
             <div className={styles.card1ListImg}>
-                <a href><img src="/index-images/image1.png" className="" alt="..." /></a>
+                <a href><img src={`/images/products/${img}`}className="" alt="..." /></a>
             </div>
             <div className={styles.card1BodyList}>
                 <h6 className={styles.card1Title}><a href="">{name}</a></h6>

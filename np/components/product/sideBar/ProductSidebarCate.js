@@ -6,16 +6,6 @@ import styles from "@/components/product/sideBar/SideBarCategory.module.css";
 import { useProductCategories } from "@/hooks/use-product-cate";
 
 export default function ProductSidebarCate({ normalCategories }) {
-  // const { selectedCategories, setSelectedCategories, handleCategoryChange } =
-  //   useProductCategories();
-
-  const router = useRouter();
-  const handleCategoryClick = (cateId) => {
-    router.push(`/product/?categoryFromDetail=${cateId}`);
-    // setSelectedCategories((prevCategories) => [...prevCategories, cateId]);
-
-    console.log("click d-cate");
-  };
   return (
     <>
       <div className={`${styles.sideBarBox}`}>
@@ -27,10 +17,9 @@ export default function ProductSidebarCate({ normalCategories }) {
           return (
             <CateSidebar
               key={category.cateId}
+              cateId={category.cateId}
               cateName={category.cateName}
               catePng={category.catePng}
-              // onClick={() => handleCategoryClick(category.cateId)}
-              onClick={() => handleCategoryClick(category.cateId)}
             />
           );
         })}

@@ -2,9 +2,16 @@
 .wrapper {
   width: 1440px;
 }
-
+.iconBG {
+  background-image: url("/index-images/iconBG04.png");
+  background-position: calc(50% + 20px) calc(50% + 10px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* filter: opacity(50%); */
+}
 .container {
-  background-color: var(--white, #fefefe);
+  /* background-color: var(--white, #fefefe); */
+  background-image: url("/index-images/BG/background.jpg");
   /* display: flex; */
   /* 容器頂部開始垂直排列，而不是水平排列 */
   /* flex-direction: column; */
@@ -32,7 +39,7 @@
 /* side-bar總width */
 .sideBar {
   width: 250px;
-  margin-right: 40px;
+  margin-right: 110px;
 }
 
 .sideTitle {
@@ -68,15 +75,33 @@
 }
 
 .DiscountBox {
+  position: relative;
+  width: 100%; /* 設定為父容器的寬度 */
+  height: 500px; /* 或其他高度 */
+  overflow: hidden;
   background-color: #b3b3b3;
   width: auto;
-  height: 420px;
+  height: 480px;
 
   & img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
   }
+}
+.discountBox {
+  position: relative;
+  width: 100%; /* 設定為父容器的寬度 */
+  height: 500px; /* 或其他高度 */
+  overflow: hidden;
+}
+
+.image.show {
+  opacity: 1;
 }
 
 /* side-bar 以及 上方優惠商品文字及圖片 (不顯示) RWD*/

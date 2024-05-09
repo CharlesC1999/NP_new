@@ -5,6 +5,9 @@ import { useRouter } from "next/router";
 
 export default function RecommendedRecipe({ recipes }) {
   const router = useRouter();
+  const handleRecipeCheckout = () => {
+    router.push(`/recipe/${recipes.recipe__i_d}`);
+  };
   return (
     <>
       <div
@@ -19,6 +22,7 @@ export default function RecommendedRecipe({ recipes }) {
           return (
             // 食譜卡片
             <div
+              key={v.id}
               onClick={() => {
                 router.push(`/recipe/${v.recipe__i_d}`);
               }}
@@ -47,17 +51,6 @@ export default function RecommendedRecipe({ recipes }) {
           );
         })}
       </div>
-
-      {/* pagination */}
-      {/* <div className="row">
-        <div
-          className={`${styles["pagination"]} d-flex gap-2 justify-content-center`}
-        >
-          <div className={`${styles["page"]} ${styles["current"]}`} />
-          <div className={styles["page"]} />
-          <div className={styles["page"]} />
-        </div>
-      </div> */}
     </>
   );
 }

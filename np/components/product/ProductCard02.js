@@ -5,9 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import FavIconProduct from "@/components/favor/FavIconProduct";
 
-// import FavIconProduct from "../favor/FavIconProduct";
-
-
 export default function ProductCard02({
   id,
   name,
@@ -62,7 +59,7 @@ export default function ProductCard02({
                       </div>
                     </>
                   ) : (
-                    <div className={`${style["price"]}`}>{price}</div>
+                    <div className={`${style["price"]}`}>$ {price}</div>
                   )}
                 </div>
                 <div
