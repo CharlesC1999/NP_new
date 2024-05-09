@@ -55,15 +55,28 @@ router.get('/', async function (req, res) {
   // const offset = (pageNow - 1) * perpageNow
 
   // 最終組合的sql語法
+  // const sqlOrders = `SELECT *
+  // FROM orders
+  // JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
+  // LEFT JOIN  product ON order_item.thing_ID =product.id
+  // AND order_item.itemType = 1
+  // LEFT JOIN product_image ON order_item.thing_ID =product_image.product_id
+  // AND order_item.itemType = 1
+  // LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
+  // AND order_item.itemType = 2
+
+  // GROUP BY orders.order_Id
+  // ORDER BY orders.Order_date DESC ;
+
   const sqlOrders = `SELECT *
   FROM orders
-  JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
-  LEFT JOIN  product ON order_item.thing_ID =product.id 
-  AND order_item.itemType = 1
-  LEFT JOIN product_image ON order_item.thing_ID =product_image.product_id
-  AND order_item.itemType = 1
-  LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
-  AND order_item.itemType = 2
+  JOIN order_item_detail ON orders.Order_ID = order_item_detail.Order_detail_ID
+  LEFT JOIN  product ON order_item_detail.commodity_id =product.id 
+  AND order_item_detail.product_type = 'product'
+  LEFT JOIN product_image ON order_item_detail.commodity_id =product_image.product_id
+  AND order_item_detail.product_type = 'product'
+  LEFT JOIN  class ON order_item_detail.class_id =class.class__i_d
+  AND order_item_detail.product_type = 'class'
   
   GROUP BY orders.order_Id
   ORDER BY orders.Order_date DESC ;

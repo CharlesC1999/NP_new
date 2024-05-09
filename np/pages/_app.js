@@ -43,23 +43,25 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>NutriPolls</title>
       </Head>
-      <AuthProvider>
-        <LoaderProvider CustomLoader={OrangeLoader}>
-          <SearchResultsProvider>
+      <ProductCateProvider>
+        <AuthProvider>
+          <LoaderProvider CustomLoader={OrangeLoader}>
             <SearchResultsProvider>
-              <CategoryForSQLProvider>
-                <CartProvider>
-                  <CategoryProvider>
-                    <ManageRouteChanges>
-                      {getLayout(<Component {...pageProps} />)}
-                    </ManageRouteChanges>
-                  </CategoryProvider>
-                </CartProvider>
-              </CategoryForSQLProvider>
+              <SearchResultsProvider>
+                <CategoryForSQLProvider>
+                  <CartProvider>
+                    <CategoryProvider>
+                      <ManageRouteChanges>
+                        {getLayout(<Component {...pageProps} />)}
+                      </ManageRouteChanges>
+                    </CategoryProvider>
+                  </CartProvider>
+                </CategoryForSQLProvider>
+              </SearchResultsProvider>
             </SearchResultsProvider>
-          </SearchResultsProvider>
-        </LoaderProvider>
-      </AuthProvider>
+          </LoaderProvider>
+        </AuthProvider>
+      </ProductCateProvider>
     </>
   );
 }

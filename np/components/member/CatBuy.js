@@ -42,7 +42,7 @@ function CatBuy({activeCategory, setActiveCategory}) {
             訂單處理中
           </a>
         </div>
-        <div className={styles.ccat}>
+        {/* <div className={styles.ccat}>
           <a
             href="#"
             style={{ color: activeCategory === "已出貨" ? "var(--green02)" : "inherit" }}
@@ -53,7 +53,7 @@ function CatBuy({activeCategory, setActiveCategory}) {
           >
             已出貨
           </a>
-        </div>
+        </div> */}
         <div className={styles.ccat}>
           <a
             href=""

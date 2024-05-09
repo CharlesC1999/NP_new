@@ -13,6 +13,13 @@
 // .MainContent {
 //   width: 1440px;
 // }
+.iconBG {
+  background-image: url("/index-images/iconBG04.png");
+  background-position: calc(50% + 20px) calc(50% + 10px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* filter: opacity(50%); */
+}
 
 .left-side {
   width: 270px;
@@ -64,6 +71,7 @@
   }
 }
 .product-text {
+  background-color: var(--white);
   user-select: none;
   margin-left: 60px;
   width: 380px;
@@ -133,10 +141,11 @@
 
 .detail-btn,
 .com-btn {
+  background-color: var(--white);
   width: 140px;
   height: 40px;
   font-size: 1.3rem;
-  border: var(--green03) solid 1px;
+  border: var(--green03) solid 1.4px;
   color: var(--green03);
   &:hover {
     color: var(--white);
@@ -145,6 +154,7 @@
 }
 
 .p-detail {
+  background-color: var(--white);
   display: block;
   box-shadow: var(--gray03) 0 3px 15px 5px;
   .h5 {
@@ -161,9 +171,11 @@
     color: var(--gray01);
     padding-bottom: 40px;
     border-bottom: solid 1px var(--gray02);
+    line-height: 30px;
   }
   .truck-text {
     color: var(--gray01);
+    line-height: 30px;
   }
   .truck-titel {
     display: flex;
@@ -176,6 +188,7 @@
 }
 
 .p-comment {
+  background-color: var(--white);
   .h5 {
     font-weight: 900;
     font-size: 1.5rem;

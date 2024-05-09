@@ -105,8 +105,8 @@ ON
 
 
 SELECT * FROM `recipe`
-ORDER BY RAND()
-LIMIT 4;
+WHERE recipe__i_d IN (4,49,48,50)
+;
 
 SELECT p.product_name, p.product_price, p.id , pImage.image_url
        FROM product AS p

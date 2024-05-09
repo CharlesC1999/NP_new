@@ -80,7 +80,7 @@ router.get('/', async function (req, res) {
   const sqlLevel = `SELECT user_ID, status, SUM(total_price) AS total_price_sum
   FROM orders
   WHERE status = '已完成'
-  GROUP BY user_ID, status; ;`
+  GROUP BY user_ID, status ;`
   // 最終組合的sql語法(計數用)
   const sqlCount = `SELECT COUNT(*) AS count FROM member_level ${where}`
 
