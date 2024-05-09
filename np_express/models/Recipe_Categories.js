@@ -22,6 +22,10 @@ export default async function (sequelize) {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      Recipe_cate_img: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       tableName: 'recipe_categories', //直接提供資料表名稱

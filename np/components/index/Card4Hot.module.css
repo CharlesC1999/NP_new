@@ -52,7 +52,7 @@
   gap: 8px;
   align-items: center;
   & h6 {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--green02);
     margin-bottom: 0;
   }
@@ -72,9 +72,8 @@
   justify-content: center;
   align-items: center;
   color: var(--green02);
-  border: 1px solid var(--green02);
   border-radius: 5px;
-  padding: 7px 2px;
+  padding: 7px 3px;
   text-decoration: none;
   font-size: 16px;
   gap: 5px;
@@ -89,7 +88,7 @@
 
 @media (max-width: 375px) {
   .card4 {
-    width: 170px;
+    width: 166px;
     border: 1px solid var(--gray02);
     border-radius: 5px;
   }
@@ -106,6 +105,13 @@
   }
   .card4Text {
     gap: 4px;
+    & h6 {
+      font-size: 14px;
+    }
+    & p {
+      /* 橫線 */
+      font-size: 12px;
+    }
   }
   .card4Btn {
     gap: 0px;

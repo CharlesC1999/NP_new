@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import SearchFilterTabs from "@/components/index/SearchFilterTabs";
 import Footer from "@/components/footer";
 import ClassCard from "@/components/search/ClassCardWeb";
+import ProductCardMobileGrid from "@/components/search/ClassCardMobile";
 import ProductCard from "@/components/search/ProductCard02";
 import RecipeCardsList from "@/components/search/RecipeCardsList";
 import PaginationRounded from "@/components/pagination";
@@ -61,14 +62,25 @@ function SearchResult() {
         {activeTab === "課程" && (
           <div>
             {results.classes && results.classes.length > 0 ? (
-              <div className={styles.cards}>
-                {results.classes.map((classData, index) => (
-                  <ClassCard
-                    classesData={classData}
-                    key={index}
-                    Index={index}
-                  />
-                ))}
+              <div>
+                <div className={styles.cards}>
+                  {results.classes.map((classData, index) => (
+                    <ClassCard
+                      classesData={classData}
+                      key={index}
+                      Index={index}
+                    />
+                  ))}
+                </div>
+                <div className={styles.cardsWeb}>
+                  {results.classes.map((classData, index) => (
+                    <ProductCardMobileGrid
+                      classesData={classData}
+                      key={index}
+                      Index={index}
+                    />
+                  ))}
+                </div>
               </div>
             ) : (
               <div className={styles.noResult}>

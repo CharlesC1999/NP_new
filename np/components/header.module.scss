@@ -524,3 +524,28 @@ a:visited {
 .slideOut {
   animation: slideOut 0.5s ease-out forwards;
 }
+.favorIcon{
+  display:flex;
+  align-items: end;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  & .favorAmount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    background: #db1212;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 14px;
+    color: #fff;
+    top:0;
+    right:0
+  }
+  @media(max-width:375px){
+    display: none;
+  }
+ 
+}

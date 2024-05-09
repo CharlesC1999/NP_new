@@ -237,7 +237,7 @@ const Class = () => {
                     aria-label="..."
                   />
                   <label className="me-2" style={{ fontSize: "16px" }}>
-                    使用折價券{" "}
+                   使用折價券{" "}
                   </label>
                 </div>
                 <select

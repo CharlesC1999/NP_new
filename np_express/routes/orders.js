@@ -60,12 +60,13 @@ router.get('/', async function (req, res) {
   JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
   LEFT JOIN  product ON order_item.thing_ID =product.id 
   AND order_item.itemType = 1
-  LEFT JOIN product_image ON order_item.thing_ID =product_image.F_product_id
+  LEFT JOIN product_image ON order_item.thing_ID =product_image.product_id
   AND order_item.itemType = 1
-  LEFT JOIN  class ON order_item.thing_ID =class.Class_ID
+  LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
   AND order_item.itemType = 2
   
-  GROUP BY orders.order_Id ;
+  GROUP BY orders.order_Id
+  ORDER BY orders.Order_date DESC ;
 `
 
   // 最終組合的sql語法(計數用)
@@ -107,12 +108,13 @@ router.get('/:status', async function (req, res) {
   JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
   LEFT JOIN  product ON order_item.thing_ID =product.id 
   AND order_item.itemType = 1
-  LEFT JOIN product_image ON order_item.thing_ID =product_image.F_product_id
+  LEFT JOIN product_image ON order_item.thing_ID =product_image.product_id
   AND order_item.itemType = 1
-  LEFT JOIN  class ON order_item.thing_ID =class.Class_ID
+  LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
   AND order_item.itemType = 2
   WHERE orders.status = "${ordersStatus}"
-  GROUP BY orders.order_Id;`
+  GROUP BY orders.order_Id
+  ORDER BY orders.Order_date DESC;`
 
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders)
