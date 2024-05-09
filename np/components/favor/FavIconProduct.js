@@ -1,9 +1,9 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { addProductFav, removeProductFav } from "@/services/user";
-import toast,{Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 // 愛心圖示(svg)
-const Heart = ({ size = 20, color = "#db1212" }) => (
+const Heart = ({ size = 20, color = "#50BF8B" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 38 38"
@@ -11,7 +11,7 @@ const Heart = ({ size = 20, color = "#db1212" }) => (
       width: size,
       height: size,
       fill: color,
-      stroke: "#db1212",
+      stroke: "#50BF8B",
       strokeWidth: "2",
     }}
   >

@@ -48,6 +48,24 @@ export default function Product() {
     setActiveButton("list");
   };
 
+  const disPic = [
+    "discount01.png",
+    "discount02.png",
+    "discount03.png",
+    "discount04.png",
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(nextIndex);
+      setNextIndex((nextIndex + 1) % disPic.length);
+    }, 4000); // 包括淡出時間後更換圖片
+
+    return () => clearInterval(interval);
+  }, [nextIndex]);
+
   //條件用
   const [productCate, setProductCate] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
@@ -63,12 +81,13 @@ export default function Product() {
   console.log(selectdiscountCate);
   //分頁部分
   const [page, setPage] = useState(1);
-  const [perpage, setPerpage] = useState(20);
+  const [perpage, setPerpage] = useState(16);
 
   //產品
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [pageCount, setPageCount] = useState(0);
+  const [mayLikeProducts, setMayLikeProducts] = useState([]);
 
   const normalCategories = productCate.filter(
     (cate) => cate.parentId === null && cate.cateId !== 23 && cate.cateId !== 22
@@ -215,6 +234,7 @@ export default function Product() {
         setPage(data.data.currentPage);
         //產品分類資料
         setProductCate(data.data.categories);
+        setMayLikeProducts(data.data.mayLikeProducts);
       } else {
         console.log("请求状态不是 'success'");
       }
@@ -258,85 +278,80 @@ export default function Product() {
     <>
       <HeaderComponent />
       <Breadcrumbs />
-      <div
-        className={`container d-flex justify-content-center ${styles.wrapper} ${styles.Top40}`}
-      >
-        <div className={`${styles.sideBar}`}>
-          {/* <ProductSidebarCate /> */}
-          <ProductSidebarDiscount
-            DisCountCategories={discountCategories}
-            handleCategoryClick={handleCategoryClick}
-          />
-          {/* <ProductSidebarDetail
-            priceRange={priceRange}
-            handleKeyDown={handleKeyDown}
-            price_gte={priceRange.min}
-            price_lte={priceRange.max}
-            ratings={ratings}
-            handlePriceChange={handlePriceChange}
-            handleRatingChange={handleRatingChange}
-            filteredSubcategories={filteredSubcategories}
-            productCate={normalCategories}
-            selectedCategory={selectedCategory}
-            handleCategorySelect={handleCategorySelect}
-            handleCategoryCheckboxChange={handleCategoryCheckboxChange}
-            selectedCategories={selectedCategories}
-          /> */}
-
-          {/* <ProductSidebarNew /> */}
-        </div>
+      <div className={styles.iconBG}>
         <div
-          className={`${styles.productW}  d-flex flex-column justify-content-start`}
+          className={`container d-flex justify-content-center ${styles.wrapper} ${styles.Top40}`}
         >
-          <div className="mainDiscount">
-            <div className={`${styles.DiscountTitleMain}`}>
-              <h4 className={`${styles.DiscountTitle}`}>限時特惠商品</h4>
-            </div>
-            <div className={`${styles.DiscountBoxMain}`}>
-              <div className={`${styles.DiscountBox}`}>
-                <img src="/index-images/Herosection02.png" alt="" />
-              </div>
-              <div className={`${styles.ProductFilter} pt-sm-4 pt-0`}>
-                <ProductFilter
-                  onShowGrid={showGrid}
-                  onShowList={showList}
-                  activeButton={activeButton}
-                  TotalRow={TotalRow}
-                />
-              </div>
-            </div>
+          <div className={`${styles.sideBar}`}>
+            {/* <ProductSidebarCate /> */}
+            <ProductSidebarDiscount
+              DisCountCategories={discountCategories}
+              handleCategoryClick={handleCategoryClick}
+            />
+            <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
           </div>
           <div
-            className={`d-flex ${styles.productCard1} justify-content-between`}
+            className={`${styles.productW}  d-flex flex-column justify-content-start`}
           >
-            {products.map((item) => (
-              <div key={item.id}>
-                <Link
-                  href={`/product/${item.id}`}
-                  className="text-decoration-none"
-                >
-                  {" "}
-                  {/* You can style this <a> tag as needed */}
-                  <ProductCard02
-                    id={item.id}
-                    img={item.image_urls}
-                    category_id={item.category_id}
-                    name={item.product_name}
-                    description={item.product_description}
-                    price={item.product_price}
-                    disPrice={item.discount_price}
-                    average_rating={item.average_rating}
-                  />
-                </Link>
+            <div className="mainDiscount">
+              <div className={`${styles.DiscountTitleMain}`}>
+                <h4 className={`${styles.DiscountTitle} mb-4`}>
+                  限時特惠商品 🎉
+                </h4>
               </div>
-            ))}
-          </div>
-          <div className="justify-content-center d-flex mt-5">
-            <Pagination
-              count={pageCount}
-              page={page}
-              onChange={(event, value) => setPage(value)}
-            />
+              <div className={`${styles.DiscountBoxMain}`}>
+                <div className={`${styles.DiscountBox}`}>
+                  {disPic.map((pic, index) => (
+                    <img
+                      key={pic}
+                      src={`/index-images/discount-Pic/${pic}`}
+                      alt=""
+                      className={`${styles.image} ${index === currentIndex ? styles.show : ""}`}
+                    />
+                  ))}
+                </div>
+                <div className={`${styles.ProductFilter} pt-sm-4 pt-0`}>
+                  <ProductFilter
+                    onShowGrid={showGrid}
+                    onShowList={showList}
+                    activeButton={activeButton}
+                    TotalRow={TotalRow}
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              className={`d-flex ${styles.productCard1} justify-content-between`}
+            >
+              {products.map((item) => (
+                <div key={item.id}>
+                  <Link
+                    href={`/product/${item.id}`}
+                    className="text-decoration-none"
+                  >
+                    {" "}
+                    {/* You can style this <a> tag as needed */}
+                    <ProductCard02
+                      id={item.id}
+                      img={item.image_urls}
+                      category_id={item.category_id}
+                      name={item.product_name}
+                      description={item.product_description}
+                      price={item.product_price}
+                      disPrice={item.discount_price}
+                      average_rating={item.average_rating}
+                    />
+                  </Link>
+                </div>
+              ))}
+            </div>
+            <div className="justify-content-center d-flex mt-5">
+              <Pagination
+                count={pageCount}
+                page={page}
+                onChange={(event, value) => setPage(value)}
+              />
+            </div>
           </div>
         </div>
       </div>

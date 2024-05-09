@@ -1,6 +1,6 @@
 import {React,useState,useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MemberCouponMain from "@/components/member/MemberCouponMain";
+import MemberCouponBox from "@/components/member/MemberCouponBox";
 import Sidebar from "@/components/member/Sidebar";
 import styles from "@/styles/member-styles/Container1.module.css"
 import Header from "@/components/header"
@@ -9,7 +9,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 //抓取登入狀態
 import { useAuth } from "@/contexts/AuthContext";
 
-export default function MemberCoupon() {
+export default function couponsBox() {
   //抓取登入狀態
   const { auth, logout } = useAuth();
   
@@ -34,7 +34,7 @@ export default function MemberCoupon() {
       {auth.isLoggedIn ? (
       <div className={` ${styles.container1} ${styles.main} ` }>
         <Sidebar/>
-       <MemberCouponMain/>
+       <MemberCouponBox/>
        </div>
       
 

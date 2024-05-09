@@ -31,7 +31,6 @@ export default function ProductDetail() {
 
   const [product, setProduct] = useState({
     id: 0,
-    category_id: 0,
     product_name: "",
     product_description: "",
     product_price: 0,
@@ -101,92 +100,95 @@ export default function ProductDetail() {
       getProduct(router.query.productId);
     }
   }, [router.isReady, router.query.productId]);
-  console.log(mayLikeProducts);
+  // console.log(normalCategories);
   return (
     <>
       <HeaderComponent />
       <Breadcrumbs />
-      <main className={`my-5`}>
-        <div
-          className={`d-flex justify-content-center flex-column align-items-center`}
-        >
+      <div className={style.iconBG}>
+        <main className={`my-5`}>
           <div
-            className={`${style["MainContent"]} d-flex flex-column flex-sm-row justify-content-center `}
+            className={`d-flex justify-content-center flex-column align-items-center`}
           >
             <div
-              className={`${style["left-side"]} d-flex flex-column d-none d-sm-flex`}
-            >
-              <div className={`side-bar01`}>
-                <ProductSidebarCate normalCategories={normalCategories} />
-              </div>
-              {/* <div className={`side-bar02`}>
-                <ProductSidebarDetail />
-              </div> */}
-              <div className={`side-bar03`}>
-                <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
-              </div>
-            </div>
-            <div
-              className={`${style["right-main"]} d-flex flex-column ms-0 ms-sm-5 justify-content-center`}
+              className={`${style["MainContent"]} d-flex flex-column flex-sm-row justify-content-center `}
             >
               <div
-                className={`${style["main-product"]} d-flex flex-sm-row flex-column justify-content-center`}
+                className={`${style["left-side"]} d-flex flex-column d-none d-sm-flex`}
               >
-                <ProductMainPic image_urls={product.image_urls} />
-                <ProductMainText
-                  key={product.id}
-                  id={product.id}
-                  name={product.product_name}
-                  description={product.product_description}
-                  price={product.product_price}
-                  discount_price={product.discount_price}
-                  upload_date={product.upload_date}
-                  average_rating={product.average_rating}
-                  review_comments={product.review_comments}
-                />
-              </div>
-              <div className={`${style["section2"]} my-3 m-sm-2`}>
-                <div className={`d-flex flex-row my-4`}>
-                  <button
-                    className={`${style["detail-btn"]} d-flex align-items-center justify-content-center btn me-4`}
-                    onClick={() => setActiveTab("product")} // 设置点击事件更新状态
-                  >
-                    商品簡介
-                  </button>
-                  <button
-                    className={`${style["com-btn"]} d-flex align-items-center justify-content-center com-btn btn`}
-                    onClick={() => setActiveTab("review")} // 设置点击事件更新状态
-                  >
-                    評論
-                  </button>
+                <div className={`side-bar01`}>
+                  <ProductSidebarCate normalCategories={normalCategories} />
                 </div>
-                <div className={`${style["p-detail"]} flex-column p-sm-5`}>
-                  {activeTab === "product" && (
-                    <ProductSection01
-                      description={product.product_description}
-                    />
-                  )}
-                  {activeTab === "review" && (
-                    <ProductSection02
-                      review_comments={product.review_comments}
-                    />
-                  )}
+                {/* <div className={`side-bar02`}>
+                <ProductSidebarDetail />
+              </div> */}
+                <div className={`side-bar03`}>
+                  <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
+                </div>
+              </div>
+              <div
+                className={`${style["right-main"]} d-flex flex-column ms-0 ms-sm-5 justify-content-center`}
+              >
+                <div
+                  className={`${style["main-product"]} d-flex flex-sm-row flex-column justify-content-center`}
+                >
+                  <ProductMainPic image_urls={product.image_urls} />
+                  <ProductMainText
+                    key={product.id}
+                    id={product.id}
+                    name={product.product_name}
+                    description={product.product_description}
+                    price={product.product_price}
+                    discount_price={product.discount_price}
+                    upload_date={product.upload_date}
+                    average_rating={product.average_rating}
+                    review_comments={product.review_comments}
+                  />
+                </div>
+                <div className={`${style["section2"]} my-3 m-sm-5`}>
+                  <div className={`d-flex flex-row my-4`}>
+                    <button
+                      className={`${style["detail-btn"]} d-flex align-items-center justify-content-center btn me-4`}
+                      onClick={() => setActiveTab("product")} // 设置点击事件更新状态
+                    >
+                      商品簡介
+                    </button>
+                    <button
+                      className={`${style["com-btn"]} d-flex align-items-center justify-content-center com-btn btn`}
+                      onClick={() => setActiveTab("review")} // 设置点击事件更新状态
+                    >
+                      評論
+                    </button>
+                  </div>
+                  <div className={`${style["p-detail"]} flex-column p-sm-5`}>
+                    {activeTab === "product" && (
+                      <ProductSection01
+                        description={product.product_description}
+                      />
+                    )}
+                    {activeTab === "review" && (
+                      <ProductSection02
+                        review_comments={product.review_comments}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
+            <div
+              className={`${style["section3"]} d-flex flex-column justify-content-center m-4`}
+            >
+              {/* <ProductMayLike /> */}
+            </div>
+            <div
+              className={`${style["recommended-recipe"]} d-flex flex-column m-5`}
+            >
+              <DetailRecommendedRecipe recipes={recipes} />
+            </div>
           </div>
-          <div
-            className={`${style["section3"]} d-flex flex-column justify-content-center m-4`}
-          >
-            {/* <ProductMayLike /> */}
-          </div>
-          <div
-            className={`${style["recommended-recipe"]} d-flex flex-column m-5`}
-          >
-            <DetailRecommendedRecipe recipes={recipes} />
-          </div>
-        </div>
-      </main>
+        </main>
+      </div>
+
       <Footer />
     </>
   );

@@ -15,9 +15,9 @@ import db from '#configs/mysql.js'
 // my-products?brand_ids=1,2&name_like=pixel&price_gte=10000&price_lte=15000&sort=price&order=asc&page=1&perpage=2
 router.get('/', async function (req, res) {
   const {
-    level_ids = '', // string, 對應 brand_id 欄位,  `brand_id IN (brand_ids)`
+    coupon_condition_ids = '', // string, 對應 brand_id 欄位,  `brand_id IN (brand_ids)`
   } = req.query
-  console.log(level_ids)
+  console.log(coupon_condition_ids)
 
   // 測試用
   // console.log(
@@ -35,7 +35,9 @@ router.get('/', async function (req, res) {
   const conditions = []
 
   // 品牌，brand_ids 使用 `brand_id IN (1,2,3)`
-  conditions[1] = level_ids ? `level_id (${level_ids})` : ''
+  conditions[1] = coupon_condition_ids
+    ? `coupon_condition_id (${coupon_condition_ids})`
+    : ''
 
   // 去除空字串
   const conditionsValues = conditions.filter((v) => v)
@@ -55,40 +57,16 @@ router.get('/', async function (req, res) {
   // const offset = (pageNow - 1) * perpageNow
 
   //   最終組合的sql語法
-  //   const sqlLevel = `SELECT * , sum(product.price * order_commodity_item.Quantity)
-  //   FROM member
-  //   join orders on member.id = orders.User_ID
-  //   join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  //   join product on order_commodity_item.Product_ID = product.id
-  //   group by member.id; `
+  const sqlCouponsBox = `SELECT * FROM coupon_condition`
 
-  // const sqlLevel = `SELECT User_ID, sum(price* Quantity) as total
-  // FROM member
-  // join orders on member.id = orders.User_ID
-  // join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  // join product on order_commodity_item.Product_ID = product.id
-  // group by user_id;`
-  // const sqlLevel = `SELECT User_ID, sum(price* Quantity) as total
-  // FROM member
-  // join orders on member.id = orders.User_ID
-  // join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  // join product on order_commodity_item.Product_ID = product.id
-  // where orders.Status = '已完成'
-  // group by user_id;`
-  // const sqlLevel = `SELECT total_price, user_id, status
-  // FROM orders ;`
-  const sqlLevel = `SELECT user_ID, status, SUM(total_price) AS total_price_sum
-  FROM orders
-  WHERE status = '已完成'
-  GROUP BY user_ID, status ;`
   // 最終組合的sql語法(計數用)
-  const sqlCount = `SELECT COUNT(*) AS count FROM member_level ${where}`
+  const sqlCount = `SELECT COUNT(*) AS count FROM coupon_condition ${where}`
 
   // 顯示sql語法
-  console.log(sqlLevel)
+  console.log(sqlCouponsBox)
   console.log(sqlCount)
 
-  const [rows, fields] = await db.query(sqlLevel)
+  const [rows, fields] = await db.query(sqlCouponsBox)
 
   console.log(rows)
 
@@ -98,15 +76,34 @@ router.get('/', async function (req, res) {
   const total = rows2[0].count
 
   // 計算頁數
-  //   const pageCount = Math.ceil(total / Number(perpage)) || 0
+  // const pageCount = Math.ceil(total / Number(perpage)) || 0
   //抓狀態
 
   return res.json({
     status: 'success',
     data: {
-      level: rows,
+      total,
+      coupons: rows,
     },
   })
+})
+router.get('/:status', async function (req, res) {
+  // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
+  const couponsStatus = req.params.status
+
+  const sqlOrders = `SELECT * FROM coupon_condition
+  `
+
+  // WHERE Status= '${ordersStatus}'
+  const [rows, fields] = await db.query(sqlOrders)
+
+  return res.json({
+    status: 'success',
+    data: {
+      coupons: rows,
+    },
+  })
+  //return res.json({ status: 'success', data: { status } })
 })
 
 export default router
