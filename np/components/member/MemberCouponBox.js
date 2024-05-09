@@ -117,7 +117,7 @@ const MemberCouponBox = () => {
       await fetch(url, {
         method: 'PUT'
       });
-      toast.success('領取成功祝你全家死光操', {
+      toast.success('領取成功-^^-', {
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ffac4d" d="M346.7 6C337.6 17 320 42.3 320 72c0 40 15.3 55.3 40 80s40 40 80 40c29.7 0 55-17.6 66-26.7c4-3.3 6-8.2 6-13.3s-2-10-6-13.2c-11.4-9.1-38.3-26.8-74-26.8c-32 0-40 8-40 8s8-8 8-40c0-35.7-17.7-62.6-26.8-74C370 2 365.1 0 360 0s-10 2-13.3 6zM244.6 136c-40 0-77.1 18.1-101.7 48.2l60.5 60.5c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-55.3-55.3 0 .1L2.2 477.9C-2 487-.1 497.8 7 505s17.9 9 27.1 4.8l134.7-62.4-52.1-52.1c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L199.7 433l100.2-46.4c46.4-21.5 76.2-68 76.2-119.2C376 194.8 317.2 136 244.6 136z"/></svg>
         ),
@@ -349,7 +349,130 @@ const MemberCouponBox = () => {
 
             </div>
           </div>
-          
+          <div className={styles.cpbox}>
+            會員等級4專區
+            <div className={styles.coupmain}>
+              {/* 可以用的 */}
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV4才能領' && v.c_status === '已發送').map((v, i) => {
+
+                const discountAmount = parseFloat(v.discount_amount);
+                let displayText;
+                // 检查 discountAmount 是否是有效的数字
+                if (!isNaN(discountAmount)) {
+                  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+                  if (discountAmount < 1) {
+                    const discountPercent = discountAmount * 10;
+                    displayText = `${discountPercent}折`;
+                  } else {
+                    displayText = `$${discountAmount}`;
+                  }
+                } else {
+                  // 如果 discountAmount 不是有效的数字，直接使用原始值
+                  displayText = v.discount_amount;
+                }
+
+                 // 确定按钮是否可用，領取條件
+                const isButtonDisabled = conformCondition1 >= 10000;
+                console.log(conformCondition1);
+                console.log(isButtonDisabled);
+                return (
+                  <div className={styles.couponCard} key={v.coupon__i_d}>
+                    <div className={styles.couponImg} >
+                      <span className={styles.cspan}>{displayText}</span>
+
+                      <span className={styles.cspan2}>效期:{v.valid_start_date}</span>
+                      <span className={styles.cspan2}>~{v.valid_start_date}</span>
+                    </div>
+                    <div className={styles.couponContent}>
+                      <div className={styles.couponDetails}>
+                        <div className={styles.lowbuy}>低消${v.minimum_spend}</div>
+
+                        <div className={styles.couponDate}>{v.coupon_description}</div>
+                      </div>
+                      <div className={styles.couponButton}>
+
+                        {isButtonDisabled ? (
+                          <button className={`${styles.couponBtn} btn`} onClick={() => handleCouponRedeem(v.coupon__i_d)}>領取</button>
+                        ) : (
+                          <p className={styles.cantGet}>資格不符</p>
+                        )}
+                        {/* <Link href={`/product`} className={`${styles.couponBtn} btn`} >領取</Link> */}
+                      </div>
+                    </div>
+                  </div>
+                );
+
+              }
+              )}
+
+
+
+
+
+            </div>
+          </div>
+          <div className={styles.cpbox}>
+            會員等級5專區
+            <div className={styles.coupmain}>
+              {/* 可以用的 */}
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV5才能領' && v.c_status === '已發送').map((v, i) => {
+
+                const discountAmount = parseFloat(v.discount_amount);
+                let displayText;
+                // 检查 discountAmount 是否是有效的数字
+                if (!isNaN(discountAmount)) {
+                  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+                  if (discountAmount < 1) {
+                    const discountPercent = discountAmount * 10;
+                    displayText = `${discountPercent}折`;
+                  } else {
+                    displayText = `$${discountAmount}`;
+                  }
+                } else {
+                  // 如果 discountAmount 不是有效的数字，直接使用原始值
+                  displayText = v.discount_amount;
+                }
+
+                 // 确定按钮是否可用，領取條件
+                const isButtonDisabled = conformCondition1 >= 15000;
+                console.log(conformCondition1);
+                console.log(isButtonDisabled);
+                return (
+                  <div className={styles.couponCard} key={v.coupon__i_d}>
+                    <div className={styles.couponImg} >
+                      <span className={styles.cspan}>{displayText}</span>
+
+                      <span className={styles.cspan2}>效期:{v.valid_start_date}</span>
+                      <span className={styles.cspan2}>~{v.valid_start_date}</span>
+                    </div>
+                    <div className={styles.couponContent}>
+                      <div className={styles.couponDetails}>
+                        <div className={styles.lowbuy}>低消${v.minimum_spend}</div>
+
+                        <div className={styles.couponDate}>{v.coupon_description}</div>
+                      </div>
+                      <div className={styles.couponButton}>
+
+                        {isButtonDisabled ? (
+                          <button className={`${styles.couponBtn} btn`} onClick={() => handleCouponRedeem(v.coupon__i_d)}>領取</button>
+                        ) : (
+                          <p className={styles.cantGet}>資格不符</p>
+                        )}
+                        {/* <Link href={`/product`} className={`${styles.couponBtn} btn`} >領取</Link> */}
+                      </div>
+                    </div>
+                  </div>
+                );
+
+              }
+              )}
+
+
+
+
+
+            </div>
+          </div>
 
 
 
