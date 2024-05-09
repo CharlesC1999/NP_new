@@ -1,10 +1,23 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./PasswordResetMain.module.css";
+import { useRouter } from "next/router";
+// 修改密碼強制登出後重新導向用
+import { useAuth } from "@/contexts/AuthContext";
 // 顯示密碼用的圖案
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
+// 顯示更新結果
+// sweet alert
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const PasswordResetMain = () => {
+  // 登出後回到首頁用
+  const router = useRouter();
+  // 修改密碼完成後強制重新登入
+  const { logout } = useAuth();
+  const goIndex = () => router.push("/member/login");
+
   // 三顆眼睛
   const [eyeOrigin, setEyeOrigin] = useState(false);
   const [eyeNew, setEyeNew] = useState(false);
@@ -92,7 +105,23 @@ const PasswordResetMain = () => {
       body: JSON.stringify(password),
     });
     const data = await res.json();
-    alert(data.message);
+
+    // 顯示成功或失敗的訊息 (sweet alert)
+    if (data.status === "success") {
+      await Swal.fire({
+        title: "密碼更新成功! 請重新登入",
+        text: "",
+        icon: "success",
+      });
+      logout();
+      goIndex();
+    } else if (data.status === "error") {
+      Swal.fire({
+        icon: "error",
+        title: data.message,
+        text: "",
+      });
+    }
   };
 
   // 初次渲染時取得LS裡的token
