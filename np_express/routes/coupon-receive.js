@@ -46,37 +46,6 @@ router.get('/', async function (req, res) {
       ? `WHERE ` + conditionsValues.map((v) => `( ${v} )`).join(` AND `)
       : ''
 
-  // 分頁用
-  // page預設為1，perpage預設為3
-  // const perpageNow = Number(perpage) || 3
-  // const pageNow = Number(page) || 1
-  // const limit = perpageNow
-  // page=1 offset=0; page=2 offset= perpage * 1; ...
-  // const offset = (pageNow - 1) * perpageNow
-
-  //   最終組合的sql語法
-  //   const sqlLevel = `SELECT * , sum(product.price * order_commodity_item.Quantity)
-  //   FROM member
-  //   join orders on member.id = orders.User_ID
-  //   join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  //   join product on order_commodity_item.Product_ID = product.id
-  //   group by member.id; `
-
-  // const sqlLevel = `SELECT User_ID, sum(price* Quantity) as total
-  // FROM member
-  // join orders on member.id = orders.User_ID
-  // join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  // join product on order_commodity_item.Product_ID = product.id
-  // group by user_id;`
-  // const sqlLevel = `SELECT User_ID, sum(price* Quantity) as total
-  // FROM member
-  // join orders on member.id = orders.User_ID
-  // join order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  // join product on order_commodity_item.Product_ID = product.id
-  // where orders.Status = '已完成'
-  // group by user_id;`
-  // const sqlLevel = `SELECT total_price, user_id, status
-  // FROM orders ;`
   const sqlLevel = `SELECT user_ID, status, SUM(total_price) AS total_price_sum
   FROM orders
   WHERE status = '已完成'

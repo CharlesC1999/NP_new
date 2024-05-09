@@ -21,14 +21,14 @@ export default function MemberLevel() {
       <Header />
       <Breadcrumbs />
 
-      {/* {auth.isLoggedIn ? ( */}
+      {auth.isLoggedIn ? (
 
         <div className={` ${styles.container1} ${styles.main} `}>
           <Sidebar />
           <MemberLevelMain />
         </div>
 
-{/* ): (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)}  */}
+): (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)} 
       
 
       <Footer />
