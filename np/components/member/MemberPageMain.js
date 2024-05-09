@@ -327,7 +327,11 @@ const MemberPageMain = () => {
                     id="address"
                     placeholder="請輸入地址"
                     name="Address"
-                    value={userData.Address === "null" ? "" : userData.Address}
+                    value={
+                      userData.Address === "null"
+                        ? "尚未填寫"
+                        : userData.Address
+                    }
                     onChange={handleChange}
                   />
                 </div>

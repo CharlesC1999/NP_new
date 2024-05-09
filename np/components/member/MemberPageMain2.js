@@ -114,7 +114,7 @@ const MemberPageMain2 = ({
                 </label>
                 <div className="col">
                   <span className={styles.userContent}>
-                    {userData.Address === "null"
+                    {userData.Address === "null" || userData.Address === ""
                       ? "尚未填寫"
                       : userData.Address}
                   </span>
