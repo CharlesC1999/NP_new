@@ -7,6 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import HeaderComponent from "@/components/Header";
 import Footer from "@/components/Footer";
 import PaginationMUI from "@/components/speaker/speaker-list/PaginationMUI";
+import PaginationM from "@/components/paginationM";
 
 export default function Speaker() {
   // 初始化值
@@ -52,7 +53,7 @@ export default function Speaker() {
   useEffect(() => {
     getSpeakers();
   }, []);
-    // 創建一個包含分頁信息的對象，page 和 perpage 分別表示當前頁碼和每頁顯示的項目數
+  // 創建一個包含分頁信息的對象，page 和 perpage 分別表示當前頁碼和每頁顯示的項目數
   // 調用 getSpeakers 函數，並將 params 作為參數傳遞，這個函數負責根據提供的分頁參數向後端 API 發送請求，獲取相應頁面的數據
   //  每當 page 變量改變（用戶翻頁時），就調用 getSpeakers 以依據新的頁碼去透過 API 獲取相應的數據
   useEffect(() => {
@@ -90,14 +91,16 @@ export default function Speaker() {
             page={page}
             onChange={(event, value) => setPage(value)}
           />
-        <div className="my-3">
-          <span className="mx-2">
-            目前頁面: {page} / 總頁數: {pageCount} / 總項目數: {total}
-          </span>
-        </div>
         </div>
       </div>
-
+      {/* 手機板分頁用 */}
+      <div className={styles.paginationM}>
+        <PaginationM
+          total={total}
+          perpage={perpage}
+          onChange={(event, value) => setPage(value)}
+        />
+      </div>
       <Footer />
     </>
   );

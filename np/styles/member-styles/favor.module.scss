@@ -26,7 +26,7 @@
   flex-direction: column;
   gap: 20px;
 }
-.hidden{
+.hidden {
   display: none;
 }
 // 用靖荃的卡片容器樣式
@@ -38,17 +38,29 @@
   flex-wrap: wrap;
   padding-bottom: 30px;
 }
+
+.classCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  gap: 16px;
+}
+
 .classCardMobile {
   display: none;
 }
 .productCardMobile {
   display: none;
-
 }
 
 @media (max-width: 375px) {
   .classCardMobile {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap: 12px;
   }
   .classCard {
     display: none;
