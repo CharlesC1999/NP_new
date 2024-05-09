@@ -90,13 +90,13 @@ router.get('/', async function (req, res) {
 
   const sqlOrders = `SELECT *
   FROM orders
-  JOIN order_item_detail ON orders.Order_ID = order_item_detail.Order_detail_ID
-  LEFT JOIN  product ON order_item_detail.commodity_id =product.id 
-  AND order_item_detail.product_type = 'product'
-  LEFT JOIN product_image ON order_item_detail.commodity_id =product_image.product_id
-  AND order_item_detail.product_type = 'product'
-  LEFT JOIN  class ON order_item_detail.class_id =class.class__i_d
-  AND order_item_detail.product_type = 'class'
+  JOIN orders_detail ON orders.Order_ID = orders_detail.Order_detail_ID
+  LEFT JOIN  product ON orders_detail.commodity_id =product.id 
+  AND orders_detail.product_type = 'product'
+  LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
+  AND orders_detail.product_type = 'product'
+  LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
+  AND orders_detail.product_type = 'class'
   
  ;
 `
@@ -140,13 +140,14 @@ router.get('/:orderid', async function (req, res) {
   // join member on orders.User_ID = member.id
   // where orders.Order_ID =  ${orderid};`
   const sqlOrders1 = `SELECT *
-  FROM order_item_detail
-      LEFT JOIN product ON order_item_detail.commodity_id = product.id
-      AND order_item_detail.product_type = 'product'
-      LEFT JOIN class ON order_item_detail.class_id = class.class__i_d
-      AND order_item_detail.product_type = 'class'
-      LEFT JOIN orders ON order_item_detail.Order_detail_ID = orders.Order_ID
-  WHERE Order_detail_ID = ${orderid};`
+  FROM orders_detail
+      LEFT JOIN product ON orders_detail.commodity_id = product.id
+      AND orders_detail.product_type = 'product'
+      LEFT JOIN class ON orders_detail.class_id = class.class__i_d
+      AND orders_detail.product_type = 'class'
+      LEFT JOIN orders ON orders_detail.Order_detail_ID = orders.Order_ID
+      LEFT JOIN member ON orders.user_id = member.id
+  WHERE Order_detail_ID = '${orderid}';`
 
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders1)
