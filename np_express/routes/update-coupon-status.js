@@ -25,7 +25,7 @@ router.put('/:couponID', async function (req, res) {
 
   const sqlOrders = `UPDATE coupons
   SET C_status = '可使用'
-  WHERE Coupon_ID = "${couponID}";`
+  WHERE coupon__i_d  = "${couponID}";`
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders)
 

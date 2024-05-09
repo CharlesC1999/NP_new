@@ -1,7 +1,7 @@
 [
   {
-    "order_id": "uuid-001",
-    "user_id": 1001,
+    "order_id": "uuid-1001",
+    "user_id": 1,
     "amount_total": 3000,
     "payment_method": "信用卡",
     "order_date": "2024-05-10T00:00:00Z",
@@ -20,8 +20,8 @@
     "return_code": null
   },
   {
-    "order_id": "uuid-002",
-    "user_id": 1002,
+    "order_id": "uuid-1002",
+    "user_id": 1,
     "amount_total": 4500,
     "payment_method": "line pay",
     "order_date": "2024-05-11T00:00:00Z",
@@ -40,8 +40,8 @@
     "return_code": "success"
   },
   {
-    "order_id": "uuid-003",
-    "user_id": 1003,
+    "order_id": "uuid-1003",
+    "user_id": 1,
     "amount_total": 2000,
     "payment_method": "ATM",
     "order_date": "2024-05-12T00:00:00Z",
