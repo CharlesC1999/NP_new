@@ -9,7 +9,7 @@
     background: #fff;
     /* box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.13); */
     @media (max-width: 375px) {
-      width: 166px;
+      min-width: 166px;
       gap: 0px;
     }
     & .lectureImg{
@@ -30,7 +30,6 @@
       padding: 15px;
       flex-direction: column;
       justify-content: center;
-      gap: 12px;
       align-self: stretch;
       align-items: center;
       @media (max-width: 375px) {
