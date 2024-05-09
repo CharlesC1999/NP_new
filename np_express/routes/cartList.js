@@ -14,6 +14,7 @@ import { createLinePayClient } from 'line-pay-merchant'
 import { v4 as uuidv4 } from 'uuid'
 // import Orders2 from '##/models/Orders2'
 import 'dotenv/config.js'
+import authenticateToken from '#middlewares/authenticateToken.js'
 
 const linePayClient = createLinePayClient({
   channelId: process.env.LINE_PAY_CHANNEL_ID,
@@ -23,11 +24,14 @@ const linePayClient = createLinePayClient({
 // console.log(linePayClient)
 
 router.post('/', async (req, res, next) => {
+  // , authenticateToken
   console.log(req.body)
   // const ordeData = req.body
   // const orderId = res.json({ status: 'success' })
 
   // 從請求中提取訂單資訊
+  // const userID = req.user.id
+  // const cids = await F
   try {
     const {
       items,
@@ -141,7 +145,9 @@ router.post('/', async (req, res, next) => {
 // 資料格式參考 https://enylin.github.io/line-pay-merchant/api-reference/request.html#example
 
 router.get('/reserve', async (req, res) => {
-  // console.log(req.body)
+  console.log(req.orderId)
+  console.log('Received orderId:', req.query.orderId)
+
   if (!req.query.lineOrder) {
     return res.json({ status: 'error', message: 'order id不存在' })
   }
@@ -158,7 +164,7 @@ router.get('/reserve', async (req, res) => {
   const orderRecord = await Orders.findByPk(id, {
     raw: true, // 只需要資料表中資料
   })
-
+  console.log(orderRecord)
   // const orderRecord = await findOne('orders', { order_id: orderId })
 
   // order_info記錄要向line pay要求的訂單json
@@ -166,7 +172,7 @@ router.get('/reserve', async (req, res) => {
 
   //const order = cache.get(orderId)
   console.log(`獲得訂單資料，內容如下：`)
-  console.log(order)
+  console.log('-------order', order)
 
   //
   try {
@@ -185,7 +191,7 @@ router.get('/reserve', async (req, res) => {
       linePayResponse.body.info.paymentAccessToken
 
     console.log(`預計付款資料(Reservation)已建立。資料如下:`)
-    console.log(reservation)
+    // console.log(reservation)
 
     // 在db儲存reservation資料
     const result = await Purchase_Order.update(

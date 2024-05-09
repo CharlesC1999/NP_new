@@ -149,27 +149,40 @@ const ShopCart3 = () => {
   // 點擊後彈出line支付 視窗、他點擊後會彈出視窗
   const MySwal = withReactContent(Swal);
 
-  const handlePaymentConfirmation = () => {
-    MySwal.fire({
-      // title: "",
-      text: "確認付款？",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonText: "是",
-      cancelButtonText: "否",
-      reverseButtons: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const toLinePay = fetch("http://localhost:3005/api/cartList/reserve", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(lineOrder),
-        });
-      }
-    });
-  };
+  // const handlePaymentConfirmation = async (orderToLinePay) => {
+  const [orderToLinePay, setOrderToLinePay] = useState("");
+  // const notifySA = async (orderToLinePay) => {
+  //   MySwal.fire({
+  //     // title: "",
+  //     text: "確認付款？",
+  //     icon: "success",
+  //     showCancelButton: true,
+  //     confirmButtonText: "是",
+  //     cancelButtonText: "否",
+  //     reverseButtons: true,
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       console.log(lineOrder.id);
+  //       const orderId = `orderId=${lineOrder.id}`;
+  //       fetch(`http://localhost:3005/api/cartList/reserve?${orderId}`, {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         // body: JSON.stringify(lineOrder),
+  //       })
+  //         .then((response) => response.json())
+  //         .then((data) => {
+  //           console.log("第二個按鈕");
+  //         })
+  //         .catch((error) => {
+  //           console.error("第二個按鈕", error);
+  //         });
+  //     }
+  //   });
+  // };
+
+  // };
 
   // ---------------
   //  顯示訂單編號在ui測試用
@@ -227,10 +240,11 @@ const ShopCart3 = () => {
       });
       const responseData = await response.json();
       console.log("服务器返回:", responseData);
-
       //
       if (responseData.status === "success") {
+        setOrderToLinePay(responseData);
         setLineOrder(responseData.data.lineOrder);
+        notifySA(responseData);
       } else {
         throw new Error("Failed to fetch data");
       }
@@ -242,6 +256,38 @@ const ShopCart3 = () => {
   // 接收到後端資料的後續處理、顯示
   // const [responseData, setResponseData] = useState(null);  // 用于存储后端数据的状态
   // const [error, setError] = useState('');  // 用于存储错误信息的状态
+
+  const notifySA = async (orderToLinePay) => {
+    MySwal.fire({
+      // title: "",
+      text: "確認付款？",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonText: "是",
+      cancelButtonText: "否",
+      reverseButtons: true,
+    }).then((result) => {
+      console.log("orderToLinePay", orderToLinePay);
+      // console.log(lineOrder.id);
+      if (result.isConfirmed) {
+        const orderId = `orderId=${orderToLinePay.data.lineOrder.id}`;
+        fetch(`http://localhost:3005/api/cartList/reserve?${orderId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: JSON.stringify(lineOrder),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("第二個按鈕");
+          })
+          .catch((error) => {
+            console.error("第二個按鈕", error);
+          });
+      }
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -450,7 +496,7 @@ const ShopCart3 = () => {
               }}
               // onClick={handlePaymentConfirmation}
               onClick={() => {
-                handlePaymentConfirmation();
+                // handlePaymentConfirmation();
                 // handleSecondAction();
               }}
             >
@@ -654,7 +700,7 @@ const ShopCart3 = () => {
                   color: "#ffffff",
                   border: "1px solid #78cea6",
                 }}
-                onClick={handlePaymentConfirmation}
+                // onClick={handlePaymentConfirmation}
               >
                 <h3 className={`${styles3.h3} fw-bold pt-1`}>送出訂單</h3>
               </button>
