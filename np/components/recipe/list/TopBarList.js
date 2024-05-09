@@ -4,7 +4,12 @@ import styles from "./TopBarList.module.scss";
 import { useCategories } from "@/hooks/recipe/use-categories";
 import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 
-export default function TopBarList({ setOrderby = {}, total = 0 }) {
+export default function TopBarList({
+  setOrderby = {},
+  total = 0,
+  showList = () => {},
+  showGrid = () => {},
+}) {
   // 手機板TopBarList的類別被點擊時設定state給SQL做查詢
   const { setRecipeCategory } = useCategoryForSQL();
   // 使用context傳遞食譜類別資料 (用在sideBar、手機板的topBarlist跟食譜細節頁的sideBar)
@@ -40,6 +45,19 @@ export default function TopBarList({ setOrderby = {}, total = 0 }) {
     { name: "按id升序", order: "asc" },
     { name: "按id降序", order: "desc" },
   ];
+
+  // 切換switch button active
+  const listBtnRef = useRef(null);
+  const gridBtnRef = useRef(null);
+
+  const listBtnActive = () => {
+    listBtnRef.current.style.backgroundColor = "var(--gray03)";
+    gridBtnRef.current.style.backgroundColor = "transparent";
+  };
+  const gridBtnActive = () => {
+    gridBtnRef.current.style.backgroundColor = "var(--gray03)";
+    listBtnRef.current.style.backgroundColor = "transparent";
+  };
 
   return (
     <>
@@ -97,7 +115,14 @@ export default function TopBarList({ setOrderby = {}, total = 0 }) {
 
         {/* switch button */}
         <div className={`col-auto ${styles["switch-card-qty"]} d-flex`}>
-          <div className={styles["switch-grid"]}>
+          <div
+            onClick={() => {
+              showGrid();
+              gridBtnActive();
+            }}
+            ref={gridBtnRef}
+            className={styles["switch-grid"]}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={20}
@@ -117,7 +142,17 @@ export default function TopBarList({ setOrderby = {}, total = 0 }) {
               />
             </svg>
           </div>
-          <div className={styles["switch-row"]}>
+          <div
+            onClick={() => {
+              showList();
+              listBtnActive();
+            }}
+            ref={listBtnRef}
+            className={styles["switch-row"]}
+            style={{
+              background: "var(--gray03)",
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={20}

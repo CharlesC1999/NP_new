@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import Header from "@/components/header";
@@ -25,6 +25,27 @@ import { CategoriesProvider } from "@/hooks/recipe/use-categories";
 import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 
 export default function RecipeList() {
+  // 切換手機板列表頁的顯示方式 (list or grid)，props給TopBarList點擊用
+  const listRef = useRef(null);
+  const gridRef = useRef(null);
+
+  // props傳給TopBarList點擊用
+  // 顯示list
+  const showList = () => {
+    listRef.current.classList.add("d-flex");
+    listRef.current.classList.remove("d-none");
+    gridRef.current.classList.add("d-none");
+    gridRef.current.classList.remove("d-flex");
+  };
+
+  // 顯示grid
+  const showGrid = () => {
+    gridRef.current.classList.add("d-flex");
+    gridRef.current.classList.remove("d-none");
+    listRef.current.classList.add("d-none");
+    listRef.current.classList.remove("d-flex");
+  };
+
   // ----------------------篩選條件 start ------------------------
   const { recipeCategory, setRecipeCategory } = useCategoryForSQL();
 
@@ -114,7 +135,12 @@ export default function RecipeList() {
       <Breadcrumbs />
       <div className={styles.wrapper}>
         {/* list排列方式的topbar */}
-        <TopBarList setOrderby={setOrderby} total={total} />
+        <TopBarList
+          setOrderby={setOrderby}
+          total={total}
+          showList={showList}
+          showGrid={showGrid}
+        />
         {/* <TopBarGrid /> */}
 
         <div className={`${styles["list-wrapper"]} d-xxl-flex`}>
@@ -123,7 +149,10 @@ export default function RecipeList() {
             <SideBarRecipe />
           </div>
           {/* 食譜卡片 (list排列) */}
-          <div className={`${styles["cards-list"]} d-flex flex-column`}>
+          <div
+            ref={listRef}
+            className={`${styles["cards-list"]} d-flex flex-column`}
+          >
             <div className="d-none d-xxl-block">
               <Filter
                 perpage={perpage}
@@ -187,26 +216,19 @@ export default function RecipeList() {
                 <FiChevronsRight />
               </button>
             </div>
-            {/* 手機板分頁用 */}
-            <div className="d-block d-xxl-none mt-4">
-              <PaginationM
-                total={total}
-                perpage={"6"}
-                recipeSetPage={setPage}
-              />
-            </div>
           </div>
           {/* 食譜卡片 (grid排列) */}
           <div
+            ref={gridRef}
             className={`${styles["grid-layout"]} d-flex justify-content-between flex-wrap d-none`}
           >
-            <RecipeCardsGrid />
-            <RecipeCardsGrid />
-            <RecipeCardsGrid />
-            <RecipeCardsGrid />
-            <RecipeCardsGrid />
+            <RecipeCardsGrid recipesData={recipesData} />
           </div>
           {/* pagination */}
+          {/* 手機板分頁用 */}
+          <div className="d-block d-xxl-none mt-3">
+            <PaginationM total={total} perpage={"6"} recipeSetPage={setPage} />
+          </div>
         </div>
       </div>
       <Footer />
