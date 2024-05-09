@@ -30,6 +30,10 @@ import { CartProvider } from "@/hooks/use-cart";
 import { CategoryForSQLProvider } from "@/hooks/recipe/use-categoryForSQL";
 
 import { ProductCateProvider } from "@/hooks/use-product-cate";
+// 使用檔案的session store，存在sessions資料夾
+// import session from "express-session";
+// import sessionFileStore from 'session-file-store'
+// const FileStore = sessionFileStore(session)
 
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
