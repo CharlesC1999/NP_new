@@ -3,10 +3,84 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./PasswordResetMain.module.css";
 
 const PasswordResetMain = () => {
+  // 狀態為物件，屬性對應到表單的欄位名稱
+  const [password, setPassword] = useState({
+    origin: "",
+    new: "",
+    confirmPassword: "",
+  });
 
-  const fetchTest = async () => {
-    const url = 'http://localhost:3000/api/reset-password/'
-  }
+  // 錯誤訊息狀態
+  const [errors, setErrors] = useState({
+    origin: "",
+    new: "",
+    confirmPassword: "",
+  });
+
+  // 輸入欄位變動時的處理函式
+  const handleChange = (e) => {
+    setPassword({ ...password, [e.target.name]: e.target.value });
+  };
+
+  // 表單送出時的處理函式
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // 檢查欄位是否有空白
+    const newErrors = {
+      origin: "",
+      new: "",
+      confirmPassword: "",
+    };
+
+    // 檢查欄位是否有空白
+    if (!password.origin) {
+      newErrors.origin = "請輸入舊密碼";
+    }
+    if (!password.new) {
+      newErrors.new = "請輸入新密碼";
+    }
+    if (!password.confirmPassword) {
+      newErrors.confirmPassword = "請再次輸入新密碼";
+    }
+    // 檢查兩次密碼是否一致
+    if (password.new !== password.confirmPassword) {
+      newErrors.confirmPassword = "兩次輸入的密碼不一致";
+    }
+
+    // 設定錯誤訊息
+    setErrors(newErrors);
+    if (Object.values(newErrors).some((v) => v)) {
+      return console.log("有錯誤");
+    }
+
+    updatePassword();
+  };
+
+  // 取得localStorage裡的token，用來發起req帶入headers
+  const [LStoken, setLStoken] = useState("");
+  const getTokenInLS = () => {
+    setLStoken(localStorage.getItem("token"));
+  };
+
+  const updatePassword = async () => {
+    const url = `http://localhost:3005/api/reset-password`;
+    const res = await fetch(url, {
+      method: "put",
+      headers: {
+        Authorization: `Bearer ${LStoken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(password),
+    });
+    const data = await res.json();
+    alert(data.message);
+  };
+
+  // 初次渲染時取得LS裡的token
+  useEffect(() => {
+    getTokenInLS();
+  }, []);
 
   return (
     <>
@@ -28,18 +102,27 @@ const PasswordResetMain = () => {
             <div className={styles.form1}>
               <div className={`${styles.box} row mb-3 align-items-start`}>
                 <label
-                  htmlFor="password"
+                  htmlFor="origin"
                   className={`col-form-label text-end col-3 ${styles.lb}`}
                 >
                   舊密碼 :
                 </label>
                 <div className="col">
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
-                    id="password"
-                    placeholder="請輸入密碼"
+                    id="origin"
+                    name="origin"
+                    placeholder="請輸入舊密碼"
+                    value={password.origin}
+                    onChange={handleChange}
                   />
+                </div>
+                {/* // 錯誤訊息 */}
+                <div className="col-12 d-flex justify-content-center">
+                  <span style={{ color: "red" }} className="error">
+                    {errors.origin}
+                  </span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 align-items-start`}>
@@ -47,31 +130,49 @@ const PasswordResetMain = () => {
                   htmlFor="password"
                   className={`col-form-label text-end col-3 ${styles.lb}`}
                 >
-                  密碼 :
+                  新密碼 :
                 </label>
                 <div className="col">
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     id="password"
-                    placeholder="請輸入密碼"
+                    name="new"
+                    placeholder="請輸入新密碼"
+                    value={password.new}
+                    onChange={handleChange}
                   />
+                </div>
+                {/* // 錯誤訊息 */}
+                <div className="col-12 d-flex justify-content-center">
+                  <span style={{ color: "red" }} className="error">
+                    {errors.new}
+                  </span>
                 </div>
               </div>
               <div className={`${styles.box} row mb-3 align-items-start`}>
                 <label
-                  htmlFor="password"
+                  htmlFor="cfmedPassword"
                   className={`col-form-label text-end col-3 ${styles.lb}`}
                 >
                   確認密碼 :
                 </label>
                 <div className="col">
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
-                    id="password"
-                    placeholder="請輸入密碼"
+                    id="cfmedPassword"
+                    placeholder="請再次輸入新密碼"
+                    value={password.confirmPassword}
+                    onChange={handleChange}
+                    name="confirmPassword"
                   />
+                </div>
+                {/* // 錯誤訊息 */}
+                <div className="col-12 d-flex justify-content-center">
+                  <span style={{ color: "red" }} className="error">
+                    {errors.confirmPassword}
+                  </span>
                 </div>
               </div>
 
@@ -79,6 +180,7 @@ const PasswordResetMain = () => {
                 className={`${styles.btnCenter} ${styles.box} row mb-3 align-items-start `}
               >
                 <button
+                  onClick={handleSubmit}
                   type="submit"
                   className={`${styles.btn1} ${styles.btnmargin} btn`}
                 >
