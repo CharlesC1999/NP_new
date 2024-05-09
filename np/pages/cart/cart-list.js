@@ -57,7 +57,7 @@ const ShopCart2 = () => {
 
   // 信用卡勾選
   const payOptions = ["Line Pay", "credit card"];
-  const [selectedPayment, setSelectedPayment] = useState("Line Pay");
+  const [selectedPayment, setSelectedPayment] = useState("line pay");
 
   const handlePaymentChange = (event) => {
     setSelectedPayment(event.target.value);
@@ -464,6 +464,7 @@ const ShopCart2 = () => {
                           value={v}
                           name="linepay"
                           checked={v === selectedPayment}
+                          // checked={selectedPayment === "line pay"}
                           onChange={handlePaymentChange}
                         />
                         <label

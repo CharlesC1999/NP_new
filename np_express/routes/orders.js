@@ -70,16 +70,16 @@ router.get('/', async function (req, res) {
 
   const sqlOrders = `SELECT *
   FROM orders
-  JOIN order_item_detail ON orders.Order_ID = order_item_detail.Order_detail_ID
-  LEFT JOIN  product ON order_item_detail.commodity_id =product.id 
-  AND order_item_detail.product_type = 'product'
-  LEFT JOIN product_image ON order_item_detail.commodity_id =product_image.product_id
-  AND order_item_detail.product_type = 'product'
-  LEFT JOIN  class ON order_item_detail.class_id =class.class__i_d
-  AND order_item_detail.product_type = 'class'
-  
+  JOIN orders_detail ON orders.Order_ID = orders_detail.order_detail_id
+  LEFT JOIN  product ON orders_detail.commodity_id =product.id 
+  AND orders_detail.product_type = 'product'
+  LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
+  AND orders_detail.product_type = 'product'
+  LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
+  AND orders_detail.product_type = 'class'
   GROUP BY orders.order_Id
-  ORDER BY orders.Order_date DESC ;
+  ORDER BY orders.Order_date DESC
+  ;
 `
 
   // 最終組合的sql語法(計數用)
@@ -116,19 +116,46 @@ router.get('/:status', async function (req, res) {
   // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
   const ordersStatus = req.params.status
 
-  const sqlOrders = `SELECT *
-  FROM orders
-  JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
-  LEFT JOIN  product ON order_item.thing_ID =product.id 
-  AND order_item.itemType = 1
-  LEFT JOIN product_image ON order_item.thing_ID =product_image.product_id
-  AND order_item.itemType = 1
-  LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
-  AND order_item.itemType = 2
-  WHERE orders.status = "${ordersStatus}"
-  GROUP BY orders.order_Id
-  ORDER BY orders.Order_date DESC;`
+  // const sqlOrders = `SELECT *
+  // FROM orders
+  // JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
+  // LEFT JOIN  product ON order_item.thing_ID =product.id
+  // AND order_item.itemType = 1
+  // LEFT JOIN product_image ON order_item.thing_ID =product_image.product_id
+  // AND order_item.itemType = 1
+  // LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
+  // AND order_item.itemType = 2
+  // WHERE orders.status = "${ordersStatus}"
+  // GROUP BY orders.order_Id
+  // ORDER BY orders.Order_date DESC;`
 
+  //   const sqlOrders = `SELECT *
+  //   FROM orders
+  //   JOIN orders_detail ON orders.Order_ID = orders_detail.Order_detail_ID
+  //   LEFT JOIN  product ON orders_detail.commodity_id =product.id
+  //   AND orders_detail.product_type = 'product'
+  //   LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
+  //   AND orders_detail.product_type = 'product'
+  //   LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
+  //   AND orders_detail.product_type = 'class'
+  //   WHERE orders.status = "${ordersStatus}"
+  //   GROUP BY orders.order_Id
+  //   ORDER BY orders.Order_date DESC ;
+  // `
+  const sqlOrders = `SELECT *
+FROM orders
+JOIN orders_detail ON orders.Order_ID = orders_detail.order_detail_id
+LEFT JOIN  product ON orders_detail.commodity_id =product.id 
+AND orders_detail.product_type = 'product'
+LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
+AND orders_detail.product_type = 'product'
+LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
+AND orders_detail.product_type = 'class'
+WHERE orders.order_status = "${ordersStatus}"
+GROUP BY orders.order_Id
+ORDER BY orders.Order_date DESC
+;
+`
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders)
 

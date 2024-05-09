@@ -346,8 +346,7 @@ router.get('/:pid', async function (req, res) {
     // 执行分类查询
     const recipes = await sequelize.query(
       `SELECT * FROM recipe
-    ORDER BY RAND()
-    LIMIT 4`,
+      WHERE recipe__i_d IN (4,49,48,50)`,
       { type: sequelize.QueryTypes.SELECT }
     )
 
