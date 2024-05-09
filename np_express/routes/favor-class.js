@@ -16,7 +16,7 @@ router.get('/', authenticateToken, async (req, res) => {
   const cids = await Favor_class.findAll({
     attributes: ['cid'],
     where: {
-      uid: req.user.id
+      uid: +
     },
     raw: true, //只需要資料
   

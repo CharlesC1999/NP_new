@@ -4,22 +4,23 @@ export default async function (sequelize) {
   return sequelize.define(
     'Orders',
     {
-      id: {
+      order_id: {
         type: DataTypes.STRING(255),
         allowNull: false,
         primaryKey: true,
         comment: 'UUID',
       },
       user_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(5),
         allowNull: false,
       },
-      total_amount: {
-        type: DataTypes.DECIMAL(10, 2), // 假设总金额需要两位小数
+      // 原本是total_amount
+      amount_total: {
+        type: DataTypes.INTEGER(10), // 假设总金额需要两位小数
         allowNull: false,
       },
       payment_method: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(50),
         defaultValue: null,
         comment: 'line pay, 信用卡, ATM',
       },
@@ -40,8 +41,10 @@ export default async function (sequelize) {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      coupon_id: {
-        type: DataTypes.INTEGER(5),
+
+      // 原本是   coupon_id
+      o_coupon_id: {
+        type: DataTypes.INTEGER(10),
         allowNull: true,
         // references: {
         //   model: 'coupons', // 假设优惠券表名为 'coupons'
@@ -49,20 +52,36 @@ export default async function (sequelize) {
         // }
       },
       discount_Amount: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL(10),
         allowNull: true,
       },
+
+      //
+      order_total_price: {
+        type: DataTypes.INTEGER(10),
+        allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM,
+        values: ['處理中', '已完成', '取消', '已退款'],
+        defaultValue: '處理中',
+        allowNull: false,
+      },
+
       // product_Type: {
       //   type: DataTypes.STRING,
       //   allowNull: false,
       // },
 
-      // 這邊是linepay 所需欄位
+      // line的status
+
       order_status: {
         type: DataTypes.STRING(255),
         defaultValue: null,
         comment: 'pending, paid, fail, cancel, error',
       },
+
+      // 這邊是linepay 所需欄位
       transaction_id: {
         type: DataTypes.STRING(255),
         defaultValue: null,

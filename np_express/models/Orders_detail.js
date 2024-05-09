@@ -4,19 +4,32 @@ export default async function (sequelize) {
   return sequelize.define(
     'Orders_detail',
     {
-      id: {
+      order_Item_id: {
         type: DataTypes.INTEGER(10),
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      order_id: {
+      // order_id: {
+      //   type: DataTypes.STRING(255),
+      //   allowNull: false,
+      //   // primaryKey: true,
+      //   comment: 'UUID',
+      // }, 跟下面是依樣
+      order_detail_id: {
         type: DataTypes.STRING(255),
         allowNull: false,
         // primaryKey: true,
         comment: 'UUID',
       },
-      product_id: {
+      // 新增欄位
+      thing_id: {
+        type: DataTypes.INTEGER(10),
+        allowNull: true,
+      },
+
+      // 等於product_id
+      commodity_id: {
         type: DataTypes.INTEGER(10),
         allowNull: true, // Make nullable to accommodate orders that might only include classes
         // references: {
@@ -33,15 +46,15 @@ export default async function (sequelize) {
         // }
       },
       quantity: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(10),
         allowNull: false,
       },
       unit_price: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL(10),
         allowNull: false,
       },
       total_price: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL(10),
         allowNull: false,
       },
       product_type: {

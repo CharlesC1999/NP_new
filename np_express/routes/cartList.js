@@ -70,18 +70,20 @@ router.post('/', async (req, res, next) => {
 
     // 創建主訂單
     const order = await Orders.create({
-      id: orderId, // 使用生成的 UUID
+      order_id: orderId, // 使用生成的 UUID
       user_id: 1, // 這裡假設 user_id 是已知的
-      total_amount: finalPrice,
+      amount_total: finalPrice,
       payment_method: paymentMethod,
       order_date: new Date(),
-      order_status: 'Pending',
       recipient_name: receiverName,
+      order_status: 'Pending',
       shipping_address: receiverAddress,
       contact_phone: phoneNumber,
-      coupon_id: couponId,
+      o_coupon_id: couponId,
       discount_Amount: discountPrice,
       // product_Type: 'Physical',
+      order_total_price: finalPrice,
+      status: '已完成',
       transaction_id: transactionId,
       order_info: orderInfo,
       reservation: reservation,
@@ -91,8 +93,8 @@ router.post('/', async (req, res, next) => {
 
     // 可以在這裡添加商品詳情的處理邏輯(若不行的話刪除試試)
     const productDetails = items.map((item) => ({
-      order_id: orderId,
-      product_id: item.id,
+      order_detail_id: orderId,
+      commodity_id: item.id,
       class_id: null,
       quantity: item.quantity,
       unit_price: item.pricePerItem,
@@ -100,8 +102,8 @@ router.post('/', async (req, res, next) => {
       product_type: 'product',
     }))
     const classDetails = classItems.map((item) => ({
-      order_id: orderId,
-      product_id: null,
+      order_detail_id: orderId,
+      commodity_id: null,
       class_id: item.id,
       quantity: item.quantity,
       unit_price: item.pricePerItem,
@@ -137,9 +139,73 @@ router.post('/', async (req, res, next) => {
 // 資料格式參考 https://enylin.github.io/line-pay-merchant/api-reference/request.html#example
 
 router.get('/reserve', async (req, res) => {
-  if (!req.query.orderId) {
+  // console.log(req.body)
+  if (!req.query.lineOrder) {
     return res.json({ status: 'error', message: 'order id不存在' })
   }
+
+  const orderId = req.query.orderId
+
+  // 設定重新導向與失敗導向的網址
+  const redirectUrls = {
+    confirmUrl: process.env.REACT_REDIRECT_CONFIRM_URL,
+    cancelUrl: process.env.REACT_REDIRECT_CANCEL_URL,
+  }
+
+  // 從資料庫取得訂單資料
+  const orderRecord = await Orders.findByPk(id, {
+    raw: true, // 只需要資料表中資料
+  })
+
+  // const orderRecord = await findOne('orders', { order_id: orderId })
+
+  // order_info記錄要向line pay要求的訂單json
+  const order = JSON.parse(orderRecord.order_info)
+
+  //const order = cache.get(orderId)
+  console.log(`獲得訂單資料，內容如下：`)
+  console.log(order)
+
+  //
+  try {
+    // 向line pay傳送的訂單資料
+    const linePayResponse = await linePayClient.request.send({
+      body: { ...order, redirectUrls },
+    })
+
+    // 深拷貝一份order資料
+    const reservation = JSON.parse(JSON.stringify(order))
+
+    reservation.returnCode = linePayResponse.body.returnCode
+    reservation.returnMessage = linePayResponse.body.returnMessage
+    reservation.transactionId = linePayResponse.body.info.transactionId
+    reservation.paymentAccessToken =
+      linePayResponse.body.info.paymentAccessToken
+
+    console.log(`預計付款資料(Reservation)已建立。資料如下:`)
+    console.log(reservation)
+
+    // 在db儲存reservation資料
+    const result = await Purchase_Order.update(
+      {
+        reservation: JSON.stringify(reservation),
+        transaction_id: reservation.transactionId,
+      },
+      {
+        where: {
+          id: orderId,
+        },
+      }
+    )
+
+    // console.log(result)
+
+    // 導向到付款頁面， line pay回應後會帶有info.paymentUrl.web為付款網址
+    res.redirect(linePayResponse.body.info.paymentUrl.web)
+  } catch (e) {
+    console.log('error', e)
+  }
+  //
 })
 
 export default router
