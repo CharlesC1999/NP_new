@@ -14,6 +14,7 @@ const pathNameMapping = {
   member: "會員",
   favor: "願望清單",
   recipe: "食譜列表",
+  recipeId: "食譜詳細頁",
   product: "產品列表",
   "product-detail": "產品介紹",
   // 繼續添加其他路徑和對應的中文名稱

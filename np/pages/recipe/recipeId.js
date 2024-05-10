@@ -51,7 +51,7 @@ export default function RecipeDetail() {
   // 取得對應的食譜
   const getRecipe = async (rid) => {
     try {
-      const url = `http://localhost:3005/api/recipes/${rid}`;
+      const url = `http://localhost:3005/api/recipes/recipeId?id=${rid}`;
       const res = await fetch(url);
       const data = await res.json();
 
@@ -102,14 +102,14 @@ export default function RecipeDetail() {
   // 當URL改變時執行取得對應食譜
   useEffect(() => {
     if (router.isReady) {
-      getRecipe(router.query.recipeId);
+      getRecipe(router.query.id);
     }
-  }, [router.query.recipeId]);
+  }, [router.query.id]);
 
   //初次渲染頁面時執行取得對應食譜的function
   useEffect(() => {
     if (router.isReady) {
-      getRecipe(router.query.recipeId);
+      getRecipe(router.query.id);
     }
   }, [router.isReady]);
 

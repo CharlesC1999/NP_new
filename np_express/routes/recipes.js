@@ -131,9 +131,11 @@ router.get('/', async function (req, res) {
 })
 
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
-router.get('/:recipeId', async function (req, res) {
+router.get('/recipeId', async function (req, res) {
+  const { id } = req.query
+  console.log('id=========================', id)
   // 轉為數字
-  const recipeId = req.params.recipeId
+  const recipeId = id
 
   // 食譜join分類表
   const sqlRecipe = `
