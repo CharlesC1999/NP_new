@@ -81,13 +81,25 @@ router.get('/', async function (req, res) {
   // group by orders.Order_ID`
 
   //這是包含圖片的跟一大堆的還有總價重新命名的
-  const sqlOrders = `SELECT orders.order_id,user_id, order_date, product_name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*product_price) AS total
-  FROM orders
-  JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  Join product on order_commodity_item.product_id = product.ID
-  JOIN product_image ON order_commodity_item.Product_ID = product_image.product_id
-  GROUP BY orders.order_id;`
+  // const sqlOrders = `SELECT orders.order_id,user_id, order_date, product_name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*product_price) AS total
+  // FROM orders
+  // JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
+  // Join product on order_commodity_item.product_id = product.ID
+  // JOIN product_image ON order_commodity_item.Product_ID = product_image.product_id
+  // GROUP BY orders.order_id;`
 
+  const sqlOrders = `SELECT *
+  FROM orders
+  JOIN orders_detail ON orders.Order_ID = orders_detail.Order_detail_ID
+  LEFT JOIN  product ON orders_detail.commodity_id =product.id 
+  AND orders_detail.product_type = 'product'
+  LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
+  AND orders_detail.product_type = 'product'
+  LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
+  AND orders_detail.product_type = 'class'
+  
+ ;
+`
   // 最終組合的sql語法(計數用)
   const sqlCount = `SELECT COUNT(*) AS count FROM orders ${where}`
 
@@ -128,13 +140,14 @@ router.get('/:orderid', async function (req, res) {
   // join member on orders.User_ID = member.id
   // where orders.Order_ID =  ${orderid};`
   const sqlOrders1 = `SELECT *
-  FROM order_item
-      LEFT JOIN product ON order_item.thing_ID = product.id
-      AND order_item.itemType = 1
-      LEFT JOIN class ON order_item.thing_ID = class.class__i_d 
-      AND order_item.itemType = 2
-      LEFT JOIN orders ON order_item.Order_detail_ID = orders.Order_ID
-  WHERE Order_detail_ID = ${orderid};`
+  FROM orders_detail
+      LEFT JOIN product ON orders_detail.commodity_id = product.id
+      AND orders_detail.product_type = 'product'
+      LEFT JOIN class ON orders_detail.class_id = class.class__i_d
+      AND orders_detail.product_type = 'class'
+      LEFT JOIN orders ON orders_detail.Order_detail_ID = orders.Order_ID
+      LEFT JOIN member ON orders.user_id = member.id
+  WHERE Order_detail_ID = '${orderid}';`
 
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders1)

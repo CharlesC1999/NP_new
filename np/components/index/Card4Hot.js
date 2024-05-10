@@ -27,7 +27,7 @@ function Card4Hot({ id, name, price, d_price, image }) {
             </div>
           </div>
           <a className={`d-flex ${styles["card4Btn"]}`} type="button" href="#">
-            <i className="fa-solid fa-cart-shopping"></i>&emsp;加入購物車
+            <i className="fa-solid fa-cart-shopping"></i>加入購物車
           </a>
         </div>
       </div>

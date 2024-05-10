@@ -103,6 +103,14 @@
       object-fit: cover;
     }
   }
+  .card4Body {
+    display: flex;
+    height: auto;
+    /* 垂直方向排列 */
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 20px;
+  }
   .card4Text {
     gap: 4px;
     & h6 {
@@ -114,6 +122,6 @@
     }
   }
   .card4Btn {
-    gap: 0px;
+   padding:4px 3px
   }
 }

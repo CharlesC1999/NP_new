@@ -19,6 +19,14 @@ import {
   handleGoogleLogin,
   showGoogleLogin,
 } from "@/hooks/google-login-firebase";
+// line
+import {
+  lineLoginRequest,
+  lineLogout,
+  lineLoginCallback,
+  getUserById,
+  parseJwt,
+} from "@/services/user";
 // 讀取畫面
 import { useLoader } from "@/hooks/use-loader";
 // sweetAlert
@@ -42,6 +50,7 @@ const Login = () => {
 
   const router = useRouter();
   const { login, googleLogin } = useAuth();
+  const { loginL, lineLogin } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -142,12 +151,65 @@ const Login = () => {
   // --------------------------------------------------
   // ------------------------line----------------------
 
+  const callbackLineLogin = async (query) => {
+    // 將查詢參數變成字串
+    const queryString = new URLSearchParams(query).toString();
+    console.log("發送的查詢字串:", queryString);
+
+    try {
+      // 發送請求
+      const response = await fetch(
+        `http://localhost:3005/api/line-login/callback?${queryString}`,
+        {
+          credentials: "include",
+        }
+      );
+
+      // 把響應結果變成json
+      const resJson = await response.json();
+      console.log("pong", resJson);
+
+      // res結果
+      if (response.ok && resJson.status === "success") {
+        console.log("login success");
+
+        // 將accessToken和userData存到localStorage
+        localStorage.setItem("token", resJson.data.accessToken);
+        localStorage.setItem("userData", JSON.stringify(resJson.data.user));
+        // setUserData(data);
+        console.log(resJson);
+        lineLogin(resJson.data);
+        if (resJson.status === "success") {
+          Swal.fire({
+            title: "登入成功",
+            // text: "That thing is still around?",
+            icon: "success",
+            // 按鈕綠色
+            confirmButtonColor: "#50bf8b",
+          });
+          router.push("/");
+        } else if (data.status === "error") {
+          console.error("Google 登入錯誤:", data.error);
+        }
+        // 可以在这里处理登录成功后的页面跳转或状态更新
+        // 例如： window.location.href = "/home";
+      } else {
+        console.error("login fail:", resJson.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const handleLineButtonClick = async () => {
     console.log("Ltouch");
     // line-login
     try {
       const response = await fetch(
-        "http://localhost:3005/api/line-login/login"
+        "http://localhost:3005/api/line-login/login",
+        {
+          credentials: "include",
+        }
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -166,19 +228,14 @@ const Login = () => {
     }
   };
 
-  fetch("http://localhost:3005/api/line-login/callback")
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.status === "success" && data.token) {
-        // 將 token 保存到 localStorage
-        localStorage.setItem("accessToken", data.token);
-      } else {
-        console.error("Failed to retrieve access token");
-      }
-    })
-    .catch((error) =>
-      console.error("Error handling LINE login callback:", error)
-    );
+  useEffect(() => {
+    if (router.isReady) {
+      if (!router.query.code) return;
+
+      callbackLineLogin(router.query);
+    }
+  }, [router.isReady, router.query]);
+
   // --------------------------------------------------
   // 連結用router導
   const goSignUp = () => {

@@ -306,17 +306,24 @@ export default function Product() {
               categoryCounts={categoryCounts}
             />
           </div>
-          <div className={`${styles.productW} d-flex jstify-content-center`}>
-            <div className={`${styles.ProductFilter} pt-sm-4 pt-0`}>
+          <div className={`${styles.productW} d-flex justify-content-center`}>
+            <div
+              className={`${styles.ProductFilter} pt-sm-4 pt-0 d-flex justify-content-center`}
+            >
               <ProductFilter
                 onShowGrid={showGrid}
                 onShowList={showList}
                 activeButton={activeButton}
                 TotalRow={TotalRow}
                 setOrderby={setOrderby}
+                normalCategories={normalCategories}
+                newCategories={newCategories}
+                setNewCategories={setNewCategories}
               />
             </div>
-            <div className={`d-flex ${styles.productCard1}`}>
+            <div
+              className={`d-flex justify-content-center ${styles.productCard1}`}
+            >
               {products.length > 0 ? (
                 // Render products if there are any
                 products.map((item) => (
