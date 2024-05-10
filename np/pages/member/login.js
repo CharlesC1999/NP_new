@@ -141,6 +141,17 @@ const Login = () => {
   };
   // --------------------------------------------------
   // ------------------------line----------------------
+  const callbackLineLogin = async (query) => {
+    const qs = new URLSearchParams({
+      ...query,
+    }).toString();
+    console.log(qs);
+    const res = await fetch(
+      `http://localhost:3005/api/line-login/callback?${qs}`,
+      { credentials: "include" }
+    ).then((res) => res.json());
+    console.log(res);
+  };
 
   const handleLineButtonClick = async () => {
     console.log("Ltouch");
@@ -166,19 +177,14 @@ const Login = () => {
     }
   };
 
-  fetch("http://localhost:3005/api/line-login/callback")
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.status === "success" && data.token) {
-        // 將 token 保存到 localStorage
-        localStorage.setItem("accessToken", data.token);
-      } else {
-        console.error("Failed to retrieve access token");
-      }
-    })
-    .catch((error) =>
-      console.error("Error handling LINE login callback:", error)
-    );
+  useEffect(() => {
+    if (router.isReady) {
+      if (!router.query.code) return;
+
+      callbackLineLogin(router.query);
+    }
+  }, [router.isReady, router.query]);
+
   // --------------------------------------------------
   // 連結用router導
   const goSignUp = () => {
