@@ -167,4 +167,31 @@ router.get('/:recipeId', async function (req, res) {
   })
 })
 
+//GET - 得到食譜的相關商品
+router.get('/:recipeId/relatedProducts', async function (req, res) {
+  // 轉為數字
+  const recipeId = req.params.recipeId
+
+  const sqlRelatedProducts = `
+  SELECT rrp.*, p.id, p.product_name, p.product_price, pi.image_url
+  FROM recipe_related_products AS rrp 
+  JOIN product AS p ON rrp.product__i_d = p.id
+  JOIN product_image AS pi ON p.id = pi.product_id
+  WHERE recipe__i_d = ${recipeId}
+  `
+
+  const [relatedProducts] = await db.query(sqlRelatedProducts)
+
+  // 如果沒有相關商品，回傳空陣列
+  if (relatedProducts.length === 0) {
+    return res.json({
+      status: 'success',
+      message: '查無結果',
+      data: { relatedProducts },
+    })
+  }
+
+  return res.json({ status: 'success', data: { relatedProducts } })
+})
+
 export default router

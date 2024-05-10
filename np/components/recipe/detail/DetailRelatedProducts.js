@@ -1,16 +1,27 @@
-import { useState } from "react";
-import Products from "@/data/recipe/product.json";
+import { useEffect, useState } from "react";
 import CheckBoxCustom from "@/components/checkbox-custom/RecipeCheckbox.js/RecipeCheckBox";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailRelatedProducts.module.scss";
 
-export default function DetailRelatedProducts() {
-  const initProducts = Products.map((v) => {
-    return { ...v, qty: 1 };
-  });
+export default function DetailRelatedProducts({ recipeID = "" }) {
+  // 最一開始從後端得到的相關商品列表
+  const [initProductsFetch, setInitProductsFetch] = useState([]);
 
-  // 相關產品的state
-  const [products, setProducts] = useState(initProducts);
+  // 從後端取得相關商品
+  const getRelatedProducts = async () => {
+    const url = `http://localhost:3005/api/recipes/${recipeID}/relatedProducts`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (Array.isArray(data.data.relatedProducts)) {
+      setInitProductsFetch(data.data.relatedProducts);
+    } else {
+      console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
+    }
+  };
+
+  // 用來map的相關產品state
+  const [products, setProducts] = useState([]);
 
   //增加商品數量
   const increaseItem = (id) => {
@@ -43,7 +54,24 @@ export default function DetailRelatedProducts() {
 
   // 加總數量與價格
   const totalItems = products.reduce((acc, v) => acc + v.qty, 0);
-  const totalPrice = products.reduce((acc, v) => acc + v.price * v.qty, 0);
+  const totalPrice = products.reduce(
+    (acc, v) => acc + v.product_price * v.qty,
+    0
+  );
+
+  // 初次渲染頁面時取得相關商品，但要先取得食譜的ID (透過props傳進來的)
+  useEffect(() => {
+    getRelatedProducts();
+  }, [recipeID]);
+
+  // 得到後端的相關商品資料後再設定給最終要用來map的state
+  useEffect(() => {
+    // 擴充相關商品的數量屬性跟checked屬性
+    const initProducts = initProductsFetch.map((v) => {
+      return { ...v, qty: 1, checked: false };
+    });
+    setProducts(initProducts);
+  }, [initProductsFetch]);
 
   return (
     <>
@@ -80,7 +108,7 @@ export default function DetailRelatedProducts() {
                   <div className={styles["product-pic"]}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="/images/recipe/detail/eb0c2b4dc60ca444aaa6979ae5467f7a.jpg"
+                      src={`/images/products/${v.image_url}`}
                       alt=""
                     />
                   </div>
@@ -88,14 +116,16 @@ export default function DetailRelatedProducts() {
                     <p
                       className={`${styles["product-name"]} ${styles["figma-h5"]}`}
                     >
-                      {v.name}
+                      {v.product_name}
                     </p>
                     <div
                       className={`${styles["portion-and-price"]} d-flex gap-2`}
                     >
                       <p className={styles["portion"]}>份量</p>
                       <p className={styles["divider"]}>|</p>
-                      <p className={styles["price"]}>單價 $ {v.price}</p>
+                      <p className={styles["price"]}>
+                        單價 $ {v.product_price}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -127,7 +157,7 @@ export default function DetailRelatedProducts() {
                     </button>
                   </div>
                   <p className={`${styles["subtotal"]} ${styles["figma-h6"]}`}>
-                    {`$ ${subtotal(v.qty, v.price)}`}
+                    {`$ ${subtotal(v.qty, v.product_price)}`}
                   </p>
                 </div>
               </div>

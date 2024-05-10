@@ -1,0 +1,22 @@
+[
+  {
+    "Related_Products_ID": 1,
+    "Recipe_ID": 49,
+    "Product_ID": 1
+  },
+  {
+    "Related_Products_ID": 2,
+    "Recipe_ID": 49,
+    "Product_ID": 2
+  },
+  {
+    "Related_Products_ID": 3,
+    "Recipe_ID": 49,
+    "Product_ID": 3
+  },
+  {
+    "Related_Products_ID": 4,
+    "Recipe_ID": 49,
+    "Product_ID": 4
+  }
+]

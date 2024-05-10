@@ -131,7 +131,7 @@ export default function RecipeDetail() {
           <div className={`col styles["main-content"]`}>
             <DetailIngredients recipe={recipe} />
             <DetailSteps recipe={recipe} />
-            <DetailRelatedProducts />
+            <DetailRelatedProducts recipeID={recipe.recipe__i_d} />
           </div>
         </div>
         <div
