@@ -1,0 +1,12 @@
+BEGIN
+  INSERT INTO member (user_name, address, account, email) VALUES (NEW.name, NEW.photo_url, NEW.line_uid, "line@noemail.com");
+  SET @new_member_id = LAST_INSERT_ID();
+  INSERT INTO member_update (type_of_member, third_party_id, call_back) VALUES ("line", NEW.id, @new_member_id);
+END
+--------------------------------line---------------------------------------
+BEGIN
+  INSERT INTO member (user_name, address, account, email) VALUES (NEW.name, NEW.photo_url, NEW.line_uid, "line@noemail.com");
+  SET @new_member_id = LAST_INSERT_ID();
+  INSERT INTO member_update (type_of_member, third_party_id, call_back) VALUES ("line", NEW.id, @new_member_id);
+END
+--------------------------------google---------------------------------------
