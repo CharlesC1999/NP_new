@@ -8,10 +8,7 @@ import multer from 'multer'
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     // 存放目錄
-    callback(
-      null,
-      'public/avatar/'
-    )
+    callback(null, 'public/avatar/')
   },
   filename: function (req, file, callback) {
     // 經授權後，req.user帶有會員的id
