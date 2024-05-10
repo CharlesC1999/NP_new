@@ -9,4 +9,4 @@ BEGIN
   SET @new_member_id = LAST_INSERT_ID();
   INSERT INTO member_update (type_of_member, third_party_id, call_back) VALUES ("line", NEW.id, @new_member_id);
 END
---------------------------------google---------------------------------------
+--------------------------------google--------------------------------------
