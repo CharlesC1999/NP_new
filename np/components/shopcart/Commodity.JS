@@ -20,6 +20,8 @@ const Commodity = () => {
   const [allChecked, setAllChecked] = useState(false);
 
   console.log(productItems);
+  // console.log("Product image path:", element.image); // 检查图片路径是否正确
+
   return (
     <>
       {/* 商品欄位 桌機樣式 */}
@@ -124,9 +126,9 @@ const Commodity = () => {
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 <img
-                  src="/images/Rectangle 143.jpg"
+                  src={`/images/${element.image}`} // 添加了基路径 /images/
                   className="img-fluid"
-                  alt="..."
+                  alt={element.name}
                   style={{ minWidth: 75 }}
                 />
               </div>
