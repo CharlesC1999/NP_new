@@ -11,6 +11,21 @@ const { Orders } = sequelize.models
 // 一般sql
 import db from '#configs/mysql.js'
 
+router.post('/add-review', async (req, res) => {
+  const { userId, productId, comment, rating, created_at } = req.body
+  try {
+    const result = await db.query(
+      `INSERT INTO product_review (user_id, product_id, comment, rating, created_at)
+       VALUES (?, ?, ?, ?, ?)`,
+      [userId, productId, comment, rating, created_at]
+    )
+    res.status(201).json({ message: 'Review added successfully' })
+  } catch (error) {
+    console.error('Database error:', error)
+    res.status(500).json({ message: 'Failed to add review' })
+  }
+})
+
 // 列表頁
 // my-products?brand_ids=1,2&name_like=pixel&price_gte=10000&price_lte=15000&sort=price&order=asc&page=1&perpage=2
 router.get('/', async function (req, res) {
@@ -111,6 +126,7 @@ router.get('/', async function (req, res) {
   })
 })
 
+// GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
 router.get('/:status', async function (req, res) {
   // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
