@@ -110,7 +110,7 @@ const Login = () => {
   const openEyes = () => {
     setShowPassword(!showPassword);
   };
-
+  // --------------------------------------------------
   useEffect(() => {
     showGoogleLogin(login, (data) => {
       setUserData(data);
@@ -136,11 +136,56 @@ const Login = () => {
 
   const handleGoogleButtonClick = () => {
     handleGoogleLogin();
-    console.log("touch");
+    console.log("Gtouch");
     // google-login-firebase export handleGoogleLogin
   };
-  // ---------------------------------------------------
+  // --------------------------------------------------
+  // ------------------------line----------------------
+  const callbackLineLogin = async (query) => {
+    const qs = new URLSearchParams({
+      ...query,
+    }).toString();
+    console.log(qs);
+    const res = await fetch(
+      `http://localhost:3005/api/line-login/callback?${qs}`,
+      { credentials: "include" }
+    ).then((res) => res.json());
+    console.log(res);
+  };
 
+  const handleLineButtonClick = async () => {
+    console.log("Ltouch");
+    // line-login
+    try {
+      const response = await fetch(
+        "http://localhost:3005/api/line-login/login"
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const loginData = await response.json();
+      console.log(loginData);
+      // 這裡假設後端返回一個包含 URL 的 JSON 對象
+      if (loginData.url) {
+        // 導向到 LINE 登入 URL
+        window.location.href = loginData.url; // 重定向到 LINE 登入
+      } else {
+        console.error("No login URL provided by backend");
+      }
+    } catch (error) {
+      console.error("Failed to login with LINE:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (!router.query.code) return;
+
+      callbackLineLogin(router.query);
+    }
+  }, [router.isReady, router.query]);
+
+  // --------------------------------------------------
   // 連結用router導
   const goSignUp = () => {
     // 導到註冊
@@ -242,7 +287,10 @@ const Login = () => {
                   />
                 </svg>
               </button>
-              <button className={LoginStyle.socialMediaButton}>
+              <button
+                className={LoginStyle.socialMediaButton}
+                onClick={handleLineButtonClick}
+              >
                 <svg
                   // Line
                   xmlns="http://www.w3.org/2000/svg"

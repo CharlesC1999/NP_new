@@ -1,8 +1,9 @@
 .sideBarBox {
+  background-color: var(--white);
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 260px;
+  width: 270px;
   padding: 25px;
   margin-bottom: 66px;
   /* border: var(--gray02) solid 1px; */

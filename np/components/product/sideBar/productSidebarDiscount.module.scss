@@ -10,12 +10,14 @@
   /*水平右,下,模糊化*/
   box-shadow: 1px 1px 10px var(--gray03);
   /*陰影化*/
+  background-color: var(--white);
 }
 
 .sideTitle {
   margin: 0;
   & h5 {
     padding-bottom: 5px;
+
     /* 將底線設為從左到右漸變 */
   }
 }

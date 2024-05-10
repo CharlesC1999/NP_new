@@ -19,19 +19,6 @@ router.get('/', async function (req, res) {
   } = req.query
   console.log(order_ids)
 
-  // 測試用
-  // console.log(
-  //   page,
-  //   perpage,
-  //   name_like,
-  //   brand_ids,
-  //   sort,
-  //   order,
-  //   price_gte,
-  //   price_lte
-  // )
-  // 處理如果沒找到資料
-  // 建立資料庫搜尋條件(where從句用)，每個條件用陣列存放，串接時用join(' AND ')
   const conditions = []
 
   // 品牌，brand_ids 使用 `brand_id IN (1,2,3)`
@@ -45,14 +32,6 @@ router.get('/', async function (req, res) {
     conditionsValues.length > 0
       ? `WHERE ` + conditionsValues.map((v) => `( ${v} )`).join(` AND `)
       : ''
-
-  // 分頁用
-  // page預設為1，perpage預設為3
-  // const perpageNow = Number(perpage) || 3
-  // const pageNow = Number(page) || 1
-  // const limit = perpageNow
-  // page=1 offset=0; page=2 offset= perpage * 1; ...
-  // const offset = (pageNow - 1) * perpageNow
 
   // 最終組合的sql語法
   // const sqlOrders = `SELECT * FROM orders `
@@ -128,6 +107,31 @@ router.get('/:orderid', async function (req, res) {
   join member on orders.User_ID = member.id
   where orders.Order_ID =  ${orderid};`
 
+  // WHERE Status= '${ordersStatus}'
+  const [rows, fields] = await db.query(sqlOrders1)
+
+  return res.json({
+    status: 'success',
+    data: {
+      orders: rows,
+    },
+  })
+  //return res.json({ status: 'success', data: { status } })
+})
+
+router.delete('/:orderid', async function (req, res) {
+  // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
+  const orderid = req.params.orderid
+
+  // const sqlOrders1 = `SELECT *
+  // FROM orders
+  // JOIN order_commodity_item ON orders.Order_ID = order_commodity_item.Order_ID
+  // Join product on order_commodity_item.product_id = product.ID
+  // join member on orders.User_ID = member.id
+  // where orders.Order_ID =  ${orderid};`
+  const sqlOrders1 = `UPDATE orders
+  
+  WHERE Order_ID = "${orderid}";`
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders1)
 

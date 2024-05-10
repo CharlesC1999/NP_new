@@ -82,12 +82,12 @@ const [userid, setUserid] = useState(null);
   return (
     <>
 
-      {orders.filter(v => v.User_ID === userid).map((v, i) => {
+      {orders.filter(v => v.user_id === userid).map((v, i) => {
           const title = v.product_name || v.class_name;
         //到時候把57改成當前會員ID(很像不能這樣寫QQ)
         //if(v.member_id===57)
         return (
-          <div className={`${styles.buyCard} my-0 my-sm-4`} key={v.Order_ID}>
+          <div className={`${styles.buyCard} my-0 my-sm-4`} key={v.order_id}>
             <div
               className={`${styles.buyCardContent} d-flex flex-row justify-content-between align-items-center`}
             >
@@ -118,20 +118,20 @@ const [userid, setUserid] = useState(null);
               >
                 <div className={styles.buyItemMain}>
                   <div className={styles.biContent}>{title}...</div>
-                  <div className={styles.biNumber}>{v.Order_date} </div>
-                  <div className={styles.biState}>狀態 : {v.Status}</div>
+                  <div className={styles.biNumber}>{v.order_date} </div>
+                  <div className={styles.biState}>狀態 : {v.order_status}</div>
                 </div>
                 <div
                   className={`${styles.biMb} d-flex flex-column justify-content-between`}
                 >
                   <div className={`${styles.biMoney} d-flex justify-content-end`}>
-                    訂單金額: {v.total_price}
+                    訂單金額: {v.order_total_price}
                   </div>
                   <div className={`d-flex flex-row justify-content-end`}>
 
 
                     <Link
-                      href={`/member/history-order-detail?order_id=${v.Order_ID}`}
+                      href={`/member/history-order-detail?order_id=${v.order_id}`}
                       className={`${styles.buyCardBtn}  btn  btn d-flex justify-content-center`}
                     >
                       <span className={`d-none d-sm-flex`}>查看詳情</span>

@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MemberCouponMain from "@/components/member/MemberCouponMain";
 import Sidebar from "@/components/member/Sidebar";
@@ -12,15 +12,26 @@ import { useAuth } from "@/contexts/AuthContext";
 export default function MemberCoupon() {
   //抓取登入狀態
   const { auth, logout } = useAuth();
+  
+
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // useEffect(() => {
+  //   const tokenFromLocalStorage = localStorage.getItem('token');
+  //   if (tokenFromLocalStorage) {
+  //     setIsLoggedIn(true);
+  //   }
+  // }, []);
   //確認一下有沒有抓到
   console.log(auth);
     return (
       <>
       
+     
       <Header/>
       <Breadcrumbs/>
       {/* 要抓登入狀態才能看到的區塊 */}
-      {/* {auth.isLoggedIn ? ( */}
+      {auth.isLoggedIn ? (
       <div className={` ${styles.container1} ${styles.main} ` }>
         <Sidebar/>
        <MemberCouponMain/>
@@ -29,8 +40,9 @@ export default function MemberCoupon() {
 
 
       
-        {/* ): (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)}  */}
+    ): (<a href="http://localhost:3000/member/login"><h1>請登入</h1></a>)} 
        <Footer/>
+       
       </>
     );
   }

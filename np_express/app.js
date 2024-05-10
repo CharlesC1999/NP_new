@@ -50,13 +50,16 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // fileStore的選項 session-cookie使用
 const fileStoreOptions = { logFn: function () {} }
+const isProduction = process.env.NODE_ENV === 'production'
 app.use(
   session({
     store: new FileStore(fileStoreOptions), // 使用檔案記錄session
     name: 'SESSION_ID', // cookie名稱，儲存在瀏覽器裡
     secret: '67f71af4602195de2450faeb6f8856c0', // 安全字串，應用一個高安全字串
     cookie: {
-      maxAge: 30 * 86400000, // 30 * (24 * 60 * 60 * 1000) = 30 * 86400000 => session保存30天
+      maxAge: 30 * 86400000, // 30天的毫秒数
+      httpOnly: true, // 增强安全性，禁止客户端JavaScript访问cookie
+      secure: isProduction, // 只在生产环境中开启安全Cookie
     },
     resave: false,
     saveUninitialized: false,

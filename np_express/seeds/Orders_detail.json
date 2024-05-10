@@ -1,0 +1,35 @@
+[
+  {
+    "order_Item_id": 1,
+    "order_detail_id": "uuid-1001",
+    "thing_id": 501,
+    "commodity_id": 301,
+    "class_id": null,
+    "quantity": 2,
+    "unit_price": 150.0,
+    "total_price": 300.0,
+    "product_type": "product"
+  },
+  {
+    "order_Item_id": 2,
+    "order_detail_id": "uuid-1002",
+    "thing_id": 502,
+    "commodity_id": null,
+    "class_id": 1,
+    "quantity": 1,
+    "unit_price": 200.0,
+    "total_price": 200.0,
+    "product_type": "class"
+  },
+  {
+    "order_Item_id": 3,
+    "order_detail_id": "uuid-1003",
+    "thing_id": 503,
+    "commodity_id": 303,
+    "class_id": 1,
+    "quantity": 3,
+    "unit_price": 120.0,
+    "total_price": 360.0,
+    "product_type": "product"
+  }
+]

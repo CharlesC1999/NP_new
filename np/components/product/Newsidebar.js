@@ -20,7 +20,7 @@ function Newsidebar({ id, name, price, img }) {
           <a href="">
             <h6 className={styles.hotTitle}>{name}</h6>
           </a>
-          <h6 className>${price}</h6>
+          <h6 className={styles.hotPrice}>${price}</h6>
         </div>
       </div>
     </>

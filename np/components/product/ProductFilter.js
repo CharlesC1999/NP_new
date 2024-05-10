@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../class_file/classFilter.module.css";
+import styles from "@/components/product/FilterProduct.module.css";
 
 const ProductFilter = ({
   onShowGrid,
@@ -13,8 +13,8 @@ const ProductFilter = ({
   const [sortByValue, setSortByValue] = useState("");
   const sortByOptions = [
     { name: "最新上架", order: "asc", sort: "upload_date" },
-    { name: "價錢低 > 高", order: "asc", sort: "product_price" },
-    { name: "價錢高 > 低", order: "desc", sort: "product_price" },
+    { name: "價錢低至高", order: "asc", sort: "product_price" },
+    { name: "價錢高至低", order: "desc", sort: "product_price" },
   ];
 
   // 處理排序選項
@@ -54,7 +54,9 @@ const ProductFilter = ({
 
   return (
     <div className={styles.widthMax}>
-      <section className={styles.productCountContainer}>
+      <section
+        className={`${styles.productCountContainer} d-flex justify-content-center p-0`}
+      >
         <header className={styles.productCountHeader}>
           <p className={styles.totalProducts}>總共： {TotalRow} 項商品</p>
           <div className={styles.productCountControls}>
@@ -160,7 +162,7 @@ const ProductFilter = ({
             </div>
             {/* only for mobile */}
             <div className={styles.classSelect}>
-              <span className={styles.classSelectLabel}>分類(#)</span>
+              <span className={styles.classSelectLabel}>分類</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24px"

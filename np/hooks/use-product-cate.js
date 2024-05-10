@@ -5,18 +5,18 @@ const CategoriesContext = createContext(null);
 //ProductCateProvider context的值
 export function ProductCateProvider({ children }) {
   //--值--//
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const handleCategoryChange = (category_id) => {
-    setSelectedCategories(category_id);
+  const [newCategories, setNewCategories] = useState([]);
+  const handleNewCateChange = (category_id) => {
+    setNewCategories(category_id);
   };
   //--值--//
   return (
     //將創建的context使用.provider ProductCateProvider的所有內容（值）包起來
     <CategoriesContext.Provider
       value={{
-        selectedCategories,
-        setSelectedCategories,
-        handleCategoryChange,
+        newCategories,
+        setNewCategories,
+        handleNewCateChange,
       }}
     >
       {children}
