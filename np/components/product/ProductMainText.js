@@ -6,6 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import toast, { Toaster } from "react-hot-toast";
 import FavIconProduct from "../favor/FavIconProduct";
 
+// 加入全域鉤子
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/hooks/use-cart";
+
 const notifyBtn = () => toast("已加入購物車 🛒");
 
 function ProductMainText({
@@ -16,10 +20,15 @@ function ProductMainText({
   discount_price,
   review_comments,
   average_rating,
+  img,
   upload_date,
   handleReviewCount,
 }) {
   const reviewCount = review_comments.length;
+
+  // 加入全域鉤子
+  const { favorClass, auth, setAction } = useAuth();
+  const { addProduct } = useCart();
 
   return (
     <>
@@ -42,7 +51,7 @@ function ProductMainText({
               ({reviewCount}則評論)
             </div>
           </div>
-         <FavIconProduct id={id}/>
+          <FavIconProduct id={id} />
         </div>
         <input
           className={`${style["amount"]} ps-4 my-2`}
@@ -52,7 +61,14 @@ function ProductMainText({
         <button
           type="submit"
           className={`${style["buy-btn"]}  my-2 btn d-flex justify-content-center align-items-center`}
-          onClick={notifyBtn}
+          // onClick={notifyBtn}
+          onClick={() => {
+            if (!auth.isLoggedIn) {
+              return toast.error("請先登入再使用!");
+            }
+            notifyBtn();
+            addProduct({ id, name, price, description, discount_price });
+          }}
         >
           &nbsp;&nbsp;加入購物車{" "}
           <i

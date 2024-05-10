@@ -244,7 +244,7 @@ router.get('/', async function (req, res) {
 
     let ratingclause = ''
     if (rating) {
-      ratingclause = `HAVING ROUND(AVG(pReview.rating), 1) = ${rating}`
+      ratingclause = `HAVING ROUND(AVG(pReview.rating), 1) >= ${rating} AND ROUND(AVG(pReview.rating), 1) < ${Number(rating) + 1}  `
     }
     console.log(rating)
     const mayLikeProducts = await sequelize.query(
