@@ -67,6 +67,20 @@ export default async function (sequelize) {
       },
     },
     {
+      hooks: {
+        // 建立時產生密碼加密字串用
+        beforeCreate: async (user) => {
+          if (user.password) {
+            user.password = await generateHash(user.password)
+          }
+        },
+        // 更新時產生密碼加密字串用
+        beforeUpdate: async (user) => {
+          if (user.password) {
+            user.password = await generateHash(user.password)
+          }
+        },
+      },
       tableName: 'member', //直接提供資料表名稱
       timestamps: false, // 使用時間戳
       paranoid: false, // 軟性刪除
