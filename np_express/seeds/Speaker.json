@@ -7,6 +7,7 @@
      "speaker_experience": "明上園楓味館廚藝總監、德霖技術學院廚藝系助理教授、2014 FDA年度優良廚師",
      "speaker_license": "西餐乙級證照、中餐乙級證照",
      "speaker_image": "lecturer1.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -17,6 +18,7 @@
      "speaker_experience": "印度阿杜納飯店行政主廚",
      "speaker_license": "西餐乙級證照",
      "speaker_image": "lecturer2.jpg",
+     "f_speaker_cate_id":"2",
      "valid": 1
     },
     {
@@ -27,6 +29,7 @@
      "speaker_experience": "功德林上海素點餐廳創辦人",
      "speaker_license": "中餐乙級證照、點心乙級證照",
      "speaker_image": "lecturer3.jpg",
+     "f_speaker_cate_id":"5",
      "valid": 1
     },
     {
@@ -37,6 +40,7 @@
      "speaker_experience": "福華大飯店主廚、高雄餐旅大學講師",
      "speaker_license": "中餐乙級證照、中餐丙級證照",
      "speaker_image": "lecturer4.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -47,6 +51,7 @@
      "speaker_experience": "香港國際美食大賽金牌、2新加坡FHA 國際烹飪挑戰賽最佳亞洲廚師獎",
      "speaker_license": "中餐乙級證照、中餐丙級證照",
      "speaker_image": "lecturer5.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -57,6 +62,7 @@
      "speaker_experience": "著有「我家也是茶餐廳」食譜書",
      "speaker_license": "中餐乙級證照、中餐丙級證照",
      "speaker_image": "lecturer6.jpg",
+     "f_speaker_cate_id":"3",
      "valid": 1
     },
     {
@@ -67,6 +73,7 @@
      "speaker_experience": "宸上名品飯店的行政主廚、CEO",
      "speaker_license": "中餐乙級證照、西餐丙級證照",
      "speaker_image": "lecturer7.jpg",
+     "f_speaker_cate_id":"2",
      "valid": 1
     },
     {
@@ -77,6 +84,7 @@
      "speaker_experience": "超過二十年港式餐廳資歷",
      "speaker_license": "中餐乙級證照、中餐丙級證照、點心乙級證照",
      "speaker_image": "lecturer8.jpg",
+     "f_speaker_cate_id":"4",
      "valid": 1
     },
     {
@@ -87,6 +95,7 @@
      "speaker_experience": "老爺酒店咖啡廳主廚、救國團講師",
      "speaker_license": "西餐乙級證照",
      "speaker_image": "lecturer9.jpeg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -97,6 +106,7 @@
      "speaker_experience": "創業輔導顧問、台灣小吃及中餐乙、丙級授課講師",
      "speaker_license": "中餐甲級證照、中餐乙級證照、中餐丙級證照",
      "speaker_image": "lecturer10.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -107,6 +117,7 @@
      "speaker_experience": "意誠餐飲集團的技術顧問、廣晟食品的副主廚",
      "speaker_license": "點心乙級證照、西餐乙級證照",
      "speaker_image": "lecturer11.jpg",
+     "f_speaker_cate_id":"4",
      "valid": 1
     },
     {
@@ -117,6 +128,7 @@
      "speaker_experience": "學學文創一口一口學食驗室行政主廚",
      "speaker_license": "中餐乙級證照、中餐丙級證照",
      "speaker_image": "lecturer12.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -127,6 +139,7 @@
      "speaker_experience": "五星七段行政主廚",
      "speaker_license": "中餐乙級證照、西餐乙級證照",
      "speaker_image": "lecturer13.jpg",
+     "f_speaker_cate_id":"3",
      "valid": 1
     },
     {
@@ -137,6 +150,7 @@
      "speaker_experience": "餐廳主廚",
      "speaker_license": "中餐乙級證照、西餐乙級證照",
      "speaker_image": "lecturer14.jpg",
+     "f_speaker_cate_id":"3",
      "valid": 1
     },
     {
@@ -147,6 +161,7 @@
      "speaker_experience": "臺北城市科技大學餐飲管理系助理教授、海外巡演及美食研習班特聘講師",
      "speaker_license": "中餐乙級證照、西餐乙級證照",
      "speaker_image": "lecturer15.jpg",
+     "f_speaker_cate_id":"3",
      "valid": 1
     },
     {
@@ -157,6 +172,7 @@
      "speaker_experience": "泰美味料理工作室創辦人",
      "speaker_license": "中餐乙級證照、西餐乙級證照",
      "speaker_image": "lecturer16.jpg",
+     "f_speaker_cate_id":"3",
      "valid": 1
     },
     {
@@ -167,6 +183,7 @@
      "speaker_experience": "澳洲藍帶學院畢業、都拿其堡餐廳創辦人",
      "speaker_license": "西餐乙級證照、西餐丙級證照",
      "speaker_image": "lecturer17.jpg",
+     "f_speaker_cate_id":"2",
      "valid": 1
     },
     {
@@ -177,6 +194,7 @@
      "speaker_experience": "黑美人飯店總鋪師",
      "speaker_license": "中餐乙級證照、中餐丙級證照",
      "speaker_image": "lecturer18.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -187,6 +205,7 @@
      "speaker_experience": "藍帶餐飲管理學院畢業、一頂帽子餐廳主廚",
      "speaker_license": "西餐乙級證照、西餐丙級證照",
      "speaker_image": "lecturer19.jpg",
+     "f_speaker_cate_id":"2",
      "valid": 1
     },
     {
@@ -197,6 +216,7 @@
      "speaker_experience": "景文科技大學專業講師、高雄餐旅學院飲料調酒客座講師",
      "speaker_license": "中餐乙級證照、中餐丙級證照",
      "speaker_image": "lecturer20.jpg",
+     "f_speaker_cate_id":"3",
      "valid": 1
     },
     {
@@ -207,6 +227,7 @@
      "speaker_experience": "超過二十年烘培經驗、法國路易樂斯福世界盃麵包大賽指導教練",
      "speaker_license": "西餐乙級證照、點心乙級證照",
      "speaker_image": "lecturer21.jpeg",
+     "f_speaker_cate_id":"2",
      "valid": 1
     },
     {
@@ -217,6 +238,7 @@
      "speaker_experience": "蔬活料理教室講師",
      "speaker_license": "中餐素食乙級、西餐、麵食、西點、烘焙等12張證照",
      "speaker_image": "lecturer22.jpg",
+     "f_speaker_cate_id":"5",
      "valid": 1
     },
     {
@@ -227,6 +249,7 @@
      "speaker_experience": "高雄餐旅大學研究所、普門中學高職部餐飲管理科老師",
      "speaker_license": "西餐乙級證照、中餐乙級證照",
      "speaker_image": "lecturer23.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -237,6 +260,7 @@
      "speaker_experience": "中式點心主廚、台灣觀光學院餐飲系副教授級專業技術講師",
      "speaker_license": "點心乙級證照、中餐乙級證照",
      "speaker_image": "lecturer24.jpg",
+     "f_speaker_cate_id":"4",
      "valid": 1
     },
     {
@@ -247,6 +271,7 @@
      "speaker_experience": "來來飯店行政主廚、職訓局講師",
      "speaker_license": "西餐乙級證照、中餐乙級證照",
      "speaker_image": "lecturer25.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     },
     {
@@ -257,6 +282,7 @@
      "speaker_experience": "歐傑洛義式餐廳廚師、歐奇窯烤比薩廚師",
      "speaker_license": "西餐乙級證照、西餐丙級證照",
      "speaker_image": "lecturer26.jpg",
+     "f_speaker_cate_id":"2",
      "valid": 1
     },
     {
@@ -267,6 +293,7 @@
      "speaker_experience": "福華飯店、江南春飯店主廚",
      "speaker_license": "中餐乙級證照、中餐丙級證照",
      "speaker_image": "lecturer27.jpg",
+     "f_speaker_cate_id":"1",
      "valid": 1
     }
    ]

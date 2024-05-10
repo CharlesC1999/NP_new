@@ -81,6 +81,7 @@ export default function Speaker() {
                   name={speaker.speaker_name}
                   title={speaker.speaker_title}
                   img={speaker.speaker_image}
+                  cate={speaker.speaker_cate_name}
                 />
               );
             })}
