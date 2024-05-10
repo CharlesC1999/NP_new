@@ -10,6 +10,7 @@ import { FaCheck } from "react-icons/fa6";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CheckBoxStyle from "@/components/checkbox-custom/CheckBoxCustom.module.scss";
 
+// import Check from "../../public/images/products";
 const Commodity = () => {
   const { productItems, increaseProduct, decreaseProduct, removeProduct } =
     useCart();
@@ -126,11 +127,12 @@ const Commodity = () => {
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 <img
-                  src={`/images/${element.image}`} // 添加了基路径 /images/
+                  src={`/images/products/${element.image}`}
                   className="img-fluid"
                   alt={element.name}
                   style={{ minWidth: 75 }}
                 />
+                {/* console.log({`/images/products/${element.image}`}) */}
               </div>
               <div className="col-3 align-self-center text-center px-4">
                 <h4 className={CommodityStyles.fc}>{element.name}</h4>
@@ -196,14 +198,14 @@ const Commodity = () => {
           </div>
         </div>
 
-        {productItems.map((element) => {
+        {productItems.map((element, index) => {
           return (
             <div className="row" key={element.id}>
               {/* 叉叉 */}
               {/* <div class="delete"></div> */}
               <div className="col-4 p-0">
                 <img
-                  src="/images/Rectangle 143.jpg"
+                  src={`/images/products/${element.image}`}
                   alt=""
                   className=""
                   style={{

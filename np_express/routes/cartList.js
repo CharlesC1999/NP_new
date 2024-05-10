@@ -62,13 +62,19 @@ router.post('/', async (req, res, next) => {
       id: orderId,
       currency: 'TWD',
       amount: finalPrice,
-      // packages: [
-      //   {
-      //     id: packageId,
-      //     amount: finalPrice,
-      //     products: allProducts,
-      //   },
-      // ],
+      packages: [
+        {
+          id: packageId,
+          amount: finalPrice,
+          products: [
+            {
+              name: '全部商品',
+              quantity: 1,
+              price: finalPrice,
+            },
+          ],
+        },
+      ],
       options: { display: { locale: 'zh_TW' } },
     }
 
