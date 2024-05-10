@@ -8,6 +8,7 @@ import Header from "../../components/header";
 import HeaderSetting from "@/styles/headerSetting.module.scss";
 
 import Footer from "../../components/footer";
+import { useCart } from "@/hooks/use-cart";
 
 const ShopCart2 = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,25 +65,66 @@ const ShopCart2 = () => {
   };
 
   // localstorage  總額呈現，商品總額
+  // const [totalPrice, setTotalPrice] = useState(0);
+  // const [totalQuantity, setTotalQuantity] = useState(0);
+  // const [totalProductPrice, setTotalproductPrice] = useState(0);
+  // const [coupon, setCoupon] = useState(0);
+  // useEffect(() => {
+  //   // 从 localStorage 获取名为 'itemsCard666' 的值
+  //   const storedItems = localStorage.getItem("itemsCard666");
+  //   if (storedItems) {
+  //     const items = JSON.parse(storedItems); // 解析字符串为数组对象
+  //     // 计算所有物品的价格总和和总数量
+  //     let total = 0;
+  //     let quantity = 0;
+  //     items.forEach((item) => {
+  //       total += item.price * item.qty || 0;
+  //       quantity += item.qty || 0;
+  //     });
+  //     setTotalPrice(total); // 设置总价状态
+  //     setTotalQuantity(quantity); // 设置总数量状态
+  //   }
+  // }, []);
+  //
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [finalPrice, setFinalPrice] = useState(0);
 
   useEffect(() => {
-    // 从 localStorage 获取名为 'itemsCard666' 的值
-    const storedItems = localStorage.getItem("itemsCard666");
-    if (storedItems) {
-      const items = JSON.parse(storedItems); // 解析字符串为数组对象
-      // 计算所有物品的价格总和和总数量
-      let total = 0;
-      let quantity = 0;
-      items.forEach((item) => {
-        total += item.price * item.qty || 0;
-        quantity += item.qty || 0;
-      });
-      setTotalPrice(total); // 设置总价状态
-      setTotalQuantity(quantity); // 设置总数量状态
-    }
+    // 读取和解析数据
+    const itemsCard = JSON.parse(localStorage.getItem("itemsCard666")) || [];
+    const productItem =
+      JSON.parse(localStorage.getItem("productItem666")) || [];
+    const coupon = JSON.parse(localStorage.getItem("coupon666"));
+
+    // 计算总价和总数量
+    const totalItemsPrice = itemsCard.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
+    );
+    const totalProductPrice = productItem.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
+    );
+    const itemsQuantity = itemsCard.reduce((acc, item) => acc + item.qty, 0);
+    const productQuantity = productItem.reduce(
+      (acc, item) => acc + item.qty,
+      0
+    );
+
+    const totalPrice = totalItemsPrice + totalProductPrice;
+    const totalQuantity = itemsQuantity + productQuantity;
+
+    // 应用优惠券折扣
+    const discountAmount = coupon ? coupon.disPrice : 0;
+    const calculatedFinalPrice = totalPrice - discountAmount;
+
+    // 更新状态
+    setTotalPrice(totalPrice);
+    setTotalQuantity(totalQuantity);
+    setFinalPrice(calculatedFinalPrice > 0 ? calculatedFinalPrice : 0);
   }, []);
+  //
 
   // 這邊設定localstorage 收件人名稱
   useEffect(() => {
@@ -163,6 +205,7 @@ const ShopCart2 = () => {
     event.preventDefault(); // 阻止表单的默认提交行为
     // 在这里处理表单提交逻辑，例如发送数据到服务器
   };
+  //
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>
@@ -190,7 +233,7 @@ const ShopCart2 = () => {
           <div className={styles2.prompt}>
             <h4 className={`${styles2.h4} `}>
               訂單總計 :{" "}
-              <span style={{ color: "#f0b559" }}>NT${totalPrice}</span>
+              <span style={{ color: "#f0b559" }}>NT${finalPrice}</span>
             </h4>
             <h5 className={styles2.h5}>
               購物車:({totalQuantity}件)

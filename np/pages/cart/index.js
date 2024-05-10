@@ -55,60 +55,7 @@ const ShopCart1 = () => {
     };
   }, []);
 
-  // const classIndex = [
-  //   { id: 0, count: 1, name: "肉桂捲初級班", price: 1500 },
-  //   { id: 1, count: 1, name: "cake初級班", price: 1200 },
-  //   { id: 2, count: 1, name: "肉捲初級班", price: 1000 },
-  // ];
-  // const [classData, classProductsData] = useState(classIndex);
-
-  // const prodcts = [
-  //   { id: 0, count: 1, name: "肉桂捲", price: 1500 },
-  //   { id: 1, count: 1, name: "meet", price: 1200 },
-  //   { id: 2, count: 1, name: "肉捲", price: 1000 },
-  // ];
-  // const [productData, setProductsData] = useState(prodcts);
-  // const [quantity,setQuantity] = useState(0)
-  // const increase = (id) => {
-  //   // setQuantity(quantity + 1)
-  //   const addProducts = classData.map((v, i) => {
-  //     if (v.id === id) return { ...v, count: v.count + 1 };
-  //     else return v;
-  //   });
-
-  //   classProductsData(addProducts);
-  // };
-
-  // const decrease = (id) => {
-  //   // if(quantity>0){
-  //   //   setQuantity(quantity - 1)
-  //   // }
-  //   const reduceProducts = classData.map((v, i) => {
-  //     if (v.id === id && v.count > 0) return { ...v, count: v.count - 1 };
-  //     else return v;
-  //   });
-
-  //   classProductsData(reduceProducts);
-  // };
-
-  // const remove = (id) => {
-  //   const removeProduct = classData.filter((v, i) => {
-  //     return v.id !== id;
-  //   });
-
-  //   classProductsData(removeProduct);
-  // };
-
-  // // const productDataTotal = productData.reduce(
-  // //   (total, product) => total + product.count * product.price,
-  // //   0
-  // // );
-  // const classDataTotal = classData.reduce(
-  //   (total, product) => total + product.count * product.price,
-  //   0
-  // );
-  // const combinedTotal = productDataTotal + classDataTotal;
-  const { totalItems, totalPrice } = useCart();
+  const { totalItems, totalPrice, totalProduct, totalProductPrice } = useCart();
 
   // 設定可控元件使用優惠券
   // const CouponOptions = ["滿千折扣50元", "全館折扣20元", "不使用優惠券"];
@@ -142,26 +89,29 @@ const ShopCart1 = () => {
   };
   // const finalPrice= if()
 
-  const [finalPrice, setFinalPrice] = useState(totalPrice);
+  //
+  const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
   const discountAmount = coupon ? coupon.disPrice : 0;
   console.log(finalPrice);
   useEffect(() => {
     if (finalPrice !== false) {
       // 如果 finalPrice 不是 false，计算最终价格
       const discountAmount = coupon ? coupon.disPrice : 0;
-      const calculatedFinalPrice = totalPrice - discountAmount;
+      const calculatedFinalPrice =
+        totalPrice + totalProductPrice - discountAmount;
       // 获取当前优惠券的折扣金额
 
       setFinalPrice(
-        isNaN(calculatedFinalPrice) ? totalPrice : calculatedFinalPrice
+        isNaN(calculatedFinalPrice)
+          ? totalPrice + totalProductPrice
+          : calculatedFinalPrice
       );
-      console.log(totalPrice, finalPrice, "gdesgsd");
+      console.log(totalPrice, totalProductPrice, finalPrice, "gdesgsd");
       // 计算并更新最终价格
     }
-  }, [coupon, totalPrice, finalPrice]);
+  }, [coupon, totalPrice, totalProductPrice, finalPrice]);
+  //
 
-  // 這裡儲存localstorage  優惠券
-  // const [coupon, setCoupon] = useState(data.name);
   useEffect(() => {
     const couponData = window.localStorage.getItem("coupon666");
     if (couponData) {
@@ -255,11 +205,12 @@ const ShopCart1 = () => {
             style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>訂單合計:</p>
-            {discountAmount ? (
+            {/* {discountAmount ? (
               <h5> ${totalPrice - discountAmount}元 </h5>
             ) : (
               <h5> {totalPrice}元</h5>
-            )}
+            )} */}
+            <h5>${finalPrice}元</h5>
 
             {/* <h5> {discountAmount}元 </h5> */}
 

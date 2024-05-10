@@ -14,6 +14,7 @@ import { createLinePayClient } from 'line-pay-merchant'
 import { v4 as uuidv4 } from 'uuid'
 // import Orders2 from '##/models/Orders2'
 import 'dotenv/config.js'
+import authenticateToken from '#middlewares/authenticateToken.js'
 
 const linePayClient = createLinePayClient({
   channelId: process.env.LINE_PAY_CHANNEL_ID,
@@ -23,15 +24,18 @@ const linePayClient = createLinePayClient({
 // console.log(linePayClient)
 
 router.post('/', async (req, res, next) => {
+  // , authenticateToken
   console.log(req.body)
   // const ordeData = req.body
   // const orderId = res.json({ status: 'success' })
 
   // 從請求中提取訂單資訊
+  // const userID = req.user.id
+  // const cids = await F
   try {
     const {
       items,
-      classItems,
+      productItems,
       totalPrice,
       couponId,
       discountPrice,
@@ -52,7 +56,7 @@ router.post('/', async (req, res, next) => {
     // 生成一个随机的包裹 ID
     const packageId = uuidv4()
 
-    const allProducts = [...items, ...classItems]
+    const allProducts = [...items, ...productItems]
     // 要傳送給line pay的訂單資訊
     const lineOrder = {
       id: orderId,
@@ -85,24 +89,14 @@ router.post('/', async (req, res, next) => {
       order_total_price: finalPrice,
       status: '已完成',
       transaction_id: transactionId,
-      order_info: orderInfo,
+      order_info: JSON.stringify(lineOrder),
       reservation: reservation,
       confirm: confirm,
       return_code: returnCode,
     })
 
     // 可以在這裡添加商品詳情的處理邏輯(若不行的話刪除試試)
-    const productDetails = items.map((item) => ({
-      order_detail_id: orderId,
-      commodity_id: item.id,
-      thing_id: null,
-      class_id: null,
-      quantity: item.quantity,
-      unit_price: item.pricePerItem,
-      total_price: item.totalPrice,
-      product_type: 'product',
-    }))
-    const classDetails = classItems.map((item) => ({
+    const classDetails = items.map((item) => ({
       order_detail_id: orderId,
       commodity_id: null,
       thing_id: null,
@@ -111,6 +105,16 @@ router.post('/', async (req, res, next) => {
       unit_price: item.pricePerItem,
       total_price: item.totalPrice,
       product_type: 'class',
+    }))
+    const productDetails = productItems.map((item) => ({
+      order_detail_id: orderId,
+      commodity_id: item.id,
+      thing_id: null,
+      class_id: null,
+      quantity: item.quantity,
+      unit_price: item.pricePerItem,
+      total_price: item.totalProductPrice,
+      product_type: 'product',
     }))
     console.log('Product Details:', productDetails, classDetails)
 
@@ -141,7 +145,9 @@ router.post('/', async (req, res, next) => {
 // 資料格式參考 https://enylin.github.io/line-pay-merchant/api-reference/request.html#example
 
 router.get('/reserve', async (req, res) => {
-  // console.log(req.body)
+  console.log(req.orderId)
+  console.log('Received orderId:', req.query.orderId)
+
   if (!req.query.lineOrder) {
     return res.json({ status: 'error', message: 'order id不存在' })
   }
@@ -157,16 +163,15 @@ router.get('/reserve', async (req, res) => {
   // 從資料庫取得訂單資料
   const orderRecord = await Orders.findByPk(id, {
     raw: true, // 只需要資料表中資料
+    // order_info記錄要向line pay要求的訂單json
   })
-
-  // const orderRecord = await findOne('orders', { order_id: orderId })
-
-  // order_info記錄要向line pay要求的訂單json
   const order = JSON.parse(orderRecord.order_info)
 
   //const order = cache.get(orderId)
   console.log(`獲得訂單資料，內容如下：`)
-  console.log(order)
+  console.log('-------order', order)
+  console.log(orderRecord)
+  // const orderRecord = await findOne('orders', { order_id: orderId })
 
   //
   try {
@@ -185,7 +190,7 @@ router.get('/reserve', async (req, res) => {
       linePayResponse.body.info.paymentAccessToken
 
     console.log(`預計付款資料(Reservation)已建立。資料如下:`)
-    console.log(reservation)
+    // console.log(reservation)
 
     // 在db儲存reservation資料
     const result = await Purchase_Order.update(
