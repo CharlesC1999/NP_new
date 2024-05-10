@@ -33,7 +33,7 @@ useEffect(() => {
   }
 }, []);
 
-
+console.log(userid);
 const getCoupons = async (cat='') => {
   const url = 'http://localhost:3005/api/coupons'+cat;
 
@@ -78,6 +78,7 @@ useEffect(() => {
       <div className={styles.title2}>我的帳戶</div>
     </div>
     {/* 主內容的標題 */}
+    <Link  href={`/member/coupons-box`} className={`${styles.gift} btn`}>禮物箱</Link>
     <div>
       {/* 分類欄 */}
   <Cat  setActiveCategory={setActiveCategory} activeCategory={activeCategory}/>
@@ -93,9 +94,9 @@ useEffect(() => {
 </div>
 <div className={styles.coupmain}>
   {/* 可以用的 */}
-  {coupons.filter(v=>v.Member_ID===userid).map((v, i) => {
-    
- const discountAmount = parseFloat(v.Discount_amount);
+  {coupons.filter(v=>v.member__i_d===userid).map((v, i) => {
+    console.log(userid);
+ const discountAmount = parseFloat(v.discount_amount);
  let displayText;
 // 检查 discountAmount 是否是有效的数字
 if (!isNaN(discountAmount)) {
@@ -108,24 +109,24 @@ if (!isNaN(discountAmount)) {
   }
 } else {
   // 如果 discountAmount 不是有效的数字，直接使用原始值
-  displayText = v.Discount_amount;
+  displayText = v.discount_amount;
 }
 // 确定按钮是否可用
-const isButtonDisabled = v.C_status !== '可使用';
-if (activeCategory === "全部" || v.C_status === activeCategory) {
+const isButtonDisabled = v.c_status !== '可使用';
+if ((activeCategory === "全部" || v.c_status === activeCategory) && (activeCategory !== "全部" || v.c_status !== "已發送") && (activeCategory === "全部" || v.c_status !== "已發送")) {
     return (
-  <div className={styles.couponCard} key={v.Coupon_ID}>
+  <div className={styles.couponCard} key={v.coupon__i_d}>
     <div className={styles.couponImg} >
     <span className={styles.cspan} >{displayText}</span>
    
-  <span className={styles.cspan2}>效期:{v.Valid_start_date}</span>
-  <span className={styles.cspan2}>~{v.Valid_end_date}</span>
+  <span className={styles.cspan2}>效期:{v.valid_start_date}</span>
+  <span className={styles.cspan2}>~{v.valid_end_date}</span>
     </div>
     <div className={styles.couponContent }>
       <div className={styles.couponDetails}>
         <div className={styles.lowbuy}>低消${v.minimum_spend}</div>
         
-        <div className={styles.couponDate}>{v.C_name}</div>
+        <div className={styles.couponDate}>{v.c_name}</div>
       </div>
       <div className={styles.couponButton}>
 

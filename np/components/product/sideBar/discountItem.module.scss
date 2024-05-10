@@ -2,16 +2,19 @@
 /* side-bar總width */
 
 .sideBox {
-  border: var(--gray02) solid 1px;
+  border: var(--green03) solid 1.2px;
   border-radius: 5px;
-
+  // background-color: var(--green05);
   .discountText {
-    color: var(--gray01);
+    color: var(--green02);
   }
   .amount {
-    color: var(--gray01);
+    color: var(--green02);
   }
 }
 .sideBox:hover {
-  border: var(--green03) solid 1px;
+  // border: var(--yellow02) solid 3px;
+  // box-shadow: 0px 3px 10px 0.5px var(--green05);
+  background-color: var(--green05);
+  color: var(--white);
 }

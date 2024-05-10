@@ -14,7 +14,7 @@ export default function ProductSidebarDetail({
   handleStartHoverRating,
   handleCategoryCheckboxChange,
   resetFilters,
-  selectedCategories,
+  newCategories,
   categoryCounts,
 }) {
   return (
@@ -25,7 +25,7 @@ export default function ProductSidebarDetail({
         </div>
         <div className={`${styles.line}`}></div>
         <br />
-        <h6>商品類別</h6>
+        <h6 className="mb-3">商品類別</h6>
         {productCate
           .filter((cate) => cate.parentId === null)
           .map((category) => (
@@ -37,8 +37,8 @@ export default function ProductSidebarDetail({
                 type="checkbox"
                 id={`category-${category.cateId}`}
                 name={`category-${category.cateId}`}
-                className="me-2 checkbox"
-                checked={selectedCategories.includes(category.cateId)}
+                className="my-2 me-2 checkbox"
+                checked={newCategories.includes(category.cateId)}
                 onChange={() => {
                   handleCategoryCheckboxChange(category.cateId);
                   handleCategorySelect(category.cateId);
@@ -70,8 +70,8 @@ export default function ProductSidebarDetail({
               type="checkbox"
               id={`sub-category-${subCategory.cateId}`}
               name={`sub-category-${subCategory.cateId}`}
-              className="me-2 checkbox"
-              checked={selectedCategories.includes(subCategory.cateId)}
+              className="my-2 me-2 checkbox"
+              checked={newCategories.includes(subCategory.cateId)}
               onChange={() => {
                 handleCategoryCheckboxChange(subCategory.cateId);
                 handleCategorySelect(subCategory.cateId);
@@ -110,25 +110,6 @@ export default function ProductSidebarDetail({
           />
         </div>
         <h6 className="mt-4 mb-3">評分</h6>
-        {/* {[5, 4, 3, 2, 1].map((stars) => (
-          <div
-            key={stars}
-            className="input-grounp d-flex flex-row mb-1"
-            style={{ color: "#FFD783" }}
-          >
-            <input
-              type="checkbox"
-              id={`rating-${stars}`}
-              name={`rating-${stars}`}
-              checked={ratings.has(stars)}
-              onChange={() => handleRatingChange(stars)}
-              className="me-2 checkbox"
-            />
-            <label htmlFor={`rating-${stars}`} className="label-checkbox">
-              {"★".repeat(stars)}
-            </label>
-          </div>
-        ))} */}
         <div className="d-flex flex-row mb-4">
           {Array(5)
             .fill(1)

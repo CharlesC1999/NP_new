@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1001,
+    "user_id": 501,
+    "total_amount": 299.99,
+    "payment_method": "Credit Card",
+    "order_date": "2024-05-07",
+    "order_status": "Pending",
+    "recipient_name": "John Doe",
+    "shipping_address": "1234 Elm St, Springfield, IL",
+    "contact_phone": "555-1234",
+    "coupon_id": null,
+    "discount_amount": null
+  },
+  {
+    "id": 1002,
+    "user_id": 502,
+    "total_amount": 450.0,
+    "payment_method": "Line Pay",
+    "order_date": "2024-05-07",
+    "order_status": "Shipped",
+    "recipient_name": "Jane Smith",
+    "shipping_address": "9876 Oak St, Metropolis, NY",
+    "contact_phone": "555-5678",
+    "coupon_id": 15,
+    "discount_amount": 20.0
+  },
+  {
+    "id": 1003,
+    "user_id": 503,
+    "total_amount": 1200.0,
+    "payment_method": "Line Pay",
+    "order_date": "2024-05-07",
+    "order_status": "Delivered",
+    "recipient_name": "Alice Johnson",
+    "shipping_address": "5432 Pine St, Gotham, NJ",
+    "contact_phone": "555-9012",
+    "coupon_id": 18,
+    "discount_amount": 100.0
+  }
+]

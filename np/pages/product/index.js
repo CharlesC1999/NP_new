@@ -16,6 +16,8 @@ import Footer from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
 import Pagination from "@/components/product/pagination";
 import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarDiscount";
+import PaginationM from "@/components/paginationM";
+// import ProductCardList from "@/components/product/ProductCardList";
 
 // import PaginationRounded from "@/components/pagination";
 //荃做版本sideBar
@@ -38,24 +40,24 @@ import { useProductCategories } from "@/hooks/use-product-cate";
 // import items from "@/data/product/productItems.json";
 
 export default function Product() {
-  const [displayGrid, setDisplayGrid] = useState(true); //選擇控制grid
-  const [activeButton, setActiveButton] = useState("grid"); // 選擇哪一個是被選擇的狀態
-  // 切換到Grid模式
+  //選擇控制grid// 選擇哪一個是被選擇的狀態 // 切換到Grid模式// 切換到List模式
+  const [displayGrid, setDisplayGrid] = useState(true);
+  const [activeButton, setActiveButton] = useState("grid");
   const showGrid = () => {
     setDisplayGrid(true);
     setActiveButton("grid");
   };
-  // 切換到List模式
   const showList = () => {
     setDisplayGrid(false);
     setActiveButton("list");
   };
 
+  //清空篩選條件
   const resetFilters = () => {
     setPriceRange({ min: "", max: "" });
-    setRating(0);
+    setRating("");
     setHoverRating(0);
-    setSelectedCategories([]);
+    setNewCategories([]);
   };
   const [mayLikeProducts, setMayLikeProducts] = useState([]);
 
@@ -78,14 +80,13 @@ export default function Product() {
   const handleStartRating = (rating) => {
     setRating(rating);
   };
-
   const handleStartHoverRating = (hover) => {
     setHoverRating(hover);
   };
   const handleResetRating = () => {
     setRating(0);
   };
-
+  //排序
   const [orderby, setOrderby] = useState({
     sort: "product_price",
     order: "asc",
@@ -101,16 +102,15 @@ export default function Product() {
     [22, 14, 15, 16, 17, 18, 19, 20].includes(cate.cateId)
   );
   //布林值
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  // const [selectedCategories, setSelectedCategories] = useState([]);
 
   //useContext
-  // const { selectedCategories, setSelectedCategories, handleCategoryChange } =
-  //   useProductCategories();
-  // console.log(selectedCategories);
-  // // 當分類選擇變化時，更新分類
-  // const handleCategorySelectContext = (category_id) => {
-  //   setSelectedCategories([...selectedCategories, category_id]);
-  // };
+  const { newCategories, setNewCategories, handleNewCategoryChange } =
+    useProductCategories();
+  // 當分類選擇變化時，更新分類
+  const handleCategorySelectContext = (category_id) => {
+    setNewCategories([...newCategories, category_id]);
+  };
 
   //互動用selectedCategory
   //UI點擊服類
@@ -150,34 +150,33 @@ export default function Product() {
   };
   //係向分類checkBox狀態
   const handleCategoryCheckboxChange = (cateId) => {
-    setSelectedCategories((prev) => {
-      let newCategories = [...prev];
+    setNewCategories((prev) => {
+      let UICategories = [...prev];
       const currentIndex = prev.indexOf(cateId);
-
       if (currentIndex === -1) {
         // 如果当前分类未被选中，添加
         if (childCategoryIds.includes(cateId)) {
           // 添加子类别时，移除对应的父类别
           Object.keys(parentChildMap).forEach((parentId) => {
             if (parentChildMap[parentId].includes(cateId)) {
-              newCategories = newCategories.filter(
+              UICategories = UICategories.filter(
                 (id) => id !== parseInt(parentId)
               );
             }
           });
-          newCategories.push(cateId);
+          UICategories.push(cateId);
         } else if (parentCategoryIds.includes(cateId)) {
           // 添加父类别前，确保没有其子类别已被选中
           const hasChildSelected = parentChildMap[cateId].some((childId) =>
-            newCategories.includes(childId)
+            UICategories.includes(childId)
           );
           if (!hasChildSelected) {
-            newCategories.push(cateId);
+            UICategories.push(cateId);
           }
         }
       } else {
         // 已选中，则移除
-        newCategories.splice(currentIndex, 1);
+        UICategories.splice(currentIndex, 1);
 
         // 检查是否需要重新添加父类别
         if (childCategoryIds.includes(cateId)) {
@@ -187,16 +186,16 @@ export default function Product() {
           if (
             parentId &&
             !parentChildMap[parentId].some((childId) =>
-              newCategories.includes(childId)
+              UICategories.includes(childId)
             )
           ) {
             // 如果这个父类别的其他子类别都没有被选中，则重新添加父类别
-            newCategories.push(parseInt(parentId));
+            UICategories.push(parseInt(parentId));
           }
         }
       }
 
-      return newCategories;
+      return UICategories;
     });
   };
 
@@ -218,42 +217,33 @@ export default function Product() {
   };
 
   const router = useRouter();
-  const { categoryFromDetail } = router.query;
+  // const { categoryFromDetail } = router.query;
   // console.log(categoryFromDetail);
-
   const [queryParams, setQueryParams] = useState({
     page: 1,
     perpage,
     price_gte: priceRange.min || "",
     price_lte: priceRange.max || "",
-    category_id: categoryFromDetail || "",
+    category_id: newCategories.join(","),
     rating: "",
     order: orderby.order,
     sort: orderby.sort,
   });
+  console.log(queryParams);
 
   useEffect(() => {
     setQueryParams((prev) => ({
       ...prev,
+      page: page,
+      perpage,
       price_gte: priceRange.min || "",
       price_lte: priceRange.max || "",
-      rating: rating > 0 ? rating : "",
-      page: page,
-      category_id: selectedCategories.join(","),
+      category_id: newCategories.join(",") || "",
+      rating: rating || "",
       order: orderby.order,
       sort: orderby.sort,
     }));
-  }, [rating, page, priceRange, selectedCategories, orderby]);
-
-  useEffect(() => {
-    if (router.isReady) {
-      console.log("isReady", router.isReady, "query", router.query);
-      setQueryParams((prev) => ({
-        ...prev,
-        category_id: categoryFromDetail ? categoryFromDetail : "",
-      }));
-    }
-  }, [router.isReady]);
+  }, [priceRange, rating, orderby, perpage, newCategories, page]); // 包括所有可能影响 queryParams 的依赖
 
   // 请求产品数据
   useEffect(() => {
@@ -278,9 +268,11 @@ export default function Product() {
         console.error("请求产品数据失败:", e);
       }
     };
-
     getProducts();
-  }, [queryParams]); // queryParams 作为 useEffect 的依赖
+  }, [queryParams]);
+  console.log(newCategories);
+  // queryParams 作为 useEffect 的依赖
+  console.log(queryParams);
 
   const [reviewCount, setReviewCount] = useState(0);
   const TotalRow = total;
@@ -288,47 +280,33 @@ export default function Product() {
     <>
       <HeaderComponent />
       <Breadcrumbs />
-      <div
-        className={`container d-flex justify-content-center ${styles.wrapper} ${styles.Top40}`}
-      >
-        <div className={`${styles.sideBar}`}>
-          {/* <ProductSidebarCate /> */}
-          {/* <ProductSidebarDiscount
-            DisCountCategories={discountCategories}
-            handleCategoryClick={handleCategoryClick}
-          /> */}
-          <ProductSidebarDetail
-            onClick={handleResetRating}
-            priceRange={priceRange}
-            handleKeyDown={handleKeyDown}
-            price_gte={priceRange.min}
-            price_lte={priceRange.max}
-            rating={rating}
-            hoverRating={hoverRating}
-            handleStartRating={handleStartRating}
-            handleStartHoverRating={handleStartHoverRating}
-            handlePriceChange={handlePriceChange}
-            filteredSubcategories={filteredSubcategories}
-            productCate={normalCategories}
-            selectedCategory={selectedCategory}
-            handleCategorySelect={handleCategorySelect}
-            handleCategoryCheckboxChange={handleCategoryCheckboxChange}
-            selectedCategories={selectedCategories}
-            resetFilters={resetFilters}
-            categoryCounts={categoryCounts}
-          />
-
-          <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
-        </div>
-        <div className={`${styles.productW}`}>
-          <div className="mainDiscount">
-            {/* <div className={`${styles.DiscountTitleMain}`}>
-              <h4 className={`${styles.DiscountTitle}`}>限時特惠商品</h4>
-            </div> */}
-            {/* <div className={`${styles.DiscountBoxMain}`}> */}
-            {/* <div className={`${styles.DiscountBox}`}>
-                <img src="/index-images/Herosection02.png" alt="" />
-              </div> */}
+      <div className={`${styles.iconBG} d-flex justify-content-center`}>
+        <div
+          className={`container d-flex justify-content-center ${styles.wrapper} ${styles.Top40}`}
+        >
+          <div className={`${styles.sideBar}`}>
+            <ProductSidebarDetail
+              onClick={handleResetRating}
+              priceRange={priceRange}
+              handleKeyDown={handleKeyDown}
+              price_gte={priceRange.min}
+              price_lte={priceRange.max}
+              rating={rating}
+              hoverRating={hoverRating}
+              handleStartRating={handleStartRating}
+              handleStartHoverRating={handleStartHoverRating}
+              handlePriceChange={handlePriceChange}
+              filteredSubcategories={filteredSubcategories}
+              productCate={normalCategories}
+              selectedCategory={selectedCategory}
+              handleCategorySelect={handleCategorySelect}
+              handleCategoryCheckboxChange={handleCategoryCheckboxChange}
+              newCategories={newCategories}
+              resetFilters={resetFilters}
+              categoryCounts={categoryCounts}
+            />
+          </div>
+          <div className={`${styles.productW} d-flex jstify-content-center`}>
             <div className={`${styles.ProductFilter} pt-sm-4 pt-0`}>
               <ProductFilter
                 onShowGrid={showGrid}
@@ -338,38 +316,77 @@ export default function Product() {
                 setOrderby={setOrderby}
               />
             </div>
-            {/* </div> */}
-          </div>
-          <div className={`d-flex ${styles.productCard1}`}>
-            {products.map((item) => (
-              <div key={item.id}>
-                <Link
-                  href={`/product/${item.id}`}
-                  className="text-decoration-none"
-                >
-                  {" "}
-                  {/* You can style this <a> tag as needed */}
-                  <ProductCard02
-                    className={`mx-sm-2 mx-0`}
-                    id={item.id}
-                    img={item.image_urls}
-                    category_id={item.category_id}
-                    name={item.product_name}
-                    description={item.product_description}
-                    price={item.product_price}
-                    disPrice={item.discount_price}
-                    average_rating={item.average_rating}
-                  />
-                </Link>
+            <div className={`d-flex ${styles.productCard1}`}>
+              {products.length > 0 ? (
+                // Render products if there are any
+                products.map((item) => (
+                  <div key={item.id}>
+                    <Link
+                      href={`/product/${item.id}`}
+                      className="text-decoration-none"
+                    >
+                      {displayGrid ? (
+                        <ProductCard02
+                          className={`mx-sm-2 mx-0`}
+                          id={item.id}
+                          img={item.image_urls}
+                          category_id={item.category_id}
+                          name={item.product_name}
+                          description={item.product_description}
+                          price={item.product_price}
+                          disPrice={item.discount_price}
+                          average_rating={item.average_rating}
+                        />
+                      ) : (
+                        <ProductCardList
+                          id={item.id}
+                          img={item.image_urls}
+                          category_id={item.category_id}
+                          name={item.product_name}
+                          description={item.product_description}
+                          price={item.product_price}
+                          disPrice={item.discount_price}
+                          average_rating={item.average_rating}
+                        />
+                      )}
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                // Render no result message and image if there are no products
+                <div className={`d-flex justify-content-center my-5`}>
+                  <h3
+                    className={`d-flex justify-content-center text-align-center`}
+                  >
+                    查詢無結果唷！
+                  </h3>
+                  <div>
+                    <img src="/index-images/noResultBG.png" alt="" />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="d-flex justify-content-center mb-3">
+              <div
+                className={`${styles.pagination} justify-content-center d-sm-flex d-none mt-5`}
+              >
+                <Pagination
+                  count={pageCount}
+                  page={page}
+                  onChange={changePage} // 使用新的 changePage 函数
+                />
               </div>
-            ))}
-          </div>
-          <div className="justify-content-center d-flex mt-5">
-            <Pagination
-              count={pageCount}
-              page={page}
-              onChange={changePage} // 使用新的 changePage 函数
-            />
+              {/* 手機板分頁用 */}
+              <div
+                className={`${styles.paginationM} d-flex d-sm-none justifu-content-center`}
+              >
+                <PaginationM
+                  total={total}
+                  perpage={perpage}
+                  onChange={(event, value) => setPage(value)}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

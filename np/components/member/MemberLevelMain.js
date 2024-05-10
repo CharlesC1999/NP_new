@@ -44,7 +44,7 @@ const calculateLevel = (total) => {
     return "Unknown";
   }
 };
-  const getCoupons = async () => {
+  const getLevel = async () => {
     const url = 'http://localhost:3005/api/member-level';
   
     // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
@@ -137,7 +137,7 @@ console.log(needmoney);
   // 樣式2: didMount階段只執行一次
   useEffect(() => {
     // 頁面初次渲染之後伺服器要求資料
-    getCoupons()
+    getLevel()
   }, [])
 
 

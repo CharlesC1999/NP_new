@@ -1,5 +1,5 @@
 .object-fit {
-  width: 99%;
+  width: 98.8%;
   height: 100%;
   object-fit: cover;
   border-radius: 5px 5px 0px 0px;
@@ -16,6 +16,7 @@
     border-radius: 5px;
   }
   .product-info {
+    background: var(--white);
     text-decoration: none;
     padding: 20px;
     .product-name {
@@ -43,8 +44,8 @@
       width: 100%;
       .price {
         color: var(--green02);
-        font-size: 0.9rem;
-        font-weight: 700;
+        font-size: 1.1rem;
+        font-weight: 600;
       }
       .price-buy {
         width: 100%;

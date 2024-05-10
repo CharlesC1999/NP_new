@@ -1,123 +1,116 @@
-.card1BodyList{
-    width: 205px;
-    display: flex;
-    /* 垂直方向排列 */
-    flex-direction: column;
-    margin: 15px 0px 0px 15px;
+.card1BodyList {
+  width: 205px;
+  display: flex;
+  /* 垂直方向排列 */
+  flex-direction: column;
+  margin: 15px 0px 0px 15px;
 
-    & .card1Title a {
-        color: var(--black);
-        text-decoration: none !important;
-
-        &:hover {
-            text-decoration: none;
-        }
-    }
-}
-
-.card1List{
-    width: 340px;
-    height: auto;
-    border: 1px solid var(--gray02);
-    border-radius: 5px;
-    margin-bottom: 10px;
-    box-shadow: 1px 1px 1px var(--gray02);
-    
-}
-
-.card1ListImg{
-    width: 80px;
-    height: 80px;
-    margin: 15px 0px 15px 15px;
-    
-
-    & img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-
-.iconButton{
-    border: none;
-    padding: 0;
-    background: none;
-    /* 移除背景色 */
-    cursor: pointer;
-}
-
-.starColor{
-    color: var(--yellow02);
-}
-
-.heartColor{
-    color: var(--green02);
-    margin-right: 5px;
-}
-
-.productCard1{
-    display: flex;
-    justify-content: flex-start;
-    gap: 7px;
-    row-gap: 30px;
-    flex-wrap: wrap;
-}
-
-
-.card1Btn{
-    position: relative;
-    width: 30px;
-    height: 25px;
-    border-radius: 5px;
-    background-color: var(--green05);
-    
+  & .card1Title a {
+    color: var(--black);
+    text-decoration: none !important;
 
     &:hover {
-        text-decoration: none;
-        color: #000;
+      text-decoration: none;
     }
-
-    & i {
-        color: var(--green02);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-    }
+  }
 }
 
-.card1Heart{
-    
-    width: auto;
-    height: 30px;
+.card1List {
+  width: 340px;
+  height: auto;
+  border: 1px solid var(--gray02);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 1px var(--gray02);
+}
+
+.card1ListImg {
+  width: 80px;
+  height: 80px;
+  margin: 15px 0px 15px 15px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.iconButton {
+  border: none;
+  padding: 0;
+  background: none;
+  /* 移除背景色 */
+  cursor: pointer;
+}
+
+.starColor {
+  color: var(--yellow02);
+}
+
+.heartColor {
+  color: var(--green02);
+  margin-right: 5px;
+}
+
+.productCard1 {
+  display: flex;
+  justify-content: flex-start;
+  gap: 7px;
+  row-gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card1Btn {
+  position: relative;
+  width: 30px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: var(--green05);
+
+  &:hover {
+    text-decoration: none;
+    color: #000;
+  }
+
+  & i {
+    color: var(--green02);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.card1Heart {
+  width: auto;
+  height: 30px;
 }
 
 .iconbutton[disabled] {
-    cursor: auto;
+  cursor: auto;
 }
 
-.card1Text{
-    margin-block: 0px;
+.card1Text {
+  margin-block: 0px;
 
-    & h6 {
-        color: var(--green03);
-        font-size: 14px;
-        margin-top: 5px;
-        font-weight: 700;
-    }
+  & h6 {
+    color: var(--green03);
+    font-size: 14px;
+    margin-top: 5px;
+    font-weight: 700;
+  }
 
-    & p {
-        /* 橫線 */
-        text-decoration: line-through;
-        margin-top: 6px;
-        font-weight: 600;
-        font-size: 12px;
-    }
-
+  & p {
+    /* 橫線 */
+    text-decoration: line-through;
+    margin-top: 6px;
+    font-weight: 600;
+    font-size: 12px;
+  }
 }
 .heartIcon p {
-    font-size: 13px;
-    line-height: 22px;
+  font-size: 13px;
+  line-height: 22px;
+  color: var(--black);
 }

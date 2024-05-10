@@ -2,16 +2,24 @@
 .wrapper {
   width: 1440px;
 }
+.iconBG {
+  background-image: url("/index-images/iconBG04.png");
+  background-position: calc(50% + 20px) calc(50% + 10px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* filter: opacity(50%); */
+}
 
 .container {
-  background-color: var(--white, #fefefe);
+  /* background-color: var(--white, #fefefe); */
+  /* background-image: url("/index-images/iconBG.png"); */
   display: flex;
   justify-content: center;
   /* 容器頂部開始垂直排列，而不是水平排列 */
   /* flex-direction: column; */
 
   /*1440 左右兩邊間距為 100px */
-  padding: 0px 0px;
+  /* padding: 0px 0px; */
 }
 
 .Top40 {
@@ -34,7 +42,8 @@
 /* side-bar總width */
 .sideBar {
   width: 250px;
-  margin-right: 100px;
+  margin-right: 70px;
+  margin-top: 50px;
 }
 
 .sideTitle {
