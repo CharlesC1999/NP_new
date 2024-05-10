@@ -84,13 +84,13 @@ export default function SpeakerDetail() {
     id < speakers.length - 4
       ? (filterSpeakers = speakers.slice(id, id + 5))
       : (filterSpeakers = speakers.slice(speakers.length - 5, speakers.length));
-    console.log(filterSpeakers);
+    // console.log(filterSpeakers);
     setFilteredSpeakers(filterSpeakers);
   }, [speakers, router.query.sid]);
   // 頁面初次渲染後向伺服器要求資料
   // 監聽router.isReady，true 或是sid有變動時，都會重新向伺服器取得資料
   useEffect(() => {
-    console.log("isReady", router.isReady, "query", router.query);
+    // console.log("isReady", router.isReady, "query", router.query);
     if (router.isReady) {
       getSpeakers(router.query.sid);
     }
