@@ -5,7 +5,7 @@ import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
-import HeaderSetting from "@/styles/class_styles/headerSetting.module.scss";
+import HeaderSetting from "@/styles/headerSetting.module.scss";
 
 import Footer from "../../components/footer";
 

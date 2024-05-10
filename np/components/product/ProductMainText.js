@@ -20,6 +20,7 @@ function ProductMainText({
   discount_price,
   review_comments,
   average_rating,
+  img,
   upload_date,
   handleReviewCount,
 }) {
@@ -66,7 +67,7 @@ function ProductMainText({
               return toast.error("請先登入再使用!");
             }
             notifyBtn();
-            addProduct({ id, name, price, description, discount_price });
+            addProduct({ id, name, price, description, discount_price, img });
           }}
         >
           &nbsp;&nbsp;加入購物車{" "}

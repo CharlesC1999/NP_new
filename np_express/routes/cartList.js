@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid'
 import 'dotenv/config.js'
 import authenticateToken from '#middlewares/authenticateToken.js'
 
+// 定義安全的私鑰字串
 const linePayClient = createLinePayClient({
   channelId: process.env.LINE_PAY_CHANNEL_ID,
   channelSecretKey: process.env.LINE_PAY_CHANNEL_SECRET,
@@ -59,18 +60,18 @@ router.post('/', async (req, res, next) => {
     const allProducts = [...items, ...productItems]
     // 要傳送給line pay的訂單資訊
     const lineOrder = {
-      id: orderId,
+      orderId: orderId,
       currency: 'TWD',
-      amount: finalPrice,
+      amount: req.body.finalPrice,
       packages: [
         {
           id: packageId,
-          amount: finalPrice,
+          amount: req.body.finalPrice,
           products: [
             {
               name: '全部商品',
               quantity: 1,
-              price: finalPrice,
+              price: req.body.finalPrice,
             },
           ],
         },
@@ -78,6 +79,7 @@ router.post('/', async (req, res, next) => {
       options: { display: { locale: 'zh_TW' } },
     }
 
+    console.log('lineOrder', lineOrder)
     // 創建主訂單
     const order = await Orders.create({
       order_id: orderId, // 使用生成的 UUID
@@ -151,74 +153,71 @@ router.post('/', async (req, res, next) => {
 // 資料格式參考 https://enylin.github.io/line-pay-merchant/api-reference/request.html#example
 
 router.get('/reserve', async (req, res) => {
-  console.log(req.orderId)
-  console.log('Received orderId:', req.query.orderId)
+  // console.log(req.orderId)
+  // console.log('Received', req.query)
+  // console.log('Received orderId:', req.query.orderId)
 
-  if (!req.query.lineOrder) {
+  if (!req.query) {
     return res.json({ status: 'error', message: 'order id不存在' })
   }
 
   const orderId = req.query.orderId
 
+  console.log('orderId', orderId)
   // 設定重新導向與失敗導向的網址
   const redirectUrls = {
     confirmUrl: process.env.REACT_REDIRECT_CONFIRM_URL,
     cancelUrl: process.env.REACT_REDIRECT_CANCEL_URL,
   }
 
-  // 從資料庫取得訂單資料
-  const orderRecord = await Orders.findByPk(id, {
+  // // 從資料庫取得訂單資料
+  const orderRecord = await Orders.findByPk(orderId, {
     raw: true, // 只需要資料表中資料
-    // order_info記錄要向line pay要求的訂單json
   })
+  // console.log('orderRecord:', orderRecord)
+  // // order_info記錄要向line pay要求的訂單json
   const order = JSON.parse(orderRecord.order_info)
+  console.log('order', order)
 
-  //const order = cache.get(orderId)
-  console.log(`獲得訂單資料，內容如下：`)
-  console.log('-------order', order)
-  console.log(orderRecord)
-  // const orderRecord = await findOne('orders', { order_id: orderId })
-
-  //
+  console.log('JSON being sent:', JSON.stringify({ ...order, redirectUrls }))
+  // //
   try {
     // 向line pay傳送的訂單資料
     const linePayResponse = await linePayClient.request.send({
       body: { ...order, redirectUrls },
     })
 
-    // 深拷貝一份order資料
-    const reservation = JSON.parse(JSON.stringify(order))
+    // const reservation = JSON.parse(JSON.stringify(order))
 
-    reservation.returnCode = linePayResponse.body.returnCode
-    reservation.returnMessage = linePayResponse.body.returnMessage
-    reservation.transactionId = linePayResponse.body.info.transactionId
-    reservation.paymentAccessToken =
-      linePayResponse.body.info.paymentAccessToken
+    // reservation.returnCode = linePayResponse.body.returnCode
+    // reservation.returnMessage = linePayResponse.body.returnMessage
+    // reservation.transactionId = linePayResponse.body.info.transactionId
+    // reservation.paymentAccessToken =
+    //   linePayResponse.body.info.paymentAccessToken
 
-    console.log(`預計付款資料(Reservation)已建立。資料如下:`)
+    // console.log(`預計付款資料(Reservation)已建立。資料如下:`)
     // console.log(reservation)
 
-    // 在db儲存reservation資料
-    const result = await Purchase_Order.update(
-      {
-        reservation: JSON.stringify(reservation),
-        transaction_id: reservation.transactionId,
-      },
-      {
-        where: {
-          id: orderId,
-        },
-      }
-    )
+    // // 儲存在資料庫
+    // const result = await Orders.update(
+    //   {
+    //     reservation: JSON.stringify(reservation),
+    //     transaction_id: reservation.transactionId,
+    //   },
+    //   {
+    //     where: {
+    //       order_id: orderId,
+    //     },
+    //   }
+    // )
 
     // console.log(result)
-
-    // 導向到付款頁面， line pay回應後會帶有info.paymentUrl.web為付款網址
-    res.redirect(linePayResponse.body.info.paymentUrl.web)
-  } catch (e) {
+    // console.log(linePayResponse.body.info.paymentUrl.web)
+    // // 導向到付款頁面， line pay回應後會帶有info.paymentUrl.web為付款網址
+    // res.redirect(linePayResponse.body.info.paymentUrl.web)
+  } catch (error) {
     console.log('error', e)
   }
-  //
 })
 
 export default router

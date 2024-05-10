@@ -274,7 +274,8 @@ const ShopCart3 = () => {
       console.log("orderToLinePay", orderToLinePay);
       // console.log(lineOrder.id);
       if (result.isConfirmed) {
-        const orderId = `orderId=${orderToLinePay.data.lineOrder.id}`;
+        const orderId = `orderId=${orderToLinePay.data.lineOrder.orderId}`;
+        console.log("Is confirmed:", result.isConfirmed);
         fetch(`http://localhost:3005/api/cartList/reserve?${orderId}`, {
           method: "GET",
           headers: {
@@ -289,6 +290,8 @@ const ShopCart3 = () => {
           .catch((error) => {
             console.error("第二個按鈕", error);
           });
+        const url = `http://localhost:3005/api/cartList/reserve?${orderId}`;
+        console.log("Request URL:", url);
       }
     });
   };
@@ -473,7 +476,7 @@ const ShopCart3 = () => {
           </section>
 
           {/*  */}
-          <p>Order ID: {lineOrder.id}</p>
+          <p>Order ID: {lineOrder.orderId}</p>
           <p>Currency: {lineOrder.currency}</p>
           <p>Total Amount: {lineOrder.amount}</p>
 

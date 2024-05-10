@@ -7,7 +7,7 @@ const Commodity = () => {
     { id: 1, count: 1, name: "cake初級班", price: 1200 },
     { id: 2, count: 1, name: "肉捲初級班", price: 1000 },
   ];
-  const [classData, classProductsData] = useState(classIndex);
+  // const [classData, classProductsData] = useState(classIndex);
 
   const prodcts = [
     { id: 0, count: 1, name: "肉桂捲", price: 1500 },
