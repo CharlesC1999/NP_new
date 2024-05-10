@@ -38,7 +38,7 @@ const MemberPageMain2 = ({
           <div className={styles.mUserimage}>
             <div className={`rounded-circle  ${styles.mUImage}`}>
               <img
-                src={`/images/member/${userData.User_image}`}
+                src={`http://localhost:3005/avatar/${userData.User_image}`}
                 alt=""
                 className="w-100 h-100 object-fit-cover rounded-circle"
               />
@@ -169,7 +169,7 @@ const MemberPageMain2 = ({
               {/* // ! 會員基本資料無須選擇圖片，修改資料才需要 */}
               <div className={styles.userImageBig}>
                 <img
-                  src={`/images/member/${userData.User_image}`}
+                  src={`http://localhost:3005/avatar/${userData.User_image}`}
                   alt=""
                   className="w-100 h-100 object-fit-cover"
                 />

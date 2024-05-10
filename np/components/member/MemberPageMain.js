@@ -447,7 +447,7 @@ const MemberPageMain = () => {
                   src={
                     fileChanged
                       ? previewURL
-                      : `/images/member/${userData.User_image}`
+                      : `http://localhost:3005/avatar/${userData.User_image}`
                   }
                   alt=""
                   className="w-100 h-100 object-fit-cover"

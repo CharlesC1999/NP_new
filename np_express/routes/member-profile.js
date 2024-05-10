@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     // 存放目錄
     callback(
       null,
-      'C:\\Users\\iii_student\\Documents\\NP_new\\np\\public\\images\\member'
+      'public/avatar/'
     )
   },
   filename: function (req, file, callback) {

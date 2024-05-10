@@ -65,7 +65,7 @@ const Sidebar = () => {
           <div className={`rounded-circle overflow-hidden ${styles.userimage}`}>
             <img
               className="w-100 h-100 object-fit-cover"
-              src={`/images/member/${userData.User_image}`}
+              src={`http://localhost:3005/avatar/${userData.User_image}`}
               alt=""
             />
           </div>
