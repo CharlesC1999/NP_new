@@ -4,23 +4,19 @@ export default async function (sequelize) {
   return sequelize.define(
     'Line_member', //- 與檔案同名，要大寫
     {
-      line_uid: {
+      id: {
         type: DataTypes.INTEGER(10),
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
+      line_uid: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: true,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: true,
-        },
       },
       photo_url: {
         type: DataTypes.STRING,
