@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 import CheckBoxCustom from "@/components/checkbox-custom/RecipeCheckbox.js/RecipeCheckBox";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailRelatedProducts.module.scss";
+// 給checkbox的icon
+import { FaCheck } from "react-icons/fa6";
+import { set } from "lodash";
 
 export default function DetailRelatedProducts({ recipeID = "" }) {
+  // TODO 暫時給checkbox的狀態
+  const [checkAll, setCheckAll] = useState(true);
+
   // 最一開始從後端得到的相關商品列表
   const [initProductsFetch, setInitProductsFetch] = useState([]);
 
@@ -21,9 +27,33 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
   };
 
   // 用來map的相關產品state
+  //增加商品數量，在後面的useEffect中設定state
   const [products, setProducts] = useState([]);
 
-  //增加商品數量
+  // 處理勾選商品
+  const handleCheck = (id) => {
+    const nextProducts = products.map((v) => {
+      if (v.id === id) {
+        return { ...v, checked: !v.checked };
+      } else {
+        return v;
+      }
+    });
+    setProducts(nextProducts);
+  };
+
+  // 全選的核取方塊用的事件處理函式
+  const handleToggleCheckedAll = (e) => {
+    setCheckAll(!checkAll);
+    const nextProducts = products.map((v, i) => {
+      // 強制所有選項物件的checked屬性，和全選的e.target.checked完全一致
+      return { ...v, checked: e.target.checked };
+    });
+
+    // 狀態修改通用第3步
+    setProducts(nextProducts);
+  };
+
   const increaseItem = (id) => {
     const newItems = products.map((v) => {
       if (v.id === id) {
@@ -68,10 +98,17 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
   useEffect(() => {
     // 擴充相關商品的數量屬性跟checked屬性
     const initProducts = initProductsFetch.map((v) => {
-      return { ...v, qty: 1, checked: false };
+      return { ...v, qty: 1, checked: true };
     });
     setProducts(initProducts);
   }, [initProductsFetch]);
+
+  // !!! 用useEffect監聽products的每個checked，如果都有checked就設定全選是true
+  useEffect(() => {
+    if (products.every((v) => v.checked)) {
+      setCheckAll(true);
+    }
+  }, [products]);
 
   return (
     <>
@@ -88,7 +125,26 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
             className={`${styles["related-products-top"]} d-flex justify-content-between`}
           >
             <div className={`${styles["top-left"]} d-flex align-items-end`}>
-              <CheckBoxCustom />
+              {/* // *** checkAll */}
+              <div className={styles["checkbox-wrapper"]}>
+                <FaCheck
+                  style={{ "font-size": "16px" }}
+                  className={`${styles["fa-check"]} ${
+                    products.every((v) => v.checked) ? "d-block" : "d-none"
+                  }`}
+                />
+                <input
+                  // onChange={handleToggleCheckedAll}
+                  onClick={(e) => {
+                    handleToggleCheckedAll(e);
+                  }}
+                  checked={checkAll}
+                  type="checkbox"
+                  className={`${styles["test"]} ${
+                    products.every((v) => v.checked) ? styles.checked : " "
+                  }`}
+                />
+              </div>
               <p className={styles["check-all"]}>全選</p>
             </div>
             <div className={`${styles["top-right"]} d-xxl-flex d-none`}>
@@ -104,7 +160,25 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                 <div
                   className={`col-12 col-xxl-8 ${styles["middle-left"]} d-flex align-items-center`}
                 >
-                  <CheckBoxCustom />
+                  {/* // *** checkbox */}
+                  <div className={styles["checkbox-wrapper"]}>
+                    <FaCheck
+                      style={{ "font-size": "16px" }}
+                      className={`${styles["fa-check"]} ${
+                        v.checked ? "d-block" : "d-none"
+                      }`}
+                    />
+                    <input
+                      onChange={() => {
+                        handleCheck(v.id);
+                      }}
+                      checked={v.checked}
+                      type="checkbox"
+                      className={`${styles["test"]} ${
+                        v.checked ? styles.checked : ""
+                      }`}
+                    />
+                  </div>
                   <div className={styles["product-pic"]}>
                     <img
                       className="w-100 h-100 object-fit-cover"
