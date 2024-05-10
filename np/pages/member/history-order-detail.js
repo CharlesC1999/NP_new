@@ -21,16 +21,17 @@ const HistoryOrderDetail = () => {
   // !!注意!! 在應用程式執行過程中，務必要保持狀態維持同樣的資料類型
   const [orderDetail, setOrderDetail] = useState([])
   const [coupons, setCoupons] = useState([])
-
-  const couponid = orderDetail.length > 0 ? orderDetail[0].O_coupon_ID : null;
+ 
+  const couponid = orderDetail.length > 0 ? orderDetail[0].O_coupon_id : null;
   console.log(couponid);
-  const couponIdExists = coupons.some(item => item.Coupon_ID === couponid);
+  const couponIdExists = coupons.some(item => item.coupon__i_d  === couponid);
   console.log(couponIdExists);
   let useCoupon;
+  
   if (couponIdExists) {
-    let coupon = coupons.find(item => item.Coupon_ID === couponid);
-    let couponName = coupon.C_name;
-    let couponDiscount = coupon.Discount_amount;
+    let coupon = coupons.find(item => item.coupon__i_d === couponid);
+    let couponName = coupon.c_name;
+    let couponDiscount = coupon.discount_amount;
     console.log(couponDiscount);
     const discountAmount = parseFloat(couponDiscount);
     let displayText;
@@ -45,7 +46,7 @@ const HistoryOrderDetail = () => {
       }
     } else {
       // 如果 discountAmount 不是有效的数字，直接使用原始值
-      displayText = v.Discount_amount;
+      displayText = v.discount_amount;
     }
     useCoupon = couponName + "/" + displayText;
   } else {
@@ -54,21 +55,21 @@ const HistoryOrderDetail = () => {
   console.log(orderDetail);
   console.log(coupons);
   // const totaltotal = orderDetail.reduce((total, order) => {
-  //   return total + (order.price * order.Quantity);
+  //   return total + (order.price * order.quantity);
   // }, 0);
 
   // console.log(totaltotal); // 打印所有商品價格的總和
   // let totaltotal = orderDetail.reduce((total, order) => {
-  //   return total + (order.price * order.Quantity);
+  //   return total + (order.price * order.quantity);
   // }, 0);
   // let totaltotal = orderDetail.reduce((total, order) => {
-  //   return total + (order.price * order.Quantity);
+  //   return total + (order.price * order.quantity);
   // }, 0);
 
   //拿出總價 //取出狀態裡的某個東西
   let totalPrice;
   orderDetail.forEach((v, i) => {
-    totalPrice = v.total_price
+    totalPrice = v.order_total_price
     console.log(totalPrice);
   });
   console.log(totalPrice);
@@ -77,7 +78,7 @@ const HistoryOrderDetail = () => {
 
   // if (couponIdExists) {
   //   // 如果有適用的優惠券，計算折扣後的總價
-  //   let coupon = coupons.find(item => item.Coupon_ID === couponid);
+  //   let coupon = coupons.find(item => item.coupon_id === couponid);
   //   let couponDiscount = parseFloat(coupon.Discount_amount);
 
   //   if (!isNaN(couponDiscount)) {
@@ -177,7 +178,7 @@ const HistoryOrderDetail = () => {
       {/* {auth.isLoggedIn ? ( */}
      
         <div className={styles3.out}>
-        <button className={`${styles3.cancel} btn`}>取消訂單</button>
+        
           <div className={`${styles3.desktop}  ${styles3.container2}  container `}>
             
             {/* 欄位一顯示商品 */}
@@ -196,15 +197,15 @@ const HistoryOrderDetail = () => {
                 <div className={`${styles3.fc} col text-center`}>小計</div>
 
               </div>
-              {orderDetail.filter(v => v.itemType === 1).map((v, i) => {
+              {orderDetail.filter(v => v.product_type === 'product').map((v, i) => {
 
                 return (
                   <div className="row py-2" key={v.Order_Item_ID}>
 
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.product_name}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price * v.Quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price * v.quantity}</div>
 
                   </div>
 
@@ -232,7 +233,7 @@ const HistoryOrderDetail = () => {
 
               </div>
 
-              {orderDetail.filter(v => v.itemType === 2).map((v, i) => {
+              {orderDetail.filter(v => v.product_type === 'class').map((v, i) => {
 
                 return (
 
@@ -240,8 +241,8 @@ const HistoryOrderDetail = () => {
 
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.class_name}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.Quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price * v.Quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price * v.quantity}</div>
 
                   </div>
                 )
@@ -263,10 +264,10 @@ const HistoryOrderDetail = () => {
                 優惠券: {useCoupon}
 
               </div>
-              <div className={`${styles3.orderEnd} `}>
+              {/* <div className={`${styles3.orderEnd} `}>
                 運費: 0元
 
-              </div>
+              </div> */}
 
               <div className={`${styles3.orderEnd} `}>
                 合計: {totalPrice} 元
@@ -290,11 +291,11 @@ const HistoryOrderDetail = () => {
                     </div>
                     <div className="row py-2">
                       <div className={`${styles3.fb} pt-2 col-2`}>付款方式</div>
-                      <div className={`${styles3.fb} pt-2 col-2`}>刷卡</div>
+                      <div className={`${styles3.fb} pt-2 col-2`}>{v.payment_method}</div>
                     </div>
                     <div className="row py-2">
                       <div className={`${styles3.fb} pt-2 col-2`}>收件者</div>
-                      <div className={`${styles3.fb} pt-2 col-2`}>{v.user_name}</div>
+                      <div className={`${styles3.fb} pt-2 col-2`}>{v.recipient_name}</div>
                     </div>
                     <div className="row py-2">
                       <div className={`${styles3.fb} pt-2 col-2`}>Email</div>
@@ -302,7 +303,7 @@ const HistoryOrderDetail = () => {
                     </div>
                     <div className="row py-2">
                       <div className={`${styles3.fb} pt-2 col-2`}>取貨地址</div>
-                      <div className="col-4 fb pt-2">台北市中正區重慶南路一段122號</div>
+                      <div className="col-4 fb pt-2">{v.shipping_address}</div>
                     </div>
 
                   </section>
@@ -329,7 +330,7 @@ const HistoryOrderDetail = () => {
             {/* </div> */}
           </div>
 
-          {/* 手機size */}
+          {/* 手機 */}
 
           <div className={`${styles3.mobile}  ${styles3.container2} container`}>
             {/*  */}
@@ -344,12 +345,12 @@ const HistoryOrderDetail = () => {
               <div className={`${styles3.topBar} row`}>
                 <div className={`${styles3.fc} col`}>商品購買明細</div>
               </div>
-              {orderDetail.filter(v => v.itemType === 1).map((v, i) => {
+              {orderDetail.filter(v => v.product_type === 'product').map((v, i) => {
 
                 return (
                   <div key={v.Order_Item_ID}>
                     <div className="row py-2 mt-1">
-                      <div className={`${styles3.fc} row ps-4 `}>{v.product_name} X {v.Quantity}</div>
+                      <div className={`${styles3.fc} row ps-4 `}>{v.product_name} X {v.quantity}</div>
 
                       <div className="row mt-4">
 
@@ -367,7 +368,7 @@ const HistoryOrderDetail = () => {
                       <div
                         className={`${styles3.fb} col text-center text-success fw-bold`}
                       >
-                       {v.product_price * v.Quantity}
+                       {v.product_price * v.quantity}
                       </div>
                     </div>
                   </div>
@@ -385,16 +386,16 @@ const HistoryOrderDetail = () => {
               <div className={`${styles3.topBar} row`}>
                 <div className={`${styles3.fc} col`}>課程購買明細</div>
               </div>
-              {orderDetail.filter(v => v.itemType === 2).map((v, i) => {
+              {orderDetail.filter(v => v.product_type === 'class').map((v, i) => {
 
                 return (
                   <div key={v.Order_Item_ID}>
                     <div className="row py-2 mt-1">
-                      <div className={`${styles3.fc} row ps-4 `}>{v.class_name} X {v.Quantity}</div>
+                      <div className={`${styles3.fc} row ps-4 `}>{v.class_name} X {v.quantity}</div>
 
                       <div className="row mt-4">
 
-                        <div className={`${styles3.fb} col fw-bold`}>{v.C_price}</div>
+                        <div className={`${styles3.fb} col fw-bold`}>{v.c_price * v.quantity}</div>
                       </div>
                     </div>
 
@@ -408,7 +409,7 @@ const HistoryOrderDetail = () => {
                       <div
                         className={`${styles3.fb} col text-center text-success fw-bold`}
                       >
-                        {v.C_price * v.Quantity}
+                        {v.c_price * v.quantity}
                       </div>
                     </div>
                   </div>
@@ -421,10 +422,10 @@ const HistoryOrderDetail = () => {
                   優惠券: {useCoupon}
 
                 </div>
-                <div className={`${styles3.orderEnd} `}>
+                {/* <div className={`${styles3.orderEnd} `}>
                   運費: 之後有再加上吧
 
-                </div>
+                </div> */}
                 <div className={`${styles3.orderEnd} `}>
                   總價:  {totalPrice}元
                 </div>
@@ -450,11 +451,11 @@ const HistoryOrderDetail = () => {
                     </div>
                     <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
                       <div className={`${styles3.fb} col mt-1`}>付款方式</div>
-                      <div className={`${styles3.fb} col mt-1`}>刷卡</div>
+                      <div className={`${styles3.fb} col mt-1`}>{v.payment_method}</div>
                     </div>
                     <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
                       <div className={`${styles3.fb} col mt-1`}>收件者</div>
-                      <div className={`${styles3.fb} col mt-1`}>{v.user_name}</div>
+                      <div className={`${styles3.fb} col mt-1`}>{v.recipient_name}</div>
                     </div>
                     <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
                       <div className={`${styles3.fb} col mt-1`}>Email</div>
@@ -462,7 +463,7 @@ const HistoryOrderDetail = () => {
                     </div>
                     <div className="row py-2" style={{ borderTop: "1px solid #78cea6" }}>
                       <div className={`${styles3.fb} col mt-1`}>取貨地址</div>
-                      <div className={`${styles3.fb} col mt-1`}>台北市xxxxxxxxx</div>
+                      <div className={`${styles3.fb} col mt-1`}>{v.shipping_address}</div>
                     </div>
 
                   </section>
