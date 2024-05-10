@@ -209,8 +209,16 @@ const MemberPageMain = () => {
           {/* 手機板大頭貼 */}
           <div className={styles.mUserimage}>
             <div className={styles.mUImage}>
-              <img src="" alt="" />
-              <div className={styles.camera}>
+              <img
+                className="rounded-circle overflow-hidden w-100 h-100 object-fit-cover"
+                src={
+                  fileChanged
+                    ? previewURL
+                    : `http://localhost:3005/avatar/${userData.User_image}`
+                }
+                alt=""
+              />
+              <div onClick={handleClickFile} className={styles.camera}>
                 <label htmlFor="fileUpload" className={styles.uploadBtn}>
                   {" "}
                   <svg
