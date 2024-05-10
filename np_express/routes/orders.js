@@ -11,6 +11,21 @@ const { Orders } = sequelize.models
 // 一般sql
 import db from '#configs/mysql.js'
 
+router.post('/add-review', async (req, res) => {
+  const { userId, productId, comment, rating, created_at } = req.body
+  try {
+    const result = await db.query(
+      `INSERT INTO product_review (user_id, product_id, comment, rating, created_at)
+       VALUES (?, ?, ?, ?, ?)`,
+      [userId, productId, comment, rating, created_at]
+    )
+    res.status(201).json({ message: 'Review added successfully' })
+  } catch (error) {
+    console.error('Database error:', error)
+    res.status(500).json({ message: 'Failed to add review' })
+  }
+})
+
 // 列表頁
 // my-products?brand_ids=1,2&name_like=pixel&price_gte=10000&price_lte=15000&sort=price&order=asc&page=1&perpage=2
 router.get('/', async function (req, res) {
@@ -70,16 +85,16 @@ router.get('/', async function (req, res) {
 
   const sqlOrders = `SELECT *
   FROM orders
-  JOIN order_item_detail ON orders.Order_ID = order_item_detail.Order_detail_ID
-  LEFT JOIN  product ON order_item_detail.commodity_id =product.id 
-  AND order_item_detail.product_type = 'product'
-  LEFT JOIN product_image ON order_item_detail.commodity_id =product_image.product_id
-  AND order_item_detail.product_type = 'product'
-  LEFT JOIN  class ON order_item_detail.class_id =class.class__i_d
-  AND order_item_detail.product_type = 'class'
-  
+  JOIN orders_detail ON orders.Order_ID = orders_detail.order_detail_id
+  LEFT JOIN  product ON orders_detail.commodity_id =product.id 
+  AND orders_detail.product_type = 'product'
+  LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
+  AND orders_detail.product_type = 'product'
+  LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
+  AND orders_detail.product_type = 'class'
   GROUP BY orders.order_Id
-  ORDER BY orders.Order_date DESC ;
+  ORDER BY orders.Order_date DESC
+  ;
 `
 
   // 最終組合的sql語法(計數用)
@@ -112,23 +127,51 @@ router.get('/', async function (req, res) {
 })
 
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
+// GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
 router.get('/:status', async function (req, res) {
   // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
   const ordersStatus = req.params.status
 
-  const sqlOrders = `SELECT *
-  FROM orders
-  JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
-  LEFT JOIN  product ON order_item.thing_ID =product.id 
-  AND order_item.itemType = 1
-  LEFT JOIN product_image ON order_item.thing_ID =product_image.product_id
-  AND order_item.itemType = 1
-  LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
-  AND order_item.itemType = 2
-  WHERE orders.status = "${ordersStatus}"
-  GROUP BY orders.order_Id
-  ORDER BY orders.Order_date DESC;`
+  // const sqlOrders = `SELECT *
+  // FROM orders
+  // JOIN order_item ON orders.Order_ID = order_item.Order_detail_ID
+  // LEFT JOIN  product ON order_item.thing_ID =product.id
+  // AND order_item.itemType = 1
+  // LEFT JOIN product_image ON order_item.thing_ID =product_image.product_id
+  // AND order_item.itemType = 1
+  // LEFT JOIN  class ON order_item.thing_ID =class.class__i_d
+  // AND order_item.itemType = 2
+  // WHERE orders.status = "${ordersStatus}"
+  // GROUP BY orders.order_Id
+  // ORDER BY orders.Order_date DESC;`
 
+  //   const sqlOrders = `SELECT *
+  //   FROM orders
+  //   JOIN orders_detail ON orders.Order_ID = orders_detail.Order_detail_ID
+  //   LEFT JOIN  product ON orders_detail.commodity_id =product.id
+  //   AND orders_detail.product_type = 'product'
+  //   LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
+  //   AND orders_detail.product_type = 'product'
+  //   LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
+  //   AND orders_detail.product_type = 'class'
+  //   WHERE orders.status = "${ordersStatus}"
+  //   GROUP BY orders.order_Id
+  //   ORDER BY orders.Order_date DESC ;
+  // `
+  const sqlOrders = `SELECT *
+FROM orders
+JOIN orders_detail ON orders.Order_ID = orders_detail.order_detail_id
+LEFT JOIN  product ON orders_detail.commodity_id =product.id 
+AND orders_detail.product_type = 'product'
+LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
+AND orders_detail.product_type = 'product'
+LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
+AND orders_detail.product_type = 'class'
+WHERE orders.order_status = "${ordersStatus}"
+GROUP BY orders.order_Id
+ORDER BY orders.Order_date DESC
+;
+`
   // WHERE Status= '${ordersStatus}'
   const [rows, fields] = await db.query(sqlOrders)
 
