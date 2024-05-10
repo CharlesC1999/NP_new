@@ -139,7 +139,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                   }`}
                 />
                 <input
-                  // onChange={handleToggleCheckedAll}
+                  disabled={products.some((v) => v.qty === 0) ? true : false}
                   onClick={(e) => {
                     handleToggleCheckedAll(e);
                   }}
@@ -174,6 +174,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                       }`}
                     />
                     <input
+                      disabled={v.qty === 0 ? true : false}
                       onChange={() => {
                         handleCheck(v.id);
                       }}
