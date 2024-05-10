@@ -54,9 +54,12 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
     setProducts(nextProducts);
   };
 
+  // 增加商品數量
   const increaseItem = (id) => {
     const newItems = products.map((v) => {
-      if (v.id === id) {
+      if (v.id === id && v.qty === 0) {
+        return { ...v, checked: true, qty: v.qty + 1 };
+      } else if (v.id === id) {
         return { ...v, qty: v.qty + 1 };
       } else {
         return v;
@@ -68,7 +71,9 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
   //減少商品數量
   const decreaseItem = (id) => {
     const newItems = products.map((v) => {
-      if (v.id === id) {
+      if (v.id === id && v.qty === 1) {
+        return { ...v, checked: false, qty: v.qty - 1 };
+      } else if (v.id === id) {
         return { ...v, qty: v.qty - 1 };
       } else {
         return v;
