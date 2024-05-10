@@ -330,6 +330,7 @@ export default function Product() {
                           className={`mx-sm-2 mx-0`}
                           id={item.id}
                           img={item.image_urls}
+                          image={item.image_urls}
                           category_id={item.category_id}
                           name={item.product_name}
                           description={item.product_description}
