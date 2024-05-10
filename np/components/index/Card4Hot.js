@@ -3,11 +3,11 @@ import styles from "./Card4Hot.module.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import FavIconProduct from "../favor/FavIconProduct";
 import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/hooks/use-cart";
+
 import toast, { Toaster } from "react-hot-toast";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-
-import { useCart } from "@/hooks/use-cart";
 
 function Card4Hot({ id, name, price, d_price, image }) {
   const { favorClass, auth, setAction } = useAuth();
@@ -46,8 +46,8 @@ function Card4Hot({ id, name, price, d_price, image }) {
             </div>
           </div>
 
-//           <a className={`d-flex ${styles["card4Btn"]}`} type="button" href="#">
-//             <i className="fa-solid fa-cart-shopping"></i>加入購物車
+          {/* <a className={`d-flex ${styles["card4Btn"]}`} type="button" href="#">
+             <i className="fa-solid fa-cart-shopping"></i>加入購物車 */}
 
           <a
             className={`d-flex ${styles["card4Btn"]}`}
@@ -57,6 +57,7 @@ function Card4Hot({ id, name, price, d_price, image }) {
               if (!auth.isLoggedIn) {
                 return toast.error("請先登入再使用!");
               }
+
               notify(name);
               console.log("Adding product:", {
                 id,
@@ -68,7 +69,6 @@ function Card4Hot({ id, name, price, d_price, image }) {
             }}
           >
             <i className="fa-solid fa-cart-shopping"></i>&emsp;加入購物車
-
           </a>
         </div>
       </div>

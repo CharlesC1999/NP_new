@@ -319,21 +319,23 @@ const ShopCart1 = () => {
               </span>
               <span className={`${shopStyles.fc} fs-4 pe-3`}>
                 {/* {combinedTotal} */}
-                {discountAmount ? (
+                {/* {discountAmount ? (
                   <h5> ${totalPrice - discountAmount}元 </h5>
                 ) : (
                   <h5> {totalPrice}元</h5>
-                )}
+                )} */}
+                <h5>${finalPrice}元</h5>
                 {/* {finalPrice ? ()} */}
               </span>
             </div>
             <div className="col">
-              <button
-                className={`${shopStyles.button} ms-4 mt-1`}
-                type="submit"
+              <a
+                href="http://localhost:3000/cart/cart-list"
+                className={`${shopStyles.button} ms-4 mt-1 ps-4 pt-1`}
+                style={{ display: "inline-block", textDecoration: "none" }}
               >
                 <h3 className="fw-bold pt-1">送出</h3>
-              </button>
+              </a>
             </div>
           </div>
         </article>

@@ -689,7 +689,7 @@ const ShopCart3 = () => {
               style={{ width: "100%" }}
             >
               <a
-                href=""
+                href="http://localhost:3000/cart/cart-list"
                 className={`${styles3.keepbuy} d-flex justify-content-center align-items-center mt-1`}
                 // type="submit"
                 style={{}}
