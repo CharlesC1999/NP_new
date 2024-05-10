@@ -87,9 +87,12 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
     return qty * price;
   };
 
+  // 最終有被勾選的才會被加總以及加進購物車
+  const finalProducts = products.filter((v) => v.checked);
+
   // 加總數量與價格
-  const totalItems = products.reduce((acc, v) => acc + v.qty, 0);
-  const totalPrice = products.reduce(
+  const totalItems = finalProducts.reduce((acc, v) => acc + v.qty, 0);
+  const totalPrice = finalProducts.reduce(
     (acc, v) => acc + v.product_price * v.qty,
     0
   );
