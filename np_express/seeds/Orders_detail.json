@@ -30,6 +30,6 @@
     "quantity": 3,
     "unit_price": 120.0,
     "total_price": 360.0,
-    "product_type": "product"
+    "product_type": "class"
   }
 ]
