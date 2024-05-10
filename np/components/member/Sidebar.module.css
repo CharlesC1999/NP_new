@@ -1,149 +1,223 @@
 .menu {
-    width: 247px;
-    display: flex;
-    /* flex-grow: 1; */
-    flex-direction: column;
-    color: var(--gray01, #747e85);
-    line-height: 120%;
-    padding: 17px 11px 0px 11px;
-    margin-right: auto;
+  width: 247px;
+  display: flex;
+  /* flex-grow: 1; */
+  flex-direction: column;
+  color: var(--gray01, #747e85);
+  line-height: 120%;
+  padding: 17px 11px 0px 11px;
+  margin-right: auto;
+}
+
+@media (max-width: 375px) {
+  .menu {
+    padding: 0;
+    width: 375px;
+    margin: 0;
   }
-  
-  
-  
-  @media (max-width: 375px) {
-    .menu {
-      padding: 0;
-      width: 375px;
-      margin: 0;
-  
-    }
-  }
-  
-  
+}
+
+.menuTop {
+  background-color: #fff;
+  display: flex;
+  padding-left: 6px;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+@media (max-width: 375px) {
   .menuTop {
-    background-color: #fff;
-    display: flex;
-    padding-left: 6px;
-    gap: 7px;
-    white-space: nowrap;
+    display: none;
   }
-  
-  @media (max-width: 375px) {
-    .menuTop {
-      display: none;
-    }
-  }
-  
-  .userimage {
-    background-color: var(--line, #d9d9d9);
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin: auto 0;
-  }
-  
+}
+
+.userimage {
+  background-color: var(--line, #d9d9d9);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: auto 0;
+}
+
+.menuTitle {
+  justify-content: center;
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 15px;
+}
+
+@media (max-width: 991px) {
   .menuTitle {
-    justify-content: center;
-    align-items: start;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 15px;
+    white-space: initial;
   }
-  
-  @media (max-width: 991px) {
-    .menuTitle {
-      white-space: initial;
-    }
-  }
-  
-  .accountleft {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    text-overflow: ellipsis;
-    font: 600 16px Inter, sans-serif;
-  }
-  
-  .nameleft {
-    margin-top: 7px;
-    font: 400 20px Inter, sans-serif;
-  }
-  
-  
+}
+
+.accountleft {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  font: 600 16px Inter, sans-serif;
+}
+
+.nameleft {
+  margin-top: 7px;
+  font: 400 20px Inter, sans-serif;
+}
+
+.menu1 {
+  padding-top: 16px;
+  background-color: var(--Black-0, #fff);
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 500;
+}
+@media (max-width: 375px) {
   .menu1 {
-    padding-top: 16px;
-    background-color: var(--Black-0, #fff);
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
-    font-weight: 500;
+    padding: 0px;
   }
-  @media(max-width: 375px){
-    .menu1{
-      padding: 0px;
-    }
-  }
-  
-  
+}
+
+.menu2 {
+  border-color: rgba(217, 225, 230, 1);
+  border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  /* 顶部边框宽度为2px，其余边框为0px */
+  border-top-width: 2px;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px 80px 25px;
+}
+
+@media (max-width: 375px) {
   .menu2 {
-    border-color: rgba(217, 225, 230, 1);
-    border-style: solid;
-    border-width: 0px 0px 0px 0px;
-    /* 顶部边框宽度为2px，其余边框为0px */
-    border-top-width: 2px;
+    margin: 0;
+    font-size: 14px;
+    /* font-weight: 400; */
+    /* line-height: 120%; */
+    border-bottom: 1px solid rgba(217, 225, 230, 1);
+    background-color: var(--white, #fefefe);
     display: flex;
-    flex-direction: column;
-    padding: 22px 20px 80px 25px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: auto;
+    padding: 20px 19px;
+    color: var(--gray02);
+    border-top: none;
   }
-  
-  
-  @media (max-width: 375px) {
-    .menu2 {
-      margin: 0;
-      font-size: 14px;
-      /* font-weight: 400; */
-      /* line-height: 120%; */
-      border-bottom: 1px solid rgba(217, 225, 230, 1);
-      background-color: var(--white, #fefefe);
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      gap: auto;
-      padding: 20px 19px;
-      color: var(--gray02);
-      border-top: none;
+}
+
+/* accordion包含修改個人資料跟修改密碼 */
+.accordion {
+  min-height: 57px;
+  margin: 0;
+  @media screen and (max-width: 376px) {
+    /* align-content: center; */
+  }
+}
+
+.chevronDown {
+  @media screen and (max-width: 376px) {
+    display: none;
+  }
+}
+
+.accordion .accordion-header {
+  cursor: pointer;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  color: #747e85;
+}
+
+.accordion .accordion-content {
+  display: none;
+  padding: 10px;
+  @media screen and (max-width: 376px) {
+    padding: 0;
+  }
+}
+.accordion.active {
+  margin-bottom: 10px;
+
+  @media screen and (max-width: 376px) {
+    margin-bottom: 0;
+  }
+
+  & .accordion-content {
+    display: flex;
+    @media screen and (max-width: 376px) {
+      position: absolute;
+      left: 2px;
+      padding-top: 8px;
     }
   }
-  
-  .myAccount {
-    text-align: center;
-    font-family: Inter, sans-serif;
-    color:#747e85;
-  }
+}
 
-  .myAccount a {
-    /* 在這裡添加你想要的樣式 */
-    
-    text-decoration: none; /* 移除下劃線 */
-    /* 其他樣式，如字體大小、字體家族等 */
-    color: #747e85;
-  }
-  
-  .lefta {
-    font-family: Inter, sans-serif;
-    margin-top: 37px;
-    text-align: center;
-    color: #747e85;
-  }
+.myAccount {
+  text-align: center;
+  font-family: Inter, sans-serif;
+  color: #747e85;
+  padding: 5px 10px;
+  font-size: 17px;
+  background-clip: content-box;
 
-  .lefta a{
+  @media screen and (max-width: 376px) {
+    padding: 0;
+    /* align-content: center; */
+    font-size: 13px;
+  }
+}
+
+.myAccount a {
+  /* 在這裡添加你想要的樣式 */
+
+  text-decoration: none; /* 移除下劃線 */
+  /* 其他樣式，如字體大小、字體家族等 */
+  color: #747e85;
+}
+
+.resetPassword {
+  text-align: center;
+  font-family: Inter, sans-serif;
+  color: #747e85;
+  padding: 5px 10px;
+  font-size: 17px;
+  background-clip: content-box;
+
+  @media screen and (max-width: 376px) {
+    padding: 0;
+    /* align-content: center; */
+    font-size: 13px;
+  }
+  & a {
     text-decoration: none;
     color: #747e85;
   }
-  
-  @media (max-width: 375px) {
-    .lefta {
-      margin: auto;
-    }
+}
+
+.lefta {
+  font-family: Inter, sans-serif;
+  height: 57px;
+  text-align: center;
+  color: #747e85;
+  padding: 5px 10px;
+  background-clip: content-box;
+
+  @media screen and (max-width: 376px) {
+    padding: 0;
+    /* align-content: center; */
   }
+}
+
+.lefta a {
+  text-decoration: none;
+  color: #747e85;
+}
+
+@media (max-width: 375px) {
+  .lefta {
+    margin: auto;
+  }
+}

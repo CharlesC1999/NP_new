@@ -202,7 +202,7 @@ const MemberPageMain = () => {
         <div className>
           {/* 主內容的標題 */}
           <div className={styles.title}>
-            <div className={styles.titleNow}>我的帳戶</div>
+            <div className={styles.titleNow}>更新資料</div>
             {/* <div className={styles.title2}>我的帳戶</div> */}
           </div>
           {/* 主內容的標題 */}
