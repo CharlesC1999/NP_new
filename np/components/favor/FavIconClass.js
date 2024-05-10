@@ -29,7 +29,9 @@ export default function FavIconClass({ id }) {
     const res = await addClassFav(cid);
     if (res.data.status === "success") {
       setAction(Date.now());
-      toast.success(`已將課程加入收藏!`);
+      toast.success(`已將課程加入收藏!`, {
+        style: { boxShadow:"0px 0px 2px #ccc"}
+      });
     }
   };
 
@@ -39,7 +41,9 @@ export default function FavIconClass({ id }) {
     if (res.data.status === "success") {
       // 伺服器成功後，更新 action 的值，觸發 context 重新發送 GET 請求並重新設定狀態
       setAction(Date.now());
-      toast.success(`已將課程移除收藏!`);
+      toast.success(`已將課程移除收藏!`, {
+        style: { boxShadow:"0px 0px 2px #ccc"}
+      });
     }
   };
 

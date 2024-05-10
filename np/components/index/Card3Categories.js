@@ -11,7 +11,7 @@ function Card3Categories({name,id}) {
             <div className={styles.cateImg}>
               <img src={`/index-images/product-cataPng/${productCateIcon[id-1]}`} alt="" />
             </div>
-                <h6 className={`pt-4`}>{name}</h6>
+                <h6>{name}</h6>
             </div>
             
       </div>
