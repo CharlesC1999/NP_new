@@ -203,9 +203,9 @@ const HistoryOrderDetail = () => {
                   <div className="row py-2" key={v.Order_Item_ID}>
 
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.product_name}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}> {v.discount_price ? v.discount_price : v.product_price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_price * v.quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}> {v.discount_price ? v.discount_price * v.quantity : v.product_price * v.quantity}</div>
 
                   </div>
 
@@ -240,9 +240,9 @@ const HistoryOrderDetail = () => {
                   <div className="row py-2" key={v.Order_Item_ID}>
 
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.class_name}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_discount_price ? v.c_discount_price : v.c_price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price * v.quantity}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_discount_price ? v.c_discount_price * v.quantity : v.c_price * v.quantity}</div>
 
                   </div>
                 )
@@ -354,7 +354,7 @@ const HistoryOrderDetail = () => {
 
                       <div className="row mt-4">
 
-                        <div className={`${styles3.fb} col fw-bold`}>{v.product_price}</div>
+                        <div className={`${styles3.fb} col fw-bold`}> {v.discount_price ? v.discount_price : v.product_price}</div>
                       </div>
                     </div>
 
@@ -368,7 +368,7 @@ const HistoryOrderDetail = () => {
                       <div
                         className={`${styles3.fb} col text-center text-success fw-bold`}
                       >
-                       {v.product_price * v.quantity}
+                       {v.discount_price ? v.discount_price * v.quantity : v.product_price * v.quantity}
                       </div>
                     </div>
                   </div>
@@ -395,7 +395,7 @@ const HistoryOrderDetail = () => {
 
                       <div className="row mt-4">
 
-                        <div className={`${styles3.fb} col fw-bold`}>{v.c_price * v.quantity}</div>
+                        <div className={`${styles3.fb} col fw-bold`}>{v.c_discount_price? v.c_discount_price:v.c_price}</div>
                       </div>
                     </div>
 
@@ -409,7 +409,7 @@ const HistoryOrderDetail = () => {
                       <div
                         className={`${styles3.fb} col text-center text-success fw-bold`}
                       >
-                        {v.c_price * v.quantity}
+                        {v.c_discount_price ? v.c_discount_price * v.quantity : v.c_price * v.quantity}
                       </div>
                     </div>
                   </div>
