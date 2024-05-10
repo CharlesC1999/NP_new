@@ -1,27 +1,50 @@
 /* 講師卡片 */
-.speakerCardLink{
+.speakerCardLink {
   text-decoration: none;
   cursor: pointer;
 }
-.speaker{
+.speaker {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 265px;
+  width: 245px;
   /* 游標進入卡片時，圖片放大效果 */
-  &:hover img {
-    transition: 0.4s ease-in-out;
+  &:hover .speakerImg {
+    transition: 0.8s ease-in-out;
     transform: scale(1.03);
-    opacity: 0.8;
+    opacity: 0.9;
   }
   @media (max-width: 375px) {
     width: 160px;
     margin-bottom: 15px;
   }
 }
-.speakerImg{
-  width: 265px;
-  height: 265px;
+.speakerImg {
+  width: 245px;
+  height: 260px;
+  border-radius: 10px;
+  position: relative;
+  & .speakerTag {
+    position: absolute;
+    border-radius: 10px 0px 10px 0px;
+    top: 0;
+    left: 0;
+    text-align: center;
+    & .tagText {
+      width: 75px;
+      height: 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 14px;
+      @media(max-width:375px){
+        width: 60px;
+        height: 24px;
+        font-size: 12px;
+      }
+    }
+  }
   @media (max-width: 375px) {
     width: 160px;
     height: 160px;
@@ -29,15 +52,16 @@
   & img {
     width: 100%;
     height: 100%;
+    border-radius: 10px;
     object-fit: cover;
   }
 }
-.speakerName{
+.speakerName {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap:5px;
+  gap: 5px;
   & h5,
   & h6 {
     font-family: inter;

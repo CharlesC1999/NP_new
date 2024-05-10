@@ -91,10 +91,12 @@ class LineLogin {
       req.session.line_login_state = state
       req.session.line_login_nonce = nonce
       console.log(req.session)
+      // console.log(req.code, 'gg')
       console.log(url)
       return res.json({ url })
     }
   }
+  // ok
 
   /**
     Middleware to handle callback after authorization.
@@ -106,7 +108,8 @@ class LineLogin {
   callback(s, f) {
     return (req, res, next) => {
       console.log(req.session)
-      console.log(req.query)
+      console.log(req.query, 'query')
+      // console.log(req)
 
       const f_ = (error) => {
         if (f) f(req, res, next, error)
@@ -115,6 +118,8 @@ class LineLogin {
       const code = req.query.code
       const state = req.query.state
       console.log(req.session)
+      console.log(state, 'state')
+      console.log(code, 'code')
 
       const friendship_status_changed = req.query.friendship_status_changed
 

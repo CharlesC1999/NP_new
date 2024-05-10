@@ -37,6 +37,10 @@ export default async function (sequelize) {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
+      f_speaker_cate_id: {
+        type: DataTypes.INTEGER,
+        allowNull:false
+      },
       valid: {
         type: DataTypes.TINYINT(2),
         allowNull: false,

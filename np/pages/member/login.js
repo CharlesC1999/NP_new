@@ -19,6 +19,14 @@ import {
   handleGoogleLogin,
   showGoogleLogin,
 } from "@/hooks/google-login-firebase";
+// line
+import {
+  lineLoginRequest,
+  lineLogout,
+  lineLoginCallback,
+  getUserById,
+  parseJwt,
+} from "@/services/user";
 // 讀取畫面
 import { useLoader } from "@/hooks/use-loader";
 // sweetAlert
@@ -141,13 +149,27 @@ const Login = () => {
   };
   // --------------------------------------------------
   // ------------------------line----------------------
+  const callbackLineLogin = async (query) => {
+    const qs = new URLSearchParams({
+      ...query,
+    }).toString();
+    console.log(qs);
+    const res = await fetch(
+      `http://localhost:3005/api/line-login/callback?${qs}`,
+      { credentials: "include" }
+    ).then((res) => res.json());
+    console.log(res);
+  };
 
   const handleLineButtonClick = async () => {
     console.log("Ltouch");
     // line-login
     try {
       const response = await fetch(
-        "http://localhost:3005/api/line-login/login"
+        "http://localhost:3005/api/line-login/login",
+        {
+          credentials: "include",
+        }
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

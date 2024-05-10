@@ -76,6 +76,12 @@ const Sidebar = () => {
               </Link>
             </div>
             <div className={styles.lefta}>
+              {" "}
+              <Link href="/member/password-reset" alt="">
+                修改密碼
+              </Link>
+            </div>
+            <div className={styles.lefta}>
               <Link href="/member/member-buy" alt="">
                 購買清單
               </Link>
