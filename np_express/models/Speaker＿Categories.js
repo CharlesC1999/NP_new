@@ -2,33 +2,21 @@ import { DataTypes } from 'sequelize'
 
 export default async function (sequelize) {
   return sequelize.define(
-    'Line_member', //- 與檔案同名，要大寫
+    'Speaker_Categories', //- 與檔案同名，要大寫
     {
-      id: {
+      speaker_cate_id: {
         type: DataTypes.INTEGER(10),
+        allowNull: false,
         primaryKey: true,
         autoIncrement: true,
+      },
+      speaker_cate_name: {
+        type: DataTypes.STRING(55),
         allowNull: false,
-      },
-      line_uid: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      photo_url: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      line_access_token: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      }
     },
     {
-      tableName: 'line_member', //直接提供資料表名稱
+      tableName: 'speaker_categories', //直接提供資料表名稱
       timestamps: false, // 使用時間戳
       paranoid: false, // 軟性刪除
       underscored: true, // 所有自動建立欄位，使用snake_case命名

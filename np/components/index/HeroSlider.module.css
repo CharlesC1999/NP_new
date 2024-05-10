@@ -96,6 +96,7 @@
     transition: .4s;
 
     & li {
+      width: 375px;
       height: 203px;
       flex: 1 0 0;
 
