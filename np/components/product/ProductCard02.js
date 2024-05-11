@@ -5,14 +5,31 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import FavIconProduct from "@/components/favor/FavIconProduct";
 
+// 購物車加入按鈕加入購物車
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/hooks/use-cart";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 export default function ProductCard02({
   id,
   name,
   price,
   disPrice,
   img,
+  image,
   average_rating,
 }) {
+  // 購物車加入按鈕加入購物車
+  const { addProduct } = useCart();
+  const { auth } = useAuth();
+  const MySwal = withReactContent(Swal);
+  const notify = (productName) => {
+    MySwal.fire({
+      title: "成功加入",
+      text: productName + "已成功加入購物車!",
+      icon: "success",
+    });
+  };
   return (
     <>
       <li key={id} className="list-unstyled">
@@ -62,15 +79,28 @@ export default function ProductCard02({
                     <div className={`${style["price"]}`}>$ {price}</div>
                   )}
                 </div>
-                <div
-                  type="submit"
+                <a
+                  type="button"
                   className={`${style["btn"]} btn justify-content-center align-centent-center d-flex`}
+                  onClick={() => {
+                    if (!auth.isLoggedIn) {
+                      return toast.error("請先登入再使用!");
+                    }
+                    console.log("Adding product:", {
+                      id,
+                      name,
+                      price,
+                      image,
+                    });
+                    notify(name);
+                    addProduct({ id, name, price, image });
+                  }}
                 >
                   <i
                     className={`fa-solid fa-cart-shopping`}
                     style={{ color: "#3BB77E" }}
                   ></i>
-                </div>
+                </a>
               </div>
             </div>
           </div>

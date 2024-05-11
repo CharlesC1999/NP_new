@@ -50,13 +50,16 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // fileStore的選項 session-cookie使用
 const fileStoreOptions = { logFn: function () {} }
+const isProduction = process.env.NODE_ENV === 'production'
 app.use(
   session({
     store: new FileStore(fileStoreOptions), // 使用檔案記錄session
     name: 'SESSION_ID', // cookie名稱，儲存在瀏覽器裡
     secret: '67f71af4602195de2450faeb6f8856c0', // 安全字串，應用一個高安全字串
     cookie: {
-      maxAge: 30 * 86400000, // 30 * (24 * 60 * 60 * 1000) = 30 * 86400000 => session保存30天
+      maxAge: 30 * 86400000, // 30天的毫秒数
+      httpOnly: true, // 增强安全性，禁止客户端JavaScript访问cookie
+      secure: isProduction, // 只在生产环境中开启安全Cookie
     },
     resave: false,
     saveUninitialized: false,
@@ -100,3 +103,15 @@ app.use(function (err, req, res, next) {
 app.use('/api/auth', authRoutes) // 使用 auth 路由，並設定路由前綴為 /api/auth
 
 export default app
+
+// app.use(
+//   session({
+//     secret: 'your_secret_key', // 这是用来加密 session ID cookie 的秘钥
+//     resave: false, // 强制 session 保存到 session store 中
+//     saveUninitialized: false, // 强制没有 "初始化" 的 session 保存到 storage 中
+//     cookie: {
+//       secure: false, // 如果是 https 网站，设置为 true
+//       httpOnly: true, // 防止客户端脚本访问 cookies
+//     },
+//   })
+// )

@@ -1,26 +1,64 @@
 import exp from "constants";
 import React from "react";
 import styles from "@/components/member/MemberBuyCard.module.scss";
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { FaLeaf } from "react-icons/fa";
+
 export default function MemberBuyCard({ activeCategory, searchTerm }) {
+  const [userid, setUserid] = useState(null);
 
-
-
+  const [productId, setProductId] = useState(0);
+  //葉子評分
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const handleStartRating = (rating) => {
+    setRating(rating);
+  };
+  const handleStartHoverRating = (hover) => {
+    setHoverRating(hover);
+  };
+  const handleResetRating = () => {
+    setRating(0);
+  };
 
   const [orders, setOrders] = useState([]);
   const [showReview, setShowReview] = useState(false);
- 
 
-  console.log(orders);
+  const handleSubmitReview = async (v) => {
+    setProductId(v.product_id); // 依據上下文獲取產品ID
+    const comment = document.querySelector("textarea").value;
 
+    const response = await fetch("/api/add-review", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userid,
+        productId,
+        comment,
+        rating,
+        created_at: new Date().toISOString(), // 或讓後端生成時間戳
+      }),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      console.log("Review submitted:", result);
+      // 可以在這裡更新UI顯示新提交的評論
+      setShowReview(false); // 隱藏評論表單
+    } else {
+      console.error("Failed to submit review:", result);
+    }
+  };
+
+  // console.log(orders);
 
   // let userid = parseInt(localStorage.getItem('userid'))
   // console.log(userid);
 
-// let userid = 1
- 
-const [userid, setUserid] = useState(null);
+  // let userid = 1
 
   useEffect(() => {
     const userIdFromLocalStorage = localStorage.getItem("userid");
@@ -30,8 +68,8 @@ const [userid, setUserid] = useState(null);
   }, []);
 
   // 資料表1商品訂單
-  const getOrders = async (cat = '') => {
-    const url = 'http://localhost:3005/api/orders/' + cat;
+  const getOrders = async (cat = "") => {
+    const url = "http://localhost:3005/api/orders/" + cat;
 
     // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
     try {
@@ -43,14 +81,13 @@ const [userid, setUserid] = useState(null);
 
       // 為了要確保資料是陣列，所以檢查後再設定
       if (Array.isArray(data.data.orders)) {
-
         // 設定到狀態中
         // setOrders(data.data.orders);
         let filteredOrders = data.data.orders;
         console.log(filteredOrders);
         // 如果存在搜索关键字，则进行过滤
         if (searchTerm) {
-          filteredOrders = filteredOrders.filter(order => {
+          filteredOrders = filteredOrders.filter((order) => {
             const title = order.product_name || order.class_name;
             return title.includes(searchTerm);
           });
@@ -58,7 +95,7 @@ const [userid, setUserid] = useState(null);
         setOrders(filteredOrders);
         console.log(searchTerm);
       } else {
-        console.log('伺服器回傳資料類型錯誤，無法設定到狀態中');
+        console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
       }
       setOrders(filteredOrders);
     } catch (e) {
@@ -66,127 +103,150 @@ const [userid, setUserid] = useState(null);
     }
   };
 
-  
- 
   // 樣式2: didMount階段只執行一次
   useEffect(() => {
     // 頁面初次渲染之後伺服器要求資料
-    getOrders(activeCategory === '全部' ? '' : activeCategory);
-    
-    
+    getOrders(activeCategory === "全部" ? "" : activeCategory);
   }, [activeCategory, searchTerm]);
-
-
-
 
   return (
     <>
-
-      {orders.filter(v => v.user_id === userid).map((v, i) => {
+      {orders
+        .filter((v) => v.user_id === userid)
+        .map((v, i) => {
           const title = v.product_name || v.class_name;
-        //到時候把57改成當前會員ID(很像不能這樣寫QQ)
-        //if(v.member_id===57)
-        return (
-          <div className={`${styles.buyCard} my-0 my-sm-4`} key={v.order_id}>
-            <div
-              className={`${styles.buyCardContent} d-flex flex-row justify-content-between align-items-center`}
-            >
-              <div className={`${styles.bccolumn}`}>
-                <div className={styles.objectFit} >
-                  {/* {v.image_url &&<img className="object-fit-cover"
+          //到時候把57改成當前會員ID(很像不能這樣寫QQ)
+          //if(v.member_id===57)
+          return (
+            <div className={`${styles.buyCard} my-0 my-sm-4`} key={v.order_id}>
+              <div
+                className={`${styles.buyCardContent} d-flex flex-row justify-content-between align-items-center`}
+              >
+                <div className={`${styles.bccolumn}`}>
+                  <div className={styles.objectFit}>
+                    {/* {v.image_url &&<img className="object-fit-cover"
 
                     src={`/images/products/${v.image_url}`}
                     alt=""
                   />} */}
-                  {v.product_name ? (
-                    <img
-                      className="object-fit-cover"
-                      src={`/images/products/${v.image_url}`}
-                      alt=""
-                    />
-                  ) : (
-                    <img
-                      className="object-fit-cover"
-                      src={`/images/member/classs.jpg`}
-                      alt=""
-                    />
-                  )}
-                </div>
-              </div>
-              <div
-                className={`${styles.buyItem} d-flex flex-row justify-content-between`}
-              >
-                <div className={styles.buyItemMain}>
-                  <div className={styles.biContent}>{title}...</div>
-                  <div className={styles.biNumber}>{v.order_date} </div>
-                  <div className={styles.biState}>狀態 : {v.order_status}</div>
-                </div>
-                <div
-                  className={`${styles.biMb} d-flex flex-column justify-content-between`}
-                >
-                  <div className={`${styles.biMoney} d-flex justify-content-end`}>
-                    訂單金額: {v.order_total_price}
-                  </div>
-                  <div className={`d-flex flex-row justify-content-end`}>
-
-
-                    <Link
-                      href={`/member/history-order-detail?order_id=${v.order_id}`}
-                      className={`${styles.buyCardBtn}  btn  btn d-flex justify-content-center`}
-                    >
-                      <span className={`d-none d-sm-flex`}>查看詳情</span>
-                      <span className={`d-flex d-sm-none`}>查看</span>
-                    </Link>
-
-                    {!showReview && (
-                      <buttons
-                        className={`${styles.buyCardBtn} btn d-flex justify-content-center ms-3`}
-                        onClick={() => setShowReview(true)}
-                      >
-                        評論
-                      </buttons>
+                    {v.product_name ? (
+                      <img
+                        className="object-fit-cover"
+                        src={`/images/products/${v.image_url}`}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="object-fit-cover"
+                        src={`/images/member/classs.jpg`}
+                        alt=""
+                      />
                     )}
                   </div>
                 </div>
-              </div>
-            </div>
-            {showReview && (
-              <div className={`${styles.reviewContainer} mt-3`}>
-                <div className={`review-header`}>
-                  <span className={`${styles.biContent}`}>評價心得</span>
-                </div>
-                <div className={`${styles.biNumber} mt-2 review-rating`}>
-                  {/* 根據需要生成相應數量的星星評分： */}
-                  <span>⭐⭐⭐⭐⭐</span>
-                </div>
-                <div className={`${styles.reviewComment} mt-3 `}>
-                  <textarea
-                    className={`mt-3  ${styles.reviewInput}`}
-                    placeholder="請輸入..."
-                  ></textarea>
-                </div>
                 <div
-                  className={`mt-3 review-actions d-flex flex-row justify-content-end`}
+                  className={`${styles.buyItem} d-flex flex-row justify-content-between`}
                 >
-                  <button
-                    className={`${styles.buyCardBtn} btn-submit btn d-flex justify-content-center me-3`}
-                    onClick={() => setShowReview(false)} // 点击时隐藏评论区域
+                  <div className={styles.buyItemMain}>
+                    <div className={styles.biContent}>{title}...</div>
+                    <div className={styles.biNumber}>{v.order_date} </div>
+                    <div className={styles.biState}>
+                      狀態 : {v.order_status}
+                    </div>
+                  </div>
+                  <div
+                    className={`${styles.biMb} d-flex flex-column justify-content-between`}
                   >
-                    取消
-                  </button>
-                  <button
-                    className={`${styles.buyCardBtn} btn-submit btn d-flex justify-content-center`}
-                  >
-                    提交
-                  </button>
+                    <div
+                      className={`${styles.biMoney} d-flex justify-content-end`}
+                    >
+                      訂單金額: {v.order_total_price}
+                    </div>
+                    <div className={`d-flex flex-row justify-content-end`}>
+                      <Link
+                        href={`/member/history-order-detail?order_id=${v.order_id}`}
+                        className={`${styles.buyCardBtn}  btn  btn d-flex justify-content-center`}
+                      >
+                        <span className={`d-none d-sm-flex`}>查看詳情</span>
+                        <span className={`d-flex d-sm-none`}>查看</span>
+                      </Link>
+
+                      {!showReview && (
+                        <buttons
+                          className={`${styles.buyCardBtn} btn d-flex justify-content-center ms-3`}
+                          onClick={() => setShowReview(true)}
+                        >
+                          評論
+                        </buttons>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            )}
-          </div>
-        );
-      }
-      )}
+              {showReview && (
+                <div className={`${styles.reviewContainer} mt-3`}>
+                  <div className={`review-header`}>
+                    <span className={`${styles.biContent}`}>評價心得</span>
+                  </div>
+                  <div
+                    className={`${styles.biNumber} mt-2 review-rating d-flex flex-row`}
+                  >
+                    {/* 根據需要生成相應數量的星星評分： */}
+                    {Array(5)
+                      .fill(1)
+                      .map((v, i) => {
+                        // 每個按鈕的分數，相當於索引+1
+                        const score = i + 1;
 
+                        return (
+                          <div
+                            key={score}
+                            className="d-flex flex-row me-3"
+                            onClick={() => handleStartRating(score)}
+                            onMouseEnter={() => handleStartHoverRating(score)}
+                            onMouseLeave={() => handleStartHoverRating(0)}
+                          >
+                            <FaLeaf
+                              className={
+                                score <= rating || score <= hoverRating
+                                  ? styles.faLeafOn
+                                  : styles.faLeafOff
+                              }
+                            />
+                          </div>
+                        );
+                      })}
+                  </div>
+                  <div className={`${styles.reviewComment} mt-3 `}>
+                    <textarea
+                      className={`mt-3  ${styles.reviewInput}`}
+                      placeholder="請輸入..."
+                    ></textarea>
+                  </div>
+                  <div
+                    className={`mt-3 review-actions d-flex flex-row justify-content-end`}
+                  >
+                    <button
+                      className={`${styles.buyCardBtn} btn-submit btn d-flex justify-content-center me-3`}
+                      onClick={() => {
+                        setShowReview(true);
+                        setProductId(v.product.id); // 确保你有方式从某处获取到product.id
+                      }}
+                    >
+                      取消
+                    </button>
+                    <button
+                      className={`${styles.buyCardBtn} btn-submit btn d-flex justify-content-center`}
+                      onClick={() => handleSubmitReview(v)}
+                    >
+                      提交
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
     </>
   );
 }

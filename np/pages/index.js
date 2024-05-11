@@ -48,7 +48,6 @@ export default function Index() {
         <div className={styles.textNutripoll}>
           <h5>
             「營養」不只是一個名稱，它象徵著我們對健康的深切關注與堅定不移的承諾。我們精選每一樣食材，希望您在品嚐美味的同時，也能感受到那份對身心健康的細心照料。
-            <br />
             「大選」意味著您在我們這裡擁有豐富的選擇。每一項食材背後，都是我們基於質量、新鮮度和營養價值的嚴格篩選
             選擇一種對生活的熱愛、對健康的追求，以及對飲食質量的不懈探索。讓我們攜手前行，將每一餐轉化為對身心的深刻滋養，共同經歷這場由內而外的健康與美好之旅。
           </h5>
@@ -70,12 +69,10 @@ export default function Index() {
             <h6>
               在您日常享用的每一口食物中，您是否真正放心？當食品添加物與過度加工成為常態，農藥殘留悄悄侵入我們的餐盤，健康食物的美味被誤解，進口食材的碳足跡無形中加重，而包裝浪費更是環境的隱憂
             </h6>
-            <br />
             <h6>
               我們可以，也應該為自己、為環境作出更好的選擇！讓我們一同回歸飲食的本質
               —「減法」的智慧。不是減少食物的選擇，而是減少對健康和環境的負擔
             </h6>
-            <br />
             <h6>這場由內而外的轉變，就從您的餐桌開始</h6>
           </div>
         </div>
@@ -91,6 +88,7 @@ export default function Index() {
                 description={v.description}
                 link={v.link}
                 image={v.image}
+                url={v.url}
               />
             );
           })}
@@ -111,7 +109,7 @@ export default function Index() {
       </div>
 
       <div className={` ${styles.wrapper}`}>
-        <div className={`d-flex justify-content-between ps-3 pe-3`}>
+        <div className={`d-flex justify-content-between`}>
           <h4 className={`${styles.MeAuto}`}>熱銷商品</h4>
           <a className={`${styles.TitleRwd}`} href="/product">
             <h5 className={`${styles.MeAuto}`}>
@@ -143,7 +141,7 @@ export default function Index() {
             <h4 className={`${styles.MeAuto}`}>熱門課程</h4>
             <a className={`${styles.TitleRwd}`} href="/class-page">
               <h5 className={`${styles.MeAuto}`}>
-                更多<i className="fa-solid fa-chevron-right"></i>
+                更多 <i className="fa-solid fa-chevron-right"></i>
               </h5>
             </a>
           </div>
@@ -173,7 +171,7 @@ export default function Index() {
             <h4 className={`${styles.MeAuto}`}>精選食譜</h4>
             <a className={`${styles.TitleRwd}`} href="/recipe">
               <h5 className={`${styles.MeAuto}`}>
-                更多<i className="fa-solid fa-chevron-right"></i>
+                更多 <i className="fa-solid fa-chevron-right"></i>
               </h5>
             </a>
           </div>
