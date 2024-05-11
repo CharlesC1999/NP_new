@@ -150,3 +150,6 @@ ORDER BY orders.Order_date DESC;
 
 
 SELECT * FROM product_review WHERE product_id = 303 AND user_id = 1
+
+
+SELECT * FROM product WHERE category_id = 22

@@ -323,7 +323,7 @@ export default function Product() {
               />
             </div>
             <div
-              className={`d-flex justify-content-center ${styles.productCard1}`}
+              className={`d-flex justify-content-start ${styles.productCard1}`}
             >
               {products.length > 0 ? (
                 // Render products if there are any

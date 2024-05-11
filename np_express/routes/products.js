@@ -44,8 +44,8 @@ router.get('/', async function (req, res) {
     const {
       page = 1,
       perpage = 20,
-      price_gte = 50,
-      price_lte = 100,
+      price_gte = '',
+      price_lte = '',
       sort = 'id',
       order = 'asc',
       category_id = '',
@@ -149,7 +149,7 @@ router.get('/', async function (req, res) {
       GROUP BY p.id ${ratingclause}
     ) AS subquery
     `
-    console.log(productQueryCount)
+    console.log(productQuery)
     const resultCount = await sequelize.query(productQueryCount, {
       type: sequelize.QueryTypes.SELECT,
     })
