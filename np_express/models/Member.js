@@ -16,24 +16,24 @@ export default async function (sequelize) {
       },
       Account: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: true,
       },
       Password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       Email: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        allowNull: true,
+        unique: false,
         validate: {
           isEmail: true,
         },
       },
       Phone: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       Address: {
         type: DataTypes.STRING,
@@ -41,11 +41,11 @@ export default async function (sequelize) {
       },
       Gender: {
         type: DataTypes.CHAR,
-        allowNull: false,
+        allowNull: true,
       },
       date_of_birth: {
         type: DataTypes.DATEONLY,
-        allowNull: false,
+        allowNull: true,
       },
       Create_date: {
         type: DataTypes.DATE,
@@ -62,8 +62,20 @@ export default async function (sequelize) {
       },
       User_image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'corn.jpg',
+      },
+      google_uid: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      line_uid: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      line_access_token: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     {
