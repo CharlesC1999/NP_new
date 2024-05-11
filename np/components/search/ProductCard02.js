@@ -8,8 +8,8 @@ export default function ProductCard02({ productsData, Index }) {
   console.log(productsData, "classDW");
   return (
     <>
-      <li key={productsData.id} className="list-unstyled mx-auto">
-        <div className={`${style["productCard"]} my-4`}>
+      <li key={productsData.id} className="list-unstyled mx-auto ">
+        <div className={`${style["productCard"]} mb-4`}>
           <div className={`${style["CardImg"]}`}>
             <img
               src={`/images/products/${productsData.image_url}`}

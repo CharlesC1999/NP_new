@@ -549,20 +549,34 @@ a:visited {
   }
 }
 
-// 手機的搜索區域
+// 手機的搜索區域--------------------------------------------
 .mobileSearchArea {
-  display: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   position: absolute;
-  width: 190px;
-  height: 46px;
+  margin-top: 4px;
+  width: 260px;
+  max-height: 0px;
+  overflow: hidden;
+  background: white;
   z-index: 500;
-  border: #78cea6, 1px;
-  border-radius: 5px;
+  top: 62px;
+  left: 55px;
+  border: #78cea6 none 1px;
+  border-radius: 10px;
+  transition: max-height 0.3s ease-in-out;
   & .searchBarInputMobile {
-    display: none;
-    padding-inline: 8px;
+    padding-inline: 12px;
     padding-block: 4px;
     font-size: 16px;
+    width: 190px;
+    height: 40px;
+    caret-color: #454545;
+    border: none;
+    border-radius: 10px;
+    opacity: 0; // 初始透明
+    transition: opacity 0.3s ease-in-out;
   }
 }
 
@@ -571,26 +585,28 @@ a:visited {
   justify-content: space-around;
   align-items: center;
   position: absolute;
-  padding-right: 6px;
-  width: 145px;
-  height: 42px;
+  margin-top: 4px;
+  width: 260px;
+  // height: 42px;
+  max-height: 42px;
   background: white;
-  z-index: 500;
-  top: 10px;
+  top: 62px;
   left: 55px;
   border: #78cea6 solid 1px;
   border-radius: 10px;
+  transition: max-height 0.2s ease-in-out;
   & .searchBarInputMobile {
     // display: none;
     padding-inline: 12px;
     padding-block: 4px;
     font-size: 16px;
-    width: 110px;
+    width: 190px;
     height: 40px;
     caret-color: #454545;
     border: none;
-    // outline: none;
     border-radius: 10px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
   }
   & .searchBarInputMobile:focus {
     outline: none;
