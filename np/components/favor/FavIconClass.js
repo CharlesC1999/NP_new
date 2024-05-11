@@ -1,4 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { useFavor } from "@/hooks/use-favorData";
 import { addClassFav, removeClassFav } from "@/services/user";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
@@ -23,8 +24,8 @@ const Heart = ({ size = 24, color = "#db1212" }) => (
 // 接收 ClassCardWeb 卡片中傳來的課程 id 值
 export default function FavIconClass({ id }) {
   // 從 useAuth 這個 context 取得目前收藏的課程 id 陣列（favorClass）、登入狀態(auth)和對於按鈕被觸發的設置(setAction)
-  const { favorClass, auth, setAction } = useAuth();
-
+  const {auth} = useAuth();
+  const { favorClass, setAction } = useFavor();
   const handleAddFav = async (cid) => {
     const res = await addClassFav(cid);
     if (res.data.status === "success") {

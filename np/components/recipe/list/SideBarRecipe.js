@@ -14,7 +14,10 @@ export default function SideBar() {
           </div>
           {/* 食譜卡片 */}
           {/* 羊肉燉湯 */}
-          <Link href={`/recipe/4`} className="text-decoration-none text-dark">
+          <Link
+            href={`/recipe/recipeId?id=4`}
+            className="text-decoration-none text-dark"
+          >
             <div className={`${styles["side-card"]} row d-flex`}>
               <div className="col-6">
                 <img
@@ -39,7 +42,10 @@ export default function SideBar() {
             </div>
           </Link>
           {/* 檸檬奶油干貝 */}
-          <Link href={`/recipe/49`} className="text-decoration-none text-dark">
+          <Link
+            href={`/recipe/recipeId?id=49`}
+            className="text-decoration-none text-dark"
+          >
             <div className={`${styles["side-card"]} row d-flex`}>
               <div className="col-6">
                 <img
@@ -64,7 +70,10 @@ export default function SideBar() {
             </div>
           </Link>
           {/* 清蒸比目魚 */}
-          <Link href={`/recipe/48`} className="text-decoration-none text-dark">
+          <Link
+            href={`/recipe/recipeId?id=48`}
+            className="text-decoration-none text-dark"
+          >
             <div className={`${styles["side-card"]} row d-flex`}>
               <div className="col-6">
                 <img
@@ -89,7 +98,10 @@ export default function SideBar() {
             </div>
           </Link>
           {/* 熱炒小卷 */}
-          <Link href={`/recipe/50`} className="text-decoration-none text-dark">
+          <Link
+            href={`/recipe/recipeId?id=50`}
+            className="text-decoration-none text-dark"
+          >
             <div className={`${styles["side-card"]} row d-flex`}>
               <div className="col-6">
                 <img
