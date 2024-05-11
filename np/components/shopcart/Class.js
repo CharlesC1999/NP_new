@@ -32,7 +32,12 @@ const Class = () => {
             </label>
           </div>
           <div className="col-2" />
-          <div className="col-3" />
+          {/* <div className="col-3" /> */}
+          <div
+            className={`col-3 text-center align-self-center ${ClassStyles.fc}`}
+          >
+            課程名稱
+          </div>
           <div
             className={`col text-center align-self-center ${ClassStyles.fc}`}
           >
@@ -67,7 +72,7 @@ const Class = () => {
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 <img
-                  src="/images/Rectangle 143.jpg"
+                  src={`/images/class-images/${element.image}`}
                   className="img-fluid"
                   alt="..."
                   style={{ minWidth: 75 }}
@@ -77,8 +82,8 @@ const Class = () => {
                 className="col-3  align-self-center pt-3 "
                 style={{ paddingLeft: "50px" }}
               >
-                <h4 className={ClassStyles.fc}>{element.name}</h4>
-                <p style={{ fontSize: "20px" }}>2024/04/05</p>
+                <h4 className={ClassStyles.fc}>{element.className}</h4>
+                <p style={{ fontSize: "16px" }}>{element.classDate}</p>
               </div>
               <div
                 className={`${ClassStyles.add} col align-self-center text-center`}
@@ -146,14 +151,14 @@ const Class = () => {
               {/* <div class="delete"></div> */}
               <div className="col-4 p-0">
                 <img
-                  src="/images/Rectangle 143.jpg"
+                  src={`/images/class-images/${element.image}`}
                   alt=""
                   style={{ objectFit: "cover", height: "100%", width: "121px" }}
                 />
               </div>
               <div className="col-8 pb-3 pt-2">
                 <div className={`${ClassStyles.fc} row mt-1`}>
-                  <div className="col-9 ps-2">{element.name}</div>
+                  <div className="col-9 ps-2">{element.className}</div>
                   <div className="col ps-4">
                     <img
                       src="/images/Frame 40118.png"
@@ -166,15 +171,15 @@ const Class = () => {
                   </div>
                 </div>
                 <div className="row mt-1">
-                  <span className="col-5" style={{ fontSize: "16px" }}>
-                    課程時間:
+                  <span className="col" style={{ fontSize: "12px" }}>
+                    {element.classDate}
                   </span>
-                  <span
+                  {/* <span
                     className="col-5 pt-1"
                     style={{ marginLeft: "-25px", fontSize: "14px" }}
                   >
                     2024/04/05
-                  </span>
+                  </span> */}
                 </div>
                 <div className="row mt-1">
                   <div className="col d-flex flex-column align-items-center justify-content-between">

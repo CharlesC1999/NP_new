@@ -2,9 +2,40 @@ import React from "react";
 import Router, { useRouter } from "next/router";
 import styles from "./classCardMobileList.module.css";
 import FavIconClass from "../favor/FavIconClass";
+import toast, { Toaster } from "react-hot-toast";
+
+// 加入購物車的鉤子
+import { useCart } from "@/hooks/use-cart";
+import { useAuth } from "@/contexts/AuthContext";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+
 export default function ProductCardMobileList({ classesData }) {
   console.log(classesData, "classDM");
 
+  // 加入購物車中使用的變數
+  const id = classesData.class__i_d;
+  const className = classesData.class_name;
+  const classDate = classesData.class_date;
+  const price = classesData.c_price;
+  const image = classesData.image__u_r_l;
+  console.log("Class Name:", className);
+  console.log("Class Date:", classDate);
+  console.log("class img", image);
+
+  // 加入購物車
+  const { addItem } = useCart();
+  const { auth } = useAuth();
+  const MySwal = withReactContent(Swal);
+
+  const notify = (productName) => {
+    MySwal.fire({
+      title: "成功加入",
+      text: productName + "已成功加入購物車!",
+      icon: "success",
+    });
+  };
+  //
   const goClassDetail = (class__i_d) => {
     // 方法一
     // Router.push(`/class-page/class-detail/${class__i_d}`);
@@ -104,7 +135,26 @@ export default function ProductCardMobileList({ classesData }) {
               className={styles.actionIcon}
             />
           </a>
-          <a href="#" className={styles.actionLink}>
+          <a
+            href="#"
+            className={styles.actionLink}
+            onClick={() => {
+              if (!auth.isLoggedIn) {
+                return toast.error("請先登入再使用!");
+              }
+              notify(className);
+
+              console.log("Adding product:", {
+                id,
+                className,
+                classDate,
+                price,
+                image,
+              });
+
+              addItem({ id, className, classDate, price, image });
+            }}
+          >
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/12c463020f554bb50b1abfb8cf140b741c2e5808718fcfa591bf4f71dd337745?apiKey=05ed34dfc33e48adbcf96f614bb553e5&"
               alt="Action 2"

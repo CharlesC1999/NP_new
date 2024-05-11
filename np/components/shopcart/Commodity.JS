@@ -100,7 +100,11 @@ const Commodity = () => {
 
         {productItems.map((element, index) => {
           return (
-            <div className="row" key={element.id}>
+            <div
+              className="row"
+              key={element.id}
+              style={{ borderBottom: "1px solid #def9ec" }}
+            >
               <div
                 className="col d-flex align-items-center justify-content-start ps-3"
                 style={{ width: 100, minWidth: 77 }}
@@ -126,12 +130,16 @@ const Commodity = () => {
                 {/* <Check /> */}
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
-                <img
-                  src={`/images/products/${element.image}`}
-                  className="img-fluid"
-                  alt={element.name}
-                  style={{ minWidth: 75 }}
-                />
+                {element.image || (element.img && element.img[0]) ? (
+                  <img
+                    src={`/images/products/${element.image || element.img[0]}`}
+                    className="img-fluid"
+                    alt={element.name || "Default name"}
+                    style={{ minWidth: 75 }}
+                  />
+                ) : (
+                  <span>No image available</span>
+                )}
                 {/* console.log({`/images/products/${element.image}`}) */}
               </div>
               <div className="col-3 align-self-center text-center px-4">
@@ -150,7 +158,10 @@ const Commodity = () => {
                 >
                   -
                 </span>
-                <span>{element.qty}</span>
+                <span>
+                  {element.qty}
+                  {/* {element.quantity} */}
+                </span>
                 <span
                   onClick={() => {
                     increaseProduct(element.id);
@@ -204,22 +215,16 @@ const Commodity = () => {
               {/* 叉叉 */}
               {/* <div class="delete"></div> */}
               <div className="col-4 p-0">
-                <img
-                  src={`/images/products/${element.image}`}
-                  alt=""
-                  className=""
-                  style={{
-                    objectFit: "cover",
-                    height: "100%",
-                    weight: "121px",
-                  }}
-                  // onClick={() => {
-                  //   const nextData = productData.filter((v, i) => {
-                  //     return v.id !== element.id;
-                  //   });
-                  //   setProductsData(nextData);
-                  // }}
-                />
+                {element.image || (element.img && element.img[0]) ? (
+                  <img
+                    src={`/images/products/${element.image || element.img[0]}`}
+                    className="img-fluid"
+                    alt={element.name || "Default name"}
+                    style={{ minWidth: 75 }}
+                  />
+                ) : (
+                  <span>No image available</span>
+                )}
               </div>
               <div className="col-8 pb-3 pt-2">
                 <div className={`${CommodityStyles.fc} mt-1 row`}>

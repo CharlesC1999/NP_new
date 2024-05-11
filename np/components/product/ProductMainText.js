@@ -20,7 +20,7 @@ function ProductMainText({
   discount_price,
   review_comments,
   average_rating,
-  img,
+  img, // 取第一個元素
   upload_date,
   handleReviewCount,
 }) {
@@ -29,7 +29,7 @@ function ProductMainText({
   // 加入全域鉤子
   const { favorClass, auth, setAction } = useAuth();
   const { addProduct } = useCart();
-
+  const [quantity, setQuantity] = useState(1);
   return (
     <>
       <div className={`${style["product-text"]} d-flex flex-column`}>
@@ -57,6 +57,8 @@ function ProductMainText({
           className={`${style["amount"]} ps-4 my-2`}
           type="number"
           defaultValue={1}
+          min="1"
+          onChange={(e) => setQuantity(Number(e.target.value))}
         />
         <button
           type="submit"
@@ -67,7 +69,22 @@ function ProductMainText({
               return toast.error("請先登入再使用!");
             }
             notifyBtn();
-            addProduct({ id, name, price, description, discount_price, img });
+            addProduct({
+              id,
+              name,
+              price,
+              description,
+              discount_price,
+              img,
+              quantity,
+            });
+            console.log("Adding product:", {
+              id,
+              name,
+              price,
+              img: img[0],
+              quantity,
+            });
           }}
         >
           &nbsp;&nbsp;加入購物車{" "}

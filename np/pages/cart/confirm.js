@@ -125,14 +125,25 @@ const ShopCart4 = () => {
             type="submit"
             href="http://localhost:3000"
           >
-            <h3 className={`${styles4.h3} fw-bold `}>返回首頁</h3>
+            <h3
+              className={`${styles4.h3} fw-bold `}
+              style={{ marginBottom: "0" }}
+            >
+              返回首頁
+            </h3>
           </a>
           <a
-            className={`${styles4.keepbuy} ms-4`}
+            className={`${styles4.keepbuy}  d-flex justify-content-center align-items-center`}
+            style={{ marginBottom: "0", textDecoration: "none" }}
             type="submit"
             href="http://localhost:3000"
           >
-            <h3 className={`${styles4.h3} fw-bold pt-1`}>繼續購物</h3>
+            <h3
+              className={`${styles4.h3} fw-bold`}
+              style={{ marginBottom: "0" }}
+            >
+              繼續購物
+            </h3>
           </a>
         </div>
       </div>
