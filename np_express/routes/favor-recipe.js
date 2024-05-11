@@ -27,7 +27,7 @@ router.get('/', authenticateToken, async (req, res) => {
 
   // 取得會員頁所需食譜資料
   // uid 為變數，根據會員 id 返回查詢結果，先用 uid =1 來測試
-  const recipeDataSql = `SELECT recipe.*,favor_recipe.uid,recipe_categories.Recipe_cate_Name
+  const recipeDataSql = `SELECT recipe.*,favor_recipe.uid,favor_recipe.created_at,recipe_categories.Recipe_cate_Name
   FROM recipe
   JOIN favor_recipe ON recipe.recipe__i_d = favor_recipe.rid 
 JOIN recipe_categories ON recipe.recipe_category__i_d = recipe_categories.recipe_cate__i_d
