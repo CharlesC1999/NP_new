@@ -30,6 +30,9 @@ router.post('/', async (req, res) => {
       Password: hashedPassword,
       Create_date: new Date(), // 假設現在的時間為創建日期
       Last_login: new Date(), // 也可以設置為現在的時間或合理的默認值
+      google_uid: 'not google',
+      line_uid: 'not line',
+      line_access_token: 'not line',
       valid: true,
     })
     res.status(201).send('會員註冊成功')
