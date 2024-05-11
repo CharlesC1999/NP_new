@@ -1,4 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { useFavor } from "@/hooks/use-favorData";
 import { addProductFav, removeProductFav } from "@/services/user";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -20,7 +21,8 @@ const Heart = ({ size = 20, color = "#50BF8B" }) => (
 );
 
 export default function FavIconProduct({ id }) {
-  const { favorProduct, auth, setAction } = useAuth();
+  const { auth } = useAuth();
+  const {favorProduct, setAction  } = useFavor()
 
   const handleAddFav = async (pid) => {
     const res = await addProductFav(pid);
