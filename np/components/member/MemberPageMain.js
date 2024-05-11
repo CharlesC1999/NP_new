@@ -202,15 +202,23 @@ const MemberPageMain = () => {
         <div className>
           {/* 主內容的標題 */}
           <div className={styles.title}>
-            <div className={styles.titleNow}>我的帳戶</div>
+            <div className={styles.titleNow}>更新資料</div>
             {/* <div className={styles.title2}>我的帳戶</div> */}
           </div>
           {/* 主內容的標題 */}
           {/* 手機板大頭貼 */}
           <div className={styles.mUserimage}>
             <div className={styles.mUImage}>
-              <img src="" alt="" />
-              <div className={styles.camera}>
+              <img
+                className="rounded-circle overflow-hidden w-100 h-100 object-fit-cover"
+                src={
+                  fileChanged
+                    ? previewURL
+                    : `http://localhost:3005/avatar/${userData.User_image}`
+                }
+                alt=""
+              />
+              <div onClick={handleClickFile} className={styles.camera}>
                 <label htmlFor="fileUpload" className={styles.uploadBtn}>
                   {" "}
                   <svg
@@ -447,7 +455,7 @@ const MemberPageMain = () => {
                   src={
                     fileChanged
                       ? previewURL
-                      : `/images/member/${userData.User_image}`
+                      : `http://localhost:3005/avatar/${userData.User_image}`
                   }
                   alt=""
                   className="w-100 h-100 object-fit-cover"

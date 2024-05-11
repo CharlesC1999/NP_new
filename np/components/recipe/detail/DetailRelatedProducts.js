@@ -1,21 +1,65 @@
-import { useState } from "react";
-import Products from "@/data/recipe/product.json";
+import { useEffect, useState } from "react";
 import CheckBoxCustom from "@/components/checkbox-custom/RecipeCheckbox.js/RecipeCheckBox";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailRelatedProducts.module.scss";
+// 給checkbox的icon
+import { FaCheck } from "react-icons/fa6";
+import { set } from "lodash";
 
-export default function DetailRelatedProducts() {
-  const initProducts = Products.map((v) => {
-    return { ...v, qty: 1 };
-  });
+export default function DetailRelatedProducts({ recipeID = "" }) {
+  // TODO 暫時給checkbox的狀態
+  const [checkAll, setCheckAll] = useState(true);
 
-  // 相關產品的state
-  const [products, setProducts] = useState(initProducts);
+  // 最一開始從後端得到的相關商品列表
+  const [initProductsFetch, setInitProductsFetch] = useState([]);
 
-  //增加商品數量
+  // 從後端取得相關商品
+  const getRelatedProducts = async () => {
+    const url = `http://localhost:3005/api/recipes/${recipeID}/relatedProducts`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (Array.isArray(data.data.relatedProducts)) {
+      setInitProductsFetch(data.data.relatedProducts);
+    } else {
+      console.log("伺服器回傳資料類型錯誤，無法設定到狀態中");
+    }
+  };
+
+  // 用來map的相關產品state
+  //增加商品數量，在後面的useEffect中設定state
+  const [products, setProducts] = useState([]);
+
+  // 處理勾選商品
+  const handleCheck = (id) => {
+    const nextProducts = products.map((v) => {
+      if (v.id === id) {
+        return { ...v, checked: !v.checked };
+      } else {
+        return v;
+      }
+    });
+    setProducts(nextProducts);
+  };
+
+  // 全選的核取方塊用的事件處理函式
+  const handleToggleCheckedAll = (e) => {
+    setCheckAll(!checkAll);
+    const nextProducts = products.map((v, i) => {
+      // 強制所有選項物件的checked屬性，和全選的e.target.checked完全一致
+      return { ...v, checked: e.target.checked };
+    });
+
+    // 狀態修改通用第3步
+    setProducts(nextProducts);
+  };
+
+  // 增加商品數量
   const increaseItem = (id) => {
     const newItems = products.map((v) => {
-      if (v.id === id) {
+      if (v.id === id && v.qty === 0) {
+        return { ...v, checked: true, qty: v.qty + 1 };
+      } else if (v.id === id) {
         return { ...v, qty: v.qty + 1 };
       } else {
         return v;
@@ -27,7 +71,9 @@ export default function DetailRelatedProducts() {
   //減少商品數量
   const decreaseItem = (id) => {
     const newItems = products.map((v) => {
-      if (v.id === id) {
+      if (v.id === id && v.qty === 1) {
+        return { ...v, checked: false, qty: v.qty - 1 };
+      } else if (v.id === id) {
         return { ...v, qty: v.qty - 1 };
       } else {
         return v;
@@ -41,9 +87,36 @@ export default function DetailRelatedProducts() {
     return qty * price;
   };
 
+  // 最終有被勾選的才會被加總以及加進購物車
+  const finalProducts = products.filter((v) => v.checked);
+
   // 加總數量與價格
-  const totalItems = products.reduce((acc, v) => acc + v.qty, 0);
-  const totalPrice = products.reduce((acc, v) => acc + v.price * v.qty, 0);
+  const totalItems = finalProducts.reduce((acc, v) => acc + v.qty, 0);
+  const totalPrice = finalProducts.reduce(
+    (acc, v) => acc + v.product_price * v.qty,
+    0
+  );
+
+  // 初次渲染頁面時取得相關商品，但要先取得食譜的ID (透過props傳進來的)
+  useEffect(() => {
+    getRelatedProducts();
+  }, [recipeID]);
+
+  // 得到後端的相關商品資料後再設定給最終要用來map的state
+  useEffect(() => {
+    // 擴充相關商品的數量屬性跟checked屬性
+    const initProducts = initProductsFetch.map((v) => {
+      return { ...v, qty: 1, checked: true };
+    });
+    setProducts(initProducts);
+  }, [initProductsFetch]);
+
+  // !!! 用useEffect監聽products的每個checked，如果都有checked就設定全選是true
+  useEffect(() => {
+    if (products.every((v) => v.checked)) {
+      setCheckAll(true);
+    }
+  }, [products]);
 
   return (
     <>
@@ -60,7 +133,26 @@ export default function DetailRelatedProducts() {
             className={`${styles["related-products-top"]} d-flex justify-content-between`}
           >
             <div className={`${styles["top-left"]} d-flex align-items-end`}>
-              <CheckBoxCustom />
+              {/* // *** checkAll */}
+              <div className={styles["checkbox-wrapper"]}>
+                <FaCheck
+                  style={{ "font-size": "16px" }}
+                  className={`${styles["fa-check"]} ${
+                    products.every((v) => v.checked) ? "d-block" : "d-none"
+                  }`}
+                />
+                <input
+                  disabled={products.some((v) => v.qty === 0) ? true : false}
+                  onClick={(e) => {
+                    handleToggleCheckedAll(e);
+                  }}
+                  checked={checkAll}
+                  type="checkbox"
+                  className={`${styles["test"]} ${
+                    products.every((v) => v.checked) ? styles.checked : " "
+                  }`}
+                />
+              </div>
               <p className={styles["check-all"]}>全選</p>
             </div>
             <div className={`${styles["top-right"]} d-xxl-flex d-none`}>
@@ -76,11 +168,30 @@ export default function DetailRelatedProducts() {
                 <div
                   className={`col-12 col-xxl-8 ${styles["middle-left"]} d-flex align-items-center`}
                 >
-                  <CheckBoxCustom />
+                  {/* // *** checkbox */}
+                  <div className={styles["checkbox-wrapper"]}>
+                    <FaCheck
+                      style={{ "font-size": "16px" }}
+                      className={`${styles["fa-check"]} ${
+                        v.checked ? "d-block" : "d-none"
+                      }`}
+                    />
+                    <input
+                      disabled={v.qty === 0 ? true : false}
+                      onChange={() => {
+                        handleCheck(v.id);
+                      }}
+                      checked={v.checked}
+                      type="checkbox"
+                      className={`${styles["test"]} ${
+                        v.checked ? styles.checked : ""
+                      }`}
+                    />
+                  </div>
                   <div className={styles["product-pic"]}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src="/images/recipe/detail/eb0c2b4dc60ca444aaa6979ae5467f7a.jpg"
+                      src={`/images/products/${v.image_url}`}
                       alt=""
                     />
                   </div>
@@ -88,14 +199,16 @@ export default function DetailRelatedProducts() {
                     <p
                       className={`${styles["product-name"]} ${styles["figma-h5"]}`}
                     >
-                      {v.name}
+                      {v.product_name}
                     </p>
                     <div
                       className={`${styles["portion-and-price"]} d-flex gap-2`}
                     >
                       <p className={styles["portion"]}>份量</p>
                       <p className={styles["divider"]}>|</p>
-                      <p className={styles["price"]}>單價 $ {v.price}</p>
+                      <p className={styles["price"]}>
+                        單價 $ {v.product_price}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -127,7 +240,7 @@ export default function DetailRelatedProducts() {
                     </button>
                   </div>
                   <p className={`${styles["subtotal"]} ${styles["figma-h6"]}`}>
-                    {`$ ${subtotal(v.qty, v.price)}`}
+                    {`$ ${subtotal(v.qty, v.product_price)}`}
                   </p>
                 </div>
               </div>

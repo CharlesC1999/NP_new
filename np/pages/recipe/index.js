@@ -10,7 +10,6 @@ import SideBarRecipe from "@/components/recipe/list/SideBarRecipe";
 import PaginationM from "@/components/paginationM";
 // 手機板的篩選、排序
 import TopBarList from "@/components/recipe/list/TopBarList";
-import TopBarGrid from "@/components/recipe/list/TopBarGrid";
 // 食譜卡片
 import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import RecipeCardsGrid from "@/components/recipe/list/RecipeCardsGrid";

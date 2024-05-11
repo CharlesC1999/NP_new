@@ -9,6 +9,7 @@ import ClassCard from "@/components/search/ClassCardWeb";
 import ProductCardMobileGrid from "@/components/search/ClassCardMobile";
 import ProductCard from "@/components/search/ProductCard02";
 import RecipeCardsList from "@/components/search/RecipeCardsList";
+import RecipeCardsMobile from "@/components/search/RecipeCardsGrid";
 import PaginationRounded from "@/components/pagination";
 import "@fortawesome/fontawesome-free/css/all.css";
 function SearchResult() {
@@ -38,14 +39,25 @@ function SearchResult() {
         {activeTab === "食譜" && (
           <div>
             {results.recipes && results.recipes.length > 0 ? (
-              <div className={styles.cards}>
-                {results.recipes.map((recipeData, index) => (
-                  <RecipeCardsList
-                    recipesData={recipeData}
-                    key={index}
-                    Index={index}
-                  />
-                ))}
+              <div>
+                <div className={styles.cards}>
+                  {results.recipes.map((recipeData, index) => (
+                    <RecipeCardsList
+                      recipesData={recipeData}
+                      key={index}
+                      Index={index}
+                    />
+                  ))}
+                </div>
+                <div className={styles.cardsWeb}>
+                  {results.recipes.map((recipeData, index) => (
+                    <RecipeCardsMobile
+                      recipesData={recipeData}
+                      key={index}
+                      Index={index}
+                    />
+                  ))}
+                </div>
               </div>
             ) : (
               <div className={styles.noResult}>

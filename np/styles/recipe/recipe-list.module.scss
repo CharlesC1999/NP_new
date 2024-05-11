@@ -14,8 +14,9 @@
   }
 
   .list-wrapper {
-    gap: 120px;
+    gap: 100px;
     margin-inline: 0px;
+    padding-right: 70px;
     @media screen and (max-width: 376px) {
       margin-inline: 0px;
     }
