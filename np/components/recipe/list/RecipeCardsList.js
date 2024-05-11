@@ -86,7 +86,7 @@ export default function RecipeCardsList({ recipesData = [] }) {
                   </div>
                 </div>
                 <Link
-                  href={`/recipe/${v.recipe__i_d}`}
+                  href={`/recipe/recipeId?id=${v.recipe__i_d}`}
                   className="link-underline link-underline-opacity-0"
                 >
                   <button
