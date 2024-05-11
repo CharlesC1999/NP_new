@@ -13,18 +13,86 @@ import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { useAuth } from "@/contexts/AuthContext";
-
+import { useFavor } from "@/hooks/use-favorData";
 export default function Favor() {
-  const {
-    favorRecipe,
-    recipeData,
-    favorClass,
-    favorProduct,
-    classData: classesData,
-    productData,
-    auth
-  } = useAuth();
+  const { auth } = useAuth();
+  const { recipeData, classData, productData } = useFavor();
   const [activeTab, setActiveTab] = useState("食譜");
+
+  // 用關鍵字搜尋
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredRecipeData, setFilteredRecipeData] = useState([]);
+  const [filteredClassData, setFilteredClassData] = useState([]);
+  const [filteredProductData, setFilteredProductData] = useState([]);
+  // 排序
+  const [sortAsc, setSortAsc] = useState(true);
+  const sortByTime = () => {
+    if (sortAsc) {
+      recipeData.sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      );
+      classData.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+      productData.sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      );
+    } else {
+      recipeData.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
+      classData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      productData.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
+    }
+    setFilteredRecipeData(recipeData);
+    setFilteredClassData(classData);
+    setFilteredProductData(productData);
+    // 切換排序方向
+    setSortAsc(!sortAsc);
+  };
+  // 偵測搜尋框的輸入
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  // 用搜尋關鍵字搜尋（食譜名稱、敘述，課程名稱、敘述，商品名稱）
+  const resultR = recipeData.filter(
+    (item) =>
+      item.title__r_name.includes(searchTerm) ||
+      item.content.includes(searchTerm)
+  );
+  const resultC = classData.filter((item) =>
+    item.class_name.includes(searchTerm) || 
+    item.class_description.includes(searchTerm)
+  );
+  const resultP = productData.filter((item) =>
+    item.product_name.includes(searchTerm)
+  );
+  // 還沒開始搜尋時用收藏的資料渲染
+  useEffect(() => {
+    setFilteredRecipeData(recipeData);
+    setFilteredClassData(classData);
+    setFilteredProductData(productData);
+  }, []);
+  // 搜尋後用搜尋結果渲染（如果搜尋框沒有內容，回復成未搜尋時的卡片狀態）
+  useEffect(() => {
+    if (searchTerm !== "") {
+      setFilteredRecipeData(resultR);
+      setFilteredClassData(resultC);
+      setFilteredProductData(resultP);
+    } else {
+      setFilteredRecipeData(recipeData);
+      setFilteredClassData(classData);
+      setFilteredProductData(productData);
+    }
+  }, [searchTerm]);
+  // 在搜尋結果中新增或移除收藏時，卡片會即時更新
+  useEffect(() => {
+    setFilteredRecipeData(resultR);
+    setFilteredClassData(resultC);
+    setFilteredProductData(resultP);
+  }, [recipeData, classData, productData]);
+
+
   return (
     <>
       <HeaderComponent />
@@ -32,20 +100,67 @@ export default function Favor() {
       <div className={`globalContainer ${styles.container}`}>
         <Sidebar />
         <div className={styles.navRight}>
-          {/* 把 activeTab 和 setActiveTab 傳遞到FavorTabs 使用 */}
-          <FavorTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+          {/*搜尋和排序 */}
+          <div className={styles.searchAndSort}>
+            <div className={styles.searchBar}>
+              <input
+                type="text"
+                className={styles.searchBarInput}
+                placeholder="在願望清單中搜尋..."
+                onChange={handleSearch}
+              />
+              <div className={styles.searchBtn}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  className={styles.searchBtn}
+                >
+                  <path
+                    fill="none"
+                    stroke="#747E85"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"
+                  />
+                </svg>
+              </div>
+            </div>
+            {/* 排序 */}
+            <button type="button" className={styles.sort} onClick={sortByTime}>
+              {sortAsc ? (
+                <>
+                  <i className="fa-solid fa-arrow-up-wide-short"></i> 由舊到新
+                </>
+              ) : (
+                <>
+                  <i className="fa-solid fa-arrow-down-wide-short"></i> 由新到舊
+                </>
+              )}
+            </button>
+          </div>
 
-          {/* card-recipe 偉鈞 */}
+          {/* 把 activeTab 和 setActiveTab 和搜尋結果資料傳遞到FavorTabs 使用 */}
+          <FavorTabs
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            filteredRecipeData={filteredRecipeData}
+            filteredClassData={filteredClassData}
+            filteredProductData={filteredProductData}
+          />
+
+          {/* card-recipe */}
           {activeTab === "食譜" && (
             <div className={styles.cards}>
-              <RecipeCardsList recipesData={recipeData} />
+              <RecipeCardsList recipesData={filteredRecipeData} />
             </div>
           )}
-          {/* card-lecture 宥毓 */}
+          {/* card-lecture */}
           {activeTab === "課程" && (
             <div className={styles.cards}>
               <div className={styles.classCard}>
-                {classesData.map((classData, index) => (
+                {filteredClassData.map((classData, index) => (
                   <ClassCard
                     classesData={classData}
                     key={index}
@@ -55,7 +170,7 @@ export default function Favor() {
                 ))}
               </div>
               <div className={styles.classCardMobile}>
-                {classesData.map((classData, index) => (
+                {filteredClassData.map((classData, index) => (
                   <ClassCardMobileList
                     classesData={classData}
                     key={index}
@@ -65,11 +180,11 @@ export default function Favor() {
               </div>
             </div>
           )}
-          {/* card-product 靖荃 */}
+          {/* card-product */}
           {activeTab === "商品" && (
             <>
               <div className={`${styles.productCard1}`}>
-                {productData.map((v) => {
+                {filteredProductData.map((v) => {
                   return (
                     <ProductCard02
                       key={v.id}
@@ -86,7 +201,7 @@ export default function Favor() {
                 })}
               </div>
               <div className={`${styles.productCardMobile}`}>
-                {productData.map((v) => {
+                {filteredProductData.map((v) => {
                   return (
                     <ProductCardList
                       key={v.id}

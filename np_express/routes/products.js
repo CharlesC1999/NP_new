@@ -7,165 +7,7 @@ const { Product } = sequelize.models
 import { getIdParam } from '#db-helpers/db-tool.js'
 
 import db from '#configs/mysql.js'
-// router.get('/', async function (req, res) {
-//   res.send('product')
-// })
 
-// GET - 得到所有會員資料
-// router.get('/', async function (req, res) {
-//   try {
-//     const {
-//       page = 1,
-//       perpage = 20,
-//       price_gte = 50,
-//       price_lte = 100,
-//       sort = 'category_id',
-//       order = 'asc',
-//       category_id = '',
-//       discount_id,
-//       rating,
-//     } = req.query
-//     //當前頁碼
-//     const pageNow = Number(page) || 1
-//     //一頁幾筆
-//     const perpageNow = Number(perpage) || 20
-//     const limit = perpageNow
-
-//     //offset 從第幾筆開始
-//     const offset = (pageNow - 1) * perpageNow
-
-//     const conditions = []
-//     if (price_gte) conditions.push(`product_price >= ${price_gte}`)
-
-//     if (price_lte) conditions.push(`product_price <= ${price_lte}`)
-//     if (category_id) {
-//       const ids = category_id.split(',').map((id) => id.trim())
-
-//       // 建立查询，优先考虑子类别
-//       const subCategoryQuery = `
-//         SELECT id FROM product_categories WHERE parent_id IN (${ids.join(',')})
-//       `
-//       const categoriesWithChildren = await sequelize.query(subCategoryQuery, {
-//         type: sequelize.QueryTypes.SELECT,
-//       })
-//       const childIds = categoriesWithChildren.map((cat) => cat.id)
-//       if (childIds.length > 0) {
-//         // 子类别存在，只使用子类别作为条件
-//         conditions.push(`category_id IN (${childIds.join(',')})`)
-//       } else {
-//         // 没有子类别，使用传入的父类别ID
-//         conditions.push(`category_id IN (${ids.join(',')})`)
-//       }
-//     }
-//     if (discount_id) conditions.push(`category_id = ${discount_id}`)
-//     // if (rating !== undefined)
-//     //   conditions.push(`ROUND(AVG(pReview.rating), 1) = ${rating}`)
-//     const conditionsValues = conditions.filter((v) => v)
-
-//     const where =
-//       conditionsValues.length > 0
-//         ? `WHERE ` + conditionsValues.map((v) => `( ${v} )`).join(` AND `)
-//         : ''
-
-//     const orderby = ` ORDER BY ${sort} ${order}`
-
-//     const categoryQuery = `
-//     SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId
-//     FROM product_categories
-//   `
-//     let havingConditions = ''
-//     if (rating !== undefined) {
-//       havingConditions = `HAVING ROUND(AVG(pReview.rating), 1) = ${rating}`
-//     }
-
-//     const productQuery = `
-//   SELECT
-//     p.id,
-//     p.product_name,
-//     p.product_price,
-//     p.discount_price,
-//     p.product_stock,
-//     p.product_description,
-//     p.valid,
-//     p.upload_date,
-//     p.category_id,
-//     pCate.name AS cate_name,
-//     pCate.parent_id,
-//     pCate.id AS CateID,
-//     pImg.image_url AS image_urls,
-//     ROUND(AVG(pReview.rating), 1) AS average_rating,
-//     GROUP_CONCAT(CONCAT_WS('|', pReview.comment, pReview.rating, pReview.user_id, DATE_FORMAT(pReview.created_at, '%Y-%m-%d %T'))) AS review_details,
-//     GROUP_CONCAT(pImg.sort_order ORDER BY pImg.sort_order) AS sort_orders
-//     FROM
-//     product AS p
-//     LEFT JOIN product_review AS pReview ON p.id = pReview.product_id
-//     LEFT JOIN product_image AS pImg ON p.id = pImg.product_id
-//     LEFT JOIN product_categories AS pCate ON p.category_id= pCate.id
-//     ${where}
-//   GROUP BY
-//     p.id
-//     ${havingConditions}
-//   ORDER BY
-//     ${sort} ${order}
-//   LIMIT ${limit} OFFSET ${offset}
-// ` //執行query
-//     const [products, categories] = await Promise.all([
-//       sequelize.query(productQuery, {
-//         replacements: { limit, offset },
-//         type: sequelize.QueryTypes.SELECT,
-//       }),
-//       sequelize.query(categoryQuery, { type: sequelize.QueryTypes.SELECT }),
-//     ])
-
-//     const havingClause = havingConditions ? `${havingConditions}` : ''
-
-//     const productQueryCount = `
-//   SELECT COUNT(*) AS count
-//   FROM (
-//     SELECT p.id
-//     FROM product AS p
-//     LEFT JOIN product_review AS pReview ON p.id = pReview.product_id
-//     LEFT JOIN product_image AS pImg ON p.id = pImg.product_id
-//     LEFT JOIN product_categories AS pCate ON p.category_id= pCate.id
-//     ${where}
-//     GROUP BY p.id
-//     ${havingClause}
-//   ) AS subquery
-// `
-//     console.log(productQueryCount)
-
-//     const resultCount = sequelize
-//       .query(productQueryCount, { type: sequelize.QueryTypes.SELECT })
-//       .then((results) => {
-//         console.log(results) // 查看返回的數據結構
-//         return results
-//       })
-//       .catch((error) => {
-//         console.error('Error executing query: ', error)
-//       })
-//     const totalRecords = resultCount[0].count
-//     console.log('Total records:', totalRecords)
-
-//     const totalPages = Math.ceil(totalRecords / perpageNow)
-//     res.json({
-//       status: 'success',
-//       data: {
-//         products: products,
-//         categories: categories,
-//         totalRecords: totalRecords,
-//         totalPages: totalPages,
-//         currentPage: pageNow,
-//       },
-//     })
-//   } catch (error) {
-//     console.error('Error fetching products:', error)
-//     return res.status(500).json({
-//       status: 'error',
-//       message: 'Internal server error.',
-//       error: error.message,
-//     })
-//   }
-// })
 async function fetchCategoryCounts() {
   const categoryCountsQuery = `
     SELECT
@@ -202,8 +44,8 @@ router.get('/', async function (req, res) {
     const {
       page = 1,
       perpage = 20,
-      price_gte = 50,
-      price_lte = 100,
+      price_gte = '',
+      price_lte = '',
       sort = 'id',
       order = 'asc',
       category_id = '',
@@ -307,7 +149,7 @@ router.get('/', async function (req, res) {
       GROUP BY p.id ${ratingclause}
     ) AS subquery
     `
-    console.log(productQueryCount)
+    console.log(productQuery)
     const resultCount = await sequelize.query(productQueryCount, {
       type: sequelize.QueryTypes.SELECT,
     })

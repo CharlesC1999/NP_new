@@ -113,3 +113,43 @@ SELECT p.product_name, p.product_price, p.id , pImage.image_url
        JOIN product_image AS pImage ON p.id = pImage.product_id
        ORDER BY RAND()
        LIMIT 5;
+
+
+SELECT product_id, user_id FROM product_review WHERE product_id =303 AND user_id = 1
+
+SELECT orders.*,
+       orders_detail.*,
+       product.*,
+       product_image.*,
+       class.*,
+       product_review.comment AS review_comment,
+       product_review.rating AS review_rating
+FROM orders
+JOIN orders_detail ON orders.Order_ID = orders_detail.order_detail_id
+LEFT JOIN product ON orders_detail.commodity_id = product.id AND orders_detail.product_type = 'product'
+LEFT JOIN product_image ON orders_detail.commodity_id = product_image.product_id AND orders_detail.product_type = 'product'
+LEFT JOIN class ON orders_detail.class_id = class.class__i_d AND orders_detail.product_type = 'class'
+LEFT JOIN product_review ON orders_detail.order_detail_id = product_review.order_detail_id  
+GROUP BY orders.order_Id
+ORDER BY orders.Order_date DESC;
+
+SELECT
+  orders.*,
+  orders_detail.*,
+  IF(product_review.id IS NULL, 0, 1) AS has_reviewed
+FROM
+  orders
+JOIN orders_detail ON orders.Order_ID = orders_detail.order_detail_id
+LEFT JOIN product_review ON orders_detail.commodity_id = product_review.product_id
+                        AND orders.user_id = product_review.user_id
+LEFT JOIN product ON orders_detail.commodity_id = product.id 
+LEFT JOIN product_image ON orders_detail.commodity_id = product_image.product_id
+LEFT JOIN class ON orders_detail.class_id = class.class__i_d
+GROUP BY orders.order_Id, orders_detail.order_detail_id
+ORDER BY orders.Order_date DESC;
+
+
+SELECT * FROM product_review WHERE product_id = 303 AND user_id = 1
+
+
+SELECT * FROM product WHERE category_id = 22

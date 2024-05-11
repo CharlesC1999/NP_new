@@ -1,0 +1,20 @@
+BEGIN
+  INSERT INTO member (user_name, address, account, email) VALUES (NEW.name, NEW.photo_url, NEW.line_uid, "line@noemail.com");
+  SET @new_member_id = LAST_INSERT_ID();
+  INSERT INTO member_update (type_of_member, third_party_id, call_back) VALUES ("line", NEW.id, @new_member_id);
+END
+--------------------------------line---------------------------------------
+BEGIN
+  INSERT INTO member (user_name, address, account, email) VALUES (NEW.display_name, NEW.photo_u_r_l, NEW.google_uid, NEW.email);
+  SET @new_member_id = LAST_INSERT_ID();
+  INSERT INTO member_update (type_of_member, third_party_id, call_back) VALUES ("google", NEW.id, @new_member_id);
+END
+--------------------------------google--------------------------------------
+BEGIN
+    IF NEW.call_back IS NOT NULL THEN
+        UPDATE Member_update
+        SET processed = 1
+        WHERE id = NEW.id;
+    END IF;
+END
+--------------------------------update processed----------------------------

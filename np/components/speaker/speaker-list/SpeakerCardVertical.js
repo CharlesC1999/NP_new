@@ -14,7 +14,7 @@ function SpeakerCardVertical({ name, title, id, img, cate }) {
       case "療癒點心":
         return '#F18795';
       case "健康蔬食":
-        return '#578B6A';
+        return '#3B9C5F';
     }
   }
     return (<Link href={`/speaker/speaker-detail?sid=${id}`} className={styles.speakerCardLink}>
