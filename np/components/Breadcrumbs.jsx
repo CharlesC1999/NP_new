@@ -12,6 +12,8 @@ const pathNameMapping = {
   speaker: "講師陣容",
   "speaker-detail": "講師介紹",
   member: "會員",
+  "member-page": "修改資料",
+  "password-reset": "修改密碼",
   favor: "願望清單",
   recipe: "食譜列表",
   recipeId: "食譜詳細頁",
