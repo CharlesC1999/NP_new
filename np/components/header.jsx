@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+// 收藏的數量資料
+import { useFavor } from "@/hooks/use-favorData";
 import { useSearchResults } from "@/contexts/searchContext";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -203,7 +205,8 @@ const HeaderComponent = () => {
   const [showFullScreen, setShowFullScreen] = useState(false); // sidebar
   // const [animation, setAnimation] = useState(""); //sidebar slideout
   const router = useRouter();
-  const { auth, logout, favorClass, favorRecipe, favorProduct } = useAuth();
+  const { auth, logout } = useAuth();
+  const { favorClass, favorRecipe, favorProduct } = useFavor();
   const favorAmountC = favorClass.length;
   const favorAmountR = favorRecipe.length;
   const favorAmountP = favorProduct.length;

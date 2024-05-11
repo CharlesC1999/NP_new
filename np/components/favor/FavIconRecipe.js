@@ -1,4 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { useFavor } from "@/hooks/use-favorData";
 import { addRecipeFav, removeRecipeFav } from "@/services/user";
 import toast from "react-hot-toast";
 
@@ -21,7 +22,8 @@ const Heart = ({ size = 30, color = "#db1212" }) => (
 // 從卡片組件中傳入該食譜 id
 export default function FavIconRecipe({ id }) {
   // 從 useAuth 這個 context 取得目前收藏的食譜 id 陣列（favorRecipe）、登入狀態(auth)和對於按鈕被觸發的設置(setAction)
-  const { favorRecipe,auth, setAction } = useAuth();
+  const { auth } = useAuth();
+  const { favorRecipe,setAction } = useFavor();
 
   // 加入收藏
   const handleAddFav = async (rid) => {
