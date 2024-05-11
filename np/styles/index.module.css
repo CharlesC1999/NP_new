@@ -146,7 +146,6 @@
 
 /* <!-- Nutripoll-p and button--> */
 
-
 .nutripollP {
   display: flex;
   padding: 15px 0px;
@@ -161,16 +160,16 @@
   gap: 10px;
   align-self: stretch;
   font-weight: normal;
-& h1 {
+  & h1 {
     font-weight: 600;
     font-size: 32px;
     color: var(--black);
-}
-& h6 {
-  font-weight: 400;
-  font-size: 20px;
-  color: var(--black);
-}
+  }
+  & h6 {
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--black);
+  }
 }
 
 .textNutripoll {
@@ -178,7 +177,8 @@
   flex-direction: column;
   & h5 {
     font-weight: 400;
-    line-height: 30.8px; /* 40.8px*/
+    line-height: 35px;
+    font-size: 1.2rem;
   }
 }
 
@@ -193,9 +193,10 @@
   background-color: var(--green03);
   width: 250px;
   height: 50px;
-  border-radius: 0%;
+  border-radius: 25px;
   color: #fff;
   font-size: 24px;
+  font-weight: 500;
   line-height: 50px;
   text-align: center;
   border: none;
@@ -221,10 +222,10 @@
     & h1 {
       font-size: 28px;
       margin-bottom: 0;
-  }
-  & h6 {
-    font-size: 18px;
-  }
+    }
+    & h6 {
+      font-size: 18px;
+    }
   }
 
   .nutripollP {
@@ -247,11 +248,12 @@
     display: flex;
     flex-direction: column;
     align-self: stretch;
+    border-radius: 15px;
   }
   .btn1 {
     width: 170px;
     height: 45px;
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -259,8 +261,8 @@
 .NutripollCard1 {
   padding: 56px 0px 80px 0px;
 }
-.card1Rwd{
-  display:flex;
+.card1Rwd {
+  display: flex;
   justify-content: space-between;
 }
 .card1Img {
@@ -281,6 +283,7 @@
   color: var(--black);
   width: 862px;
   height: auto;
+  justify-content: space-between;
 
   & h3 {
     font-size: 32px;
@@ -296,7 +299,7 @@
 /* <!-- Nutripoll-card1 RWD--> */
 @media (max-width: 375px) {
   .NutripollCard1 {
-    padding: 20px 0px 30px 0px;
+    padding: 20px 0px 20px 0px;
   }
 
   .card1Rwd {
@@ -323,7 +326,8 @@
     flex-direction: column;
     color: var(--black, #454545);
     width: 375px;
-    padding: 0px 15px;
+    padding: 0px 20px;
+    gap:10px;
     margin-left: 0px;
     height: auto;
 
@@ -348,12 +352,12 @@
   display: flex;
   padding: 56px 0px;
   /* justify-content: space-between; */
-  gap:70px;
+  gap: 70px;
   flex-wrap: wrap;
-  @media(max-width: 375px){
-    gap:0px;
-    row-gap:10px;
-    padding:20px 10px;
+  @media (max-width: 375px) {
+    gap: 0px;
+    row-gap: 10px;
+    padding: 20px 10px;
   }
 }
 
@@ -367,7 +371,7 @@
 }
 .MeAuto {
   font-weight: 700;
-  font-size:24px;
+  font-size: 24px;
 }
 .arrow {
   width: 25px;
@@ -384,19 +388,21 @@
     display: none;
   }
   .MeAuto {
-    font-size:20px;
+    font-size: 20px;
+    padding-inline: 15px;
   }
 }
 
 /* <!-- Nutripoll-card4 熱銷商品 框架--> */
 .Nutripollcard4 {
   display: flex;
-  padding: 35px 15px;
+  padding: 35px 0px;
   row-gap: 10px;
-  gap: 35px;
+  gap: 45px;
   flex-wrap: wrap;
-  @media(max-width:375px){
-gap:10px;
+  @media (max-width: 375px) {
+    gap: 10px;
+    padding: 20px 15px;
   }
 }
 
@@ -419,26 +425,28 @@ gap:10px;
 Nutripoll-card5 熱門課程 */
 /* 讓卡片水平排列 */
 .FlexRow {
-  margin-block: 40px;
+  margin-top: 75px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-
-.card5Title {
-  padding: 0px 15px 35px 15px;
-}
-.card6Title{
-  padding-inline: 10px;
-}
 .Nutripollcard5{
-  padding: 15px;
+  display: flex;
+  flex-direction:column;
+  gap:20px
+}
+.card5Title {
+  padding-bottom: 35px;
+}
+.card6Title {
+  padding-inline: 10px;
 }
 /* Nutripoll-card6 精選食譜 */
 .Nutripollcard6 {
   flex-direction: column;
   padding: 35px 10px;
-  gap: 20px;
+  gap: 30px;
 }
 
 /* <!-- Nutripoll-card5&6 熱門課程&精選食譜 RWD --> */
@@ -446,16 +454,26 @@ Nutripoll-card5 熱門課程 */
   .FlexRow {
     display: flex;
     flex-direction: column !important;
+    margin: 30px 0px;
   }
   .card5Main {
     width: auto;
   }
-  .card6Title{
-    padding-inline: 15px;
+  .Nutripollcard5{
+    display: flex;
+    flex-direction:column;
+    padding-left:15px;
+    gap:10px
+  }
+  .card6Main{
+    margin: bottom 40px;
+  }
+  .card6Title {
+    padding-inline: 0px;
   }
   .Nutripollcard6 {
     flex-direction: column;
-    padding: 35px 10px 0px 10px;
+    padding: 35px 15px 0px 15px;
     gap: 20px;
   }
 }

@@ -151,7 +151,7 @@
     align-self: stretch;
     padding-bottom: 50px;
     @media (max-width: 375px) {
-      gap: 30px;
+      gap: 15px;
     }
     & .title{
       display: flex;
@@ -159,18 +159,21 @@
       font-size: 24px;
       font-weight: 600;
       @media (max-width: 375px) {
-        font-size: 16px;
+        font-size: 20px;
       }
     }
   }
   .lectureGroup{
     display: flex;
-    // justify-content: space-between;
     gap: 50px;
     align-self: stretch;
     @media (max-width: 375px) {
       width: 375px;
+      gap:30px;
       padding: 0 15px;
       align-self: auto;
+      // 設置拖曳效果
+      overflow-x: auto;
+      scrollbar-width: none;
     }
   }

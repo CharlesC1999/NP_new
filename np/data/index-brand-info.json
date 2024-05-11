@@ -4,21 +4,24 @@
     "title": "喚醒身心的天然食材",
     "description": "我們相信，減去食品添加和過度加工，您能重新發現食材原有的滋味與能量",
     "link": "新鮮食材",
-    "image":"image 1.png"
+    "image":"image 1.png",
+    "url":"/product"
   },
   {
     "id": 2,
     "title": "源頭嚴選的安心承諾",
     "description": "減去農藥殘留的擔憂，我們從源頭嚴格把關，只為給您純淨無憂的每一口",
     "link": "檢驗合格證書",
-    "image":"image 2.png"
+    "image":"image 2.png",
+    "url":"#"
   },
   {
     "id": 3,
     "title": "栽培美味的新鮮選擇",
     "description": "我們證明，健康食材同樣可以烹調出美味佳餚，透過豐富的食譜，減去對健康食物的誤解",
     "link": "美味食譜",
-    "image":"image 3.png"
+    "image":"image 3.png",
+    "url":"/recipe"
   }
   ,
    {
@@ -26,20 +29,23 @@
     "title": "烹饌關懷的溫馨行動",
     "description": "在節日時舉辦送暖活動，選用自家產品烹煮佳餚，以美食為街友帶來溫馨與關懷",
     "link": "行動支持",
-    "image":"image 4.png"
+    "image":"image 4.png",
+    "url":"#"
   },
   {
     "id": 5,
     "title": "啟動減塑的環保行動",
     "description": "實踐資源循環，採用再生紙袋包裝蔬果，減去包裝浪費，我們以行動實踐對環境的承諾",
     "link": "了解更多",
-    "image":"image 5.png"
+    "image":"image 5.png",
+    "url":"#"
   },
   {
     "id": 6,
     "title": "支持在地的永續承諾",
     "description": "通過減少食物里程和碳足跡，我們不僅照顧到您的健康，也關懷每一份生命與這片土地",
     "link": "精選在地商家",
-    "image":"image 6.png"
+    "image":"image 6.png",
+    "url":"#"
   }
 ]

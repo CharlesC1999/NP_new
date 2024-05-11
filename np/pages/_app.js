@@ -31,7 +31,7 @@ import { CategoryForSQLProvider } from "@/hooks/recipe/use-categoryForSQL";
 
 import { ProductCateProvider } from "@/hooks/use-product-cate";
 // 使用檔案的session store，存在sessions資料夾
-// import session from "express-session";
+import session from "express-session";
 // import sessionFileStore from 'session-file-store'
 // const FileStore = sessionFileStore(session)
 
@@ -47,17 +47,15 @@ export default function App({ Component, pageProps }) {
         <AuthProvider>
           <LoaderProvider CustomLoader={OrangeLoader}>
             <SearchResultsProvider>
-              <SearchResultsProvider>
-                <CategoryForSQLProvider>
-                  <CartProvider>
-                    <CategoryProvider>
-                      <ManageRouteChanges>
-                        {getLayout(<Component {...pageProps} />)}
-                      </ManageRouteChanges>
-                    </CategoryProvider>
-                  </CartProvider>
-                </CategoryForSQLProvider>
-              </SearchResultsProvider>
+              <CategoryForSQLProvider>
+                <CartProvider>
+                  <CategoryProvider>
+                    <ManageRouteChanges>
+                      {getLayout(<Component {...pageProps} />)}
+                    </ManageRouteChanges>
+                  </CategoryProvider>
+                </CartProvider>
+              </CategoryForSQLProvider>
             </SearchResultsProvider>
           </LoaderProvider>
         </AuthProvider>

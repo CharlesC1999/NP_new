@@ -28,7 +28,9 @@ router.get('/', async function (req, res) {
   const offset = (pageNow - 1) * perpageNow
 
   // 返回該分頁所需要的資料範圍，例如第三頁，會得到第 25~36 筆資料
-  const sqlSpeakers = `SELECT * FROM speaker LIMIT ${limit} OFFSET ${offset}`
+  const sqlSpeakers = `SELECT speaker.*,speaker_categories.speaker_cate_name
+  FROM speaker
+  JOIN speaker_categories ON speaker.f_speaker_cate_id = speaker_categories.speaker_cate_id LIMIT ${limit} OFFSET ${offset}`
   // 從 sqlSpeakers 中取得分頁資料內容，放在 speakersPage
   const [speakersPage] = await db.query(sqlSpeakers)
 

@@ -137,6 +137,7 @@ export default function ProductDetail() {
                     key={product.id}
                     id={product.id}
                     name={product.product_name}
+                    img={product.image_urls}
                     description={product.product_description}
                     price={product.product_price}
                     discount_price={product.discount_price}
