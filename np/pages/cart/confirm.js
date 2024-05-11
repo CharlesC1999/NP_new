@@ -3,9 +3,15 @@ import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import styles4 from "./shopStyle4.module.css";
 import styles from "@/components/header.module.scss";
 import stylesFooter from "../../components/footer.module.css";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Header from "../../components/header";
 import HeaderSetting from "@/styles/headerSetting.module.scss";
+// import { useAuth } from "@/hooks/use-auth";
+
+import toast, { Toast, Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
+
+import axiosInstance from "@/services/axios-instance";
 
 import Footer from "../../components/footer";
 
@@ -45,6 +51,63 @@ const ShopCart4 = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // -----------------------------接收linepay資料
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [result, setResult] = useState({
+    returnCode: "",
+    returnMessage: "",
+  });
+  // const auth = useAuth();
+  const handleConfirm = async (transactionId) => {
+    const res = await axiosInstance.get(
+      `/cartList/confirm?transactionId=${transactionId}&orderId=${router.query.orderId}`
+    );
+
+    // console.log(data);
+    console.log(res.data);
+
+    if (res.data.status === "success") {
+      toast.success("付款成功");
+    } else {
+      toast.error("付款失敗");
+    }
+
+    if (res.data.data) {
+      setResult(res.data.data);
+    }
+
+    // 處理完畢，關閉載入狀態
+    setIsLoading(false);
+  };
+
+  // confirm回來用的
+  useEffect(() => {
+    if (router.isReady) {
+      // 這裡確保能得到router.query值
+      console.log(router.query);
+      // http://localhost:3000/order?transactionId=2022112800733496610&orderId=da3b7389-1525-40e0-a139-52ff02a350a8
+      // 這裡要得到交易id，處理伺服器通知line pay已確認付款，為必要流程
+      // TODO: 除非為不需登入的交易，為提高安全性應檢查是否為會員登入狀態
+      const { transactionId, orderId } = router.query;
+
+      // 如果沒有帶transactionId或orderId時，導向至首頁(或其它頁)
+      if (!transactionId || !orderId) {
+        // 關閉載入狀態
+        setIsLoading(false);
+        // 不繼續處理
+        return;
+      }
+
+      // 向server發送確認交易api
+      handleConfirm(transactionId);
+    }
+
+    // eslint-disable-next-line
+  }, [router.isReady]);
+
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>
@@ -60,12 +123,17 @@ const ShopCart4 = () => {
           <a
             className={`${styles4.return} me-2 d-flex justify-content-center align-items-center`}
             type="submit"
+            href="http://localhost:3000"
           >
             <h3 className={`${styles4.h3} fw-bold `}>返回首頁</h3>
           </a>
-          <button className={`${styles4.keepbuy} ms-4`} type="submit">
+          <a
+            className={`${styles4.keepbuy} ms-4`}
+            type="submit"
+            href="http://localhost:3000"
+          >
             <h3 className={`${styles4.h3} fw-bold pt-1`}>繼續購物</h3>
-          </button>
+          </a>
         </div>
       </div>
       <Footer />

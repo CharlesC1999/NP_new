@@ -283,15 +283,23 @@ const ShopCart3 = () => {
           },
           // body: JSON.stringify(lineOrder),
         })
-          .then((response) => response.json())
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Network response was not ok");
+          })
           .then((data) => {
-            console.log("第二個按鈕");
+            console.log("成功收到後端回傳的資料", data);
+            window.location.href = data;
+            console.log("Redirecting to LINE Pay:", data.paymentUrl);
+            window.location.href = data.paymentUrl;
           })
           .catch((error) => {
             console.error("第二個按鈕", error);
           });
-        const url = `http://localhost:3005/api/cartList/reserve?${orderId}`;
-        console.log("Request URL:", url);
+        // const url = `http://localhost:3005/api/cartList/reserve?${orderId}`;
+        // console.log("Request URL:", url);
       }
     });
   };

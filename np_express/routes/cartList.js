@@ -187,36 +187,91 @@ router.get('/reserve', async (req, res) => {
       body: { ...order, redirectUrls },
     })
 
-    // const reservation = JSON.parse(JSON.stringify(order))
+    const reservation = JSON.parse(JSON.stringify(order))
 
-    // reservation.returnCode = linePayResponse.body.returnCode
-    // reservation.returnMessage = linePayResponse.body.returnMessage
-    // reservation.transactionId = linePayResponse.body.info.transactionId
-    // reservation.paymentAccessToken =
-    //   linePayResponse.body.info.paymentAccessToken
+    reservation.returnCode = linePayResponse.body.returnCode
+    reservation.returnMessage = linePayResponse.body.returnMessage
+    reservation.transactionId = linePayResponse.body.info.transactionId
+    reservation.paymentAccessToken =
+      linePayResponse.body.info.paymentAccessToken
 
-    // console.log(`預計付款資料(Reservation)已建立。資料如下:`)
-    // console.log(reservation)
+    console.log(`預計付款資料(Reservation)已建立。資料如下:`)
+    console.log(reservation)
 
-    // // 儲存在資料庫
-    // const result = await Orders.update(
-    //   {
-    //     reservation: JSON.stringify(reservation),
-    //     transaction_id: reservation.transactionId,
-    //   },
-    //   {
-    //     where: {
-    //       order_id: orderId,
-    //     },
-    //   }
-    // )
+    // 儲存在資料庫
+    const result = await Orders.update(
+      {
+        reservation: JSON.stringify(reservation),
+        transaction_id: reservation.transactionId,
+      },
+      {
+        where: {
+          order_id: orderId,
+        },
+      }
+    )
 
-    // console.log(result)
-    // console.log(linePayResponse.body.info.paymentUrl.web)
-    // // 導向到付款頁面， line pay回應後會帶有info.paymentUrl.web為付款網址
+    console.log(result)
+    console.log(linePayResponse.body.info.paymentUrl.web)
+    const paymentUrl = linePayResponse.body.info.paymentUrl.web
+    res.json({ paymentUrl: paymentUrl })
+    // 導向到付款頁面， line pay回應後會帶有info.paymentUrl.web為付款網址
     // res.redirect(linePayResponse.body.info.paymentUrl.web)
   } catch (error) {
     console.log('error', e)
+  }
+})
+
+router.get('/confirm', async (req, res) => {
+  console.log(req.query)
+  const transactionId = req.query.transactionId
+
+  const dbOrder = await Orders.findOne({
+    where: { transaction_id: transactionId },
+    raw: true, // 只需要資料表中資料
+  })
+
+  console.log(dbOrder)
+
+  const transaction = JSON.parse(dbOrder.reservation)
+
+  console.log(transaction)
+
+  const amount = transaction.amount
+
+  try {
+    const linePayResponse = await linePayClient.confirm.send({
+      transactionId: transactionId,
+      body: {
+        currency: 'TWD',
+        amount: amount,
+      },
+    })
+    console.log(linePayResponse)
+
+    let status = 'paid'
+
+    if (linePayResponse.body.returnCode !== '0000') {
+      status = 'fail'
+    }
+
+    // 更新資料庫的訂單狀態
+    const result = await Orders.update(
+      {
+        status,
+        return_code: linePayResponse.body.returnCode,
+        confirm: JSON.stringify(linePayResponse.body),
+      },
+      {
+        where: {
+          order_id: dbOrder.transaction_id,
+        },
+      }
+    )
+
+    return res.json({ status: 'success', data: linePayResponse.body })
+  } catch (error) {
+    return res.json({ status: 'fail', data: error.data })
   }
 })
 
