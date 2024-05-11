@@ -105,17 +105,7 @@
         @media screen and (max-width: 376px) {
           gap: 20px;
         }
-        input[type="checkbox"] {
-          appearance: none;
-          flex: 0 0 20px;
-          height: 20px;
-          margin-right: 5px;
-          border: 2px solid var(--green02);
-          border-radius: 3px;
-          &:hover {
-            border: 2px solid var(--green03);
-          }
-        }
+
         .product-pic {
           width: 145px;
           height: 150px;
@@ -206,5 +196,30 @@
         letter-spacing: 1.2px;
       }
     }
+  }
+}
+
+.checkbox-wrapper {
+  position: relative;
+  .test {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border: 2px solid var(--green02);
+    border-radius: 3px;
+    &.checked {
+      background: var(--green02);
+    }
+    &:hover {
+      border: 2px solid var(--green03);
+    }
+  }
+  .fa-check {
+    position: absolute;
+    color: white;
+    pointer-events: none;
+    top: 2px;
+    left: 2px;
   }
 }
