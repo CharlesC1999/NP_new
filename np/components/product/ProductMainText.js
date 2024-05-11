@@ -20,6 +20,7 @@ function ProductMainText({
   discount_price,
   review_comments,
   average_rating,
+  img,
   upload_date,
   handleReviewCount,
 }) {
