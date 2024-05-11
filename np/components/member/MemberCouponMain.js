@@ -18,8 +18,10 @@ import Cat from "./Cat"
 
 const [coupons, setCoupons] = useState([])
 const [activeCategory, setActiveCategory] = useState("全部");
-
-
+const [searchTerm, setSearchTerm] = useState("");
+const handleSearch = (event) => {
+  setSearchTerm(event.target.value);
+};
 // let userid = parseInt(localStorage.getItem('userid'))
 // console.log(userid);
 
@@ -35,21 +37,29 @@ useEffect(() => {
 
 console.log(userid);
 const getCoupons = async (cat='') => {
-  const url = 'http://localhost:3005/api/coupons'+cat;
+  let url = 'http://localhost:3005/api/coupons';
 
-  // 如果用了async-await，實務上要習慣使用try...catch來處理錯誤
+  // 如果指定了分类，则加上分类参数
+  if (cat) {
+    url += `?category=${cat}`;
+  }
+
   try {
-    // fetch預設是使用GET，不需要加method設定
-    const res = await fetch(url)
-    // 解析json格式資料成js的資料
-    const data = await res.json()
-    console.log(data)
+    const res = await fetch(url);
+    const data = await res.json();
 
-    // 為了要確保資料是陣列，所以檢查後再設定
     if (Array.isArray(data.data.coupons)) {
-      // 設定到狀態中
-      setCoupons(data.data.coupons)
-      // console.log('abc');
+      let filteredCoupons = data.data.coupons;
+
+      // 如果存在搜索关键字，则进行过滤
+      if (searchTerm) {
+        filteredCoupons = filteredCoupons.filter((coupon) => {
+          const title = coupon.c_name;
+          return title.includes(searchTerm);
+        });
+      }
+
+      setCoupons(filteredCoupons);
     } else {
       console.log('伺服器回傳資料類型錯誤，無法設定到狀態中')
     }
@@ -61,7 +71,7 @@ const getCoupons = async (cat='') => {
 useEffect(() => {
   // 頁面初次渲染之後伺服器要求資料
   getCoupons(activeCategory==='全部'?'':activeCategory)
-}, [activeCategory])
+}, [activeCategory,searchTerm])
 
 
   return(
@@ -83,19 +93,37 @@ useEffect(() => {
       {/* 分類欄 */}
   <Cat  setActiveCategory={setActiveCategory} activeCategory={activeCategory}/>
   {/* 分類欄下面的搜尋框 */}
-  {/* <div className={styles.searchContainer}>
-  <input className={styles.searchBar} type="text" placeholder="Search for items..." />
-  <button type="submit" className={styles.searchButton}>
-    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
-      <path fill="none" stroke="#747E85" strokelinecap="round" strokelinejoin="round" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314" />
-    </svg>
-  </button>
-</div> */}
+  <div className={styles.searchContainer} >
+            <input
+                className={styles.searchBar}
+                type="text"
+                placeholder="Search for coupon's name..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <button type="submit" className={styles.searchButton}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="#747E85"
+                    strokelinecap="round"
+                    strokelinejoin="round"
+                    d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"
+                  />
+                </svg>
+              </button>
+            </div>
 </div>
 <div className={styles.coupmain}>
   {/* 可以用的 */}
   {coupons.filter(v=>v.member__i_d===userid).map((v, i) => {
     console.log(userid);
+    const title = v.c_name;
  const discountAmount = parseFloat(v.discount_amount);
  let displayText;
 // 检查 discountAmount 是否是有效的数字
@@ -126,7 +154,7 @@ if ((activeCategory === "全部" || v.c_status === activeCategory) && (activeCat
       <div className={styles.couponDetails}>
         <div className={styles.lowbuy}>低消${v.minimum_spend}</div>
         
-        <div className={styles.couponDate}>{v.c_name}</div>
+        <div className={styles.couponDate}>{title}</div>
       </div>
       <div className={styles.couponButton}>
 
