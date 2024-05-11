@@ -24,7 +24,7 @@ router.get('/', authenticateToken, async (req, res) => {
   const favorClass = cids.map((v) => v.cid)
   // 取得會員頁所需課程資料(JOIN class 和 favor-class 資料表)
   // uid 為變數，根據會員 id 返回查詢結果，先用 uid =1 來測試
-  const classDataSql = `SELECT class.*,favor_class.uid,class_image.image__u_r_l,speaker.speaker_name
+  const classDataSql = `SELECT class.*,favor_class.uid,favor_class.created_at,class_image.image__u_r_l,speaker.speaker_name
     FROM class
     JOIN class_image ON  class.class__i_d = class_image.f__class__i_d
     JOIN favor_class ON  class.class__i_d = favor_class.cid

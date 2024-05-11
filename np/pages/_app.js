@@ -34,7 +34,8 @@ import { ProductCateProvider } from "@/hooks/use-product-cate";
 import session from "express-session";
 // import sessionFileStore from 'session-file-store'
 // const FileStore = sessionFileStore(session)
-
+// 收藏頁 context
+import { FavorDataProvider } from "@/hooks/use-favorData";
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
@@ -45,6 +46,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ProductCateProvider>
         <AuthProvider>
+        <FavorDataProvider>
           <LoaderProvider CustomLoader={OrangeLoader}>
             <SearchResultsProvider>
               <CategoryForSQLProvider>
@@ -58,6 +60,7 @@ export default function App({ Component, pageProps }) {
               </CategoryForSQLProvider>
             </SearchResultsProvider>
           </LoaderProvider>
+          </FavorDataProvider>
         </AuthProvider>
       </ProductCateProvider>
     </>

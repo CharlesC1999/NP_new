@@ -28,6 +28,7 @@ router.get('/', authenticateToken, async (req, res) => {
   product.*,
   product_image.image_url AS image_urls,
   favor_product.uid,
+  favor_product.created_at,
   ROUND(AVG(product_review.rating), 1) AS average_rating
 FROM 
   product
