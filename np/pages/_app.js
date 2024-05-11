@@ -31,10 +31,11 @@ import { CategoryForSQLProvider } from "@/hooks/recipe/use-categoryForSQL";
 
 import { ProductCateProvider } from "@/hooks/use-product-cate";
 // 使用檔案的session store，存在sessions資料夾
-// import session from "express-session";
+import session from "express-session";
 // import sessionFileStore from 'session-file-store'
 // const FileStore = sessionFileStore(session)
-
+// 收藏頁 context
+import { FavorDataProvider } from "@/hooks/use-favorData";
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
@@ -45,21 +46,21 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ProductCateProvider>
         <AuthProvider>
+        <FavorDataProvider>
           <LoaderProvider CustomLoader={OrangeLoader}>
             <SearchResultsProvider>
-              <SearchResultsProvider>
-                <CategoryForSQLProvider>
-                  <CartProvider>
-                    <CategoryProvider>
-                      <ManageRouteChanges>
-                        {getLayout(<Component {...pageProps} />)}
-                      </ManageRouteChanges>
-                    </CategoryProvider>
-                  </CartProvider>
-                </CategoryForSQLProvider>
-              </SearchResultsProvider>
+              <CategoryForSQLProvider>
+                <CartProvider>
+                  <CategoryProvider>
+                    <ManageRouteChanges>
+                      {getLayout(<Component {...pageProps} />)}
+                    </ManageRouteChanges>
+                  </CategoryProvider>
+                </CartProvider>
+              </CategoryForSQLProvider>
             </SearchResultsProvider>
           </LoaderProvider>
+          </FavorDataProvider>
         </AuthProvider>
       </ProductCateProvider>
     </>

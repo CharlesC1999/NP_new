@@ -24,7 +24,7 @@
 }
 
 .widthMax {
-  width: auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   /* flex-wrap: wrap; */
@@ -52,26 +52,37 @@
     /* padding-inline: 15px; */
     flex-direction: row;
     width: auto;
+    justify-content: center;
   }
 }
 
 .productCountHeader {
+  /* border: solid 2px var(--green05); */
+  background-color: var(--green05);
+  box-shadow: 0px 1px 3px var(--gray02);
+  padding: 5px 7px;
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-block: 5px;
   gap: 10px;
+  align-items: center;
+  border-radius: 5px;
 }
 
 .totalProducts {
   /* 應該要是h3 */
   font-size: 19px;
   margin: auto 0;
-  font-weight: 400;
+  font-weight: 500;
+  padding: 4px 20px;
+  color: var(--green01);
 }
 @media (max-width: 375px) {
   .productCountHeader {
-    padding-inline: 0;
+    background-color: var(--white);
+    box-shadow: none;
+    /* padding-inline: 30px; */
     width: auto;
   }
   .totalProducts {
@@ -81,9 +92,8 @@
 
 .productCountControls {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   gap: 16px;
-  padding: 1px 0;
   font-weight: 400;
 }
 
@@ -178,9 +188,10 @@
 }
 
 .sortBy {
-  font-weight: 300;
+  font-weight: 400;
   position: relative;
   display: flex;
+  color: var(--gray01);
   justify-content: center;
   align-self: start;
   background-color: #fff;
@@ -207,6 +218,7 @@
 
 .sortByValue {
   text-align: center;
+  font-weight: 300;
 }
 .sortMobile {
   display: none;
@@ -333,6 +345,9 @@
     /* box-shadow: 2px 5px rgba(0, 0, 0, 0.1); */
     /* 偷懶 */
     margin-top: 274px;
+    z-index: 1;
+    border-inline: solid 0.3px var(--gray01);
+    border-bottom: solid 0.3px var(--gray01);
   }
 }
 /* class-selections-mobile-only */

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+// 收藏的數量資料
+import { useFavor } from "@/hooks/use-favorData";
 import { useSearchResults } from "@/contexts/searchContext";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,7 +15,7 @@ import Swal from "sweetalert2";
 //react icon
 import { AiOutlineHome } from "react-icons/ai";
 import { RiDiscountPercentLine } from "react-icons/ri";
-import { FaListUl } from "react-icons/fa";
+import { FaListUl, FaCheck } from "react-icons/fa";
 import { LuChefHat, LuClipboardEdit } from "react-icons/lu";
 import { GrGroup } from "react-icons/gr";
 import { IoMdBusiness } from "react-icons/io";
@@ -201,9 +203,12 @@ const HeaderComponent = () => {
   const recipeDropdownRef = useRef(null); // 食譜下拉列表的參考
   const calssDropdownRef = useRef(null); // 課程下拉列表的參考
   const [showFullScreen, setShowFullScreen] = useState(false); // sidebar
+  // 初始化狀態為 false，表示.mobileSearchArea區塊預設不顯示
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
   // const [animation, setAnimation] = useState(""); //sidebar slideout
   const router = useRouter();
-  const { auth, logout, favorClass, favorRecipe, favorProduct } = useAuth();
+  const { auth, logout } = useAuth();
+  const { favorClass, favorRecipe, favorProduct } = useFavor();
   const favorAmountC = favorClass.length;
   const favorAmountR = favorRecipe.length;
   const favorAmountP = favorProduct.length;
@@ -343,6 +348,38 @@ const HeaderComponent = () => {
     // 導向到結果頁面或更新組件顯示結果
   };
 
+  const handleSearchM = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(`http://localhost:3005/api/search/findAll`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          searchText: searchInput,
+          category: selectedText,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const results = await response.json();
+      // 更新組件狀態以顯示搜索結果
+      console.log(results);
+      // 結果用鉤子傳遞
+      setResults(results);
+      // 導向到結果頁面並將搜索結果作為路由參數傳遞;
+      router.push("/search-result");
+    } catch (error) {
+      console.error("搜索請求失敗:", error);
+    }
+    // 導向到結果頁面或更新組件顯示結果
+  };
+
   const handleProductClick = () => {
     setIsProductOpen(false); // 點選項關閉下拉
   };
@@ -405,6 +442,11 @@ const HeaderComponent = () => {
       document.removeEventListener("mousedown", handleClickRecipeOutside);
     };
   }, []);
+  // ----------------------------手機搜------------------------------------
+  const mobileSearch = () => {
+    setShowMobileSearch(!showMobileSearch);
+    console.log(showMobileSearch);
+  };
   // ---------------------------------------------------------------------
 
   // swal登出彈出確認
@@ -571,26 +613,96 @@ const HeaderComponent = () => {
               </svg>
             </button>
           </div>
+          <div
+            // className={styles.mobileSearchArea}
+            className={
+              showMobileSearch
+                ? styles.mobileSearchAreaShow
+                : styles.mobileSearchArea
+            }
+          >
+            <input
+              type="text"
+              className={styles.searchBarInputMobile}
+              value={searchInput}
+              onChange={handleInputChange}
+            />
+            <button
+              type="submit"
+              className={styles.searchBarButton}
+              style={{ marginBottom: "3px" }}
+            >
+              <FaCheck onClick={handleSearchM} />
+            </button>
+          </div>
           <div className={styles.headerActions}>
             {auth.isLoggedIn ? (
-              <a onClick={goFavor} className={styles.pageLink}>
+              <div>
+                <a onClick={mobileSearch} className={styles.pageLink}>
+                  {/* <!-- 手機圖示svg --> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30px"
+                    height="30px"
+                    viewBox="0 0 24 24"
+                    className={styles.iconLinkMobile}
+                  >
+                    {/* 這個要修改成彈出式搜索 */}
+                    <path
+                      fill="#50BF8B"
+                      d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
+                    />
+                  </svg>
+                  {/* <span className={styles.iconText}> */}
+                  {/* <!-- 願望清單 heart --> */}
+                </a>
+                <a onClick={goFavor} className={styles.pageLink}>
+                  <div className={styles.favorIcon}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 256 256"
+                      className={styles.mobileNone}
+                    >
+                      <path
+                        fill="#50BF8B"
+                        d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
+                      />
+                    </svg>
+                    {favorAmountTotal !== 0 && (
+                      <div className={styles.favorAmount}>
+                        {" "}
+                        {favorAmountTotal}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* 願望清單
+                </span> */}
+                </a>
+              </div>
+            ) : (
+              <div>
                 {/* <!-- 手機圖示svg --> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="30px"
-                  height="30px"
-                  viewBox="0 0 24 24"
-                  className={styles.iconLinkMobile}
-                >
-                  <path
-                    fill="#50BF8B"
-                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
-                  />
-                </svg>
+                {/* 這應該是搜索 */}
+                <a onClick={mobileSearch} className={styles.pageLink}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30px"
+                    height="30px"
+                    viewBox="0 0 24 24"
+                    className={styles.iconLinkMobile}
+                  >
+                    <path
+                      fill="#50BF8B"
+                      d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
+                    />
+                  </svg>
+                </a>
                 {/* <span className={styles.iconText}> */}
                 {/* <!-- 願望清單 heart --> */}
-
-                <div className={styles.favorIcon}>
+                <a onClick={doLogin} className={styles.pageLink}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32"
@@ -599,49 +711,14 @@ const HeaderComponent = () => {
                     className={styles.mobileNone}
                   >
                     <path
-                      fill="#50BF8B"
+                      fill="#253D4E"
                       d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
                     />
                   </svg>
-                 {favorAmountTotal !== 0 && <div className={styles.favorAmount}> {favorAmountTotal}</div>}
-                </div>
-
-                {/* 願望清單
+                  {/* 願望清單
                 </span> */}
-              </a>
-            ) : (
-              <a onClick={doLogin} className={styles.pageLink}>
-                {/* <!-- 手機圖示svg --> */}
-                {/* 這應該是搜索 */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="30px"
-                  height="30px"
-                  viewBox="0 0 24 24"
-                  className={styles.iconLinkMobile}
-                >
-                  <path
-                    fill="#50BF8B"
-                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
-                  />
-                </svg>
-                {/* <span className={styles.iconText}> */}
-                {/* <!-- 願望清單 heart --> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 256 256"
-                  className={styles.mobileNone}
-                >
-                  <path
-                    fill="#253D4E"
-                    d="M178 28c-20.09 0-37.92 7.93-50 21.56C115.92 35.93 98.09 28 78 28a66.08 66.08 0 0 0-66 66c0 72.34 105.81 130.14 110.31 132.57a12 12 0 0 0 11.38 0C138.19 224.14 244 166.34 244 94a66.08 66.08 0 0 0-66-66m-5.49 142.36a328.69 328.69 0 0 1-44.51 31.8a328.69 328.69 0 0 1-44.51-31.8C61.82 151.77 36 123.42 36 94a42 42 0 0 1 42-42c17.8 0 32.7 9.4 38.89 24.54a12 12 0 0 0 22.22 0C145.3 61.4 160.2 52 178 52a42 42 0 0 1 42 42c0 29.42-25.82 57.77-47.49 76.36"
-                  />
-                </svg>
-                {/* 願望清單
-                </span> */}
-              </a>
+                </a>
+              </div>
             )}
             {auth.isLoggedIn ? (
               <a onClick={goCart} className={styles.pageLink}>

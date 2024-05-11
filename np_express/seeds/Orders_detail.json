@@ -25,11 +25,11 @@
     "order_Item_id": 3,
     "order_detail_id": "uuid-1003",
     "thing_id": 503,
-    "commodity_id": 303,
+    "commodity_id": null,
     "class_id": 1,
     "quantity": 3,
     "unit_price": 120.0,
     "total_price": 360.0,
-    "product_type": "product"
+    "product_type": "class"
   }
 ]

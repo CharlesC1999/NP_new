@@ -12,6 +12,11 @@
   border-radius: 5px;
   border-right: 1px solid var(--gray02, #d9e1e6);
   border-bottom: 1px solid var(--gray02, #d9e1e6);
+  transition: 0.2s;
+}
+
+.cardContainer:hover {
+  transform: scale(1.02);
 }
 
 .imageWrapper {

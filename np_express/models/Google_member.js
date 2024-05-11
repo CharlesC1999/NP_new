@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 
-export default async function (sequelize) {
+const Google_member = async (sequelize) => {
   return sequelize.define(
     'Google_member', //- 與檔案同名，要大寫
     {
@@ -30,6 +30,10 @@ export default async function (sequelize) {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      callback_id: {
+        type: DataTypes.INTEGER(10),
+        allowNull: true,
+      },
     },
     {
       tableName: 'google_member', //直接提供資料表名稱
@@ -41,3 +45,5 @@ export default async function (sequelize) {
     }
   )
 }
+
+export default Google_member

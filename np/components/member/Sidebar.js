@@ -2,8 +2,15 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Sidebar.module.css";
 import Link from "next/link";
+// accordion的icon
+import { IoChevronDown } from "react-icons/io5";
 
 const Sidebar = () => {
+  const [isToggled, setIsToggled] = useState(false);
+  const handleToggle = () => {
+    setIsToggled(!isToggled);
+  };
+
   // 取得localStorage裡的token，用來發起req帶入headers
   const [LStoken, setLStoken] = useState("");
   const getTokenInLS = () => {
@@ -58,7 +65,7 @@ const Sidebar = () => {
           <div className={`rounded-circle overflow-hidden ${styles.userimage}`}>
             <img
               className="w-100 h-100 object-fit-cover"
-              src={`/images/member/${userData.User_image}`}
+              src={`http://localhost:3005/avatar/${userData.User_image}`}
               alt=""
             />
           </div>
@@ -69,12 +76,48 @@ const Sidebar = () => {
         </div>
         <div className={styles.menu1}>
           <div className={styles.menu2}>
-            <div className={styles.myAccount}>
+            {/* // !!! 測試改成accordion */}
+            <div
+              onClick={handleToggle}
+              className={`position-relative ${
+                isToggled ? styles["active"] : ""
+              } ${styles["accordion"]}`}
+              style={{ cursor: "pointer" }}
+            >
+              <IoChevronDown
+                className={`position-absolute end-0 ${styles["chevronDown"]}`}
+              />
+              <div className={styles["accordion-header"]}>我的帳戶</div>
+              <div
+                className={` flex-column gap-2 ${styles["accordion-content"]}`}
+              >
+                <div className={` ${styles.myAccount}`}>
+                  {" "}
+                  <Link href="/member" alt="">
+                    會員資料
+                  </Link>
+                </div>
+                <div className={styles.resetPassword}>
+                  {" "}
+                  <Link href="/member/password-reset" alt="">
+                    修改密碼
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className={` ${styles.myAccount}`}>
               {" "}
               <Link href="/member" alt="">
                 我的帳戶
               </Link>
-            </div>
+            </div> */}
+            {/* <div className={styles.lefta}>
+              {" "}
+              <Link href="/member/password-reset" alt="">
+                修改密碼
+              </Link>
+            </div> */}
             <div className={styles.lefta}>
               <Link href="/member/member-buy" alt="">
                 購買清單

@@ -1,9 +1,10 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect }  from "react";
+import { useState, useEffect } from "react";
 import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
+import HeaderSetting from "@/styles/headerSetting.module.scss";
 import HeroSlider from "@/components/index/HeroSlider";
 import Card2 from "@/components/index/Card2";
 import Card3Categories from "@/components/index/Card3Categories";
@@ -22,12 +23,12 @@ export default function Index() {
   const [productCate, setProductCate] = useState([]);
   const fetchHomeData = async () => {
     try {
-      const { hotProduct, hotClass, recommendedRecipe,productCate } =
+      const { hotProduct, hotClass, recommendedRecipe, productCate } =
         await getHomePageInfo();
       setHotProduct(hotProduct);
       setHotClass(hotClass);
       setRecipe(recommendedRecipe);
-      setProductCate(productCate)
+      setProductCate(productCate);
     } catch (error) {
       console.error("Failed to fetch favorites:", error);
     }
@@ -36,8 +37,11 @@ export default function Index() {
     fetchHomeData();
   }, []);
   return (
-    <>
-      <HeaderComponent />
+    <div className={HeaderSetting.mobileAdjust}>
+      <div className={HeaderSetting.headerSetting}>
+        <HeaderComponent />
+      </div>
+
       <HeroSlider />
       <div className={` ${styles.wrapper} ${styles.nutripollP}`}>
         <div className={`${styles.titleP}`}>
@@ -101,9 +105,7 @@ export default function Index() {
         </div>
         <div className={`${styles.Nutripollcard3}`}>
           {productCate.map((v) => {
-            return (
-              <Card3Categories key={v.id} name={v.name} id={v.id} />
-            )
+            return <Card3Categories key={v.id} name={v.name} id={v.id} />;
           })}
         </div>
       </div>
@@ -193,6 +195,6 @@ export default function Index() {
 
       <Footer />
       <ToTheTop />
-    </>
+    </div>
   );
 }
