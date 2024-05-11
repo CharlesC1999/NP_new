@@ -10,22 +10,16 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductCard02 from "@/components/product/ProductCard02";
 import ProductCardList from "@/components/product/ProductCardList";
-import ProductFilter from "@/components/product/ProductFilter";
+import ProductFilter from "@/components/product/ProductFilterDiscount";
 import Footer from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
 import Pagination from "@/components/product/pagination";
-import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarDiscount";
-
-// import PaginationRounded from "@/components/pagination";
-//荃做版本sideBar
-// import CateSidebar from "@/components/product/CateSidebar";
-// import NewSidebar from "@/components/product/Newsidebar";
-// import ProductCard from "@/components/product/ProductCard";
+import ProductFilterDiscount from "@/components/product/ProductFilterDiscount";
 
 //side bar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
 import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
-import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDetail";
+import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarDiscount";
 
 //style
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -56,6 +50,10 @@ export default function Product() {
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
+  //產品數量顯示
+  //產品數量顯示
+
+  const [categoryCounts, setCategoryCounts] = useState({});
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,7 +69,10 @@ export default function Product() {
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
   const [ratings, setRatings] = useState(new Set());
 
-  const [orderby, setOrderby] = useState({ sort: "id", order: "asc" });
+  const [orderby, setOrderby] = useState({
+    sort: "product_price",
+    order: "asc",
+  });
 
   const [selectdiscountCate, setSelectdiscountCate] = useState(0);
   const handleCategoryClick = (categoryId) => {
@@ -95,6 +96,7 @@ export default function Product() {
   const discountCategories = productCate.filter((cate) =>
     [22, 14, 15, 16, 17, 18, 19, 20].includes(cate.cateId)
   );
+  console.log(discountCategories);
   //布林值
   const [selectedCategories, setSelectedCategories] = useState([]);
   //互動用selectedCategory
@@ -214,6 +216,8 @@ export default function Product() {
     price_lte: priceRange.max || "",
     category_id: "",
     discount_id: selectdiscountCate,
+    order: orderby.order,
+    sort: orderby.sort,
   });
 
   const getProducts = async (params = {}) => {
@@ -235,6 +239,7 @@ export default function Product() {
         //產品分類資料
         setProductCate(data.data.categories);
         setMayLikeProducts(data.data.mayLikeProducts);
+        setCategoryCounts(data.data.categoryCounts);
       } else {
         console.log("请求状态不是 'success'");
       }
@@ -265,13 +270,12 @@ export default function Product() {
     const params = {
       page,
       perpage,
-      price_gte: priceRange.min || "",
-      price_lte: priceRange.max || "",
-      category_id: selectedCategories.join(","),
       discount_id: selectdiscountCate,
+      order: orderby.order,
+      sort: orderby.sort,
     };
     getProducts(params); // 请求产品数据
-  }, [page, perpage, priceRange, selectedCategories, selectdiscountCate]);
+  }, [page, perpage, priceRange, selectdiscountCate, orderby]);
 
   const TotalRow = total;
   return (
@@ -287,6 +291,8 @@ export default function Product() {
             <ProductSidebarDiscount
               DisCountCategories={discountCategories}
               handleCategoryClick={handleCategoryClick}
+              selectdiscountCate={selectdiscountCate}
+              setSelectdiscountCate={setSelectdiscountCate}
             />
             <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
           </div>
@@ -311,11 +317,15 @@ export default function Product() {
                   ))}
                 </div>
                 <div className={`${styles.ProductFilter} pt-sm-4 pt-0`}>
-                  <ProductFilter
+                  <ProductFilterDiscount
                     onShowGrid={showGrid}
                     onShowList={showList}
                     activeButton={activeButton}
                     TotalRow={TotalRow}
+                    setOrderby={setOrderby}
+                    discountCategories={discountCategories}
+                    selectdiscountCate={selectdiscountCate}
+                    setSelectdiscountCate={setSelectdiscountCate}
                   />
                 </div>
               </div>
@@ -323,27 +333,55 @@ export default function Product() {
             <div
               className={`d-flex ${styles.productCard1} justify-content-between`}
             >
-              {products.map((item) => (
-                <div key={item.id}>
-                  <Link
-                    href={`/product/${item.id}`}
-                    className="text-decoration-none"
+              {products.length > 0 ? (
+                // Render products if there are any
+                products.map((item) => (
+                  <div key={item.id}>
+                    <Link
+                      href={`/product/${item.id}`}
+                      className="text-decoration-none"
+                    >
+                      {displayGrid ? (
+                        <ProductCard02
+                          className={`mx-sm-2 mx-0`}
+                          id={item.id}
+                          img={item.image_urls}
+                          image={item.image_urls}
+                          category_id={item.category_id}
+                          name={item.product_name}
+                          description={item.product_description}
+                          price={item.product_price}
+                          disPrice={item.discount_price}
+                          average_rating={item.average_rating}
+                        />
+                      ) : (
+                        <ProductCardList
+                          id={item.id}
+                          img={item.image_urls}
+                          category_id={item.category_id}
+                          name={item.product_name}
+                          description={item.product_description}
+                          price={item.product_price}
+                          disPrice={item.discount_price}
+                          average_rating={item.average_rating}
+                        />
+                      )}
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                // Render no result message and image if there are no products
+                <div className={`d-flex justify-content-center my-5`}>
+                  <h3
+                    className={`d-flex justify-content-center text-align-center`}
                   >
-                    {" "}
-                    {/* You can style this <a> tag as needed */}
-                    <ProductCard02
-                      id={item.id}
-                      img={item.image_urls}
-                      category_id={item.category_id}
-                      name={item.product_name}
-                      description={item.product_description}
-                      price={item.product_price}
-                      disPrice={item.discount_price}
-                      average_rating={item.average_rating}
-                    />
-                  </Link>
+                    查詢無結果唷！
+                  </h3>
+                  <div>
+                    <img src="/index-images/noResultBG.png" alt="" />
+                  </div>
                 </div>
-              ))}
+              )}
             </div>
             <div className="justify-content-center d-flex mt-5">
               <Pagination
