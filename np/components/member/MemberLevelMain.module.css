@@ -419,3 +419,26 @@
             margin-left: 34px;
         }
     }
+
+
+    .levelLeft{
+      flex: 1;
+    }
+    .levelRight{
+      flex:1;
+    }
+    .levelRight img{
+      animation: blink 0.5s infinite alternate;
+    }
+    .levelRight img:hover{
+      transform: scale(1.1);
+      
+    }
+    @keyframes blink {
+      0% {
+        filter: brightness(100%) hue-rotate(0deg); /* 初始颜色，这里是不改变颜色 */
+      }
+      100% {
+        filter: brightness(100%) hue-rotate(-30deg); /* 最终颜色，这里是亮度增加50%，色相旋转180度（即改变颜色为相反的颜色） */
+      }
+    }
