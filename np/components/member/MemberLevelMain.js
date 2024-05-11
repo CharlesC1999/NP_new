@@ -164,7 +164,8 @@ console.log(needmoney);
         <div className={styles.membershipDetails}>
         
        {/* 原本迴圈的地方起始點 */}
-          <div >
+       <div className="d-flex">
+          <div className={styles.levelLeft}>
           <div className={styles.currentLevel}>當前會員等級</div>
           <div className={styles.currentLevelInfo}>當前會員等級:
            <br/>  <h1>
@@ -183,7 +184,10 @@ console.log(needmoney);
             </h3>
           </div>
           </div>
-   
+          <div className={styles.levelRight}>
+          <img src={`/images/level/lv${nowlevel}.png`} alt={`Level ${nowlevel}`}  />
+          </div>
+        </div>
           <div className={styles.levelBenefits}>各等級所需條件和福利</div>
           <div className={styles.levelCards}>
             <div className={`${styles.levelCard} ${styles.mNo}`}>
@@ -243,7 +247,7 @@ console.log(needmoney);
             </div>
           </div>
         </div>
-        {/* <div className={styles.upgradeRules}>升級/降級規則</div> */}
+        
         
       </div>
   </div>
