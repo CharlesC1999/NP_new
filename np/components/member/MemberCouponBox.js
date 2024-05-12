@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./MemberCouponMain.module.css"
-
+//測試新增
+import axios from 'axios'; // 导入 axios 库
 // import { useAuth } from "@/contexts/AuthContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,17 +18,43 @@ const MemberCouponBox = () => {
       setUserid(parseInt(userIdFromLocalStorage));
     }
   }, []);
-
-
+  console.log(userid);
+//測試新增
+  const [couponInput, setCouponInput] = useState('');
   const [coupons, setCoupons] = useState([])
   const [couponsCondition, setCouponsCondition] = useState([])
   const [receive, setReceive] = useState([])
+//測試一下新增
+const handleInputChange = (event) => {
+  setCouponInput(event.target.value);
+};
+const handleSubmit = async (event,userid) => {
+  event.preventDefault();
+  console.log(userid);
+  // 假设用户输入特定字符串为 '我愛np'
+  if (couponInput === '我愛np') {
+    try {
+      
+      console.log(userid);
+      // 发送 POST 请求到后端新增优惠券
+      await axios.post('http://localhost:3005/api/coupon-add', { member__i_d: userid });
+      toast.success('新增优惠券成功！');
+    } catch (error) {
+      // 判断是否为已领取过优惠券的错误提示
+      if (error.response && error.response.status === 400 && error.response.data && error.response.data.message === '已領取過此優惠券') {
+        // 如果是已领取过优惠券的错误提示，则显示给用户相应的提示信息
+        toast.error('您已領取過此優惠券，無法再次領取！');
+      } else {
+        // 如果不是已领取过优惠券的错误提示，则显示一般错误信息
+        console.error('新增优惠券失败', error);
+        toast.error('新增优惠券失败');
+      }
+    }
+  }
+};
 
 
-
-
-
-
+//以上為測試一下新增
 
   const getCoupons = async () => {
     const url = 'http://localhost:3005/api/coupons';
@@ -161,6 +188,11 @@ const MemberCouponBox = () => {
             <div className={styles.titleNow}>優惠券</div>
             <div className={styles.title2}>我的帳戶</div>
             <Link  href={`/member/member-coupon`} className={`${styles.gift} btn`}>返回</Link>
+            {/* 測試新增 */}
+            <form className={`${styles.cForm} d-flex`} onSubmit={(event) => handleSubmit(event, userid)}>
+  <input className={styles.cInput} type="text" value={couponInput} onChange={handleInputChange} />
+  <button className={styles.cInputBtn} type="submit">提交</button>
+</form>
           </div>
           {/* 主內容的標題 */}
           <div className={styles.cpbox}>

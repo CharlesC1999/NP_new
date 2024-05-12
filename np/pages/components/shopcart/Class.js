@@ -122,7 +122,7 @@ const Class = () => {
                 style={{ paddingLeft: "100px" }}
               >
                 <h4 className={ClassStyles.fc}>{element.name}</h4>
-                <p style={{ fontSize: "20px" }}>2024/04/05</p>
+                <p style={{ fontSize: "20px" }}>{element.date}</p>
               </div>
               <div
                 className={`${ClassStyles.add} col align-self-center text-center`}

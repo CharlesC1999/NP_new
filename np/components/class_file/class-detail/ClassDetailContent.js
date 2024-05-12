@@ -6,6 +6,12 @@ import MArticle from "./MClassDetailContentArticleWeb";
 import WArticle from "./WClassDetailContentArticleWeb";
 import toast, { Toaster } from "react-hot-toast";
 import FavIconClass from "@/components/favor/FavIconClass";
+
+// 加入購物車的鉤子
+import { useCart } from "@/hooks/use-cart";
+import { useAuth } from "@/contexts/AuthContext";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 const ClassDetail = ({ classData }) => {
   // 用來管理哪個標籤頁是激活的狀態
   const [activeTab, setActiveTab] = useState("info");
@@ -14,6 +20,30 @@ const ClassDetail = ({ classData }) => {
 
   console.log(classData.classDetail, "there");
   classData = classData.classDetail;
+
+  // 加入購物車
+  const { addItem } = useCart();
+  const { auth } = useAuth();
+  const MySwal = withReactContent(Swal);
+
+  const notify2 = (productName) => {
+    MySwal.fire({
+      title: "成功加入",
+      text: productName + "已成功加入購物車!",
+      icon: "success",
+    });
+  };
+  //
+
+  // 加入購物車中使用的變數
+  const id = classData.class__i_d;
+  const className = classData.class_name;
+  const classDate = classData.class_date;
+  const price = classData.c_price;
+  const image = classData.image__u_r_l;
+  console.log("Class Name:", className);
+  console.log("Class Date:", classDate);
+  console.log("class img", image);
 
   // console.log(classData.speaker_id, "gos");
   const goSpeakerD = () => {
@@ -132,7 +162,26 @@ const ClassDetail = ({ classData }) => {
             </div>
           )}
           <div className={styles.classLinksContainer}>
-            <a className={styles.linkBtn} href="#">
+            <a
+              className={styles.linkBtn}
+              href="#"
+              onClick={() => {
+                if (!auth.isLoggedIn) {
+                  return toast.error("請先登入再使用!");
+                }
+                notify2(className);
+
+                console.log("Adding product:", {
+                  id,
+                  className,
+                  classDate,
+                  price,
+                  image,
+                });
+
+                addItem({ id, className, classDate, price, image });
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20px"
