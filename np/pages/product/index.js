@@ -63,6 +63,7 @@ export default function Product() {
 
   //產品數量顯示
   const [categoryCounts, setCategoryCounts] = useState({});
+  console.log(categoryCounts);
   //分頁部分
   const [page, setPage] = useState(1);
   const [perpage, setPerpage] = useState(20);
@@ -322,7 +323,7 @@ export default function Product() {
               />
             </div>
             <div
-              className={`d-flex justify-content-center ${styles.productCard1}`}
+              className={`d-flex justify-content-start ${styles.productCard1}`}
             >
               {products.length > 0 ? (
                 // Render products if there are any

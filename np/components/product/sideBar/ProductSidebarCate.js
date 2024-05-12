@@ -5,7 +5,10 @@ import styles from "@/components/product/sideBar/SideBarCategory.module.css";
 //useContext
 import { useProductCategories } from "@/hooks/use-product-cate";
 
-export default function ProductSidebarCate({ normalCategories }) {
+export default function ProductSidebarCate({
+  normalCategories,
+  categoryCounts,
+}) {
   return (
     <>
       <div className={`${styles.sideBarBox}`}>
@@ -20,6 +23,7 @@ export default function ProductSidebarCate({ normalCategories }) {
               cateId={category.cateId}
               cateName={category.cateName}
               catePng={category.catePng}
+              categoryCounts={categoryCounts}
             />
           );
         })}

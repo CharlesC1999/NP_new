@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import classSidebarStyles from "./classSidebarStyles.module.css";
 import DateTimePicker from "./ClassDateTimePicker";
@@ -7,7 +7,14 @@ import { useCategory } from "@/hooks/ClassProp";
 
 const classSidebar = () => {
   const router = useRouter();
-  const { setCategoryId } = useCategory();
+  const {
+    categoryId,
+    setCategoryId,
+    setFinalStartDate,
+    setFinalEndDate,
+    priceRange,
+    setPriceRange,
+  } = useCategory();
 
   const handleCategoryChange = (categoryId) => {
     return () => {
@@ -17,6 +24,24 @@ const classSidebar = () => {
       router.push(`/class-page`);
     };
   };
+
+  const handleStartDate = (date) => {
+    setFinalStartDate(date);
+  };
+
+  const handleEndDate = (date) => {
+    setFinalEndDate(date);
+    router.push(`/class-page`);
+  };
+
+  const handlePriceRangeChange = (range) => {
+    setPriceRange(range);
+  };
+
+  useEffect(() => {
+    if (priceRange.min !== undefined && priceRange.max !== undefined) {
+    }
+  }, [priceRange, router]);
 
   return (
     <div
@@ -75,11 +100,18 @@ const classSidebar = () => {
       </div>
       <div>
         {/* 日期篩選 */}
-        <DateTimePicker />
+        <DateTimePicker
+          getStartDate={handleStartDate}
+          getEndDate={handleEndDate}
+        />
       </div>
       <div className={classSidebarStyles.priceClass}>
-        <p className={classSidebarStyles.subTitle}>價格</p>
-        <ClassPriceRange />
+        {/* <p className={classSidebarStyles.subTitle}>價格</p>
+        <ClassPriceRange
+          min={0}
+          max={9999}
+          onRangeChange={handlePriceRangeChange}
+        /> */}
       </div>
     </div>
   );

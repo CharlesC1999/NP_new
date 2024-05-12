@@ -117,7 +117,10 @@ export default function ProductDetail() {
                 className={`${style["left-side"]} d-flex flex-column d-none d-sm-flex`}
               >
                 <div className={`side-bar01`}>
-                  <ProductSidebarCate normalCategories={normalCategories} />
+                  <ProductSidebarCate
+                    normalCategories={normalCategories}
+                    categoryCounts={categoryCounts}
+                  />
                 </div>
                 {/* <div className={`side-bar02`}>
                 <ProductSidebarDetail />

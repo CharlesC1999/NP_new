@@ -50,11 +50,10 @@ export default function ProductSidebarDetail({
               >
                 {category.cateName}
                 <span>
-                  (
-                  {categoryCounts[
-                    `dis${category.cateName.replace(/\s+/g, "")}`
-                  ] || 0}
-                  )
+                  <span className="ms-1">
+                    {" "}
+                    ({categoryCounts[category.cateName] || 0}){" "}
+                  </span>
                 </span>
               </label>
             </div>
