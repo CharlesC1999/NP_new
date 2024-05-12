@@ -18,6 +18,10 @@ export default async function (sequelize) {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
+      order_detail_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       comment: {
         type: DataTypes.TEXT('medium'),
         allowNull: true,

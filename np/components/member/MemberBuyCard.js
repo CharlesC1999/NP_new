@@ -4,6 +4,7 @@ import styles from "@/components/member/MemberBuyCard.module.scss";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaLeaf } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 export default function MemberBuyCard({ activeCategory, searchTerm }) {
   const [userid, setUserid] = useState(null);
@@ -24,37 +25,75 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
 
   const [orders, setOrders] = useState([]);
   const [showReview, setShowReview] = useState(false);
+  const [activeProductId, setActiveProductId] = useState(0);
+  const handleShowReview = (productId) => {
+    setActiveProductId(productId);
+    setShowReview(true);
+  };
 
+  const handleCloseReview = () => {
+    console.log("Clearing active product ID"); // 输出清除操作
+    setActiveProductId(0);
+    setShowReview(false);
+  };
+
+  const date = new Date().toISOString(); // '2024-05-10T08:21:03.530Z'
+  const formattedDate = date.replace("T", " ").replace("Z", "").slice(0, 19); // '2024-05-10 08:21:03'
+
+  console.log(activeProductId);
+
+  //評價按鈕送出，將評論資料傳後後端處理
   const handleSubmitReview = async (v) => {
-    setProductId(v.product_id); // 依據上下文獲取產品ID
     const comment = document.querySelector("textarea").value;
 
-    const response = await fetch("/api/add-review", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userid,
-        productId,
-        comment,
-        rating,
-        created_at: new Date().toISOString(), // 或讓後端生成時間戳
-      }),
-    });
+    const response = await fetch(
+      "http://localhost:3005/api/orders/add-review",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid,
+          activeProductId,
+          comment,
+          rating,
+          created_at: formattedDate, // 或讓後端生成時間戳
+        }),
+      }
+    );
 
     const result = await response.json();
+    console.log(result);
     if (response.ok) {
+      setShowReview(false); // 隱藏評論表單
+
       console.log("Review submitted:", result);
       // 可以在這裡更新UI顯示新提交的評論
-      setShowReview(false); // 隱藏評論表單
+
+      Swal.fire({
+        title: "評論成功",
+        text: "",
+        icon: "success",
+      });
+      handleCloseReview();
     } else {
+      setShowReview(false); // 隱藏評論表單
+
       console.error("Failed to submit review:", result);
+      Swal.fire({
+        title: "已評論",
+        text: "",
+        icon: "error",
+      });
     }
   };
 
-  // console.log(orders);
+  console.log(orders);
 
+  // useEffect(() => {
+  //   setShowReview(false);
+  // }, [handleSubmitReview]);
   // let userid = parseInt(localStorage.getItem('userid'))
   // console.log(userid);
 
@@ -117,6 +156,13 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
           const title = v.product_name || v.class_name;
           //到時候把57改成當前會員ID(很像不能這樣寫QQ)
           //if(v.member_id===57)
+          console.log(
+            "Is showing review form:",
+            activeProductId,
+            v.id,
+            activeProductId === v.id
+          );
+
           return (
             <div className={`${styles.buyCard} my-0 my-sm-4`} key={v.order_id}>
               <div
@@ -170,20 +216,25 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
                         <span className={`d-none d-sm-flex`}>查看詳情</span>
                         <span className={`d-flex d-sm-none`}>查看</span>
                       </Link>
-
-                      {!showReview && (
-                        <buttons
-                          className={`${styles.buyCardBtn} btn d-flex justify-content-center ms-3`}
-                          onClick={() => setShowReview(true)}
+                      {v.has_reviewed === 1 ? (
+                        <button
+                          className={`${styles.buyCardBtn} btn d-flex justify-content-center ms-3 disabled`}
                         >
-                          評論
-                        </buttons>
+                          已評價
+                        </button>
+                      ) : (
+                        <button
+                          className={`${styles.buyCardBtn} btn d-flex justify-content-center ms-3 `}
+                          onClick={() => handleShowReview(v.id)}
+                        >
+                          評價
+                        </button>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
-              {showReview && (
+              {v.has_reviewed === 0 && activeProductId === v.id && (
                 <div className={`${styles.reviewContainer} mt-3`}>
                   <div className={`review-header`}>
                     <span className={`${styles.biContent}`}>評價心得</span>
@@ -228,16 +279,13 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
                   >
                     <button
                       className={`${styles.buyCardBtn} btn-submit btn d-flex justify-content-center me-3`}
-                      onClick={() => {
-                        setShowReview(true);
-                        setProductId(v.product.id); // 确保你有方式从某处获取到product.id
-                      }}
+                      onClick={handleCloseReview}
                     >
                       取消
                     </button>
                     <button
                       className={`${styles.buyCardBtn} btn-submit btn d-flex justify-content-center`}
-                      onClick={() => handleSubmitReview(v)}
+                      onClick={() => handleSubmitReview(v.id)}
                     >
                       提交
                     </button>
