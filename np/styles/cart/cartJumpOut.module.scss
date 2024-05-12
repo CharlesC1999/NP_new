@@ -41,6 +41,8 @@
   grid-template-columns: repeat(4, 1fr);
   padding: 10px;
   margin-inline: 48px;
+  height: 85%;
+  overflow: auto;
 }
 
 .CouponList {
