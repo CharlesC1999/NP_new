@@ -19,7 +19,10 @@ import { FaListUl, FaCheck } from "react-icons/fa";
 import { LuChefHat, LuClipboardEdit } from "react-icons/lu";
 import { GrGroup } from "react-icons/gr";
 import { IoMdBusiness } from "react-icons/io";
+// 引入食譜分類的鉤子
+import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 
+// const { setRecipeCategory,handleCategoryChange } = useCategoryForSQL();
 const MobileSideBar = ({ onClose }) => {
   const sidebarRef = useRef(null);
   const router = useRouter();
@@ -997,8 +1000,12 @@ const HeaderComponent = () => {
                   <React.Fragment key={item.id}>
                     <a
                       key={item.id}
-                      onClick={() => handleRecipeClick()}
-                      href={item.href}
+                      // onClick={() => handleRecipeClick()}
+                      onClick={() => {
+                        router.push("/recipe");
+                        handleCategoryChange(item.id);
+                      }}
+                      // href={item.href}
                       className={item.className}
                     >
                       {item.name}
