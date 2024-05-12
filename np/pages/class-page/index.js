@@ -96,10 +96,21 @@ const ClassList = () => {
       endDate: finalEndDate
         ? moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss")
         : undefined,
+      priceStart: finalPriceRange.min,
+      priceEnd: finalPriceRange.max,
     };
     console.log(params); // 全部篩選的條件
     getClasses(params);
-  }, [page, perpage, sortBy, categoryId, formatStartDate, formatEndDate]);
+  }, [
+    page,
+    perpage,
+    sortBy,
+    categoryId,
+    formatStartDate,
+    formatEndDate,
+    finalPriceRange.min,
+    finalPriceRange.max,
+  ]);
 
   const getClasses = async (params) => {
     // console.log(params);
@@ -170,8 +181,8 @@ const ClassList = () => {
     setFinalEndDate(date);
   };
 
-  const priceRange = (date) => {
-    setFinalPriceRange(date);
+  const priceRange = (range) => {
+    setFinalPriceRange(range);
   };
 
   console.log(finalStartDate, finalEndDate, finalPriceRange, "goal");
