@@ -1,9 +1,11 @@
 import React from "react";
 
-const CouponC = (couponDetail) => {
+export default function CouponC({ couponDetail, Index }) {
   return (
-    <div>
-      <img src="" />
+    <div key={Index}>
+      <div>
+        <img src={`@/${couponDetail.coupon_image}`} alt="優惠券" />
+      </div>
     </div>
   );
-};
+}

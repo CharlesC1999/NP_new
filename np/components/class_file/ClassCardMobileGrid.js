@@ -1,6 +1,7 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import styles from "./classCardMobileGrid.module.css";
+// 收藏的鉤子
 import FavIconClass from "../favor/FavIconClass";
 import toast, { Toaster } from "react-hot-toast";
 

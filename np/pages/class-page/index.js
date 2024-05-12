@@ -142,7 +142,7 @@ const ClassList = () => {
     setPageCount(Math.ceil(total / perpage));
   }, [total, perpage]);
 
-  // 初次渲染時取得食譜列表資料
+  // 初次渲染時取得課程列表資料
   useEffect(() => {
     getClasses();
   }, []);

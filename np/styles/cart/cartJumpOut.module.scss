@@ -16,18 +16,23 @@
   top: 10vh;
   left: 10vw;
   width: 80vw;
-  height: 80vh;
+  height: 83vh;
   background-color: #f9f9f9;
-  padding-inline: 2vw;
-  padding-block: 3vh;
+  padding-inline: 3vw;
+  padding-block: 4vh;
+  border-radius: 16px;
 }
 
 .titleText {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  height: 50px;
+  height: 72px;
+  padding-bottom: 14px;
+  margin-inline: 48px;
+  margin-bottom: 36px;
+  border-bottom: var(--gray01) 3px solid;
 }
 
 .mainArea {
@@ -35,4 +40,10 @@
   justify-items: center;
   grid-template-columns: repeat(4, 1fr);
   padding: 10px;
+  margin-inline: 48px;
+}
+
+.CouponList {
+  padding: 10px;
+  margin-bottom: 20px;
 }
