@@ -3,8 +3,39 @@ import styles from "./ClassCardWeb.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import Router, { useRouter } from "next/router";
 import FavIconClass from "../favor/FavIconClass";
+
+// 加入購物車的鉤子
+import { useCart } from "@/hooks/use-cart";
+import { useAuth } from "@/contexts/AuthContext";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+
 export default function ClassCard({ classesData }) {
   console.log(classesData, "classDW");
+  const id = classesData.class__i_d;
+  const className = classesData.class_name;
+  const classDate = classesData.class_date;
+  const price = classesData.c_price;
+  const image = classesData.image__u_r_l;
+
+  console.log("Class ID:", id);
+  console.log("Class Name:", className);
+  console.log("Class Date:", classDate);
+  console.log("class img", image);
+
+  // 加入購物車
+  const { addItem } = useCart();
+  const { auth } = useAuth();
+  const MySwal = withReactContent(Swal);
+
+  const notify2 = (productName) => {
+    MySwal.fire({
+      title: "成功加入",
+      text: productName + "已成功加入購物車!",
+      icon: "success",
+    });
+  };
+
   // 初始化每個課程的愛心狀態為 false
   const [heartActive, setHeartActive] = useState(false);
 
@@ -65,7 +96,9 @@ export default function ClassCard({ classesData }) {
             {classesData.class_description}
           </p>
           <div className={styles.truffledRicePricing}>
-            <p className={styles.truffledRicePrice}>{classesData.c_price}</p>
+            <p className={styles.truffledRicePrice}>
+              NT${classesData.c_discount_price}
+            </p>
             {/* 目前沒有折價的價錢 */}
             <p className={styles.truffledRiceOriginalPrice}>
               {classesData.c_price}
@@ -131,7 +164,26 @@ export default function ClassCard({ classesData }) {
               </svg>
               <span className={styles.linkButtonText}>了解更多</span>
             </a>
-            <a className={styles.linksButtons} href="#">
+            <a
+              className={styles.linksButtons}
+              href="#"
+              onClick={() => {
+                if (!auth.isLoggedIn) {
+                  return toast.error("請先登入再使用!");
+                }
+                notify2(className);
+
+                console.log("Adding product:", {
+                  id,
+                  className,
+                  classDate,
+                  price,
+                  image,
+                });
+
+                addItem({ id, className, classDate, price, image });
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18px"

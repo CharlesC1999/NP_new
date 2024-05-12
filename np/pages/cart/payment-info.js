@@ -274,7 +274,8 @@ const ShopCart3 = () => {
       console.log("orderToLinePay", orderToLinePay);
       // console.log(lineOrder.id);
       if (result.isConfirmed) {
-        const orderId = `orderId=${orderToLinePay.data.lineOrder.id}`;
+        const orderId = `orderId=${orderToLinePay.data.lineOrder.orderId}`;
+        console.log("Is confirmed:", result.isConfirmed);
         fetch(`http://localhost:3005/api/cartList/reserve?${orderId}`, {
           method: "GET",
           headers: {
@@ -282,13 +283,23 @@ const ShopCart3 = () => {
           },
           // body: JSON.stringify(lineOrder),
         })
-          .then((response) => response.json())
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Network response was not ok");
+          })
           .then((data) => {
-            console.log("第二個按鈕");
+            console.log("成功收到後端回傳的資料", data);
+            window.location.href = data;
+            console.log("Redirecting to LINE Pay:", data.paymentUrl);
+            window.location.href = data.paymentUrl;
           })
           .catch((error) => {
             console.error("第二個按鈕", error);
           });
+        // const url = `http://localhost:3005/api/cartList/reserve?${orderId}`;
+        // console.log("Request URL:", url);
       }
     });
   };
@@ -473,7 +484,7 @@ const ShopCart3 = () => {
           </section>
 
           {/*  */}
-          <p>Order ID: {lineOrder.id}</p>
+          <p>Order ID: {lineOrder.orderId}</p>
           <p>Currency: {lineOrder.currency}</p>
           <p>Total Amount: {lineOrder.amount}</p>
 

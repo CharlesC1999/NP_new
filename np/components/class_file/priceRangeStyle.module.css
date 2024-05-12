@@ -31,6 +31,13 @@
   }
 }
 
+.summitButton:active {
+  & .settingBotton {
+    transition: all 0.15s;
+    transform: scale(1.05) rotate(-8deg);
+  }
+}
+
 .settingBotton {
   margin-left: 8px;
 }

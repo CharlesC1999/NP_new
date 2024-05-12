@@ -12,13 +12,23 @@ const { Orders } = sequelize.models
 import db from '#configs/mysql.js'
 
 router.post('/add-review', async (req, res) => {
-  const { userId, productId, comment, rating, created_at } = req.body
+  const { userid, activeProductId, comment, rating, created_at } = req.body
+
+  // 先檢查是否已經有評論
+
   try {
-    const result = await db.query(
-      `INSERT INTO product_review (user_id, product_id, comment, rating, created_at)
-       VALUES (?, ?, ?, ?, ?)`,
-      [userId, productId, comment, rating, created_at]
-    )
+    // 插入新的評論
+    const insertQuery = `INSERT INTO product_review (user_id, product_id, comment, rating, created_at)
+                         VALUES (?, ?, ?, ?, ?)`
+    const result = await db.query(insertQuery, [
+      userid,
+      activeProductId,
+      comment,
+      rating,
+      created_at,
+    ])
+
+    console.log(result)
     res.status(201).json({ message: 'Review added successfully' })
   } catch (error) {
     console.error('Database error:', error)
@@ -32,7 +42,7 @@ router.get('/', async function (req, res) {
   const {
     order_ids = '', // string, 對應 brand_id 欄位,  `brand_id IN (brand_ids)`
   } = req.query
-  console.log(order_ids)
+  // console.log(order_ids)
 
   // 測試用
   // console.log(
@@ -51,6 +61,7 @@ router.get('/', async function (req, res) {
 
   // 品牌，brand_ids 使用 `brand_id IN (1,2,3)`
   conditions[1] = order_ids ? `Order_ ID (${order_ids})` : ''
+  // conditions[2] = order_ids ? `Order_ ID (${order_ids})` : ''
 
   // 去除空字串
   const conditionsValues = conditions.filter((v) => v)
@@ -83,47 +94,51 @@ router.get('/', async function (req, res) {
   // GROUP BY orders.order_Id
   // ORDER BY orders.Order_date DESC ;
 
-  const sqlOrders = `SELECT *
+  const sqlOrders = `
+  SELECT orders.*, orders_detail.*, product.*, product_image.image_url, class.class_name
   FROM orders
   JOIN orders_detail ON orders.Order_ID = orders_detail.order_detail_id
-  LEFT JOIN  product ON orders_detail.commodity_id =product.id 
-  AND orders_detail.product_type = 'product'
-  LEFT JOIN product_image ON orders_detail.commodity_id =product_image.product_id
-  AND orders_detail.product_type = 'product'
-  LEFT JOIN  class ON orders_detail.class_id =class.class__i_d
-  AND orders_detail.product_type = 'class'
+  LEFT JOIN product ON orders_detail.commodity_id = product.id AND orders_detail.product_type = 'product'
+  LEFT JOIN product_image ON orders_detail.commodity_id = product_image.product_id AND orders_detail.product_type = 'product'
+  LEFT JOIN class ON orders_detail.class_id = class.class__i_d AND orders_detail.product_type = 'class'
+  ${where}
   GROUP BY orders.order_Id
-  ORDER BY orders.Order_date DESC
-  ;
+  ORDER BY orders.Order_date DESC;
+
 `
 
   // 最終組合的sql語法(計數用)
   const sqlCount = `SELECT COUNT(*) AS count FROM orders ${where}`
+  try {
+    const [orders, fields] = await db.query(sqlOrders)
+    const enhancedOrders = await Promise.all(
+      orders.map(async (order) => {
+        const reviewCheckQuery = `SELECT 1 FROM product_review WHERE product_id = ? AND user_id = ? LIMIT 1`
+        const [hasReviewed] = await db.query(reviewCheckQuery, [
+          order.commodity_id,
+          order.user_id,
+        ])
+        order.has_reviewed = hasReviewed.length > 0 ? 1 : 0
+        return order
+      })
+    )
 
-  // 顯示sql語法
-  console.log(sqlOrders)
-  console.log(sqlCount)
+    const [totalResult] = await db.query(sqlCount)
+    const total = totalResult[0].count
 
-  const [rows, fields] = await db.query(sqlOrders)
-
-  console.log(rows)
-
-  const [rows2] = await db.query(sqlCount)
-
-  // 回傳總筆數
-  const total = rows2[0].count
-
-  // 計算頁數
-  // const pageCount = Math.ceil(total / Number(perpage)) || 0
-  //抓狀態
-
-  return res.json({
-    status: 'success',
-    data: {
-      total,
-      orders: rows,
-    },
-  })
+    res.json({
+      status: 'success',
+      data: {
+        total,
+        orders: enhancedOrders,
+      },
+    })
+  } catch (error) {
+    console.error('Database error:', error)
+    res
+      .status(500)
+      .json({ status: 'error', message: 'Failed to retrieve orders' })
+  }
 })
 
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
