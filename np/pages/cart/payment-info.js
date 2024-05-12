@@ -287,6 +287,7 @@ const ShopCart3 = () => {
             if (response.ok) {
               return response.json();
             }
+            console.log("response", response);
             throw new Error("Network response was not ok");
           })
           .then((data) => {
@@ -295,6 +296,7 @@ const ShopCart3 = () => {
             console.log("Redirecting to LINE Pay:", data.paymentUrl);
             window.location.href = data.paymentUrl;
           })
+
           .catch((error) => {
             console.error("第二個按鈕", error);
           });
@@ -346,7 +348,7 @@ const ShopCart3 = () => {
             {items.map((item, index) => (
               <div key={index} className="row py-2">
                 <div className={`${styles3.fb} col text-center pt-2`}>
-                  {item.name}
+                  {item.className}
                 </div>
                 <div
                   className={`${styles3.fb} col d-flex align-items-center justify-content-center `}
@@ -542,12 +544,13 @@ const ShopCart3 = () => {
             </div>
             {items.map((item, index) => (
               <div key={index} className="row py-2 mt-1">
-                <div className={`${styles3.fc} row ps-4`}>{item.name}</div>
+                <div className={`${styles3.fc} row ps-4`}>{item.className}</div>
                 <div
                   className={`${styles3.fb} row ps-4`}
                   style={{ fontSize: 12 }}
                 >
-                  課程時間: {item.sn} {/* 假设 sn 字段用来存储日期信息 */}
+                  課程時間: {item.classDate}{" "}
+                  {/* 假设 sn 字段用来存储日期信息 */}
                 </div>
                 <div className="row mt-4">
                   <div className="col-3 border ms-2">有庫存</div>
@@ -564,7 +567,7 @@ const ShopCart3 = () => {
                   className={`${styles3.fb} row ps-4`}
                   style={{ fontSize: 12 }}
                 >
-                  課程時間: {item.sn} {/* 假设 sn 字段用来存储日期信息 */}
+                  {/* 課程時間: {item.sn} 假设 sn 字段用来存储日期信息 */}
                 </div>
                 <div className="row mt-4">
                   <div className="col-3 border ms-2">有庫存</div>

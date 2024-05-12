@@ -57,7 +57,7 @@ function Card4Hot({ id, name, price, d_price, image }) {
               if (!auth.isLoggedIn) {
                 return toast.error("請先登入再使用!");
               }
-
+              console.log(auth.isLoggedIn);
               notify(name);
               console.log("Adding product:", {
                 id,

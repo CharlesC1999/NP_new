@@ -12,6 +12,8 @@ const { Orders, Orders_detail, Orders2 } = sequelize.models
 import { createLinePayClient } from 'line-pay-merchant'
 
 import { v4 as uuidv4 } from 'uuid'
+// 檢查空物件, 轉換req.params為數字
+import { getIdParam } from '#db-helpers/db-tool.js'
 // import Orders2 from '##/models/Orders2'
 import 'dotenv/config.js'
 import authenticateToken from '#middlewares/authenticateToken.js'
@@ -24,6 +26,12 @@ const linePayClient = createLinePayClient({
 })
 // console.log(linePayClient)
 
+// 這邊是看會員是否登入路由
+
+
+
+
+// 下面是 line pay 的路由
 router.post('/', async (req, res, next) => {
   // , authenticateToken
   console.log(req.body)
