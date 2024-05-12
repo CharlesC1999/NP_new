@@ -1,0 +1,38 @@
+.jumpOutWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.jumpOutContainer {
+  position: fixed;
+  top: 10vh;
+  left: 10vw;
+  width: 80vw;
+  height: 80vh;
+  background-color: #f9f9f9;
+  padding-inline: 2vw;
+  padding-block: 3vh;
+}
+
+.titleText {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.mainArea {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 10px;
+}
