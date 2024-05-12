@@ -94,7 +94,9 @@ export default function ProductCardMobileGrid({ classesData }) {
           <FavIconClass id={classesData.class__i_d} />
         </div>
         <div className={styles.productPricing}>
-          <div className={styles.currentPrice}>$NT{classesData.c_price}</div>
+          <div className={styles.currentPrice}>
+            $NT{classesData.c_discount_price}
+          </div>
           <div className={styles.originalPrice}>${classesData.c_price}</div>
         </div>
         <div className={styles.productActions}>

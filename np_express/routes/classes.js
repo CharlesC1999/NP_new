@@ -20,6 +20,8 @@ router.get('/', async function (req, res) {
     categoryId,
     startDate: formatStartDate,
     endDate: formatEndDate,
+    priceStart,
+    priceEnd,
   } = req.query
   console.log(req.query, 'gg')
   console.log(categoryId, formatStartDate, formatEndDate)
@@ -63,6 +65,17 @@ router.get('/', async function (req, res) {
     whereClause += ` AND c.class_date >= ${validStartDate}`
   } else if (validEndDate) {
     whereClause += ` AND c.class_date <= ${validEndDate}`
+  }
+
+  // 價格篩選
+  if (priceStart && priceEnd) {
+    whereClause += ` AND c.c_discount_price BETWEEN ${db.escape(
+      priceStart
+    )} AND ${db.escape(priceEnd)}`
+  } else if (priceStart) {
+    whereClause += ` AND c.c_discount_price >= ${db.escape(priceStart)}`
+  } else if (priceEnd) {
+    whereClause += ` AND c.c_discount_price <= ${db.escape(priceEnd)}`
   }
 
   // if (formatStartDate === 'undefined') {

@@ -4,9 +4,10 @@ import DateTimePicker from "./ClassDateTimePicker";
 import ClassPriceRange from "./ClassPriceRange";
 import { MdAutorenew } from "react-icons/md";
 
-const classSidebar = ({ finalStart, finalEnd }) => {
+const classSidebar = ({ finalStart, finalEnd, finalPrice }) => {
   const [classDateStart, setClassDateStart] = useState("");
   const [classDateEnd, setClassDateEnd] = useState("");
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 9999 }); // 新增價格範圍狀態
 
   const handleStartDate = (date) => {
     setClassDateStart(date);
@@ -26,6 +27,14 @@ const classSidebar = ({ finalStart, finalEnd }) => {
 
   // finalEnd(classDateEnd);
 
+  const handlePriceRangeChange = (range) => {
+    // 新增處理價格範圍變化的函數
+    setPriceRange(range);
+    finalPrice(range);
+  };
+
+  console.log(priceRange);
+
   useEffect(() => {
     if (classDateStart) {
       finalStart(classDateStart);
@@ -38,6 +47,12 @@ const classSidebar = ({ finalStart, finalEnd }) => {
     }
   }, [classDateEnd]);
 
+  useEffect(() => {
+    // 在這裡觀察 priceRange 的變化
+    console.log(priceRange);
+    finalPrice(priceRange);
+  }, [priceRange]);
+
   const reset = () => {
     // reset
     setClassDateStart("");
@@ -46,6 +61,10 @@ const classSidebar = ({ finalStart, finalEnd }) => {
     // reset classList
     finalStart("");
     finalEnd("");
+
+    //  reset price range
+    setPriceRange({ min: 0, max: 9999 });
+    finalPrice({ min: 0, max: 9999 });
   };
 
   return (
@@ -72,7 +91,11 @@ const classSidebar = ({ finalStart, finalEnd }) => {
       </div>
       <div className={classSidebarStyles.priceClass}>
         <p className={classSidebarStyles.subTitle}>價格</p>
-        <ClassPriceRange />
+        <ClassPriceRange
+          min={0}
+          max={9999}
+          onRangeChange={handlePriceRangeChange}
+        />
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import "@/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import shopStyles from "./shopStyle1.module.css";
 import styles from "@/components/header.module.scss";
+import JumpOut from "@/styles/cart/cartJumpOut.module.scss";
 import stylesFooter from "../../components/footer.module.css";
 import HeaderSetting from "@/styles/headerSetting.module.scss";
 import React, { useState, useEffect, useRef } from "react";
+import { RiDiscountPercentLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 // 購物車用到的主鍵
 import Header from "@/components/Header";
@@ -11,12 +13,33 @@ import Footer from "../../components/footer";
 import Navbar from "@/components/shopcart/Navbar";
 import Class from "@/components/shopcart/Class";
 import Commodity from "@/components/shopcart/Commodity";
+import CouponC from "@/components/shopcart/couponC";
 
 // 加上context鉤子
 import { useCart } from "@/hooks/use-cart";
 
 // 綠色勾勾
 import Check from "@/components/checkbox-custom/CheckBoxCustom";
+
+const JumpOutCoupon = ({ onClose }) => {
+  const getCoupoon = async (params) => {
+    const searchParams = new URLSearchParams(params);
+    const url = "";
+  };
+
+  // 彈出畫面
+  <div className={JumpOut.jumpOutWrapper}>
+    <div className={JumpOut.jumpOutContainer}>
+      <header className={`h2 text-dark ${JumpOut.titleText}`}>
+        <RiDiscountPercentLine size={36} color="#50bf8b" />
+        請選擇優惠券
+      </header>
+      <section className={JumpOut.mainArea}>
+        <CouponC couponDetail={CDetail} />
+      </section>
+    </div>
+  </div>;
+};
 
 const ShopCart1 = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -163,6 +186,7 @@ const ShopCart1 = () => {
                 使用折價券{" "}
               </label>
             </div>
+            {/* 這裡 */}
             <select
               className="form-select form-select-sm "
               // aria-label="Small select example "

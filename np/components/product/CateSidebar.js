@@ -5,7 +5,7 @@ Link;
 import { useRouter } from "next/router";
 import { useProductCategories } from "@/hooks/use-product-cate";
 
-function CateSidebar({ cateName, catePng, cateId }) {
+function CateSidebar({ cateName, catePng, cateId, categoryCounts }) {
   const router = useRouter();
   const { newCategories, setNewCategories } = useProductCategories();
   const handleNewCategoryChange = (cateId) => {
@@ -32,7 +32,7 @@ function CateSidebar({ cateName, catePng, cateId }) {
             <div>
               <h6 className={styles.left}>{cateName}</h6>
             </div>
-            <h6 className={styles.right}>∞</h6>
+            {/* <h6 className={styles.right}> {categoryCounts[cateName] || 0}</h6> */}
           </div>
         </div>
       </div>

@@ -24,6 +24,7 @@ function SearchResult() {
     indexOfFirstProduct,
     indexOfLastProduct
   );
+  console.log(currentProducts);
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
