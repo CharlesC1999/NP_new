@@ -6,7 +6,7 @@ import sequelize from '#configs/db.js'
 import db from '#configs/mysql.js'
 // console.log(process.env)
 
-const { Orders, Orders_detail, Orders2 } = sequelize.models
+const { Orders, Orders_detail, Coupons } = sequelize.models
 
 // line pay使用npm套件
 import { createLinePayClient } from 'line-pay-merchant'
@@ -26,10 +26,22 @@ const linePayClient = createLinePayClient({
 })
 // console.log(linePayClient)
 
-// 這邊是看會員是否登入路由
+// 這邊是看哪個會員登入連到cart index
+router.get('/', authenticateToken, async (req, res) => {
+  const userID = req.user.id
+  console.log(userID)
+  // const cartIds =
 
-
-
+  try {
+    const coupons = await Coupons.findAll({
+      where: { userId: req.user.id, c_status: '可使用' },
+    })
+    res.json(coupons)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
 
 // 下面是 line pay 的路由
 router.post('/', async (req, res, next) => {

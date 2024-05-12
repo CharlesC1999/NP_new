@@ -129,7 +129,7 @@ const ShopCart1 = () => {
           ? totalPrice + totalProductPrice
           : calculatedFinalPrice
       );
-      console.log(totalPrice, totalProductPrice, finalPrice, "gdesgsd");
+      console.log(totalPrice, totalProductPrice, finalPrice, "價格");
       // 计算并更新最终价格
     }
   }, [coupon, totalPrice, totalProductPrice, finalPrice]);
@@ -154,6 +154,34 @@ const ShopCart1 = () => {
   // const [discountAmount,setDiscountAmount]=useState([])
   // c;
 
+  //設一個路由去抓後端資料id
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     setError("No token found. Please login.");
+  //     return;
+  //   }
+
+  //   fetch("http://localhost:3005/api/cartList", {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setCoupons(data); // Assuming the data is an array of coupons
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //       setError(error.message);
+  //     });
+  // }, []);
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>
