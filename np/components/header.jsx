@@ -570,9 +570,9 @@ const HeaderComponent = () => {
                         >
                           {item.name}
                         </a>
-                        {index < menuItems.length - 1 && (
+                        {/* {index < menuItems.length - 1 && (
                           <hr className={styles.noMargin} />
-                        )}
+                        )} */}
                       </React.Fragment>
                     ))}
                   </div>
@@ -939,9 +939,9 @@ const HeaderComponent = () => {
                     >
                       {item.name}
                     </a>
-                    {index < productCategory.length - 1 && (
+                    {/* {index < productCategory.length - 1 && (
                       <hr className={styles.noMargin} />
-                    )}
+                    )} */}
                   </React.Fragment>
                 ))}
               </div>
@@ -1008,9 +1008,9 @@ const HeaderComponent = () => {
                     >
                       {item.name}
                     </a>
-                    {index < recipeCategory.length - 1 && (
+                    {/* {index < recipeCategory.length - 1 && (
                       <hr className={styles.noMargin} />
-                    )}
+                    )} */}
                   </React.Fragment>
                 ))}
               </div>
@@ -1077,9 +1077,9 @@ const HeaderComponent = () => {
                     >
                       {item.name}
                     </a>
-                    {index < classCategory.length - 1 && (
+                    {/* {index < classCategory.length - 1 && (
                       <hr className={styles.noMargin} />
-                    )}
+                    )} */}
                   </React.Fragment>
                 ))}
               </div>

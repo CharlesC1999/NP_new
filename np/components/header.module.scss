@@ -255,12 +255,12 @@ a:visited {
   text-decoration: none;
   display: flex;
   align-items: start;
-  color: #454545;
+  color: #565C5D;
   cursor: pointer;
+  font-size: 20px;
+  gap: 8px;
 }
-.pageLink:active {
-  color: #78cea6;
-}
+
 .pageLink:visited {
   color: #454545;
 }
@@ -475,32 +475,61 @@ a:visited {
 
 .navList {
   display: flex;
-  gap: 35px;
-  padding: 10px 48px;
+  gap: 15px;
+  margin-bottom: 10px;
 }
-
 /* 頁面連結 */
 .navItemPromotion {
   display: flex;
   gap: 4px;
   justify-content: center;
-  margin-inline-end: 16px;
+  align-items: center;
+  height: 45px;
+  padding-inline:15px;
 }
-
+.navItemPromotion:hover{
+  color:var(--green02);
+  border-bottom:3px solid var(--green02);
+  cursor:pointer
+}
+.navItemPromotion:hover .pageLink{
+  color:var(--green02);
+}
 .navItemPageLinks {
   display: flex;
-  gap: 3px;
+  gap: 8px;
   justify-content: center;
+  align-items:center;
+  height: 45px;
+  padding-inline:15px;
+}
+.navItemPageLinks:hover{
+  color:var(--green02);
+  border-bottom:3px solid var(--green02);
+  cursor:pointer
+}
+.navItemPageLinks:hover .pageLink{
+  color:var(--green02);
 }
 /* 頁面連結 */
 
 .navItemAbout {
   display: flex;
   gap: 3px;
+  align-items:center;
+  height: 45px;
+  padding-inline:15px;
   justify-content: center;
   letter-spacing: 0.8px;
 }
-
+.navItemAbout:hover{
+  color:var(--green02);
+  border-bottom:3px solid var(--green02) ;
+  cursor:pointer
+ }
+ .navItemAbout:hover .pageLink{
+  color:var(--green02);
+}
 .navTextButton {
   padding: 0;
   border: none;
