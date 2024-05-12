@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import PriceRangeStyle from "./priceRangeStyle.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -17,6 +18,7 @@ const RangeSlider = ({ min, max, onRangeChange }) => {
 
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +33,7 @@ const RangeSlider = ({ min, max, onRangeChange }) => {
     // 呼叫父組件的回調函數來更新狀態
     if (minValue <= maxValue) {
       onRangeChange({ min: minValue, max: maxValue });
+      router.push(`/class-page`);
     } else {
       toast.error("價格區間設定錯誤"); // 錯誤提示
     }
@@ -87,11 +90,3 @@ const RangeSlider = ({ min, max, onRangeChange }) => {
 };
 
 export default RangeSlider;
-
-// export default function PriceRangeSelector() {
-//   const handleRangeChange = (range) => {
-//     console.log(range);
-//   };
-
-//   return <RangeSlider min={0} max={9999} onRangeChange={handleRangeChange} />;
-// }

@@ -23,6 +23,9 @@ const ClassList = () => {
   // 先導入讀取鉤子
   const { setLoading } = useLoader();
   const { categoryId, setCategoryId } = useCategory();
+  const { finalStartDate, setFinalStartDate } = useCategory();
+  const { finalEndDate, setFinalEndDate } = useCategory();
+  const { priceRange, setPriceRange } = useCategory();
 
   const containerStyle = {
     display: "flex",
@@ -74,11 +77,10 @@ const ClassList = () => {
   // 用於選擇分類
   // const [categoryId, setCategoryId] = useState(null);
   // 獲取到日期的資料
-  const [finalStartDate, setFinalStartDate] = useState(null);
-  const [finalEndDate, setFinalEndDate] = useState(null);
+  // const [finalStartDate, setFinalStartDate] = useState(null);
+  // const [finalEndDate, setFinalEndDate] = useState(null);
   // 獲取價格區間
-  const [finalPriceRange, setFinalPriceRange] = useState({ min: 0, max: 9999 });
-  // todo 把價格篩選完成(先睡)
+  // const [finalPriceRange, setFinalPriceRange] = useState({ min: 0, max: 9999 });
   const formatStartDate = moment(finalStartDate).format("YYYY-MM-DD HH:mm:ss");
   const formatEndDate = moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss");
 
@@ -96,8 +98,8 @@ const ClassList = () => {
       endDate: finalEndDate
         ? moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss")
         : undefined,
-      priceStart: finalPriceRange.min,
-      priceEnd: finalPriceRange.max,
+      priceStart: priceRange.min,
+      priceEnd: priceRange.max,
     };
     console.log(params); // 全部篩選的條件
     getClasses(params);
@@ -108,8 +110,8 @@ const ClassList = () => {
     categoryId,
     formatStartDate,
     formatEndDate,
-    finalPriceRange.min,
-    finalPriceRange.max,
+    priceRange?.min,
+    priceRange?.max,
   ]);
 
   const getClasses = async (params) => {
@@ -181,11 +183,20 @@ const ClassList = () => {
     setFinalEndDate(date);
   };
 
-  const priceRange = (range) => {
-    setFinalPriceRange(range);
+  const handlePriceRange = (range) => {
+    setPriceRange(range);
   };
 
-  console.log(finalStartDate, finalEndDate, finalPriceRange, "goal");
+  console.log(finalStartDate, finalEndDate, priceRange, "goal");
+
+  const reset = () => {
+    // reset classList
+    setFinalStartDate("");
+    setFinalEndDate("");
+
+    //  reset price range
+    setPriceRange({ min: 0, max: 9999 });
+  };
 
   // ----------------------------顯示模式
   // 切換到Grid模式
@@ -215,7 +226,7 @@ const ClassList = () => {
             <ClassSidebar
               finalStart={startDate}
               finalEnd={endDate}
-              finalPrice={priceRange}
+              finalPrice={handlePriceRange}
             />
           </div>
 
