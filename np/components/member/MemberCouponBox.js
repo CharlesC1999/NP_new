@@ -189,9 +189,9 @@ const handleSubmit = async (event,userid) => {
             <div className={styles.title2}>我的帳戶</div>
             <Link  href={`/member/member-coupon`} className={`${styles.gift} btn`}>返回</Link>
             {/* 測試新增 */}
-            <form onSubmit={(event) => handleSubmit(event, userid)}>
-  <input type="text" value={couponInput} onChange={handleInputChange} />
-  <button type="submit">提交</button>
+            <form className={`${styles.cForm} d-flex`} onSubmit={(event) => handleSubmit(event, userid)}>
+  <input className={styles.cInput} type="text" value={couponInput} onChange={handleInputChange} />
+  <button className={styles.cInputBtn} type="submit">提交</button>
 </form>
           </div>
           {/* 主內容的標題 */}
