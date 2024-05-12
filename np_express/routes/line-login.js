@@ -5,6 +5,7 @@ import jsonwebtoken from 'jsonwebtoken'
 
 import sequelize from '#configs/db.js'
 const { Line_member } = sequelize.models
+const { Member } = sequelize.models
 
 // line-login模組
 import line_login from '#services/line-login.js'
@@ -43,7 +44,7 @@ router.get('/logout', async function (req, res, next) {
   }
 
   // 查詢
-  const dbUser = await Line_member.findOne({
+  const dbUser = await Member.findOne({
     where: {
       line_uid: req.query.line_uid,
     },
@@ -82,7 +83,7 @@ router.get(
       console.log(token_response.id_token, 'uuid')
 
       // 1. 先查詢資料庫是否有同line_uid的資料
-      const total = await Line_member.count({
+      const total = await Member.count({
         where: {
           line_uid,
         },
@@ -101,7 +102,7 @@ router.get(
 
       if (total) {
         // 2-1. 有存在 -> 從資料庫查詢會員資料
-        const dbUser = await Line_member.findOne({
+        const dbUser = await Member.findOne({
           where: {
             line_uid,
           },
@@ -112,31 +113,34 @@ router.get(
         // 回傳給前端的資料
         returnUser = {
           id: dbUser.id,
-          name: dbUser.name,
+          name: dbUser.User_name,
           line_uid: dbUser.line_uid,
-          photo_url: dbUser.photo_url,
+          photo_url: dbUser.User_image,
         }
       } else {
         // 2-2. 不存在 -> 建立一個新會員資料(無帳號與密碼)，只有line來的資料 -> 執行登入工作
         const user = {
-          name: token_response.id_token.name,
-          email: '',
+          User_name: token_response.id_token.name,
+          Email: 'line@noemail.com',
           line_uid: token_response.id_token.sub,
           line_access_token: token_response.access_token,
-          photo_url: token_response.id_token.picture,
+          User_image: token_response.id_token.picture,
+          Create_date: new Date(),
+          Last_login: new Date(),
+          google_uid: 'not google',
         }
         console.log(user.line_uid)
         // await insertOne('users', newUser)
 
         // 新增會員資料
-        const newUser = await Line_member.create(user)
+        const newUser = await Member.create(user)
 
         // 回傳給前端的資料
         returnUser = {
           id: newUser.id,
-          username: '',
-          google_uid: newUser.google_uid,
-          line_uid,
+          name: newUser.User_name,
+          line_uid: newUser.line_uid,
+          photo_url: newUser.User_image,
         }
       }
 
