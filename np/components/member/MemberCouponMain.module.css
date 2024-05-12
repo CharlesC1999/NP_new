@@ -904,6 +904,7 @@ padding: 23px 0;
 .cpbox{
   width: 100%;
   border: #50bf8b 1px solid;
+  margin: 15px;
 }
 .cantGet{
   color: red;
@@ -917,4 +918,20 @@ padding: 23px 0;
 .gift:hover{
   background-color: #def9ec;
   color: #50bf8b;
+}
+.cInput{
+  border: #50bf8b 2px solid;
+  border-radius: 2px;
+}
+.cInputBtn{
+  background-color: #fff;
+  color: #50bf8b;
+  border: #50bf8b 2px solid;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: bolder;
+  margin-left:5px ;
+}
+.cForm{
+  margin: 10px;
 }
