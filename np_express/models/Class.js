@@ -30,6 +30,10 @@ export default async function (sequelize) {
         type: DataTypes.INTEGER(5),
         allowNull: false,
       },
+      Current_person: {
+        type: DataTypes.INTEGER(5),
+        allowNull: false,
+      },
       Class_person_limit: {
         type: DataTypes.INTEGER(5),
         allowNull: false,

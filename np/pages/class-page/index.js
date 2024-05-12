@@ -76,7 +76,9 @@ const ClassList = () => {
   // 獲取到日期的資料
   const [finalStartDate, setFinalStartDate] = useState(null);
   const [finalEndDate, setFinalEndDate] = useState(null);
-
+  // 獲取價格區間
+  const [finalPriceRange, setFinalPriceRange] = useState({ min: 0, max: 9999 });
+  // todo 把價格篩選完成(先睡)
   const formatStartDate = moment(finalStartDate).format("YYYY-MM-DD HH:mm:ss");
   const formatEndDate = moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss");
 
@@ -95,7 +97,7 @@ const ClassList = () => {
         ? moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss")
         : undefined,
     };
-    console.log(params); // 确认这些参数的值
+    console.log(params); // 全部篩選的條件
     getClasses(params);
   }, [page, perpage, sortBy, categoryId, formatStartDate, formatEndDate]);
 
@@ -122,22 +124,6 @@ const ClassList = () => {
       return {};
     }
   };
-
-  // const handleCategoryChange = async (categoryId) => {
-  //   console.log("Category changing to:", categoryId);
-  //   setCategoryId(categoryId);
-  //   // 這裡直接調用 getClasses，傳遞新的 categoryId
-  //   setPage(1);
-  //   const newParams =
-  //     categoryId === 0
-  //       ? { page: 1, perpage, sortBy }
-  //       : { page: 1, perpage, sortBy, categoryId };
-  //   const data = await getClasses(newParams);
-  //   console.log("Data received on category change:", data);
-  //   if (data && data.status === "success") {
-  //     setTotal(data.data.total);
-  //   }
-  // };
 
   useEffect(() => {
     setPageCount(Math.ceil(total / perpage));
@@ -184,8 +170,13 @@ const ClassList = () => {
     setFinalEndDate(date);
   };
 
-  console.log(finalStartDate, finalEndDate, "goal");
+  const priceRange = (date) => {
+    setFinalPriceRange(date);
+  };
 
+  console.log(finalStartDate, finalEndDate, finalPriceRange, "goal");
+
+  // ----------------------------顯示模式
   // 切換到Grid模式
   const showGrid = () => {
     setDisplayGrid(true);
@@ -197,7 +188,7 @@ const ClassList = () => {
     setDisplayGrid(false);
     setActiveButton("list");
   };
-
+  // ----------------------------顯示模式
   console.log(total, "im here");
   console.log(page, "nowPage");
   return (
@@ -210,7 +201,11 @@ const ClassList = () => {
         <ClassClassifacion categoryChange={setCategoryId} />
         <div className={ContentSetting.DisplaySetting}>
           <div style={{ height: "100%" }} className={ContentSetting.MobileNone}>
-            <ClassSidebar finalStart={startDate} finalEnd={endDate} />
+            <ClassSidebar
+              finalStart={startDate}
+              finalEnd={endDate}
+              finalPrice={priceRange}
+            />
           </div>
 
           <div className={CardStyle.SearchResultContainer}>

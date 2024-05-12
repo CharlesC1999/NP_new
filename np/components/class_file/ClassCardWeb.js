@@ -65,7 +65,9 @@ export default function ClassCard({ classesData }) {
             {classesData.class_description}
           </p>
           <div className={styles.truffledRicePricing}>
-            <p className={styles.truffledRicePrice}>{classesData.c_price}</p>
+            <p className={styles.truffledRicePrice}>
+              NT${classesData.c_discount_price}
+            </p>
             {/* 目前沒有折價的價錢 */}
             <p className={styles.truffledRiceOriginalPrice}>
               {classesData.c_price}

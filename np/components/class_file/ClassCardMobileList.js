@@ -90,7 +90,9 @@ export default function ProductCardMobileList({ classesData }) {
           <FavIconClass id={classesData.class__i_d} />
         </div>
         <div className={styles.productPricing}>
-          <span className={styles.currentPrice}>$NT{classesData.c_price}</span>
+          <span className={styles.currentPrice}>
+            $NT{classesData.c_discount_price}
+          </span>
           <span className={styles.originalPrice}>${classesData.c_price}</span>
         </div>
         <div className={styles.productActions}>
