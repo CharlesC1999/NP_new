@@ -1472,7 +1472,7 @@
   {
     "Coupon_ID": "100",
     "Member_ID": "1",
-    "C_name": "我幹你的",
+    "C_name": "LV3會員福利",
     "C_code": "",
     "Discount_amount": "100.00",
     "Discount_type": "金額",
@@ -1487,7 +1487,7 @@
   {
     "Coupon_ID": "101",
     "Member_ID": "1",
-    "C_name": "氣死了好氣喔",
+    "C_name": "LV1會員福利",
     "C_code": "",
     "Discount_amount": "100.00",
     "Discount_type": "金額",
