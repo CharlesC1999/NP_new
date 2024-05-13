@@ -11,7 +11,6 @@ export default function DetailIngredients({ recipe }) {
   const ingredientAry = recipe.ingredients.split(",").map((v) => {
     return v.split("&");
   });
-  console.log(ingredientAry);
 
   return (
     <>
