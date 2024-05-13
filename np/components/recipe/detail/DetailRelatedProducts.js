@@ -9,11 +9,15 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 // 導向登入頁
 import { useRouter } from "next/router";
+// 加入購物車
+import { useCart } from "@/hooks/use-cart";
 
 import { set } from "lodash";
 // import { utimesSync } from "fs";
 
 export default function DetailRelatedProducts({ recipeID = "" }) {
+  // 加入購物車
+  const { addToCartAry } = useCart();
   // 未登入時導向登入頁
   const router = useRouter();
   //給checkbox的狀態
@@ -102,10 +106,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
 
   // 加總數量與價格
   const totalItems = finalProducts.reduce((acc, v) => acc + v.qty, 0);
-  const totalPrice = finalProducts.reduce(
-    (acc, v) => acc + v.product_price * v.qty,
-    0
-  );
+  const totalPrice = finalProducts.reduce((acc, v) => acc + v.price * v.qty, 0);
 
   // 抓取登入狀態
   // 取得localStorage裡的token，用來發起req帶入headers
@@ -140,6 +141,10 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
   // 按下加入購物車時顯示是否登入
   const checkLogin = async () => {
     if (userId) {
+      // 先執行加入購物車
+      // !!! 待解決
+      addToCartAry(finalProducts);
+      // 完成加入購物車後再顯示訊息
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -269,7 +274,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                   <div className={styles["product-pic"]}>
                     <img
                       className="w-100 h-100 object-fit-cover"
-                      src={`/images/products/${v.image_url}`}
+                      src={`/images/products/${v.image}`}
                       alt=""
                     />
                   </div>
@@ -277,16 +282,14 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                     <p
                       className={`${styles["product-name"]} ${styles["figma-h5"]}`}
                     >
-                      {v.product_name}
+                      {v.name}
                     </p>
                     <div
                       className={`${styles["portion-and-price"]} d-flex gap-2`}
                     >
                       <p className={styles["portion"]}>份量</p>
                       <p className={styles["divider"]}>|</p>
-                      <p className={styles["price"]}>
-                        單價 $ {v.product_price}
-                      </p>
+                      <p className={styles["price"]}>單價 $ {v.price}</p>
                     </div>
                   </div>
                 </div>
@@ -318,7 +321,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                     </button>
                   </div>
                   <p className={`${styles["subtotal"]} ${styles["figma-h6"]}`}>
-                    {`$ ${subtotal(v.qty, v.product_price)}`}
+                    {`$ ${subtotal(v.qty, v.price)}`}
                   </p>
                 </div>
               </div>

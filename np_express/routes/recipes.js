@@ -175,7 +175,7 @@ router.get('/:recipeId/relatedProducts', async function (req, res) {
   const recipeId = req.params.recipeId
 
   const sqlRelatedProducts = `
-  SELECT rrp.*, p.id, p.product_name, p.product_price, pi.image_url
+  SELECT rrp.*, p.id, p.product_name AS name, p.product_price AS price, pi.image_url AS image
   FROM recipe_related_products AS rrp 
   JOIN product AS p ON rrp.product__i_d = p.id
   JOIN product_image AS pi ON p.id = pi.product_id
