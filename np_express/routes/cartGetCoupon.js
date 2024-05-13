@@ -3,8 +3,10 @@ import db from '#configs/mysql.js'
 const router = express.Router()
 
 router.get('/getCouponsDetail', async (req, res) => {
+  const { member } = req.query
+
   console.log('Request received for /getCouponsDetail')
-  const sql = `SELECT cu.* FROM coupons AS cu`
+  const sql = `SELECT cu.* FROM coupons AS cu WHERE cu.member__i_d = ${member}`
   console.log(sql)
 
   try {
