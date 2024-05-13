@@ -147,6 +147,9 @@ a:visited {
   .container {
     padding: 8px 0px;
   }
+  .container.shrink{
+    padding: 0px;
+  }
   .header {
     max-width: 100%;
     padding: 0 20px;
@@ -295,6 +298,7 @@ a:visited {
   .headerContent {
     flex-wrap: wrap;
     max-width: 100%;
+    height: 46.063px;
   }
 }
 
