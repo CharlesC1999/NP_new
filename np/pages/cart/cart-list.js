@@ -277,50 +277,7 @@ const ShopCart2 = () => {
                 </div>
                 {inputEmail}
                 {/* 套bs5套件 */}
-                {/* <label htmlFor="phone" className={`${styles2.label}`}>
-                  電話號碼:
-                </label>
-                <div className="input-group mb-3" style={{}}>
-                  <div
-                    className={`${styles2.button} ${styles2.input} btn btn-outline-secondary dropdown-toggle py-1`}
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    style={{ width: "40%" }}
-                  >
-                    TW +886
-                  </div>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Separated link
-                      </a>
-                    </li>
-                  </ul>
-                  <input
-                    type="text"
-                    className="form-control py-1"
-                    aria-label="Text input with dropdown button"
-                  />
-                </div> */}
+
                 <div className="mb-3">
                   <label
                     htmlFor="exampleInputEmail1"

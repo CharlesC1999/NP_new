@@ -22,7 +22,7 @@ import { useCart } from "@/hooks/use-cart";
 import Check from "@/components/checkbox-custom/CheckBoxCustom";
 
 // 用來關、開優惠券的按鈕
-const JumpOutCoupon = ({ onClose }) => {
+const JumpOutCoupon = ({ onClose, onSelect }) => {
   const [couponsData, setCouponsData] = useState([]);
   // 抓會員localstorage資料
   const [userData, setUserData] = useState("");
@@ -70,7 +70,7 @@ const JumpOutCoupon = ({ onClose }) => {
   useEffect(() => {
     getCoupoon();
   }, []);
-
+  // 用來點旁邊關閉
   const handleClose = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -78,6 +78,11 @@ const JumpOutCoupon = ({ onClose }) => {
   };
 
   console.log("氣屁氣", couponsData);
+
+  // 新增點擊事件
+  const handleSelectCoupon = (couponsData) => {
+    onSelect(couponsData); // 调用从外部传入的 onSelect 函数
+  };
 
   // 彈出畫面
   return (
@@ -94,6 +99,7 @@ const JumpOutCoupon = ({ onClose }) => {
               key={index}
               Index={index}
               className={JumpOut.CouponList}
+              onSelect={handleSelectCoupon} // 传递处理函数到每个 CouponC
             />
           ))}
         </section>
@@ -106,6 +112,7 @@ const ShopCart1 = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
   const [showFullScreen, setShowFullScreen] = useState(false);
+
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -175,6 +182,7 @@ const ShopCart1 = () => {
 
   // const [discount, setDiscount] = useState(0);
 
+  // 之前的優惠券不會用到-----------
   const handleDiscount = (e) => {
     const selectedID = parseInt(e.target.value); // Make sure to parse the ID to a number
     const selectedCoupon = data.find((coupon) => coupon.id === selectedID); // Use find, not filter
@@ -182,9 +190,9 @@ const ShopCart1 = () => {
   };
   // const finalPrice= if()
 
-  //
   console.log(totalPrice);
   console.log(totalProductPrice);
+
   const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
   const discountAmount = coupon ? coupon.disPrice : 0;
   console.log(finalPrice);
@@ -222,6 +230,7 @@ const ShopCart1 = () => {
 
   // console.log(finalPrice);
 
+  // ----------------------------------------------------
   // 去抓儲存在localstorage的使用者
   const [userId, setUserId] = useState(null);
 
@@ -236,7 +245,63 @@ const ShopCart1 = () => {
     }
   }, []);
   console.log("userId", userId);
+  // console.log(couponsData);
 
+  // 這邊處理子元件點擊的優惠券
+  const [selectedCoupon, setSelectedCoupon] = useState([]);
+
+  // console.log(selectedCoupon);
+  // 設定儲存優惠券在localstorage中
+  useEffect(() => {
+    const data = window.localStorage.getItem("dataCoupon666");
+    if (data) {
+      setSelectedCoupon(JSON.parse(data));
+    }
+  }, []);
+  //setItem
+  useEffect(() => {
+    if (selectedCoupon.length > 0) {
+      window.localStorage.setItem(
+        "dataCoupon666",
+        JSON.stringify(selectedCoupon)
+      );
+    }
+  }, [selectedCoupon]);
+  const handleCouponSelect = (couponData) => {
+    setSelectedCoupon([couponData]);
+    console.log("Selected coupon:", couponData);
+    console.log(selectedCoupon);
+    setShowFullScreen(false); // 关闭模态框
+  };
+
+  const [finalPrice2, setFinalPrice2] = useState(
+    totalPrice + totalProductPrice
+  );
+
+  // 把折扣金額提出來
+  const totalDiscount = selectedCoupon.reduce(
+    (sum, coupon) => sum + parseFloat(coupon.discount_amount),
+    0
+  );
+
+  // const [discountCoupon, setDiscountCoupon] = useState(0);
+
+  // useEffect(() => {
+  //   // 从 localStorage 获取数据
+  //   const data = localStorage.getItem("dataCoupon666");
+  //   if (data) {
+  //     const coupons = JSON.parse(data);
+  //     if (coupons.length > 0) {
+  //       // 假设我们关心第一个优惠券的 discount_amount
+  //       const firstCouponDiscount = parseFloat(coupons[0].discount_amount);
+  //       setDiscountCoupon(firstCouponDiscount);
+  //     }
+  //   }
+  // }, [discountCoupon]);
+
+  // useEffect(() => {
+  //   console.log("Selected coupon updated:", selectedCoupon);
+  // }, [selectedCoupon]);
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>
@@ -305,9 +370,22 @@ const ShopCart1 = () => {
               </svg>
             </button>
             {showFullScreen && (
-              <JumpOutCoupon onClose={() => setShowFullScreen(false)} />
+              <JumpOutCoupon
+                onClose={() => setShowFullScreen(false)}
+                onSelect={handleCouponSelect}
+              />
             )}
           </div>
+          {selectedCoupon.map((coupon, index) => (
+            <div key={index}>
+              <p>ID: {coupon.coupon__i_d}</p>
+              <p>Selected Coupon: {coupon.c_name}</p>
+              <p>最低消費: {coupon.minimum_spend}</p>
+              <p>Valid Until: {coupon.valid_end_date}</p>
+              <p>折扣金額: {coupon.discount_amount}</p>
+            </div>
+          ))}
+          <p>${discountAmount}</p>
           {/*  */}
           {/* <div>{coupon}</div> */}
           <div
@@ -318,7 +396,7 @@ const ShopCart1 = () => {
             <p className={`${shopStyles.fs} `}>折扣金額:</p>
             <h5 className="pt-1">
               ${/* {} */}
-              {coupon ? coupon.disPrice : 0}元
+              {coupon ? coupon.disPrice : 0} 元
             </h5>
           </div>
           <div
