@@ -22,29 +22,75 @@ import { useCart } from "@/hooks/use-cart";
 import Check from "@/components/checkbox-custom/CheckBoxCustom";
 
 const JumpOutCoupon = ({ onClose }) => {
+  const [couponsData, setCouponsData] = useState([]);
+
   const getCoupoon = async (params) => {
     const searchParams = new URLSearchParams(params);
-    const url = "";
+    const url = `http://localhost:3005/api/cartGetCoupon/getCouponsDetail/?${searchParams.toString()}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      // 為了要確保資料是陣列，所以檢查後再設定
+      if (data && data.status === "success") {
+        setCouponsData(data.data.couponsSql); // 更新課程數據
+      }
+      return data; // 返回數據
+    } catch (e) {
+      console.error("Failed to fetch classes:", e);
+      return {};
+    }
   };
 
+  useEffect(() => {
+    getCoupoon();
+  }, []);
+
+  const handleClose = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  console.log("氣屁氣", couponsData);
+
   // 彈出畫面
-  <div className={JumpOut.jumpOutWrapper}>
-    <div className={JumpOut.jumpOutContainer}>
-      <header className={`h2 text-dark ${JumpOut.titleText}`}>
-        <RiDiscountPercentLine size={36} color="#50bf8b" />
-        請選擇優惠券
-      </header>
-      <section className={JumpOut.mainArea}>
-        <CouponC couponDetail={CDetail} />
-      </section>
+  return (
+    <div className={JumpOut.jumpOutWrapper} onClick={handleClose}>
+      <div className={JumpOut.jumpOutContainer}>
+        <header className={`h2 text-dark ${JumpOut.titleText}`}>
+          <RiDiscountPercentLine size={36} color="#50bf8b" />
+          請選擇優惠券
+        </header>
+        <section className={JumpOut.mainArea}>
+          {couponsData.map((couponsData, index) => (
+            <CouponC
+              couponDetail={couponsData}
+              key={index}
+              Index={index}
+              className={JumpOut.CouponList}
+            />
+          ))}
+        </section>
+      </div>
     </div>
-  </div>;
+  );
 };
 
 const ShopCart1 = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
+  const [showFullScreen, setShowFullScreen] = useState(false);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    if (showFullScreen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showFullScreen]);
 
   let hasMargin = true;
   let isMobile = false;
@@ -231,6 +277,28 @@ const ShopCart1 = () => {
                 );
               })}
             </select>
+            <button
+              onClick={() => {
+                // console.log("Button clicked");
+                setShowFullScreen(!showFullScreen);
+              }}
+              className={shopStyles.try}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#50bf8b"
+                  d="M22 4.25A2.25 2.25 0 0 0 19.75 2h-5.466a3.25 3.25 0 0 0-2.299.953l-8.5 8.51a3.25 3.25 0 0 0 .004 4.596l4.462 4.455a3.255 3.255 0 0 0 4.596-.001l.094-.094a5.5 5.5 0 1 1 7.777-7.779l.63-.63A3.25 3.25 0 0 0 22 9.712zm-6.5 2.752a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0m4.668 12.105a4.5 4.5 0 1 0-1.06 1.06l2.612 2.613a.75.75 0 1 0 1.06-1.06zM19.5 16.5a3 3 0 1 1-6 0a3 3 0 0 1 6 0"
+                />
+              </svg>
+            </button>
+            {showFullScreen && (
+              <JumpOutCoupon onClose={() => setShowFullScreen(false)} />
+            )}
           </div>
           {/*  */}
           {/* <div>{coupon}</div> */}
@@ -328,21 +396,6 @@ const ShopCart1 = () => {
           >
             使用折價券 :
           </div>
-          {/* <div className="row"> */}
-          {/* 使用折價券 */}
-          {/* <div className="pay d-flex justify-content" style={{ width: "100%" }}> */}
-          {/* <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id="checkboxNoLabel"
-                    defaultValue=""
-                    aria-label="..."
-                  />
-                  <label className="me-2" style={{ fontSize: "16px" }}>
-                    使用折價券{" "}
-                  </label>
-                </div> */}
           <select
             className="form-select form-select-sm me-4"
             // aria-label="Small select example "
