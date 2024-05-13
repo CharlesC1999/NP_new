@@ -62,9 +62,9 @@ router.post('/', async function (req, res, next) {
 
     // 回傳給前端的資料
     returnUser = {
-      id: newUser.id,
-      username: newUser.User_name,
-      photo_url: newUser.User_image,
+      id: dbUser.id,
+      username: dbUser.User_name,
+      photo_url: dbUser.User_image,
     }
   } else {
     // 2-2. 不存在 -> 建立一個新會員資料(無帳號與密碼)，只有google來的資料 -> 執行登入工作
