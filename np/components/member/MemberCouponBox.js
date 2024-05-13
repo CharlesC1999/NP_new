@@ -11,54 +11,48 @@ import "react-toastify/dist/ReactToastify.css";
 //跑馬燈測試
 
 const MemberCouponBox = () => {
-  const [userid, setUserid] = useState("");
+  const [useridid, setUseridid] = useState("");
+  
 
   useEffect(() => {
     const userIdFromLocalStorage = localStorage.getItem("userData");
     console.log(userIdFromLocalStorage);
     if (userIdFromLocalStorage) {
-      setUserid(JSON.parse(userIdFromLocalStorage));
+      setUseridid(JSON.parse(userIdFromLocalStorage));
     }
   }, []);
   // console.log(userid.id);
-  const useridid = userid.id;
-  console.log(useridid);
-  //測試新增
-  const [couponInput, setCouponInput] = useState("");
-  const [coupons, setCoupons] = useState([]);
-  const [couponsCondition, setCouponsCondition] = useState([]);
-  const [receive, setReceive] = useState([]);
-  //測試一下新增
-  const handleInputChange = (event) => {
-    setCouponInput(event.target.value);
-  };
-  const handleSubmit = async (event, userid) => {
-    event.preventDefault();
-    console.log(userid);
-    // 假设用户输入特定字符串为 '我愛np'
-    if (couponInput === "我愛np") {
-      try {
-        console.log(userid);
-        // 发送 POST 请求到后端新增优惠券
-        await axios.post("http://localhost:3005/api/coupon-add", {
-          member__i_d: useridid,
-        });
-        toast.success("新增優惠券成功！");
-      } catch (error) {
-        // 判断是否为已领取过优惠券的错误提示
-        if (
-          error.response &&
-          error.response.status === 400 &&
-          error.response.data &&
-          error.response.data.message === "已領取過此優惠券"
-        ) {
-          // 如果是已领取过优惠券的错误提示，则显示给用户相应的提示信息
-          toast.error("您已領取過此優惠券，無法再次領取！");
-        } else {
-          // 如果不是已领取过优惠券的错误提示，则显示一般错误信息
-          console.error("新增优惠券失败", error);
-          toast.error("新增优惠券失败");
-        }
+  const userid= useridid.id
+  console.log(userid);
+//測試新增
+  const [couponInput, setCouponInput] = useState('');
+  const [coupons, setCoupons] = useState([])
+  const [couponsCondition, setCouponsCondition] = useState([])
+  const [receive, setReceive] = useState([])
+//測試一下新增
+const handleInputChange = (event) => {
+  setCouponInput(event.target.value);
+};
+const handleSubmit = async (event,userid) => {
+  event.preventDefault();
+  console.log(userid);
+  // 假设用户输入特定字符串为 '我愛np'
+  if (couponInput === '我愛np') {
+    try {
+      
+      console.log(userid);
+      // 发送 POST 请求到后端新增优惠券
+      await axios.post('http://localhost:3005/api/coupon-add', { member__i_d: userid });
+      toast.success('新增優惠券成功！');
+    } catch (error) {
+      // 判断是否为已领取过优惠券的错误提示
+      if (error.response && error.response.status === 400 && error.response.data && error.response.data.message === '已領取過此優惠券') {
+        // 如果是已领取过优惠券的错误提示，则显示给用户相应的提示信息
+        toast.error('您已領取過此優惠券，無法再次領取！');
+      } else {
+        // 如果不是已领取过优惠券的错误提示，则显示一般错误信息
+        console.error('新增優惠券失敗', error);
+        toast.error('新增優惠券失敗');
       }
     }
   };
@@ -203,45 +197,27 @@ const MemberCouponBox = () => {
               返回
             </Link>
             {/* 測試新增 */}
-            <form
-              className={`${styles.cForm} d-flex`}
-              onSubmit={(event) => handleSubmit(event, userid)}
-            >
-              <input
-                className={styles.cInput}
-                type="text"
-                value={couponInput}
-                onChange={handleInputChange}
-              />
-              <button className={styles.cInputBtn} type="submit">
-                提交
-              </button>
-            </form>
+            <form className={`${styles.cForm} d-flex`} onSubmit={(event) => handleSubmit(event, userid)}>
+  <input className={styles.cInput} type="text" value={couponInput} onChange={handleInputChange} />
+  <button className={styles.cInputBtn} type="submit">提交</button>
+</form>
+<p>⭐首次註冊會員輸入"我愛np"，即可領取優惠券1張(效期領取日起算30日)⭐</p>
           </div>
           {/* 主內容的標題 */}
           <div className={styles.cpbox}>
             會員等級1專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons
-                .filter(
-                  (v) =>
-                    v.member__i_d === useridid &&
-                    v.coupon_description === "LV1才能領" &&
-                    v.c_status === "已發送"
-                )
-                .map((v, i) => {
-                  const discountAmount = parseFloat(v.discount_amount);
-                  let displayText;
-                  // 检查 discountAmount 是否是有效的数字
-                  if (!isNaN(discountAmount)) {
-                    // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
-                    if (discountAmount < 1) {
-                      const discountPercent = discountAmount * 10;
-                      displayText = `${discountPercent}折`;
-                    } else {
-                      displayText = `$${discountAmount}`;
-                    }
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV1才能領' && v.c_status === '已發送').map((v, i) => {
+
+                const discountAmount = parseFloat(v.discount_amount);
+                let displayText;
+                // 检查 discountAmount 是否是有效的数字
+                if (!isNaN(discountAmount)) {
+                  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+                  if (discountAmount < 1) {
+                    const discountPercent = discountAmount * 10;
+                    displayText = `${discountPercent}折`;
                   } else {
                     // 如果 discountAmount 不是有效的数字，直接使用原始值
                     displayText = v.discount_amount;
@@ -296,25 +272,16 @@ const MemberCouponBox = () => {
             會員等級2專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons
-                .filter(
-                  (v) =>
-                    v.member__i_d === useridid &&
-                    v.coupon_description === "LV2才能領" &&
-                    v.c_status === "已發送"
-                )
-                .map((v, i) => {
-                  const discountAmount = parseFloat(v.discount_amount);
-                  let displayText;
-                  // 检查 discountAmount 是否是有效的数字
-                  if (!isNaN(discountAmount)) {
-                    // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
-                    if (discountAmount < 1) {
-                      const discountPercent = discountAmount * 10;
-                      displayText = `${discountPercent}折`;
-                    } else {
-                      displayText = `$${discountAmount}`;
-                    }
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV2才能領' && v.c_status === '已發送').map((v, i) => {
+
+                const discountAmount = parseFloat(v.discount_amount);
+                let displayText;
+                // 检查 discountAmount 是否是有效的数字
+                if (!isNaN(discountAmount)) {
+                  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+                  if (discountAmount < 1) {
+                    const discountPercent = discountAmount * 10;
+                    displayText = `${discountPercent}折`;
                   } else {
                     // 如果 discountAmount 不是有效的数字，直接使用原始值
                     displayText = v.discount_amount;
@@ -369,25 +336,16 @@ const MemberCouponBox = () => {
             會員等級3專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons
-                .filter(
-                  (v) =>
-                    v.member__i_d === useridid &&
-                    v.coupon_description === "LV3才能領" &&
-                    v.c_status === "已發送"
-                )
-                .map((v, i) => {
-                  const discountAmount = parseFloat(v.discount_amount);
-                  let displayText;
-                  // 检查 discountAmount 是否是有效的数字
-                  if (!isNaN(discountAmount)) {
-                    // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
-                    if (discountAmount < 1) {
-                      const discountPercent = discountAmount * 10;
-                      displayText = `${discountPercent}折`;
-                    } else {
-                      displayText = `$${discountAmount}`;
-                    }
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV3才能領' && v.c_status === '已發送').map((v, i) => {
+
+                const discountAmount = parseFloat(v.discount_amount);
+                let displayText;
+                // 检查 discountAmount 是否是有效的数字
+                if (!isNaN(discountAmount)) {
+                  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+                  if (discountAmount < 1) {
+                    const discountPercent = discountAmount * 10;
+                    displayText = `${discountPercent}折`;
                   } else {
                     // 如果 discountAmount 不是有效的数字，直接使用原始值
                     displayText = v.discount_amount;
@@ -442,25 +400,16 @@ const MemberCouponBox = () => {
             會員等級4專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons
-                .filter(
-                  (v) =>
-                    v.member__i_d === useridid &&
-                    v.coupon_description === "LV4才能領" &&
-                    v.c_status === "已發送"
-                )
-                .map((v, i) => {
-                  const discountAmount = parseFloat(v.discount_amount);
-                  let displayText;
-                  // 检查 discountAmount 是否是有效的数字
-                  if (!isNaN(discountAmount)) {
-                    // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
-                    if (discountAmount < 1) {
-                      const discountPercent = discountAmount * 10;
-                      displayText = `${discountPercent}折`;
-                    } else {
-                      displayText = `$${discountAmount}`;
-                    }
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV4才能領' && v.c_status === '已發送').map((v, i) => {
+
+                const discountAmount = parseFloat(v.discount_amount);
+                let displayText;
+                // 检查 discountAmount 是否是有效的数字
+                if (!isNaN(discountAmount)) {
+                  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+                  if (discountAmount < 1) {
+                    const discountPercent = discountAmount * 10;
+                    displayText = `${discountPercent}折`;
                   } else {
                     // 如果 discountAmount 不是有效的数字，直接使用原始值
                     displayText = v.discount_amount;
@@ -515,25 +464,16 @@ const MemberCouponBox = () => {
             會員等級5專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons
-                .filter(
-                  (v) =>
-                    v.member__i_d === useridid &&
-                    v.coupon_description === "LV5才能領" &&
-                    v.c_status === "已發送"
-                )
-                .map((v, i) => {
-                  const discountAmount = parseFloat(v.discount_amount);
-                  let displayText;
-                  // 检查 discountAmount 是否是有效的数字
-                  if (!isNaN(discountAmount)) {
-                    // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
-                    if (discountAmount < 1) {
-                      const discountPercent = discountAmount * 10;
-                      displayText = `${discountPercent}折`;
-                    } else {
-                      displayText = `$${discountAmount}`;
-                    }
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV5才能領' && v.c_status === '已發送').map((v, i) => {
+
+                const discountAmount = parseFloat(v.discount_amount);
+                let displayText;
+                // 检查 discountAmount 是否是有效的数字
+                if (!isNaN(discountAmount)) {
+                  // 如果 discountAmount 是有效的数字，根据大小判断是折扣还是固定金额
+                  if (discountAmount < 1) {
+                    const discountPercent = discountAmount * 10;
+                    displayText = `${discountPercent}折`;
                   } else {
                     // 如果 discountAmount 不是有效的数字，直接使用原始值
                     displayText = v.discount_amount;

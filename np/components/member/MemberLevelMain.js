@@ -13,14 +13,27 @@ import styles from "./MemberLevelMain.module.css"
   // let userid = parseInt(localStorage.getItem('userid'))
   // console.log(userid);
  
-  const [userid, setUserid] = useState(null);
+  // const [userid, setUserid] = useState(null);
+
+  // useEffect(() => {
+  //   const userIdFromLocalStorage = localStorage.getItem("userid");
+  //   if (userIdFromLocalStorage) {
+  //     setUserid(parseInt(userIdFromLocalStorage));
+  //   }
+  // }, []);
+  const [useridid, setUseridid] = useState("");
+  
 
   useEffect(() => {
-    const userIdFromLocalStorage = localStorage.getItem("userid");
+    const userIdFromLocalStorage = localStorage.getItem("userData");
+    console.log(userIdFromLocalStorage);
     if (userIdFromLocalStorage) {
-      setUserid(parseInt(userIdFromLocalStorage));
+      setUseridid(JSON.parse(userIdFromLocalStorage));
     }
   }, []);
+  // console.log(userid.id);
+  const userid= useridid.id
+  console.log(userid);
 
 //我先在這裡寫死人，因為只有這個葉他會有抓到undefined user而整個錯誤的問題???
   // let userid = 1
