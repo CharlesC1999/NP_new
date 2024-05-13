@@ -51,8 +51,8 @@ const handleSubmit = async (event,userid) => {
         toast.error('您已領取過此優惠券，無法再次領取！');
       } else {
         // 如果不是已领取过优惠券的错误提示，则显示一般错误信息
-        console.error('新增优惠券失败', error);
-        toast.error('新增优惠券失败');
+        console.error('新增優惠券失敗', error);
+        toast.error('新增優惠券失敗');
       }
     }
   }
@@ -198,7 +198,7 @@ const handleSubmit = async (event,userid) => {
   <input className={styles.cInput} type="text" value={couponInput} onChange={handleInputChange} />
   <button className={styles.cInputBtn} type="submit">提交</button>
 </form>
-
+<p>⭐首次註冊會員輸入"我愛np"，即可領取優惠券1張(效期領取日起算30日)⭐</p>
           </div>
           {/* 主內容的標題 */}
           <div className={styles.cpbox}>
