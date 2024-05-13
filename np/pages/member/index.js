@@ -76,7 +76,8 @@ export default function MemberPage2() {
     if (userData.date_of_birth) {
       setBirthAry(userData.date_of_birth.split("-"));
     } else {
-      setBirthAry("尚未填寫");
+      // 防止userData.date_of_birth是null
+      setBirthAry("----,--,--".split(","));
     }
   }, [userData]);
 

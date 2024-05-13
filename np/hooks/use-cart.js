@@ -1,3 +1,4 @@
+import { set } from "lodash";
 import { createContext, useState, useContext, useEffect } from "react";
 
 // 1. 建立與導出它
@@ -188,6 +189,45 @@ export function CartProvider({ children }) {
     }
   };
 
+  // !!! 測試食譜頁的加入購物車
+  // 數量新增而非加入新的商品
+  const increaseProductQty = (singleProduct) => {
+    // 找出購物車中的商品
+    const product = productItems.find(
+      (product) => product.id === singleProduct.id
+    );
+
+    // 若找不到則回傳
+    if (!product) return;
+
+    // 增加數量
+    const newProduct = { ...product, qty: (product.qty += singleProduct.qty) };
+    setProductItems([...productItems, newProduct]);
+  };
+
+  const addToCartAry = (array) => {
+    let newProductItems = [...productItems];
+
+    // 檢查是否已在購物車中，若是則新增數量，反之則加入購物車
+    array.forEach((product) => {
+      const existProduct = productItems.find((p) => p.id === product.id);
+
+      if (existProduct) {
+        increaseProductQty(product);
+      } else {
+        // 新增至購物車
+        const newItem = { ...product, qty: product.qty };
+        newProductItems.push(newItem);
+      }
+    });
+
+    // 一次性更新狀態
+    setProductItems(newProductItems);
+    // setProductItems(array);
+  };
+
+  // !!! 測試結束
+
   const totalProduct = productItems.reduce((acc, v) => acc + v.qty, 0);
   const totalProductPrice = productItems.reduce(
     (acc, v) => acc + v.qty * v.price,
@@ -213,6 +253,7 @@ export function CartProvider({ children }) {
         removeProduct,
         totalProduct,
         totalProductPrice,
+        addToCartAry,
       }}
     >
       {children}
