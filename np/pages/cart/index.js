@@ -23,6 +23,28 @@ import Check from "@/components/checkbox-custom/CheckBoxCustom";
 
 const JumpOutCoupon = ({ onClose }) => {
   const [couponsData, setCouponsData] = useState([]);
+  // 抓會員localstorage資料
+  const [userData, setUserData] = useState("");
+
+  useEffect(() => {
+    // 組件渲染後立即執行的effect，檢查LocalStorage中是否有資料
+    const forShowCoupon = localStorage.getItem("userData");
+    if (forShowCoupon) {
+      // 如果LocalStorage中有資料，則將其轉換為JavaScript物件並存入state中
+      setUserData(JSON.parse(forShowCoupon));
+    }
+  }, []);
+
+  const member = userData.id;
+  console.log(member);
+
+  useEffect(() => {
+    const params = {
+      member,
+    };
+    console.log(params); // 全部篩選的條件
+    getCoupoon(params);
+  }, [member]);
 
   const getCoupoon = async (params) => {
     const searchParams = new URLSearchParams(params);

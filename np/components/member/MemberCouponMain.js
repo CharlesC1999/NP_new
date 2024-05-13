@@ -26,14 +26,27 @@ const handleSearch = (event) => {
 // console.log(userid);
 
 
-const [userid, setUserid] = useState(null);
+// const [userid, setUserid] = useState(null);
+
+// useEffect(() => {
+//   const userIdFromLocalStorage = localStorage.getItem("userid");
+//   if (userIdFromLocalStorage) {
+//     setUserid(parseInt(userIdFromLocalStorage));
+//   }
+// }, []);
+const [useridid, setUseridid] = useState("");
+  
 
 useEffect(() => {
-  const userIdFromLocalStorage = localStorage.getItem("userid");
+  const userIdFromLocalStorage = localStorage.getItem("userData");
+  console.log(userIdFromLocalStorage);
   if (userIdFromLocalStorage) {
-    setUserid(parseInt(userIdFromLocalStorage));
+    setUseridid(JSON.parse(userIdFromLocalStorage));
   }
 }, []);
+// console.log(userid.id);
+const userid= useridid.id
+console.log(userid);
 
 console.log(userid);
 const getCoupons = async (cat='') => {
