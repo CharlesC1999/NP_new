@@ -42,7 +42,7 @@ const handleSubmit = async (event,userid) => {
       
       console.log(userid);
       // 发送 POST 请求到后端新增优惠券
-      await axios.post('http://localhost:3005/api/coupon-add', { member__i_d: userid });
+      await axios.post('http://localhost:3005/api/coupon-add', { member__i_d: useridid });
       toast.success('新增優惠券成功！');
     } catch (error) {
       // 判断是否为已领取过优惠券的错误提示
