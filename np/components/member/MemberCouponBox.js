@@ -8,16 +8,21 @@ import axios from 'axios'; // 导入 axios 库
 // import { useAuth } from "@/contexts/AuthContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+//跑馬燈測試
 
 const MemberCouponBox = () => {
-  const [userid, setUserid] = useState(null);
+  const [useridid, setUseridid] = useState("");
+  
 
   useEffect(() => {
-    const userIdFromLocalStorage = localStorage.getItem("userid");
+    const userIdFromLocalStorage = localStorage.getItem("userData");
+    console.log(userIdFromLocalStorage);
     if (userIdFromLocalStorage) {
-      setUserid(parseInt(userIdFromLocalStorage));
+      setUseridid(JSON.parse(userIdFromLocalStorage));
     }
   }, []);
+  // console.log(userid.id);
+  const userid= useridid.id
   console.log(userid);
 //測試新增
   const [couponInput, setCouponInput] = useState('');
@@ -38,7 +43,7 @@ const handleSubmit = async (event,userid) => {
       console.log(userid);
       // 发送 POST 请求到后端新增优惠券
       await axios.post('http://localhost:3005/api/coupon-add', { member__i_d: userid });
-      toast.success('新增优惠券成功！');
+      toast.success('新增優惠券成功！');
     } catch (error) {
       // 判断是否为已领取过优惠券的错误提示
       if (error.response && error.response.status === 400 && error.response.data && error.response.data.message === '已領取過此優惠券') {
@@ -193,6 +198,7 @@ const handleSubmit = async (event,userid) => {
   <input className={styles.cInput} type="text" value={couponInput} onChange={handleInputChange} />
   <button className={styles.cInputBtn} type="submit">提交</button>
 </form>
+
           </div>
           {/* 主內容的標題 */}
           <div className={styles.cpbox}>

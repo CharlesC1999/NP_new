@@ -78,12 +78,6 @@ router.get('/', async function (req, res) {
     whereClause += ` AND c.c_discount_price <= ${db.escape(priceEnd)}`
   }
 
-  // if (formatStartDate === 'undefined') {
-  //   if (formatStartDate && formatEndDate) {
-  //     whereClause -= ` AND c.class_date >= ${db.escape(formatStartDate)} AND c.class_date <= ${db.escape(formatEndDate)}`
-  //   }
-  // }
-
   const sqlCate = `
     SELECT c.*, ci.image__u_r_l, s.speaker_name
     FROM class AS c
