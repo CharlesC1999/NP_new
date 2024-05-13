@@ -73,7 +73,11 @@ export default function MemberPage2() {
     }
 
     // 設定生日
-    setBirthAry(userData.date_of_birth.split("-"));
+    if (userData.date_of_birth) {
+      setBirthAry(userData.date_of_birth.split("-"));
+    } else {
+      setBirthAry("尚未填寫");
+    }
   }, [userData]);
 
   // *** 防止直接從網址改變頁面，所以要在這裡判斷LStoken是否有值，有值才能顯示會員中心

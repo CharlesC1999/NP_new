@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import CheckBoxCustom from "@/components/checkbox-custom/RecipeCheckbox.js/RecipeCheckBox";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailRelatedProducts.module.scss";
@@ -8,12 +8,14 @@ import { FaCheck } from "react-icons/fa6";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 // 導向登入頁
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { set } from "lodash";
 // import { utimesSync } from "fs";
 
 export default function DetailRelatedProducts({ recipeID = "" }) {
+  // 未登入時導向登入頁
+  const router = useRouter();
   //給checkbox的狀態
   const [checkAll, setCheckAll] = useState(true);
 
@@ -94,6 +96,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
     return qty * price;
   };
 
+  // TODO 最終要加入購物車的商品
   // 最終有被勾選的才會被加總以及加進購物車
   const finalProducts = products.filter((v) => v.checked);
 
@@ -104,7 +107,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
     0
   );
 
-  // TODO 測試抓取登入狀態
+  // 抓取登入狀態
   // 取得localStorage裡的token，用來發起req帶入headers
   const [LStoken, setLStoken] = useState("");
 
@@ -137,22 +140,30 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
   // 按下加入購物車時顯示是否登入
   const checkLogin = async () => {
     if (userId) {
-      await Swal.fire({
-        title: "成功加入購物車!",
-        text: "",
+      Swal.fire({
+        position: "top-end",
         icon: "success",
+        title: "成功加入購物車",
+        showConfirmButton: false,
+        timer: 1500,
       });
     } else {
       Swal.fire({
-        icon: "error",
-        title: "請先登入才能加入購物車哦~",
-        // TODO 待解決導向登入頁
-        text: <Link href={"/member/login"}>點我登入</Link>,
+        title: "請先登入才能加入購物車",
+        text: "是否前往登入頁面?",
+        icon: "warning",
+        showCancelButton: true,
+        // confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "是",
+        cancelButtonText: "否",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/member/login");
+        }
       });
     }
   };
-
-  // TODO 測試結束
 
   // 初次渲染頁面時取得相關商品，但要先取得食譜的ID (透過props傳進來的)
   useEffect(() => {
