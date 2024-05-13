@@ -32,9 +32,7 @@ const Commodity = () => {
       >
         商品
       </main>
-
       {/*  */}
-
       <main
         className={`${CommodityStyles.ProductBorder} ${CommodityStyles.main} ${CommodityStyles.desk}`}
       >
@@ -103,7 +101,7 @@ const Commodity = () => {
             <div
               className="row"
               key={element.id}
-              style={{ borderBottom: "1px solid #def9ec" }}
+              // style={{ borderBottom: "1px solid #def9ec" }}
             >
               <div
                 className="col d-flex align-items-center justify-content-start ps-3"
@@ -195,7 +193,6 @@ const Commodity = () => {
           );
         })}
       </main>
-
       {/* 商品欄位 手機樣式*/}
       <main
         className={`${CommodityStyles.main} ${CommodityStyles.ProductBorder} ${CommodityStyles.mobile}`}
@@ -220,7 +217,11 @@ const Commodity = () => {
                     src={`/images/products/${element.image || element.img[0]}`}
                     className="img-fluid"
                     alt={element.name || "Default name"}
-                    style={{ minWidth: 75 }}
+                    style={{
+                      objectFit: "cover",
+                      height: "100%",
+                      width: "121px",
+                    }}
                   />
                 ) : (
                   <span>No image available</span>

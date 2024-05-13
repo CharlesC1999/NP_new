@@ -151,38 +151,6 @@ const ShopCart3 = () => {
 
   // const handlePaymentConfirmation = async (orderToLinePay) => {
   const [orderToLinePay, setOrderToLinePay] = useState("");
-  // const notifySA = async (orderToLinePay) => {
-  //   MySwal.fire({
-  //     // title: "",
-  //     text: "確認付款？",
-  //     icon: "success",
-  //     showCancelButton: true,
-  //     confirmButtonText: "是",
-  //     cancelButtonText: "否",
-  //     reverseButtons: true,
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       console.log(lineOrder.id);
-  //       const orderId = `orderId=${lineOrder.id}`;
-  //       fetch(`http://localhost:3005/api/cartList/reserve?${orderId}`, {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         // body: JSON.stringify(lineOrder),
-  //       })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           console.log("第二個按鈕");
-  //         })
-  //         .catch((error) => {
-  //           console.error("第二個按鈕", error);
-  //         });
-  //     }
-  //   });
-  // };
-
-  // };
 
   // ---------------
   //  顯示訂單編號在ui測試用
@@ -194,10 +162,27 @@ const ShopCart3 = () => {
   console.log(allPrice);
   const finalPrice = allPrice - coupon.disPrice;
   console.log(finalPrice);
+
+  // 去抓儲存在localstorage的使用者
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // 從 localStorage 獲取 userData
+    const storedData = localStorage.getItem("userData");
+    if (storedData) {
+      // 解析 JSON 字符串回物件
+      const userData = JSON.parse(storedData);
+      // 更新狀態以保存用戶 ID
+      setUserId(userData.id);
+    }
+  }, []);
+  console.log("userId", userId);
+
   // 處理表單提交事件
   const handleSubmit = async (event) => {
     // 阻擋表單預設行為
     event.preventDefault();
+
     const formData = {
       //  課程
       items: items.map((item) => ({
@@ -231,6 +216,8 @@ const ShopCart3 = () => {
       receiverAddress: receiverAddress,
       // 付款方式
       paymentMethod: payMethod,
+      // 會員id
+      userId: userId,
     };
 
     // 发送数据到服务器

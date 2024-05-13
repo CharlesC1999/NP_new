@@ -66,7 +66,12 @@ const Class = () => {
             <div className="row" key={element.id}>
               <div
                 className="col d-flex align-items-center justify-content-start ps-3"
-                style={{ width: 100, minWidth: 77 }}
+                // style={{
+                //   width: 100,
+                //   minWidth: 77,
+                //   borderTop: "1px solid #def9ec",
+                // }}
+                // style={{ borderBottom: "1px solid #def9ec" }}
               >
                 {/* <Check /> */}
               </div>
@@ -74,7 +79,7 @@ const Class = () => {
                 <img
                   src={`/images/class-images/${element.image}`}
                   className="img-fluid"
-                  alt="..."
+                  alt={element.name}
                   style={{ minWidth: 75 }}
                 />
               </div>

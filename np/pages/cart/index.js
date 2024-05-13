@@ -250,6 +250,22 @@ const ShopCart1 = () => {
   //       setError(error.message);
   //     });
   // }, []);
+
+  // 去抓儲存在localstorage的使用者
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // 從 localStorage 獲取 userData
+    const storedData = localStorage.getItem("userData");
+    if (storedData) {
+      // 解析 JSON 字符串回物件
+      const userData = JSON.parse(storedData);
+      // 更新狀態以保存用戶 ID
+      setUserId(userData.id);
+    }
+  }, []);
+  console.log("userId", userId);
+
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>

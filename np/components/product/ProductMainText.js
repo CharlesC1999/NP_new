@@ -21,6 +21,7 @@ function ProductMainText({
   review_comments,
   average_rating,
   img, // 取第一個元素
+  qty,
   upload_date,
   handleReviewCount,
 }) {
@@ -76,14 +77,14 @@ function ProductMainText({
               description,
               discount_price,
               img,
-              quantity,
+              qty: quantity,
             });
             console.log("Adding product:", {
               id,
               name,
               price,
               img: img[0],
-              quantity,
+              qty,
             });
           }}
         >

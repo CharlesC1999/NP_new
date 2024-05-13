@@ -104,6 +104,7 @@ export function CartProvider({ children }) {
   // 陣列迭代方法: reduce(累加、歸納)
   // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
   const totalItems = items.reduce((acc, v) => acc + v.qty, 0);
+  console.log(totalItems);
   const totalPrice = items.reduce((acc, v) => acc + v.qty * v.price, 0);
 
   // ---------------------------------
@@ -120,7 +121,7 @@ export function CartProvider({ children }) {
   }, []);
   //setItem
   useEffect(() => {
-    if (items.length > 0) {
+    if (productItems.length > 0) {
       window.localStorage.setItem(
         "productItem666",
         JSON.stringify(productItems)
@@ -182,7 +183,8 @@ export function CartProvider({ children }) {
       increaseProduct(product.id);
     } else {
       // 否則作新增商品，擴充商品數量屬性qty，預設為1
-      const newItem = { ...product, qty: 1 };
+      const newItem = { ...product, qty: product.qty };
+
       const nextItems = [...productItems, newItem];
 
       setProductItems(nextItems);
@@ -233,7 +235,7 @@ export function CartProvider({ children }) {
     (acc, v) => acc + v.qty * v.price,
     0
   );
-
+  console.log(totalProduct);
   return (
     <CartContext.Provider
       // 使用value屬性提供資料給提供者階層以下的所有後代元件

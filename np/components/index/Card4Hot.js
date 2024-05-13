@@ -9,9 +9,10 @@ import toast, { Toaster } from "react-hot-toast";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 
-function Card4Hot({ id, name, price, d_price, image }) {
+function Card4Hot({ id, name, price, d_price, image, qty = 1 }) {
   const { favorClass, auth, setAction } = useAuth();
   const { addProduct } = useCart();
+  console.log(id, name, price, d_price, image, qty);
 
   const MySwal = withReactContent(Swal);
 
@@ -64,8 +65,10 @@ function Card4Hot({ id, name, price, d_price, image }) {
                 name,
                 price: d_price,
                 image,
+                qty,
+                // quantity: 1,
               });
-              addProduct({ id, name, price: d_price, image });
+              addProduct({ id, name, price: d_price, image, qty: 1 });
             }}
           >
             <i className="fa-solid fa-cart-shopping"></i>&emsp;加入購物車

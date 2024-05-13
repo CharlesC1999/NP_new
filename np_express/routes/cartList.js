@@ -27,21 +27,21 @@ const linePayClient = createLinePayClient({
 // console.log(linePayClient)
 
 // 這邊是看哪個會員登入連到cart index
-router.get('/', authenticateToken, async (req, res) => {
-  const userID = req.user.id
-  console.log(userID)
-  // const cartIds =
+// router.get('/', authenticateToken, async (req, res) => {
+//   const userID = req.user.id
+//   console.log(userID)
+//   // const cartIds =
 
-  try {
-    const coupons = await Coupons.findAll({
-      where: { userId: req.user.id, c_status: '可使用' },
-    })
-    res.json(coupons)
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ message: 'Internal Server Error' })
-  }
-})
+//   try {
+//     const coupons = await Coupons.findAll({
+//       where: { userId: req.user.id, c_status: '可使用' },
+//     })
+//     res.json(coupons)
+//   } catch (error) {
+//     console.log(error)
+//     res.status(500).json({ message: 'Internal Server Error' })
+//   }
+// })
 
 // 下面是 line pay 的路由
 router.post('/', async (req, res, next) => {
@@ -70,6 +70,7 @@ router.post('/', async (req, res, next) => {
       reservation, // 从请求中获取预留信息
       confirm, // 从请求中获取确认信息
       returnCode, // 从请求中获取返回代码
+      userId,
     } = req.body
 
     // 生成一個隨機的訂單編號
@@ -103,7 +104,7 @@ router.post('/', async (req, res, next) => {
     // 創建主訂單
     const order = await Orders.create({
       order_id: orderId, // 使用生成的 UUID
-      user_id: 1, // 這裡假設 user_id 是已知的
+      user_id: userId, // 這裡假設 user_id 是已知的
       amount_total: totalPrice,
       payment_method: paymentMethod,
       order_date: new Date(),
@@ -238,7 +239,7 @@ router.get('/reserve', async (req, res) => {
     // 導向到付款頁面， line pay回應後會帶有info.paymentUrl.web為付款網址
     // res.redirect(linePayResponse.body.info.paymentUrl.web)
   } catch (error) {
-    console.log('error', e)
+    console.log('error', error)
   }
 })
 
