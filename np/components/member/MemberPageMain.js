@@ -59,7 +59,7 @@ const MemberPageMain = () => {
   const genderAry = [
     { name: "男", key: "M" },
     { name: "女", key: "F" },
-    { name: "其他", key: "Other" },
+    { name: "其他", key: "OTHER" },
   ];
 
   // 多欄位共用的formChange
