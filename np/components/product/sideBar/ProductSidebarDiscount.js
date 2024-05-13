@@ -5,6 +5,7 @@ import DiscountItem from "@/components/product/sideBar/DiscountItem";
 export default function ProductSidebarDiscount({
   DisCountCategories,
   handleCategoryClick,
+  categoryCounts,
 }) {
   return (
     <>
@@ -18,7 +19,10 @@ export default function ProductSidebarDiscount({
             key={category.cateId}
             onClick={() => handleCategoryClick(category.cateId)}
           >
-            <DiscountItem category_name={category.cateName} />
+            <DiscountItem
+              category_name={category.cateName}
+              categoryCounts={categoryCounts}
+            />
           </div>
         ))}
       </div>
