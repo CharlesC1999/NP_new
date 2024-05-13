@@ -7,8 +7,20 @@ import { FaLeaf } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 export default function MemberBuyCard({ activeCategory, searchTerm }) {
-  const [userid, setUserid] = useState(null);
+  // const [userid, setUserid] = useState(null);
+  const [useridid, setUseridid] = useState("");
+  
 
+  useEffect(() => {
+    const userIdFromLocalStorage = localStorage.getItem("userData");
+    console.log(userIdFromLocalStorage);
+    if (userIdFromLocalStorage) {
+      setUseridid(JSON.parse(userIdFromLocalStorage));
+    }
+  }, []);
+  // console.log(userid.id);
+  const userid= useridid.id
+  console.log(userid);
   const [productId, setProductId] = useState(0);
   //葉子評分
   const [rating, setRating] = useState(0);
@@ -99,12 +111,12 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
 
   // let userid = 1
 
-  useEffect(() => {
-    const userIdFromLocalStorage = localStorage.getItem("userid");
-    if (userIdFromLocalStorage) {
-      setUserid(parseInt(userIdFromLocalStorage));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userIdFromLocalStorage = localStorage.getItem("userid");
+  //   if (userIdFromLocalStorage) {
+  //     setUserid(parseInt(userIdFromLocalStorage));
+  //   }
+  // }, []);
 
   // 資料表1商品訂單
   const getOrders = async (cat = "") => {
