@@ -11,19 +11,19 @@ import 'react-toastify/dist/ReactToastify.css';
 //跑馬燈測試
 
 const MemberCouponBox = () => {
-  const [userid, setUserid] = useState("");
+  const [useridid, setUseridid] = useState("");
   
 
   useEffect(() => {
     const userIdFromLocalStorage = localStorage.getItem("userData");
     console.log(userIdFromLocalStorage);
     if (userIdFromLocalStorage) {
-      setUserid(JSON.parse(userIdFromLocalStorage));
+      setUseridid(JSON.parse(userIdFromLocalStorage));
     }
   }, []);
   // console.log(userid.id);
-  const useridid= userid.id
-  console.log(useridid);
+  const userid= useridid.id
+  console.log(userid);
 //測試新增
   const [couponInput, setCouponInput] = useState('');
   const [coupons, setCoupons] = useState([])
@@ -42,7 +42,7 @@ const handleSubmit = async (event,userid) => {
       
       console.log(userid);
       // 发送 POST 请求到后端新增优惠券
-      await axios.post('http://localhost:3005/api/coupon-add', { member__i_d: useridid });
+      await axios.post('http://localhost:3005/api/coupon-add', { member__i_d: userid });
       toast.success('新增優惠券成功！');
     } catch (error) {
       // 判断是否为已领取过优惠券的错误提示
@@ -205,7 +205,7 @@ const handleSubmit = async (event,userid) => {
             會員等級1專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons.filter(v => v.member__i_d === useridid && v.coupon_description === 'LV1才能領' && v.c_status === '已發送').map((v, i) => {
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV1才能領' && v.c_status === '已發送').map((v, i) => {
 
                 const discountAmount = parseFloat(v.discount_amount);
                 let displayText;
@@ -267,7 +267,7 @@ const handleSubmit = async (event,userid) => {
             會員等級2專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons.filter(v => v.member__i_d === useridid && v.coupon_description === 'LV2才能領' && v.c_status === '已發送').map((v, i) => {
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV2才能領' && v.c_status === '已發送').map((v, i) => {
 
                 const discountAmount = parseFloat(v.discount_amount);
                 let displayText;
@@ -329,7 +329,7 @@ const handleSubmit = async (event,userid) => {
             會員等級3專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons.filter(v => v.member__i_d === useridid && v.coupon_description === 'LV3才能領' && v.c_status === '已發送').map((v, i) => {
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV3才能領' && v.c_status === '已發送').map((v, i) => {
 
                 const discountAmount = parseFloat(v.discount_amount);
                 let displayText;
@@ -391,7 +391,7 @@ const handleSubmit = async (event,userid) => {
             會員等級4專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons.filter(v => v.member__i_d === useridid && v.coupon_description === 'LV4才能領' && v.c_status === '已發送').map((v, i) => {
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV4才能領' && v.c_status === '已發送').map((v, i) => {
 
                 const discountAmount = parseFloat(v.discount_amount);
                 let displayText;
@@ -453,7 +453,7 @@ const handleSubmit = async (event,userid) => {
             會員等級5專區
             <div className={styles.coupmain}>
               {/* 可以用的 */}
-              {coupons.filter(v => v.member__i_d === useridid && v.coupon_description === 'LV5才能領' && v.c_status === '已發送').map((v, i) => {
+              {coupons.filter(v => v.member__i_d === userid && v.coupon_description === 'LV5才能領' && v.c_status === '已發送').map((v, i) => {
 
                 const discountAmount = parseFloat(v.discount_amount);
                 let displayText;
