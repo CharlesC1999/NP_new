@@ -64,7 +64,13 @@ const ShopCart3 = () => {
     if (storedItems) {
       setItems(JSON.parse(storedItems)); // 解析字符串并设置状态
     }
+    console.log(items);
   }, []);
+
+  const items2 = items.filter((v) => {
+    return v.checked;
+  });
+  console.log(items2);
 
   // 去抓存取在localStorage的資料
   // 抓商品資料
@@ -79,6 +85,10 @@ const ShopCart3 = () => {
     }
   }, []);
 
+  const productItems2 = productItems.filter((v) => {
+    return v.checked;
+  });
+  console.log(productItems2);
   // 去抓存取在localStorage的資料
   //  抓使用得優惠券
 
@@ -156,11 +166,14 @@ const ShopCart3 = () => {
   //  顯示訂單編號在ui測試用
   const [lineOrder, setLineOrder] = useState("");
   const [error, setError] = useState("");
+  // const [finalPrice, setFinalPrice] = useState("");
 
   console.log("lineOrder", lineOrder);
   const allPrice = totalPrice + totalProductPrice;
   console.log(allPrice);
-  const finalPrice = allPrice - coupon.disPrice;
+  console.log("coupon", coupon.disPrice);
+  const finalPrice =
+    coupon.disPrice !== undefined ? allPrice - coupon.disPrice : allPrice;
   console.log(finalPrice);
 
   // 去抓儲存在localstorage的使用者
@@ -185,7 +198,7 @@ const ShopCart3 = () => {
 
     const formData = {
       //  課程
-      items: items.map((item) => ({
+      items: items2.map((item) => ({
         id: item.id,
         name: item.name,
         quantity: item.qty,
@@ -193,7 +206,7 @@ const ShopCart3 = () => {
         totalPrice: item.price * item.qty,
       })),
       // 商品
-      productItems: productItems.map((item) => ({
+      productItems: productItems2.map((item) => ({
         id: item.id,
         name: item.name,
         quantity: item.qty,
@@ -332,7 +345,7 @@ const ShopCart3 = () => {
               {/* <div className={`${styles3.fc} col text-center`}>庫存</div> */}
             </div>
 
-            {items.map((item, index) => (
+            {items2.map((item, index) => (
               <div key={index} className="row py-2">
                 <div className={`${styles3.fb} col text-center pt-2`}>
                   {item.className}
@@ -359,7 +372,7 @@ const ShopCart3 = () => {
                 </div> */}
               </div>
             ))}
-            {productItems.map((item, index) => (
+            {productItems2.map((item, index) => (
               <div key={index} className="row py-2">
                 <div className={`${styles3.fb} col text-center pt-2`}>
                   {item.name}
@@ -547,7 +560,7 @@ const ShopCart3 = () => {
                 </div>
               </div>
             ))}
-            {productItems.map((item, index) => (
+            {productItems2.map((item, index) => (
               <div key={index} className="row py-2 mt-1">
                 <div className={`${styles3.fc} row ps-4`}>{item.name}</div>
                 <div

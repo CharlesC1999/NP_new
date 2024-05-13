@@ -3,10 +3,34 @@ import ClassStyles from "./class.module.css";
 // import Check from "@/components/checkbox-custom/CheckBoxCustom";
 // 加上context鉤子
 import { useCart } from "@/hooks/use-cart";
+import { FaCheck } from "react-icons/fa6";
 
 const Class = () => {
-  const { items, increaseItem, decreaseItem, removeItem } = useCart();
-  const { totalItems, totalPrice } = useCart();
+  const { items, increaseItem, decreaseItem, removeItem, setItems } = useCart();
+  // const { totalItems, totalPrice } = useCart();
+
+  // 勾勾
+  const handleCheck = (id) => {
+    const nextItems = items.map((v) => {
+      if (v.id === id) {
+        return { ...v, checked: !v.checked };
+      } else {
+        return v;
+      }
+    });
+    setItems(nextItems);
+  };
+
+  // 全選的核取方塊用的事件處理函式
+  const handleToggleCheckedAll = (e) => {
+    const nextItems = items.map((v, i) => {
+      // 強制所有選項物件的checked屬性，和全選的e.target.checked完全一致
+      return { ...v, checked: e.target.checked };
+    });
+
+    // 狀態修改通用第3步
+    setItems(nextItems);
+  };
 
   return (
     <>
@@ -25,7 +49,29 @@ const Class = () => {
             className="col d-flex flex-direction-row"
             style={{ width: 100, minWidth: 77 }}
           >
-            <div className="pt-2">{/* <Check /> */}</div>
+            <div className="pt-2">
+              {/* // 全選的checkbox */}
+              <div className={ClassStyles["checkbox-wrapper"]}>
+                <FaCheck
+                  style={{ fontSize: "16px" }}
+                  className={`${ClassStyles["fa-check"]} ${
+                    items.every((v) => v.checked) ? "d-block" : "d-none"
+                  } ${items.length === 0 ? "d-none" : ""} `}
+                />
+                <input
+                  checked={items.every((v) => v.checked)}
+                  onClick={handleToggleCheckedAll}
+                  type="checkbox"
+                  className={`${ClassStyles["test"]} ${
+                    items.length === 0
+                      ? ""
+                      : items.every((v) => v.checked)
+                      ? ClassStyles.checked
+                      : " "
+                  } `}
+                />
+              </div>
+            </div>
 
             <label className={`mt-1 m-1 ${ClassStyles.fc} `} htmlFor="">
               全選
@@ -73,7 +119,25 @@ const Class = () => {
                 // }}
                 // style={{ borderBottom: "1px solid #def9ec" }}
               >
-                {/* <Check /> */}
+                {/* // 勾勾 */}
+                <div className={ClassStyles["checkbox-wrapper"]}>
+                  <FaCheck
+                    style={{ "font-size": "16px" }}
+                    className={`${ClassStyles["fa-check"]}  ${
+                      element.checked ? "d-block" : "d-none"
+                    }`}
+                  />
+                  <input
+                    onChange={() => {
+                      handleCheck(element.id);
+                    }}
+                    checked={element.checked}
+                    type="checkbox"
+                    className={`${ClassStyles["test"]} ${
+                      element.checked ? ClassStyles.checked : ""
+                    }`}
+                  />
+                </div>
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 <img

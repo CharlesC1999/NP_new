@@ -21,6 +21,7 @@ import { useCart } from "@/hooks/use-cart";
 // 綠色勾勾
 import Check from "@/components/checkbox-custom/CheckBoxCustom";
 
+// 用來關、開優惠券的按鈕
 const JumpOutCoupon = ({ onClose }) => {
   const [couponsData, setCouponsData] = useState([]);
   // 抓會員localstorage資料
@@ -182,6 +183,8 @@ const ShopCart1 = () => {
   // const finalPrice= if()
 
   //
+  console.log(totalPrice);
+  console.log(totalProductPrice);
   const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
   const discountAmount = coupon ? coupon.disPrice : 0;
   console.log(finalPrice);
@@ -218,39 +221,6 @@ const ShopCart1 = () => {
   }, [coupon]);
 
   // console.log(finalPrice);
-
-  // 存到LOCALSTORAGE
-  // const [discountAmount,setDiscountAmount]=useState([])
-  // c;
-
-  //設一個路由去抓後端資料id
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (!token) {
-  //     setError("No token found. Please login.");
-  //     return;
-  //   }
-
-  //   fetch("http://localhost:3005/api/cartList", {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setCoupons(data); // Assuming the data is an array of coupons
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //       setError(error.message);
-  //     });
-  // }, []);
 
   // 去抓儲存在localstorage的使用者
   const [userId, setUserId] = useState(null);
@@ -299,7 +269,7 @@ const ShopCart1 = () => {
                 使用折價券{" "}
               </label>
             </div>
-            {/* 這裡 */}
+            {/* 這裡 是之前優惠券 */}
             <select
               className="form-select form-select-sm "
               // aria-label="Small select example "
@@ -434,7 +404,8 @@ const ShopCart1 = () => {
           >
             使用折價券 :
           </div>
-          <select
+          {/* 這裡是之前優惠券 */}
+          {/* <select
             className="form-select form-select-sm me-4"
             // aria-label="Small select example "
             style={{ width: "130px" }}
@@ -449,12 +420,13 @@ const ShopCart1 = () => {
                 </option>
               );
             })}
-          </select>
+          </select> */}
           <button
             onClick={() => {
               setShowFullScreen(!showFullScreen);
             }}
-            className={shopStyles.try}
+            className={`${shopStyles.try}`}
+            style={{ marginRight: "80px" }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
