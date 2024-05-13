@@ -9,7 +9,7 @@ export default function ProductCard02({ productsData, Index }) {
   return (
     <>
       <li key={productsData.id} className="list-unstyled mx-auto ">
-        <div className={`${style["productCard"]} mb-4`}>
+        <div className={`${style["productCard"]} mb-4 mx-1`}>
           <div className={`${style["CardImg"]}`}>
             <img
               src={`/images/products/${productsData.image_url}`}
