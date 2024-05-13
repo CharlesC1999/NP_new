@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
 // 顯示密碼用的圖案
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
-// 顯示更新結果
 // sweet alert
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
