@@ -903,6 +903,7 @@ padding: 23px 0;
 }
 .cpbox{
   width: 100%;
+  /* max-width: fit-content; */
   border: #50bf8b 1px solid;
   margin: 15px;
 }
@@ -910,11 +911,14 @@ padding: 23px 0;
   color: red;
 }
 .gift{
+  width: 100px;
+  align-self: end;
   margin: 10px 0;
   font-weight: bold;
   background-color: #def9ec;
   color: #50bf8b;
 }
+
 .gift:hover{
   background-color: #def9ec;
   color: #50bf8b;
@@ -927,11 +931,22 @@ padding: 23px 0;
   background-color: #fff;
   color: #50bf8b;
   border: #50bf8b 2px solid;
-  border-radius: 10px;
+  border-left:none ;
+  /* border-radius: 10px; */
   padding: 5px;
   font-weight: bolder;
-  margin-left:5px ;
+  /* margin-left:5px ; */
 }
 .cForm{
   margin: 10px;
+}
+@media (max-width:375px) {
+  .cInput{
+    flex: 1;
+  }
+}
+@media (max-width:375px) {
+  .cForm{
+    margin: 10px 0;
+  }
 }
