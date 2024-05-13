@@ -4,10 +4,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./DetailRelatedProducts.module.scss";
 // 給checkbox的icon
 import { FaCheck } from "react-icons/fa6";
+// sweet alert
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+// 導向登入頁
+import Link from "next/link";
+
 import { set } from "lodash";
+// import { utimesSync } from "fs";
 
 export default function DetailRelatedProducts({ recipeID = "" }) {
-  // TODO 暫時給checkbox的狀態
+  //給checkbox的狀態
   const [checkAll, setCheckAll] = useState(true);
 
   // 最一開始從後端得到的相關商品列表
@@ -97,6 +104,56 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
     0
   );
 
+  // TODO 測試抓取登入狀態
+  // 取得localStorage裡的token，用來發起req帶入headers
+  const [LStoken, setLStoken] = useState("");
+
+  const getTokenInLS = () => {
+    setLStoken(localStorage.getItem("token"));
+  };
+
+  // 判斷是否有登入，有id就是有登入
+  const [userId, setUserId] = useState("");
+
+  // 串接上後端並把token傳進headers用來解碼
+  // !!! 從localStorage取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
+  const getUser = async () => {
+    const url = "http://localhost:3005/api/member-profile/check";
+    const tokenforheaders = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${LStoken}`,
+      },
+    };
+    try {
+      const res = await fetch(url, tokenforheaders);
+      const data = await res.json();
+      setUserId(data.data.user.id);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // 按下加入購物車時顯示是否登入
+  const checkLogin = async () => {
+    if (userId) {
+      await Swal.fire({
+        title: "成功加入購物車!",
+        text: "",
+        icon: "success",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "請先登入才能加入購物車哦~",
+        // TODO 待解決導向登入頁
+        text: <Link href={"/member/login"}>點我登入</Link>,
+      });
+    }
+  };
+
+  // TODO 測試結束
+
   // 初次渲染頁面時取得相關商品，但要先取得食譜的ID (透過props傳進來的)
   useEffect(() => {
     getRelatedProducts();
@@ -117,6 +174,16 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
       setCheckAll(true);
     }
   }, [products]);
+
+  // 取得token用來驗證是否登入
+  useEffect(() => {
+    getTokenInLS();
+  }, []);
+
+  // 得到token後執行getUser()去後端解碼token並根據得到的user資料查詢資料庫並將資料設定給userId
+  useEffect(() => {
+    getUser();
+  }, [LStoken]);
 
   return (
     <>
@@ -252,7 +319,13 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
             <p className={styles["total"]}>
               共選擇 {totalItems} 項商品，共計 ${totalPrice} 元
             </p>
-            <button type="button" className="btn btn-primary">
+            <button
+              onClick={() => {
+                checkLogin();
+              }}
+              type="button"
+              className="btn btn-primary"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={15}
