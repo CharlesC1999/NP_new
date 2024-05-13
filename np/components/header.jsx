@@ -309,15 +309,15 @@ const HeaderComponent = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const threshold = 100; //設定閾值避免偵測捲動太敏感導致閃爍問題
-      console.log("currentScrollY", currentScrollY);
+      // console.log("currentScrollY", currentScrollY);
       // console.log("lastScrollY", lastScrollY.current);
       if (Math.abs(currentScrollY - lastScrollY.current) > threshold) {
         if (currentScrollY > lastScrollY.current) {
           setShrink(true);
-          console.log("往下捲動");
+          // console.log("往下捲動");
         } else {
           setShrink(false);
-          console.log("往上捲動");
+          // console.log("往上捲動");
         }
         lastScrollY.current = currentScrollY;
       }
@@ -611,7 +611,7 @@ const HeaderComponent = () => {
             </a>
           </div>
 
-          <div className={styles.searchBar}>
+          <div className={`${styles.searchBar}`}>
             <div className={styles.searchBarLeft}>
               <div className={styles.dropdown} ref={dropdownRef}>
                 <button
@@ -711,7 +711,7 @@ const HeaderComponent = () => {
               <FaCheck onClick={handleSearchM} />
             </button>
           </div>
-          <div className={styles.headerActions}>
+          <div className={`${styles.headerActions}`}>
             {auth.isLoggedIn ? (
               <div>
                 <a onClick={mobileSearch} className={styles.pageLink}>
