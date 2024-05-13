@@ -26,7 +26,7 @@ router.post('/', async function (req, res) {
   const coupon_description = '首次註冊禮'
   const valid_start_date = formatDate(currentDate)
   const valid_end_date = formatDate(endDate)
-  const coupon_image = null
+  const coupon_image = 'NPLove.png'
   const minimum_spend = 100
   const valid = 1
   const c_status = '可使用'
