@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSearchResults } from "@/contexts/searchContext";
 import styles from "@/styles/search-result.module.scss";
 import HeaderComponent from "@/components/header";
@@ -11,10 +11,12 @@ import ProductCard from "@/components/search/ProductCard02";
 import RecipeCardsList from "@/components/search/RecipeCardsList";
 import RecipeCardsMobile from "@/components/search/RecipeCardsGrid";
 import PaginationRounded from "@/components/pagination";
+import PaginationM from "@/components/paginationM";
 import "@fortawesome/fontawesome-free/css/all.css";
 function SearchResult() {
   const { results } = useSearchResults();
   console.log(results);
+  const [total, setTotal] = useState(results?.products?.length || 0);
   const [activeTab, setActiveTab] = useState("食譜");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(12);
@@ -24,10 +26,16 @@ function SearchResult() {
     indexOfFirstProduct,
     indexOfLastProduct
   );
+  console.log(total);
+
   console.log(currentProducts);
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
+
+  useEffect(() => {
+    setTotal(results?.products?.length || 0);
+  }, [results?.products]);
 
   // --------------------------------------------
   console.log(results.classes);
@@ -121,11 +129,20 @@ function SearchResult() {
                     />
                   ))}
                 </div>
-                <PaginationRounded
-                  count={Math.ceil(results.products.length / itemsPerPage)}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                />
+                <div className={styles.pagiW}>
+                  <PaginationRounded
+                    count={Math.ceil(results.products.length / itemsPerPage)}
+                    page={currentPage}
+                    onChange={handlePageChange}
+                  />
+                </div>
+                <div className={styles.pagiM}>
+                  <PaginationM
+                    onChange={handlePageChange}
+                    total={total}
+                    perpage={"12"}
+                  />
+                </div>
               </div>
             ) : (
               <div className={styles.noResult}>

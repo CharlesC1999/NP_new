@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   margin-inline: auto;
-  padding: 60px 0px;
+  padding: 16px 0px;
   gap: 30px;
 }
 .cards {
@@ -84,4 +84,17 @@
 .noResultImg img {
   width: 300px;
   height: 300px;
+}
+
+.pagiM {
+  display: none;
+}
+
+@media (max-width: 375px) {
+  .pagiW {
+    display: none;
+  }
+  .pagiM {
+    display: block;
+  }
 }
