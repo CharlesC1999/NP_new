@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import PriceRangeStyle from "./priceRangeStyle.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
 const RangeSlider = ({ min, max, onRangeChange }) => {
   const rangeBoxSet = {
@@ -16,28 +18,26 @@ const RangeSlider = ({ min, max, onRangeChange }) => {
 
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "minValue") {
-      if (value >= min && value <= maxValue) {
-        setMinValue(Number(value));
-        onRangeChange({ min: Number(value), max: maxValue });
-      }
+      setMinValue(Number(value));
     } else if (name === "maxValue") {
-      if (value <= max && value >= minValue) {
-        setMaxValue(Number(value));
-        onRangeChange({ min: minValue, max: Number(value) });
-      }
+      setMaxValue(Number(value));
     }
   };
 
-  //   const handleSliderChange = (e) => {
-  //     const [min, max] = e.target.value.split(",").map(Number);
-  //     setMinValue(min);
-  //     setMaxValue(max);
-  //     onRangeChange({ min, max });
-  //   };
+  const handleSubmit = () => {
+    // 呼叫父組件的回調函數來更新狀態
+    if (minValue <= maxValue) {
+      onRangeChange({ min: minValue, max: maxValue });
+      router.push(`/class-page`);
+    } else {
+      toast.error("價格區間設定錯誤"); // 錯誤提示
+    }
+  };
 
   return (
     <div style={rangeSetContainer}>
@@ -48,7 +48,7 @@ const RangeSlider = ({ min, max, onRangeChange }) => {
           name="minValue"
           value={minValue}
           min={min}
-          max={maxValue}
+          max={max}
           onChange={handleInputChange}
         />
         <div className={PriceRangeStyle.to}>-</div>
@@ -57,12 +57,12 @@ const RangeSlider = ({ min, max, onRangeChange }) => {
           type="number"
           name="maxValue"
           value={maxValue}
-          min={minValue}
+          min={min}
           max={max}
           onChange={handleInputChange}
         />
       </div>
-      <button className={PriceRangeStyle.summitButton}>
+      <button className={PriceRangeStyle.summitButton} onClick={handleSubmit}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="23px"
@@ -76,22 +76,17 @@ const RangeSlider = ({ min, max, onRangeChange }) => {
           />
         </svg>
       </button>
-      {/* <input
-        type="range"
-        min={min}
-        max={max}
-        value={`${minValue},${maxValue}`}
-        onChange={handleSliderChange}
-        multiple
-      /> */}
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            color: "red",
+          },
+        }}
+      />
     </div>
   );
 };
 
-export default function PriceRangeSelector() {
-  const handleRangeChange = (range) => {
-    console.log(range);
-  };
-
-  return <RangeSlider min={0} max={9999} onRangeChange={handleRangeChange} />;
-}
+export default RangeSlider;

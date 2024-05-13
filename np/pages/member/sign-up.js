@@ -371,13 +371,13 @@ const SignUpPage = () => {
                           required
                         />
                         <label
-                          className={`${signUp.genderLabel} form-check-label px-3`}
+                          className={`${signUp.genderLabel} form-check-label px-2`}
                           htmlFor="flexRadioDefault1"
                         >
                           男
                         </label>
                       </div>
-                      <div className={`${signUp.formCheck} mx-4`}>
+                      <div className={`${signUp.formCheck}`}>
                         <input
                           className={`form-check-input ${signUp.formCheckInput}`}
                           type="radio"
@@ -390,10 +390,28 @@ const SignUpPage = () => {
                           required
                         />
                         <label
-                          className={`${signUp.genderLabel} form-check-label  px-3`}
+                          className={`${signUp.genderLabel} form-check-label  px-2`}
                           htmlFor="flexRadioDefault2"
                         >
                           女
+                        </label>
+                      </div>
+                      <div className={signUp.formCheck}>
+                        <input
+                          className={`form-check-input ${signUp.formCheckInput}`}
+                          type="radio"
+                          name="gender"
+                          value="OTHER"
+                          onChange={handleChange}
+                          checked={formData.gender === "OTHER"}
+                          id="flexRadioDefault3"
+                          required
+                        />
+                        <label
+                          className={`${signUp.genderLabel} form-check-label px-2`}
+                          htmlFor="flexRadioDefault3"
+                        >
+                          其他
                         </label>
                       </div>
                     </div>
