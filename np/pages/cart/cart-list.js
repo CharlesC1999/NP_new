@@ -236,7 +236,7 @@ const ShopCart2 = () => {
                     }}
                   />
                 </div>
-                {inputName}
+
                 <div className="mb-3">
                   <label
                     htmlFor="exampleInputEmail1"
@@ -255,7 +255,7 @@ const ShopCart2 = () => {
                     }}
                   />
                 </div>
-                {inputEmail}
+
                 {/* 套bs5套件 */}
 
                 <div className="mb-3">
@@ -275,7 +275,6 @@ const ShopCart2 = () => {
                       setInputNumber(event.target.value);
                     }}
                   />
-                  {inputNumber}
                 </div>
 
                 <div className="form-group form-check">
@@ -337,7 +336,6 @@ const ShopCart2 = () => {
                     value={inputPackageName}
                     onChange={(event) => setInputPackage(event.target.value)}
                   />
-                  {inputPackageName}
                 </div>
 
                 <div className="mb-3">
@@ -357,7 +355,6 @@ const ShopCart2 = () => {
                       setInputPackageNumber(event.target.value);
                     }}
                   />
-                  {inputPackageNumber}
                 </div>
 
                 <div className="form-group form-check">
@@ -390,7 +387,6 @@ const ShopCart2 = () => {
                       setInputAddress(event.target.value);
                     }}
                   />
-                  {inputAddress}
                 </div>
                 <div className="form-group form-check">
                   <input
