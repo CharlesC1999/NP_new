@@ -1,7 +1,7 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
 import HeaderSetting from "@/styles/headerSetting.module.scss";
@@ -15,12 +15,21 @@ import Footer from "@/components/Footer";
 import ToTheTop from "@/components/toTheTop";
 import data from "@/data/index-brand-info.json";
 import { getHomePageInfo } from "@/services/user";
-
+// 商品分類鉤子
+import { useRouter } from "next/router";
+import { useProductCategories } from "@/hooks/use-product-cate";
 export default function Index() {
   const [hotProduct, setHotProduct] = useState([]);
   const [hotClass, setHotClass] = useState([]);
   const [recipe, setRecipe] = useState([]);
   const [productCate, setProductCate] = useState([]);
+  const { newCategories, setNewCategories } = useProductCategories();
+  const router = useRouter();
+  const handleNewCategoryChange = (cateId) => {
+    setNewCategories([cateId]);
+    router.push("/product");
+  };
+
   const fetchHomeData = async () => {
     try {
       const { hotProduct, hotClass, recommendedRecipe, productCate } =
@@ -105,7 +114,14 @@ export default function Index() {
         </div>
         <div className={`${styles.Nutripollcard3}`}>
           {productCate.map((v) => {
-            return <Card3Categories key={v.id} name={v.name} id={v.id} />;
+            return (
+              <Card3Categories
+                key={v.id}
+                name={v.name}
+                id={v.id}
+                handleNewCategoryChange={handleNewCategoryChange}
+              />
+            );
           })}
         </div>
       </div>

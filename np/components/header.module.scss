@@ -288,11 +288,12 @@ a:visited {
   max-width: 1440px;
   width: 100%;
   height: 83.281px;
-  overflow: hidden;
   transition: height 0.3s ease-in-out;
+  // overflow:hidden;
 }
 .headerContent.shrink{
   height: 0;
+  overflow: hidden;
 }
 @media (max-width: 375px) {
   .headerContent {
@@ -331,7 +332,6 @@ a:visited {
   color: #fefefe;
   cursor: pointer;
 }
-
 .logo:visited {
   color: #fefefe;
 }
@@ -357,7 +357,6 @@ a:visited {
   margin: auto 0;
   padding: 0px 24px;
 }
-
 @media (max-width: 375px) {
   .searchBar {
     display: none;
