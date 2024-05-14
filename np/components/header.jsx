@@ -129,6 +129,9 @@ const MobileSideBar = ({ onClose }) => {
     }
   }, [LStoken]);
 
+  console.log(userData);
+  console.log(userData.User_image);
+
   return (
     <div className={styles.fullMobileScreen} onClick={handleClose}>
       <div
@@ -141,11 +144,11 @@ const MobileSideBar = ({ onClose }) => {
               {auth.isLoggedIn ? (
                 <img
                   src={
-                    userData && userData.address
-                      ? userData.address.startsWith("https")
-                        ? userData.address.startsWith("http://localhost")
+                    userData && userData.User_image
+                      ? userData.User_image.startsWith("https://")
+                        ? userData.User_image
                         : `http://localhost:3005/avatar/${userData.User_image}`
-                      : `${userData.User_image}`
+                      : ``
                   }
                   alt="UserImg"
                 />
@@ -154,7 +157,9 @@ const MobileSideBar = ({ onClose }) => {
               )}
             </div>
             {auth.isLoggedIn ? (
-              <div className={styles.memberName}>{userData.name} 歡迎！</div>
+              <div className={styles.memberName}>
+                {userData.User_name} 歡迎！
+              </div>
             ) : (
               <div></div>
             )}
@@ -259,7 +264,7 @@ const HeaderComponent = () => {
   // 下拉式分類連結（接收分類 context）
   const { setRecipeCategory } = useCategoryForSQL();
   const { setCategoryId } = useCategory();
-  const {newCategories,setNewCategories } = useProductCategories();
+  const { newCategories, setNewCategories } = useProductCategories();
   const handleCategoryChangeR = (category = "") => {
     setRecipeCategory(category);
   };
@@ -270,7 +275,6 @@ const HeaderComponent = () => {
     setNewCategories([categoryId]);
     router.push("/product");
   };
-
 
   // 搜索下拉選單
   const menuItems = [
@@ -1063,7 +1067,7 @@ const HeaderComponent = () => {
                   <React.Fragment key={item.id}>
                     <a
                       key={item.id}
-                       onClick={() => handleCategoryChangeP(item.id)}
+                      onClick={() => handleCategoryChangeP(item.id)}
                       className={item.className}
                     >
                       {item.name}
