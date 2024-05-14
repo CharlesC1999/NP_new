@@ -26,7 +26,6 @@ function ProductMainText({
   handleReviewCount,
 }) {
   const reviewCount = review_comments.length;
-
   // 加入全域鉤子
   const { favorClass, auth, setAction } = useAuth();
   const { addProduct } = useCart();
@@ -36,8 +35,14 @@ function ProductMainText({
       <div className={`${style["product-text"]} d-flex flex-column`}>
         <div className={`${style["h3"]} mb-3`}>{name}</div>
         <p className={`${style["p"]} my-2`}>{description}</p>
-        <div className={`${style["d-price"]}`}>{discount_price}</div>
-        <div className={`${style["price"]}`}>${price}</div>
+        {discount_price ? (
+          <>
+            <div className={`${style["d-price"]}`}>${price}</div>
+            <div className={`${style["price"]}`}>${discount_price}</div>
+          </>
+        ) : (
+          <div className={`${style["price"]}`}>${price}</div>
+        )}
         <div
           className={`${style["star-row"]} d-flex flex-row my-2 align-items-center justify-content-between`}
         >

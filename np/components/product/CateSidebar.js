@@ -9,7 +9,6 @@ function CateSidebar({ cateName, catePng, cateId, categoryCounts }) {
   const router = useRouter();
   const { newCategories, setNewCategories } = useProductCategories();
   const handleNewCategoryChange = (cateId) => {
-    // 更新状态并导航到产品页面
     setNewCategories([cateId]); // 假设这是添加分类的逻辑
     router.push("/product");
   };
