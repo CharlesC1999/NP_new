@@ -10,9 +10,9 @@ import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 
 function Card4Hot({ id, name, price, d_price, image, qty = 1 }) {
-  const { favorClass, auth, setAction } = useAuth();
+  const { auth } = useAuth();
   const { addProduct } = useCart();
-  console.log(id, name, price, d_price, image, qty);
+  // console.log(id, name, price, d_price, image, qty);
 
   const MySwal = withReactContent(Swal);
 
@@ -60,14 +60,14 @@ function Card4Hot({ id, name, price, d_price, image, qty = 1 }) {
               }
               console.log(auth.isLoggedIn);
               notify(name);
-              console.log("Adding product:", {
-                id,
-                name,
-                price: d_price,
-                image,
-                qty,
-                // quantity: 1,
-              });
+              // console.log("Adding product:", {
+              //   id,
+              //   name,
+              //   price: d_price,
+              //   image,
+              //   qty,
+              //   // quantity: 1,
+              // });
               addProduct({ id, name, price: d_price, image, qty: 1 });
             }}
           >
