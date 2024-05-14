@@ -82,7 +82,7 @@ export default function ProductSidebarDetail({
               style={{ color: "#747E85" }}
             >
               {subCategory.cateName}
-              <span>(amount)</span>
+              <span></span>
             </label>
           </div>
         ))}
