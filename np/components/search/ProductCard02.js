@@ -1,16 +1,45 @@
 import React, { useState } from "react";
+import Router, { useRouter } from "next/router";
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/hooks/use-cart";
 //style
-import style from "@/components/product/productCard02.module.scss";
+import style from "@/components/search/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FavIconProduct from "@/components/favor/FavIconProduct";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-export default function ProductCard02({ productsData, Index }) {
+export default function ProductCard02({ productsData, Index, qty = 1 }) {
   console.log(productsData, "classDW");
+  const { id, product_name, product_price, image_url } = productsData;
+  console.log(id, product_name, product_price, image_url);
+  const { auth } = useAuth();
+  const { addProduct } = useCart();
+  const MySwal = withReactContent(Swal);
+  const notify = (productName) => {
+    MySwal.fire({
+      title: "成功加入",
+      text: productName + "已成功加入購物車!",
+      icon: "success",
+    });
+  };
+  const goProductDetail = (id) => {
+    // 方法一
+    // Router.push(`/class-page/class-detail/${class__i_d}`);
+    // 方法二
+    Router.push({
+      pathname: "/product/productId",
+      query: { id: id },
+    });
+  };
   return (
     <>
       <li key={productsData.id} className="list-unstyled mx-auto ">
         <div className={`${style["productCard"]} mb-4 mx-1`}>
-          <div className={`${style["CardImg"]}`}>
+          <div
+            className={`${style["CardImg"]}`}
+            onClick={() => goProductDetail(productsData.id)}
+          >
             <img
               src={`/images/products/${productsData.image_url}`}
               alt="商品圖片"
@@ -60,13 +89,26 @@ export default function ProductCard02({ productsData, Index }) {
                 <a
                   type="button"
                   className={`${style["btn"]} btn justify-content-center align-centent-center d-flex`}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     if (!auth.isLoggedIn) {
                       return toast.error("請先登入再使用!");
                     }
-
-                    // notify(productsData.product_name);
-                    // addProduct({ productsData.id, productsData.product_name, productsData.price, productsData.image_url });
+                    console.log("Adding product:", {
+                      id,
+                      image_url,
+                      product_name,
+                      product_price,
+                      qty,
+                    });
+                    notify(product_name);
+                    addProduct({
+                      id,
+                      image_url,
+                      product_name,
+                      product_price,
+                      qty,
+                    });
                   }}
                 >
                   <i

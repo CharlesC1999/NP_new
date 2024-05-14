@@ -146,8 +146,8 @@ const MobileSideBar = ({ onClose }) => {
                   src={
                     userData && userData.User_image
                       ? userData.User_image.startsWith("https://")
-                        ? userData.User_image
-                        : `http://localhost:3005/avatar/${userData.User_image}`
+                        ? userData.User_image // 是https://開頭的圖片
+                        : `http://localhost:3005/avatar/${userData.User_image}` // 不是https://開頭的圖片
                       : ``
                   }
                   alt="UserImg"
