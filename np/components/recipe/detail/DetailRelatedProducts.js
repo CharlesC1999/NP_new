@@ -293,8 +293,8 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                     <div
                       className={`${styles["portion-and-price"]} d-flex gap-2`}
                     >
-                      <p className={styles["portion"]}>份量</p>
-                      <p className={styles["divider"]}>|</p>
+                      {/* <p className={styles["portion"]}>份量</p> */}
+                      {/* <p className={styles["divider"]}>|</p> */}
                       <p className={styles["price"]}>
                         單價 ${" "}
                         {v.discount_price === null ? v.price : v.discount_price}
