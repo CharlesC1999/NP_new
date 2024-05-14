@@ -237,11 +237,11 @@ FROM
     LEFT JOIN product_image AS pImg ON p.id = pImg.product_id
     LEFT JOIN product_categories AS pCate ON p.category_id = pCate.id
 WHERE
-    rating IN (3)
+    category_id IN  (15,14)
 GROUP BY 
     p.id
 ORDER BY
-    rating DESC  
+    id DESC  
 LIMIT 100; 
 
 SELECT 
@@ -347,3 +347,38 @@ SELECT COUNT(*) AS disGift FROM product WHERE category_id = 22;
 
 
 SELECT * FROM product WHERE category_id IN ()
+
+SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId
+    FROM product_categories WHERE id IN (14,15,16,17,18,19,20,23)
+
+
+
+SELECT 
+    p.id, 
+    p.product_name, 
+    p.product_price, 
+    p.discount_price,
+    p.product_stock, 
+    p.product_description,
+    p.valid, 
+    p.upload_date,
+    p.category_id, 
+    pCate.name AS cate_name,
+    pCate.parent_id,
+    pCate.id AS CateID,
+    pImg.image_url AS image_urls,
+    ROUND(AVG(pReview.rating), 1) AS average_rating,
+    GROUP_CONCAT(DISTINCT CONCAT_WS('|', pReview.comment, pReview.rating, pReview.user_id, DATE_FORMAT(pReview.created_at, '%Y-%m-%d %T'))) AS review_details,
+    GROUP_CONCAT(DISTINCT pImg.sort_order ORDER BY pImg.sort_order) AS sort_orders
+FROM 
+    product AS p
+    LEFT JOIN product_review AS pReview ON p.id = pReview.product_id
+    LEFT JOIN product_image AS pImg ON p.id = pImg.product_id
+    LEFT JOIN product_categories AS pCate ON p.category_id = pCate.id
+WHERE
+    p.category_id IN (14,15,16,17,18,19,20,23)
+GROUP BY 
+    p.id
+ORDER BY
+    p.id DESC
+LIMIT 100;

@@ -6,7 +6,8 @@ router.get('/getCouponsDetail', async (req, res) => {
   const { member } = req.query
 
   console.log('Request received for /getCouponsDetail')
-  const sql = `SELECT cu.* FROM coupons AS cu WHERE cu.member__i_d = ${member}`
+  const sql = `SELECT cu.* FROM coupons AS cu WHERE cu.member__i_d = ${member} AND cu.c_status = "可使用"`
+  console.log(member, 'gggggg')
   console.log(sql)
 
   try {

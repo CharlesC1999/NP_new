@@ -113,14 +113,14 @@ export default function ProductCardMobileGrid({ classesData }) {
             />
           </a>
           <a
+            type="button"
             href="#"
             className={styles.actionLink}
             onClick={() => {
               if (!auth.isLoggedIn) {
                 return toast.error("請先登入再使用!");
+                console.log(toast.error("請先登入再使用!"));
               }
-              notify(className);
-
               console.log("Adding product:", {
                 id,
                 className,
@@ -128,6 +128,7 @@ export default function ProductCardMobileGrid({ classesData }) {
                 price,
                 image,
               });
+              notify(className);
 
               addItem({ id, className, classDate, price, image });
             }}

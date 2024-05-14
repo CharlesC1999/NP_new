@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 export default function RecommendedRecipe({ recipes }) {
   const router = useRouter();
   const handleRecipeCheckout = () => {
-    router.push(`/recipe/${recipes.recipe__i_d}`);
+    router.push(`/recipe?recipeId${recipes.recipe__i_d}`);
   };
   return (
     <>
@@ -24,7 +24,7 @@ export default function RecommendedRecipe({ recipes }) {
             <div
               key={v.id}
               onClick={() => {
-                router.push(`/recipe/${v.recipe__i_d}`);
+                router.push(`/recipe/recipeId?id=${v.recipe__i_d}`);
               }}
               className={`col-6 col-xxl-3 ${styles["recipe-card"]} d-flex flex-column`}
             >
