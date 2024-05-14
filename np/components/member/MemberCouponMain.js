@@ -22,6 +22,7 @@ const [searchTerm, setSearchTerm] = useState("");
 const handleSearch = (event) => {
   setSearchTerm(event.target.value);
 };
+
 // let userid = parseInt(localStorage.getItem('userid'))
 // console.log(userid);
 
@@ -48,7 +49,44 @@ useEffect(() => {
 const userid= useridid.id
 console.log(userid);
 
-console.log(userid);
+
+const checkAndSendCoupon = async () => {
+  try {
+    // 假设你已经有用户的 userID
+    const userId =userid ;
+
+    // 发送请求给后端，检查用户是否已领取优惠券
+    const response = await fetch(`http://localhost:3005/api/check-coupon-status?userId=${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (!data.hasCoupon) {
+        // 如果用户尚未领取优惠券，则再发送请求给后端，自动发放优惠券
+        await fetch('http://localhost:3005/api/check-coupon-status', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId }),
+        });
+        console.log('优惠券已发放');
+      } else {
+        console.log('用户已领取优惠券');
+      }
+    } else {
+      console.error('检查优惠券状态失败');
+    }
+  } catch (error) {
+    console.error('发生错误：', error.message);
+  }
+};
+
+
 const getCoupons = async (cat='') => {
   let url = 'http://localhost:3005/api/coupons';
 
@@ -101,7 +139,7 @@ useEffect(() => {
       <div className={styles.title2}>我的帳戶</div>
     </div>
     {/* 主內容的標題 */}
-    <Link  href={`/member/coupons-box`} className={`${styles.gift} btn`}>禮物箱</Link>
+    <Link  href={`/member/coupons-box`} className={`${styles.gift} btn`} onClick={checkAndSendCoupon}>禮物箱</Link>
     <div>
       {/* 分類欄 */}
   <Cat  setActiveCategory={setActiveCategory} activeCategory={activeCategory}/>
