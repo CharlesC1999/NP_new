@@ -64,7 +64,13 @@ const ShopCart3 = () => {
     if (storedItems) {
       setItems(JSON.parse(storedItems)); // 解析字符串并设置状态
     }
+    console.log(items);
   }, []);
+
+  const items2 = items.filter((v) => {
+    return v.checked;
+  });
+  console.log(items2);
 
   // 去抓存取在localStorage的資料
   // 抓商品資料
@@ -79,6 +85,10 @@ const ShopCart3 = () => {
     }
   }, []);
 
+  const productItems2 = productItems.filter((v) => {
+    return v.checked;
+  });
+  console.log(productItems2);
   // 去抓存取在localStorage的資料
   //  抓使用得優惠券
 
@@ -91,6 +101,42 @@ const ShopCart3 = () => {
     }
   }, []);
 
+  // 去抓存在localStorage的資料dataCoupon666
+
+  const [dataCoupon, setDataCoupon] = useState([]);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("dataCoupon666");
+    if (storedData) {
+      setDataCoupon(JSON.parse(storedData));
+    }
+  }, []);
+
+  console.log(dataCoupon);
+
+  const dataCoupon2 = dataCoupon.map((v) => {
+    return v.discount_amount;
+  });
+  console.log(dataCoupon2);
+
+  // const dataCouponId = dataCoupon[0].coupon__i_d;
+  // console.log(dataCouponId);
+  const dataCouponId = dataCoupon.length > 0 ? dataCoupon[0].coupon__i_d : null;
+  console.log(dataCouponId);
+
+  const displayTexts = dataCoupon2.map((discountAmount) => {
+    if (discountAmount < 1) {
+      return `${
+        discountAmount.endsWith("5")
+          ? discountAmount * 100
+          : discountAmount * 10
+      } 折`;
+    } else {
+      return `${parseInt(discountAmount)} 元`;
+    }
+  });
+  console.log(displayTexts);
+  // 計算總金額
   // 去抓存全域鉤子的資料
   // 設定總額
   const { totalItems, totalPrice, totalProduct, totalProductPrice } = useCart();
@@ -103,6 +149,19 @@ const ShopCart3 = () => {
     if (storedPayMethod) {
       const cleanPayMethod = storedPayMethod.replace(/^"|"$/g, "");
       setPayMethod(cleanPayMethod);
+    }
+  }, []);
+
+  // 去抓localStorage總價的資料finalPriceAfterDiscount55666
+  const [finalPriceAfterDiscount, setFinalPriceAfterDiscount] = useState(0);
+
+  useEffect(() => {
+    const storedFinalPrice = localStorage.getItem(
+      "finalPriceAfterDiscount55666"
+    );
+    if (storedFinalPrice) {
+      const cleanFinalPrice = storedFinalPrice.replace(/^"|"$/g, "");
+      setFinalPriceAfterDiscount(cleanFinalPrice);
     }
   }, []);
 
@@ -151,56 +210,44 @@ const ShopCart3 = () => {
 
   // const handlePaymentConfirmation = async (orderToLinePay) => {
   const [orderToLinePay, setOrderToLinePay] = useState("");
-  // const notifySA = async (orderToLinePay) => {
-  //   MySwal.fire({
-  //     // title: "",
-  //     text: "確認付款？",
-  //     icon: "success",
-  //     showCancelButton: true,
-  //     confirmButtonText: "是",
-  //     cancelButtonText: "否",
-  //     reverseButtons: true,
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       console.log(lineOrder.id);
-  //       const orderId = `orderId=${lineOrder.id}`;
-  //       fetch(`http://localhost:3005/api/cartList/reserve?${orderId}`, {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         // body: JSON.stringify(lineOrder),
-  //       })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           console.log("第二個按鈕");
-  //         })
-  //         .catch((error) => {
-  //           console.error("第二個按鈕", error);
-  //         });
-  //     }
-  //   });
-  // };
-
-  // };
 
   // ---------------
   //  顯示訂單編號在ui測試用
   const [lineOrder, setLineOrder] = useState("");
   const [error, setError] = useState("");
+  // const [finalPrice, setFinalPrice] = useState("");
 
   console.log("lineOrder", lineOrder);
   const allPrice = totalPrice + totalProductPrice;
   console.log(allPrice);
-  const finalPrice = allPrice - coupon.disPrice;
+  console.log("coupon", coupon.disPrice);
+  const finalPrice =
+    coupon.disPrice !== undefined ? allPrice - coupon.disPrice : allPrice;
   console.log(finalPrice);
+
+  // 去抓儲存在localstorage的使用者
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // 從 localStorage 獲取 userData
+    const storedData = localStorage.getItem("userData");
+    if (storedData) {
+      // 解析 JSON 字符串回物件
+      const userData = JSON.parse(storedData);
+      // 更新狀態以保存用戶 ID
+      setUserId(userData.id);
+    }
+  }, []);
+  console.log("userId", userId);
+
   // 處理表單提交事件
   const handleSubmit = async (event) => {
     // 阻擋表單預設行為
     event.preventDefault();
+
     const formData = {
       //  課程
-      items: items.map((item) => ({
+      items: items2.map((item) => ({
         id: item.id,
         name: item.name,
         quantity: item.qty,
@@ -208,7 +255,7 @@ const ShopCart3 = () => {
         totalPrice: item.price * item.qty,
       })),
       // 商品
-      productItems: productItems.map((item) => ({
+      productItems: productItems2.map((item) => ({
         id: item.id,
         name: item.name,
         quantity: item.qty,
@@ -218,11 +265,13 @@ const ShopCart3 = () => {
       // 合計
       totalPrice: totalPrice + totalProductPrice || 0,
       // 優惠券id
-      couponId: coupon.id || 0,
+      couponId: dataCouponId || 0,
       // 優惠券扣掉價格
-      discountPrice: coupon.disPrice || 0,
+      discountPrice: allPrice - finalPriceAfterDiscount || 0,
       // 最終價格
-      finalPrice: totalPrice + totalProductPrice - coupon.disPrice || 0,
+      finalPrice:
+        totalPrice + totalProductPrice - (allPrice - finalPriceAfterDiscount) ||
+        0,
       // 收件人
       receiverName: receiverName,
       // 手機
@@ -231,6 +280,8 @@ const ShopCart3 = () => {
       receiverAddress: receiverAddress,
       // 付款方式
       paymentMethod: payMethod,
+      // 會員id
+      userId: userId,
     };
 
     // 发送数据到服务器
@@ -287,6 +338,7 @@ const ShopCart3 = () => {
             if (response.ok) {
               return response.json();
             }
+            console.log("response", response);
             throw new Error("Network response was not ok");
           })
           .then((data) => {
@@ -295,6 +347,7 @@ const ShopCart3 = () => {
             console.log("Redirecting to LINE Pay:", data.paymentUrl);
             window.location.href = data.paymentUrl;
           })
+
           .catch((error) => {
             console.error("第二個按鈕", error);
           });
@@ -343,10 +396,10 @@ const ShopCart3 = () => {
               {/* <div className={`${styles3.fc} col text-center`}>庫存</div> */}
             </div>
 
-            {items.map((item, index) => (
+            {items2.map((item, index) => (
               <div key={index} className="row py-2">
                 <div className={`${styles3.fb} col text-center pt-2`}>
-                  {item.name}
+                  {item.className}
                 </div>
                 <div
                   className={`${styles3.fb} col d-flex align-items-center justify-content-center `}
@@ -370,7 +423,7 @@ const ShopCart3 = () => {
                 </div> */}
               </div>
             ))}
-            {productItems.map((item, index) => (
+            {productItems2.map((item, index) => (
               <div key={index} className="row py-2">
                 <div className={`${styles3.fb} col text-center pt-2`}>
                   {item.name}
@@ -425,9 +478,17 @@ const ShopCart3 = () => {
                 className={`${styles3.fc} col d-flex align-items-center justify-content-center`}
                 // style={{ paddingRight: "40PX" }}
               >
-                NT${coupon.disPrice}
+                NT${allPrice - finalPriceAfterDiscount}
+                {/* NT${coupon.disPrice} */}
               </div>
             </div>
+
+            {/* 計算使用優惠卷金額、折扣 */}
+            {/* <div>
+              {displayTexts.map((text, index) => (
+                <p key={index}>{text}</p>
+              ))}
+            </div> */}
 
             <div
               className="row py-2 pt-3"
@@ -438,7 +499,8 @@ const ShopCart3 = () => {
               <div className={`${styles3.fc} col text-center`}></div>
               {/* <div className={`${styles3.fc} col text-center`}></div> */}
               <div className={`${styles3.fc} col text-center`}>
-                NT$ {finalPrice}
+                NT${finalPriceAfterDiscount}
+                {/* 舊的折扣後金額NT$ {finalPrice} */}
               </div>
             </div>
           </section>
@@ -542,12 +604,13 @@ const ShopCart3 = () => {
             </div>
             {items.map((item, index) => (
               <div key={index} className="row py-2 mt-1">
-                <div className={`${styles3.fc} row ps-4`}>{item.name}</div>
+                <div className={`${styles3.fc} row ps-4`}>{item.className}</div>
                 <div
                   className={`${styles3.fb} row ps-4`}
                   style={{ fontSize: 12 }}
                 >
-                  課程時間: {item.sn} {/* 假设 sn 字段用来存储日期信息 */}
+                  課程時間: {item.classDate}{" "}
+                  {/* 假设 sn 字段用来存储日期信息 */}
                 </div>
                 <div className="row mt-4">
                   <div className="col-3 border ms-2">有庫存</div>
@@ -557,14 +620,14 @@ const ShopCart3 = () => {
                 </div>
               </div>
             ))}
-            {productItems.map((item, index) => (
+            {productItems2.map((item, index) => (
               <div key={index} className="row py-2 mt-1">
                 <div className={`${styles3.fc} row ps-4`}>{item.name}</div>
                 <div
                   className={`${styles3.fb} row ps-4`}
                   style={{ fontSize: 12 }}
                 >
-                  課程時間: {item.sn} {/* 假设 sn 字段用来存储日期信息 */}
+                  {/* 課程時間: {item.sn} 假设 sn 字段用来存储日期信息 */}
                 </div>
                 <div className="row mt-4">
                   <div className="col-3 border ms-2">有庫存</div>

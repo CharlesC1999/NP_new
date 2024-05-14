@@ -22,7 +22,7 @@ import { IoMdBusiness } from "react-icons/io";
 // 引入食譜分類的鉤子
 import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 import { useCategory } from "@/hooks/ClassProp";
-
+import { useProductCategories } from "@/hooks/use-product-cate";
 const MobileSideBar = ({ onClose }) => {
   const sidebarRef = useRef(null);
   const router = useRouter();
@@ -33,6 +33,7 @@ const MobileSideBar = ({ onClose }) => {
 
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
+  const goProductPromote = () => router.push(routes.productPromote);
   const goRecipeList = () => router.push(routes.recipeList);
   const goSpeekerList = () => router.push(routes.speakerList);
   const doLogin = () => router.push(routes.login);
@@ -189,7 +190,7 @@ const MobileSideBar = ({ onClose }) => {
           </div>
           <div className={styles.optionBlock}>
             <button className={styles.optionBtn}>
-              <RiDiscountPercentLine size={24} />
+              <RiDiscountPercentLine size={24} onClick={goProductPromote} />
               優惠活動
             </button>
           </div>
@@ -202,7 +203,7 @@ const MobileSideBar = ({ onClose }) => {
           <div className={styles.optionBlock}>
             <button className={styles.optionBtn} onClick={goRecipeList}>
               <LuChefHat size={24} />
-              食譜精選
+              健康食譜
             </button>
           </div>
           <div className={styles.optionBlock}>
@@ -258,17 +259,24 @@ const HeaderComponent = () => {
   // 下拉式分類連結（接收分類 context）
   const { setRecipeCategory } = useCategoryForSQL();
   const { setCategoryId } = useCategory();
+  const {newCategories,setNewCategories } = useProductCategories();
   const handleCategoryChangeR = (category = "") => {
     setRecipeCategory(category);
   };
   const handleCategoryChangeC = (categoryId) => {
     setCategoryId(categoryId);
   };
+  const handleCategoryChangeP = (categoryId) => {
+    setNewCategories([categoryId]);
+    router.push("/product");
+  };
+
+
   // 搜索下拉選單
   const menuItems = [
     { id: 1, name: "所有分類", className: styles.selectionLink },
     { id: 2, name: "商品列表", className: styles.selectionLink },
-    { id: 3, name: "食譜精選", className: styles.selectionLink },
+    { id: 3, name: "健康食譜", className: styles.selectionLink },
     { id: 4, name: "精選課程", className: styles.selectionLink },
     // { id: 5, name: "講師陣容", className: styles.selectionLink },
   ];
@@ -288,43 +296,43 @@ const HeaderComponent = () => {
     {
       id: 1,
       name: "新鮮蔬菜",
-      href: "/product?categoryFromDetail=1",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 2,
       name: "新鮮水果",
-      href: "/product?categoryFromDetail=2",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 3,
       name: "嚴選肉類",
-      href: "/product?categoryFromDetail=3",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 4,
       name: "海鮮水產",
-      href: "/product?categoryFromDetail=4",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 5,
       name: "精選雞蛋",
-      href: "/product?categoryFromDetail=5",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 6,
       name: "豆乳製品",
-      href: "/product?categoryFromDetail=6",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 7,
       name: "素食專區",
-      href: "/product?categoryFromDetail=7",
+      href: "#",
       className: styles.selectionLink,
     },
   ];
@@ -344,16 +352,16 @@ const HeaderComponent = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const threshold = 100; //設定閾值避免偵測捲動太敏感導致閃爍問題
-      console.log("currentScrollY", currentScrollY);
+      const threshold = 300; //設定閾值避免偵測捲動太敏感導致閃爍問題
+      // console.log("currentScrollY", currentScrollY);
       // console.log("lastScrollY", lastScrollY.current);
       if (Math.abs(currentScrollY - lastScrollY.current) > threshold) {
         if (currentScrollY > lastScrollY.current) {
           setShrink(true);
-          console.log("往下捲動");
+          // console.log("往下捲動");
         } else {
           setShrink(false);
-          console.log("往上捲動");
+          // console.log("往上捲動");
         }
         lastScrollY.current = currentScrollY;
       }
@@ -417,7 +425,7 @@ const HeaderComponent = () => {
     const routerNameMapping = {
       所有分類: "findAll",
       商品列表: "findProduct",
-      食譜精選: "findRecipe",
+      健康食譜: "findRecipe",
       精選課程: "findClass",
     };
     // 端點對應設置
@@ -655,7 +663,7 @@ const HeaderComponent = () => {
             </a>
           </div>
 
-          <div className={styles.searchBar}>
+          <div className={`${styles.searchBar}`}>
             <div className={styles.searchBarLeft}>
               <div className={styles.dropdown} ref={dropdownRef}>
                 <button
@@ -755,7 +763,7 @@ const HeaderComponent = () => {
               <FaCheck onClick={handleSearchM} />
             </button>
           </div>
-          <div className={styles.headerActions}>
+          <div className={`${styles.headerActions}`}>
             {auth.isLoggedIn ? (
               <div>
                 <a onClick={mobileSearch} className={styles.pageLink}>
@@ -1055,8 +1063,7 @@ const HeaderComponent = () => {
                   <React.Fragment key={item.id}>
                     <a
                       key={item.id}
-                      onClick={() => handleProductClick()}
-                      href={item.href}
+                       onClick={() => handleCategoryChangeP(item.id)}
                       className={item.className}
                     >
                       {item.name}
@@ -1068,7 +1075,7 @@ const HeaderComponent = () => {
           </li>
           <li className={styles.navItemPageLinks}>
             <a onClick={goRecipeList} className={styles.pageLink}>
-              <div>食譜精選</div>
+              <div>健康食譜</div>
             </a>
             <button
               className={styles.navTextButton}

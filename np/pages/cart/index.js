@@ -21,7 +21,8 @@ import { useCart } from "@/hooks/use-cart";
 // 綠色勾勾
 import Check from "@/components/checkbox-custom/CheckBoxCustom";
 
-const JumpOutCoupon = ({ onClose }) => {
+// 用來關、開優惠券的按鈕
+const JumpOutCoupon = ({ onClose, onSelect }) => {
   const [couponsData, setCouponsData] = useState([]);
   // 抓會員localstorage資料
   const [userData, setUserData] = useState("");
@@ -69,7 +70,7 @@ const JumpOutCoupon = ({ onClose }) => {
   useEffect(() => {
     getCoupoon();
   }, []);
-
+  // 用來點旁邊關閉
   const handleClose = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -77,6 +78,11 @@ const JumpOutCoupon = ({ onClose }) => {
   };
 
   console.log("氣屁氣", couponsData);
+
+  // 新增點擊事件
+  const handleSelectCoupon = (couponsData) => {
+    onSelect(couponsData); // 调用从外部传入的 onSelect 函数
+  };
 
   // 彈出畫面
   return (
@@ -93,6 +99,7 @@ const JumpOutCoupon = ({ onClose }) => {
               key={index}
               Index={index}
               className={JumpOut.CouponList}
+              onSelect={handleSelectCoupon} // 传递处理函数到每个 CouponC
             />
           ))}
         </section>
@@ -105,6 +112,7 @@ const ShopCart1 = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("所有分類");
   const [showFullScreen, setShowFullScreen] = useState(false);
+
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -174,6 +182,7 @@ const ShopCart1 = () => {
 
   // const [discount, setDiscount] = useState(0);
 
+  // 之前的優惠券不會用到-----------
   const handleDiscount = (e) => {
     const selectedID = parseInt(e.target.value); // Make sure to parse the ID to a number
     const selectedCoupon = data.find((coupon) => coupon.id === selectedID); // Use find, not filter
@@ -181,7 +190,9 @@ const ShopCart1 = () => {
   };
   // const finalPrice= if()
 
-  //
+  console.log(totalPrice);
+  console.log(totalProductPrice);
+
   const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
   const discountAmount = coupon ? coupon.disPrice : 0;
   console.log(finalPrice);
@@ -198,7 +209,7 @@ const ShopCart1 = () => {
           ? totalPrice + totalProductPrice
           : calculatedFinalPrice
       );
-      console.log(totalPrice, totalProductPrice, finalPrice, "gdesgsd");
+      console.log(totalPrice, totalProductPrice, finalPrice, "價格");
       // 计算并更新最终价格
     }
   }, [coupon, totalPrice, totalProductPrice, finalPrice]);
@@ -219,10 +230,146 @@ const ShopCart1 = () => {
 
   // console.log(finalPrice);
 
-  // 存到LOCALSTORAGE
-  // const [discountAmount,setDiscountAmount]=useState([])
-  // c;
+  // ----------------------------------------------------
+  // 去抓儲存在localstorage的使用者
+  const [userId, setUserId] = useState(null);
 
+  useEffect(() => {
+    // 從 localStorage 獲取 userData
+    const storedData = localStorage.getItem("userData");
+    if (storedData) {
+      // 解析 JSON 字符串回物件
+      const userData = JSON.parse(storedData);
+      // 更新狀態以保存用戶 ID
+      setUserId(userData.id);
+    }
+  }, []);
+  console.log("userId", userId);
+  // console.log(couponsData);
+
+  // 這邊處理子元件點擊的優惠券
+  const [selectedCoupon, setSelectedCoupon] = useState([]);
+
+  // console.log(selectedCoupon);
+  // 設定儲存優惠券在localstorage中
+  useEffect(() => {
+    const data = window.localStorage.getItem("dataCoupon666");
+    if (data) {
+      setSelectedCoupon(JSON.parse(data));
+    }
+  }, []);
+  //setItem
+  useEffect(() => {
+    if (selectedCoupon.length > 0) {
+      window.localStorage.setItem(
+        "dataCoupon666",
+        JSON.stringify(selectedCoupon)
+      );
+    }
+  }, [selectedCoupon]);
+  const handleCouponSelect = (couponData) => {
+    setSelectedCoupon([couponData]);
+    console.log("Selected coupon:", couponData);
+    console.log(selectedCoupon);
+    setShowFullScreen(false); // 关闭模态框
+  };
+
+  // const [finalPrice2, setFinalPrice2] = useState(
+  //   totalPrice + totalProductPrice
+  // );
+
+  // console.log(finalPrice2);
+
+  // 把折扣金額提出來------
+  const [discountAmount2, setDiscountAmount2] = useState(0); // State to hold the discount amount
+
+  useEffect(() => {
+    if (selectedCoupon.length > 0) {
+      const discount = Number(selectedCoupon[0].discount_amount);
+      setDiscountAmount2(discount);
+    }
+  }, [selectedCoupon]);
+
+  console.log(typeof discountAmount2);
+
+  // const displayText =
+  //   discountAmount2 > 1 ? `${discountAmount2}元` : `${discountAmount2} 折扣`;
+
+  // console.log(typeof displayText)(有分減掉、乘法用)
+  const displayText =
+    discountAmount2 > 1 ? `${discountAmount2}元` : `${discountAmount2} 折`;
+
+  // 提取折扣数字的方法(有分減掉、乘法用)
+  const numericValue = parseFloat(displayText.match(/-?\d+\.?\d*/)[0]);
+
+  console.log(typeof numericValue); // 输出 "number"
+  console.log(numericValue);
+
+  const displayText2 =
+    discountAmount2 > 1
+      ? `${discountAmount2}元`
+      : `${
+          discountAmount2.toString().endsWith("5")
+            ? discountAmount2 * 100
+            : discountAmount2 * 10
+        } 折`;
+  console.log(discountAmount2);
+  console.log(displayText2);
+  // if (discountAmount < 1) {
+  //   return `${
+  //     discountAmount.endsWith("5")
+  //       ? discountAmount * 100
+  //       : discountAmount * 10
+  //   } 折`;
+  // } else {
+  //   return `${parseInt(discountAmount)} 元`;
+  // }
+
+  // 把購買低消費金額提出來------
+  const [minimumConsumption, setMinimumConsumption] = useState(0); //   minimumConsumption
+
+  useEffect(() => {
+    if (selectedCoupon.length > 0) {
+      const consumption = Number(selectedCoupon[0].minimum_spend);
+      setMinimumConsumption(consumption);
+    }
+  }, [selectedCoupon]);
+
+  console.log(minimumConsumption);
+
+  const finalPrice2 = totalPrice + totalProductPrice;
+  console.log(finalPrice2);
+
+  // 判斷優惠卷是使用乘法、除法並計算(若小於1用*，大於1用減法)
+
+  let finalPriceAfterDiscount;
+  if (finalPrice2 >= minimumConsumption) {
+    // 如果满足最低消费，根据 numericValue 的值应用不同的优惠
+    if (numericValue < 1) {
+      // 如果 numericValue 小于 1，视为折扣率，用乘法
+      finalPriceAfterDiscount = finalPrice2 * numericValue;
+    } else {
+      // 如果 numericValue 大于等于 1，视为具体金额，用减法
+      finalPriceAfterDiscount = finalPrice2 - numericValue;
+    }
+    // 对最终价格进行四舍五入到最接近的整数
+    finalPriceAfterDiscount = Math.round(finalPriceAfterDiscount);
+    // 或者，四舍五入保留两位小数
+    // finalPriceAfterDiscount = Number(finalPriceAfterDiscount.toFixed(2));
+  } else {
+    // 如果不满足最低消费，显示原价
+    finalPriceAfterDiscount = finalPrice2;
+  }
+  console.log(finalPriceAfterDiscount);
+
+  // 儲存最終價格到localstorage中
+  useEffect(() => {
+    localStorage.setItem(
+      "finalPriceAfterDiscount55666",
+      finalPriceAfterDiscount
+    );
+    console.log("Saved to localStorage:", finalPriceAfterDiscount);
+  }, [finalPriceAfterDiscount]);
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>
@@ -255,7 +402,7 @@ const ShopCart1 = () => {
                 使用折價券{" "}
               </label>
             </div>
-            {/* 這裡 */}
+            {/* 這裡 是之前優惠券 */}
             <select
               className="form-select form-select-sm "
               // aria-label="Small select example "
@@ -291,9 +438,24 @@ const ShopCart1 = () => {
               </svg>
             </button>
             {showFullScreen && (
-              <JumpOutCoupon onClose={() => setShowFullScreen(false)} />
+              <JumpOutCoupon
+                onClose={() => setShowFullScreen(false)}
+                onSelect={handleCouponSelect}
+              />
             )}
           </div>
+
+          {/* 檢查優惠券 內容 */}
+          {/* {selectedCoupon.map((coupon, index) => (
+            <div key={index}>
+              <p>ID: {coupon.coupon__i_d}</p>
+              <p>Selected Coupon: {coupon.c_name}</p>
+              <p>最低消費: {coupon.minimum_spend}</p>
+              <p>Valid Until: {coupon.valid_end_date}</p>
+              <p>折扣金額: {coupon.discount_amount}</p>
+            </div>
+          ))} */}
+          {/* <p>${discountAmount}</p> */}
           {/*  */}
           {/* <div>{coupon}</div> */}
           <div
@@ -301,12 +463,15 @@ const ShopCart1 = () => {
             style={{ width: "500px" }}
           >
             {/* 折扣 */}
-            <p className={`${shopStyles.fs} `}>折扣金額:</p>
-            <h5 className="pt-1">
-              ${/* {} */}
-              {coupon ? coupon.disPrice : 0}元
-            </h5>
+            <p className={`${shopStyles.fs} `}>優惠券折扣:</p>
+            <h5 className="pt-1"> {displayText2}</h5>
+            {/* 測試用優惠券折扣  <h5 className="pt-1">
+              {coupon ? coupon.disPrice : 0}
+            </h5> */}
           </div>
+          {/* 實際折扣為{displayText} */}
+          {/* <h5>優惠券折扣 : </h5> */}
+          {/* <h5>最低消費 : ${minimumConsumption}</h5> */}
           <div
             className={`${shopStyles.pay} d-flex justify-content-between`}
             style={{ width: "500px" }}
@@ -319,17 +484,18 @@ const ShopCart1 = () => {
             style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>訂單合計:</p>
-            {/* {discountAmount ? (
-              <h5> ${totalPrice - discountAmount}元 </h5>
-            ) : (
-              <h5> {totalPrice}元</h5>
-            )} */}
-            <h5>${finalPrice}元</h5>
 
-            {/* <h5> {discountAmount}元 </h5> */}
-
-            {/* <h5>${finalPrice !== false ? finalPrice : totalPrice}</h5> */}
+            <h5>${finalPriceAfterDiscount}元</h5>
           </div>
+
+          {/*  檢查用<h5>折扣後價格: {finalPriceAfterDiscount}</h5> */}
+          <h5>
+            {finalPrice2 < minimumConsumption && (
+              <p style={{ color: "red" }}>
+                此優惠券使用須滿足最低消費金額: {minimumConsumption}
+              </p>
+            )}
+          </h5>
           <div
             className={`${shopStyles.pay2}  d-flex justify-content-center py-4`}
             style={{ width: "100%", borderTop: "1px solid #d9d9d9" }}
@@ -390,7 +556,8 @@ const ShopCart1 = () => {
           >
             使用折價券 :
           </div>
-          <select
+          {/* 這裡是之前優惠券 */}
+          {/* <select
             className="form-select form-select-sm me-4"
             // aria-label="Small select example "
             style={{ width: "130px" }}
@@ -405,12 +572,13 @@ const ShopCart1 = () => {
                 </option>
               );
             })}
-          </select>
+          </select> */}
           <button
             onClick={() => {
               setShowFullScreen(!showFullScreen);
             }}
-            className={shopStyles.try}
+            className={`${shopStyles.try}`}
+            style={{ marginRight: "80px" }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
