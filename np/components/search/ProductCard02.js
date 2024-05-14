@@ -20,7 +20,7 @@ export default function ProductCard02({ productsData, Index }) {
 
           <div className={`${style["product-info"]}`}>
             <h6 className={`${style["product-name"]} my-2`}>
-              {productsData.productsData}
+              {productsData.product_name}
             </h6>
             <div
               className={`${style["stars-row"]}  d-flex flex-row justify-content-between  mb-3`}

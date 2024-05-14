@@ -3,13 +3,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/styles/Product/products.module.scss";
 
 export default function ProductMainPic({ image_urls }) {
+  console.log("Initial URLs:", image_urls);
   const defaultImage = "/index-images/noResultBG.png";
   const basePath = "/index-images/p-image/"; // 基础路径
 
   // 填充 images 数组，确保至少有四个元素
-  const images = image_urls.map((url) => `${basePath}${url}`); // 为每个 URL 添加路径前缀
+  const images = image_urls.map((url) => `${basePath}${url}`);
+  console.log("Processed Images:", images);
   while (images.length < 4) {
-    images.push(defaultImage); // 如果不足四张图片，添加默认图片
+    images.push(defaultImage);
   }
 
   // 目前顯示圖片的索引

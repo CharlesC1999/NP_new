@@ -42,7 +42,7 @@ export default function ProductCard02({
           >
             <div className={`${style["CardImg"]}`}>
               <img
-                src={`/images/products/${img}`}
+                src={`/index-images/p-image/${img}`}
                 alt="商品圖片"
                 className={`${style["object-fit"]}`}
               />

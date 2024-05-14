@@ -57,6 +57,8 @@ export default function RecipeList() {
   // 總共幾筆資料、總頁數
   const [total, setTotal] = useState(0);
   const [pageCount, setPageCount] = useState(0);
+  // 給手機板TopBar顯示用的總筆數
+  const [totalForTopBar, setTotalForTopBar] = useState(0);
 
   // 排序(前面為排序欄位，後面參數asc為從小到大，desc為從大到小排序)
   const [orderby, setOrderby] = useState({ sort: "recipe__i_d", order: "asc" });
@@ -83,6 +85,7 @@ export default function RecipeList() {
 
       if (data.status === "success") {
         setTotal(data.data.total);
+        setTotalForTopBar(data.data.finalAllCountTopBar);
         setPageCount(data.data.pageCount);
       }
     } catch (e) {
@@ -136,7 +139,7 @@ export default function RecipeList() {
         {/* list排列方式的topbar */}
         <TopBarList
           setOrderby={setOrderby}
-          total={total}
+          total={totalForTopBar}
           showList={showList}
           showGrid={showGrid}
         />

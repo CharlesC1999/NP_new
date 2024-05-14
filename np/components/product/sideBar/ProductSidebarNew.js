@@ -1,5 +1,5 @@
 import React from "react";
-import Newsidebar from "@/components/product/Newsidebar";
+import NewSidebar from "@/components/product/LikeSidebar";
 import styles from "@/components/product/sideBar/SideBarCategory.module.css";
 import { useRouter } from "next/router";
 
@@ -13,7 +13,7 @@ export default function ProductSidebarNew({ mayLikeProducts }) {
     <>
       <div className={`${styles.sideBarBox}`}>
         <div className={`${styles.sideTitle}`}>
-          <h5>您可能喜歡</h5>
+          <h5>最新上架</h5>
         </div>
         <div className={`${styles.line} mb-3`}></div>
         {mayLikeProducts.map((v) => {
@@ -21,7 +21,7 @@ export default function ProductSidebarNew({ mayLikeProducts }) {
             /* console.log("Product ID:", v.id); */
           }
           return (
-            <Newsidebar
+            <NewSidebar
               key={v.id}
               id={v.id}
               name={v.product_name}

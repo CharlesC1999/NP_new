@@ -71,47 +71,26 @@ const ShopCart2 = () => {
   // const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
   // const [finalPrice, setFinalPrice] = useState(0);
-  const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
+  // const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
 
   console.log(totalProduct + totalItems);
-  console.log(finalPrice);
-  console.log(totalPrice + totalProductPrice);
+  // console.log(finalPrice);
+  // console.log(totalPrice + totalProductPrice);
+
+  //去抓存在LOCALSTORAGE的資料
+  const [finalPrice, setFinalPrice] = useState(0); // 初始状态为0
+
   useEffect(() => {
-    // 读取和解析数据
-    const itemsCard = JSON.parse(localStorage.getItem("itemsCard666")) || [];
-    const productItem =
-      JSON.parse(localStorage.getItem("productItem666")) || [];
-    const coupon = JSON.parse(localStorage.getItem("coupon666"));
+    // 尝试从 localStorage 中读取价格
+    const storedPrice = localStorage.getItem("finalPriceAfterDiscount55666");
 
-    // 计算总价和总数量
-    const totalItemsPrice = itemsCard.reduce(
-      (acc, item) => acc + item.price * item.qty,
-      0
-    );
-    const totalProductPrice = productItem.reduce(
-      (acc, item) => acc + item.price * item.qty,
-      0
-    );
-    const itemsQuantity = itemsCard.reduce((acc, item) => acc + item.qty, 0);
-    const productQuantity = productItem.reduce(
-      (acc, item) => acc + item.qty,
-      0
-    );
-
-    const totalPrice = totalItemsPrice + totalProductPrice;
-    const totalQuantity = itemsQuantity + productQuantity;
-
-    // 应用优惠券折扣
-    const discountAmount = coupon ? coupon.disPrice : 0;
-    const calculatedFinalPrice = totalPrice - discountAmount;
-
-    // 更新状态
-
-    // setTotalPrice(totalPrice);
-    setTotalQuantity(totalQuantity);
-    setFinalPrice(calculatedFinalPrice > 0 ? calculatedFinalPrice : 0);
+    // 检查存储的价格是否存在，并转换为数字类型
+    if (storedPrice) {
+      setFinalPrice(Number(storedPrice));
+    } else {
+      console.log("No price found in localStorage.");
+    }
   }, []);
-  //
 
   // 這邊設定localstorage 收件人名稱
   useEffect(() => {
@@ -221,7 +200,8 @@ const ShopCart2 = () => {
             <h4 className={`${styles2.h4} `}>
               訂單總計 :{" "}
               <span style={{ color: "#f0b559" }}>
-                NT${totalPrice + totalProductPrice}
+                {/* NT${totalPrice + totalProductPrice} */}
+                {finalPrice}
               </span>
             </h4>
             <h5 className={styles2.h5}>
