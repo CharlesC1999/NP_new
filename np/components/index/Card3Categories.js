@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./Card3Categories.module.css";
-import Link from "next/Link"
-function Card3Categories({name,id}) {
+
+function Card3Categories({name,id,handleNewCategoryChange}) {
   const productCateIcon = ["cateVegetable01.png","cateFruit.png","cateMeat.png","cateFish.png","cateEgg.png","cateMilk.png","cateVegetable02.png"]
   return(
     <>  
-      <Link href={`/product?categoryFromDetail=${id}`} className={styles.card3boxLink }>
+      <a  className={styles.card3boxLink } onClick={() => handleNewCategoryChange(id)}>
         <div className={`${styles['card3box']}`}>
           <div className={`${styles['card3CategoryContent']}`}>
             <div className={styles.cateImg}>
@@ -15,7 +15,7 @@ function Card3Categories({name,id}) {
             </div>
             
       </div>
-      </Link>
+      </a>
     </>
   )
 }

@@ -140,12 +140,23 @@
 }
 
 .productCard1 {
-  width: 1000px;
-  padding-inline: 20px;
-  row-gap: 30px;
+  align-content: flex-start;
+  position: relative;
+  top: 0px;
+  width: 910px;
+  row-gap: 0px;
+  gap: 10px 20px;
   flex-wrap: wrap;
-  padding-bottom: 30px;
+  /* padding-inline: 45px; */
+  padding-bottom: 20px;
+  margin-bottom: 50px;
 }
+
+/* .mainDiscount {
+  position: absolute;
+  width: 910px;
+  top:
+} */
 
 .List {
   display: none;

@@ -130,7 +130,7 @@
     top: 0px;
     width: 355px;
     /* margin-left: 20px; */
-    /* border: #454545 solid 1px; */
+    /* border: #de3434 solid 1px; */
   }
 }
 
@@ -138,7 +138,7 @@
 /* 商品總width 框架 */
 .productW {
   /* border: #454545 solid 1px; */
-  width: 880px;
+  width: 910px;
   position: relative;
   flex-direction: column;
   display: flex;
@@ -153,18 +153,23 @@
     display: flex;
   }
 }
+.productCardBox {
+  margin-top: 70px;
+  width: 910px;
+  /* height: 50vh; */
+}
 
 .productCard1 {
   /* border: #454545 solid 1px; */
-
-  align-content: flex-start;
+  /* height: 60vh; */
   position: relative;
-  top: 70px;
+  /* top: 70px; */
   width: 910px;
   row-gap: 0px;
   gap: 10px 20px;
   flex-wrap: wrap;
   /* padding-inline: 45px; */
+  padding-inline: 5px;
   padding-bottom: 20px;
   margin-bottom: 50px;
 }
@@ -174,6 +179,11 @@
 }
 
 @media (width: 375px) {
+  .productCardBox {
+    margin-top: 0px;
+    width: 360px;
+    /* height: 50vh; */
+  }
   .productCard1 {
     align-content: flex-start;
     position: relative;
