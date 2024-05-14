@@ -67,10 +67,11 @@ export default function ProductDetail() {
 
   //取得後端網址資料
   const getProduct = async (productId) => {
-    const url = `http://localhost:3005/api/products/${productId}`;
-    console.log(url);
     try {
-      const url = `http://localhost:3005/api/products/${productId}`;
+      const url = `http://localhost:3005/api/products/productId?id=${productId}
+      `;
+      console.log(url);
+
       const res = await fetch(url);
       const data = await res.json();
 
@@ -97,10 +98,9 @@ export default function ProductDetail() {
     if (router.isReady) {
       console.log("isReady", router.isReady, "query", router.query);
       // 確保能得從router.query到pid後，再向伺服器要求對應資料
-      getProduct(router.query.productId);
+      getProduct(router.query.id);
     }
-  }, [router.isReady, router.query.productId]);
-  // console.log(normalCategories);
+  }, [router.isReady, router.query.id]);
   return (
     <>
       <HeaderComponent />
