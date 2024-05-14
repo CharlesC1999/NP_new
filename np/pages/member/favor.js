@@ -25,7 +25,7 @@ export default function Favor() {
   const [filteredClassData, setFilteredClassData] = useState([]);
   const [filteredProductData, setFilteredProductData] = useState([]);
   // 排序
-  const [sortAsc, setSortAsc] = useState(true);
+  const [sortAsc, setSortAsc] = useState(false);
   const sortByTime = () => {
     if (sortAsc) {
       recipeData.sort(
@@ -54,15 +54,13 @@ export default function Favor() {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-  // 用搜尋關鍵字搜尋（食譜名稱、敘述，課程名稱、敘述，商品名稱）
+  // 用搜尋關鍵字搜尋（食譜名稱、課程名稱、商品名稱）
   const resultR = recipeData.filter(
     (item) =>
-      item.title__r_name.includes(searchTerm) ||
-      item.content.includes(searchTerm)
+      item.title__r_name.includes(searchTerm)
   );
   const resultC = classData.filter((item) =>
-    item.class_name.includes(searchTerm) || 
-    item.class_description.includes(searchTerm)
+    item.class_name.includes(searchTerm)
   );
   const resultP = productData.filter((item) =>
     item.product_name.includes(searchTerm)

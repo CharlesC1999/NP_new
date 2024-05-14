@@ -12,9 +12,14 @@ import CheckBoxStyle from "@/components/checkbox-custom/CheckBoxCustom.module.sc
 
 // import Check from "../../public/images/products";
 const Commodity = () => {
-  const { productItems, increaseProduct, decreaseProduct, removeProduct } =
-    useCart();
-  const { totalProduct, totalProductPrice } = useCart();
+  const {
+    productItems,
+    increaseProduct,
+    decreaseProduct,
+    removeProduct,
+    setProductItems,
+  } = useCart();
+  // const { totalProduct, totalProductPrice,set } = useCart();
   //  勾勾
   const [checked, setChecked] = useState(false);
 
@@ -22,6 +27,35 @@ const Commodity = () => {
 
   console.log(productItems);
   // console.log("Product image path:", element.image); // 检查图片路径是否正确
+
+  // 處理商品勾選
+  const handleCheck = (id) => {
+    const nextProducts = productItems.map((v) => {
+      if (v.id === id) {
+        return { ...v, checked: !v.checked };
+      } else {
+        return v;
+      }
+    });
+    setProductItems(nextProducts);
+  };
+
+  // 全選的核取方塊用的事件處理函式
+  const handleToggleCheckedAll = (e) => {
+    const nextProducts = productItems.map((v, i) => {
+      // 強制所有選項物件的checked屬性，和全選的e.target.checked完全一致
+      return { ...v, checked: e.target.checked };
+    });
+
+    // 狀態修改通用第3步
+    setProductItems(nextProducts);
+  };
+
+  // 最終要送出的訂單
+  const finalProduct = productItems.filter((v) => v.checked);
+  console.log(finalProduct);
+
+  // 結束處理商品勾選
 
   return (
     <>
@@ -32,9 +66,7 @@ const Commodity = () => {
       >
         商品
       </main>
-
       {/*  */}
-
       <main
         className={`${CommodityStyles.ProductBorder} ${CommodityStyles.main} ${CommodityStyles.desk}`}
       >
@@ -45,24 +77,27 @@ const Commodity = () => {
           >
             <div className="pt-2">
               {/* 綠色勾勾 */}
-              {/* <div className={CheckBoxStyle["checkbox-wrapper"]}>
+              {/* // 全選的checkbox */}
+              <div className={CommodityStyles["checkbox-wrapper"]}>
                 <FaCheck
-                  style={{ "font-size": "16px" }}
-                  className={`${CheckBoxStyle["fa-check"]} ${
-                    checked ? "d-block" : "d-none"
-                  }`}
+                  style={{ fontSize: "16px" }}
+                  className={`${CommodityStyles["fa-check"]} ${
+                    productItems.every((v) => v.checked) ? "d-block" : "d-none"
+                  } ${productItems.length === 0 ? "d-none" : ""} `}
                 />
                 <input
-                  onChange={() => {
-                    setChecked(!checked);
-                  }}
-                  checked={checked}
+                  checked={productItems.every((v) => v.checked)}
+                  onClick={handleToggleCheckedAll}
                   type="checkbox"
-                  className={`${CheckBoxStyle["test"]} ${
-                    checked ? CheckBoxStyle.checked : ""
-                  }`}
+                  className={`${CommodityStyles["test"]} ${
+                    productItems.length === 0
+                      ? ""
+                      : productItems.every((v) => v.checked)
+                      ? CommodityStyles.checked
+                      : " "
+                  } `}
                 />
-              </div> */}
+              </div>
             </div>
 
             <label className={`${CommodityStyles.fc}  m-1 fw-bold`} htmlFor="">
@@ -103,31 +138,31 @@ const Commodity = () => {
             <div
               className="row"
               key={element.id}
-              style={{ borderBottom: "1px solid #def9ec" }}
+              // style={{ borderBottom: "1px solid #def9ec" }}
             >
               <div
                 className="col d-flex align-items-center justify-content-start ps-3"
                 style={{ width: 100, minWidth: 77 }}
               >
-                {/* <div className={CheckBoxStyle["checkbox-wrapper"]}>
+                {/* // 勾勾 */}
+                <div className={CommodityStyles["checkbox-wrapper"]}>
                   <FaCheck
                     style={{ "font-size": "16px" }}
-                    className={`${CheckBoxStyle["fa-check"]} ${
-                      checked ? "d-block" : "d-none"
+                    className={`${CommodityStyles["fa-check"]}  ${
+                      element.checked ? "d-block" : "d-none"
                     }`}
                   />
                   <input
-                  onChange={() => {
-                    setChecked(!checked);
-                  }}
-                  checked={checked}
-                  type="checkbox"
-                  className={`${CheckBoxStyle["test"]} ${
-                    checked ? CheckBoxStyle.checked : ""
-                  }`}      
+                    onChange={() => {
+                      handleCheck(element.id);
+                    }}
+                    checked={element.checked}
+                    type="checkbox"
+                    className={`${CommodityStyles["test"]} ${
+                      element.checked ? CommodityStyles.checked : ""
+                    }`}
                   />
-                </div> */}
-                {/* <Check /> */}
+                </div>
               </div>
               <div className="col-2 d-flex align-items-center justify-content-center">
                 {element.image || (element.img && element.img[0]) ? (
@@ -195,7 +230,6 @@ const Commodity = () => {
           );
         })}
       </main>
-
       {/* 商品欄位 手機樣式*/}
       <main
         className={`${CommodityStyles.main} ${CommodityStyles.ProductBorder} ${CommodityStyles.mobile}`}
@@ -220,7 +254,11 @@ const Commodity = () => {
                     src={`/images/products/${element.image || element.img[0]}`}
                     className="img-fluid"
                     alt={element.name || "Default name"}
-                    style={{ minWidth: 75 }}
+                    style={{
+                      objectFit: "cover",
+                      height: "100%",
+                      width: "121px",
+                    }}
                   />
                 ) : (
                   <span>No image available</span>
