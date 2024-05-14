@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //style
 import style from "@/components/product/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import Link from "next/link";
 import FavIconProduct from "@/components/favor/FavIconProduct";
 
 // 購物車加入按鈕加入購物車
@@ -34,13 +34,19 @@ export default function ProductCard02({
     <>
       <li key={id} className="list-unstyled">
         <div className={`${style["productCard"]} my-4`}>
-          <div className={`${style["CardImg"]}`}>
-            <img
-              src={`/images/products/${img}`}
-              alt="商品圖片"
-              className={`${style["object-fit"]}`}
-            />
-          </div>
+          <Link
+            href={`/product/productId?id=${id}`}
+            className="text-decoration-none"
+          >
+            <div className={`${style["CardImg"]}`}>
+              <img
+                src={`/images/products/${img}`}
+                alt="商品圖片"
+                className={`${style["object-fit"]}`}
+              />
+            </div>
+          </Link>
+
           <div className={`${style["product-info"]}`}>
             <h6 className={`${style["product-name"]} my-2`}>{name}</h6>
             <div

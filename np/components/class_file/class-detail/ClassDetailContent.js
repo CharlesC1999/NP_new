@@ -144,7 +144,7 @@ const ClassDetail = ({ classData }) => {
               <div className={styles.classInfor}>
                 <div className={styles.inforTitle}>報名人數：</div>
                 <div className={styles.inforDetail}>
-                  10 / {classData.class_person_limit}
+                  {classData.current_person} / {classData.class_person_limit}
                 </div>
               </div>
             </div>

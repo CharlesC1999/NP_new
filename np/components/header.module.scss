@@ -123,6 +123,11 @@ a:visited {
   flex-direction: column;
   align-items: center;
   padding: 0px 0;
+  box-shadow: 0px 2px 4px #bbbbbb77;
+  top: 0;
+  width: 100%;
+  position: sticky;
+  z-index: 999;
 }
 
 .header {
@@ -133,11 +138,17 @@ a:visited {
   padding: 12px 0px;
   max-width: 1440px;
   width: 100%;
+  transition: 0.3s ease-in-out;
 }
-
+.header.shrink{
+  padding: 0px;
+}
 @media (max-width: 375px) {
   .container {
     padding: 8px 0px;
+  }
+  .container.shrink{
+    padding: 0px;
   }
   .header {
     max-width: 100%;
@@ -159,28 +170,34 @@ a:visited {
 
 .selectionLink {
   background: #fefefe;
-  color: black;
-  padding: 10px;
+  color: #6a6868;
+  padding-inline: 10px;
+  padding-block:6px;
   text-align: left;
   text-decoration: none;
   display: block;
   width: 100%;
   cursor: pointer;
 }
-
+.selectionLink:hover{
+  color: var(--green01);
+  background: #eef4ea;
+}
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
 .dropdownContent {
-  font-size: 16px;
+  display: none;
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   position: absolute;
   min-width: 100px;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow:0px -1px 2px 1px rgb(0 0 0 / 4%);
   background: #fefefe;
+  border-radius: 10px;
   z-index: 1;
 }
 
@@ -255,14 +272,10 @@ a:visited {
   text-decoration: none;
   display: flex;
   align-items: start;
-  color: #454545;
+  color: #565C5D;
   cursor: pointer;
-}
-.pageLink:active {
-  color: #78cea6;
-}
-.pageLink:visited {
-  color: #454545;
+  font-size: 20px;
+  gap: 8px;
 }
 
 /* 頁面連結 */
@@ -274,12 +287,18 @@ a:visited {
   justify-content: space-between;
   max-width: 1440px;
   width: 100%;
+  height: 83.281px;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
 }
-
+.headerContent.shrink{
+  height: 0;
+}
 @media (max-width: 375px) {
   .headerContent {
     flex-wrap: wrap;
     max-width: 100%;
+    height: 46.063px;
   }
 }
 
@@ -372,7 +391,7 @@ a:visited {
   display: flex;
   font-size: 16px;
   font-weight: 500;
-  gap: 16px;
+  gap: 8px;
   line-height: 120%;
   margin: auto 0;
   text-align: center;
@@ -475,32 +494,61 @@ a:visited {
 
 .navList {
   display: flex;
-  gap: 35px;
-  padding: 10px 48px;
+  gap: 15px;
+  margin-bottom: 10px;
 }
-
 /* 頁面連結 */
 .navItemPromotion {
   display: flex;
   gap: 4px;
   justify-content: center;
-  margin-inline-end: 16px;
+  align-items: center;
+  height: 45px;
+  padding-inline:15px;
 }
-
+.navItemPromotion:hover{
+  color:var(--green02);
+  border-bottom:3px solid var(--green02);
+  cursor:pointer
+}
+.navItemPromotion:hover .pageLink{
+  color:var(--green02);
+}
 .navItemPageLinks {
   display: flex;
-  gap: 3px;
+  gap: 8px;
   justify-content: center;
+  align-items:center;
+  height: 45px;
+  padding-inline:15px;
+}
+.navItemPageLinks:hover{
+  color:var(--green02);
+  border-bottom:3px solid var(--green02);
+  cursor:pointer
+}
+.navItemPageLinks:hover .pageLink{
+  color:var(--green02);
 }
 /* 頁面連結 */
 
 .navItemAbout {
   display: flex;
   gap: 3px;
+  align-items:center;
+  height: 45px;
+  padding-inline:15px;
   justify-content: center;
   letter-spacing: 0.8px;
 }
-
+.navItemAbout:hover{
+  color:var(--green02);
+  border-bottom:3px solid var(--green02) ;
+  cursor:pointer
+ }
+ .navItemAbout:hover .pageLink{
+  color:var(--green02);
+}
 .navTextButton {
   padding: 0;
   border: none;

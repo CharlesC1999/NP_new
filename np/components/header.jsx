@@ -19,6 +19,9 @@ import { FaListUl, FaCheck } from "react-icons/fa";
 import { LuChefHat, LuClipboardEdit } from "react-icons/lu";
 import { GrGroup } from "react-icons/gr";
 import { IoMdBusiness } from "react-icons/io";
+// 引入食譜分類的鉤子
+import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
+import { useCategory } from "@/hooks/ClassProp";
 
 const MobileSideBar = ({ onClose }) => {
   const sidebarRef = useRef(null);
@@ -29,6 +32,7 @@ const MobileSideBar = ({ onClose }) => {
 
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
+  const goProductPromote = () => router.push(routes.productPromote);
   const goRecipeList = () => router.push(routes.recipeList);
   const goSpeekerList = () => router.push(routes.speakerList);
   const doLogin = () => router.push(routes.login);
@@ -150,7 +154,7 @@ const MobileSideBar = ({ onClose }) => {
           </div>
           <div className={styles.optionBlock}>
             <button className={styles.optionBtn}>
-              <RiDiscountPercentLine size={24} />
+              <RiDiscountPercentLine size={24} onClick={goProductPromote} />
               優惠活動
             </button>
           </div>
@@ -216,7 +220,15 @@ const HeaderComponent = () => {
   // console.log(auth);
   let hasMargin = true;
   let isMobile = false;
-
+  // 下拉式分類連結（接收分類 context）
+  const { setRecipeCategory } = useCategoryForSQL();
+  const { setCategoryId } = useCategory();
+  const handleCategoryChangeR = (category = "") => {
+    setRecipeCategory(category);
+  };
+  const handleCategoryChangeC = (categoryId) => {
+    setCategoryId(categoryId);
+  };
   // 搜索下拉選單
   const menuItems = [
     { id: 1, name: "所有分類", className: styles.selectionLink },
@@ -238,12 +250,48 @@ const HeaderComponent = () => {
 
   // 商品下拉選單
   const productCategory = [
-    { id: 1, name: "新鮮蔬菜", href: "#", className: styles.selectionLink },
-    { id: 2, name: "新鮮水果", href: "#", className: styles.selectionLink },
-    { id: 3, name: "嚴選肉類", href: "#", className: styles.selectionLink },
-    { id: 4, name: "海鮮水產", href: "#", className: styles.selectionLink },
-    { id: 5, name: "乳品烘焙", href: "#", className: styles.selectionLink },
-    { id: 6, name: "風味精粹", href: "#", className: styles.selectionLink },
+    {
+      id: 1,
+      name: "新鮮蔬菜",
+      href: "/product?categoryFromDetail=1",
+      className: styles.selectionLink,
+    },
+    {
+      id: 2,
+      name: "新鮮水果",
+      href: "/product?categoryFromDetail=2",
+      className: styles.selectionLink,
+    },
+    {
+      id: 3,
+      name: "嚴選肉類",
+      href: "/product?categoryFromDetail=3",
+      className: styles.selectionLink,
+    },
+    {
+      id: 4,
+      name: "海鮮水產",
+      href: "/product?categoryFromDetail=4",
+      className: styles.selectionLink,
+    },
+    {
+      id: 5,
+      name: "精選雞蛋",
+      href: "/product?categoryFromDetail=5",
+      className: styles.selectionLink,
+    },
+    {
+      id: 6,
+      name: "豆乳製品",
+      href: "/product?categoryFromDetail=6",
+      className: styles.selectionLink,
+    },
+    {
+      id: 7,
+      name: "素食專區",
+      href: "/product?categoryFromDetail=7",
+      className: styles.selectionLink,
+    },
   ];
 
   // 課程下拉選單
@@ -255,6 +303,30 @@ const HeaderComponent = () => {
     { id: 5, name: "養生/素食", href: "#", className: styles.selectionLink },
     { id: 6, name: "烘焙/點心", href: "#", className: styles.selectionLink },
   ];
+  // -----------------header 捲動效果 -------------------------------
+  const [shrink, setShrink] = useState(false);
+  const lastScrollY = useRef(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const threshold = 100; //設定閾值避免偵測捲動太敏感導致閃爍問題
+      console.log("currentScrollY", currentScrollY);
+      // console.log("lastScrollY", lastScrollY.current);
+      if (Math.abs(currentScrollY - lastScrollY.current) > threshold) {
+        if (currentScrollY > lastScrollY.current) {
+          setShrink(true);
+          console.log("往下捲動");
+        } else {
+          setShrink(false);
+          console.log("往上捲動");
+        }
+        lastScrollY.current = currentScrollY;
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // -----------------------開關控制區--------------------------------
   // 搜尋開關控制
   const toggleDropdown = () => setIsSearchOpen(!isSearchOpen);
@@ -494,9 +566,15 @@ const HeaderComponent = () => {
   const goSpeekerList = () => router.push(routes.speakerList);
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
+    <div className={shrink?`${styles.container} ${styles.shrink}`:`${styles.container}`}>
+      <header className={shrink?`${styles.header} ${styles.shrink}`:`${styles.header}`}>
+        <div
+          className={
+            shrink
+              ? `${styles.headerContent} ${styles.shrink}`
+              : `${styles.headerContent}`
+          }
+        >
           <div className={styles.logoWrapper}>
             <button
               className={styles.mobileMenu}
@@ -527,7 +605,9 @@ const HeaderComponent = () => {
               <img
                 src="/images/np_logo.png"
                 alt="Company Logo"
-                className={styles.logo}
+                className={
+                  shrink ? `${styles.logo} ${styles.shrink}` : `${styles.logo}`
+                }
               />
             </a>
           </div>
@@ -570,9 +650,6 @@ const HeaderComponent = () => {
                         >
                           {item.name}
                         </a>
-                        {index < menuItems.length - 1 && (
-                          <hr className={styles.noMargin} />
-                        )}
                       </React.Fragment>
                     ))}
                   </div>
@@ -856,7 +933,9 @@ const HeaderComponent = () => {
           </div>
         </div>
       </header>
-      <nav className={styles.nav}>
+      <nav
+        className={shrink ? `${styles.nav} ${styles.shrink}` : `${styles.nav}`}
+      >
         <ul className={styles.navList}>
           <li className={styles.navItemPromotion}>
             <a onClick={goProductPromote} className={styles.pageLink}>
@@ -894,13 +973,13 @@ const HeaderComponent = () => {
                   height="24"
                   viewBox="0 0 24 24"
                 >
-                  <g fill="none" fillRule="evenodd">
+                  <svg fill="none" fillRule="evenodd">
                     <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
                     <path
                       fill="#50bf8b"
                       d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
                     />
-                  </g>
+                  </svg>
                 </svg>
               ) : (
                 <svg
@@ -924,9 +1003,9 @@ const HeaderComponent = () => {
                 className={styles.dropdownContent}
                 ref={productDropdownRef}
                 style={{
-                  marginTop: "50px",
-                  marginRight: "4px",
-                  width: "110px",
+                  marginTop: "291px",
+                  marginLeft: "52px",
+                  width: "200px",
                 }}
               >
                 {productCategory.map((item, index) => (
@@ -939,9 +1018,6 @@ const HeaderComponent = () => {
                     >
                       {item.name}
                     </a>
-                    {index < productCategory.length - 1 && (
-                      <hr className={styles.noMargin} />
-                    )}
                   </React.Fragment>
                 ))}
               </div>
@@ -993,24 +1069,27 @@ const HeaderComponent = () => {
                 className={styles.dropdownContent}
                 ref={recipeDropdownRef}
                 style={{
-                  marginTop: "50px",
-                  marginRight: "4px",
-                  width: "110px",
+                  marginTop: "255px",
+                  marginLeft: "52px",
+                  width: "200px",
                 }}
               >
                 {recipeCategory.map((item, index) => (
                   <React.Fragment key={item.id}>
                     <a
                       key={item.id}
-                      onClick={() => handleRecipeClick()}
-                      href={item.href}
+                      // onClick={() => handleRecipeClick()}
+                      onClick={() => {
+                        router.push("/recipe");
+                        handleCategoryChangeR(item.id);
+                      }}
                       className={item.className}
                     >
                       {item.name}
                     </a>
-                    {index < recipeCategory.length - 1 && (
+                    {/* {index < recipeCategory.length - 1 && (
                       <hr className={styles.noMargin} />
-                    )}
+                    )} */}
                   </React.Fragment>
                 ))}
               </div>
@@ -1062,24 +1141,26 @@ const HeaderComponent = () => {
                 className={styles.dropdownContent}
                 ref={calssDropdownRef}
                 style={{
-                  marginTop: "50px",
-                  marginRight: "4px",
-                  width: "110px",
+                  marginTop: "255px",
+                  marginLeft: "52px",
+                  width: "200px",
                 }}
               >
                 {classCategory.map((item, index) => (
                   <React.Fragment key={item.id}>
                     <a
                       key={item.id}
-                      onClick={() => handleClassClick()}
-                      href={item.href}
+                      onClick={() => {
+                        router.push("/class-page");
+                        handleCategoryChangeC(item.id);
+                      }}
                       className={item.className}
                     >
                       {item.name}
                     </a>
-                    {index < classCategory.length - 1 && (
+                    {/* {index < classCategory.length - 1 && (
                       <hr className={styles.noMargin} />
-                    )}
+                    )} */}
                   </React.Fragment>
                 ))}
               </div>
@@ -1088,39 +1169,11 @@ const HeaderComponent = () => {
           <li className={styles.navItemPageLinks}>
             <a onClick={goSpeekerList} className={styles.pageLink}>
               <span className={styles.navText}>講師陣容</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <g fill="none" fillRule="evenodd">
-                  <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                  <path
-                    fill="#D9E1E6"
-                    d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
-                  />
-                </g>
-              </svg>
             </a>
           </li>
           <li className={styles.navItemAbout}>
             <a href="#" className={styles.pageLink}>
               <span className={styles.navText}>認識Nutripolls</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <g fill="none" fillRule="evenodd">
-                  <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                  <path
-                    fill="#D9E1E6"
-                    d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z"
-                  />
-                </g>
-              </svg>
             </a>
           </li>
         </ul>

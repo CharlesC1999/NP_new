@@ -23,6 +23,9 @@ const ClassList = () => {
   // 先導入讀取鉤子
   const { setLoading } = useLoader();
   const { categoryId, setCategoryId } = useCategory();
+  const { finalStartDate, setFinalStartDate } = useCategory();
+  const { finalEndDate, setFinalEndDate } = useCategory();
+  const { priceRange, setPriceRange } = useCategory();
 
   const containerStyle = {
     display: "flex",
@@ -74,9 +77,10 @@ const ClassList = () => {
   // 用於選擇分類
   // const [categoryId, setCategoryId] = useState(null);
   // 獲取到日期的資料
-  const [finalStartDate, setFinalStartDate] = useState(null);
-  const [finalEndDate, setFinalEndDate] = useState(null);
-
+  // const [finalStartDate, setFinalStartDate] = useState(null);
+  // const [finalEndDate, setFinalEndDate] = useState(null);
+  // 獲取價格區間
+  // const [finalPriceRange, setFinalPriceRange] = useState({ min: 0, max: 9999 });
   const formatStartDate = moment(finalStartDate).format("YYYY-MM-DD HH:mm:ss");
   const formatEndDate = moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss");
 
@@ -94,10 +98,21 @@ const ClassList = () => {
       endDate: finalEndDate
         ? moment(finalEndDate).format("YYYY-MM-DD HH:mm:ss")
         : undefined,
+      priceStart: priceRange.min,
+      priceEnd: priceRange.max,
     };
-    console.log(params); // 确认这些参数的值
+    console.log(params); // 全部篩選的條件
     getClasses(params);
-  }, [page, perpage, sortBy, categoryId, formatStartDate, formatEndDate]);
+  }, [
+    page,
+    perpage,
+    sortBy,
+    categoryId,
+    formatStartDate,
+    formatEndDate,
+    priceRange?.min,
+    priceRange?.max,
+  ]);
 
   const getClasses = async (params) => {
     // console.log(params);
@@ -123,27 +138,11 @@ const ClassList = () => {
     }
   };
 
-  // const handleCategoryChange = async (categoryId) => {
-  //   console.log("Category changing to:", categoryId);
-  //   setCategoryId(categoryId);
-  //   // 這裡直接調用 getClasses，傳遞新的 categoryId
-  //   setPage(1);
-  //   const newParams =
-  //     categoryId === 0
-  //       ? { page: 1, perpage, sortBy }
-  //       : { page: 1, perpage, sortBy, categoryId };
-  //   const data = await getClasses(newParams);
-  //   console.log("Data received on category change:", data);
-  //   if (data && data.status === "success") {
-  //     setTotal(data.data.total);
-  //   }
-  // };
-
   useEffect(() => {
     setPageCount(Math.ceil(total / perpage));
   }, [total, perpage]);
 
-  // 初次渲染時取得食譜列表資料
+  // 初次渲染時取得課程列表資料
   useEffect(() => {
     getClasses();
   }, []);
@@ -184,8 +183,22 @@ const ClassList = () => {
     setFinalEndDate(date);
   };
 
-  console.log(finalStartDate, finalEndDate, "goal");
+  const handlePriceRange = (range) => {
+    setPriceRange(range);
+  };
 
+  console.log(finalStartDate, finalEndDate, priceRange, "goal");
+
+  const reset = () => {
+    // reset classList
+    setFinalStartDate("");
+    setFinalEndDate("");
+
+    //  reset price range
+    setPriceRange({ min: 0, max: 9999 });
+  };
+
+  // ----------------------------顯示模式
   // 切換到Grid模式
   const showGrid = () => {
     setDisplayGrid(true);
@@ -197,7 +210,7 @@ const ClassList = () => {
     setDisplayGrid(false);
     setActiveButton("list");
   };
-
+  // ----------------------------顯示模式
   console.log(total, "im here");
   console.log(page, "nowPage");
   return (
@@ -210,7 +223,11 @@ const ClassList = () => {
         <ClassClassifacion categoryChange={setCategoryId} />
         <div className={ContentSetting.DisplaySetting}>
           <div style={{ height: "100%" }} className={ContentSetting.MobileNone}>
-            <ClassSidebar finalStart={startDate} finalEnd={endDate} />
+            <ClassSidebar
+              finalStart={startDate}
+              finalEnd={endDate}
+              finalPrice={handlePriceRange}
+            />
           </div>
 
           <div className={CardStyle.SearchResultContainer}>

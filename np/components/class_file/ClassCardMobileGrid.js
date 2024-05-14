@@ -1,6 +1,7 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import styles from "./classCardMobileGrid.module.css";
+// 收藏的鉤子
 import FavIconClass from "../favor/FavIconClass";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -94,7 +95,9 @@ export default function ProductCardMobileGrid({ classesData }) {
           <FavIconClass id={classesData.class__i_d} />
         </div>
         <div className={styles.productPricing}>
-          <div className={styles.currentPrice}>$NT{classesData.c_price}</div>
+          <div className={styles.currentPrice}>
+            $NT{classesData.c_discount_price}
+          </div>
           <div className={styles.originalPrice}>${classesData.c_price}</div>
         </div>
         <div className={styles.productActions}>

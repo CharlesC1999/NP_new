@@ -20,6 +20,8 @@ router.get('/', async function (req, res) {
     categoryId,
     startDate: formatStartDate,
     endDate: formatEndDate,
+    priceStart,
+    priceEnd,
   } = req.query
   console.log(req.query, 'gg')
   console.log(categoryId, formatStartDate, formatEndDate)
@@ -65,11 +67,16 @@ router.get('/', async function (req, res) {
     whereClause += ` AND c.class_date <= ${validEndDate}`
   }
 
-  // if (formatStartDate === 'undefined') {
-  //   if (formatStartDate && formatEndDate) {
-  //     whereClause -= ` AND c.class_date >= ${db.escape(formatStartDate)} AND c.class_date <= ${db.escape(formatEndDate)}`
-  //   }
-  // }
+  // 價格篩選
+  if (priceStart && priceEnd) {
+    whereClause += ` AND c.c_discount_price BETWEEN ${db.escape(
+      priceStart
+    )} AND ${db.escape(priceEnd)}`
+  } else if (priceStart) {
+    whereClause += ` AND c.c_discount_price >= ${db.escape(priceStart)}`
+  } else if (priceEnd) {
+    whereClause += ` AND c.c_discount_price <= ${db.escape(priceEnd)}`
+  }
 
   const sqlCate = `
     SELECT c.*, ci.image__u_r_l, s.speaker_name
