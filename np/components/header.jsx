@@ -32,6 +32,7 @@ const MobileSideBar = ({ onClose }) => {
 
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
+  const goProductPromote = () => router.push(routes.productPromote);
   const goRecipeList = () => router.push(routes.recipeList);
   const goSpeekerList = () => router.push(routes.speakerList);
   const doLogin = () => router.push(routes.login);
@@ -153,7 +154,7 @@ const MobileSideBar = ({ onClose }) => {
           </div>
           <div className={styles.optionBlock}>
             <button className={styles.optionBtn}>
-              <RiDiscountPercentLine size={24} />
+              <RiDiscountPercentLine size={24} onClick={goProductPromote} />
               優惠活動
             </button>
           </div>
