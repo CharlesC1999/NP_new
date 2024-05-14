@@ -112,6 +112,7 @@ export default function Product() {
       sort: orderby.sort,
     }));
   }, [page, perpage, selectdiscountCate, orderby]);
+
   console.log(page);
   const getMayLike = async () => {
     const searchParams = new URLSearchParams(querySearch);

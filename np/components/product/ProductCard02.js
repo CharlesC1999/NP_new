@@ -6,6 +6,7 @@ import Link from "next/link";
 import FavIconProduct from "@/components/favor/FavIconProduct";
 
 // 購物車加入按鈕加入購物車
+import toast from "react-hot-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/hooks/use-cart";
 import withReactContent from "sweetalert2-react-content";
@@ -18,6 +19,7 @@ export default function ProductCard02({
   img,
   image,
   average_rating,
+  qty = 1,
 }) {
   // 購物車加入按鈕加入購物車
   const { addProduct } = useCart();
@@ -40,7 +42,7 @@ export default function ProductCard02({
           >
             <div className={`${style["CardImg"]}`}>
               <img
-                src={`/images/products/${img}`}
+                src={`/index-images/p-image/${img}`}
                 alt="商品圖片"
                 className={`${style["object-fit"]}`}
               />
@@ -85,10 +87,13 @@ export default function ProductCard02({
                     <div className={`${style["price"]}`}>$ {price}</div>
                   )}
                 </div>
-                <a
+                <button
                   type="button"
                   className={`${style["btn"]} btn justify-content-center align-centent-center d-flex`}
-                  onClick={() => {
+                  onClick={(e) => {
+                    // e.stopPropagation();
+                    e.preventDefault();
+
                     if (!auth.isLoggedIn) {
                       return toast.error("請先登入再使用!");
                     }
@@ -97,16 +102,18 @@ export default function ProductCard02({
                       name,
                       price,
                       image,
+                      // quantity,
+                      qty,
                     });
                     notify(name);
-                    addProduct({ id, name, price, image });
+                    addProduct({ id, name, price, image, qty });
                   }}
                 >
                   <i
                     className={`fa-solid fa-cart-shopping`}
                     style={{ color: "#3BB77E" }}
                   ></i>
-                </a>
+                </button>
               </div>
             </div>
           </div>

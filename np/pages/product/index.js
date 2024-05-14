@@ -273,7 +273,7 @@ export default function Product() {
   }, [queryParams]);
   console.log(newCategories);
   // queryParams 作为 useEffect 的依赖
-  console.log(queryParams);
+  // console.log(queryParams);
 
   const [reviewCount, setReviewCount] = useState(0);
   const TotalRow = total;
