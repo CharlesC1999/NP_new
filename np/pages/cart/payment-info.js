@@ -101,6 +101,42 @@ const ShopCart3 = () => {
     }
   }, []);
 
+  // 去抓存在localStorage的資料dataCoupon666
+
+  const [dataCoupon, setDataCoupon] = useState([]);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("dataCoupon666");
+    if (storedData) {
+      setDataCoupon(JSON.parse(storedData));
+    }
+  }, []);
+
+  console.log(dataCoupon);
+
+  const dataCoupon2 = dataCoupon.map((v) => {
+    return v.discount_amount;
+  });
+  console.log(dataCoupon2);
+
+  // const dataCouponId = dataCoupon[0].coupon__i_d;
+  // console.log(dataCouponId);
+  const dataCouponId = dataCoupon.length > 0 ? dataCoupon[0].coupon__i_d : null;
+  console.log(dataCouponId);
+
+  const displayTexts = dataCoupon2.map((discountAmount) => {
+    if (discountAmount < 1) {
+      return `${
+        discountAmount.endsWith("5")
+          ? discountAmount * 100
+          : discountAmount * 10
+      } 折`;
+    } else {
+      return `${parseInt(discountAmount)} 元`;
+    }
+  });
+  console.log(displayTexts);
+  // 計算總金額
   // 去抓存全域鉤子的資料
   // 設定總額
   const { totalItems, totalPrice, totalProduct, totalProductPrice } = useCart();
@@ -113,6 +149,19 @@ const ShopCart3 = () => {
     if (storedPayMethod) {
       const cleanPayMethod = storedPayMethod.replace(/^"|"$/g, "");
       setPayMethod(cleanPayMethod);
+    }
+  }, []);
+
+  // 去抓localStorage總價的資料finalPriceAfterDiscount55666
+  const [finalPriceAfterDiscount, setFinalPriceAfterDiscount] = useState(0);
+
+  useEffect(() => {
+    const storedFinalPrice = localStorage.getItem(
+      "finalPriceAfterDiscount55666"
+    );
+    if (storedFinalPrice) {
+      const cleanFinalPrice = storedFinalPrice.replace(/^"|"$/g, "");
+      setFinalPriceAfterDiscount(cleanFinalPrice);
     }
   }, []);
 
@@ -216,11 +265,13 @@ const ShopCart3 = () => {
       // 合計
       totalPrice: totalPrice + totalProductPrice || 0,
       // 優惠券id
-      couponId: coupon.id || 0,
+      couponId: dataCouponId || 0,
       // 優惠券扣掉價格
-      discountPrice: coupon.disPrice || 0,
+      discountPrice: allPrice - finalPriceAfterDiscount || 0,
       // 最終價格
-      finalPrice: totalPrice + totalProductPrice - coupon.disPrice || 0,
+      finalPrice:
+        totalPrice + totalProductPrice - (allPrice - finalPriceAfterDiscount) ||
+        0,
       // 收件人
       receiverName: receiverName,
       // 手機
@@ -427,9 +478,17 @@ const ShopCart3 = () => {
                 className={`${styles3.fc} col d-flex align-items-center justify-content-center`}
                 // style={{ paddingRight: "40PX" }}
               >
-                NT${coupon.disPrice}
+                NT${allPrice - finalPriceAfterDiscount}
+                {/* NT${coupon.disPrice} */}
               </div>
             </div>
+
+            {/* 計算使用優惠卷金額、折扣 */}
+            {/* <div>
+              {displayTexts.map((text, index) => (
+                <p key={index}>{text}</p>
+              ))}
+            </div> */}
 
             <div
               className="row py-2 pt-3"
@@ -440,7 +499,8 @@ const ShopCart3 = () => {
               <div className={`${styles3.fc} col text-center`}></div>
               {/* <div className={`${styles3.fc} col text-center`}></div> */}
               <div className={`${styles3.fc} col text-center`}>
-                NT$ {finalPrice}
+                NT${finalPriceAfterDiscount}
+                {/* 舊的折扣後金額NT$ {finalPrice} */}
               </div>
             </div>
           </section>

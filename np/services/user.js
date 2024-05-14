@@ -9,8 +9,6 @@ export const getFavs = async () => {
     const responseRecipe = await axiosInstanceFav.get("/favor-recipe");
     const responseClass = await axiosInstanceFav.get("/favor-class");
     const responseProduct = await axiosInstanceFav.get("/favor-product");
-    // 使用 axiosInstanceFav 發送 購物車GET 請求
-    const responseCart = await axiosInstanceFav.get("/cartList");
 
     // 從回應中解構出需要的 data 部分，並重新命名
     const { data: dataRecipe } = responseRecipe;

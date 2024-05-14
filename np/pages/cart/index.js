@@ -274,34 +274,102 @@ const ShopCart1 = () => {
     setShowFullScreen(false); // 关闭模态框
   };
 
-  const [finalPrice2, setFinalPrice2] = useState(
-    totalPrice + totalProductPrice
-  );
+  // const [finalPrice2, setFinalPrice2] = useState(
+  //   totalPrice + totalProductPrice
+  // );
 
-  // 把折扣金額提出來
-  const totalDiscount = selectedCoupon.reduce(
-    (sum, coupon) => sum + parseFloat(coupon.discount_amount),
-    0
-  );
+  // console.log(finalPrice2);
 
-  // const [discountCoupon, setDiscountCoupon] = useState(0);
+  // 把折扣金額提出來------
+  const [discountAmount2, setDiscountAmount2] = useState(0); // State to hold the discount amount
 
-  // useEffect(() => {
-  //   // 从 localStorage 获取数据
-  //   const data = localStorage.getItem("dataCoupon666");
-  //   if (data) {
-  //     const coupons = JSON.parse(data);
-  //     if (coupons.length > 0) {
-  //       // 假设我们关心第一个优惠券的 discount_amount
-  //       const firstCouponDiscount = parseFloat(coupons[0].discount_amount);
-  //       setDiscountCoupon(firstCouponDiscount);
-  //     }
-  //   }
-  // }, [discountCoupon]);
+  useEffect(() => {
+    if (selectedCoupon.length > 0) {
+      const discount = Number(selectedCoupon[0].discount_amount);
+      setDiscountAmount2(discount);
+    }
+  }, [selectedCoupon]);
 
-  // useEffect(() => {
-  //   console.log("Selected coupon updated:", selectedCoupon);
-  // }, [selectedCoupon]);
+  console.log(typeof discountAmount2);
+
+  // const displayText =
+  //   discountAmount2 > 1 ? `${discountAmount2}元` : `${discountAmount2} 折扣`;
+
+  // console.log(typeof displayText)(有分減掉、乘法用)
+  const displayText =
+    discountAmount2 > 1 ? `${discountAmount2}元` : `${discountAmount2} 折`;
+
+  // 提取折扣数字的方法(有分減掉、乘法用)
+  const numericValue = parseFloat(displayText.match(/-?\d+\.?\d*/)[0]);
+
+  console.log(typeof numericValue); // 输出 "number"
+  console.log(numericValue);
+
+  const displayText2 =
+    discountAmount2 > 1
+      ? `${discountAmount2}元`
+      : `${
+          discountAmount2.toString().endsWith("5")
+            ? discountAmount2 * 100
+            : discountAmount2 * 10
+        } 折`;
+  console.log(discountAmount2);
+  console.log(displayText2);
+  // if (discountAmount < 1) {
+  //   return `${
+  //     discountAmount.endsWith("5")
+  //       ? discountAmount * 100
+  //       : discountAmount * 10
+  //   } 折`;
+  // } else {
+  //   return `${parseInt(discountAmount)} 元`;
+  // }
+
+  // 把購買低消費金額提出來------
+  const [minimumConsumption, setMinimumConsumption] = useState(0); //   minimumConsumption
+
+  useEffect(() => {
+    if (selectedCoupon.length > 0) {
+      const consumption = Number(selectedCoupon[0].minimum_spend);
+      setMinimumConsumption(consumption);
+    }
+  }, [selectedCoupon]);
+
+  console.log(minimumConsumption);
+
+  const finalPrice2 = totalPrice + totalProductPrice;
+  console.log(finalPrice2);
+
+  // 判斷優惠卷是使用乘法、除法並計算(若小於1用*，大於1用減法)
+
+  let finalPriceAfterDiscount;
+  if (finalPrice2 >= minimumConsumption) {
+    // 如果满足最低消费，根据 numericValue 的值应用不同的优惠
+    if (numericValue < 1) {
+      // 如果 numericValue 小于 1，视为折扣率，用乘法
+      finalPriceAfterDiscount = finalPrice2 * numericValue;
+    } else {
+      // 如果 numericValue 大于等于 1，视为具体金额，用减法
+      finalPriceAfterDiscount = finalPrice2 - numericValue;
+    }
+    // 对最终价格进行四舍五入到最接近的整数
+    finalPriceAfterDiscount = Math.round(finalPriceAfterDiscount);
+    // 或者，四舍五入保留两位小数
+    // finalPriceAfterDiscount = Number(finalPriceAfterDiscount.toFixed(2));
+  } else {
+    // 如果不满足最低消费，显示原价
+    finalPriceAfterDiscount = finalPrice2;
+  }
+  console.log(finalPriceAfterDiscount);
+
+  // 儲存最終價格到localstorage中
+  useEffect(() => {
+    localStorage.setItem(
+      "finalPriceAfterDiscount55666",
+      finalPriceAfterDiscount
+    );
+    console.log("Saved to localStorage:", finalPriceAfterDiscount);
+  }, [finalPriceAfterDiscount]);
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>
@@ -376,7 +444,9 @@ const ShopCart1 = () => {
               />
             )}
           </div>
-          {selectedCoupon.map((coupon, index) => (
+
+          {/* 檢查優惠券 內容 */}
+          {/* {selectedCoupon.map((coupon, index) => (
             <div key={index}>
               <p>ID: {coupon.coupon__i_d}</p>
               <p>Selected Coupon: {coupon.c_name}</p>
@@ -384,8 +454,8 @@ const ShopCart1 = () => {
               <p>Valid Until: {coupon.valid_end_date}</p>
               <p>折扣金額: {coupon.discount_amount}</p>
             </div>
-          ))}
-          <p>${discountAmount}</p>
+          ))} */}
+          {/* <p>${discountAmount}</p> */}
           {/*  */}
           {/* <div>{coupon}</div> */}
           <div
@@ -393,12 +463,15 @@ const ShopCart1 = () => {
             style={{ width: "500px" }}
           >
             {/* 折扣 */}
-            <p className={`${shopStyles.fs} `}>折扣金額:</p>
-            <h5 className="pt-1">
-              ${/* {} */}
-              {coupon ? coupon.disPrice : 0} 元
-            </h5>
+            <p className={`${shopStyles.fs} `}>優惠券折扣:</p>
+            <h5 className="pt-1"> {displayText2}</h5>
+            {/* 測試用優惠券折扣  <h5 className="pt-1">
+              {coupon ? coupon.disPrice : 0}
+            </h5> */}
           </div>
+          {/* 實際折扣為{displayText} */}
+          {/* <h5>優惠券折扣 : </h5> */}
+          {/* <h5>最低消費 : ${minimumConsumption}</h5> */}
           <div
             className={`${shopStyles.pay} d-flex justify-content-between`}
             style={{ width: "500px" }}
@@ -411,17 +484,18 @@ const ShopCart1 = () => {
             style={{ width: "500px" }}
           >
             <p className={`${shopStyles.fs} `}>訂單合計:</p>
-            {/* {discountAmount ? (
-              <h5> ${totalPrice - discountAmount}元 </h5>
-            ) : (
-              <h5> {totalPrice}元</h5>
-            )} */}
-            <h5>${finalPrice}元</h5>
 
-            {/* <h5> {discountAmount}元 </h5> */}
-
-            {/* <h5>${finalPrice !== false ? finalPrice : totalPrice}</h5> */}
+            <h5>${finalPriceAfterDiscount}元</h5>
           </div>
+
+          {/*  檢查用<h5>折扣後價格: {finalPriceAfterDiscount}</h5> */}
+          <h5>
+            {finalPrice2 < minimumConsumption && (
+              <p style={{ color: "red" }}>
+                此優惠券使用須滿足最低消費金額: {minimumConsumption}
+              </p>
+            )}
+          </h5>
           <div
             className={`${shopStyles.pay2}  d-flex justify-content-center py-4`}
             style={{ width: "100%", borderTop: "1px solid #d9d9d9" }}
