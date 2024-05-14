@@ -88,7 +88,6 @@ router.get('/', async function (req, res) {
     if (rating) {
       ratingclause = `HAVING ROUND(AVG(pReview.rating), 1) >= ${rating} AND ROUND(AVG(pReview.rating), 1) < ${Number(rating) + 1}  `
     }
-    console.log(rating)
     const mayLikeProducts = await sequelize.query(
       `SELECT p.product_name, p.product_price, p.id , pImage.image_url
       FROM product AS p
@@ -99,6 +98,7 @@ router.get('/', async function (req, res) {
         type: sequelize.QueryTypes.SELECT,
       }
     )
+
     const productQuery = `
     SELECT 
       p.id, 
@@ -128,14 +128,51 @@ router.get('/', async function (req, res) {
       ${orderByClause}
       LIMIT ${limit} OFFSET ${offset}
     `
+    const disCountproductQuery = `
+    SELECT 
+      p.id, 
+      p.product_name, 
+      p.product_price, 
+      p.discount_price,
+      p.product_stock, 
+      p.product_description,
+      p.valid, 
+      p.upload_date,
+      p.category_id, 
+      pCate.name AS cate_name,
+      pCate.parent_id,
+      pCate.id AS CateID,
+      pImg.image_url AS image_urls,
+      ROUND(AVG(pReview.rating), 1) AS average_rating,
+      GROUP_CONCAT(CONCAT_WS('|', pReview.comment, pReview.rating, pReview.user_id, DATE_FORMAT(pReview.created_at, '%Y-%m-%d %T'))) AS review_details,
+      GROUP_CONCAT(pImg.sort_order ORDER BY pImg.sort_order) AS sort_orders
+      FROM 
+      product AS p
+      LEFT JOIN product_review AS pReview ON p.id = pReview.product_id
+      LEFT JOIN product_image AS pImg ON p.id = pImg.product_id
+      LEFT JOIN product_categories AS pCate ON p.category_id = pCate.id
+      WHERE category_id = 23
+      LIMIT ${limit} OFFSET ${offset}
+    `
     const categoryQuery = `
     SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId
     FROM product_categories
     `
-    const [products, categories] = await Promise.all([
-      sequelize.query(productQuery, { type: sequelize.QueryTypes.SELECT }),
-      sequelize.query(categoryQuery, { type: sequelize.QueryTypes.SELECT }),
-    ])
+    const categoryQueryDisCount = `
+    SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId
+    FROM product_categories WHERE id IN(14,15,16,17,18,19,20,23)
+    `
+    const [products, categories, categoryDisCount, disCountproduct] =
+      await Promise.all([
+        sequelize.query(productQuery, { type: sequelize.QueryTypes.SELECT }),
+        sequelize.query(categoryQuery, { type: sequelize.QueryTypes.SELECT }),
+        sequelize.query(categoryQueryDisCount, {
+          type: sequelize.QueryTypes.SELECT,
+        }),
+        sequelize.query(disCountproductQuery, {
+          type: sequelize.QueryTypes.SELECT,
+        }),
+      ])
 
     const productQueryCount = `
     SELECT COUNT(*) AS count
@@ -149,12 +186,11 @@ router.get('/', async function (req, res) {
       GROUP BY p.id ${ratingclause}
     ) AS subquery
     `
-    console.log(productQuery)
+    console.log(disCountproduct)
     const resultCount = await sequelize.query(productQueryCount, {
       type: sequelize.QueryTypes.SELECT,
     })
     const totalRecords = resultCount[0].count
-    console.log('Total records:', totalRecords)
     const categoryCounts = await fetchCategoryCounts()
     const totalPages = Math.ceil(totalRecords / perpageNow)
     res.json({
@@ -167,6 +203,8 @@ router.get('/', async function (req, res) {
         currentPage: pageNow,
         categoryCounts: categoryCounts,
         mayLikeProducts: mayLikeProducts,
+        categoryDisCount: categoryDisCount,
+        disCountproduct: disCountproduct,
       },
     })
   } catch (error) {
@@ -180,12 +218,155 @@ router.get('/', async function (req, res) {
   }
 })
 
+router.get('/disCount', async function (req, res) {
+  try {
+    const {
+      page = 1,
+      perpage = 16,
+      sort = 'id',
+      order = 'asc',
+      discount_id = '',
+    } = req.query
+
+    const pageNow = Number(page) || 1 //點擊的頁碼數字
+
+    const perpageNow = Number(perpage) || 16 //顯示幾筆？
+    const limit = perpageNow
+
+    const offset = (pageNow - 1) * perpageNow //第一筆索引
+
+    const conditions = []
+    if (discount_id) {
+      const ids = discount_id.split(',').map((id) => id.trim())
+      conditions.push(`category_id IN (${ids.join(',')})`)
+    } else {
+      // 否則，使用預設的優惠分類ID
+      conditions.push(`category_id IN (14,15,16,17,18,19,20,23)`)
+    }
+    const conditionsValues = conditions.filter((v) => v)
+
+    const where =
+      conditionsValues.length > 0
+        ? `WHERE ` + conditionsValues.map((v) => `( ${v} )`).join(` AND `)
+        : ''
+
+    let orderByClause = sort ? `ORDER BY ${sort} ${order}` : 'ORDER BY id ASC'
+
+    const mayLikeProductsQuery = `SELECT p.product_name, p.product_price, p.id , pImage.image_url
+      FROM product AS p
+      JOIN product_image AS pImage ON p.id = pImage.product_id
+      ORDER BY RAND()
+      LIMIT 5;`
+
+    const disCountproductQuery = `
+    SELECT 
+    p.id, 
+    p.product_name, 
+    p.product_price, 
+    p.discount_price,
+    p.product_stock, 
+    p.product_description,
+    p.valid, 
+    p.upload_date,
+    p.category_id, 
+    pCate.name AS cate_name,
+    pCate.parent_id,
+    pCate.id AS CateID,
+    pImg.image_url AS image_urls,
+    ROUND(AVG(pReview.rating), 1) AS average_rating,
+    GROUP_CONCAT(DISTINCT CONCAT_WS('|', pReview.comment, pReview.rating, pReview.user_id, DATE_FORMAT(pReview.created_at, '%Y-%m-%d %T'))) AS review_details,
+    GROUP_CONCAT(DISTINCT pImg.sort_order ORDER BY pImg.sort_order) AS sort_orders
+FROM 
+    product AS p
+    LEFT JOIN product_review AS pReview ON p.id = pReview.product_id
+    LEFT JOIN product_image AS pImg ON p.id = pImg.product_id
+    LEFT JOIN product_categories AS pCate ON p.category_id = pCate.id
+    ${where}
+GROUP BY 
+    p.id
+    ${orderByClause}
+    LIMIT ${limit} OFFSET ${offset}`
+
+    const categoryQuery = `
+    SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId
+    FROM product_categories
+    `
+    const categoryQueryDisCount = `
+    SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId
+    FROM product_categories WHERE id IN(14,15,16,17,18,19,20,23)
+    `
+    const disCountproductCount = `
+    SELECT COUNT(*) AS count
+    FROM (
+      SELECT p.id
+      FROM product AS p
+      LEFT JOIN product_review AS pReview ON p.id = pReview.product_id
+      LEFT JOIN product_image AS pImg ON p.id = pImg.product_id
+      LEFT JOIN product_categories AS pCate ON p.category_id = pCate.id
+      ${where}
+      GROUP BY p.id 
+    ) AS subquery
+    `
+    const [
+      categories,
+      categoryDisCount,
+      disCountproduct,
+      resultCount,
+      mayLikeProducts,
+    ] = await Promise.all([
+      sequelize.query(categoryQuery, { type: sequelize.QueryTypes.SELECT }),
+      sequelize.query(categoryQueryDisCount, {
+        type: sequelize.QueryTypes.SELECT,
+      }),
+      sequelize.query(disCountproductQuery, {
+        type: sequelize.QueryTypes.SELECT,
+      }),
+      sequelize.query(disCountproductCount, {
+        type: sequelize.QueryTypes.SELECT,
+      }),
+      sequelize.query(mayLikeProductsQuery, {
+        type: sequelize.QueryTypes.SELECT,
+      }),
+    ])
+
+    const totalRecords = resultCount[0].count
+    console.log('Total records:', totalRecords) //76
+    const categoryCounts = await fetchCategoryCounts()
+    const totalPages = Math.ceil(totalRecords / perpageNow)
+    console.log(totalPages) //4
+    console.log(disCountproductQuery)
+    console.log('Received page:', pageNow, 'and perpage:', perpageNow)
+    console.log('Calculated offset:', offset)
+    res.json({
+      status: 'success',
+      data: {
+        totalRecords: totalRecords, //總筆數
+        totalPages: totalPages, //總頁數
+        currentPage: pageNow, //現在第一筆索引
+        categories: categories,
+        categoryCounts: categoryCounts,
+        mayLikeProducts: mayLikeProducts,
+        categoryDisCount: categoryDisCount,
+        disCountproduct: disCountproduct,
+        disCountproductCount: disCountproductCount,
+      },
+    })
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    return res.status(500).json({
+      status: 'error',
+      message: 'Internal server error.',
+      error: error.message,
+    })
+  }
+})
+
 // GET - 得到單筆資料(注意，有動態參數時要寫在GET區段最後面)
-router.get('/:pid', async function (req, res) {
-  const productId = parseInt(req.params.pid) // 將id轉成數字
+router.get('/productId', async function (req, res) {
+  const { id } = req.query
+  const productId = id // 將id轉成數字
 
   try {
-    // 执行分类查询
     const recipes = await sequelize.query(
       `SELECT * FROM recipe
       WHERE recipe__i_d IN (4,49,48,50)`,
@@ -196,18 +377,20 @@ router.get('/:pid', async function (req, res) {
       `SELECT DISTINCT id AS cateId, name AS cateName, parent_id AS parentId, cate_png AS catePng FROM product_categories`,
       { type: sequelize.QueryTypes.SELECT }
     )
+
     const mayLikeProducts = await sequelize.query(
-      `SELECT p.product_name,p.id, p.product_price, pImage.image_url
+      `SELECT p.product_name, p.id, p.product_price, pImage.image_url
        FROM product AS p
        JOIN product_image AS pImage ON p.id = pImage.product_id
        WHERE p.category_id = (SELECT category_id FROM product WHERE id = :productId)
          AND p.id <> :productId
        LIMIT 5;`,
       {
-        replacements: { productId: productId },
+        replacements: { productId }, // 使用參數化查詢來提升安全性
         type: sequelize.QueryTypes.SELECT,
       }
     )
+
     const categoryCounts = await fetchCategoryCounts()
     //執行資料庫搜尋 query
     const [results, metadata] = await sequelize.query(
