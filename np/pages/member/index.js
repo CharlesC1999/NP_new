@@ -97,7 +97,9 @@ export default function MemberPage2() {
   } else {
     content = (
       <div className="d-flex flex-column justify-content-center align-items-center my-5">
-        <h2>嗨~你還沒有登入喔！所以看不到你的資料啦~</h2>
+        <h2 className={`text-center styles["warning"]`}>
+          嗨~你還沒有登入喔！<div>所以看不到你的資料啦~</div>
+        </h2>
         <Link
           className="text-decoration-none"
           style={{ color: "var(--green02)", fontSize: "20px" }}

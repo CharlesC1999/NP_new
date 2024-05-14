@@ -76,6 +76,7 @@ const ShopCart4 = () => {
       localStorage.removeItem("coupon666");
       localStorage.removeItem("itemsCard666");
       localStorage.removeItem("productItem666");
+      localStorage.removeItem("finalPriceAfterDiscount55666");
     } else {
       toast.error("付款失敗");
     }
