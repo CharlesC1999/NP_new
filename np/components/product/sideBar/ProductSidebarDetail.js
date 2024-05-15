@@ -139,7 +139,7 @@ export default function ProductSidebarDetail({
           className={`${styles.clearFilter} btn my-3`}
           onClick={resetFilters}
         >
-          清空條件
+          重新篩選
         </button>
       </div>
     </div>
