@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 //style
 import style from "@/components/product/productCard02.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,6 +32,15 @@ export default function ProductCard02({
       icon: "success",
     });
   };
+  const imageLoaded = useCallback(() => {
+    const imgElements = document.querySelectorAll(".CardImg img");
+    imgElements.forEach((img) => {
+      if (img && img.previousElementSibling) {
+        img.style.display = "block"; // 確保圖片顯示
+        img.previousElementSibling.style.display = "none"; // 隱藏加載器
+      }
+    });
+  }, []);
   return (
     <>
       <li key={id} className="list-unstyled">
@@ -41,10 +50,12 @@ export default function ProductCard02({
             className="text-decoration-none"
           >
             <div className={`${style["CardImg"]}`}>
+              <div className={`${style["loader"]}`}></div>
               <img
                 src={`/index-images/p-image/${img}`}
                 alt="商品圖片"
                 className={`${style["object-fit"]}`}
+                onLoad={imageLoaded} // Corrected to use React event handling
               />
             </div>
           </Link>
