@@ -12,7 +12,7 @@ import withReactContent from "sweetalert2-react-content";
 export default function ProductCard02({ productsData, Index, qty = 1 }) {
   console.log(productsData, "classDW");
   const { id, product_name, product_price, image_url } = productsData;
-  console.log(id, product_name, product_price, image_url);
+  console.log(id, product_name, product_price, image_url, qty);
   const { auth } = useAuth();
   const { addProduct } = useCart();
   const MySwal = withReactContent(Swal);
