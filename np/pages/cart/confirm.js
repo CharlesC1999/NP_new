@@ -73,7 +73,7 @@ const ShopCart4 = () => {
       toast.success("付款成功");
       console.log("Checkout successful:", res.data.status);
 
-      localStorage.removeItem("coupon666");
+      localStorage.removeItem("dataCoupon666");
       localStorage.removeItem("itemsCard666");
       localStorage.removeItem("productItem666");
       localStorage.removeItem("finalPriceAfterDiscount55666");

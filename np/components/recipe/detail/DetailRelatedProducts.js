@@ -358,6 +358,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                 height={15}
                 viewBox="0 0 15 15"
                 fill="none"
+                className={styles["cart-icon"]}
               >
                 <mask
                   id="mask0_2921_33112"

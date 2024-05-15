@@ -218,8 +218,6 @@ export default function Product() {
   };
 
   const router = useRouter();
-  // const { categoryFromDetail } = router.query;
-  // console.log(categoryFromDetail);
   const [queryParams, setQueryParams] = useState({
     page: 1,
     perpage,
@@ -233,9 +231,7 @@ export default function Product() {
   console.log(queryParams);
 
   useEffect(() => {
-    setQueryParams((prev) => ({
-      ...prev,
-      page: page,
+    const newParams = {
       perpage,
       price_gte: priceRange.min || "",
       price_lte: priceRange.max || "",
@@ -243,7 +239,23 @@ export default function Product() {
       rating: rating || "",
       order: orderby.order,
       sort: orderby.sort,
+    };
+
+    // 判断是否是 page 以外的任何参数改变
+    const shouldResetPage = Object.keys(newParams).some(
+      (key) => queryParams[key] !== newParams[key]
+    );
+
+    setQueryParams((prev) => ({
+      ...prev,
+      ...newParams,
+      page: shouldResetPage ? 1 : page,
     }));
+
+    // 如果需要重置分页，我们在这里设置 page 为 1
+    if (shouldResetPage) {
+      setPage(1);
+    }
   }, [priceRange, rating, orderby, perpage, newCategories, page]); // 包括所有可能影响 queryParams 的依赖
 
   // 请求产品数据
@@ -271,9 +283,6 @@ export default function Product() {
     };
     getProducts();
   }, [queryParams]);
-  console.log(newCategories);
-  // queryParams 作为 useEffect 的依赖
-  // console.log(queryParams);
 
   const [reviewCount, setReviewCount] = useState(0);
   const TotalRow = total;
