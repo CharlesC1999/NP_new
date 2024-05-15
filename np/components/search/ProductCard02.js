@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 
 export default function ProductCard02({ productsData, Index, qty = 1 }) {
   console.log(productsData, "classDW");
+
   const { product_id, product_name, product_price, image_url } = productsData;
   console.log(product_id, product_name, product_price, image_url);
   const { auth } = useAuth();

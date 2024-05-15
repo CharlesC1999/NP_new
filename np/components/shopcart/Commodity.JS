@@ -167,7 +167,9 @@ const Commodity = () => {
               <div className="col-2 d-flex align-items-center justify-content-center">
                 {element.image || (element.img && element.img[0]) ? (
                   <img
-                    src={`/images/products/${element.image || element.img[0]}`}
+                    src={`/images/products/${
+                      element.image || element.img[0] || element.img.image_url
+                    }`}
                     className="img-fluid"
                     alt={element.name || "Default name"}
                     style={{ minWidth: 75 }}
