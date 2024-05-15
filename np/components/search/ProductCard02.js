@@ -13,8 +13,22 @@ import toast from "react-hot-toast";
 export default function ProductCard02({ productsData, Index, qty = 1 }) {
   console.log(productsData, "classDW");
 
-  const { product_id, product_name, product_price, image_url } = productsData;
-  console.log(product_id, product_name, product_price, image_url);
+  const { product_id, product_name, product_price, image_url, discount_price } =
+    productsData;
+
+  const id = product_id;
+  const name = product_name;
+  const price = product_price;
+  const image = image_url;
+  const discountPrice = discount_price;
+
+  console.log(
+    product_id,
+    product_name,
+    product_price,
+    image_url,
+    discount_price
+  );
   const { auth } = useAuth();
   const { addProduct } = useCart();
   const MySwal = withReactContent(Swal);
@@ -102,14 +116,22 @@ export default function ProductCard02({ productsData, Index, qty = 1 }) {
                       image_url,
                       product_name,
                       product_price,
+                      discount_price,
                       qty,
                     });
                     notify(product_name);
                     addProduct({
-                      product_id,
-                      image_url,
-                      product_name,
-                      product_price,
+                      // product_id,
+                      // image_url,
+                      // product_name,
+                      // product_price,
+                      // discount_price,
+                      // qty,
+                      id,
+                      name,
+                      price,
+                      image,
+                      discountPrice,
                       qty,
                     });
                   }}
