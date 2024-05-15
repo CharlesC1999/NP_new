@@ -94,7 +94,7 @@
 @media (max-width: 375px) {
   .menu2 {
     margin: 0;
-    
+
     font-size: 14px;
     /* font-weight: 400; */
     /* line-height: 120%; */
@@ -104,7 +104,7 @@
     flex-direction: row;
     justify-content: space-between;
     gap: auto;
-    padding: 20px 19px 0px 19px;
+    padding: 0px 19px 10px 19px;
     color: var(--gray02);
     border-top: none;
   }
@@ -116,6 +116,7 @@
   margin: 0;
   @media screen and (max-width: 376px) {
     /* align-content: center; */
+    min-height: auto;
   }
 }
 
@@ -151,7 +152,7 @@
     @media screen and (max-width: 376px) {
       position: absolute;
       left: 2px;
-      padding-top: 8px;
+      padding-top: 15px;
     }
   }
 }
@@ -208,8 +209,13 @@
 
   @media screen and (max-width: 376px) {
     padding: 0;
+    height: auto;
+
     /* align-content: center; */
   }
+}
+.lefta a:hover{
+  color: var(--green02);
 }
 
 .lefta a {
@@ -220,5 +226,10 @@
 @media (max-width: 375px) {
   .lefta {
     margin: auto;
+    /* height: 10px; */
   }
+}
+
+.activeLink {
+  color: green; /* 點擊後的顏色 */
 }
