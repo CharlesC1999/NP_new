@@ -565,8 +565,16 @@ const HeaderComponent = () => {
   const goSpeekerList = () => router.push(routes.speakerList);
 
   return (
-    <div className={shrink?`${styles.container} ${styles.shrink}`:`${styles.container}`}>
-      <header className={shrink?`${styles.header} ${styles.shrink}`:`${styles.header}`}>
+    <div
+      className={
+        shrink ? `${styles.container} ${styles.shrink}` : `${styles.container}`
+      }
+    >
+      <header
+        className={
+          shrink ? `${styles.header} ${styles.shrink}` : `${styles.header}`
+        }
+      >
         <div
           className={
             shrink
