@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // 确保已经导入 axios
 import { useRouter } from "next/router"; // 导入 useRouter 以便在需要时进行路由跳转
 
-
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -26,7 +25,6 @@ export const AuthProvider = ({ children }) => {
       });
     }
   }, []);
-
 
   const router = useRouter();
 
@@ -85,6 +83,10 @@ export const AuthProvider = ({ children }) => {
     if (auth.token) {
       localStorage.removeItem("token");
       localStorage.removeItem("userData");
+      localStorage.removeItem("dataCoupon666");
+      localStorage.removeItem("itemsCard666");
+      localStorage.removeItem("productItem666");
+      localStorage.removeItem("finalPriceAfterDiscount55666");
       setAuth({ token: null, isLoggedIn: false, userData: [] });
       try {
         await axios.delete("http://localhost:3005/api/auth/logout", {
@@ -113,8 +115,6 @@ export const AuthProvider = ({ children }) => {
         logout,
         googleLogin,
         lineLogin,
-  
-    
       }}
     >
       {children}
