@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import CateSidebar from "@/components/product/CateSidebar";
 import styles from "@/components/product/sideBar/SideBarCategory.module.css";
 //useContext
-import { useProductCategories } from "@/hooks/use-product-cate";
+// import { useProductCategories } from "@/hooks/use-product-cate";
 
 export default function ProductSidebarCate({
   normalCategories,

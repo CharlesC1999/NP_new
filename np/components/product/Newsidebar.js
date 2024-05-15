@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 function Newsidebar({ id, name, price, img }) {
   const router = useRouter();
   const handleCategoryClick = (cateId) => () => {
-    router.push(`/product/${cateId}`);
+    router.push(`/product/productId?id=${cateId}`);
   };
   return (
     <>
