@@ -29,6 +29,7 @@ const Sidebar = () => {
     User_image: null,
   });
 
+
   // 串接上後端並把token傳進headers用來解碼
   // !!! 從localStorage取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
   const getUser = async () => {
@@ -118,8 +119,8 @@ const Sidebar = () => {
                 修改密碼
               </Link>
             </div> */}
-            <div className={styles.lefta}>
-              <Link href="/member/member-buy" alt="">
+            <div className={styles.lefta} >
+              <Link href="/member/member-buy" alt="" >
                 購買清單
               </Link>
             </div>
