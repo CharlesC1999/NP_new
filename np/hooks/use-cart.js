@@ -107,6 +107,7 @@ export function CartProvider({ children }) {
   const totalItems = finalItems.reduce((acc, v) => acc + v.qty, 0);
   const totalPrice = finalItems.reduce((acc, v) => acc + v.qty * v.price, 0);
 
+  console.log(totalItems);
   // ---------------------------------
   // 這邊是加上商品
   const [productItems, setProductItems] = useState([]);
@@ -259,7 +260,6 @@ export function CartProvider({ children }) {
         totalProduct,
         totalProductPrice,
         addToCartAry,
-
         setProductItems,
       }}
     >
