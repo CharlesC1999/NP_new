@@ -57,74 +57,40 @@ const ShopCart2 = () => {
   const [inputAddress, setInputAddress] = useState("");
 
   // 信用卡勾選
-  const payOptions = ["Line Pay", "credit card"];
+  const payOptions = ["Line Pay", "貨到付款"];
   const [selectedPayment, setSelectedPayment] = useState("line pay");
 
   const handlePaymentChange = (event) => {
     setSelectedPayment(event.target.value);
   };
 
-  // localstorage  總額呈現，商品總額
+  const { totalItems, totalPrice, totalProduct, totalProductPrice } = useCart();
+
+  console.log(totalProductPrice);
+  console.log(totalPrice);
   // const [totalPrice, setTotalPrice] = useState(0);
-  // const [totalQuantity, setTotalQuantity] = useState(0);
-  // const [totalProductPrice, setTotalproductPrice] = useState(0);
-  // const [coupon, setCoupon] = useState(0);
-  // useEffect(() => {
-  //   // 从 localStorage 获取名为 'itemsCard666' 的值
-  //   const storedItems = localStorage.getItem("itemsCard666");
-  //   if (storedItems) {
-  //     const items = JSON.parse(storedItems); // 解析字符串为数组对象
-  //     // 计算所有物品的价格总和和总数量
-  //     let total = 0;
-  //     let quantity = 0;
-  //     items.forEach((item) => {
-  //       total += item.price * item.qty || 0;
-  //       quantity += item.qty || 0;
-  //     });
-  //     setTotalPrice(total); // 设置总价状态
-  //     setTotalQuantity(quantity); // 设置总数量状态
-  //   }
-  // }, []);
-  //
-  const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const [finalPrice, setFinalPrice] = useState(0);
+  // const [finalPrice, setFinalPrice] = useState(0);
+  // const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
+
+  console.log(totalProduct + totalItems);
+  // console.log(finalPrice);
+  // console.log(totalPrice + totalProductPrice);
+
+  //去抓存在LOCALSTORAGE的資料
+  const [finalPrice, setFinalPrice] = useState(0); // 初始状态为0
 
   useEffect(() => {
-    // 读取和解析数据
-    const itemsCard = JSON.parse(localStorage.getItem("itemsCard666")) || [];
-    const productItem =
-      JSON.parse(localStorage.getItem("productItem666")) || [];
-    const coupon = JSON.parse(localStorage.getItem("coupon666"));
+    // 尝试从 localStorage 中读取价格
+    const storedPrice = localStorage.getItem("finalPriceAfterDiscount55666");
 
-    // 计算总价和总数量
-    const totalItemsPrice = itemsCard.reduce(
-      (acc, item) => acc + item.price * item.qty,
-      0
-    );
-    const totalProductPrice = productItem.reduce(
-      (acc, item) => acc + item.price * item.qty,
-      0
-    );
-    const itemsQuantity = itemsCard.reduce((acc, item) => acc + item.qty, 0);
-    const productQuantity = productItem.reduce(
-      (acc, item) => acc + item.qty,
-      0
-    );
-
-    const totalPrice = totalItemsPrice + totalProductPrice;
-    const totalQuantity = itemsQuantity + productQuantity;
-
-    // 应用优惠券折扣
-    const discountAmount = coupon ? coupon.disPrice : 0;
-    const calculatedFinalPrice = totalPrice - discountAmount;
-
-    // 更新状态
-    setTotalPrice(totalPrice);
-    setTotalQuantity(totalQuantity);
-    setFinalPrice(calculatedFinalPrice > 0 ? calculatedFinalPrice : 0);
+    // 检查存储的价格是否存在，并转换为数字类型
+    if (storedPrice) {
+      setFinalPrice(Number(storedPrice));
+    } else {
+      console.log("No price found in localStorage.");
+    }
   }, []);
-  //
 
   // 這邊設定localstorage 收件人名稱
   useEffect(() => {
@@ -233,15 +199,18 @@ const ShopCart2 = () => {
           <div className={styles2.prompt}>
             <h4 className={`${styles2.h4} `}>
               訂單總計 :{" "}
-              <span style={{ color: "#f0b559" }}>NT${finalPrice}</span>
+              <span style={{ color: "#f0b559" }}>
+                {/* NT${totalPrice + totalProductPrice} */}
+                {finalPrice}
+              </span>
             </h4>
             <h5 className={styles2.h5}>
-              購物車:({totalQuantity}件)
-              <img
+              購物車:({totalProduct + totalItems}件)
+              {/* <img
                 src="/images/arrow-down.png"
                 alt=""
                 style={{ width: 12, marginLeft: 15 }}
-              />
+              /> */}
             </h5>
           </div>
           {/* 表單部分 */}
@@ -267,7 +236,7 @@ const ShopCart2 = () => {
                     }}
                   />
                 </div>
-                {inputName}
+
                 <div className="mb-3">
                   <label
                     htmlFor="exampleInputEmail1"
@@ -286,52 +255,9 @@ const ShopCart2 = () => {
                     }}
                   />
                 </div>
-                {inputEmail}
+
                 {/* 套bs5套件 */}
-                {/* <label htmlFor="phone" className={`${styles2.label}`}>
-                  電話號碼:
-                </label>
-                <div className="input-group mb-3" style={{}}>
-                  <div
-                    className={`${styles2.button} ${styles2.input} btn btn-outline-secondary dropdown-toggle py-1`}
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    style={{ width: "40%" }}
-                  >
-                    TW +886
-                  </div>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Separated link
-                      </a>
-                    </li>
-                  </ul>
-                  <input
-                    type="text"
-                    className="form-control py-1"
-                    aria-label="Text input with dropdown button"
-                  />
-                </div> */}
+
                 <div className="mb-3">
                   <label
                     htmlFor="exampleInputEmail1"
@@ -349,7 +275,6 @@ const ShopCart2 = () => {
                       setInputNumber(event.target.value);
                     }}
                   />
-                  {inputNumber}
                 </div>
 
                 <div className="form-group form-check">
@@ -411,7 +336,6 @@ const ShopCart2 = () => {
                     value={inputPackageName}
                     onChange={(event) => setInputPackage(event.target.value)}
                   />
-                  {inputPackageName}
                 </div>
 
                 <div className="mb-3">
@@ -431,7 +355,6 @@ const ShopCart2 = () => {
                       setInputPackageNumber(event.target.value);
                     }}
                   />
-                  {inputPackageNumber}
                 </div>
 
                 <div className="form-group form-check">
@@ -464,7 +387,6 @@ const ShopCart2 = () => {
                       setInputAddress(event.target.value);
                     }}
                   />
-                  {inputAddress}
                 </div>
                 <div className="form-group form-check">
                   <input

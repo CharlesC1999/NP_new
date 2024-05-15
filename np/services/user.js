@@ -9,6 +9,7 @@ export const getFavs = async () => {
     const responseRecipe = await axiosInstanceFav.get("/favor-recipe");
     const responseClass = await axiosInstanceFav.get("/favor-class");
     const responseProduct = await axiosInstanceFav.get("/favor-product");
+
     // 從回應中解構出需要的 data 部分，並重新命名
     const { data: dataRecipe } = responseRecipe;
     const { data: dataClass } = responseClass;
@@ -79,7 +80,7 @@ export const getHomePageInfo = async () => {
       hotProduct: dataHomePage.data.hotProduct,
       hotClass: dataHomePage.data.hotClass,
       recommendedRecipe: dataHomePage.data.recommendedRecipe,
-      productCate:dataHomePage.data.productCate
+      productCate: dataHomePage.data.productCate,
     };
   } catch (error) {
     console.error("Error fetching favorites:", error);

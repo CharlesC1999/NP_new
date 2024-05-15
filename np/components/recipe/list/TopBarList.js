@@ -204,7 +204,7 @@ export default function TopBarList({
               }}
               className="text-center m-0"
             >
-              全部 (50)
+              全部 ({total})
             </p>
             {newCategories.map((v, i) => {
               return (

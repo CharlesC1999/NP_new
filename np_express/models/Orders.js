@@ -26,20 +26,20 @@ export default async function (sequelize) {
       },
       order_date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
 
       recipient_name: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
       shipping_address: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
       contact_phone: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
 
       // 原本是   coupon_id
@@ -65,7 +65,7 @@ export default async function (sequelize) {
         type: DataTypes.ENUM,
         values: ['處理中', '已完成', '取消', '已退款'],
         defaultValue: '處理中',
-        allowNull: false,
+        allowNull: true,
       },
 
       // product_Type: {

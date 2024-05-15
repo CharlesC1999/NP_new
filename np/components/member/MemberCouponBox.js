@@ -251,7 +251,8 @@ const MemberCouponBox = () => {
                   }
 
                   // 确定按钮是否可用，領取條件
-                  const isButtonDisabled = conformCondition1 >= 0;
+                  // const isButtonDisabled = conformCondition1 >= 0;
+                  const isButtonDisabled = conformCondition1 >= 0 || conformCondition1 === undefined;
                   console.log(conformCondition1);
                   console.log(isButtonDisabled);
                   return (
@@ -263,7 +264,7 @@ const MemberCouponBox = () => {
                           效期:{v.valid_start_date}
                         </span>
                         <span className={styles.cspan2}>
-                          ~{v.valid_start_date}
+                          ~{v.valid_end_date}
                         </span>
                       </div>
                       <div className={styles.couponContent}>

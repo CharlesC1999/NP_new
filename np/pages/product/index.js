@@ -66,7 +66,7 @@ export default function Product() {
   console.log(categoryCounts);
   //分頁部分
   const [page, setPage] = useState(1);
-  const [perpage, setPerpage] = useState(20);
+  const [perpage, setPerpage] = useState(12);
 
   //產品
   const [products, setProducts] = useState([]);
@@ -218,8 +218,6 @@ export default function Product() {
   };
 
   const router = useRouter();
-  // const { categoryFromDetail } = router.query;
-  // console.log(categoryFromDetail);
   const [queryParams, setQueryParams] = useState({
     page: 1,
     perpage,
@@ -233,9 +231,7 @@ export default function Product() {
   console.log(queryParams);
 
   useEffect(() => {
-    setQueryParams((prev) => ({
-      ...prev,
-      page: page,
+    const newParams = {
       perpage,
       price_gte: priceRange.min || "",
       price_lte: priceRange.max || "",
@@ -243,7 +239,23 @@ export default function Product() {
       rating: rating || "",
       order: orderby.order,
       sort: orderby.sort,
+    };
+
+    // 判断是否是 page 以外的任何参数改变
+    const shouldResetPage = Object.keys(newParams).some(
+      (key) => queryParams[key] !== newParams[key]
+    );
+
+    setQueryParams((prev) => ({
+      ...prev,
+      ...newParams,
+      page: shouldResetPage ? 1 : page,
     }));
+
+    // 如果需要重置分页，我们在这里设置 page 为 1
+    if (shouldResetPage) {
+      setPage(1);
+    }
   }, [priceRange, rating, orderby, perpage, newCategories, page]); // 包括所有可能影响 queryParams 的依赖
 
   // 请求产品数据
@@ -271,9 +283,6 @@ export default function Product() {
     };
     getProducts();
   }, [queryParams]);
-  console.log(newCategories);
-  // queryParams 作为 useEffect 的依赖
-  console.log(queryParams);
 
   const [reviewCount, setReviewCount] = useState(0);
   const TotalRow = total;
@@ -307,7 +316,7 @@ export default function Product() {
               categoryCounts={categoryCounts}
             />
           </div>
-          <div className={`${styles.productW} d-flex justify-content-center`}>
+          <div className={`${styles.productW} d-flex justify-content-start`}>
             <div
               className={`${styles.ProductFilter} pt-sm-4 pt-0 d-flex justify-content-center`}
             >
@@ -323,16 +332,19 @@ export default function Product() {
               />
             </div>
             <div
-              className={`d-flex justify-content-start ${styles.productCard1}`}
+              className={`d-flex justify-content-center align-items-center ${styles.productCardBox}`}
             >
-              {products.length > 0 ? (
-                // Render products if there are any
-                products.map((item) => (
-                  <div key={item.id}>
-                    <Link
-                      href={`/product/${item.id}`}
-                      className="text-decoration-none"
-                    >
+              <div
+                className={`d-flex justify-content-start ${styles.productCard1}`}
+              >
+                {products.length > 0 ? (
+                  // Render products if there are any
+                  products.map((item) => (
+                    <div key={item.id}>
+                      {/* <Link
+                        href={`/product/${item.id}`}
+                        className="text-decoration-none"
+                      > */}
                       {displayGrid ? (
                         <ProductCard02
                           className={`mx-sm-2 mx-0`}
@@ -358,23 +370,24 @@ export default function Product() {
                           average_rating={item.average_rating}
                         />
                       )}
-                    </Link>
+                      {/* </Link> */}
+                    </div>
+                  ))
+                ) : (
+                  <div className={`d-flex justify-content-center my-5`}>
+                    <h3
+                      className={`d-flex justify-content-center text-align-center`}
+                    >
+                      查詢無結果唷！
+                    </h3>
+                    <div>
+                      <img src="/index-images/noResultBG.png" alt="" />
+                    </div>
                   </div>
-                ))
-              ) : (
-                // Render no result message and image if there are no products
-                <div className={`d-flex justify-content-center my-5`}>
-                  <h3
-                    className={`d-flex justify-content-center text-align-center`}
-                  >
-                    查詢無結果唷！
-                  </h3>
-                  <div>
-                    <img src="/index-images/noResultBG.png" alt="" />
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
+
             <div className="d-flex justify-content-center mb-3">
               <div
                 className={`${styles.pagination} justify-content-center d-sm-flex d-none mt-5`}

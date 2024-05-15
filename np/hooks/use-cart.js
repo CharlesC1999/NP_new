@@ -94,7 +94,7 @@ export function CartProvider({ children }) {
       increaseItem(item.id);
     } else {
       // 否則作新增商品，擴充商品數量屬性qty，預設為1
-      const newItem = { ...item, qty: 1 };
+      const newItem = { ...item, qty: 1, checked: true };
       const nextItems = [...items, newItem];
 
       setItems(nextItems);
@@ -103,9 +103,11 @@ export function CartProvider({ children }) {
 
   // 陣列迭代方法: reduce(累加、歸納)
   // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
-  const totalItems = items.reduce((acc, v) => acc + v.qty, 0);
-  const totalPrice = items.reduce((acc, v) => acc + v.qty * v.price, 0);
+  const finalItems = items.filter((v) => v.checked);
+  const totalItems = finalItems.reduce((acc, v) => acc + v.qty, 0);
+  const totalPrice = finalItems.reduce((acc, v) => acc + v.qty * v.price, 0);
 
+  console.log(totalItems);
   // ---------------------------------
   // 這邊是加上商品
   const [productItems, setProductItems] = useState([]);
@@ -120,7 +122,7 @@ export function CartProvider({ children }) {
   }, []);
   //setItem
   useEffect(() => {
-    if (items.length > 0) {
+    if (productItems.length > 0) {
       window.localStorage.setItem(
         "productItem666",
         JSON.stringify(productItems)
@@ -182,7 +184,9 @@ export function CartProvider({ children }) {
       increaseProduct(product.id);
     } else {
       // 否則作新增商品，擴充商品數量屬性qty，預設為1
-      const newItem = { ...product, qty: 1 };
+
+      const newItem = { ...product, qty: product.qty, checked: true };
+
       const nextItems = [...productItems, newItem];
 
       setProductItems(nextItems);
@@ -227,13 +231,14 @@ export function CartProvider({ children }) {
   };
 
   // !!! 測試結束
+  const finalProduct = productItems.filter((v) => v.checked);
+  const totalProduct = finalProduct.reduce((acc, v) => acc + v.qty, 0);
 
-  const totalProduct = productItems.reduce((acc, v) => acc + v.qty, 0);
-  const totalProductPrice = productItems.reduce(
+  const totalProductPrice = finalProduct.reduce(
     (acc, v) => acc + v.qty * v.price,
     0
   );
-
+  console.log(totalProduct);
   return (
     <CartContext.Provider
       // 使用value屬性提供資料給提供者階層以下的所有後代元件
@@ -245,6 +250,7 @@ export function CartProvider({ children }) {
         removeItem,
         totalItems,
         totalPrice,
+        setItems,
 
         productItems,
         addProduct,
@@ -254,6 +260,7 @@ export function CartProvider({ children }) {
         totalProduct,
         totalProductPrice,
         addToCartAry,
+        setProductItems,
       }}
     >
       {children}

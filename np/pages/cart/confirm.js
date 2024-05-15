@@ -71,12 +71,19 @@ const ShopCart4 = () => {
 
     if (res.data.status === "success") {
       toast.success("付款成功");
+      console.log("Checkout successful:", res.data.status);
+
+      localStorage.removeItem("dataCoupon666");
+      localStorage.removeItem("itemsCard666");
+      localStorage.removeItem("productItem666");
+      localStorage.removeItem("finalPriceAfterDiscount55666");
     } else {
       toast.error("付款失敗");
     }
 
     if (res.data.data) {
       setResult(res.data.data);
+      console.log(res.data.data);
     }
 
     // 處理完畢，關閉載入狀態

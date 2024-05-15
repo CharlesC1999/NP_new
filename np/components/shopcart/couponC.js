@@ -1,10 +1,13 @@
 import React from "react";
 import styles from "./couponC.module.scss";
 
-export default function CouponC({ couponDetail, Index }) {
+export default function CouponC({ couponDetail, Index, onSelect }) {
   return (
     <div key={Index}>
-      <button className={styles.cardSetContainer}>
+      <button
+        className={styles.cardSetContainer}
+        onClick={() => onSelect(couponDetail)}
+      >
         <img
           src={`/images/coupon-image/${couponDetail.coupon_image}`}
           alt="優惠券"

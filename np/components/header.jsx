@@ -22,16 +22,18 @@ import { IoMdBusiness } from "react-icons/io";
 // 引入食譜分類的鉤子
 import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 import { useCategory } from "@/hooks/ClassProp";
-
+import { useProductCategories } from "@/hooks/use-product-cate";
 const MobileSideBar = ({ onClose }) => {
   const sidebarRef = useRef(null);
   const router = useRouter();
   const { auth, logout } = useAuth();
   const [userData, setUserData] = useState("");
   const [isActive, setIsActive] = useState(true); // 控制動畫的狀態
+  const [LStoken, setLStoken] = useState(""); // 從後端取用
 
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
+  const goProductPromote = () => router.push(routes.productPromote);
   const goRecipeList = () => router.push(routes.recipeList);
   const goSpeekerList = () => router.push(routes.speakerList);
   const doLogin = () => router.push(routes.login);
@@ -92,6 +94,44 @@ const MobileSideBar = ({ onClose }) => {
     });
   };
 
+  const getTokenInLS = () => {
+    setLStoken(localStorage.getItem("token"));
+  };
+  // 串接上後端並把token傳進headers用來解碼
+  // !!! 從localStorage取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
+  // 為了一個照片的變更而fetch
+  const getUser = async () => {
+    const url = "http://localhost:3005/api/member-profile/check";
+    const tokenforheaders = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${LStoken}`,
+      },
+    };
+    try {
+      const res = await fetch(url, tokenforheaders);
+      const data = await res.json();
+      setUserData(data.data.user);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // 初次渲染時取得LS裡的token
+  useEffect(() => {
+    getTokenInLS();
+  }, []);
+
+  // 得到token後執行getUser()去後端解碼token並根據得到的user資料查詢資料庫並將資料設定給userData
+  useEffect(() => {
+    if (LStoken) {
+      getUser();
+    }
+  }, [LStoken]);
+
+  console.log(userData);
+  console.log(userData.User_image);
+
   return (
     <div className={styles.fullMobileScreen} onClick={handleClose}>
       <div
@@ -104,11 +144,11 @@ const MobileSideBar = ({ onClose }) => {
               {auth.isLoggedIn ? (
                 <img
                   src={
-                    userData && userData.address
-                      ? userData.address.startsWith("https")
-                        ? userData.address
-                        : `/images/member-image/${userData.address}`
-                      : ""
+                    userData && userData.User_image
+                      ? userData.User_image.startsWith("https://")
+                        ? userData.User_image // 是https://開頭的圖片
+                        : `http://localhost:3005/avatar/${userData.User_image}` // 不是https://開頭的圖片
+                      : ``
                   }
                   alt="UserImg"
                 />
@@ -117,7 +157,9 @@ const MobileSideBar = ({ onClose }) => {
               )}
             </div>
             {auth.isLoggedIn ? (
-              <div className={styles.memberName}>{userData.name} 歡迎！</div>
+              <div className={styles.memberName}>
+                {userData.User_name} 歡迎！
+              </div>
             ) : (
               <div></div>
             )}
@@ -153,7 +195,7 @@ const MobileSideBar = ({ onClose }) => {
           </div>
           <div className={styles.optionBlock}>
             <button className={styles.optionBtn}>
-              <RiDiscountPercentLine size={24} />
+              <RiDiscountPercentLine size={24} onClick={goProductPromote} />
               優惠活動
             </button>
           </div>
@@ -166,7 +208,7 @@ const MobileSideBar = ({ onClose }) => {
           <div className={styles.optionBlock}>
             <button className={styles.optionBtn} onClick={goRecipeList}>
               <LuChefHat size={24} />
-              食譜精選
+              健康食譜
             </button>
           </div>
           <div className={styles.optionBlock}>
@@ -222,17 +264,23 @@ const HeaderComponent = () => {
   // 下拉式分類連結（接收分類 context）
   const { setRecipeCategory } = useCategoryForSQL();
   const { setCategoryId } = useCategory();
+  const { newCategories, setNewCategories } = useProductCategories();
   const handleCategoryChangeR = (category = "") => {
     setRecipeCategory(category);
   };
   const handleCategoryChangeC = (categoryId) => {
     setCategoryId(categoryId);
   };
+  const handleCategoryChangeP = (categoryId) => {
+    setNewCategories([categoryId]);
+    router.push("/product");
+  };
+
   // 搜索下拉選單
   const menuItems = [
     { id: 1, name: "所有分類", className: styles.selectionLink },
     { id: 2, name: "商品列表", className: styles.selectionLink },
-    { id: 3, name: "食譜精選", className: styles.selectionLink },
+    { id: 3, name: "健康食譜", className: styles.selectionLink },
     { id: 4, name: "精選課程", className: styles.selectionLink },
     // { id: 5, name: "講師陣容", className: styles.selectionLink },
   ];
@@ -252,43 +300,43 @@ const HeaderComponent = () => {
     {
       id: 1,
       name: "新鮮蔬菜",
-      href: "/product?categoryFromDetail=1",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 2,
       name: "新鮮水果",
-      href: "/product?categoryFromDetail=2",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 3,
       name: "嚴選肉類",
-      href: "/product?categoryFromDetail=3",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 4,
       name: "海鮮水產",
-      href: "/product?categoryFromDetail=4",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 5,
       name: "精選雞蛋",
-      href: "/product?categoryFromDetail=5",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 6,
       name: "豆乳製品",
-      href: "/product?categoryFromDetail=6",
+      href: "#",
       className: styles.selectionLink,
     },
     {
       id: 7,
       name: "素食專區",
-      href: "/product?categoryFromDetail=7",
+      href: "#",
       className: styles.selectionLink,
     },
   ];
@@ -308,16 +356,16 @@ const HeaderComponent = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const threshold = 100; //設定閾值避免偵測捲動太敏感導致閃爍問題
-      console.log("currentScrollY", currentScrollY);
+      const threshold = 300; //設定閾值避免偵測捲動太敏感導致閃爍問題
+      // console.log("currentScrollY", currentScrollY);
       // console.log("lastScrollY", lastScrollY.current);
       if (Math.abs(currentScrollY - lastScrollY.current) > threshold) {
         if (currentScrollY > lastScrollY.current) {
           setShrink(true);
-          console.log("往下捲動");
+          // console.log("往下捲動");
         } else {
           setShrink(false);
-          console.log("往上捲動");
+          // console.log("往上捲動");
         }
         lastScrollY.current = currentScrollY;
       }
@@ -381,7 +429,7 @@ const HeaderComponent = () => {
     const routerNameMapping = {
       所有分類: "findAll",
       商品列表: "findProduct",
-      食譜精選: "findRecipe",
+      健康食譜: "findRecipe",
       精選課程: "findClass",
     };
     // 端點對應設置
@@ -619,7 +667,7 @@ const HeaderComponent = () => {
             </a>
           </div>
 
-          <div className={styles.searchBar}>
+          <div className={`${styles.searchBar}`}>
             <div className={styles.searchBarLeft}>
               <div className={styles.dropdown} ref={dropdownRef}>
                 <button
@@ -719,7 +767,7 @@ const HeaderComponent = () => {
               <FaCheck onClick={handleSearchM} />
             </button>
           </div>
-          <div className={styles.headerActions}>
+          <div className={`${styles.headerActions}`}>
             {auth.isLoggedIn ? (
               <div>
                 <a onClick={mobileSearch} className={styles.pageLink}>
@@ -1019,8 +1067,7 @@ const HeaderComponent = () => {
                   <React.Fragment key={item.id}>
                     <a
                       key={item.id}
-                      onClick={() => handleProductClick()}
-                      href={item.href}
+                      onClick={() => handleCategoryChangeP(item.id)}
                       className={item.className}
                     >
                       {item.name}
@@ -1032,7 +1079,7 @@ const HeaderComponent = () => {
           </li>
           <li className={styles.navItemPageLinks}>
             <a onClick={goRecipeList} className={styles.pageLink}>
-              <div>食譜精選</div>
+              <div>健康食譜</div>
             </a>
             <button
               className={styles.navTextButton}
