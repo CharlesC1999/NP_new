@@ -12,8 +12,9 @@ import toast from "react-hot-toast";
 
 export default function ProductCard02({ productsData, Index, qty = 1 }) {
   console.log(productsData, "classDW");
-  const { id, product_name, product_price, image_url } = productsData;
-  console.log(id, product_name, product_price, image_url);
+
+  const { product_id, product_name, product_price, image_url } = productsData;
+  console.log(product_id, product_name, product_price, image_url);
   const { auth } = useAuth();
   const { addProduct } = useCart();
   const MySwal = withReactContent(Swal);
@@ -24,13 +25,14 @@ export default function ProductCard02({ productsData, Index, qty = 1 }) {
       icon: "success",
     });
   };
-  const goProductDetail = (id) => {
+  console.log(product_id);
+  const goProductDetail = (product_id) => {
     // 方法一
     // Router.push(`/class-page/class-detail/${class__i_d}`);
     // 方法二
     Router.push({
       pathname: "/product/productId",
-      query: { id: id },
+      query: { id: product_id },
     });
   };
   return (
@@ -39,7 +41,7 @@ export default function ProductCard02({ productsData, Index, qty = 1 }) {
         <div className={`${style["productCard"]} mb-4 mx-1`}>
           <div
             className={`${style["CardImg"]}`}
-            onClick={() => goProductDetail(productsData.id)}
+            onClick={() => goProductDetail(productsData.product_id)}
           >
             <img
               src={`/images/products/${productsData.image_url}`}
@@ -96,7 +98,7 @@ export default function ProductCard02({ productsData, Index, qty = 1 }) {
                       return toast.error("請先登入再使用!");
                     }
                     console.log("Adding product:", {
-                      id,
+                      product_id,
                       image_url,
                       product_name,
                       product_price,
@@ -104,7 +106,7 @@ export default function ProductCard02({ productsData, Index, qty = 1 }) {
                     });
                     notify(product_name);
                     addProduct({
-                      id,
+                      product_id,
                       image_url,
                       product_name,
                       product_price,
