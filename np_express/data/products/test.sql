@@ -382,3 +382,11 @@ GROUP BY
 ORDER BY
     p.id DESC
 LIMIT 100;
+
+
+
+SELECT p.product_name, p.product_price, p.id , pImage.image_url , p.upload_date
+      FROM product AS p
+      JOIN product_image AS pImage ON p.id = pImage.product_id
+      ORDER BY created_at DESC
+      LIMIT 5;

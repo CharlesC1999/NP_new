@@ -12,12 +12,12 @@ import ProductMainText from "@/components/product/ProductMainText";
 import ProductSection01 from "@/components/product/ProductSection01";
 import ProductSection02 from "@/components/product/ProductSection02";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ProductMayLike from "@/components/product/ProductMayLike";
+
 //推薦食譜component
 import DetailRecommendedRecipe from "@/components/recipe/detail/RecommendedRecipeProduct";
 //sidebar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
-import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
+import ProductSidebarLike from "@/components/product/sideBar/ProductSidebarLike";
 import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDetail";
 
 // //useContext
@@ -76,10 +76,13 @@ export default function ProductDetail() {
       const data = await res.json();
 
       if (data && data.status === "success" && data.data) {
+        const uniqueImageUrls = Array.from(
+          new Set(data.data.image_urls.split(","))
+        );
         const formattedProduct = {
           ...data.data,
           review_comments: parseReviewDetails(data.data.review_details),
-          image_urls: data.data.image_urls.split(","),
+          image_urls: uniqueImageUrls,
           sort_orders: data.data.sort_orders.split(",").map(Number),
         };
         setProductCate(data.categories);
@@ -92,6 +95,7 @@ export default function ProductDetail() {
       console.error("Error fetching product:", e);
     }
   };
+  console.log(product.image_urls);
   //動態路由需要router來確定是否收到值 1.isReady是布林值 2.query是回傳的id值
   const router = useRouter();
   useEffect(() => {
@@ -101,6 +105,7 @@ export default function ProductDetail() {
       getProduct(router.query.id);
     }
   }, [router.isReady, router.query.id]);
+  console.log(product);
   return (
     <>
       <HeaderComponent />
@@ -126,7 +131,7 @@ export default function ProductDetail() {
                 <ProductSidebarDetail />
               </div> */}
                 <div className={`side-bar03`}>
-                  <ProductSidebarNew mayLikeProducts={mayLikeProducts} />
+                  <ProductSidebarLike mayLikeProducts={mayLikeProducts} />
                 </div>
               </div>
               <div

@@ -24,7 +24,7 @@ export default function RecommendedRecipe({
             // 食譜卡片
             <div
               onClick={() => {
-                router.push(`/recipe/${v.recipe__i_d}`);
+                router.push(`/recipe/recipeId?id=${v.recipe__i_d}`);
               }}
               className={`col-6 col-xxl-3 ${styles["recipe-card"]} d-flex flex-column`}
             >

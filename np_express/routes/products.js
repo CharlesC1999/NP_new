@@ -252,11 +252,11 @@ router.get('/disCount', async function (req, res) {
 
     let orderByClause = sort ? `ORDER BY ${sort} ${order}` : 'ORDER BY id ASC'
 
-    const mayLikeProductsQuery = `SELECT p.product_name, p.product_price, p.id , pImage.image_url
-      FROM product AS p
-      JOIN product_image AS pImage ON p.id = pImage.product_id
-      ORDER BY RAND()
-      LIMIT 5;`
+    const mayLikeProductsQuery = `SELECT p.product_name, p.product_price, p.id , pImage.image_url , p.upload_date
+    FROM product AS p
+    JOIN product_image AS pImage ON p.id = pImage.product_id
+    ORDER BY created_at DESC
+    LIMIT 5`
 
     const disCountproductQuery = `
     SELECT 
@@ -400,6 +400,7 @@ router.get('/productId', async function (req, res) {
       p.product_name,
       p.category_id,
       p.product_price,
+      p.discount_price,
       p.product_stock,
       p.product_description,
       p.valid,

@@ -29,6 +29,7 @@ const MobileSideBar = ({ onClose }) => {
   const { auth, logout } = useAuth();
   const [userData, setUserData] = useState("");
   const [isActive, setIsActive] = useState(true); // 控制動畫的狀態
+  const [LStoken, setLStoken] = useState(""); // 從後端取用
 
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
@@ -93,6 +94,44 @@ const MobileSideBar = ({ onClose }) => {
     });
   };
 
+  const getTokenInLS = () => {
+    setLStoken(localStorage.getItem("token"));
+  };
+  // 串接上後端並把token傳進headers用來解碼
+  // !!! 從localStorage取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
+  // 為了一個照片的變更而fetch
+  const getUser = async () => {
+    const url = "http://localhost:3005/api/member-profile/check";
+    const tokenforheaders = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${LStoken}`,
+      },
+    };
+    try {
+      const res = await fetch(url, tokenforheaders);
+      const data = await res.json();
+      setUserData(data.data.user);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // 初次渲染時取得LS裡的token
+  useEffect(() => {
+    getTokenInLS();
+  }, []);
+
+  // 得到token後執行getUser()去後端解碼token並根據得到的user資料查詢資料庫並將資料設定給userData
+  useEffect(() => {
+    if (LStoken) {
+      getUser();
+    }
+  }, [LStoken]);
+
+  console.log(userData);
+  console.log(userData.User_image);
+
   return (
     <div className={styles.fullMobileScreen} onClick={handleClose}>
       <div
@@ -105,11 +144,11 @@ const MobileSideBar = ({ onClose }) => {
               {auth.isLoggedIn ? (
                 <img
                   src={
-                    userData && userData.address
-                      ? userData.address.startsWith("https")
-                        ? userData.address
-                        : `/images/member-image/${userData.address}`
-                      : ""
+                    userData && userData.User_image
+                      ? userData.User_image.startsWith("https://")
+                        ? userData.User_image // 是https://開頭的圖片
+                        : `http://localhost:3005/avatar/${userData.User_image}` // 不是https://開頭的圖片
+                      : ``
                   }
                   alt="UserImg"
                 />
@@ -118,7 +157,9 @@ const MobileSideBar = ({ onClose }) => {
               )}
             </div>
             {auth.isLoggedIn ? (
-              <div className={styles.memberName}>{userData.name} 歡迎！</div>
+              <div className={styles.memberName}>
+                {userData.User_name} 歡迎！
+              </div>
             ) : (
               <div></div>
             )}
@@ -223,7 +264,7 @@ const HeaderComponent = () => {
   // 下拉式分類連結（接收分類 context）
   const { setRecipeCategory } = useCategoryForSQL();
   const { setCategoryId } = useCategory();
-  const {newCategories,setNewCategories } = useProductCategories();
+  const { newCategories, setNewCategories } = useProductCategories();
   const handleCategoryChangeR = (category = "") => {
     setRecipeCategory(category);
   };
@@ -234,7 +275,6 @@ const HeaderComponent = () => {
     setNewCategories([categoryId]);
     router.push("/product");
   };
-
 
   // 搜索下拉選單
   const menuItems = [
@@ -573,8 +613,16 @@ const HeaderComponent = () => {
   const goSpeekerList = () => router.push(routes.speakerList);
 
   return (
-    <div className={shrink?`${styles.container} ${styles.shrink}`:`${styles.container}`}>
-      <header className={shrink?`${styles.header} ${styles.shrink}`:`${styles.header}`}>
+    <div
+      className={
+        shrink ? `${styles.container} ${styles.shrink}` : `${styles.container}`
+      }
+    >
+      <header
+        className={
+          shrink ? `${styles.header} ${styles.shrink}` : `${styles.header}`
+        }
+      >
         <div
           className={
             shrink
@@ -1019,7 +1067,7 @@ const HeaderComponent = () => {
                   <React.Fragment key={item.id}>
                     <a
                       key={item.id}
-                       onClick={() => handleCategoryChangeP(item.id)}
+                      onClick={() => handleCategoryChangeP(item.id)}
                       className={item.className}
                     >
                       {item.name}
