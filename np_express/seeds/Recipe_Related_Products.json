@@ -35,11 +35,6 @@
     "Product_ID": 10
   },
   {
-    "Related_Products_ID": 8,
-    "Recipe_ID": 4,
-    "Product_ID": 121
-  },
-  {
     "Related_Products_ID": 9,
     "Recipe_ID": 48,
     "Product_ID": 88
@@ -72,6 +67,96 @@
   {
     "Related_Products_ID": 15,
     "Recipe_ID": 5,
+    "Product_ID": 17
+  },
+  {
+    "Related_Products_ID": 16,
+    "Recipe_ID": 1,
+    "Product_ID": 235
+  },
+  {
+    "Related_Products_ID": 17,
+    "Recipe_ID": 1,
+    "Product_ID": 4
+  },
+  {
+    "Related_Products_ID": 18,
+    "Recipe_ID": 2,
+    "Product_ID": 277
+  },
+  {
+    "Related_Products_ID": 20,
+    "Recipe_ID": 2,
+    "Product_ID": 14
+  },
+  {
+    "Related_Products_ID": 21,
+    "Recipe_ID": 6,
+    "Product_ID": 279
+  },
+  {
+    "Related_Products_ID": 22,
+    "Recipe_ID": 6,
+    "Product_ID": 213
+  },
+  {
+    "Related_Products_ID": 23,
+    "Recipe_ID": 6,
+    "Product_ID": 206
+  },
+  {
+    "Related_Products_ID": 24,
+    "Recipe_ID": 7,
+    "Product_ID": 205
+  },
+  {
+    "Related_Products_ID": 25,
+    "Recipe_ID": 8,
+    "Product_ID": 89
+  },
+  {
+    "Related_Products_ID": 26,
+    "Recipe_ID": 8,
+    "Product_ID": 213
+  },
+  {
+    "Related_Products_ID": 27,
+    "Recipe_ID": 8,
+    "Product_ID": 217
+  },
+  {
+    "Related_Products_ID": 28,
+    "Recipe_ID": 9,
+    "Product_ID": 278
+  },
+  {
+    "Related_Products_ID": 29,
+    "Recipe_ID": 9,
+    "Product_ID": 15
+  },
+  {
+    "Related_Products_ID": 30,
+    "Recipe_ID": 10,
+    "Product_ID": 17
+  },
+  {
+    "Related_Products_ID": 31,
+    "Recipe_ID": 11,
+    "Product_ID": 343
+  },
+  {
+    "Related_Products_ID": 32,
+    "Recipe_ID": 11,
+    "Product_ID": 17
+  },
+  {
+    "Related_Products_ID": 33,
+    "Recipe_ID": 12,
+    "Product_ID": 336
+  },
+  {
+    "Related_Products_ID": 34,
+    "Recipe_ID": 12,
     "Product_ID": 17
   }
 ]

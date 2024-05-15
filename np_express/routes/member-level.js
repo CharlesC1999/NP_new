@@ -82,20 +82,20 @@ router.get('/', async function (req, res) {
   WHERE order_status = '已完成'
   GROUP BY user_ID, status ;`
   // 最終組合的sql語法(計數用)
-  const sqlCount = `SELECT COUNT(*) AS count FROM member_level ${where}`
+  // const sqlCount = `SELECT COUNT(*) AS count FROM member_level ${where}`
 
   // 顯示sql語法
   console.log(sqlLevel)
-  console.log(sqlCount)
+  // console.log(sqlCount)
 
   const [rows, fields] = await db.query(sqlLevel)
 
   console.log(rows)
 
-  const [rows2] = await db.query(sqlCount)
+  // const [rows2] = await db.query(sqlCount)
 
   // 回傳總筆數
-  const total = rows2[0].count
+  // const total = rows2[0].count
 
   // 計算頁數
   //   const pageCount = Math.ceil(total / Number(perpage)) || 0

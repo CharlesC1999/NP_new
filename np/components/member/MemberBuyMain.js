@@ -22,7 +22,7 @@ const MemberBuyMain = () => {
   return (
     <>
       <div
-        className={` ${styles.container1} ${styles.main}  d-flex flex-column justify-content-center align-items-center`}
+        className={` ${styles.container1} ${styles.main}  d-flex flex-column  `}
       >
         {/* 下面是側邊攔 */}
 

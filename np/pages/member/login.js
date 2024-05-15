@@ -31,7 +31,6 @@ import {
 import { useLoader } from "@/hooks/use-loader";
 // sweetAlert
 import Swal from "sweetalert2";
-import { result } from "lodash";
 
 const Login = () => {
   // 導入讀取鉤子
@@ -79,8 +78,8 @@ const Login = () => {
       if (response.status === 200) {
         login(response.data.token, response.data.userData);
         // 使用Context的login方法
-        console.log("userdata", response.data.userData);
-        console.log("登入成功!");
+        // console.log("userdata", response.data.userData);
+        // console.log("登入成功!");
         Swal.fire({
           title: "登入成功",
           // text: "That thing is still around?",
@@ -125,7 +124,7 @@ const Login = () => {
       setUserData(data);
       googleLogin(data.data);
       // login();
-      console.log(data);
+      // console.log(data);
       if (data.status === "success") {
         Swal.fire({
           title: "登入成功",
@@ -167,7 +166,7 @@ const Login = () => {
 
       // 把響應結果變成json
       const resJson = await response.json();
-      console.log("pong", resJson);
+      // console.log("pong", resJson);
 
       // res結果
       if (response.ok && resJson.status === "success") {
@@ -215,7 +214,7 @@ const Login = () => {
         throw new Error("Network response was not ok");
       }
       const loginData = await response.json();
-      console.log(loginData);
+      // console.log(loginData);
       // 這裡假設後端返回一個包含 URL 的 JSON 對象
       if (loginData.url) {
         // 導向到 LINE 登入 URL
