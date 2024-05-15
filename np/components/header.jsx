@@ -23,12 +23,15 @@ import { IoMdBusiness } from "react-icons/io";
 import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
 import { useCategory } from "@/hooks/ClassProp";
 import { useProductCategories } from "@/hooks/use-product-cate";
+// 引入購物車的鉤子
+import { useCart } from "@/hooks/use-cart";
 const MobileSideBar = ({ onClose }) => {
   const sidebarRef = useRef(null);
   const router = useRouter();
   const { auth, logout } = useAuth();
   const [userData, setUserData] = useState("");
   const [isActive, setIsActive] = useState(true); // 控制動畫的狀態
+  const [LStoken, setLStoken] = useState(""); // 從後端取用
 
   const goClassList = () => router.push(routes.classList);
   const goProductList = () => router.push(routes.productList);
@@ -93,6 +96,44 @@ const MobileSideBar = ({ onClose }) => {
     });
   };
 
+  const getTokenInLS = () => {
+    setLStoken(localStorage.getItem("token"));
+  };
+  // 串接上後端並把token傳進headers用來解碼
+  // !!! 從localStorage取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
+  // 為了一個照片的變更而fetch
+  const getUser = async () => {
+    const url = "http://localhost:3005/api/member-profile/check";
+    const tokenforheaders = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${LStoken}`,
+      },
+    };
+    try {
+      const res = await fetch(url, tokenforheaders);
+      const data = await res.json();
+      setUserData(data.data.user);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // 初次渲染時取得LS裡的token
+  useEffect(() => {
+    getTokenInLS();
+  }, []);
+
+  // 得到token後執行getUser()去後端解碼token並根據得到的user資料查詢資料庫並將資料設定給userData
+  useEffect(() => {
+    if (LStoken) {
+      getUser();
+    }
+  }, [LStoken]);
+
+  console.log(userData);
+  console.log(userData.User_image);
+
   return (
     <div className={styles.fullMobileScreen} onClick={handleClose}>
       <div
@@ -105,11 +146,11 @@ const MobileSideBar = ({ onClose }) => {
               {auth.isLoggedIn ? (
                 <img
                   src={
-                    userData && userData.address
-                      ? userData.address.startsWith("https")
-                        ? userData.address
-                        : `/images/member-image/${userData.address}`
-                      : ""
+                    userData && userData.User_image
+                      ? userData.User_image.startsWith("https://")
+                        ? userData.User_image // 是https://開頭的圖片
+                        : `http://localhost:3005/avatar/${userData.User_image}` // 不是https://開頭的圖片
+                      : ``
                   }
                   alt="UserImg"
                 />
@@ -118,7 +159,9 @@ const MobileSideBar = ({ onClose }) => {
               )}
             </div>
             {auth.isLoggedIn ? (
-              <div className={styles.memberName}>{userData.name} 歡迎！</div>
+              <div className={styles.memberName}>
+                {userData.User_name} 歡迎！
+              </div>
             ) : (
               <div></div>
             )}
@@ -223,7 +266,7 @@ const HeaderComponent = () => {
   // 下拉式分類連結（接收分類 context）
   const { setRecipeCategory } = useCategoryForSQL();
   const { setCategoryId } = useCategory();
-  const {newCategories,setNewCategories } = useProductCategories();
+  const { newCategories, setNewCategories } = useProductCategories();
   const handleCategoryChangeR = (category = "") => {
     setRecipeCategory(category);
   };
@@ -234,7 +277,6 @@ const HeaderComponent = () => {
     setNewCategories([categoryId]);
     router.push("/product");
   };
-
 
   // 搜索下拉選單
   const menuItems = [
@@ -572,9 +614,20 @@ const HeaderComponent = () => {
   const goRecipeList = () => router.push(routes.recipeList);
   const goSpeekerList = () => router.push(routes.speakerList);
 
+  // 引入購物車的鉤子
+  const { totalItems, totalProduct } = useCart();
+
   return (
-    <div className={shrink?`${styles.container} ${styles.shrink}`:`${styles.container}`}>
-      <header className={shrink?`${styles.header} ${styles.shrink}`:`${styles.header}`}>
+    <div
+      className={
+        shrink ? `${styles.container} ${styles.shrink}` : `${styles.container}`
+      }
+    >
+      <header
+        className={
+          shrink ? `${styles.header} ${styles.shrink}` : `${styles.header}`
+        }
+      >
         <div
           className={
             shrink
@@ -779,7 +832,7 @@ const HeaderComponent = () => {
                     className={styles.iconLinkMobile}
                   >
                     <path
-                      fill="#50BF8B"
+                      fill="#253D4E"
                       d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"
                     />
                   </svg>
@@ -832,8 +885,12 @@ const HeaderComponent = () => {
                     d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
                   />
                 </svg>
-                {/* 購物車
-                </span> */}
+                {/* 購物車 */}
+                <div
+                  className={`position-absolute d-flex justify-content-center align-items-center bg-danger ${styles["cart-num"]}`}
+                >
+                  {totalItems + totalProduct}
+                </div>
               </a>
             ) : (
               <a onClick={doLogin} className={styles.pageLink}>
@@ -846,7 +903,7 @@ const HeaderComponent = () => {
                   className={styles.iconLinkMobile}
                 >
                   <path
-                    fill="#50BF8B"
+                    fill="#253D4E"
                     d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
                   />
                 </svg>
@@ -907,7 +964,7 @@ const HeaderComponent = () => {
                   className={styles.iconLinkMobile}
                 >
                   <path
-                    fill="#50BF8B"
+                    fill="#253D4E"
                     d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"
                   />
                 </svg>
@@ -1019,7 +1076,7 @@ const HeaderComponent = () => {
                   <React.Fragment key={item.id}>
                     <a
                       key={item.id}
-                       onClick={() => handleCategoryChangeP(item.id)}
+                      onClick={() => handleCategoryChangeP(item.id)}
                       className={item.className}
                     >
                       {item.name}

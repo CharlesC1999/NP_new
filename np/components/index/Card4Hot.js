@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 function Card4Hot({ id, name, price, d_price, image, qty = 1 }) {
   const { auth } = useAuth();
   const { addProduct } = useCart();
-  // console.log(id, name, price, d_price, image, qty);
+  console.log(id, name, price, d_price, image, qty);
 
   const MySwal = withReactContent(Swal);
 
@@ -27,7 +27,7 @@ function Card4Hot({ id, name, price, d_price, image, qty = 1 }) {
     <>
       <div className={`${styles["card4"]}`}>
         <div className={`${styles["card4Img"]}`}>
-          <a href={`/product/${id}`}>
+          <a href={`/product/productId?id=${id}`}>
             <img
               src={`/images/products/${image}`}
               className="{`${styles['card4ImgTop']}`}"

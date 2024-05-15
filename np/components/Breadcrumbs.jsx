@@ -19,6 +19,7 @@ const pathNameMapping = {
   recipeId: "食譜介紹",
   product: "商品列表",
   productId: "商品介紹",
+  promote: "優惠活動",
   "member-buy": "購買清單",
   "member-coupon": "優惠券",
   "member-level": "會員等級",

@@ -252,7 +252,6 @@ const ClassDetail = ({ classData }) => {
 
         {/* basically, it only need one set */}
       </section>
-      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 };

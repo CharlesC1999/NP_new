@@ -43,7 +43,12 @@ export default function Product() {
     setActiveButton("list");
   };
 
-  const disPic = ["discount01.png", "discount02.png", "discount04.png"];
+  const disPic = [
+    "discount11.png",
+    "discount10.png",
+    "discount02.png",
+    "discount04.png",
+  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
@@ -55,7 +60,7 @@ export default function Product() {
     const interval = setInterval(() => {
       setCurrentIndex(nextIndex);
       setNextIndex((nextIndex + 1) % disPic.length);
-    }, 4000); // 包括淡出時間後更換圖片
+    }, 2000); // 包括淡出時間後更換圖片
 
     return () => clearInterval(interval);
   }, [nextIndex]);
@@ -102,35 +107,25 @@ export default function Product() {
   });
 
   useEffect(() => {
-    console.log("Current page state:", page);
-    setquerySearch((prev) => ({
-      ...prev,
-      page: page,
+    const newParams = {
       perpage,
       discount_id: selectdiscountCate,
       order: orderby.order,
       sort: orderby.sort,
-    }));
-  }, [page, perpage, selectdiscountCate, orderby]);
-  console.log(page);
-  const getMayLike = async () => {
-    const searchParams = new URLSearchParams(querySearch);
+    };
 
-    const url = `http://localhost:3005/api/products/disCount?${searchParams.toString()}`;
-    console.log("url" + url);
+    // 检查除 page 外的其他参数是否有变更
+    const shouldResetPage = Object.keys(newParams).some(
+      (key) => querySearch[key] !== newParams[key]
+    );
 
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data.status === "success") {
-        setMayLikeProducts(data.data.mayLikeProducts);
-      } else {
-        console.log("请求状态不是 'success'");
-      }
-    } catch (e) {
-      console.error("请求产品数据失败:", e);
+    if (shouldResetPage) {
+      setPage(1); // 重置页码
+      setquerySearch({ ...newParams, page: 1 }); // 同时更新查询参数
+    } else {
+      setquerySearch((prev) => ({ ...prev, page })); // 更新查询参数中的页码
     }
-  };
+  }, [perpage, selectdiscountCate, orderby, page]);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -159,7 +154,26 @@ export default function Product() {
       }
     };
     getProducts();
-  }, [querySearch]);
+  }, [querySearch, page]);
+
+  const getMayLike = async () => {
+    const searchParams = new URLSearchParams(querySearch);
+
+    const url = `http://localhost:3005/api/products/disCount?${searchParams.toString()}`;
+    console.log("url" + url);
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.status === "success") {
+        setMayLikeProducts(data.data.mayLikeProducts);
+      } else {
+        console.log("请求状态不是 'success'");
+      }
+    } catch (e) {
+      console.error("请求产品数据失败:", e);
+    }
+  };
 
   useEffect(() => {
     getMayLike();

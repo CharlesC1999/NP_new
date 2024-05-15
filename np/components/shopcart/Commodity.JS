@@ -55,6 +55,7 @@ const Commodity = () => {
   const finalProduct = productItems.filter((v) => v.checked);
   console.log(finalProduct);
 
+  console.log(productItems);
   // 結束處理商品勾選
 
   return (
@@ -135,11 +136,7 @@ const Commodity = () => {
 
         {productItems.map((element, index) => {
           return (
-            <div
-              className="row"
-              key={element.id}
-              // style={{ borderBottom: "1px solid #def9ec" }}
-            >
+            <div className="row" key={element.id}>
               <div
                 className="col d-flex align-items-center justify-content-start ps-3"
                 style={{ width: 100, minWidth: 77 }}
@@ -167,7 +164,9 @@ const Commodity = () => {
               <div className="col-2 d-flex align-items-center justify-content-center">
                 {element.image || (element.img && element.img[0]) ? (
                   <img
-                    src={`/images/products/${element.image || element.img[0]}`}
+                    src={`/images/products/${
+                      element.image || element.img[0] || element.img.image_url
+                    }`}
                     className="img-fluid"
                     alt={element.name || "Default name"}
                     style={{ minWidth: 75 }}

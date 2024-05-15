@@ -22,7 +22,7 @@ const Heart = ({ size = 20, color = "#50BF8B" }) => (
 
 export default function FavIconProduct({ id }) {
   const { auth } = useAuth();
-  const {favorProduct, setAction  } = useFavor()
+  const { favorProduct, setAction } = useFavor();
 
   const handleAddFav = async (pid) => {
     const res = await addProductFav(pid);
@@ -30,7 +30,7 @@ export default function FavIconProduct({ id }) {
       // 伺服器成功後，更新 action 的值，觸發 context 重新發送 GET 請求並重新設定狀態
       setAction(Date.now());
       toast.success(`已將商品加入收藏!`, {
-        style: { boxShadow:"0px 0px 2px #ccc"}
+        style: { boxShadow: "0px 0px 2px #ccc" },
       });
     }
   };
@@ -42,13 +42,14 @@ export default function FavIconProduct({ id }) {
       // 伺服器成功後，更新 action 的值，觸發 context 重新發送 GET 請求並重新設定狀態
       setAction(Date.now());
       toast.success(`已將商品移除收藏!`, {
-        style: { boxShadow:"0px 0px 2px #ccc"}
+        style: { boxShadow: "0px 0px 2px #ccc" },
       });
     }
   };
 
   return (
     <>
+      <Toaster position="bottom-right" reverseOrder={false} />
       {/* 如果收藏陣列包含現在要新增的這筆 id（表示現在已收藏要移除），愛心是紅色，點擊則刪除 */}
       {/* 如果收藏陣列不包含現在要新增的這筆 id（表示現在未收藏要新增），愛心是白色，點擊則新增 */}
       {favorProduct.includes(id) ? (
@@ -78,7 +79,6 @@ export default function FavIconProduct({ id }) {
           <Heart color="white" />
         </button>
       )}
-      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 }

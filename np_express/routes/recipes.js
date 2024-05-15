@@ -107,6 +107,13 @@ router.get('/', async function (req, res) {
   // 計算分頁所需的頁數
   const pageCount = Math.ceil(total / Number(perpage)) || 0
 
+  // 給TopBar用的總筆數
+  const sqlCountAllTopBar = `SELECT COUNT(*) AS countCate FROM recipe`
+  // 主食
+  const sqlAllTopBar = `SELECT COUNT(*) AS countAll FROM recipe`
+  const [allCountTopBar] = await db.query(sqlAllTopBar)
+  const finalAllCountTopBar = allCountTopBar[0].countAll
+
   // 得到所有食譜分類名稱
   const recipesCategories = await Recipe_Categories.findAll({
     logging: console.log,
@@ -119,6 +126,7 @@ router.get('/', async function (req, res) {
       recipesCategories,
       recipesRawSql,
       total,
+      finalAllCountTopBar,
       pageCount,
       finalStapleCount,
       finalSauceCount,
@@ -175,7 +183,7 @@ router.get('/:recipeId/relatedProducts', async function (req, res) {
   const recipeId = req.params.recipeId
 
   const sqlRelatedProducts = `
-  SELECT rrp.*, p.id, p.product_name AS name, p.product_price AS price, pi.image_url AS image
+  SELECT rrp.*, p.id, p.product_name AS name, p.product_price AS price, p.discount_price, pi.image_url AS image
   FROM recipe_related_products AS rrp 
   JOIN product AS p ON rrp.product__i_d = p.id
   JOIN product_image AS pi ON p.id = pi.product_id

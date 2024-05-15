@@ -20,11 +20,17 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  @media (max-width: 375px) {
+    font-size: 18px;
+  }
 }
 .routerFont {
   color: var(--green03);
   font-size: 20px;
   font-weight: 700;
+  @media (max-width: 375px) {
+    font-size: 18px;
+  }
 }
 
 .linkStyle {

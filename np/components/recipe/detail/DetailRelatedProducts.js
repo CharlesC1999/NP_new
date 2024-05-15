@@ -100,13 +100,21 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
     return qty * price;
   };
 
-  // TODO 最終要加入購物車的商品
-  // 最終有被勾選的才會被加總以及加進購物車
+  // 先過濾出有被有被勾選的
   const finalProducts = products.filter((v) => v.checked);
 
+  // 檢查商品是否有折扣，有折扣就用折扣價格，沒有就用原價，用這組陣列去做加總以及加入購物車
+  const filterPrice = finalProducts.map((v) => {
+    if (v.discount_price === null) {
+      return { ...v };
+    } else {
+      return { ...v, price: v.discount_price };
+    }
+  });
+
   // 加總數量與價格
-  const totalItems = finalProducts.reduce((acc, v) => acc + v.qty, 0);
-  const totalPrice = finalProducts.reduce((acc, v) => acc + v.price * v.qty, 0);
+  const totalItems = filterPrice.reduce((acc, v) => acc + v.qty, 0);
+  const totalPrice = filterPrice.reduce((acc, v) => acc + v.price * v.qty, 0);
 
   // 抓取登入狀態
   // 取得localStorage裡的token，用來發起req帶入headers
@@ -142,8 +150,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
   const checkLogin = async () => {
     if (userId) {
       // 先執行加入購物車
-      // !!! 待解決
-      addToCartAry(finalProducts);
+      addToCartAry(filterPrice);
       // 完成加入購物車後再顯示訊息
       Swal.fire({
         position: "top-end",
@@ -158,7 +165,6 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
         text: "是否前往登入頁面?",
         icon: "warning",
         showCancelButton: true,
-        // confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "是",
         cancelButtonText: "否",
@@ -287,9 +293,12 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                     <div
                       className={`${styles["portion-and-price"]} d-flex gap-2`}
                     >
-                      <p className={styles["portion"]}>份量</p>
-                      <p className={styles["divider"]}>|</p>
-                      <p className={styles["price"]}>單價 $ {v.price}</p>
+                      {/* <p className={styles["portion"]}>份量</p> */}
+                      {/* <p className={styles["divider"]}>|</p> */}
+                      <p className={styles["price"]}>
+                        單價 ${" "}
+                        {v.discount_price === null ? v.price : v.discount_price}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -321,7 +330,10 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                     </button>
                   </div>
                   <p className={`${styles["subtotal"]} ${styles["figma-h6"]}`}>
-                    {`$ ${subtotal(v.qty, v.price)}`}
+                    {`$ ${subtotal(
+                      v.qty,
+                      v.discount_price === null ? v.price : v.discount_price
+                    )}`}
                   </p>
                 </div>
               </div>
@@ -346,6 +358,7 @@ export default function DetailRelatedProducts({ recipeID = "" }) {
                 height={15}
                 viewBox="0 0 15 15"
                 fill="none"
+                className={styles["cart-icon"]}
               >
                 <mask
                   id="mask0_2921_33112"
