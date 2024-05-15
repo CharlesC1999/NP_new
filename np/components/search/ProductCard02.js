@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import FavIconProduct from "@/components/favor/FavIconProduct";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import toast from "react-hot-toast";
 
 export default function ProductCard02({ productsData, Index, qty = 1 }) {
   console.log(productsData, "classDW");
