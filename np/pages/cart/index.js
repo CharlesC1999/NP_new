@@ -37,14 +37,14 @@ const JumpOutCoupon = ({ onClose, onSelect }) => {
   }, []);
 
   const member = userData.id;
-  // console.log(userData);
-  console.log(member);
+  // // console.log(userData);
+  // console.log(member);
 
   useEffect(() => {
     const params = {
       member,
     };
-    console.log(params); // 全部篩選的條件
+    // console.log(params); // 全部篩選的條件
     getCoupoon(params);
   }, [member]);
 
@@ -77,7 +77,7 @@ const JumpOutCoupon = ({ onClose, onSelect }) => {
     }
   };
 
-  console.log("氣屁氣", couponsData);
+  // console.log("氣屁氣", couponsData);
 
   // 新增點擊事件
   const handleSelectCoupon = (couponsData) => {
@@ -178,7 +178,7 @@ const ShopCart1 = () => {
   //   },
   // ];
   // const [coupon, setCoupon] = useState(data.name);
-  // console.log(coupon);
+  // // console.log(coupon);
 
   // const [discount, setDiscount] = useState(0);
 
@@ -190,12 +190,12 @@ const ShopCart1 = () => {
   // };
   // // const finalPrice= if()
 
-  // console.log(totalPrice);
-  // console.log(totalProductPrice);
+  // // console.log(totalPrice);
+  // // console.log(totalProductPrice);
 
   // const [finalPrice, setFinalPrice] = useState(totalPrice + totalProductPrice);
   // const discountAmount = coupon ? coupon.disPrice : 0;
-  // console.log(finalPrice);
+  // // console.log(finalPrice);
   // useEffect(() => {
   //   if (finalPrice !== false) {
   //     // 如果 finalPrice 不是 false，计算最终价格
@@ -209,7 +209,7 @@ const ShopCart1 = () => {
   //         ? totalPrice + totalProductPrice
   //         : calculatedFinalPrice
   //     );
-  //     console.log(totalPrice, totalProductPrice, finalPrice, "價格");
+  //     // console.log(totalPrice, totalProductPrice, finalPrice, "價格");
   //     // 计算并更新最终价格
   //   }
   // }, [coupon, totalPrice, totalProductPrice, finalPrice]);
@@ -228,7 +228,7 @@ const ShopCart1 = () => {
   //   }
   // }, [coupon]);
 
-  // console.log(finalPrice);
+  // // console.log(finalPrice);
 
   // ----------------------------------------------------
   // 去抓儲存在localstorage的使用者
@@ -244,13 +244,13 @@ const ShopCart1 = () => {
       setUserId(userData.id);
     }
   }, []);
-  console.log("userId", userId);
-  // console.log(couponsData);
+  // console.log("userId", userId);
+  // // console.log(couponsData);
 
   // 這邊處理子元件點擊的優惠券
   const [selectedCoupon, setSelectedCoupon] = useState([]);
 
-  // console.log(selectedCoupon);
+  // // console.log(selectedCoupon);
   // 設定儲存優惠券在localstorage中
   useEffect(() => {
     const data = window.localStorage.getItem("dataCoupon666");
@@ -269,8 +269,8 @@ const ShopCart1 = () => {
   }, [selectedCoupon]);
   const handleCouponSelect = (couponData) => {
     setSelectedCoupon([couponData]);
-    console.log("Selected coupon:", couponData);
-    console.log(selectedCoupon);
+    // console.log("Selected coupon:", couponData);
+    // console.log(selectedCoupon);
     setShowFullScreen(false); // 关闭模态框
   };
 
@@ -278,7 +278,7 @@ const ShopCart1 = () => {
   //   totalPrice + totalProductPrice
   // );
 
-  // console.log(finalPrice2);
+  // // console.log(finalPrice2);
 
   // 把折扣金額提出來------
   const [discountAmount2, setDiscountAmount2] = useState(0); // State to hold the discount amount
@@ -290,21 +290,21 @@ const ShopCart1 = () => {
     }
   }, [selectedCoupon]);
 
-  console.log(typeof discountAmount2);
+  // console.log(typeof discountAmount2);
 
-  console.log(discountAmount2);
+  // console.log(discountAmount2);
   // const displayText =
   //   discountAmount2 > 1 ? `${discountAmount2}元` : `${discountAmount2} 折扣`;
 
-  // console.log(typeof displayText)(有分減掉、乘法用)
+  // // console.log(typeof displayText)(有分減掉、乘法用)
   const displayText =
     discountAmount2 > 1 ? `${discountAmount2}元` : `${discountAmount2} 折`;
 
   // 提取折扣数字的方法(有分減掉、乘法用)
   const numericValue = parseFloat(displayText.match(/-?\d+\.?\d*/)[0]);
 
-  console.log(typeof numericValue); // 输出 "number"
-  console.log(numericValue);
+  // console.log(typeof numericValue); // 输出 "number"
+  // console.log(numericValue);
 
   const displayText2 =
     discountAmount2 > 1
@@ -314,8 +314,8 @@ const ShopCart1 = () => {
             ? discountAmount2 * 100
             : discountAmount2 * 10
         } 折`;
-  console.log(discountAmount2);
-  console.log(displayText2);
+  // console.log(discountAmount2);
+  // console.log(displayText2);
   // if (discountAmount < 1) {
   //   return `${
   //     discountAmount.endsWith("5")
@@ -336,10 +336,10 @@ const ShopCart1 = () => {
     }
   }, [selectedCoupon]);
 
-  console.log(minimumConsumption);
+  // console.log(minimumConsumption);
 
   const finalPrice2 = totalPrice + totalProductPrice;
-  console.log(finalPrice2);
+  // console.log(finalPrice2);
 
   // 判斷優惠卷是使用乘法、除法並計算(若小於1用*，大於1用減法)
 
@@ -369,7 +369,7 @@ const ShopCart1 = () => {
     finalPriceAfterDiscount = finalPrice2;
   }
 
-  console.log(finalPriceAfterDiscount);
+  // console.log(finalPriceAfterDiscount);
 
   // 儲存最終價格到localstorage中
   useEffect(() => {
@@ -377,7 +377,7 @@ const ShopCart1 = () => {
       "finalPriceAfterDiscount55666",
       finalPriceAfterDiscount
     );
-    console.log("Saved to localStorage:", finalPriceAfterDiscount);
+    // console.log("Saved to localStorage:", finalPriceAfterDiscount);
   }, [finalPriceAfterDiscount]);
   return (
     <div className={HeaderSetting.mobileAdjust}>
@@ -407,7 +407,10 @@ const ShopCart1 = () => {
             <div className=" d-flex">
               {/* <div className="pt-1"> <Check/></div> */}
 
-              <label htmlFor="" className={`${shopStyles.fs} `}>
+              <label
+                htmlFor=""
+                className={`${shopStyles.fs} d-flex align-items-center`}
+              >
                 使用折價券{" "}
               </label>
             </div>
