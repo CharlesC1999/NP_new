@@ -136,14 +136,6 @@
     "created_at": "2024-04-28"
   },
   {
-    "id": "18",
-    "product_id": "7",
-    "user_id": "40",
-    "comment": "這是我吃過最好的產品之一。",
-    "rating": "5",
-    "created_at": "2024-04-28"
-  },
-  {
     "id": "19",
     "product_id": "8",
     "user_id": "7",
@@ -301,14 +293,6 @@
     "user_id": "27",
     "comment": "顏色鮮豔，看起來很不錯。",
     "rating": "5",
-    "created_at": "2024-04-28"
-  },
-  {
-    "id": "38",
-    "product_id": "7",
-    "user_id": "30",
-    "comment": "非常耐用，用了很長時間。",
-    "rating": "4",
     "created_at": "2024-04-28"
   },
   {
