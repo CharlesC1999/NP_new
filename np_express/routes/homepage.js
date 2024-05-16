@@ -14,7 +14,7 @@ GROUP BY product.product_name LIMIT 12`
   JOIN class_image ON  class.class__i_d = class_image.f__class__i_d
   JOIN favor_class ON  class.class__i_d = favor_class.cid
   JOIN speaker ON class.f__speaker__i_d = speaker_id
-  WHERE class_image.sort_order = 0 AND class.class__i_d BETWEEN 4 AND 12 LIMIT 2`
+  WHERE class_image.sort_order = 0 AND class.class__i_d BETWEEN 20 AND 23 LIMIT 2`
   const [hotClass] = await db.query(hotClassSql)
   const recipeSql = `SELECT * FROM recipe WHERE recipe__i_d BETWEEN 19 AND 22`
   const [recommendedRecipe] = await db.query(recipeSql)

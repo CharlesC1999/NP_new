@@ -214,6 +214,9 @@
     /* align-content: center; */
   }
 }
+.lefta a:hover{
+  color: var(--green02);
+}
 
 .lefta a {
   text-decoration: none;
@@ -223,5 +226,10 @@
 @media (max-width: 375px) {
   .lefta {
     margin: auto;
+    /* height: 10px; */
   }
+}
+
+.activeLink {
+  color: green; /* 點擊後的顏色 */
 }

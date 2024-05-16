@@ -20,14 +20,8 @@ import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate"
 import ProductSidebarLike from "@/components/product/sideBar/ProductSidebarLike";
 import ProductSidebarDetail from "@/components/product/sideBar/ProductSidebarDetail";
 
-// //useContext
-// import { useProductCategories } from "@/hooks/use-product-cate";
-
 export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("product");
-
-  // const { selectedCategories, setSelectedCategories, handleCategoryChange } =
-  //   useProductCategories();
 
   const [product, setProduct] = useState({
     id: 0,
@@ -45,9 +39,7 @@ export default function ProductDetail() {
   const [mayLikeProducts, setMayLikeProducts] = useState([]);
 
   const [recipes, setRecipes] = useState([]);
-  //產品數量顯示
   const [categoryCounts, setCategoryCounts] = useState({});
-  //條件用
   const [productCate, setProductCate] = useState([]);
   //解析ReviewDetails字串
   function parseReviewDetails(details) {
@@ -95,17 +87,14 @@ export default function ProductDetail() {
       console.error("Error fetching product:", e);
     }
   };
-  console.log(product.image_urls);
-  //動態路由需要router來確定是否收到值 1.isReady是布林值 2.query是回傳的id值
+
   const router = useRouter();
   useEffect(() => {
-    if (router.isReady) {
+    if (router.isReady && router.query.id) {
       console.log("isReady", router.isReady, "query", router.query);
-      // 確保能得從router.query到pid後，再向伺服器要求對應資料
       getProduct(router.query.id);
     }
   }, [router.isReady, router.query.id]);
-  console.log(product);
   return (
     <>
       <HeaderComponent />
@@ -135,7 +124,7 @@ export default function ProductDetail() {
                 </div>
               </div>
               <div
-                className={`${style["right-main"]} d-flex flex-column ms-0 ms-sm-5 justify-content-center`}
+                className={`${style["right-main"]} d-flex flex-column ms-0 ms-sm-5 justify-content-star`}
               >
                 <div
                   className={`${style["main-product"]} d-flex flex-sm-row flex-column justify-content-center`}

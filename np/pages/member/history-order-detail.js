@@ -22,7 +22,7 @@ const HistoryOrderDetail = () => {
   const [orderDetail, setOrderDetail] = useState([])
   const [coupons, setCoupons] = useState([])
  
-  const couponid = orderDetail.length > 0 ? orderDetail[0].O_coupon_id : null;
+  const couponid = orderDetail.length > 0 ? orderDetail[0].o_coupon_id : null;
   console.log(couponid);
   const couponIdExists = coupons.some(item => item.coupon__i_d  === couponid);
   console.log(couponIdExists);
@@ -76,6 +76,16 @@ const HistoryOrderDetail = () => {
 
 
 
+  let discount;
+orderDetail.forEach((v, i) => {
+  discount = v.discount__amount;
+  if (discount === 0) {
+    discount="未使用優惠券"
+  } else {
+    discount=`折$${discount}元`;
+  }
+});
+console.log(discount);
   // if (couponIdExists) {
   //   // 如果有適用的優惠券，計算折扣後的總價
   //   let coupon = coupons.find(item => item.coupon_id === couponid);
@@ -202,11 +212,13 @@ const HistoryOrderDetail = () => {
                 return (
                   <div className="row py-2" key={v.Order_Item_ID}>
 
-                    {/* <div className={`${styles3.fb} col text-center pt-2`}>{v.product_name}</div> */}
-                    <Link className={`${styles3.xd} col text-center pt-2`}  href={`/product/${v.id}`}>{v.product_name}</Link>
-                    <div className={`${styles3.fb} col text-center pt-2`}> {v.discount_price ? v.discount_price : v.product_price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.product_name}</div>
+                    {/* <Link className={`${styles3.xd} col text-center pt-2`}  href={`/product/productId?id=${v.id}`}>{v.product_name}</Link> */}
+                    {/* <div className={`${styles3.fb} col text-center pt-2`}> {v.discount_price ? v.discount_price : v.product_price}</div> */}
+                    <div className={`${styles3.fb} col text-center pt-2`}> {v.product_price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}> {v.discount_price ? v.discount_price * v.quantity : v.product_price * v.quantity}</div>
+                    {/* <div className={`${styles3.fb} col text-center pt-2`}> {v.discount_price ? v.discount_price * v.quantity : v.product_price * v.quantity}</div> */}
+                    <div className={`${styles3.fb} col text-center pt-2`}> {v.product_price * v.quantity}</div>
 
                   </div>
 
@@ -240,11 +252,14 @@ const HistoryOrderDetail = () => {
 
                   <div className="row py-2" key={v.Order_Item_ID}>
 
-                    {/* <div className={`${styles3.fb} col text-center pt-2`}>{v.class_name}</div> */}
-                    <Link className={`${styles3.xd} col text-center pt-2`}  href={`/class-page/class-detail?class__i_d=${v.class__i_d}`}>{v.class_name}</Link>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_discount_price ? v.c_discount_price : v.c_price}</div>
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.class_name}</div>
+                    {/* <Link className={`${styles3.xd} col text-center pt-2`}  href={`/class-page/class-detail?class__i_d=${v.class__i_d}`}>{v.class_name}</Link> */}
+                    {/* <div className={`${styles3.fb} col text-center pt-2`}>{v.c_discount_price ? v.c_discount_price : v.c_price}</div> */}
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price}</div>
                     <div className={`${styles3.fb} col text-center pt-2`}>{v.quantity}</div>
-                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_discount_price ? v.c_discount_price * v.quantity : v.c_price * v.quantity}</div>
+                    {/* <div className={`${styles3.fb} col text-center pt-2`}>{v.c_discount_price ? v.c_discount_price * v.quantity : v.c_price * v.quantity}</div> */}
+                    <div className={`${styles3.fb} col text-center pt-2`}>{v.c_price * v.quantity}</div>
+
 
                   </div>
                 )
@@ -263,7 +278,7 @@ const HistoryOrderDetail = () => {
 
 
               <div className={`${styles3.orderEnd} `}>
-                優惠券: {useCoupon}
+                優惠券:   {discount}  
 
               </div>
               {/* <div className={`${styles3.orderEnd} `}>
@@ -352,11 +367,12 @@ const HistoryOrderDetail = () => {
                 return (
                   <div key={v.Order_Item_ID}>
                     <div className="row ">
-                      {/* <div className={`${styles3.fc} row ps-4 `}>{v.product_name} X {v.quantity}</div> */}
-                      <Link className={`${styles3.xd} col  pt-2`}  href={`/product/${v.id}`}>{v.product_name}&nbsp; X &nbsp;&nbsp;{v.quantity}</Link>
+                      <div className={`${styles3.fc} row ps-4 `}>{v.product_name} X {v.quantity}</div>
+                      {/* <Link className={`${styles3.xd} col  pt-2`}  href={`/product/productId?id=${v.id}`}>{v.product_name}&nbsp; X &nbsp;&nbsp;{v.quantity}</Link> */}
                       <div className>
-
-                        <div className={`${styles3.xd2} col text-start mt-2 fw-bold`}> {v.discount_price ? v.discount_price : v.product_price}</div>
+                      {/* <div className={`${styles3.xd2} col text-start mt-2 fw-bold`}> {v.discount_price ? v.discount_price : v.product_price}</div>
+                      </div> */}
+                        <div className={`${styles3.xd2} col text-start mt-2 fw-bold`}> {v.product_price}</div>
                       </div>
                     </div>
 
@@ -370,7 +386,8 @@ const HistoryOrderDetail = () => {
                       <div
                         className={`${styles3.fb} col text-end  text-success fw-bold`}
                       >
-                       {v.discount_price ? v.discount_price * v.quantity : v.product_price * v.quantity}
+                       {/* {v.discount_price ? v.discount_price * v.quantity : v.product_price * v.quantity} */}
+                       {v.product_price * v.quantity}
                       </div>
                     </div>
                   </div>
@@ -393,12 +410,14 @@ const HistoryOrderDetail = () => {
                 return (
                   <div key={v.Order_Item_ID}>
                     <div className="row py-2 mt-1">
-                      {/* <div className={`${styles3.fc} row ps-4 `}>{v.class_name} X {v.quantity}</div> */}
-                      <Link className={`${styles3.xd} col  pt-2`}   href={`/class-page/class-detail?class__i_d=${v.class__i_d}`}>{v.class_name}&nbsp; X &nbsp;&nbsp;{v.quantity}</Link>
+                      <div className={`${styles3.fc} row ps-4 `}>{v.class_name} X {v.quantity}</div>
+                      {/* <Link className={`${styles3.xd} col  pt-2`}   href={`/class-page/class-detail?class__i_d=${v.class__i_d}`}>{v.class_name}&nbsp; X &nbsp;&nbsp;{v.quantity}</Link> */}
 
                       <div className="row mt-4">
 
-                        <div className={`${styles3.fb} col fw-bold`}>{v.c_discount_price? v.c_discount_price:v.c_price}</div>
+                        {/* <div className={`${styles3.fb} col fw-bold`}>{v.c_discount_price? v.c_discount_price:v.c_price}</div>
+                      </div> */}
+                      <div className={`${styles3.fb} col fw-bold`}>{v.c_price}</div>
                       </div>
                     </div>
 
@@ -412,7 +431,8 @@ const HistoryOrderDetail = () => {
                       <div
                         className={`${styles3.fb} col text-center text-success fw-bold`}
                       >
-                        {v.c_discount_price ? v.c_discount_price * v.quantity : v.c_price * v.quantity}
+                        {/* {v.c_discount_price ? v.c_discount_price * v.quantity : v.c_price * v.quantity} */}
+                        {v.c_price * v.quantity}
                       </div>
                     </div>
                   </div>
@@ -422,7 +442,7 @@ const HistoryOrderDetail = () => {
               )}
               <div className={`${styles3.totalPrice} row`}>
                 <div className={`${styles3.orderEnd} `}>
-                  優惠券: {useCoupon}
+                  優惠券:  {discount}  
 
                 </div>
                 {/* <div className={`${styles3.orderEnd} `}>

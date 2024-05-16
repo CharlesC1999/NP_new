@@ -105,8 +105,6 @@ export default function RecipeCardsList({ recipesData, Index }) {
           </div>
         </div>
       </div>
-
-      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 }

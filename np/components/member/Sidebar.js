@@ -64,8 +64,13 @@ const Sidebar = () => {
         <div className={styles.menuTop}>
           <div className={`rounded-circle overflow-hidden ${styles.userimage}`}>
             <img
-              className="w-100 h-100 object-fit-cover"
-              src={`http://localhost:3005/avatar/${userData.User_image}`}
+              src={
+                userData && userData.User_image
+                  ? userData.User_image.startsWith("https://")
+                    ? userData.User_image // 是https://開頭的圖片
+                    : `http://localhost:3005/avatar/${userData.User_image}` // 不是https://開頭的圖片
+                  : ``
+              }
               alt=""
             />
           </div>

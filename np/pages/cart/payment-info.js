@@ -319,6 +319,7 @@ const ShopCart3 = () => {
       icon: "success",
       showCancelButton: true,
       confirmButtonText: "是",
+      confirmButtonColor: "#50bf8b",
       cancelButtonText: "否",
       reverseButtons: true,
     }).then((result) => {
@@ -546,9 +547,9 @@ const ShopCart3 = () => {
           </section>
 
           {/*  */}
-          <p>Order ID: {lineOrder.orderId}</p>
+          {/* <p>Order ID: {lineOrder.orderId}</p>
           <p>Currency: {lineOrder.currency}</p>
-          <p>Total Amount: {lineOrder.amount}</p>
+          <p>Total Amount: {lineOrder.amount}</p> */}
 
           {/* 折價券、付款 */}
           <div

@@ -7,12 +7,12 @@
     "Publish_date": "2021-11-01",
     "Recipe_category_ID": "5",
     "recipe_valid": "1",
-    "Servings": 1,
-    "Ingredients_Count": 3,
-    "Cooking_Time": 25,
-    "Ingredients": "test",
+    "Servings": 4,
+    "Ingredients_Count": 7,
+    "Cooking_Time": 20,
+    "Ingredients": "刈包麵團&4個,五花肉&400克,辣椒&2條,青菜&200克,花生粉&適量,香菜&適量,酸菜&適量",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備刈包麵團、五花肉、辣椒、青菜、花生粉、香菜和酸菜。T將五花肉放入滾水中煮熟，取出後切成薄片。T將青菜汆燙或炒熟，備用。T將辣椒切成絲或片，根據口味適量調整辣度。T將刈包麵團加熱至微暖，使其變軟。T將軟化的麵團打開，放入煮熟的五花肉、青菜、辣椒，撒上花生粉，加入香菜和酸菜，包裹成包子形狀。T將包好的刈包放入蒸籠中，蒸煮約15-20分鐘，至麵團熟透即可食用。"
   },
   {
     "Recipe_ID": "2",
@@ -22,12 +22,12 @@
     "Publish_date": "2023-02-02",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 2,
-    "Ingredients_Count": 4,
-    "Cooking_Time": 30,
-    "Ingredients": "test",
+    "Servings": 3,
+    "Ingredients_Count": 5,
+    "Cooking_Time": 90,
+    "Ingredients": "鴨腿&3支,鹽&適量,胡椒&適量,乾香草&適量,橄欖油&適量",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備鴨腿、鹽、胡椒、乾香草等調味料。T將鴨腿表面均勻地塗抹鹽、胡椒和乾香草。T將調味好的鴨腿放入真空袋中，加入適量橄欖油，真空密封。T將真空袋中的鴨腿放入煮水中，以低溫（攝氏60-80度）浸泡2-3小時。T將浸泡過的鴨腿放入預熱至180度的烤箱中烤約1.5小時，至金黃色和熟透。T取出烤好的鴨腿，讓其休息約10分鐘，然後切片享用。"
   },
   {
     "Recipe_ID": "3",
@@ -37,12 +37,12 @@
     "Publish_date": "2022-05-03",
     "Recipe_category_ID": "3",
     "recipe_valid": "1",
-    "Servings": 3,
-    "Ingredients_Count": 5,
-    "Cooking_Time": 35,
-    "Ingredients": "test",
+    "Servings": 4,
+    "Ingredients_Count": 4,
+    "Cooking_Time": 20,
+    "Ingredients": "鹹湯圓皮&適量,鮮肉餡&400克,蒜片&2瓣,蔬菜&適量",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備鹹湯圓皮、鮮肉餡、蒜片、蔬菜等食材。T將一鍋水煮沸，加入適量的鹹湯圓皮，煮至浮起。T將鮮肉餡與蒜片和蔬菜混合，製成小丸子狀。T將製好的餡料小丸子放入煮好的湯圓中，繼續煮至湯圓浮起，肉熟透。T根據個人口味加入鹽、胡椒等調味料，煮至湯汁濃郁。T將煮好的客家鮮肉鹹湯圓盛裝在碗中，撒上少許蔬菜裝飾即可食用。"
   },
   {
     "Recipe_ID": "4",
@@ -82,12 +82,12 @@
     "Publish_date": "2022-10-06",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 6,
-    "Ingredients_Count": 4,
-    "Cooking_Time": 30,
-    "Ingredients": "test",
+    "Servings": 5,
+    "Ingredients_Count": 3,
+    "Cooking_Time": 40,
+    "Ingredients": "雞肉&1公斤,香菇&200克,紅蘿蔔&1根",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備雞肉、香菇、胡蘿蔔等食材。T將雞肉清洗乾淨，放入鍋中加水煮至八分熟，撇去浮沫。T將切好的香菇和紅蘿蔔加入煮軟的雞肉中，繼續煮至雞肉和蔬菜熟透。T根據個人口味加入鹽、胡椒等調味料，煮至湯汁濃郁。T將煮好的南靖雞盛裝在碗中，撒上少許香菜裝飾即可食用。"
   },
   {
     "Recipe_ID": "7",
@@ -97,12 +97,12 @@
     "Publish_date": "2021-01-08",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 7,
-    "Ingredients_Count": 5,
+    "Servings": 3,
+    "Ingredients_Count": 2,
     "Cooking_Time": 35,
-    "Ingredients": "test",
+    "Ingredients": "蹄膀&1條,筍子&300克",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備蹄膀、筍子等食材。T將蹄膀清洗乾淨，放入沸水中煮熟，取出備用。T將筍子去皮，切成適當大小的片狀。T在鍋中加入適量水，放入煮熟的蹄膀和切好的筍子，加入適量調味料（例如鹽、胡椒、生抽等），煮至筍子軟熟。T將煮好的蹄膀和筍子盛裝在盤中，即可享用。"
   },
   {
     "Recipe_ID": "8",
@@ -112,27 +112,27 @@
     "Publish_date": "2023-12-08",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 8,
-    "Ingredients_Count": 6,
-    "Cooking_Time": 40,
-    "Ingredients": "test",
+    "Servings": 3,
+    "Ingredients_Count": 4,
+    "Cooking_Time": 20,
+    "Ingredients": "五柳枝石老魚&1條,香菜&適量,香菇&100克,木耳&50克",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備五柳枝石老魚、香菜、香菇、木耳等食材。T將魚清洗乾淨，去除內臟和鱗片，剖成兩片。T將香菜洗淨切段，香菇和木耳洗淨切片。T將魚放入鍋中，加入適量水，加入香菇和木耳，用中火煮約15分鐘。T根據個人口味加入鹽、胡椒等調味料。T將煮好的五柳枝石老魚盛裝在碟中，撒上香菜裝飾即可食用。"
   },
   {
     "Recipe_ID": "9",
     "Title_R_name": "香酥芋泥鴨",
-    "Image_URL": "18_YDMLgaciEz.jpeg",
+    "Image_URL": "18_YDMLgaciEz.jpg",
     "Content": "這是一道功夫手工菜,先將全鴨以多種辛香料和酒醃漬數小時,去除鴨腥味,然後蒸炊入味,趁熱片下整塊多汁的鴨肉,佐以精心調配之大甲檳榔心芋泥餡,芋芯鬆軟，油炸之後口感外酥脆內綿密，淡淡芋香襯托鴨肉的鮮美，而鴨肉也大有來頭,是選用法國土番鴨，肉質甘甜，採自然飼養法，在飼料中添加益生菌，不施打藥物，還有駐廠獸醫師檢驗，吃得安心有健康。",
     "Publish_date": "2022-04-08",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 9,
+    "Servings": 2,
     "Ingredients_Count": 3,
     "Cooking_Time": 25,
-    "Ingredients": "test",
+    "Ingredients": "鴨肉&200克,芋頭&200克,青江菜&100克",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備鴨肉、芋頭、青江菜等食材。T將鴨肉和芋頭清洗乾淨，切成適當大小的塊狀。T將鴨肉和芋頭分別煮熟。T將煮熟的芋頭搗成泥狀，加入適量調味料。T將煮熟的鴨肉塊用適量調味料醃製片刻。T將醃製好的鴨肉裹上芋頭泥，下油鍋中炸至金黃酥脆。T將青江菜炒至熟透，加入適量調味料。T將炸好的香酥芋泥鴨和炒好的青江菜盛裝在碟中，即可享用。"
   },
   {
     "Recipe_ID": "10",
@@ -142,12 +142,12 @@
     "Publish_date": "2021-08-10",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 9,
-    "Ingredients_Count": 4,
+    "Servings": 3,
+    "Ingredients_Count": 6,
     "Cooking_Time": 30,
-    "Ingredients": "test",
+    "Ingredients": "螃蟹&3隻,沙茶醬&3湯匙,蔥&2根,蒜&3瓣,生薑&一小塊,辣椒&1條",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備螃蟹、沙茶醬、蔥、蒜、生薑、辣椒等食材。T將螃蟹清洗乾淨，切成適當大小的塊狀，去除螃蟹殼外殼，剁碎螃蟹腳。T將蔥、蒜、生薑切末，辣椒切片。T在鍋中熱油，爆香蔥、蒜、生薑、辣椒，加入沙茶醬炒香。T將處理好的螃蟹放入鍋中，翻炒至螃蟹變色。T根據個人口味加入鹽、糖等調味料，繼續翻炒均勻。T將炒好的沙茶炒螃蟹盛裝在盤中，即可享用。"
   },
   {
     "Recipe_ID": "11",
@@ -157,12 +157,12 @@
     "Publish_date": "2022-07-11",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 9,
-    "Ingredients_Count": 5,
-    "Cooking_Time": 35,
-    "Ingredients": "test",
+    "Servings": 3,
+    "Ingredients_Count": 4,
+    "Cooking_Time": 15,
+    "Ingredients": "溪蝦&300克,椒鹽&2湯匙,蔥&1根,蒜&2瓣",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備溪蝦、椒鹽、蔥、蒜等食材。T將溪蝦清洗乾淨，去除蝦頭、蝦殼等，去腸泥。T將蔥切段，蒜切片。T在鍋中熱油，爆香蔥段、蒜片，加入溪蝦翻炒。T將溪蝦炒至變色後，加入適量的椒鹽，繼續炒至溪蝦均勻沾滿椒鹽。T將炒好的椒鹽溪蝦盛裝在盤中，即可享用。"
   },
   {
     "Recipe_ID": "12",
@@ -172,17 +172,17 @@
     "Publish_date": "2021-12-12",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 9,
-    "Ingredients_Count": 6,
-    "Cooking_Time": 40,
-    "Ingredients": "test",
+    "Servings": 2,
+    "Ingredients_Count": 5,
+    "Cooking_Time": 20,
+    "Ingredients": "蝦子&200克,紹興酒&3湯匙,蔥&1根,姜&2片,鹽&少許",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "準備蝦子、紹興酒、蔥、姜、鹽等食材。T將蝦子清洗乾淨，去除蝦腸，用鹽水浸泡片刻，洗淨後瀝乾。T將蔥切段，姜切片。T在鍋中熱油，爆香蔥段、姜片，加入蝦子翻炒至變色。T將煮至蝦子變色後，加入適量的紹興酒，繼續翻炒至酒精揮發。T將炒好的紹興醉蝦盛裝在盤中，即可享用。"
   },
   {
     "Recipe_ID": "13",
     "Title_R_name": "紅紋鵝掌鮑魚",
-    "Image_URL": "18_YDMLgaciEz.jpeg",
+    "Image_URL": "18_YDMLgaciEz.jpg",
     "Content": "使用自家契養的放山古早雞骨與香甜甘潤的桂圓肉長時間熬煮成高湯底後，加入本土鵝掌及高檔鮑魚以炆火慢慢燉煮而成。鮑魚的Q彈加上鵝掌的滑嫩，滷至入味後完成這道工序繁複的年節大菜，每一口都是濃郁香滑的滋味。再搭配新鮮蔬菜一起食用，清爽解膩，澎湃上桌且美味滿分！",
     "Publish_date": "2022-10-13",
     "Recipe_category_ID": "1",
@@ -277,12 +277,12 @@
     "Publish_date": "2023-06-19",
     "Recipe_category_ID": "6",
     "recipe_valid": "1",
-    "Servings": 9,
-    "Ingredients_Count": 5,
-    "Cooking_Time": 35,
-    "Ingredients": "test",
+    "Servings": 2,
+    "Ingredients_Count": 7,
+    "Cooking_Time": 30,
+    "Ingredients": "柚子&1顆,小番茄&10-12顆,生菜&2杯,橄欖油&2湯匙,檸檬汁&1湯匙,蜂蜜&1茶匙,鹽&少許",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "剝柚子，將小番茄對半切開，洗淨生菜並瀝乾。T將剝好的柚子撕成小塊，去除白色的部分。T將生菜放入大碗中，加入處理好的柚子和小番茄。T在小碗中混合橄欖油、檸檬汁、蜂蜜和少許鹽，攪拌均勻。T將製作好的醬汁淋在沙拉上，輕輕拌勻。T將拌好的沙拉裝盤，可以加點堅果或薄荷葉裝飾。"
   },
   {
     "Recipe_ID": "20",
@@ -292,12 +292,12 @@
     "Publish_date": "2021-01-20",
     "Recipe_category_ID": "1",
     "recipe_valid": "1",
-    "Servings": 9,
-    "Ingredients_Count": 6,
+    "Servings": 3,
+    "Ingredients_Count": 8,
     "Cooking_Time": 40,
-    "Ingredients": "test",
+    "Ingredients": "豆腐&300g,白菜葉&9片,油&2湯匙,醬油&3湯匙,香油&1湯匙,蒜末&2瓣,糖&1茶匙,蔥花&適量",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "將豆腐切成條狀，瀝乾水分。T白菜葉洗淨，放入熱水中燙軟，瀝乾備用。T將豆腐條放在燙軟的白菜葉上，捲起固定。T在平底鍋中加熱少許油，放入白菜豆腐卷煎至兩面金黃。T調製醬汁：在小碗中混合醬油、香油、蒜末和少許糖。T將煎好的白菜豆腐卷裝盤，淋上調製好的醬汁，撒上蔥花裝飾。"
   },
   {
     "Recipe_ID": "21",
@@ -307,12 +307,12 @@
     "Publish_date": "2021-01-02",
     "Recipe_category_ID": "4",
     "recipe_valid": "1",
-    "Servings": 9,
+    "Servings": 1,
     "Ingredients_Count": 3,
-    "Cooking_Time": 25,
-    "Ingredients": "test",
+    "Cooking_Time": 15,
+    "Ingredients": "藍靛果&1顆,蜂蜜或糖&適量,碳酸水或汽水&適量",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "將藍靛果去皮、去籽，切成小塊。T將藍靛果塊放入攪拌機中，加入適量水，打成果汁。T將打好的藍靛果汁過濾，去除果渣。T根據個人口味加入適量蜂蜜或糖調味。T將藍靛果汁倒入杯中，加入適量碳酸水或汽水，輕輕攪拌即可飲用。"
   },
   {
     "Recipe_ID": "22",
@@ -322,12 +322,12 @@
     "Publish_date": "2023-01-07",
     "Recipe_category_ID": "3",
     "recipe_valid": "1",
-    "Servings": 9,
-    "Ingredients_Count": 4,
+    "Servings": 2,
+    "Ingredients_Count": 7,
     "Cooking_Time": 30,
-    "Ingredients": "test",
+    "Ingredients": "紅蘿蔔&150克,玉米&1條,豌豆&100克,水&600毫升,蔬菜湯或雞湯底&600毫升,鹽&適量,胡椒&適量",
     "Portion": "test",
-    "Steps": "test"
+    "Steps": "洗淨紅蘿蔔、玉米、豌豆，去皮並切成小塊。T將切好的紅蘿蔔、玉米、豌豆放入鍋中，加入適量水，煮至蔬菜變軟。T使用攪拌器將煮軟的蔬菜打成泥狀。T加入蔬菜湯或雞湯底，調整濃度和口感。T根據個人口味加入鹽、胡椒等調味料。T將濃湯煮沸後即可食用，可以加入奶油或乳酪增添口感。"
   },
   {
     "Recipe_ID": "23",
