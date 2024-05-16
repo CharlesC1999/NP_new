@@ -36,6 +36,7 @@ import session from "express-session";
 // const FileStore = sessionFileStore(session)
 // 收藏頁 context
 import { FavorDataProvider } from "@/hooks/use-favorData";
+import { Toaster } from "react-hot-toast";
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
@@ -53,7 +54,8 @@ export default function App({ Component, pageProps }) {
                 <CartProvider>
                   <CategoryProvider>
                     <ManageRouteChanges>
-                      {getLayout(<Component {...pageProps} />)}
+                        {getLayout(<Component {...pageProps} />)}
+                        <Toaster position="bottom-right" reverseOrder={false}/>
                     </ManageRouteChanges>
                   </CategoryProvider>
                 </CartProvider>
