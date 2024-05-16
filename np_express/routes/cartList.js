@@ -288,6 +288,17 @@ router.get('/confirm', async (req, res) => {
         },
       }
     )
+    // 更改優惠券變成已使用
+    if (dbOrder.o_coupon_id) {
+      console.log(
+        `Attempting to update coupon status for coupon__i_d: ${dbOrder.o_coupon_id}`
+      )
+      const updateResult = await Coupons.update(
+        { C_status: '已使用' },
+        { where: { Coupon_ID: dbOrder.o_coupon_id } }
+      )
+      console.log(`Update result: ${updateResult}`)
+    }
 
     return res.json({ status: 'success', data: linePayResponse.body })
   } catch (error) {

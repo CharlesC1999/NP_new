@@ -61,6 +61,7 @@ const ShopCart4 = () => {
     returnMessage: "",
   });
   // const auth = useAuth();
+
   const handleConfirm = async (transactionId) => {
     const res = await axiosInstance.get(
       `/cartList/confirm?transactionId=${transactionId}&orderId=${router.query.orderId}`
@@ -115,6 +116,12 @@ const ShopCart4 = () => {
     // eslint-disable-next-line
   }, [router.isReady]);
 
+  useEffect(() => {
+    localStorage.removeItem("dataCoupon666");
+    localStorage.removeItem("itemsCard666");
+    localStorage.removeItem("productItem666");
+    localStorage.removeItem("finalPriceAfterDiscount55666");
+  }, []);
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>
