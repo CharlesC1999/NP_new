@@ -173,7 +173,7 @@ export default function TopBarList({
         >
           {/* 排序下拉式選單 */}
           <div
-            className={`col-4 d-flex flex-column gap-1 position-relative py-2 px-0 ${styles["select-box"]} ${styles["click-hidden"]}`}
+            className={`col-4 d-flex flex-column gap-1 position-absolute py-2 px-0 ${styles["select-box"]} ${styles["click-hidden"]}`}
             ref={selectBoxRef}
           >
             {sortByOptions.map((v, i) => {
@@ -193,7 +193,7 @@ export default function TopBarList({
           </div>
           {/* 分類下拉式選單 */}
           <div
-            className={` col-5 d-flex flex-column gap-1 position-relative py-2 px-0 ${styles["categories-box"]} ${styles["click-hidden"]}`}
+            className={` col-5 d-flex flex-column gap-1 position-absolute py-2 px-0 ${styles["categories-box"]} ${styles["click-hidden"]}`}
             ref={categoryBoxRef}
           >
             <p
