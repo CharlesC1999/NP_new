@@ -76,15 +76,6 @@ const RangeSlider = ({ min, max, onRangeChange }) => {
           />
         </svg>
       </button>
-      <Toaster
-        position="bottom-right"
-        reverseOrder={false}
-        toastOptions={{
-          style: {
-            color: "red",
-          },
-        }}
-      />
     </div>
   );
 };

@@ -129,7 +129,6 @@ export default function DetailTop({ recipe }) {
           </div>
         </div>
       </div>
-      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 }
