@@ -17,14 +17,7 @@ import HeaderComponent from "@/components/Header";
 import Pagination from "@/components/product/pagination";
 import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarDiscount";
 import PaginationM from "@/components/paginationM";
-// import ProductCardList from "@/components/product/ProductCardList";
-
-// import PaginationRounded from "@/components/pagination";
-//荃做版本sideBar
-// import CateSidebar from "@/components/product/CateSidebar";
-// import NewSidebar from "@/components/product/Newsidebar";
-// import ProductCard from "@/components/product/ProductCard";
-
+import ToTheTop from "@/components/toTheTop";
 //side bar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
 import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
@@ -412,7 +405,7 @@ export default function Product() {
           </div>
         </div>
       </div>
-
+      <ToTheTop />
       <Footer />
     </>
   );
