@@ -200,7 +200,6 @@ export default function ClassCard({ classesData, Index }) {
           </div>
         </div>
       </div>
-      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 }

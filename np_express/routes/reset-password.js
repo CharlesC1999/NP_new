@@ -41,6 +41,11 @@ router.put('/', authenticateToken, async (req, res) => {
     return res.json({ status: 'error', message: '密碼錯誤' })
   }
 
+  // 新舊密碼不能相同
+  if (userPassword.origin === userPassword.new) {
+    return res.json({ status: 'error', message: '新舊密碼不能相同' })
+  }
+
   const salt = bcrypt.genSaltSync(10)
   //   bcrypt加密
   const hashedPassword = bcrypt.hashSync(userPassword.new, salt)
