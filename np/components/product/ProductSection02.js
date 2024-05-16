@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "@/components/product/productSection02.module.scss";
 
 export default function ProductSection02({ review_comments }) {
+  console.log(review_comments);
   return (
     <>
       <div className={`${style["p-comment"]} flex-column `}>
@@ -14,6 +15,18 @@ export default function ProductSection02({ review_comments }) {
           {review_comments.map((review, index) => {
             const starsCount = review.rating;
             const emptyStarsCount = Math.max(0, 5 - starsCount);
+            if (
+              !review ||
+              !review.reviewerId ||
+              !review.createdAt ||
+              !review.rating ||
+              !review.comment
+            ) {
+              return null;
+            }
+            if (!review_comments || review_comments.length === 0) {
+              return <p>No reviews available</p>;
+            }
             return (
               <div key={index}>
                 <div className={`d-flex flex-row align-items-center mt-3`}>
