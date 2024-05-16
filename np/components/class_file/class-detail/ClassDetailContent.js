@@ -195,17 +195,6 @@ const ClassDetail = ({ classData }) => {
               </svg>
               <p className={styles.linkText}>立刻報名</p>
             </a>
-            {/* <a className={styles.linkBtn} onClick={notify}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20px"
-                height="20px"
-                viewBox="0 0 24 24"
-              >
-                <path fill="white" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z" />
-              </svg>
-              <p className={styles.linkText}>加入收藏</p>
-            </a> */}
             <FavIconClass id={classData.class__i_d} />
           </div>
         </div>
