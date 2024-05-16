@@ -146,7 +146,13 @@ const MemberPageMain2 = ({
               {/* // ! 會員基本資料無須選擇圖片，修改資料才需要 */}
               <div className={styles.userImageBig}>
                 <img
-                  src={`http://localhost:3005/avatar/${userData.User_image}`}
+                  src={
+                    userData && userData.User_image
+                      ? userData.User_image.startsWith("https://")
+                        ? userData.User_image // 是https://開頭的圖片
+                        : `http://localhost:3005/avatar/${userData.User_image}` // 不是https://開頭的圖片
+                      : ``
+                  }
                   alt=""
                   className="w-100 h-100 object-fit-cover"
                 />

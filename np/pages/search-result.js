@@ -70,8 +70,8 @@ function SearchResult() {
               </div>
             ) : (
               <div className={styles.noResult}>
-                <h3>找不到您搜尋的 " " </h3>
-                <h5>請重新搜尋</h5>
+                <h3>找不到搜尋結果</h3>
+                <h5>請您重新搜尋</h5>
                 <div className={styles.noResultImg}>
                   <img src="/index-images/noResult.png" alt="" />
                 </div>
@@ -105,8 +105,8 @@ function SearchResult() {
               </div>
             ) : (
               <div className={styles.noResult}>
-                <h3>找不到您搜尋的 " " </h3>
-                <h5>請重新搜尋</h5>
+                 <h3>找不到搜尋結果</h3>
+                <h5>請您重新搜尋</h5>
                 <div className={styles.noResultImg}>
                   <img src="/index-images/noResult.png" alt="" />
                 </div>
@@ -146,8 +146,8 @@ function SearchResult() {
               </div>
             ) : (
               <div className={styles.noResult}>
-                <h3>找不到您搜尋的 " " </h3>
-                <h5>請重新搜尋</h5>
+                 <h3>找不到搜尋結果</h3>
+                <h5>請您重新搜尋</h5>
                 <div className={styles.noResultImg}>
                   <img src="/index-images/noResult.png" alt="" />
                 </div>
