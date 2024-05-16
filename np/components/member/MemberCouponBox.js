@@ -337,7 +337,7 @@ const MemberCouponBox = () => {
                           效期:{v.valid_start_date}
                         </span>
                         <span className={styles.cspan2}>
-                          ~{v.valid_start_date}
+                          ~{v.valid_end_date}
                         </span>
                       </div>
                       <div className={styles.couponContent}>
@@ -410,7 +410,7 @@ const MemberCouponBox = () => {
                           效期:{v.valid_start_date}
                         </span>
                         <span className={styles.cspan2}>
-                          ~{v.valid_start_date}
+                          ~{v.valid_end_date}
                         </span>
                       </div>
                       <div className={styles.couponContent}>
@@ -483,7 +483,7 @@ const MemberCouponBox = () => {
                           效期:{v.valid_start_date}
                         </span>
                         <span className={styles.cspan2}>
-                          ~{v.valid_start_date}
+                          ~{v.valid_end_date}
                         </span>
                       </div>
                       <div className={styles.couponContent}>
@@ -556,7 +556,7 @@ const MemberCouponBox = () => {
                           效期:{v.valid_start_date}
                         </span>
                         <span className={styles.cspan2}>
-                          ~{v.valid_start_date}
+                          ~{v.valid_end_date}
                         </span>
                       </div>
                       <div className={styles.couponContent}>

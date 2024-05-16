@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useFavor } from "@/hooks/use-favorData";
 import { addProductFav, removeProductFav } from "@/services/user";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 // 愛心圖示(svg)
 const Heart = ({ size = 20, color = "#50BF8B" }) => (
@@ -49,7 +49,6 @@ export default function FavIconProduct({ id }) {
 
   return (
     <>
-      <Toaster position="bottom-right" reverseOrder={false} />
       {/* 如果收藏陣列包含現在要新增的這筆 id（表示現在已收藏要移除），愛心是紅色，點擊則刪除 */}
       {/* 如果收藏陣列不包含現在要新增的這筆 id（表示現在未收藏要新增），愛心是白色，點擊則新增 */}
       {favorProduct.includes(id) ? (

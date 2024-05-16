@@ -57,7 +57,6 @@ export default function FavIconClass({ id }) {
   // 嵌套渲染：只有在路由為講師細節頁時才進行後續的 switch 判斷
   return (
     <>
-      <Toaster position="bottom-right" reverseOrder={false} />
       {/* 用在講師細節頁的收藏樣式 */}
       {isClassDetail &&
         (favorClass.includes(id) ? (
