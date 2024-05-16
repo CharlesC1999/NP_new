@@ -17,14 +17,7 @@ import HeaderComponent from "@/components/Header";
 import Pagination from "@/components/product/pagination";
 import ProductSidebarDiscount from "@/components/product/sideBar/ProductSidebarDiscount";
 import PaginationM from "@/components/paginationM";
-// import ProductCardList from "@/components/product/ProductCardList";
-
-// import PaginationRounded from "@/components/pagination";
-//荃做版本sideBar
-// import CateSidebar from "@/components/product/CateSidebar";
-// import NewSidebar from "@/components/product/Newsidebar";
-// import ProductCard from "@/components/product/ProductCard";
-
+import ToTheTop from "@/components/toTheTop";
 //side bar components
 import ProductSidebarCate from "@/components/product/sideBar/ProductSidebarCate";
 import ProductSidebarNew from "@/components/product/sideBar/ProductSidebarNew";
@@ -216,6 +209,7 @@ export default function Product() {
     console.log("Changing page to:", value);
     setPage(value);
   };
+  const [firstRenderComplete, setFirstRenderComplete] = useState(false);
 
   const router = useRouter();
   const [queryParams, setQueryParams] = useState({
@@ -255,6 +249,7 @@ export default function Product() {
     // 如果需要重置分页，我们在这里设置 page 为 1
     if (shouldResetPage) {
       setPage(1);
+      setFirstRenderComplete(true);
     }
   }, [priceRange, rating, orderby, perpage, newCategories, page]); // 包括所有可能影响 queryParams 的依赖
 
@@ -338,13 +333,8 @@ export default function Product() {
                 className={`d-flex justify-content-start ${styles.productCard1}`}
               >
                 {products.length > 0 ? (
-                  // Render products if there are any
                   products.map((item) => (
                     <div key={item.id}>
-                      {/* <Link
-                        href={`/product/${item.id}`}
-                        className="text-decoration-none"
-                      > */}
                       {displayGrid ? (
                         <ProductCard02
                           className={`mx-sm-2 mx-0`}
@@ -370,19 +360,22 @@ export default function Product() {
                           average_rating={item.average_rating}
                         />
                       )}
-                      {/* </Link> */}
                     </div>
                   ))
                 ) : (
                   <div className={`d-flex justify-content-center my-5`}>
-                    <h3
-                      className={`d-flex justify-content-center text-align-center`}
-                    >
-                      查詢無結果唷！
-                    </h3>
-                    <div>
-                      <img src="/index-images/noResultBG.png" alt="" />
-                    </div>
+                    {firstRenderComplete && (
+                      <div>
+                        <div className={`d-flex justify-content-center my-5`}>
+                          <h3
+                            className={`d-flex justify-content-center text-align-center`}
+                          >
+                            查詢無結果唷！
+                          </h3>
+                          <img src="/index-images/noResultBG.png" alt="" />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -412,7 +405,7 @@ export default function Product() {
           </div>
         </div>
       </div>
-
+      <ToTheTop />
       <Footer />
     </>
   );
