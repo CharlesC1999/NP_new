@@ -76,6 +76,12 @@ const HistoryOrderDetail = () => {
 
 
 
+  let discount;
+  orderDetail.forEach((v,i)=>{
+    discount=v.discount__amount
+    console.log(discount);
+  })
+  console.log(discount);
   // if (couponIdExists) {
   //   // 如果有適用的優惠券，計算折扣後的總價
   //   let coupon = coupons.find(item => item.coupon_id === couponid);
@@ -268,7 +274,7 @@ const HistoryOrderDetail = () => {
 
 
               <div className={`${styles3.orderEnd} `}>
-                優惠券: {useCoupon}
+                優惠券: 折  {discount}  元
 
               </div>
               {/* <div className={`${styles3.orderEnd} `}>
@@ -432,7 +438,7 @@ const HistoryOrderDetail = () => {
               )}
               <div className={`${styles3.totalPrice} row`}>
                 <div className={`${styles3.orderEnd} `}>
-                  優惠券: {useCoupon}
+                  優惠券: 折 {discount}  元
 
                 </div>
                 {/* <div className={`${styles3.orderEnd} `}>
