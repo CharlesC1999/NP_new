@@ -97,7 +97,7 @@ const Class = () => {
           <div
             className={`col text-center align-self-center ${ClassStyles.fc}`}
           >
-            小記
+            小計
           </div>
           <div
             className={`col text-center align-self-center ${ClassStyles.fc}`}

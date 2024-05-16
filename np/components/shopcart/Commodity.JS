@@ -125,7 +125,7 @@ const Commodity = () => {
           <div
             className={`${CommodityStyles.fc} col text-center align-self-center fw-bold`}
           >
-            小記
+            小計
           </div>
           <div
             className={`${CommodityStyles.fc} col text-center align-self-center fw-bold`}
