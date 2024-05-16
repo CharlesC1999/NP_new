@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useFavor } from "@/hooks/use-favorData";
 import { addClassFav, removeClassFav } from "@/services/user";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import styles from "./FavorIconClass.module.css";
 

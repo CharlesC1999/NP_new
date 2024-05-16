@@ -2,23 +2,10 @@ import { useState, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./RecipeCardsList.module.scss";
-import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 import FavIconRecipe from "@/components/favor/FavIconRecipe";
 
 export default function RecipeCardsList({ recipesData = [] }) {
-  //收藏與否的state
-  // const [saved, setSaved] = useState(false);
-
-  // const notify = () => {
-  //   if (saved) {
-  //     setSaved(false);
-  //     return toast("成功移除收藏");
-  //   } else {
-  //     setSaved(true);
-  //     return toast("成功加入收藏");
-  //   }
-  // };
 
   return (
     <>
@@ -113,7 +100,6 @@ export default function RecipeCardsList({ recipesData = [] }) {
           </div>
         );
       })}
-      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 }

@@ -125,6 +125,7 @@ router.post('/', async (req, res) => {
           valid,
           c_status,
         ]
+        console.log(values)
 
         await db.query(sqlCouponInsert, values)
       }

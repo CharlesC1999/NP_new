@@ -448,8 +448,9 @@ const ShopCart2 = () => {
                   className={`${styles2.keepbuy} d-flex justify-content-center align-items-center mt-2 fs-5`}
                   style={{
                     width: "100px", // 設定按鈕的寬度為100像素
-                    height: "40px", // 設定按鈕的高度為50像素
+                    height: "30px", // 設定按鈕的高度為50像素
                     fontSize: "20px", // 設定按鈕的字型大小為20像素
+                    opacity: 0,
                   }}
                 >
                   一鍵填入
