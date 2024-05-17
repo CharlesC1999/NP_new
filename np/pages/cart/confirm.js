@@ -121,6 +121,9 @@ const ShopCart4 = () => {
     localStorage.removeItem("itemsCard666");
     localStorage.removeItem("productItem666");
     localStorage.removeItem("finalPriceAfterDiscount55666");
+    localStorage.removeItem("inputName1");
+    localStorage.removeItem("inputNumber");
+    localStorage.removeItem("inputAddress1");
   }, []);
   return (
     <div className={HeaderSetting.mobileAdjust}>
