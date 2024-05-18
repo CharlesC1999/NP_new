@@ -5,6 +5,7 @@ import sequelize from '#configs/db.js'
 // 一般sql
 import db from '#configs/mysql.js'
 // console.log(process.env)
+import moment from 'moment-timezone'
 
 const { Orders, Orders_detail, Coupons } = sequelize.models
 
@@ -99,6 +100,8 @@ router.post('/', async (req, res, next) => {
       ],
       options: { display: { locale: 'zh_TW' } },
     }
+    let orderDate = new Date()
+    let orderDateUTC8 = orderDate.setHours(orderDate.getHours() + 8)
 
     console.log('lineOrder', lineOrder)
     // 創建主訂單
@@ -107,7 +110,7 @@ router.post('/', async (req, res, next) => {
       user_id: userId, // 這裡假設 user_id 是已知的
       amount_total: totalPrice,
       payment_method: paymentMethod,
-      order_date: new Date(),
+      order_date: orderDateUTC8,
       recipient_name: receiverName,
       order_status: '已完成',
       shipping_address: receiverAddress,

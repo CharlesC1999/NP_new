@@ -18,6 +18,7 @@ const Commodity = () => {
     decreaseProduct,
     removeProduct,
     setProductItems,
+    totalProduct,
   } = useCart();
   // const { totalProduct, totalProductPrice,set } = useCart();
   //  勾勾
@@ -238,7 +239,7 @@ const Commodity = () => {
             className={`${CommodityStyles.fc} col ps-4 `}
             style={{ fontSize: 16 }}
           >
-            產品(2)
+            產品({totalProduct})
           </div>
         </div>
 

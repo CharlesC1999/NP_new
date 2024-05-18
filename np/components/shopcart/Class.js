@@ -6,7 +6,14 @@ import { useCart } from "@/hooks/use-cart";
 import { FaCheck } from "react-icons/fa6";
 
 const Class = () => {
-  const { items, increaseItem, decreaseItem, removeItem, setItems } = useCart();
+  const {
+    items,
+    increaseItem,
+    decreaseItem,
+    removeItem,
+    setItems,
+    totalItems,
+  } = useCart();
   // const { totalItems, totalPrice } = useCart();
 
   // 勾勾
@@ -209,7 +216,7 @@ const Class = () => {
             className={`${ClassStyles.fc} col ps-4 `}
             style={{ fontSize: 16 }}
           >
-            課程(4)
+            課程({totalItems})
           </div>
         </div>
         {/*  */}
