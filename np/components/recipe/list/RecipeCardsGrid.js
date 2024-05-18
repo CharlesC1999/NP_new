@@ -33,7 +33,6 @@ export default function RecipeCardsGrid({ recipesData = [] }) {
                   </div>
                   <div className={styles["heart"]}>
                     <FavIconRecipe id={v.recipe__i_d} />
-                    <Toaster position="bottom-right" reverseOrder={false} />
                   </div>
                 </div>
                 <div

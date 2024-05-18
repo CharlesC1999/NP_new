@@ -315,7 +315,10 @@ const ShopCart2 = () => {
                 >
                   <h5 style={{ fontSize: 24, color: "#4D785D" }}>
                     送貨資料
-                    <span style={{ fontSize: 18 }}>
+                    <span
+                      style={{ fontSize: 18 }}
+                      className={styles2.disappear}
+                    >
                       {" "}
                       (以選擇的送貨方式:宅配到府)
                     </span>
