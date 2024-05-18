@@ -16,8 +16,8 @@ const ClassFilter = ({
 
   // 排序的選項 (單純map用)
   const sortByOptions = [
-    { name: "食譜id升序", order: "asc" },
-    { name: "食譜id降序", order: "desc" },
+    { name: "食譜序號升序", order: "asc" },
+    { name: "食譜序號降序", order: "desc" },
   ];
 
   // 對應 toggleIconState
@@ -152,7 +152,7 @@ const ClassFilter = ({
             >
               <span className={styles.sortByLabel}>依 :</span>
               <span className={styles.sortByValue} id="sortByValue">
-                {sortByValue || "食譜id升序"}
+                {sortByValue || "食譜序號升序"}
                 {/* 確認這裡沒有錯誤地回落到 "Select" */}
               </span>
               <svg
