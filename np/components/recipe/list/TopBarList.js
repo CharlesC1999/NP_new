@@ -42,8 +42,8 @@ export default function TopBarList({
 
   // 排序的選項 (單純map用)
   const sortByOptions = [
-    { name: "按id升序", order: "asc" },
-    { name: "按id降序", order: "desc" },
+    { name: "按序號升序", order: "asc" },
+    { name: "按序號降序", order: "desc" },
   ];
 
   // 切換switch button active
