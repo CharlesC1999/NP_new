@@ -61,6 +61,7 @@ const ShopCart4 = () => {
     returnMessage: "",
   });
   // const auth = useAuth();
+
   const handleConfirm = async (transactionId) => {
     const res = await axiosInstance.get(
       `/cartList/confirm?transactionId=${transactionId}&orderId=${router.query.orderId}`
@@ -73,10 +74,10 @@ const ShopCart4 = () => {
       toast.success("付款成功");
       console.log("Checkout successful:", res.data.status);
 
-      localStorage.removeItem("dataCoupon666");
-      localStorage.removeItem("itemsCard666");
-      localStorage.removeItem("productItem666");
-      localStorage.removeItem("finalPriceAfterDiscount55666");
+      // localStorage.removeItem("dataCoupon666");
+      // localStorage.removeItem("itemsCard666");
+      // localStorage.removeItem("productItem666");
+      // localStorage.removeItem("finalPriceAfterDiscount55666");
     } else {
       toast.error("付款失敗");
     }
@@ -115,6 +116,15 @@ const ShopCart4 = () => {
     // eslint-disable-next-line
   }, [router.isReady]);
 
+  useEffect(() => {
+    localStorage.removeItem("dataCoupon666");
+    localStorage.removeItem("itemsCard666");
+    localStorage.removeItem("productItem666");
+    localStorage.removeItem("finalPriceAfterDiscount55666");
+    localStorage.removeItem("inputName1");
+    localStorage.removeItem("inputNumber");
+    localStorage.removeItem("inputAddress1");
+  }, []);
   return (
     <div className={HeaderSetting.mobileAdjust}>
       <div className={HeaderSetting.headerSetting}>

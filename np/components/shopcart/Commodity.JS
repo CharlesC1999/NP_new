@@ -18,6 +18,7 @@ const Commodity = () => {
     decreaseProduct,
     removeProduct,
     setProductItems,
+    totalProduct,
   } = useCart();
   // const { totalProduct, totalProductPrice,set } = useCart();
   //  勾勾
@@ -125,7 +126,7 @@ const Commodity = () => {
           <div
             className={`${CommodityStyles.fc} col text-center align-self-center fw-bold`}
           >
-            小記
+            小計
           </div>
           <div
             className={`${CommodityStyles.fc} col text-center align-self-center fw-bold`}
@@ -238,7 +239,7 @@ const Commodity = () => {
             className={`${CommodityStyles.fc} col ps-4 `}
             style={{ fontSize: 16 }}
           >
-            產品(2)
+            產品({totalProduct})
           </div>
         </div>
 
