@@ -255,7 +255,7 @@ router.get('/disCount', async function (req, res) {
     const mayLikeProductsQuery = `SELECT p.product_name, p.product_price, p.id , pImage.image_url , p.upload_date
     FROM product AS p
     JOIN product_image AS pImage ON p.id = pImage.product_id
-    ORDER BY created_at DESC
+    ORDER BY upload_date DESC
     LIMIT 5`
 
     const disCountproductQuery = `
