@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 export default function MemberBuyCard({ activeCategory, searchTerm }) {
   // const [userid, setUserid] = useState(null);
   const [useridid, setUseridid] = useState("");
-  
 
   useEffect(() => {
     const userIdFromLocalStorage = localStorage.getItem("userData");
@@ -18,8 +17,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
       setUseridid(JSON.parse(userIdFromLocalStorage));
     }
   }, []);
-  // console.log(userid.id);
-  const userid= useridid.id
+  const userid = useridid.id;
   console.log(userid);
   const [productId, setProductId] = useState(0);
   //葉子評分
@@ -44,7 +42,7 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
   };
 
   const handleCloseReview = () => {
-    console.log("Clearing active product ID"); // 输出清除操作
+    console.log("Clearing active product ID");
     setActiveProductId(0);
     setShowReview(false);
   };
@@ -52,12 +50,8 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
   const date = new Date().toISOString(); // '2024-05-10T08:21:03.530Z'
   const formattedDate = date.replace("T", " ").replace("Z", "").slice(0, 19); // '2024-05-10 08:21:03'
 
-  console.log(activeProductId);
-
-  //評價按鈕送出，將評論資料傳後後端處理
   const handleSubmitReview = async (v) => {
     const comment = document.querySelector("textarea").value;
-
     const response = await fetch(
       "http://localhost:3005/api/orders/add-review",
       {
@@ -76,7 +70,6 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
     );
 
     const result = await response.json();
-    console.log(result);
     if (response.ok) {
       setShowReview(false); // 隱藏評論表單
 
@@ -100,24 +93,6 @@ export default function MemberBuyCard({ activeCategory, searchTerm }) {
       });
     }
   };
-
-  console.log(orders);
-
-  // useEffect(() => {
-  //   setShowReview(false);
-  // }, [handleSubmitReview]);
-  // let userid = parseInt(localStorage.getItem('userid'))
-  // console.log(userid);
-
-  // let userid = 1
-
-  // useEffect(() => {
-  //   const userIdFromLocalStorage = localStorage.getItem("userid");
-  //   if (userIdFromLocalStorage) {
-  //     setUserid(parseInt(userIdFromLocalStorage));
-  //   }
-  // }, []);
-
   // 資料表1商品訂單
   const getOrders = async (cat = "") => {
     const url = "http://localhost:3005/api/orders/" + cat;

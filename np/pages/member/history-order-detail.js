@@ -82,7 +82,7 @@ orderDetail.forEach((v, i) => {
   if (discount === 0) {
     discount="未使用優惠券"
   } else {
-    discount=`折$${discount}元`;
+    discount=`折$${discount}元`; 
   }
 });
 console.log(discount);
