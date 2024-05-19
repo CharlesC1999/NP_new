@@ -19,6 +19,7 @@ import _ from "lodash";
 import { useRouter } from "next/router";
 // 導入路徑配置
 import routes from "@/contexts/routes";
+import { useMediaQuery } from "@mui/material";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -156,6 +157,8 @@ const SignUpPage = () => {
 
   const goLogin = () => router.push(routes.login);
 
+  const isSmallScreen = useMediaQuery("(max-width:375px)");
+
   return (
     <>
       <div className={signUp.bodyStyles}>
@@ -257,14 +260,17 @@ const SignUpPage = () => {
                     <label htmlFor className={signUp.label}>
                       生日
                     </label>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      className={signUp.dateTime}
+                    >
                       <DatePicker
                         label="請輸入您的生日"
                         disableFuture //禁用未來日期
                         value={formData.date_of_birth}
                         onChange={handleDateChange}
                         sx={{
-                          width: "310px",
+                          width: isSmallScreen ? "280px" : "310px",
                           height: "35px",
                           bgcolor: "#ECECEC",
                           borderRadius: "5px",
