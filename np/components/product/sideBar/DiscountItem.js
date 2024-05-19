@@ -12,7 +12,8 @@ function DiscountItem({ category_name, categoryCounts }) {
           className={`${style.sideBox} d-flex align-items-center justify-content-between p-2`}
         >
           <div className={`${style.discountText} align-items-center`}>
-            🎉 {category_name}
+            <i class="fa-solid fa-tags me-2"></i>
+            {category_name}
           </div>
           <div className={`${style.amount} align-items-center`}>
             {" "}
