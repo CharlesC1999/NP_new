@@ -47,7 +47,7 @@ export default function ProductSection02({ review_comments }) {
                 <p className={`${style["p"]} mb-3`}>{review.comment}</p>
                 <div className={`${style["detail-text"]} mb-5`}>
                   <i class="fa-regular fa-thumbs-up"></i>
-                  <span className={`px-2`}>5</span>
+                  <span className={`px-2`}></span>
                 </div>
               </div>
             );

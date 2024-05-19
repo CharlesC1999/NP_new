@@ -53,7 +53,6 @@ function Card4Hot({ id, name, price, d_price, image, qty = 1 }) {
           <a
             className={`d-flex ${styles["card4Btn"]}`}
             type="button"
-            href="#"
             onClick={() => {
               if (!auth.isLoggedIn) {
                 return toast.error("請先登入再使用!");
