@@ -103,7 +103,7 @@ router.post('/', async (req, res) => {
         const valid_end_date = formatDate(
           new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
         ) // 加上30天的毫秒数
-        const coupon_image = 'NPLove.png'
+        const coupon_image = '-100.png'
         const valid = 1
         const c_status = '已發送'
 
@@ -125,6 +125,7 @@ router.post('/', async (req, res) => {
           valid,
           c_status,
         ]
+        console.log(values)
 
         await db.query(sqlCouponInsert, values)
       }

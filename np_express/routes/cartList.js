@@ -5,6 +5,7 @@ import sequelize from '#configs/db.js'
 // 一般sql
 import db from '#configs/mysql.js'
 // console.log(process.env)
+import moment from 'moment-timezone'
 
 const { Orders, Orders_detail, Coupons } = sequelize.models
 
@@ -99,6 +100,8 @@ router.post('/', async (req, res, next) => {
       ],
       options: { display: { locale: 'zh_TW' } },
     }
+    let orderDate = new Date()
+    let orderDateUTC8 = orderDate.setHours(orderDate.getHours() + 8)
 
     console.log('lineOrder', lineOrder)
     // 創建主訂單
@@ -107,7 +110,7 @@ router.post('/', async (req, res, next) => {
       user_id: userId, // 這裡假設 user_id 是已知的
       amount_total: totalPrice,
       payment_method: paymentMethod,
-      order_date: new Date(),
+      order_date: orderDateUTC8,
       recipient_name: receiverName,
       order_status: '已完成',
       shipping_address: receiverAddress,
@@ -288,6 +291,17 @@ router.get('/confirm', async (req, res) => {
         },
       }
     )
+    // 更改優惠券變成已使用
+    if (dbOrder.o_coupon_id) {
+      console.log(
+        `Attempting to update coupon status for coupon__i_d: ${dbOrder.o_coupon_id}`
+      )
+      const updateResult = await Coupons.update(
+        { C_status: '已使用' },
+        { where: { Coupon_ID: dbOrder.o_coupon_id } }
+      )
+      console.log(`Update result: ${updateResult}`)
+    }
 
     return res.json({ status: 'success', data: linePayResponse.body })
   } catch (error) {

@@ -29,7 +29,6 @@ const Sidebar = () => {
     User_image: null,
   });
 
-
   // 串接上後端並把token傳進headers用來解碼
   // !!! 從localStorage取出token後，帶入headers來解碼，若要用postman測試記得Authorization也要選Bearer Token並放入加密的token
   const getUser = async () => {
@@ -65,8 +64,13 @@ const Sidebar = () => {
         <div className={styles.menuTop}>
           <div className={`rounded-circle overflow-hidden ${styles.userimage}`}>
             <img
-              className="w-100 h-100 object-fit-cover"
-              src={`http://localhost:3005/avatar/${userData.User_image}`}
+              src={
+                userData && userData.User_image
+                  ? userData.User_image.startsWith("https://")
+                    ? userData.User_image // 是https://開頭的圖片
+                    : `http://localhost:3005/avatar/${userData.User_image}` // 不是https://開頭的圖片
+                  : ``
+              }
               alt=""
             />
           </div>
@@ -119,8 +123,8 @@ const Sidebar = () => {
                 修改密碼
               </Link>
             </div> */}
-            <div className={styles.lefta} >
-              <Link href="/member/member-buy" alt="" >
+            <div className={styles.lefta}>
+              <Link href="/member/member-buy" alt="">
                 購買清單
               </Link>
             </div>

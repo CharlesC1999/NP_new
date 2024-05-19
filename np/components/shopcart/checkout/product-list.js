@@ -46,8 +46,6 @@ export default function ProductList() {
           );
         })}
       </ul>
-      {/* 用於土司訊息的元件 */}
-      <Toaster />
     </>
   );
 }

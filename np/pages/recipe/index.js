@@ -22,6 +22,7 @@ import { CategoriesProvider } from "@/hooks/recipe/use-categories";
 
 // 點sideBar設定state是該類別的ID，當作params來傳給後端做SQL查詢
 import { useCategoryForSQL } from "@/hooks/recipe/use-categoryForSQL";
+import ToTheTop from "@/components/toTheTop";
 
 export default function RecipeList() {
   // 切換手機板列表頁的顯示方式 (list or grid)，props給TopBarList點擊用
@@ -234,6 +235,7 @@ export default function RecipeList() {
         </div>
       </div>
       <Footer />
+      <ToTheTop />
     </CategoriesProvider>
   );
 }
