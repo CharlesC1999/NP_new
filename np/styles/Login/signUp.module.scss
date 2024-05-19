@@ -8,6 +8,7 @@
 
 @media (width: 375px) {
   .bodyStyles {
+    height: 100%;
     background-color: var(--gray03);
   }
 }
@@ -201,4 +202,14 @@
 
 .errorText {
   height: 24px;
+}
+
+.dateTime {
+  width: 310px;
+}
+
+@media (max-width: 375px) {
+  .dateTime {
+    width: 280px;
+  }
 }
