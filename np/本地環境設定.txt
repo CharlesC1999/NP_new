@@ -3,14 +3,3 @@ DB_USER=vvvv4577
 DB_PASS=jk451244zxc
 DB_NAME=nutripolls
 
-LINE_PAY_CHANNEL_ID= 2004889720
-LINE_PAY_CHANNEL_SECRET=7737810f661ea8ec4f29a3dd1b7be5e7
-LINE_PAY_VERSION=v3
-LINE_PAY_SITE=https://sandbox-api-pay.line.me
-#
-# 注意訂單頁與付款完確認頁為同一頁
-REACT_REDIRECT_CONFIRM_URL=http://localhost:3000/cart/confirm
-REACT_REDIRECT_CANCEL_URL=http://localhost:3000/test/line-pay/cancel    
-
-因為被gitignore掉，所以放這
-我要測試

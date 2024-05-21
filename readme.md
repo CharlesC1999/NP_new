@@ -1,27 +1,40 @@
-##### 全部文件都在 np 資料夾裡面，請在裡面的個個資料夾進行開發
-
-##### 因為私人存儲庫的主分支保護要錢，所以提 PR 時請不要直接自己按合併(綠色按鈕)
+## ![NutriPolls](/forMarkdownImg/Nutripolls%20簡報.png "NutriPolls")
 
 ---
 
-##### 請大家從 NP_new 的存儲庫，建立 fork 以及[分支頁面](https://github.com/CharlesC1999/NP_new/branches)建立分支
+## 您好，我們是NutriPolls，希望為您帶來天然健康的全方位服務平台
 
-##### 建立完後請在自己 fork 後的存儲庫 git clone 把資料從 git hub 存儲下來
+##### 此專案以React、Next.js構建前端網站，後端的部分以Express構建路由及相關的API，並以MySQL購建所需的資料庫。
 
-##### 在自己本機電腦上用 VS code 打開上傳後會把你所 commit 的更新同步到你的存儲庫，
+##### 以下是本專案所有開發工具及使用的套件。
 
-##### 請在將自己存儲庫的進度同步到小組存儲庫(NP_new)之前，請將小組存儲庫最新進度同步到自己的存儲庫
+##
 
-##### 再將自己的存儲庫的進度 PR 到自己在小組存儲庫中的分支，這一個 PR 可以自己按同意
-
-##### 之後再將自己分支的進度 PR 到主分支(main)，這一個 PR <font color=#FF6600>不能自己按通過</font>。
+## ![NutriPolls tools](/forMarkdownImg/npm%20item.png "NutriPolls tools")
 
 ---
 
-## 留言板
+##### 欲測試本專案，請依照以下步驟布置環境
 
-大家可以在這邊直接留言??感覺還不錯
+##### 1. 請在[後端資料夾](/np_express/)創立後端.env檔，並將[後端設定文件](/np_express/env.txt)中的內容複製貼上到以創建好的.env檔
 
-##### <font color=brown>我已經把 footer 跟 header 跟 React 的無功能切版用好了，有需要可以拿去用 C.C. 4/11</font>
+##### 2. 請在終端機開啟[後端資料夾](/np_express/)，並輸入
 
----
+        1.  npm run seed  //建置資料庫數據
+        2.  npm i         //安裝所需套件
+        3.  npm run dev   //運行後端
+
+##### 2.5. 因本專案資料庫建構於Xampp中，因此需開啟Xampp Control Panel，並運行Apache及MySQL
+
+## ![Xampp](/forMarkdownImg/xampp.png "Xampp")
+
+##### 3. 請在終端機開啟[前端資料夾](/np/)，並輸入
+
+        1.  npm i         //安裝所需套件
+        2.  npm run dev   //運行前端
+
+##### 4.請在瀏覽器輸入 [http://localhost:3000/](http://localhost:3000/)，進入網站。
+
+##
+
+### 本專題所使用資源皆僅供專題展示所用，無任何商業意圖
