@@ -20,16 +20,6 @@ router.get('/', async function (req, res) {
   console.log(order_ids)
 
   // 測試用
-  // console.log(
-  //   page,
-  //   perpage,
-  //   name_like,
-  //   brand_ids,
-  //   sort,
-  //   order,
-  //   price_gte,
-  //   price_lte
-  // )
   // 處理如果沒找到資料
   // 建立資料庫搜尋條件(where從句用)，每個條件用陣列存放，串接時用join(' AND ')
   const conditions = []
@@ -45,48 +35,6 @@ router.get('/', async function (req, res) {
     conditionsValues.length > 0
       ? `WHERE ` + conditionsValues.map((v) => `( ${v} )`).join(` AND `)
       : ''
-
-  // 分頁用
-  // page預設為1，perpage預設為3
-  // const perpageNow = Number(perpage) || 3
-  // const pageNow = Number(page) || 1
-  // const limit = perpageNow
-  // page=1 offset=0; page=2 offset= perpage * 1; ...
-  // const offset = (pageNow - 1) * perpageNow
-
-  // 最終組合的sql語法
-  // const sqlOrders = `SELECT * FROM orders `
-  //抓到全部的關聯
-  // const sqlOrders = `SELECT *
-  // FROM orders
-  // JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // JOIN product_image ON order_item.Product_ID = product_image.F_product_id;`
-  //只有圖片跟ID
-  // const sqlOrders = `SELECT orders.order_id, MAX(image_url) AS image_url
-  // FROM orders
-  // LEFT JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // LEFT JOIN product_image ON order_item.Product_ID = product_image.F_product_id
-  // GROUP BY orders.order_id;`
-  // 包含總價的
-  // const sqlOrders = `SELECT *, sum(Quantity*price)
-  // FROM orders
-  // JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // Join product on order_item.product_id = product.ID
-  // group by orders.Order_ID`
-  //剩下orderid跟總價
-  // const sqlOrders = `SELECT orders.Order_ID, sum(Quantity*price)
-  // FROM orders
-  // JOIN order_item ON orders.Order_ID = order_item.Order_ID
-  // Join product on order_item.product_id = product.ID
-  // group by orders.Order_ID`
-
-  //這是包含圖片的跟一大堆的還有總價重新命名的
-  // const sqlOrders = `SELECT orders.order_id,user_id, order_date, product_name, status, shipping_address, quantity, discription, MAX(image_url) AS image_url,  sum(Quantity*product_price) AS total
-  // FROM orders
-  // JOIN order_commodity_item on orders.Order_ID = order_commodity_item.Order_ID
-  // Join product on order_commodity_item.product_id = product.ID
-  // JOIN product_image ON order_commodity_item.Product_ID = product_image.product_id
-  // GROUP BY orders.order_id;`
 
   const sqlOrders = `SELECT *
   FROM orders
@@ -132,13 +80,6 @@ router.get('/', async function (req, res) {
 router.get('/:orderid', async function (req, res) {
   // 轉為數字，  上面的status要等於下面的req.params.status裡面的status
   const orderid = req.params.orderid
-
-  // const sqlOrders1 = `SELECT *
-  // FROM orders
-  // JOIN order_commodity_item ON orders.Order_ID = order_commodity_item.Order_ID
-  // Join product on order_commodity_item.product_id = product.ID
-  // join member on orders.User_ID = member.id
-  // where orders.Order_ID =  ${orderid};`
   const sqlOrders1 = `SELECT *
   FROM orders_detail
       LEFT JOIN product ON orders_detail.commodity_id = product.id
