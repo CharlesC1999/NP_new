@@ -62,8 +62,14 @@ router.post('/findProduct', async (req, res) => {
     const { searchText } = req.body
 
     // 執行產品查詢
-    const sql =
-      'SELECT * FROM product JOIN product_categories ON product.category_id = product_categories.id JOIN product_image ON product.id = product_image.product_id WHERE product_name LIKE :searchText AND product_image.sort_order = 0'
+    const sql = `
+    SELECT *, ROUND(AVG(product_review.rating), 1) AS average_rating FROM product 
+    JOIN product_categories ON product.category_id = product_categories.id 
+    JOIN product_image ON product.id = product_image.product_id 
+    JOIN product_review ON product.id = product_review.product_id 
+    WHERE product_name LIKE :searchText AND product_image.sort_order = 0 
+    GROUP BY product.id, product_categories.name, product_image.image_url
+    `
 
     const products = await sequelize.query(sql, {
       replacements: { searchText: `%${searchText}%` },
