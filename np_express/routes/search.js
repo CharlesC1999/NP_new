@@ -11,7 +11,7 @@ router.post('/findAll', async (req, res) => {
 
   try {
     // 從請求體中獲取搜尋條件
-    const { searchText } = req.body
+    const { searchText } = req.body //測試用 "肉"，直接在路由跑，要把{}拿掉
     // 並行執行所有查詢
     const sqlP = `
     SELECT *, ROUND(AVG(product_review.rating), 1) AS average_rating FROM product 
