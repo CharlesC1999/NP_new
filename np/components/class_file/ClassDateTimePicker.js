@@ -79,13 +79,13 @@ function CustomDatePicker({ getStartDate, getEndDate }) {
             onClick={() => setPickerView("year")}
             className={ButtonStyles.buttonStyle}
           >
-            <sapn className={ButtonStyles.buttonTextStyle}>Year</sapn>
+            <span className={ButtonStyles.buttonTextStyle}>Year</span>
           </button>
           <button
             onClick={() => setPickerView("month")}
             className={ButtonStyles.buttonStyle}
           >
-            <sapn className={ButtonStyles.buttonTextStyle}>Month</sapn>
+            <span className={ButtonStyles.buttonTextStyle}>Month</span>
           </button>
         </div>
       </div>

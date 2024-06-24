@@ -59,8 +59,8 @@ router.post('/findProduct', async (req, res) => {
   console.log('bonP')
 
   try {
-    const { searchText } = req.body
-
+    const { searchText } = req.body //測試用 "肉"
+    console.log(searchText)
     // 執行產品查詢
     const sql =
       'SELECT * FROM product JOIN product_categories ON product.category_id = product_categories.id JOIN product_image ON product.id = product_image.product_id WHERE product_name LIKE :searchText AND product_image.sort_order = 0'
