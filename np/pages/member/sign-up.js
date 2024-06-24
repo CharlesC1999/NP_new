@@ -182,9 +182,7 @@ const SignUpPage = () => {
                   className={`d-flex flex-column justify-content-center align-items-center`}
                 >
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
-                    <label htmlFor className={signUp.label}>
-                      姓名 (必填)
-                    </label>
+                    <label className={signUp.label}>姓名 (必填)</label>
                     <input
                       type="text"
                       name="user_name"
@@ -198,14 +196,12 @@ const SignUpPage = () => {
                   <div
                     className={`${signUp.inputGroupForError} d-flex flex-column`}
                   >
-                    <label htmlFor className={signUp.label}>
-                      帳號 (必填)
-                    </label>
+                    <label className={signUp.label}>帳號 (必填)</label>
                     <input
                       type="account"
                       name="account"
-                      minlength="8"
-                      maxlength="24"
+                      minLength="8"
+                      maxLength="24"
                       value={formData.account}
                       onChange={handleAccountChange}
                       className={`${signUp.input} ps-2`}
@@ -221,9 +217,7 @@ const SignUpPage = () => {
                   <div
                     className={`${signUp.inputGroupForError} d-flex flex-column`}
                   >
-                    <label htmlFor className={signUp.label}>
-                      電子信箱(必填)
-                    </label>
+                    <label className={signUp.label}>電子信箱(必填)</label>
                     <input
                       type="email"
                       name="email"
@@ -240,9 +234,7 @@ const SignUpPage = () => {
                     </div>
                   </div>
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
-                    <label htmlFor className={signUp.label}>
-                      手機
-                    </label>
+                    <label className={signUp.label}>手機</label>
                     <input
                       type="tel"
                       name="phone"
@@ -257,9 +249,7 @@ const SignUpPage = () => {
                   className={` d-flex flex-column justify-content-cetner align-items-center`}
                 >
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
-                    <label htmlFor className={signUp.label}>
-                      生日
-                    </label>
+                    <label className={signUp.label}>生日</label>
                     <LocalizationProvider
                       dateAdapter={AdapterDayjs}
                       className={signUp.dateTime}
@@ -302,14 +292,12 @@ const SignUpPage = () => {
                     </LocalizationProvider>
                   </div>
                   <div className={`${signUp.inputGroup} d-flex flex-column`}>
-                    <label htmlFor className={signUp.label}>
-                      密碼(必填)
-                    </label>
+                    <label className={signUp.label}>密碼(必填)</label>
                     <div className={signUp.openYourEyes}>
                       <input
                         type={showPassword ? "text" : "password"}
                         name="password"
-                        minlength="8"
+                        minLength="8"
                         pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" //至少要有大小寫及8個字符以上
                         title="密碼必須包含至少8個字符，包含一個小寫字母和一個大寫字母。"
                         value={formData.password}
@@ -330,14 +318,12 @@ const SignUpPage = () => {
                   <div
                     className={`${signUp.inputGroupForError} d-flex flex-column`}
                   >
-                    <label htmlFor className={signUp.label}>
-                      密碼確認(必填)
-                    </label>
+                    <label className={signUp.label}>密碼確認(必填)</label>
                     <div className={signUp.openYourEyes}>
                       <input
                         type={showPasswordC ? "text" : "password"}
                         name="confirmPassword"
-                        minlength="8"
+                        minLength="8"
                         pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" //至少要有大小寫及8個字符以上
                         title="密碼必須包含至少8個字符，包含一個小寫字母和一個大寫字母。"
                         value={formData.confirmPassword}
@@ -392,7 +378,6 @@ const SignUpPage = () => {
                           onChange={handleChange}
                           checked={formData.gender === "F"}
                           id="flexRadioDefault2"
-                          defaultChecked
                           required
                         />
                         <label

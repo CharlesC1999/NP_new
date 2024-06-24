@@ -52,7 +52,9 @@ const PaginationComponent = ({
         className={Styles.paginationBox}
       >
         {Array.from({ length: total }, (_, i) => (
-          <option value={i + 1}>{i + 1}</option>
+          <option key={i} value={i + 1}>
+            {i + 1}
+          </option>
         ))}
       </select>
       <button

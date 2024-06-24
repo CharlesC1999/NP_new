@@ -59,8 +59,8 @@ router.post('/findProduct', async (req, res) => {
   console.log('bonP')
 
   try {
-    const { searchText } = req.body
-
+    const { searchText } = req.body //測試用 "肉"
+    console.log(searchText)
     // 執行產品查詢
     const sql = `
     SELECT *, ROUND(AVG(product_review.rating), 1) AS average_rating FROM product 
