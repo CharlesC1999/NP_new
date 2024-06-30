@@ -16,7 +16,19 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    const userDataString = localStorage.getItem("userData");
+    let userData = {};
+
+    if (userDataString) {
+      try {
+        userData = JSON.parse(userDataString);
+      } catch (error) {
+        console.error("Invalid JSON in userData:", error);
+        // 如果解析失敗，可以選擇清除無效的數據
+        localStorage.removeItem("userData");
+      }
+    }
+
     if (token) {
       setAuth({
         token: token,

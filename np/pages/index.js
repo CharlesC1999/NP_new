@@ -1,7 +1,7 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
 import HeaderSetting from "@/styles/headerSetting.module.scss";
@@ -66,7 +66,7 @@ export default function Index() {
           </h5>
         </div>
         <div className={styles.buttonNutripoll}>
-          <a type="button" className={styles.btn1} href>
+          <a type="button" className={styles.btn1}>
             了解Nutripolls
           </a>
         </div>
@@ -75,7 +75,7 @@ export default function Index() {
       <div className={` ${styles.wrapper} ${styles.NutripollCard1}`}>
         <div className={`d-flex ${styles.card1Rwd}`}>
           <div className={styles.card1Img}>
-            <img src="/index-images/Herosection02.png" alt />
+            <img src="/index-images/Herosection02.png" />
           </div>
           <div className={styles.card1Text}>
             <h3>從餐桌開始，做出更好的選擇</h3>

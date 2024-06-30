@@ -34,6 +34,13 @@ app.use(
   })
 )
 
+// 設置COOP和CORP標頭的中間件
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin')
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-origin')
+  next()
+})
+
 // 視圖引擎設定
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
@@ -103,15 +110,3 @@ app.use(function (err, req, res, next) {
 app.use('/api/auth', authRoutes) // 使用 auth 路由，並設定路由前綴為 /api/auth
 
 export default app
-
-// app.use(
-//   session({
-//     secret: 'your_secret_key', // 这是用来加密 session ID cookie 的秘钥
-//     resave: false, // 强制 session 保存到 session store 中
-//     saveUninitialized: false, // 强制没有 "初始化" 的 session 保存到 storage 中
-//     cookie: {
-//       secure: false, // 如果是 https 网站，设置为 true
-//       httpOnly: true, // 防止客户端脚本访问 cookies
-//     },
-//   })
-// )
