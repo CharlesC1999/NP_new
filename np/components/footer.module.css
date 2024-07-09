@@ -21,7 +21,7 @@
 .footerTop {
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
   padding-top: 20px;
   /* section */
 }

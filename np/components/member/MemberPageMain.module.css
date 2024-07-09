@@ -19,7 +19,9 @@
   -webkit-line-clamp: 1;
   color: var(--black);
   text-overflow: ellipsis;
-  font: 300 24px Inter, sans-serif;
+  font:
+    300 24px Inter,
+    sans-serif;
 }
 
 @media (max-width: 375px) {
@@ -31,7 +33,9 @@
 .title2 {
   color: var(--gray01);
   margin-top: 20px;
-  font: 500 15px Inter, sans-serif;
+  font:
+    500 15px Inter,
+    sans-serif;
 }
 
 @media (max-width: 991px) {
@@ -279,7 +283,7 @@ display: none;
 
 .menuTitle {
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -296,12 +300,16 @@ display: none;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   text-overflow: ellipsis;
-  font: 600 16px Inter, sans-serif;
+  font:
+    600 16px Inter,
+    sans-serif;
 }
 
 .nameleft {
   margin-top: 7px;
-  font: 400 20px Inter, sans-serif;
+  font:
+    400 20px Inter,
+    sans-serif;
 }
 
 .menu1 {
@@ -482,7 +490,7 @@ display: none;
 .page-link {
   text-decoration: none;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .page-link:active {
@@ -588,7 +596,7 @@ display: none;
 }
 
 .header-actions {
-  align-items: start;
+  align-items: flex-start;
   align-self: stretch;
   color: var(--gray01, #919da6);
   display: flex;
@@ -719,7 +727,7 @@ display: none;
 /* header下面那塊綠色 */
 .path {
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   background-color: rgba(222, 249, 236, 0.5);
   display: flex;
   flex-direction: column;

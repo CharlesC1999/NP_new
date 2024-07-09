@@ -385,7 +385,7 @@ a:visited {
 }
 
 .headerActions {
-  align-items: end;
+  align-items: flex-end;
   align-self: stretch;
   color: var(--gray01, #919da6);
   display: flex;
@@ -574,7 +574,7 @@ a:visited {
 }
 .favorIcon {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   position: relative;
   width: 40px;
   height: 40px;

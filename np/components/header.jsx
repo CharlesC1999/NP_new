@@ -6,7 +6,6 @@ import { useSearchResults } from "@/contexts/searchContext";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./header.module.scss";
-// import classNames from "classnames";
 import routes from "@/contexts/routes"; // 導入路徑配置
 //  react icon
 import { IoLogOutOutline } from "react-icons/io5";

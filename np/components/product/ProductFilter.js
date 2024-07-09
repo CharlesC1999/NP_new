@@ -74,51 +74,6 @@ const ProductFilter = ({
       <header className={styles.productCountHeader}>
         <p className={styles.totalProducts}>總共： {TotalRow} 項商品</p>
         <div className={styles.productCountControls}>
-          {/* <div className={styles.itemsPerPage}>
-              <span className={styles.itemsPerPageValue} id="itemsPerPage">
-                {defaultValue}
-              </span>
-              <div className={styles.numberIncreaseDecrease}>
-                <button
-                  className={styles.selectBtn}
-                  id="itemsPerPageUpIcon"
-                  onClick={handleIncrease}
-                  disabled={isUpDisabled}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10px"
-                    height="8px"
-                    viewBox="0 0 1024 1024"
-                    className={styles.selectBtnIcon}
-                  >
-                    <path
-                      fill="#78CEA6"
-                      d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className={styles.selectBtn}
-                  id="itemsPerPageDownIcon"
-                  onClick={handleDecrease}
-                  disabled={isDownDisabled}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10px"
-                    height="8px"
-                    viewBox="0 0 1024 1024"
-                    className={styles.selectBtnIcon}
-                  >
-                    <path
-                      fill="#78CEA6"
-                      d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div> */}
           <div
             className={
               sortByOpen ? `${styles.sortBy} ${styles.open}` : styles.sortBy
@@ -143,7 +98,6 @@ const ProductFilter = ({
                 d="M4 18h4c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1M3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1m1 6h10c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1"
               />
             </svg>
-            {/* <span className={styles.sortOrder}>排序</span> */}
 
             <div className={styles.sortByOptions}>
               {sortByOptions.map((option, index) => (
@@ -201,23 +155,6 @@ const ProductFilter = ({
               </div>
             )}
           </div>
-          {/* only for mobile */}
-          {/* <div className={styles.classSelect}>
-              <span className={styles.classSelectLabel}>分類</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                viewBox="0 0 24 24"
-                className={styles.sortMobile}
-              >
-                <path
-                  fill="#8b96a5"
-                  d="M2.57 3h18.86l-6.93 9.817V21h-5v-8.183zm3.86 2l5.07 7.183V19h1v-6.817L17.57 5z"
-                />
-              </svg>
-            </div> */}
-          {/* only for mobile */}
         </div>
         <div className={styles.gridRowSelections}>
           <button
@@ -263,11 +200,6 @@ const ProductFilter = ({
           </button>
         </div>
       </header>
-      {/* <section
-        className={`${styles.productCountContainer} d-flex justify-content-center p-0`}
-      >
-       
-      </section> */}
     </div>
   );
 };

@@ -41,7 +41,7 @@
 
 .menuTitle {
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -58,12 +58,16 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   text-overflow: ellipsis;
-  font: 600 16px Inter, sans-serif;
+  font:
+    600 16px Inter,
+    sans-serif;
 }
 
 .nameleft {
   margin-top: 7px;
-  font: 400 20px Inter, sans-serif;
+  font:
+    400 20px Inter,
+    sans-serif;
 }
 
 .menu1 {
@@ -214,7 +218,7 @@
     /* align-content: center; */
   }
 }
-.lefta a:hover{
+.lefta a:hover {
   color: var(--green02);
 }
 
