@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router"; // 路由
 import DetailStyles from "@/styles/class_styles/classDetail.module.css";
 import HeaderSetting from "@/styles/headerSetting.module.scss";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ClassSidebar from "@/components/class_file/ClassSidebarDetailVersion";
 import ClassDetail from "@/components/class_file/class-detail/ClassDetailContent";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 import { useParams } from "react-router-dom";
 
 const ClassDetailPage = () => {

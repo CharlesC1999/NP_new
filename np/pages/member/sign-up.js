@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import signUp from "@/styles/Login/signUp.module.scss";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 // for mui
 // import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
@@ -287,7 +287,7 @@ const SignUpPage = () => {
                             "&:hover > fieldset": { borderColor: "none" },
                           },
                         }}
-                        renderInput={(params) => <TextField {...params} />}
+                        textField={(params) => <TextField {...params} />}
                       />
                     </LocalizationProvider>
                   </div>

@@ -5,7 +5,7 @@ import { useCategory } from "@/hooks/ClassProp";
 import moment from "moment-timezone";
 import ContentSetting from "@/styles/class_styles/ContentSetting.module.css";
 import HeaderSetting from "@/styles/headerSetting.module.scss";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import ClassClassifacion from "@/components/class_file/ClassClassification";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ClassSidebar from "@/components/class_file/ClassSidebar";
@@ -17,7 +17,7 @@ import CardStyle from "@/styles/class_styles/CardStyle.module.css";
 import Pagination from "@/components/pagination";
 import ToTheTop from "@/components/toTheTop";
 import PaginationM from "@/components/paginationM";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 
 const ClassList = () => {
   // 先導入讀取鉤子

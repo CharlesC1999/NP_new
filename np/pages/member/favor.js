@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/member-styles/favor.module.scss";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import HeaderComponent from "@/components/Header";
-import Footer from "@/components/Footer";
+import HeaderComponent from "@/components/header";
+import Footer from "@/components/footer";
 import Sidebar from "@/components/member/Sidebar";
 import FavorTabs from "@/components/favor/FavorTabs";
 import ClassCard from "@/components/class_file/ClassCardWeb";
@@ -55,9 +55,8 @@ export default function Favor() {
     setSearchTerm(event.target.value);
   };
   // 用搜尋關鍵字搜尋（食譜名稱、課程名稱、商品名稱）
-  const resultR = recipeData.filter(
-    (item) =>
-      item.title__r_name.includes(searchTerm)
+  const resultR = recipeData.filter((item) =>
+    item.title__r_name.includes(searchTerm)
   );
   const resultC = classData.filter((item) =>
     item.class_name.includes(searchTerm)
@@ -89,7 +88,6 @@ export default function Favor() {
     setFilteredClassData(resultC);
     setFilteredProductData(resultP);
   }, [recipeData, classData, productData]);
-
 
   return (
     <>

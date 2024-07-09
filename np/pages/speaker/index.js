@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/speaker/index.module.scss";
 import SpeakerCardVertical from "@/components/speaker/speaker-list/SpeakerCardVertical";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import HeaderComponent from "@/components/Header";
-import Footer from "@/components/Footer";
+import HeaderComponent from "@/components/header";
+import Footer from "@/components/footer";
 import PaginationMUI from "@/components/speaker/speaker-list/PaginationMUI";
 import PaginationM from "@/components/paginationM";
 

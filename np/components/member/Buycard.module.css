@@ -9,24 +9,20 @@
   padding: 20px 15px 20px 15px;
   box-shadow: inset 0px -2px 0px 0px var(#def9ec);
   /* 添加向内延伸的边框 */
-  
 }
-@media (max-width: 375px){
-  .buyCard{
+@media (max-width: 375px) {
+  .buyCard {
     width: 334px;
     height: 115px;
     padding: 20px 15px 20px 15px;
     margin: 20px 15px 0 15px;
-    }
+  }
 }
-
 
 .buyCardContent {
   gap: 20px;
   display: flex;
 }
-
-
 
 .bccolumn {
   display: flex;
@@ -35,8 +31,6 @@
   width: 16%;
   margin-left: 0px;
 }
-
-
 
 .bcimg {
   background-color: var(--line, #d9d9d9);
@@ -49,7 +43,7 @@
   .bcimg {
     width: 80px;
     height: 80px;
-    margin:auto;
+    margin: auto;
   }
 }
 
@@ -61,10 +55,8 @@
   margin-left: 20px;
 }
 
-
-
 .buyItem {
-  justify-content: end;
+  justify-content: flex-end;
   align-self: stretch;
   display: flex;
   width: 100%;
@@ -72,8 +64,6 @@
   line-height: 120%;
   margin: auto 0;
 }
-
-
 
 .buyItemMain {
   justify-content: center;
@@ -87,11 +77,13 @@
 
 .biContent {
   color: var(--black, var(--gray03, #454545));
-  font: 20px Inter, sans-serif;
+  font:
+    20px Inter,
+    sans-serif;
   font-weight: bold;
 }
-@media (max-width:375px) {
-  .biContent{
+@media (max-width: 375px) {
+  .biContent {
     font-size: 14px;
   }
 }
@@ -100,8 +92,8 @@
   font-family: Inter, sans-serif;
   margin-top: 10px;
 }
-@media (max-width:375px) {
-  .biNumber{
+@media (max-width: 375px) {
+  .biNumber {
     font-size: 12px;
     margin-top: 0px;
   }
@@ -111,8 +103,8 @@
   font-family: Inter, sans-serif;
   margin-top: 10px;
 }
-@media (max-width:375px) {
-  .biState{
+@media (max-width: 375px) {
+  .biState {
     font-size: 12px;
     margin-top: 0px;
   }
@@ -128,9 +120,8 @@
 
 @media (max-width: 375px) {
   .biMb {
-   display: block;
-   margin: auto;
-   
+    display: block;
+    margin: auto;
   }
 }
 
@@ -138,13 +129,15 @@
   color: var(--gray01, #747e85);
   align-self: start;
   margin-top: 14px;
-  font: 500 16px Inter, sans-serif;
+  font:
+    500 16px Inter,
+    sans-serif;
 }
 @media (max-width: 375px) {
   .biMoney {
-   display: block;
-   margin-bottom: 14px;
-   font-size: 14px;
+    display: block;
+    margin-bottom: 14px;
+    font-size: 14px;
   }
 }
 
@@ -157,10 +150,7 @@
   background-color: #78cea6;
   border: #78cea6;
   border-radius: 5px;
-
 }
-
-
 
 .buyCardBtn {
   display: inline-flex;
@@ -180,7 +170,7 @@
   background-color: #def9ec;
   color: #50bf8b;
 }
-.buyCardBtn:hover{
+.buyCardBtn:hover {
   background-color: #def9ec;
   color: #50bf8b;
 }

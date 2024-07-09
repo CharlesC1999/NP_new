@@ -11,7 +11,7 @@ import { FaArrowLeft } from "react-icons/fa";
 // React Icon
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginStyle from "@/styles/Login/login.module.scss";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 // 導入路徑配置
 import routes from "@/contexts/routes";
 // Google登入
@@ -119,30 +119,21 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   // --------------------------------------------------
-  useEffect(() => {
+  const handleGoogleButtonClick = () => {
     showGoogleLogin(login, (data) => {
       setUserData(data);
       googleLogin(data.data);
-      // login();
-      // console.log(data);
       if (data.status === "success") {
         Swal.fire({
           title: "登入成功",
-          // text: "That thing is still around?",
           icon: "success",
-          // 按鈕綠色
           confirmButtonColor: "#50bf8b",
         });
         router.push("/");
       } else if (data.status === "error") {
         console.error("Google 登入錯誤:", data.error);
       }
-
-      // Perform any necessary navigation here
     });
-  }, []);
-
-  const handleGoogleButtonClick = () => {
     handleGoogleLogin();
     console.log("Gtouch");
     // google-login-firebase export handleGoogleLogin

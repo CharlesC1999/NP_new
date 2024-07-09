@@ -8,7 +8,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { RiDiscountPercentLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 // 購物車用到的主鍵
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import Footer from "../../components/footer";
 import Navbar from "@/components/shopcart/Navbar";
 import Class from "@/components/shopcart/Class";

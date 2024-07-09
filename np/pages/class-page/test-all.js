@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ClassClassifacion from "@/components/class_file/ClassClassification";
 import ClassSidebar from "@/components/class_file/ClassSidebar";
@@ -9,7 +9,7 @@ import ClassCard from "@/components/class_file/ClassCardWeb";
 import ClassCardMobileList from "@/components/class_file/ClassCardMobileList";
 import ClassCardMobileGrid from "@/components/class_file/ClassCardMobileGrid";
 import Pagination from "@/components/Pagination";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 
 const ForTest = () => {
   const containerStyle = {

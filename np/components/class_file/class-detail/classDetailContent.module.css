@@ -303,7 +303,7 @@
 
 .speakerDetailLink {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   text-decoration: none;
   /* style */
   color: var(--green02, var(--green02, #50bf8b));

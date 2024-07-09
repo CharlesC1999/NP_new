@@ -6,8 +6,8 @@ import styles from "@/styles/speaker/speaker-detail.module.scss";
 import SpeakerCardHorizontal from "@/components/speaker/speaker-detail/SpeakerCardHorizontal";
 import SpeakerProfileSection from "@/components/speaker/speaker-detail/SpeakerProfileSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import HeaderComponent from "@/components/Header";
-import Footer from "@/components/Footer";
+import HeaderComponent from "@/components/header";
+import Footer from "@/components/footer";
 import LectureCardVertical from "@/components/speaker/speaker-detail/LectureCardVertical";
 
 // 資料來自伺服器
@@ -42,12 +42,14 @@ export default function SpeakerDetail() {
   // 新增一個狀態來存儲過濾後的講師數據
   const [filteredSpeakers, setFilteredSpeakers] = useState([]);
   //新增一個狀態儲存講師開設的課程資訊
-  const [relatedClass, setRelatedClass] = useState([{
-    "class__i_d": "",
-    "class_name": "",
-    "class_description": "",
-    "image__u_r_l": ""
-}]);
+  const [relatedClass, setRelatedClass] = useState([
+    {
+      class__i_d: "",
+      class_name: "",
+      class_description: "",
+      image__u_r_l: "",
+    },
+  ]);
   // 宣告出 router 物件，可以取得兩個值
   // 1. router.query，是一個物件，其中有動態路由的參數值pid
   // 2. router.isReady，是一個布林值，代表本頁面元件已完成水合作用，可以得到pid值

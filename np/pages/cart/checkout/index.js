@@ -8,8 +8,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductCard02 from "@/components/shopcart/product/ProductCard02";
 import ProductCardList from "@/components/product/ProductCardList";
 import ProductFilter from "@/components/product/ProductFilter";
-import Footer from "@/components/Footer";
-import HeaderComponent from "@/components/Header";
+import Footer from "@/components/footer";
+import HeaderComponent from "@/components/header";
 
 // import PaginationRounded from "@/components/pagination";
 //荃做版本sideBar

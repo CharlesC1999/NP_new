@@ -11,8 +11,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductCard02 from "@/components/product/ProductCard02";
 import ProductCardList from "@/components/product/ProductCardList";
 import ProductFilter from "@/components/product/ProductFilterDiscount";
-import Footer from "@/components/Footer";
-import HeaderComponent from "@/components/Header";
+import Footer from "@/components/footer";
+import HeaderComponent from "@/components/header";
 import Pagination from "@/components/product/pagination";
 import ProductFilterDiscount from "@/components/product/ProductFilterDiscount";
 import PaginationM from "@/components/paginationM";
@@ -214,7 +214,9 @@ export default function Product() {
                       key={pic}
                       src={`/index-images/discount-Pic/${pic}`}
                       alt=""
-                      className={`${styles.image} ${index === currentIndex ? styles.show : ""}`}
+                      className={`${styles.image} ${
+                        index === currentIndex ? styles.show : ""
+                      }`}
                     />
                   ))}
                 </div>
